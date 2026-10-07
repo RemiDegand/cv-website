@@ -5,54 +5,293 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rémi Degand | Analyst</title>
   <meta name="description" content="Online CV of Rémi Degand, Analyst profile in tech.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- Sticky top menu -->
   <header class="menu">
-    <a href="#hero" class="menu-name">Rémi Degand</a>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="container menu-inner">
+      <a href="#hero" class="menu-name">Rémi Degand</a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <!-- 1. Hero: name, headline, pitch, buttons, availability -->
-    <section id="hero">
-      <h1>Rémi Degand</h1>
-      <p>Headline: to write</p>
+    <!-- 1. HERO -->
+    <section id="hero" class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">Available from May 2027 · Internship, VIE or full-time</p>
+          <h1>Rémi Degand</h1>
+          <!-- TODO (content step): final headline and pitch -->
+          <p class="headline">Forecasting &amp; Data Analyst</p>
+          <p class="pitch">I turn operational and financial data into forecasts, dashboards and tools that teams use every day.</p>
+          <div class="hero-buttons">
+            <a href="cv-remi-degand.pdf" class="button button-primary" download>Download CV</a>
+            <!-- The chatbot comes in Phase 2: this button will open it -->
+            <button type="button" class="button button-secondary" disabled title="Coming soon">Ask my AI assistant</button>
+            <!-- TODO: put your LinkedIn profile URL -->
+            <a href="https://www.linkedin.com/in/YOUR-PROFILE" class="button button-ghost" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+        <!-- Photo: put your picture in the project folder as photo.jpg -->
+        <img src="photo.jpg" alt="Portrait of Rémi Degand" class="hero-photo">
+      </div>
     </section>
 
-    <!-- 2. About: 3-4 sentences -->
+    <!-- 2. ABOUT -->
     <section id="about">
-      <h2>About</h2>
+      <div class="container">
+        <h2>About</h2>
+        <!-- TODO (content step): 3-4 sentences, who I am, background, why analytics in tech -->
+        <p class="lead">Master in Management student at NEOMA Business School, majoring in Data Analysis and Supply Chain. To write: 3–4 sentences about who I am, my background and why analytics in tech.</p>
+      </div>
     </section>
 
-    <!-- 3. Experience: Key · Leadership & Volunteering · Hands-on -->
+    <!-- 3. EXPERIENCE -->
     <section id="experience">
-      <h2>Experience</h2>
+      <div class="container">
+        <h2>Experience</h2>
+
+        <!-- 3a. Key experience: large cards, key figures, "see more" -->
+        <h3 class="group-title">Key experience</h3>
+        <div class="cards cards-large">
+
+          <article class="card">
+            <header class="card-header">
+              <div>
+                <h4>Forecasting Analyst Intern</h4>
+                <p class="card-org">Glovo · Global Operations · Barcelona</p>
+              </div>
+              <p class="card-date">Mar – Sep 2026</p>
+            </header>
+            <ul class="figures">
+              <li><strong>+8 pts</strong> forecast accuracy vs. target</li>
+              <li><strong>5</strong> countries forecast weekly</li>
+              <li><strong>1</strong> web app used daily by the team</li>
+            </ul>
+            <details>
+              <summary>See more</summary>
+              <ul>
+                <li>Forecasted weekly rider supply for Poland (South), Ukraine (West), Armenia, Georgia and Kyrgyzstan, covering several hundred thousand orders and rider slots per week.</li>
+                <li>Reached +8 pts vs. target in forecast accuracy by reviewing past forecasts to fix gaps and leading weekly meetings with the 5 local teams.</li>
+                <li>Designed and built a web app used daily by all forecasting team members across Europe, Africa and Asia: multi-view dashboards, AI-generated zone summaries and a chatbot.</li>
+                <li>Created AI skills to automate forecast adjustments.</li>
+              </ul>
+            </details>
+            <ul class="tags">
+              <li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>Apps Script</li><li>LLMs</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <header class="card-header">
+              <div>
+                <h4>Data Analyst Intern</h4>
+                <p class="card-org">OSLO · Villeneuve d'Ascq</p>
+              </div>
+              <p class="card-date">Sep – Dec 2025</p>
+            </header>
+            <ul class="figures">
+              <li><strong>€350k → €8k</strong> annual revenue discrepancies</li>
+              <li><strong>13</strong> data models · <strong>6</strong> dashboards</li>
+              <li><strong>4</strong> business units supported</li>
+            </ul>
+            <details>
+              <summary>See more</summary>
+              <ul>
+                <li>Redesigned a revenue recognition data model to allocate revenue monthly based on actual activity, reducing annual discrepancies from €350k to €8k.</li>
+                <li>Automated aged receivables reporting and cash flow calculation tools for 3 entities.</li>
+                <li>Automated VAT calculations, saving 2 hours per month and eliminating manual errors.</li>
+                <li>Built a sales commission tool for 2 business units (≈ €3M revenue each).</li>
+                <li>Built a production planning framework covering ~1,000 orders a year, with performance reporting used weekly by management.</li>
+                <li>Developed multi-business-unit dashboards (€3–4M revenue) with year-over-year analysis and recurring vs. non-recurring revenue.</li>
+              </ul>
+            </details>
+            <ul class="tags">
+              <li>Excel</li><li>Data modeling</li><li>Dashboards</li><li>Finance</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <header class="card-header">
+              <div>
+                <h4>Treasurer</h4>
+                <p class="card-org">Envie d'Sup · Service Civique · Rouen</p>
+              </div>
+              <p class="card-date">Dec 2024 – Jun 2025</p>
+            </header>
+            <ul class="figures">
+              <li><strong>€49k</strong> public budget managed</li>
+              <li><strong>84+</strong> supplier invoices processed</li>
+              <li><strong>100%</strong> program execution</li>
+            </ul>
+            <details>
+              <summary>See more</summary>
+              <ul>
+                <li>Financial management of a state-supported non-profit serving 229 students from priority education zones.</li>
+                <li>Built and monitored budget forecasts to stay within allocated envelopes.</li>
+                <li>Cost analysis by class and activity type to prepare next year's grant applications.</li>
+              </ul>
+            </details>
+            <ul class="tags">
+              <li>Budgeting</li><li>Forecasting</li><li>Cost analysis</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <header class="card-header">
+              <div>
+                <h4>Business Developer Intern</h4>
+                <p class="card-org">Pain de Minuit</p>
+              </div>
+              <p class="card-date">Feb – Jul 2024</p>
+            </header>
+            <ul class="figures">
+              <li><strong>105</strong> new B2B clients</li>
+              <li><strong>~21</strong> new clients per month</li>
+              <li><strong>€3–10k</strong> distributor orders handled</li>
+            </ul>
+            <details>
+              <summary>See more</summary>
+              <ul>
+                <li>Start-up brewing beer from unsold bread, distributed across France.</li>
+                <li>Designed a prospecting strategy for independent retailers: 104 bakeries and 1 large retail store signed.</li>
+                <li>Client retention through structured follow-ups at +30, +90 and +120 days.</li>
+                <li>Managed end-to-end logistics: order processing, stock reception, shipments.</li>
+                <li>Led a prospecting mission with a UK bakery, featured on a public TV channel.</li>
+              </ul>
+            </details>
+            <ul class="tags">
+              <li>B2B sales</li><li>Prospecting</li><li>Logistics</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- 3b. Leadership & volunteering: medium cards -->
+        <h3 class="group-title">Leadership &amp; volunteering</h3>
+        <div class="cards cards-medium">
+          <article class="card">
+            <h4>Envie d'Sup</h4>
+            <p class="card-date">Nov 2024 – Jun 2025 · Rouen</p>
+            <ul>
+              <li><strong>Head of 9th Grade Program:</strong> designed 8 workshops, coordinated 18 tutors, supported 34 students.</li>
+              <li><strong>Head of Outreach:</strong> collected prizes and supplies for events, led a team of 11 students.</li>
+              <li><strong>Mentor:</strong> guided 9th-grade students through 10 workshops.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h4>Academic Lead, Budgeting &amp; Financial Analysis</h4>
+            <p class="card-date">EGC Lille · Sep 2022 – Feb 2024</p>
+            <p>Bi-weekly support sessions for 2nd and 3rd-year students: investment profitability, management control, costs and financial analysis.</p>
+          </article>
+          <article class="card">
+            <h4>Sponsorship &amp; Hospital Visits</h4>
+            <p class="card-date">Cheer Up Rouen · Nov 2024 – Jun 2025</p>
+            <p>Raised prizes and donations for solidarity projects and visited young cancer patients at the Henri Becquerel Center.</p>
+          </article>
+          <article class="card">
+            <h4>Charity raffle</h4>
+            <p class="card-date">Own initiative · Nov – Dec 2022</p>
+            <p>Sold 200 tickets to fund shoes, clothing, hostel nights and food: 10 homeless people directly supported.</p>
+          </article>
+        </div>
+
+        <!-- 3c. Hands-on experience: compact list -->
+        <h3 class="group-title">Hands-on experience</h3>
+        <ul class="compact-list">
+          <li><span>Click &amp; Collect Order Picker · Intermarché</span><span class="card-date">Jun – Jul 2025</span></li>
+          <li><span>Food &amp; Beverage Team Member · Hilton Malta</span><span class="card-date">Apr – Aug 2023</span></li>
+          <li><span>Warehouse Worker · EuropEvent</span><span class="card-date">Jul 2022</span></li>
+          <li><span>Sales Advisor Intern · Decathlon</span><span class="card-date">Apr – May 2022</span></li>
+          <li><span>Department Manager Intern · Intermarché</span><span class="card-date">Dec 2021</span></li>
+          <li><span>Seasonal Agricultural Assistant · Florimond Desprez</span><span class="card-date">Jul 2021</span></li>
+        </ul>
+      </div>
     </section>
 
-    <!-- 4. Skills: Data tools · Business skills · Languages -->
+    <!-- 4. SKILLS -->
     <section id="skills">
-      <h2>Skills</h2>
+      <div class="container">
+        <h2>Skills</h2>
+        <!-- TODO (content step): check and complete these lists -->
+        <div class="cards cards-medium">
+          <div class="card">
+            <h4>Data tools</h4>
+            <ul class="tags">
+              <li>SQL</li><li>Python</li><li>BigQuery</li><li>Looker</li><li>Excel</li><li>Google Sheets / Apps Script</li><li>LLMs (Gemini, Claude)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Business skills</h4>
+            <ul class="tags">
+              <li>Forecasting</li><li>Financial analysis</li><li>Budgeting</li><li>Supply chain</li><li>B2B sales</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Languages</h4>
+            <ul class="tags">
+              <li>French: native</li><li>English: to fill</li><li>Spanish: to fill</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- 5. Education -->
+    <!-- 5. EDUCATION -->
     <section id="education">
-      <h2>Education</h2>
+      <div class="container">
+        <h2>Education</h2>
+        <div class="timeline">
+          <article>
+            <p class="card-date">Sep 2024 – Jan 2028</p>
+            <h4>NEOMA Business School</h4>
+            <p class="card-org">Master in Management, English Track · Major in Data Analysis and Supply Chain</p>
+            <p>Algorithmic Thinking for Data Analysis, Optimization Tools for Management, Supply Chain Foundations, Capital Budgeting and Financing.</p>
+          </article>
+          <article>
+            <p class="card-date">Sep 2021 – Jun 2024</p>
+            <h4>EGC Lille</h4>
+            <p class="card-org">Bachelor's Degree in Business, Marketing &amp; Financial Management</p>
+            <p>Top of the class in Budget Management and Financial Analysis.</p>
+          </article>
+          <article>
+            <p class="card-date">Sep 2018 – Jun 2021</p>
+            <h4>Institut de Genech</h4>
+            <p class="card-org">French Baccalauréat, General Track</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- 6. Contact -->
-    <section id="contact">
-      <h2>Contact</h2>
+    <!-- 6. CONTACT -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <p class="lead">Looking for an Analyst role in tech from May 2027. Let's talk.</p>
+        <div class="hero-buttons">
+          <!-- TODO: confirm which email to show -->
+          <a href="mailto:remidegand02@gmail.com" class="button button-primary">Email me</a>
+          <a href="https://www.linkedin.com/in/YOUR-PROFILE" class="button button-ghost" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="cv-remi-degand.pdf" class="button button-ghost" download>Download CV</a>
+        </div>
+      </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Rémi Degand</div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
