@@ -1,0 +1,25 @@
+/* Design comes later (Phase 1, step 2). For now: just make the menu sticky. */
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.menu {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu nav a {
+  margin-left: 1rem;
+}
+
+section {
+  min-height: 60vh;
+  padding: 2rem 1rem;
+}
