@@ -28,7 +28,7 @@ body {
 a { color: var(--accent); }
 
 .container {
-  max-width: 1040px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 16px;
 }
@@ -156,9 +156,55 @@ h4 { font-size: 1.1rem; }
 .card ul { padding-left: 20px; margin: 12px 0 0; }
 .card p { margin: 8px 0 0; }
 
-.card-header { display: flex; justify-content: space-between; gap: 16px; }
+.card-header { display: flex; justify-content: space-between; gap: 12px; }
+
+/* Company logo: same 48px square tile everywhere, left of the title
+   (the files in logos/ are pre-cropped square tiles, see CV website.md) */
+.card-title { display: flex; align-items: flex-start; gap: 12px; }   /* logo stays top-left even when the title wraps */
+.compact-list .card-title { align-items: center; }
+.cards-medium .card-date { white-space: normal; }
+.card-logo {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+/* Tile with initials or an icon when there is no logo */
+.card-logo-placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
 .card-org { color: var(--text-muted); margin: 4px 0 0; }
 .card-date { color: var(--text-muted); font-size: 0.9rem; white-space: nowrap; margin: 0; }
+
+/* "Company · industry" always on one line (labels are kept short to fit;
+   on very narrow screens it ends with "…" instead of wrapping) */
+.card-title { flex: 1; min-width: 0; }
+.card-title > div, .card-title > span:not(.card-logo) { min-width: 0; }
+.card-org { font-size: 0.875rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Top-right block: dates, location underneath */
+.card-meta { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; text-align: right; }
+.card .card-meta p { margin: 0; }
+.card-meta .card-date { font-weight: 500; color: var(--text); font-size: 0.85rem; }
+.card-location { color: var(--text-muted); font-size: 0.85rem; white-space: nowrap; margin: 2px 0 0; }
+
+/* Leadership cards: 2 per row so the title has room next to the date block */
+#experience .cards-medium { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
+
+/* Hands-on rows: role on top, company · industry underneath */
+.compact-list .card-org { display: block; font-size: 0.9rem; margin: 0; }
+.compact-list strong { font-weight: 500; }
+
+/* One-line description of the position, between the header and the key figures */
+.card .card-desc { margin: 16px 0 0; color: var(--text); }
 
 /* Key figures */
 .card .figures { list-style: none; padding: 0; margin: 20px 0; display: grid; gap: 6px; }
@@ -182,10 +228,44 @@ details[open] summary { margin-bottom: 4px; }
 .compact-list { list-style: none; padding: 0; margin: 0; }
 .compact-list li {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
+}
+
+/* ===== Hover effect on experiences (cards lift, rows highlight) ===== */
+#experience .card,
+#experience .card-logo,
+.compact-list li {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+/* Each experience sets --brand to its logo's main color in index.html
+   (style="--brand: #FED42A"); without it the hover falls back to the blue accent */
+#experience .card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--brand, var(--accent)) 70%, transparent);
+  box-shadow: 0 4px 8px rgba(16, 24, 40, 0.06), 0 16px 32px color-mix(in srgb, var(--brand, var(--accent)) 28%, transparent);
+}
+
+/* Rows: padding + negative margin so the highlight extends past the text, which stays in place */
+.compact-list li { padding: 12px; margin: 0 -12px; border-radius: 10px; }
+.compact-list li:hover { background: color-mix(in srgb, var(--brand, var(--accent)) 9%, var(--bg)); }
+
+/* Logo pops slightly when its experience is hovered */
+#experience .card:hover .card-logo,
+.compact-list li:hover .card-logo { transform: scale(1.08); }
+
+/* No movement for people who turn animations off in their system settings */
+@media (prefers-reduced-motion: reduce) {
+  #experience .card,
+  #experience .card-logo,
+  .compact-list li { transition: none; }
+  #experience .card:hover,
+  #experience .card:hover .card-logo,
+  .compact-list li:hover .card-logo { transform: none; }
 }
 
 /* ===== Education timeline ===== */
@@ -216,5 +296,9 @@ details[open] summary { margin-bottom: 4px; }
   .hero-photo { width: 120px; height: 120px; }
   .cards-large { grid-template-columns: 1fr; }
   .card-header, .compact-list li { flex-direction: column; gap: 2px; }
+  .compact-list li { align-items: flex-start; }
+  .card-meta { align-items: flex-start; text-align: left; }
+  .card-header .card-meta { padding-left: 60px; }  /* line up dates under the text, not the logo */
+  .compact-list .card-meta { padding-left: 60px; flex-direction: row; gap: 8px; }
   .menu-name { display: none; }
 }
