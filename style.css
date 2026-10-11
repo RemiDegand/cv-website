@@ -19,6 +19,9 @@ html { scroll-behavior: smooth; scroll-padding-top: var(--menu-height); }
 
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;   /* footer stays at the bottom on short pages */
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", system-ui, sans-serif;
@@ -37,7 +40,8 @@ section { padding: 80px 0; }
 section:nth-of-type(even) { background: var(--bg-soft); }
 
 h1, h2, h3, h4 { line-height: 1.2; margin: 0; }
-h2 { font-size: 2rem; margin-bottom: 32px; }
+h2, .page-title { font-size: 2rem; margin-bottom: 32px; }
+main { flex: 1; }
 h4 { font-size: 1.1rem; }
 
 .lead { font-size: 1.15rem; color: var(--text-muted); max-width: 680px; }
@@ -209,10 +213,6 @@ h4 { font-size: 1.1rem; }
 /* Key figures */
 .card .figures { list-style: none; padding: 0; margin: 20px 0; display: grid; gap: 6px; }
 .figures strong { color: var(--accent); font-size: 1.1rem; }
-
-/* "See more" */
-details summary { cursor: pointer; color: var(--accent); font-weight: 600; }
-details[open] summary { margin-bottom: 4px; }
 
 /* Tool tags */
 .card .tags { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
