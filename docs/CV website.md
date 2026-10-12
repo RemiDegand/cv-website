@@ -398,9 +398,9 @@ ONLINE (each question)
 - The project folder is **outside OneDrive** on purpose (OneDrive sync can lock or corrupt Git/npm files).
 
 ## Current state of the website (12 October 2026, evening)
-**Folder:** `C:\Users\remid\cv-website` · **Last commit:** `b1b7103` ("Add project notes", **pushed to GitHub**: https://github.com/RemiDegand/cv-website, `main` tracks `origin/main`).
+**Folder:** `C:\Users\remid\cv-website` · **Last commit:** `b4edb06` + notes update (**pushed to GitHub**: https://github.com/RemiDegand/cv-website, `main` tracks `origin/main`).
 - Commits on 12 Oct: `a3cf660` (8 Oct work: logos, card layout, hover) · `4a87e45` (split into 4 pages, Skills removed) · `ce88cb1` (original logo files) · `95de957` (Home carousel + hero, About removed, Education panel + logos + level labels) · `b1b7103` (project notes moved into the repo).
-- ⚠ **Not committed yet (12 Oct evening):** the whole Education rework (zoom view + FLIP animation, per-year mini timelines, courses, experience tiles), the `id`s on 3 Experience cards, and these notes. Files: `education.html`, `experience.html`, `script.js`, `style.css`, `docs/CV website.md`. The user hasn't asked to commit yet: ask, then commit + push.
+- `b4edb06` (12 Oct evening): Education zoom view, per-year cards, courses, experience tiles, notes rewrite. **Everything is committed.**
 
 | File | Content |
 |---|---|
@@ -424,7 +424,6 @@ ONLINE (each question)
 - **Tools on this PC:** no Python. Use Node.js for scripts and PowerShell `System.Drawing` for image cropping (logos).
 
 ### ▶ Next session: start here
-0. **Commit + push** the Education rework if the user agrees (see "Not committed yet" above).
 1. **Education:** add the **EGC Year 1 and Year 2 courses** (the user will send them). Then go through the "Review of the Education page" list in section 3: fix the NEOMA dates/degree contradictions and locations, remove the repeated card header, open NEOMA by default, add results (Top of the class, TOEIC), decide on high school. Maybe a square NEOMA icon for a more readable circle.
 2. **Fix the CV** (public version without the phone, headline "Data & Business Analyst", Business Analytics major, resolve the differences listed below), then replace `CV.pdf` and remove it from `.gitignore`.
 3. **Put the site online with Firebase Hosting.** In `firebase.json`: exclude `photo.jpg`/`photo2.jpg`, the original logo files and `docs/` from deploy (`ignore`), and add a `Content-Disposition: attachment` header for the PDF so it always downloads.
