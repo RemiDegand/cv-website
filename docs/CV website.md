@@ -21,7 +21,7 @@
 ├───────────────────────────────────────────────────────┤
 │ index.html       HERO + KEY EXPERIENCE carousel        │
 │ experience.html  Key · Leadership & volunteering · Hands-on │
-│ education.html   timeline + details panel on click     │
+│ education.html   timeline + zoom view with year details │
 │ contact.html     email · LinkedIn · CV                 │
 └───────────────────────────────────────────────────────┘
                                    ( 💬 )  <- chatbot bubble later (Phase 2)
@@ -115,19 +115,50 @@ HANDS-ON EXPERIENCE               (compact list, one line each)
   - Genech: "French General Baccalaureate · Mathematics, Economic & Social Sciences" (= Baccalauréat général, spécialités Maths + SES)
 - The **last line** (courses / achievement) was **removed on purpose** (12 Oct). Ideas if it comes back: one standout fact per school (bac mention, ranking/GPA, internships during the program), 2–3 key courses, or a key project.
 
-**Interaction (12 Oct):** by default the page shows only the timeline. Hovering a school gives it a light blue background, a blue ring on its logo, a blue name and label, and "View details →". Clicking opens a **details panel on the right**: simple grey outline, **no shadow** (must not look like a separate window), placed level with the selected school with a **"<" arrow** pointing at it; the timeline narrows to the left. Close with ×, Esc, or a second click on the school. On phones the panel opens under the school (arrow pointing up). Keyboard: Tab + Enter.
-- Tried and rejected on 12 Oct: a separate floating card with a shadow, then timeline + details in one shared box. The user found both looked like "another window".
-- Panel content lives in `<template id="detail-neoma|egc|genech">` blocks in `education.html`, same structure as an experience card: logo, school, degree, dates + location, description, 3 highlights, course tags.
+**Interaction: "zoom" view (12 Oct).** By default the page shows only the timeline. Hovering a school gives it a light blue background, a blue ring on its logo, a blue name and label, and "View details →". Clicking a school **zooms in**: the schools stay on the left (their column keeps the same width, 2/5 of the page, so the text never rewraps) and **only the clicked school's details card opens on its right**, level with it, with a **"<" arrow** pointing at it. The card has a simple grey outline and **no shadow** (it must not look like a separate window). Clicking another school swaps the card. The page scrolls to the clicked school only when it's off screen.
+- **Animation:** "FLIP" technique in `script.js`: note where each school is, apply the change, then slide each school from its old place to its new one with transforms only (no layout work at each frame). The timeline height animates with them so the line and footer follow, the new card zooms in gently (CSS `edu-zoom-in`), the old card fades out (a temporary copy), and the scroll runs at the same time. 0.4 s, ease-out. "Reduce motion" users get the change without animation.
+- **Close:** "× Close details" button next to the page title, Esc, or a second click on the highlighted school. Keyboard: Tab + Enter.
+- **Phones:** the card opens under its school (arrow pointing up). Not re-checked on a phone width since the per-year content was added.
+- **Tried and rejected on 12 Oct** (don't redo): a floating card with a shadow, and timeline + details in one shared box (both looked like "another window"); the View Transitions API (felt laggy: page frozen, snapshots stretched while text rewrapped, scroll only after the animation); all 3 cards open at once ("too much at the same time").
+- **Code:** card content lives in `<template id="detail-neoma|egc|genech">` blocks in `education.html`; `script.js` builds one card per school, placed right after the school in the `.timeline` grid (2 columns: schools · card).
 
-**Panel content (first draft, to improve):**
-- **NEOMA**, Sep 2024 – Jan 2028, no location yet (campus to confirm: Rouen or Reims?). "Master in Management taught in English, with a major in Business Analytics." Highlights: Major in Business Analytics · English Track · 2 internships during the program (OSLO, Glovo). Courses: Algorithmic Thinking for Data Analysis, Optimization Tools for Management, Supply Chain Foundations, Production and Business Processes, Capital Budgeting and Financing.
-- **EGC Lille**, Sep 2021 – Jun 2024, Lille, France (assumed, to confirm). Highlights: Top of the class in Budget Management and Financial Analysis · Academic Lead (support sessions for 2nd and 3rd-year students) · Internship at Pain de Minuit. Courses: Real and Forecast Costs, Financial Analysis, Investment Profitability, Management Accounting.
-- **Institut de Genech**, Sep 2018 – Jun 2021, Genech, France (assumed, to confirm). Description only, no highlights yet.
-- **Missing info to ask the user:** school projects, results (GPA, ranking, bac mention), NEOMA campus, exchange semester, certifications (e.g. TOEIC 930).
+**Card content (12 Oct, decided with the user step by step):**
+- **Header:** logo, school, degree line, dates, location. No description sentence (removed at the user's request).
+- **Mini timeline, one step per school year, newest first** (DESC, user's request). Chosen over tabs and an accordion: everything visible at once. Dot + line per year; current year = filled dot + "Current" badge.
+- **Year line:** year name in blue + optional subtitle (+ badge) on the left, years **on the right** of the card.
+- **Under the year line:** only (a) the **courses in plain grey text**, separated by " · " (tags were tried and rejected), and/or (b) **experience tiles**. **No sentence** (all removed at the user's request) and **no "Role · Company" text lines** (removed, "not good for the moment").
+- **Experience tiles:** small rectangles side by side, logo + position name, link to the matching card on the Experience page (`experience.html#glovo`, `#oslo`, `#pain-de-minuit`: those cards have these `id`s). On hover the tile lifts with a glow in the logo colour; the linked card gets its logo-coloured outline (CSS `:target`). A single tile keeps the normal size (`auto-fill` grid).
+
+| School | Year | Subtitle | Content |
+|---|---|---|---|
+| NEOMA | **M2** 2026 – 2027 (current) | MSc Business Analytics | Decision Models · Algorithm Design · Data-Driven Business Strategy · Business, Analytics & Strategy of the Firm |
+| NEOMA | **Gap year** 2025 – 2026 | none | 2 tiles: Glovo "Forecasting Analyst Intern" · OSLO "Data Analyst Intern" ("perfect" per the user) |
+| NEOMA | **M1** 2024 – 2025 | Major Supply Chain & Economy | Data Analysis and Decision Making · Algorithmic Thinking for Data Analysis · Capital Budgeting and Financing |
+| EGC | **Year 3** 2023 – 2024 | none | Financial Analysis · Actual Costs · Forecast Costs · Supply Chain (Purchasing) (user's French: "Analyse financière, coût réel, coût prévisionnel, supply chain (achat)") + tile Pain de Minuit "Business Developer Intern" |
+| EGC | **Year 2** 2022 – 2023 | none | empty: **courses coming soon from the user** |
+| EGC | **Year 1** 2021 – 2022 | none | empty: **courses coming soon from the user** |
+| Genech | **12th grade** 2020 – 2021 | none | Mathematics · Economic & Social Sciences · Core curriculum |
+| Genech | **11th grade** 2019 – 2020 | none | Mathematics · Economic & Social Sciences · Digital & Computer Science (NSI) · Core curriculum |
+| Genech | **10th grade** 2018 – 2019 | none | Core curriculum ("tronc commun") |
+
+- Content removed on 12 Oct and kept here in case it comes back: Academic Lead (EGC, Sep 2022 – Feb 2024), charity raffle (Nov – Dec 2022), Hilton Malta (Apr – Aug 2023), Intermarché (Dec 2021), Decathlon (Apr – May 2022), Treasurer + volunteering at Envie d'Sup and Cheer Up (during M1). EGC description: "Top of the class in Budget Management and Financial Analysis" (to place in the right year). Older course lists: NEOMA Optimization Tools for Management, Supply Chain Foundations (full name "Supply Chain Foundations for Turbulent Times"), Production and Business Processes; EGC Real and Forecast Costs, Investment Profitability, Management Accounting.
+
+**Review of the Education page (12 Oct, Claude's opinion, asked by the user). Areas for improvement, by priority:**
+1. **Fix what contradicts itself** (a recruiter would notice first):
+   - NEOMA dates: header says **Sep 2024 – Jan 2028**, M2 says **2026 – 2027**, `about-me.md` says the M2 school year ends 16 Apr 2027, and the hero says "available from May 2027". Check LinkedIn and align everything.
+   - NEOMA degree line "Master in Management · Business Analytics, English Track" vs. M1 "Major Supply Chain & Economy" and M2 "MSc Business Analytics". Suggestion: "Master in Management (Grande École) · MSc Business Analytics in M2" (to confirm with the user). LinkedIn to update too.
+   - Locations: NEOMA has none (campus: Rouen? the M1-year volunteering was in Rouen); EGC "Lille" and Genech "Genech" are assumptions.
+2. **Remove the repeated card header:** it repeats the logo, name, degree and dates of the school shown right next to it. Remove it or keep only the location: shorter card, years higher up. Easiest visual win.
+3. **Make the details easier to find:** they only appear on click and "View details →" only on hover. Suggestion: open NEOMA automatically when the page loads (most relevant school; shows the schools are clickable).
+4. **Show results, not only courses:** EGC "Top of the class in Budget Management and Financial Analysis" (fits Year 3 next to Financial Analysis), TOEIC 930/990 in the year it was taken, an M2 data project.
+5. **Simplify high school:** at Master's level recruiters barely look at it, and it takes 3 year steps (one only says "Core curriculum"). Options: keep Genech on the timeline without details (not clickable), or remove it and keep NEOMA + EGC.
+- Smaller: "Business, Analytics & Strategy of the Firm": one course or two?; an M1 tile for the Treasurer role (Key experience, happened during M1) would match the gap year and Year 3; check the phone layout with the tiles and right-aligned dates.
+- **User's decision (12 Oct):** first finish the courses (EGC Years 1 and 2 coming soon), then decide if something else is needed. Points 1–3 were proposed as the next quick wins; not started yet.
 
 **Facts:**
-- NEOMA major = **Business Analytics** (12 Oct). ⚠ LinkedIn still says "Data Analysis and Supply Chain": the user will update LinkedIn. Full course name: "Supply Chain Foundations for Turbulent Times".
+- NEOMA: M1 major **Supply Chain & Economy**, M2 **MSc Business Analytics** (user, 12 Oct). ⚠ LinkedIn still says "Data Analysis and Supply Chain".
 - EGC: top of the class in the Budget Management and Financial Analysis module.
+- Genech: bac général 2021, specialties Maths + SES + NSI in Première, Maths + SES in Terminale. Bac mention unknown.
 
 ### 4. Contact (`contact.html`)
 - Short line "Looking for an Analyst role in tech from May 2027. Let's talk." + buttons: Email me (Gmail) · LinkedIn · Download CV (PDF)
@@ -366,18 +397,19 @@ ONLINE (each question)
 - GitHub: never share a password or token in chat.
 - The project folder is **outside OneDrive** on purpose (OneDrive sync can lock or corrupt Git/npm files).
 
-## Current state of the website (12 October 2026)
-**Folder:** `C:\Users\remid\cv-website` · **Last commit:** `95de957` (9 commits on `main`, **pushed to GitHub** on 12 Oct: https://github.com/RemiDegand/cv-website, `main` tracks `origin/main`).
-- Commits on 12 Oct: `a3cf660` (8 Oct work: logos, card layout, hover) · `4a87e45` (split into 4 pages, Skills removed) · `ce88cb1` (original logo files) · `95de957` (Home carousel + hero, About removed, Education panel + logos + level labels). **Everything is committed.**
+## Current state of the website (12 October 2026, evening)
+**Folder:** `C:\Users\remid\cv-website` · **Last commit:** `b1b7103` ("Add project notes", **pushed to GitHub**: https://github.com/RemiDegand/cv-website, `main` tracks `origin/main`).
+- Commits on 12 Oct: `a3cf660` (8 Oct work: logos, card layout, hover) · `4a87e45` (split into 4 pages, Skills removed) · `ce88cb1` (original logo files) · `95de957` (Home carousel + hero, About removed, Education panel + logos + level labels) · `b1b7103` (project notes moved into the repo).
+- ⚠ **Not committed yet (12 Oct evening):** the whole Education rework (zoom view + FLIP animation, per-year mini timelines, courses, experience tiles), the `id`s on 3 Experience cards, and these notes. Files: `education.html`, `experience.html`, `script.js`, `style.css`, `docs/CV website.md`. The user hasn't asked to commit yet: ask, then commit + push.
 
 | File | Content |
 |---|---|
 | `index.html` | Home: hero (final headline + pitch) + Key experience carousel (Glovo, OSLO, Treasurer) |
-| `experience.html` | Key experience (4 large cards) · Leadership & volunteering (4 cards) · Hands-on (6 compact rows) |
-| `education.html` | Timeline with level labels + logo circles, details panel on click (content in `<template>` blocks) |
+| `experience.html` | Key experience (4 large cards) · Leadership & volunteering (4 cards) · Hands-on (6 compact rows). Glovo, OSLO and Pain de Minuit cards have `id`s (linked from the Education tiles) |
+| `education.html` | Timeline with level labels + logo circles; click = zoom view with the school's card (per-year mini timeline: courses + experience tiles), content in `<template>` blocks |
 | `contact.html` | Email, LinkedIn, CV download |
 | `style.css` | Clean & light design, blue accent, design tokens in `:root`, responsive (phone layout under 720px). Page width 1120px. Logo-coloured hover on experience cards (Experience page + Home carousel). Sections: carousel styles, Education timeline/panel styles |
-| `script.js` | Home carousel (arrows, dots, position) + Education details panel (open/close, placed level with the school, moved under the school on phones). Chatbot placeholder for Phase 2 |
+| `script.js` | Home carousel (arrows, dots, position) + Education zoom view (builds the cards from the templates, shows the clicked school's card with a FLIP slide animation, close). Chatbot placeholder for Phase 2 |
 | `logos/` | 160×160 PNG square tiles (empty margins trimmed, centered on white). Companies shown at 48×48 top-left of cards; schools shown in 44px circles on the Education timeline. Taglines/slogans cropped out (OSLO, EGC → "egc" only, Hilton, Cheer Up); Glovo and Decathlon fill the tile with their colour. Pain de Minuit = barrel only; Institut de Genech = 3-petal symbol only; charity raffle = heart icon (no organization). Originals (`Glovo logo.jpg`, `Logo EGC.png`, `logo Institut de Genech.jpg`…) in the root folder (committed, ~520 KB: exclude them from the Firebase deploy) |
 | `profile.jpg` | Photo on the site: 600×600, 34 KB, made from `photo2.jpg` |
 | `CV.pdf` | Draft CV, downloads as `Remi-Degand-CV.pdf` |
@@ -387,24 +419,25 @@ ONLINE (each question)
 
 **How to view it:**
 - Quick look: double-click `index.html`. The CV button opens the PDF instead of downloading it in this mode (browser security on local files).
-- Like online: run `npx http-server C:\Users\remid\cv-website -p 8080 -c-1` in a PowerShell window, then open http://localhost:8080. The CV button downloads the file and you stay on the page. Ctrl+C stops the server. (Note: on 7 Oct Claude Code stopped this server because the PC was low on memory.)
+- Like online: run `npx http-server C:\Users\remid\cv-website -p 8080 -c-1` in a PowerShell window, then open http://localhost:8080. The CV button downloads the file and you stay on the page. Ctrl+C stops the server. (Note: on 7 and 12 Oct Claude Code stopped this server because the PC was low on memory: don't restart it without asking.)
 - **Needed for Claude's browser checks:** the Chrome tool can't open `file://` pages, so Claude starts this server. Screenshots sometimes time out (browser freezes); the first click after loading a page sometimes doesn't register (hover first).
 - **Tools on this PC:** no Python. Use Node.js for scripts and PowerShell `System.Drawing` for image cropping (logos).
 
 ### ▶ Next session: start here
-1. **Education:** get the missing info from the user (projects, GPA/ranking, bac mention, NEOMA campus, exchange, certifications), confirm EGC/Genech locations, then improve the panel content and decide on the timeline's last line. Maybe a square NEOMA icon for a more readable circle.
+0. **Commit + push** the Education rework if the user agrees (see "Not committed yet" above).
+1. **Education:** add the **EGC Year 1 and Year 2 courses** (the user will send them). Then go through the "Review of the Education page" list in section 3: fix the NEOMA dates/degree contradictions and locations, remove the repeated card header, open NEOMA by default, add results (Top of the class, TOEIC), decide on high school. Maybe a square NEOMA icon for a more readable circle.
 2. **Fix the CV** (public version without the phone, headline "Data & Business Analyst", Business Analytics major, resolve the differences listed below), then replace `CV.pdf` and remove it from `.gitignore`.
 3. **Put the site online with Firebase Hosting.** In `firebase.json`: exclude `photo.jpg`/`photo2.jpg`, the original logo files and `docs/` from deploy (`ignore`), and add a `Content-Disposition: attachment` header for the PDF so it always downloads.
 4. **Experience cards:** bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
 5. **Open question:** use the CV's figures and extra skills on the site? (see "Open questions" below).
 6. **Design:** keep the current clean & light design. Claude Design canvas (A "Data notebook", B "Night mode"), tried on 8 Oct and **reverted at the user's request**: https://claude.ai/artifact/6Zu9cPTzvpTMLmgyEFszgD (private).
-7. **User to do:** update LinkedIn (headline "Data & Business Analyst", NEOMA major "Business Analytics").
+7. **User to do:** update LinkedIn (headline "Data & Business Analyst"; NEOMA: M1 major Supply Chain & Economy, M2 MSc Business Analytics) and check the NEOMA end date there.
 
 ## Roadmap
 **Phase 1: the website (free, no card)**
 1. ✅ Install the tools (Node.js, Git, Firebase CLI), create GitHub + Firebase accounts
-2. ✅ Build the site: HTML structure → CSS design → JavaScript. 12 Oct: 4 pages, Home carousel, Education details panel
-3. 🔄 Write the content (Hero done 12 Oct; Experience mostly done, short descriptions to expand; Education panel first draft; About and Skills removed for now)
+2. ✅ Build the site: HTML structure → CSS design → JavaScript. 12 Oct: 4 pages, Home carousel, Education zoom view with per-year cards
+3. 🔄 Write the content (Hero done 12 Oct; Experience mostly done, short descriptions to expand; Education per-year cards with courses, EGC Years 1–2 to fill; About and Skills removed for now)
 4. Put it online with Firebase Hosting + save the code on GitHub
 
 **Phase 2: the RAG chatbot (card needed, ≈ €0 + budget alert)**
@@ -435,7 +468,7 @@ _LinkedIn wins when dates conflict._
 | Availability | "Available immediately for 6 months, Gap year" | "From May 2027: internship, VIE or full-time" |
 | NEOMA end date | May 2027 | Jan 2028 |
 | Target role | Demand / Supply planning / S&OP intern | "Data & Business Analyst" (tech) |
-| NEOMA major | Data Analysis and Supply Chain? | Business Analytics |
+| NEOMA major | Data Analysis and Supply Chain? | M1 Supply Chain & Economy, M2 MSc Business Analytics |
 | Treasurer | "Cordée de la réussite", Jan–Jun 2025, 86 invoices | "Envie d'Sup", Dec 2024–Jun 2025, 84 invoices |
 | Typo | "S&0P" (zero) | "S&OP" |
 
@@ -447,4 +480,5 @@ _LinkedIn wins when dates conflict._
 ## Notes / learning log
 _Write here what I learn at each step (useful for interviews: "tell me about a project you built")._
 - **12 Oct:** split a one-page site into several pages (shared menu, "active" link per page); built a carousel with CSS scroll-snap + JavaScript (arrows, dots); built a "master–detail" view (list on the left, details on the right) with HTML `<template>` blocks; responsive design (side panel on desktop, drop-down under the item on phones); accessibility (keyboard Enter/Esc, `aria-expanded`).
+- **12 Oct (later):** Education "zoom" view. Placing each card right after its school in one CSS grid (2 columns) keeps the card level with its school. First tried the View Transitions API (snapshots of the page before/after), which felt laggy; replaced it with the **FLIP** technique (First, Last, Invert, Play): measure positions, change the layout, then animate `transform` from the old to the new position. Animating `transform`/`opacity` is smooth because the browser doesn't recompute the layout at each frame.
 - **Headline lesson:** use a job title recruiters actually search for ("Data & Business Analyst"), and put the specifics in the pitch.

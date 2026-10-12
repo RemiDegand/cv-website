@@ -26,44 +26,44 @@
   </header>
 
   <main>
-    <!-- EDUCATION: timeline on the left; clicking a school opens its details on the right
-         (on phones the details open under the clicked school) -->
+    <!-- EDUCATION: timeline of schools. Clicking a school "zooms in": the timeline moves to the left
+         and each school's details open on its right (under it on phones). script.js builds the
+         details cards from the <template> blocks below. -->
     <section id="education">
       <div class="container">
-        <h1 class="page-title">Education</h1>
-        <div class="edu-layout">
-          <div class="timeline">
-            <article class="edu-item" data-school="neoma" tabindex="0" role="button" aria-expanded="false" aria-controls="edu-detail">
-              <span class="edu-level">Master's degree</span>
-              <img src="logos/neoma.png" alt="NEOMA Business School logo" class="edu-logo" width="44" height="44">
-              <span class="edu-hint" aria-hidden="true">View details →</span>
-              <p class="card-date">Sep 2024 – Jan 2028</p>
-              <h4>NEOMA Business School</h4>
-              <p class="card-org">Master in Management · Business Analytics, English Track</p>
-            </article>
-            <article class="edu-item" data-school="egc" tabindex="0" role="button" aria-expanded="false" aria-controls="edu-detail">
-              <span class="edu-level">Bachelor's degree</span>
-              <img src="logos/egc.png" alt="EGC Business School logo" class="edu-logo" width="44" height="44">
-              <span class="edu-hint" aria-hidden="true">View details →</span>
-              <p class="card-date">Sep 2021 – Jun 2024</p>
-              <h4>EGC Lille</h4>
-              <p class="card-org">Bachelor's Degree in Business, Marketing &amp; Financial Management · French Track</p>
-            </article>
-            <article class="edu-item" data-school="genech" tabindex="0" role="button" aria-expanded="false" aria-controls="edu-detail">
-              <span class="edu-level">High school</span>
-              <img src="logos/institut-de-genech.png" alt="Institut de Genech logo" class="edu-logo" width="44" height="44">
-              <span class="edu-hint" aria-hidden="true">View details →</span>
-              <p class="card-date">Sep 2018 – Jun 2021</p>
-              <h4>Institut de Genech</h4>
-              <p class="card-org">French General Baccalaureate · Mathematics, Economic &amp; Social Sciences</p>
-            </article>
-          </div>
-
-          <!-- Details panel: filled from the <template> of the clicked school -->
-          <aside id="edu-detail" class="card edu-detail" aria-live="polite" hidden></aside>
+        <div class="section-head">
+          <h1 class="page-title">Education</h1>
+          <button type="button" class="button button-ghost edu-close" hidden>× Close details</button>
+        </div>
+        <div class="timeline">
+          <article class="edu-item" data-school="neoma" tabindex="0" role="button" aria-expanded="false" aria-controls="edu-detail-neoma">
+            <span class="edu-level">Master's degree</span>
+            <img src="logos/neoma.png" alt="NEOMA Business School logo" class="edu-logo" width="44" height="44">
+            <span class="edu-hint" aria-hidden="true">View details →</span>
+            <p class="card-date">Sep 2024 – Jan 2028</p>
+            <h4>NEOMA Business School</h4>
+            <p class="card-org">Master in Management · Business Analytics, English Track</p>
+          </article>
+          <article class="edu-item" data-school="egc" tabindex="0" role="button" aria-expanded="false" aria-controls="edu-detail-egc">
+            <span class="edu-level">Bachelor's degree</span>
+            <img src="logos/egc.png" alt="EGC Business School logo" class="edu-logo" width="44" height="44">
+            <span class="edu-hint" aria-hidden="true">View details →</span>
+            <p class="card-date">Sep 2021 – Jun 2024</p>
+            <h4>EGC Lille</h4>
+            <p class="card-org">Bachelor's Degree in Business, Marketing &amp; Financial Management · French Track</p>
+          </article>
+          <article class="edu-item" data-school="genech" tabindex="0" role="button" aria-expanded="false" aria-controls="edu-detail-genech">
+            <span class="edu-level">High school</span>
+            <img src="logos/institut-de-genech.png" alt="Institut de Genech logo" class="edu-logo" width="44" height="44">
+            <span class="edu-hint" aria-hidden="true">View details →</span>
+            <p class="card-date">Sep 2018 – Jun 2021</p>
+            <h4>Institut de Genech</h4>
+            <p class="card-org">French General Baccalaureate · Mathematics, Economic &amp; Social Sciences</p>
+          </article>
         </div>
 
-        <!-- School details (FIRST DRAFT, to improve: descriptions, projects, results, campus) -->
+        <!-- School details: header, then a mini timeline with one step per school year,
+             newest first (courses as plain text; EGC courses still to add) -->
         <template id="detail-neoma">
           <header class="card-header">
             <div class="card-title">
@@ -75,15 +75,24 @@
             </div>
             <div class="card-meta"><p class="card-date">Sep 2024 – Jan 2028</p></div>
           </header>
-          <p class="card-desc">Master in Management taught in English, with a major in Business Analytics.</p>
-          <ul class="figures">
-            <li><strong>Major</strong> in Business Analytics</li>
-            <li><strong>English Track:</strong> all courses taught in English</li>
-            <li><strong>2</strong> internships during the program: OSLO and Glovo</li>
-          </ul>
-          <ul class="tags">
-            <li>Algorithmic Thinking for Data Analysis</li><li>Optimization Tools for Management</li><li>Supply Chain Foundations</li><li>Production and Business Processes</li><li>Capital Budgeting and Financing</li>
-          </ul>
+          <ol class="edu-years">
+            <li class="current">
+              <p class="edu-year-title"><strong>M2</strong><span class="edu-year-sub">MSc Business Analytics</span><span class="edu-badge">Current</span><span class="edu-year-date">2026 – 2027</span></p>
+              <p class="edu-courses">Decision Models · Algorithm Design · Data-Driven Business Strategy · Business, Analytics &amp; Strategy of the Firm</p>
+            </li>
+            <li>
+              <p class="edu-year-title"><strong>Gap year</strong><span class="edu-year-date">2025 – 2026</span></p>
+              <!-- Small tiles linking to the matching card on the Experience page -->
+              <div class="edu-exps">
+                <a href="experience.html#glovo" class="edu-exp" style="--brand: #FED42A"><img src="logos/glovo.png" alt="Glovo logo" width="32" height="32"><span>Forecasting Analyst Intern</span></a>
+                <a href="experience.html#oslo" class="edu-exp" style="--brand: #D3A26E"><img src="logos/oslo.png" alt="OSLO logo" width="32" height="32"><span>Data Analyst Intern</span></a>
+              </div>
+            </li>
+            <li>
+              <p class="edu-year-title"><strong>M1</strong><span class="edu-year-sub">Major Supply Chain &amp; Economy</span><span class="edu-year-date">2024 – 2025</span></p>
+              <p class="edu-courses">Data Analysis and Decision Making · Algorithmic Thinking for Data Analysis · Capital Budgeting and Financing</p>
+            </li>
+          </ol>
         </template>
 
         <template id="detail-egc">
@@ -97,15 +106,21 @@
             </div>
             <div class="card-meta"><p class="card-date">Sep 2021 – Jun 2024</p><p class="card-location">Lille, France</p></div>
           </header>
-          <p class="card-desc">Bachelor's degree in business, with courses in marketing and financial management.</p>
-          <ul class="figures">
-            <li><strong>Top of the class</strong> in Budget Management and Financial Analysis</li>
-            <li><strong>Academic Lead:</strong> support sessions for 2nd and 3rd-year students</li>
-            <li><strong>Internship</strong> at Pain de Minuit as Business Developer</li>
-          </ul>
-          <ul class="tags">
-            <li>Real and Forecast Costs</li><li>Financial Analysis</li><li>Investment Profitability</li><li>Management Accounting</li>
-          </ul>
+          <ol class="edu-years">
+            <li>
+              <p class="edu-year-title"><strong>Year 3</strong><span class="edu-year-date">2023 – 2024</span></p>
+              <p class="edu-courses">Financial Analysis · Actual Costs · Forecast Costs · Supply Chain (Purchasing)</p>
+              <div class="edu-exps">
+                <a href="experience.html#pain-de-minuit" class="edu-exp" style="--brand: #BA9B6D"><img src="logos/pain-de-minuit.png" alt="Pain de Minuit logo" width="32" height="32"><span>Business Developer Intern</span></a>
+              </div>
+            </li>
+            <li>
+              <p class="edu-year-title"><strong>Year 2</strong><span class="edu-year-date">2022 – 2023</span></p>
+            </li>
+            <li>
+              <p class="edu-year-title"><strong>Year 1</strong><span class="edu-year-date">2021 – 2022</span></p>
+            </li>
+          </ol>
         </template>
 
         <template id="detail-genech">
@@ -119,7 +134,20 @@
             </div>
             <div class="card-meta"><p class="card-date">Sep 2018 – Jun 2021</p><p class="card-location">Genech, France</p></div>
           </header>
-          <p class="card-desc">French General Baccalaureate, with Mathematics and Economic &amp; Social Sciences as main subjects.</p>
+          <ol class="edu-years">
+            <li>
+              <p class="edu-year-title"><strong>12th grade</strong><span class="edu-year-date">2020 – 2021</span></p>
+              <p class="edu-courses">Mathematics · Economic &amp; Social Sciences · Core curriculum</p>
+            </li>
+            <li>
+              <p class="edu-year-title"><strong>11th grade</strong><span class="edu-year-date">2019 – 2020</span></p>
+              <p class="edu-courses">Mathematics · Economic &amp; Social Sciences · Digital &amp; Computer Science · Core curriculum</p>
+            </li>
+            <li>
+              <p class="edu-year-title"><strong>10th grade</strong><span class="edu-year-date">2018 – 2019</span></p>
+              <p class="edu-courses">Core curriculum</p>
+            </li>
+          </ol>
         </template>
       </div>
     </section>
