@@ -26,29 +26,101 @@
   </header>
 
   <main>
-    <!-- 5. EDUCATION -->
+    <!-- EDUCATION: timeline on the left; clicking a school opens its details on the right
+         (on phones the details open under the clicked school) -->
     <section id="education">
       <div class="container">
         <h1 class="page-title">Education</h1>
-        <div class="timeline">
-          <article>
-            <p class="card-date">Sep 2024 – Jan 2028</p>
-            <h4>NEOMA Business School</h4>
-            <p class="card-org">Master in Management, English Track · Major in Data Analysis and Supply Chain</p>
-            <p>Algorithmic Thinking for Data Analysis, Optimization Tools for Management, Supply Chain Foundations, Capital Budgeting and Financing.</p>
-          </article>
-          <article>
-            <p class="card-date">Sep 2021 – Jun 2024</p>
-            <h4>EGC Lille</h4>
-            <p class="card-org">Bachelor's Degree in Business, Marketing &amp; Financial Management</p>
-            <p>Top of the class in Budget Management and Financial Analysis.</p>
-          </article>
-          <article>
-            <p class="card-date">Sep 2018 – Jun 2021</p>
-            <h4>Institut de Genech</h4>
-            <p class="card-org">French Baccalauréat, General Track</p>
-          </article>
+        <div class="edu-layout">
+          <div class="timeline">
+            <article class="edu-item" data-school="neoma" tabindex="0" role="button" aria-expanded="false" aria-controls="edu-detail">
+              <span class="edu-level">Master's degree</span>
+              <img src="logos/neoma.png" alt="NEOMA Business School logo" class="edu-logo" width="44" height="44">
+              <span class="edu-hint" aria-hidden="true">View details →</span>
+              <p class="card-date">Sep 2024 – Jan 2028</p>
+              <h4>NEOMA Business School</h4>
+              <p class="card-org">Master in Management · Business Analytics, English Track</p>
+            </article>
+            <article class="edu-item" data-school="egc" tabindex="0" role="button" aria-expanded="false" aria-controls="edu-detail">
+              <span class="edu-level">Bachelor's degree</span>
+              <img src="logos/egc.png" alt="EGC Business School logo" class="edu-logo" width="44" height="44">
+              <span class="edu-hint" aria-hidden="true">View details →</span>
+              <p class="card-date">Sep 2021 – Jun 2024</p>
+              <h4>EGC Lille</h4>
+              <p class="card-org">Bachelor's Degree in Business, Marketing &amp; Financial Management · French Track</p>
+            </article>
+            <article class="edu-item" data-school="genech" tabindex="0" role="button" aria-expanded="false" aria-controls="edu-detail">
+              <span class="edu-level">High school</span>
+              <img src="logos/institut-de-genech.png" alt="Institut de Genech logo" class="edu-logo" width="44" height="44">
+              <span class="edu-hint" aria-hidden="true">View details →</span>
+              <p class="card-date">Sep 2018 – Jun 2021</p>
+              <h4>Institut de Genech</h4>
+              <p class="card-org">French General Baccalaureate · Mathematics, Economic &amp; Social Sciences</p>
+            </article>
+          </div>
+
+          <!-- Details panel: filled from the <template> of the clicked school -->
+          <aside id="edu-detail" class="card edu-detail" aria-live="polite" hidden></aside>
         </div>
+
+        <!-- School details (FIRST DRAFT, to improve: descriptions, projects, results, campus) -->
+        <template id="detail-neoma">
+          <header class="card-header">
+            <div class="card-title">
+              <img src="logos/neoma.png" alt="NEOMA Business School logo" class="card-logo" width="48" height="48">
+              <div>
+                <h2 class="edu-detail-title">NEOMA Business School</h2>
+                <p class="card-org">Master in Management · Business Analytics, English Track</p>
+              </div>
+            </div>
+            <div class="card-meta"><p class="card-date">Sep 2024 – Jan 2028</p></div>
+          </header>
+          <p class="card-desc">Master in Management taught in English, with a major in Business Analytics.</p>
+          <ul class="figures">
+            <li><strong>Major</strong> in Business Analytics</li>
+            <li><strong>English Track:</strong> all courses taught in English</li>
+            <li><strong>2</strong> internships during the program: OSLO and Glovo</li>
+          </ul>
+          <ul class="tags">
+            <li>Algorithmic Thinking for Data Analysis</li><li>Optimization Tools for Management</li><li>Supply Chain Foundations</li><li>Production and Business Processes</li><li>Capital Budgeting and Financing</li>
+          </ul>
+        </template>
+
+        <template id="detail-egc">
+          <header class="card-header">
+            <div class="card-title">
+              <img src="logos/egc.png" alt="EGC Business School logo" class="card-logo" width="48" height="48">
+              <div>
+                <h2 class="edu-detail-title">EGC Lille</h2>
+                <p class="card-org">Bachelor's Degree in Business, Marketing &amp; Financial Management · French Track</p>
+              </div>
+            </div>
+            <div class="card-meta"><p class="card-date">Sep 2021 – Jun 2024</p><p class="card-location">Lille, France</p></div>
+          </header>
+          <p class="card-desc">Bachelor's degree in business, with courses in marketing and financial management.</p>
+          <ul class="figures">
+            <li><strong>Top of the class</strong> in Budget Management and Financial Analysis</li>
+            <li><strong>Academic Lead:</strong> support sessions for 2nd and 3rd-year students</li>
+            <li><strong>Internship</strong> at Pain de Minuit as Business Developer</li>
+          </ul>
+          <ul class="tags">
+            <li>Real and Forecast Costs</li><li>Financial Analysis</li><li>Investment Profitability</li><li>Management Accounting</li>
+          </ul>
+        </template>
+
+        <template id="detail-genech">
+          <header class="card-header">
+            <div class="card-title">
+              <img src="logos/institut-de-genech.png" alt="Institut de Genech logo" class="card-logo" width="48" height="48">
+              <div>
+                <h2 class="edu-detail-title">Institut de Genech</h2>
+                <p class="card-org">French General Baccalaureate · Mathematics, Economic &amp; Social Sciences</p>
+              </div>
+            </div>
+            <div class="card-meta"><p class="card-date">Sep 2018 – Jun 2021</p><p class="card-location">Genech, France</p></div>
+          </header>
+          <p class="card-desc">French General Baccalaureate, with Mathematics and Economic &amp; Social Sciences as main subjects.</p>
+        </template>
       </div>
     </section>
   </main>

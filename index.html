@@ -32,9 +32,9 @@
         <div class="hero-text">
           <p class="eyebrow">Available from May 2027 · Internship, VIE or full-time</p>
           <h1>Rémi Degand</h1>
-          <!-- TODO (content step): final headline and pitch -->
-          <p class="headline">Forecasting &amp; Data Analyst</p>
-          <p class="pitch">I turn operational and financial data into forecasts, dashboards and tools that teams use every day.</p>
+          <!-- Headline and pitch decided 12 Oct 2026 -->
+          <p class="headline">Data &amp; Business Analyst</p>
+          <p class="pitch">I turn operational and financial data into insights that drive decisions, and build AI tools that save teams time.</p>
           <div class="hero-buttons">
             <a href="CV.pdf" class="button button-primary" download="Remi-Degand-CV.pdf">Download CV</a>
             <!-- The chatbot comes in Phase 2: this button will open it -->
@@ -47,12 +47,85 @@
       </div>
     </section>
 
-    <!-- 2. ABOUT -->
-    <section id="about">
+    <!-- 2. KEY EXPERIENCE: carousel, one card at a time (copies of the cards in experience.html) -->
+    <section id="highlights">
       <div class="container">
-        <h2>About</h2>
-        <!-- TODO (content step): 3-4 sentences, who I am, background, why analytics in tech -->
-        <p class="lead">Master in Management student at NEOMA Business School, majoring in Data Analysis and Supply Chain. To write: 3–4 sentences about who I am, my background and why analytics in tech.</p>
+        <div class="section-head">
+          <h2>Key experience</h2>
+          <a href="experience.html" class="see-all">See all experience →</a>
+        </div>
+        <div class="carousel">
+          <button type="button" class="carousel-arrow" data-dir="-1" aria-label="Previous experience">‹</button>
+          <div class="carousel-track" tabindex="0" aria-label="Key experience, scroll sideways">
+            <article class="card" style="--brand: #FED42A">
+              <header class="card-header">
+                <div class="card-title">
+                  <img src="logos/glovo.png" alt="Glovo logo" class="card-logo" width="48" height="48">
+                  <div>
+                  <h4>Forecasting Analyst Intern</h4>
+                  <p class="card-org">Glovo · Delivery Platform</p>
+                  </div>
+                </div>
+                <div class="card-meta"><p class="card-date">Mar – Sep 2026</p><p class="card-location">Barcelona, Spain</p></div>
+              </header>
+              <p class="card-desc">Forecaster in the Supply Ops department for the PLECA market. Forecasted weekly rider supply from customer demand and designed tools to make processes more efficient.</p>
+              <ul class="figures">
+                <li><strong>5</strong> countries forecast weekly</li>
+                <li><strong>1</strong> web app designed, used daily by the team</li>
+                <li><strong>+8 pts</strong> forecast accuracy vs. target</li>
+              </ul>
+              <ul class="tags">
+                <li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>Apps Script</li><li>LLMs</li>
+              </ul>
+            </article>
+
+            <article class="card" style="--brand: #D3A26E">
+              <header class="card-header">
+                <div class="card-title">
+                  <img src="logos/oslo.png" alt="OSLO logo" class="card-logo" width="48" height="48">
+                  <div>
+                  <h4>Data Analyst Intern</h4>
+                  <p class="card-org">OSLO · IT &amp; SaaS Solutions</p>
+                  </div>
+                </div>
+                <div class="card-meta"><p class="card-date">Sep – Dec 2025</p><p class="card-location">Villeneuve d'Ascq, France</p></div>
+              </header>
+              <p class="card-desc">Analyst in the Information Systems department. Improved data reliability to build KPIs for steering the business, and created BI tools for the software OSLO distributes.</p>
+              <ul class="figures">
+                <li><strong>€350k → €8k</strong> annual revenue discrepancies</li>
+                <li><strong>13</strong> data models · <strong>6</strong> dashboards</li>
+                <li><strong>4</strong> business units supported</li>
+              </ul>
+              <ul class="tags">
+                <li>Excel</li><li>Data modeling</li><li>Dashboards</li><li>Finance</li>
+              </ul>
+            </article>
+
+            <article class="card" style="--brand: #E1311D">
+              <header class="card-header">
+                <div class="card-title">
+                  <img src="logos/envie-dsup.png" alt="Envie d'Sup logo" class="card-logo" width="48" height="48">
+                  <div>
+                  <h4>Treasurer</h4>
+                  <p class="card-org">Envie d'Sup · State-Supported NPO</p>
+                  </div>
+                </div>
+                <div class="card-meta"><p class="card-date">Dec 2024 – Jun 2025</p><p class="card-location">Rouen, France</p></div>
+              </header>
+              <p class="card-desc">Managed the public budget of a non-profit serving 229 students from priority education zones.</p>
+              <ul class="figures">
+                <li><strong>€49k</strong> public budget managed</li>
+                <li><strong>84+</strong> supplier invoices processed</li>
+                <li><strong>100%</strong> program execution</li>
+              </ul>
+              <ul class="tags">
+                <li>Budgeting</li><li>Forecasting</li><li>Cost analysis</li>
+              </ul>
+            </article>
+          </div>
+          <button type="button" class="carousel-arrow" data-dir="1" aria-label="Next experience">›</button>
+        </div>
+        <div class="carousel-dots"></div>
       </div>
     </section>
   </main>

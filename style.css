@@ -201,7 +201,7 @@ h4 { font-size: 1.1rem; }
 .card-location { color: var(--text-muted); font-size: 0.85rem; white-space: nowrap; margin: 2px 0 0; }
 
 /* Leadership cards: 2 per row so the title has room next to the date block */
-#experience .cards-medium { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
+:is(#experience, #highlights) .cards-medium { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
 
 /* Hands-on rows: role on top, company · industry underneath */
 .compact-list .card-org { display: block; font-size: 0.9rem; margin: 0; }
@@ -236,15 +236,15 @@ h4 { font-size: 1.1rem; }
 }
 
 /* ===== Hover effect on experiences (cards lift, rows highlight) ===== */
-#experience .card,
-#experience .card-logo,
+:is(#experience, #highlights) .card,
+:is(#experience, #highlights) .card-logo,
 .compact-list li {
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 }
 
 /* Each experience sets --brand to its logo's main color in index.html
    (style="--brand: #FED42A"); without it the hover falls back to the blue accent */
-#experience .card:hover {
+:is(#experience, #highlights) .card:hover {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--brand, var(--accent)) 70%, transparent);
   box-shadow: 0 4px 8px rgba(16, 24, 40, 0.06), 0 16px 32px color-mix(in srgb, var(--brand, var(--accent)) 28%, transparent);
@@ -255,18 +255,69 @@ h4 { font-size: 1.1rem; }
 .compact-list li:hover { background: color-mix(in srgb, var(--brand, var(--accent)) 9%, var(--bg)); }
 
 /* Logo pops slightly when its experience is hovered */
-#experience .card:hover .card-logo,
+:is(#experience, #highlights) .card:hover .card-logo,
 .compact-list li:hover .card-logo { transform: scale(1.08); }
 
 /* No movement for people who turn animations off in their system settings */
 @media (prefers-reduced-motion: reduce) {
-  #experience .card,
-  #experience .card-logo,
+  :is(#experience, #highlights) .card,
+  :is(#experience, #highlights) .card-logo,
   .compact-list li { transition: none; }
-  #experience .card:hover,
-  #experience .card:hover .card-logo,
+  :is(#experience, #highlights) .card:hover,
+  :is(#experience, #highlights) .card:hover .card-logo,
   .compact-list li:hover .card-logo { transform: none; }
 }
+
+/* ===== Home: key experience carousel (one card at a time) ===== */
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
+.section-head h2 { margin: 0; }
+.see-all { font-weight: 600; text-decoration: none; white-space: nowrap; }
+.see-all:hover { text-decoration: underline; }
+
+.carousel { display: flex; align-items: center; gap: 16px; }
+
+.carousel-track {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;            /* arrows and dots replace the scrollbar */
+  padding: 8px 4px 28px;            /* room for the hover lift and shadow */
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track > .card { flex: 0 0 100%; scroll-snap-align: start; }
+
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.carousel-arrow:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.carousel-arrow:disabled { opacity: 0.35; cursor: default; }
+
+.carousel-dots { display: flex; justify-content: center; gap: 8px; }
+.carousel-dots button {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--border);
+  cursor: pointer;
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+.carousel-dots button.active { width: 24px; background: var(--accent); }
 
 /* ===== Education timeline ===== */
 .timeline { border-left: 2px solid var(--border); padding-left: 24px; display: grid; gap: 32px; }
@@ -283,6 +334,138 @@ h4 { font-size: 1.1rem; }
 }
 .timeline h4 { margin-top: 4px; }
 .timeline p { margin: 4px 0 0; }
+
+/* ===== Education: click a school to open its details on the right ===== */
+.edu-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: start; }
+.edu-layout.has-detail { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
+.edu-layout .timeline { grid-template-columns: minmax(0, 1fr); }   /* lets long lines shrink instead of running under the panel */
+
+/* Each school: padding + negative margin so the hover background goes past the text, which stays in place */
+.timeline .edu-item {
+  padding: 12px 16px;
+  margin: -12px -16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+/* Room on the left for the level labels, and for the logo circles that sit on the line */
+.edu-layout .timeline { margin-left: 176px; padding-left: 40px; }
+.timeline .edu-item::before { display: none; }   /* the logo replaces the dot */
+
+/* School logo in a circle, centred on the timeline line */
+.edu-logo {
+  position: absolute;
+  left: -46px;
+  top: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--border);
+  background: var(--bg);
+  object-fit: cover;
+  font-size: 0.85rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Level (Master's degree, Bachelor's degree, High school), to the left of the line */
+.edu-level {
+  position: absolute;
+  right: calc(100% + 60px);
+  white-space: nowrap;
+  top: 22px;
+  width: 150px;
+  text-align: right;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.edu-item:hover,
+.edu-item:focus-visible { background: var(--accent-soft); outline: none; }
+.edu-item:hover .edu-logo,
+.edu-item:focus-visible .edu-logo,
+.edu-item[aria-expanded="true"] .edu-logo { transform: scale(1.08); box-shadow: 0 0 0 2px var(--accent); }
+.edu-item:hover .edu-level,
+.edu-item:focus-visible .edu-level,
+.edu-item[aria-expanded="true"] .edu-level { color: var(--accent); }
+.edu-item:hover h4,
+.edu-item:focus-visible h4 { color: var(--accent); }
+
+/* Selected school */
+.edu-item[aria-expanded="true"] { background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent); }
+.edu-item[aria-expanded="true"] h4 { color: var(--accent); }
+
+/* "View details" hint: appears on hover (always shown on phones, see below) */
+.edu-hint {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.edu-item:hover .edu-hint,
+.edu-item:focus-visible .edu-hint { opacity: 1; transform: none; }
+.edu-item[aria-expanded="true"] .edu-hint { opacity: 0; }
+
+/* Details panel: simple outline (no shadow), placed level with the selected school
+   (script.js sets --panel-offset), with a "<" arrow pointing at it */
+.edu-detail {
+  position: relative;               /* anchors the arrow and the × close button */
+  margin-top: var(--panel-offset, 0px);
+  padding-top: 40px;
+  box-shadow: none;
+  animation: edu-open 0.25s ease;
+}
+.edu-detail::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 30px;                        /* level with the school name */
+  width: 14px;
+  height: 14px;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transform: rotate(45deg);
+}
+.edu-detail[hidden] { display: none; }
+.edu-detail-title { font-size: 1.1rem; margin: 0; }
+.edu-layout .card-org { white-space: normal; }   /* degree names wrap instead of ending in "…" */
+.edu-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.edu-close:hover { color: var(--accent); }
+@keyframes edu-open { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .edu-detail { animation: none; }
+  .edu-item, .edu-logo, .edu-hint { transition: none; }
+}
+
+/* Phones: one column, details open under the clicked school */
+@media (max-width: 720px) {
+  .edu-layout.has-detail { grid-template-columns: minmax(0, 1fr); }
+  .edu-layout .timeline { margin-left: 0; padding-left: 36px; }
+  .edu-logo { left: -39px; width: 36px; height: 36px; }
+  .edu-level { position: static; display: block; width: auto; text-align: left; white-space: normal; }   /* label above the dates */
+  .edu-detail { margin: -16px 0 0; padding: 40px 16px 20px; }
+  .edu-detail::before { left: 24px; top: -8px; transform: rotate(135deg); }   /* arrow points up at the school */
+  .edu-hint { position: static; display: block; margin-bottom: 4px; opacity: 1; transform: none; }
+}
 
 /* ===== Footer ===== */
 .footer { padding: 32px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border); }
@@ -301,4 +484,5 @@ h4 { font-size: 1.1rem; }
   .card-header .card-meta { padding-left: 60px; }  /* line up dates under the text, not the logo */
   .compact-list .card-meta { padding-left: 60px; flex-direction: row; gap: 8px; }
   .menu-name { display: none; }
+  .carousel-arrow { display: none; }   /* swipe on phones; dots show the position */
 }
