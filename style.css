@@ -277,7 +277,7 @@ h4 { font-size: 1.1rem; }
 /* ===== Experience page: key experience timeline ===== */
 /* One line on the left with the year and the logo; each card has its text on the left
    and its key figures on the right. --brand is set on .xp-item in experience.html */
-.xp-timeline { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; margin-left: 96px; padding-left: 40px; border-left: 2px solid var(--border); }
+.xp-timeline { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; margin-left: 176px; padding-left: 40px; border-left: 2px solid var(--border); }
 .xp-item { position: relative; }
 .xp-dot {
   position: absolute;
@@ -293,7 +293,13 @@ h4 { font-size: 1.1rem; }
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .xp-item:hover .xp-dot { transform: scale(1.08); box-shadow: 0 0 0 2px var(--brand, var(--accent)); }
-.xp-year { position: absolute; right: calc(100% + 76px); top: 30px; font-weight: 700; color: var(--text-muted); }
+/* Left of the line: year, then when/why (school year, gap year) in small grey capitals, like the Education levels */
+.xp-context { position: absolute; right: calc(100% + 76px); top: 22px; width: 150px; margin: 0; text-align: right; line-height: 1.35; }
+.xp-context span { display: block; }
+.xp-year { font-weight: 700; color: var(--text-muted); }
+.xp-label { margin-top: 4px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.25s ease; }
+.xp-sub { color: var(--text-muted); font-size: 0.8rem; }
+.xp-item:hover .xp-label { color: var(--accent); }
 
 .xp-card { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 0 32px; }
 .xp-card .figures { margin: 0; padding-left: 24px; border-left: 1px solid var(--border); align-content: center; }
@@ -339,7 +345,8 @@ h4 { font-size: 1.1rem; }
 @media (max-width: 720px) {
   .xp-timeline { margin-left: 0; padding-left: 32px; }
   .xp-dot { left: -49px; top: 18px; width: 32px; height: 32px; }
-  .xp-year { position: static; display: block; margin-bottom: 6px; }
+  .xp-context { position: static; width: auto; margin-bottom: 6px; text-align: left; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px; }   /* one line above the card */
+  .xp-label { margin-top: 0; }
   .xp-card { grid-template-columns: minmax(0, 1fr); }
   .xp-card .card-header .card-meta { padding-left: 0; }   /* no logo in these cards (it sits on the line) */
   .xp-card .figures { margin-top: 16px; padding-left: 0; border-left: 0; }
