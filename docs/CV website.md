@@ -406,10 +406,11 @@ ONLINE (each question)
 - GitHub: never share a password or token in chat.
 - The project folder is **outside OneDrive** on purpose (OneDrive sync can lock or corrupt Git/npm files).
 
-## Current state of the website (12 October 2026, evening)
-**Folder:** `C:\Users\remid\cv-website` · **Last commit:** `b4edb06` + notes update (**pushed to GitHub**: https://github.com/RemiDegand/cv-website, `main` tracks `origin/main`).
+## Current state of the website (13 October 2026)
+**Folder:** `C:\Users\remid\cv-website` · **Last commit:** `7c671cf` + notes update (**pushed to GitHub**: https://github.com/RemiDegand/cv-website, `main` tracks `origin/main`).
 - Commits on 12 Oct: `a3cf660` (8 Oct work: logos, card layout, hover) · `4a87e45` (split into 4 pages, Skills removed) · `ce88cb1` (original logo files) · `95de957` (Home carousel + hero, About removed, Education panel + logos + level labels) · `b1b7103` (project notes moved into the repo).
-- `b4edb06` (12 Oct evening): Education zoom view, per-year cards, courses, experience tiles, notes rewrite. **Everything is committed.**
+- `b4edb06` (12 Oct evening): Education zoom view, per-year cards, courses, experience tiles, notes rewrite.
+- Commits on 13 Oct: `2dce272` · `910f44f` · `49b33f4` (Education: M1 major Data Analysis & Supply Chain, EGC Year 1 and 2 courses) · `8b5bbec` (Experience: key experience timeline + list + details) · `7c671cf` (Experience: when/why context left of the timeline). **Everything is committed and pushed.**
 
 | File | Content |
 |---|---|
@@ -417,7 +418,7 @@ ONLINE (each question)
 | `experience.html` | Key experience timeline (4 wide cards, figures on the right) · Leadership & volunteering + Hands-on as a list + details panel (cards in `<template>` blocks). Glovo, OSLO and Pain de Minuit cards have `id`s (linked from the Education tiles) |
 | `education.html` | Timeline with level labels + logo circles; click = zoom view with the school's card (per-year mini timeline: courses + experience tiles), content in `<template>` blocks |
 | `contact.html` | Email, LinkedIn, CV download |
-| `style.css` | Clean & light design, blue accent, design tokens in `:root`, responsive (phone layout under 720px). Page width 1120px. Logo-coloured hover on experience cards (Experience page + Home carousel). Sections: carousel styles, Education timeline/panel styles |
+| `style.css` | Clean & light design, blue accent, design tokens in `:root`, responsive (phone layout under 720px). Page width 1120px. Logo-coloured hover on experience cards (Experience page + Home carousel). Sections: Experience timeline + list/details (`xp-…`), carousel styles, Education timeline/panel styles. The old `.compact-list` and `.cards-large/-medium` rules are no longer used on the Experience page |
 | `script.js` | Home carousel (arrows, dots, position) + Experience list + details + Education zoom view (builds the cards from the templates, shows the clicked school's card with a FLIP slide animation, close). Chatbot placeholder for Phase 2 |
 | `logos/` | 160×160 PNG square tiles (empty margins trimmed, centered on white). Companies shown at 48×48 top-left of cards; schools shown in 44px circles on the Education timeline. Taglines/slogans cropped out (OSLO, EGC → "egc" only, Hilton, Cheer Up); Glovo and Decathlon fill the tile with their colour. Pain de Minuit = barrel only; Institut de Genech = 3-petal symbol only; charity raffle = heart icon (no organization). Originals (`Glovo logo.jpg`, `Logo EGC.png`, `logo Institut de Genech.jpg`…) in the root folder (committed, ~520 KB: exclude them from the Firebase deploy) |
 | `profile.jpg` | Photo on the site: 600×600, 34 KB, made from `photo2.jpg` |
@@ -430,13 +431,14 @@ ONLINE (each question)
 - Quick look: double-click `index.html`. The CV button opens the PDF instead of downloading it in this mode (browser security on local files).
 - Like online: run `npx http-server C:\Users\remid\cv-website -p 8080 -c-1` in a PowerShell window, then open http://localhost:8080. The CV button downloads the file and you stay on the page. Ctrl+C stops the server. (Note: on 7 and 12 Oct Claude Code stopped this server because the PC was low on memory: don't restart it without asking.)
 - **Needed for Claude's browser checks:** the Chrome tool can't open `file://` pages, so Claude starts this server. Screenshots sometimes time out (browser freezes); the first click after loading a page sometimes doesn't register (hover first).
+- **Claude's screenshots without the server (13 Oct):** headless Chrome (`chrome.exe --headless=new --screenshot`) works on `file://` pages. Its window can't go below ~500px wide, so for a phone check put the page in a 390px `<iframe>` in a scratch page.
 - **Tools on this PC:** no Python. Use Node.js for scripts and PowerShell `System.Drawing` for image cropping (logos).
 
 ### ▶ Next session: start here
 1. **Education:** all courses are in (13 Oct). Go through the "Review of the Education page" list in section 3: fix the NEOMA dates/degree contradictions and locations, remove the repeated card header, open NEOMA by default, add results (Top of the class, TOEIC), decide on high school. Maybe a square NEOMA icon for a more readable circle.
 2. **Fix the CV** (public version without the phone, headline "Data & Business Analyst", Business Analytics major, resolve the differences listed below), then replace `CV.pdf` and remove it from `.gitignore`.
 3. **Put the site online with Firebase Hosting.** In `firebase.json`: exclude `photo.jpg`/`photo2.jpg`, the original logo files and `docs/` from deploy (`ignore`), and add a `Content-Disposition: attachment` header for the PDF so it always downloads.
-4. **Experience cards:** new layout done 13 Oct (see section 2); review the new Hands-on descriptions. bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
+4. **Experience:** new layout done 13 Oct (see section 2). Next: (a) **context labels for the list rows** (leadership, hands-on): Claude asked the user when/why for each (summer job? which school-year internship?), waiting for answers; (b) user to check the timeline labels ("Alongside classes" for Treasurer, "Final internship" for Pain de Minuit); (c) review the new Hands-on descriptions; (d) bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
 5. **Open question:** use the CV's figures and extra skills on the site? (see "Open questions" below).
 6. **Design:** keep the current clean & light design. Claude Design canvas (A "Data notebook", B "Night mode"), tried on 8 Oct and **reverted at the user's request**: https://claude.ai/artifact/6Zu9cPTzvpTMLmgyEFszgD (private).
 7. **User to do:** update LinkedIn (headline "Data & Business Analyst"; NEOMA: M2 MSc Business Analytics) and check the NEOMA end date there.
@@ -444,7 +446,7 @@ ONLINE (each question)
 ## Roadmap
 **Phase 1: the website (free, no card)**
 1. ✅ Install the tools (Node.js, Git, Firebase CLI), create GitHub + Firebase accounts
-2. ✅ Build the site: HTML structure → CSS design → JavaScript. 12 Oct: 4 pages, Home carousel, Education zoom view with per-year cards
+2. ✅ Build the site: HTML structure → CSS design → JavaScript. 12 Oct: 4 pages, Home carousel, Education zoom view with per-year cards. 13 Oct: Experience timeline + list/details
 3. 🔄 Write the content (Hero done 12 Oct; Experience mostly done, short descriptions to expand; Education per-year cards with courses, all years filled 13 Oct; About and Skills removed for now)
 4. Put it online with Firebase Hosting + save the code on GitHub
 
