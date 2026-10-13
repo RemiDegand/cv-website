@@ -274,6 +274,79 @@ h4 { font-size: 1.1rem; }
   .compact-list li:hover .card-logo { transform: none; }
 }
 
+/* ===== Experience page: key experience timeline ===== */
+/* One line on the left with the year and the logo; each card has its text on the left
+   and its key figures on the right. --brand is set on .xp-item in experience.html */
+.xp-timeline { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; margin-left: 96px; padding-left: 40px; border-left: 2px solid var(--border); }
+.xp-item { position: relative; }
+.xp-dot {
+  position: absolute;
+  left: -63px;                      /* centred on the line */
+  top: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--border);
+  background: var(--bg);
+  object-fit: cover;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.xp-item:hover .xp-dot { transform: scale(1.08); box-shadow: 0 0 0 2px var(--brand, var(--accent)); }
+.xp-year { position: absolute; right: calc(100% + 76px); top: 30px; font-weight: 700; color: var(--text-muted); }
+
+.xp-card { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 0 32px; }
+.xp-card .figures { margin: 0; padding-left: 24px; border-left: 1px solid var(--border); align-content: center; }
+
+/* ===== Experience page: other experiences (list on the left, details on the right) ===== */
+.xp-browse { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 40px; align-items: start; margin-top: 48px; }
+.xp-list .group-title { margin: 28px 0 8px; }
+.xp-list .group-title:first-child { margin-top: 0; }
+.xp-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.xp-row:hover, .xp-row:focus-visible { background: color-mix(in srgb, var(--brand, var(--accent)) 9%, var(--bg)); outline: none; }
+.xp-row.selected { background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent); }
+.xp-row .card-logo { width: 40px; height: 40px; }
+.xp-row-text { flex: 1; min-width: 0; line-height: 1.35; }
+.xp-row-text strong { display: block; font-weight: 600; }
+.xp-row.selected strong { color: var(--accent); }
+.xp-row-text span { display: block; color: var(--text-muted); font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.xp-row-date { color: var(--text-muted); font-size: 0.8rem; white-space: nowrap; }
+.xp-detail { position: sticky; top: calc(var(--menu-height) + 24px); }   /* stays in view while scrolling the list */
+.xp-detail .card { box-shadow: none; animation: xp-in 0.3s ease both; }
+@keyframes xp-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .xp-dot, .xp-row { transition: none; }
+  .xp-item:hover .xp-dot { transform: none; }
+  .xp-detail .card { animation: none; }
+}
+
+/* Phones: year above each card, figures under the text, details open under the clicked row */
+@media (max-width: 720px) {
+  .xp-timeline { margin-left: 0; padding-left: 32px; }
+  .xp-dot { left: -49px; top: 18px; width: 32px; height: 32px; }
+  .xp-year { position: static; display: block; margin-bottom: 6px; }
+  .xp-card { grid-template-columns: minmax(0, 1fr); }
+  .xp-card .card-header .card-meta { padding-left: 0; }   /* no logo in these cards (it sits on the line) */
+  .xp-card .figures { margin-top: 16px; padding-left: 0; border-left: 0; }
+  .xp-browse { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .xp-detail { position: static; margin: 8px 0 16px; }
+}
+
 /* ===== Home: key experience carousel (one card at a time) ===== */
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
 .section-head :is(h1, h2) { margin: 0; }

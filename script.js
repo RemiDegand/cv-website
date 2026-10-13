@@ -143,4 +143,28 @@ if (timeline) {
   document.addEventListener("keydown", (event) => { if (event.key === "Escape") close(); });
 }
 
+// Experience: other experiences. Click a row to show its card (from its <template>) on the
+// right, or right under the row on phones. The first row is open when the page loads.
+const xpBrowse = document.querySelector(".xp-browse");
+if (xpBrowse) {
+  const list = xpBrowse.querySelector(".xp-list");
+  const detail = xpBrowse.querySelector(".xp-detail");
+  const rows = list.querySelectorAll(".xp-row");
+  const phone = window.matchMedia("(max-width: 720px)");
+
+  function show(row) {
+    rows.forEach((r) => {
+      r.classList.toggle("selected", r === row);
+      r.setAttribute("aria-pressed", r === row);
+    });
+    detail.replaceChildren(document.getElementById("xp-" + row.dataset.id).content.cloneNode(true));
+    if (phone.matches) row.after(detail);
+    else if (detail.parentElement !== xpBrowse) xpBrowse.appendChild(detail);
+  }
+
+  rows.forEach((row) => row.addEventListener("click", () => show(row)));
+  phone.addEventListener("change", () => show(list.querySelector(".xp-row.selected")));
+  show(rows[0]);
+}
+
 // Later: chatbot window (Phase 2).

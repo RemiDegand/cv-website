@@ -42,6 +42,14 @@
 - Ideas not done yet: narrower card on big screens, add Pain de Minuit as a 4th card.
 
 ### 2. Experience (`experience.html`): 3 groups (decided)
+**Layout (changed 13 Oct 2026, chosen by the user from 3 prototypes: A timeline, B list + details, C filters + sort):**
+- **Key experience = timeline, newest first** (like Education): year on the left, logo in a circle on the line, then a **wide card** with text on the left (header, description, tags) and the **key figures on the right** (separated by a thin line). On phones the figures go under the text and the year above the card. The card has no logo of its own (it sits on the line).
+- **Leadership & volunteering + Hands-on = list + details** (like Education): a list of rows on the left (logo, position, company · industry, dates), grouped by type; clicking a row shows its full card on the right (sticky while scrolling). First row (Envie d'Sup) open by default. On phones the card opens under the clicked row. Cards live in `<template id="xp-…">` blocks; `script.js` shows them.
+- **Hands-on cards now have a short description** (and Hilton has 3 key figures), written from the summaries below on 13 Oct. To review with the user.
+- Rejected: the filters + sort bar (option C), and one single timeline for everything (option A mixed volunteering in between the key experiences).
+- The old 2 × 2 grid version is in Git commit `49b33f4`.
+
+_Content below: groups and card rules (still valid)._
 ```
 KEY EXPERIENCE                    (large cards: description + key figures + tools; "see more" removed 8 Oct)
   Glovo – Forecasting Analyst          ★ data
@@ -405,11 +413,11 @@ ONLINE (each question)
 | File | Content |
 |---|---|
 | `index.html` | Home: hero (final headline + pitch) + Key experience carousel (Glovo, OSLO, Treasurer) |
-| `experience.html` | Key experience (4 large cards) · Leadership & volunteering (4 cards) · Hands-on (6 compact rows). Glovo, OSLO and Pain de Minuit cards have `id`s (linked from the Education tiles) |
+| `experience.html` | Key experience timeline (4 wide cards, figures on the right) · Leadership & volunteering + Hands-on as a list + details panel (cards in `<template>` blocks). Glovo, OSLO and Pain de Minuit cards have `id`s (linked from the Education tiles) |
 | `education.html` | Timeline with level labels + logo circles; click = zoom view with the school's card (per-year mini timeline: courses + experience tiles), content in `<template>` blocks |
 | `contact.html` | Email, LinkedIn, CV download |
 | `style.css` | Clean & light design, blue accent, design tokens in `:root`, responsive (phone layout under 720px). Page width 1120px. Logo-coloured hover on experience cards (Experience page + Home carousel). Sections: carousel styles, Education timeline/panel styles |
-| `script.js` | Home carousel (arrows, dots, position) + Education zoom view (builds the cards from the templates, shows the clicked school's card with a FLIP slide animation, close). Chatbot placeholder for Phase 2 |
+| `script.js` | Home carousel (arrows, dots, position) + Experience list + details + Education zoom view (builds the cards from the templates, shows the clicked school's card with a FLIP slide animation, close). Chatbot placeholder for Phase 2 |
 | `logos/` | 160×160 PNG square tiles (empty margins trimmed, centered on white). Companies shown at 48×48 top-left of cards; schools shown in 44px circles on the Education timeline. Taglines/slogans cropped out (OSLO, EGC → "egc" only, Hilton, Cheer Up); Glovo and Decathlon fill the tile with their colour. Pain de Minuit = barrel only; Institut de Genech = 3-petal symbol only; charity raffle = heart icon (no organization). Originals (`Glovo logo.jpg`, `Logo EGC.png`, `logo Institut de Genech.jpg`…) in the root folder (committed, ~520 KB: exclude them from the Firebase deploy) |
 | `profile.jpg` | Photo on the site: 600×600, 34 KB, made from `photo2.jpg` |
 | `CV.pdf` | Draft CV, downloads as `Remi-Degand-CV.pdf` |
@@ -427,7 +435,7 @@ ONLINE (each question)
 1. **Education:** all courses are in (13 Oct). Go through the "Review of the Education page" list in section 3: fix the NEOMA dates/degree contradictions and locations, remove the repeated card header, open NEOMA by default, add results (Top of the class, TOEIC), decide on high school. Maybe a square NEOMA icon for a more readable circle.
 2. **Fix the CV** (public version without the phone, headline "Data & Business Analyst", Business Analytics major, resolve the differences listed below), then replace `CV.pdf` and remove it from `.gitignore`.
 3. **Put the site online with Firebase Hosting.** In `firebase.json`: exclude `photo.jpg`/`photo2.jpg`, the original logo files and `docs/` from deploy (`ignore`), and add a `Content-Disposition: attachment` header for the PDF so it always downloads.
-4. **Experience cards:** bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
+4. **Experience cards:** new layout done 13 Oct (see section 2); review the new Hands-on descriptions. bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
 5. **Open question:** use the CV's figures and extra skills on the site? (see "Open questions" below).
 6. **Design:** keep the current clean & light design. Claude Design canvas (A "Data notebook", B "Night mode"), tried on 8 Oct and **reverted at the user's request**: https://claude.ai/artifact/6Zu9cPTzvpTMLmgyEFszgD (private).
 7. **User to do:** update LinkedIn (headline "Data & Business Analyst"; NEOMA: M2 MSc Business Analytics) and check the NEOMA end date there.
@@ -480,4 +488,5 @@ _LinkedIn wins when dates conflict._
 _Write here what I learn at each step (useful for interviews: "tell me about a project you built")._
 - **12 Oct:** split a one-page site into several pages (shared menu, "active" link per page); built a carousel with CSS scroll-snap + JavaScript (arrows, dots); built a "master–detail" view (list on the left, details on the right) with HTML `<template>` blocks; responsive design (side panel on desktop, drop-down under the item on phones); accessibility (keyboard Enter/Esc, `aria-expanded`).
 - **12 Oct (later):** Education "zoom" view. Placing each card right after its school in one CSS grid (2 columns) keeps the card level with its school. First tried the View Transitions API (snapshots of the page before/after), which felt laggy; replaced it with the **FLIP** technique (First, Last, Invert, Play): measure positions, change the layout, then animate `transform` from the old to the new position. Animating `transform`/`opacity` is smooth because the browser doesn't recompute the layout at each frame.
+- **13 Oct:** built 3 layout prototypes on one page from a single JavaScript data list so the user could compare them, then generated the final static HTML from that list. Grid columns need `minmax(0, 1fr)` instead of `1fr`, or long one-line text (nowrap) makes the column wider than a phone screen.
 - **Headline lesson:** use a job title recruiters actually search for ("Data & Business Analyst"), and put the specifics in the pitch.
