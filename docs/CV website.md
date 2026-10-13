@@ -135,7 +135,7 @@ HANDS-ON EXPERIENCE               (compact list, one line each)
 | NEOMA | **Gap year** 2025 – 2026 | none | 2 tiles: Glovo "Forecasting Analyst Intern" · OSLO "Data Analyst Intern" ("perfect" per the user) |
 | NEOMA | **M1** 2024 – 2025 | Major Data Analysis & Supply Chain (changed 13 Oct, was "Supply Chain & Economy") | Data Analysis and Decision Making · Algorithmic Thinking for Data Analysis · Capital Budgeting and Financing |
 | EGC | **Year 3** 2023 – 2024 | none | Financial Analysis · Actual Costs · Forecast Costs · Supply Chain (Purchasing) (user's French: "Analyse financière, coût réel, coût prévisionnel, supply chain (achat)") + tile Pain de Minuit "Business Developer Intern" |
-| EGC | **Year 2** 2022 – 2023 | none | Management Control · Investment Profitability · Sales Negotiation (user's French, 13 Oct: "Contrôle de gestion, rentabilité des investissements, négociation commerciale") |
+| EGC | **Year 2** 2022 – 2023 | none | Management Accounting · Investment Profitability · Sales Negotiation (user's French, 13 Oct: "Contrôle de gestion, rentabilité des investissements, négociation commerciale") |
 | EGC | **Year 1** 2021 – 2022 | none | Financial Management Tools · Financial Accounting · Sales Techniques · Sales Performance Indicators (user's French, 13 Oct: "Outils de gestion (financière), comptabilité générale, technique de vente, indicateurs de la performance commerciale") |
 | Genech | **12th grade** 2020 – 2021 | none | Mathematics · Economic & Social Sciences · Core curriculum |
 | Genech | **11th grade** 2019 – 2020 | none | Mathematics · Economic & Social Sciences · Digital & Computer Science (NSI) · Core curriculum |
