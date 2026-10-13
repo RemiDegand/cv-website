@@ -304,6 +304,15 @@ h4 { font-size: 1.1rem; }
 .xp-card { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 0 32px; }
 .xp-card .figures { margin: 0; padding-left: 24px; border-left: 1px solid var(--border); align-content: center; }
 
+/* Next experience: empty dashed card with a "?" on the line */
+.xp-next .xp-dot { display: grid; place-items: center; border: 2px dashed var(--accent); box-shadow: none; color: var(--accent); font-size: 1.2rem; font-weight: 700; }
+.xp-next .xp-card { border: 2px dashed color-mix(in srgb, var(--accent) 45%, var(--border)); background: transparent; box-shadow: none; }
+.xp-next .tags li { border-style: dashed; background: transparent; }
+.xp-next-cta { display: grid; place-items: center; padding-left: 24px; border-left: 1px solid var(--border); }
+@media (max-width: 720px) {
+  .xp-next-cta { justify-items: start; margin-top: 16px; padding-left: 0; border-left: 0; }
+}
+
 /* ===== Experience page: other experiences (list on the left, details on the right) ===== */
 .xp-browse { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 40px; align-items: start; margin-top: 48px; }
 .xp-list .group-title { margin: 28px 0 8px; }
