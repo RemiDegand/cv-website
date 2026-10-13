@@ -133,10 +133,10 @@ HANDS-ON EXPERIENCE               (compact list, one line each)
 |---|---|---|---|
 | NEOMA | **M2** 2026 – 2027 (current) | MSc Business Analytics | Decision Models · Algorithm Design · Data-Driven Business Strategy · Business, Analytics & Strategy of the Firm |
 | NEOMA | **Gap year** 2025 – 2026 | none | 2 tiles: Glovo "Forecasting Analyst Intern" · OSLO "Data Analyst Intern" ("perfect" per the user) |
-| NEOMA | **M1** 2024 – 2025 | Major Supply Chain & Economy | Data Analysis and Decision Making · Algorithmic Thinking for Data Analysis · Capital Budgeting and Financing |
+| NEOMA | **M1** 2024 – 2025 | Major Data Analysis & Supply Chain (changed 13 Oct, was "Supply Chain & Economy") | Data Analysis and Decision Making · Algorithmic Thinking for Data Analysis · Capital Budgeting and Financing |
 | EGC | **Year 3** 2023 – 2024 | none | Financial Analysis · Actual Costs · Forecast Costs · Supply Chain (Purchasing) (user's French: "Analyse financière, coût réel, coût prévisionnel, supply chain (achat)") + tile Pain de Minuit "Business Developer Intern" |
-| EGC | **Year 2** 2022 – 2023 | none | empty: **courses coming soon from the user** |
-| EGC | **Year 1** 2021 – 2022 | none | empty: **courses coming soon from the user** |
+| EGC | **Year 2** 2022 – 2023 | none | Management Control · Investment Profitability · Sales Negotiation (user's French, 13 Oct: "Contrôle de gestion, rentabilité des investissements, négociation commerciale") |
+| EGC | **Year 1** 2021 – 2022 | none | Management Tools · Financial Accounting · Sales Techniques · Sales Performance Indicators (user's French, 13 Oct: "Outils de gestion, comptabilité générale, technique de vente, indicateurs de la performance commerciale") |
 | Genech | **12th grade** 2020 – 2021 | none | Mathematics · Economic & Social Sciences · Core curriculum |
 | Genech | **11th grade** 2019 – 2020 | none | Mathematics · Economic & Social Sciences · Digital & Computer Science (NSI) · Core curriculum |
 | Genech | **10th grade** 2018 – 2019 | none | Core curriculum ("tronc commun") |
@@ -146,17 +146,17 @@ HANDS-ON EXPERIENCE               (compact list, one line each)
 **Review of the Education page (12 Oct, Claude's opinion, asked by the user). Areas for improvement, by priority:**
 1. **Fix what contradicts itself** (a recruiter would notice first):
    - NEOMA dates: header says **Sep 2024 – Jan 2028**, M2 says **2026 – 2027**, `about-me.md` says the M2 school year ends 16 Apr 2027, and the hero says "available from May 2027". Check LinkedIn and align everything.
-   - NEOMA degree line "Master in Management · Business Analytics, English Track" vs. M1 "Major Supply Chain & Economy" and M2 "MSc Business Analytics". Suggestion: "Master in Management (Grande École) · MSc Business Analytics in M2" (to confirm with the user). LinkedIn to update too.
+   - NEOMA degree line "Master in Management · Business Analytics, English Track" vs. M1 "Major Data Analysis & Supply Chain" and M2 "MSc Business Analytics". Suggestion: "Master in Management (Grande École) · MSc Business Analytics in M2" (to confirm with the user). LinkedIn to update too.
    - Locations: NEOMA has none (campus: Rouen? the M1-year volunteering was in Rouen); EGC "Lille" and Genech "Genech" are assumptions.
 2. **Remove the repeated card header:** it repeats the logo, name, degree and dates of the school shown right next to it. Remove it or keep only the location: shorter card, years higher up. Easiest visual win.
 3. **Make the details easier to find:** they only appear on click and "View details →" only on hover. Suggestion: open NEOMA automatically when the page loads (most relevant school; shows the schools are clickable).
 4. **Show results, not only courses:** EGC "Top of the class in Budget Management and Financial Analysis" (fits Year 3 next to Financial Analysis), TOEIC 930/990 in the year it was taken, an M2 data project.
 5. **Simplify high school:** at Master's level recruiters barely look at it, and it takes 3 year steps (one only says "Core curriculum"). Options: keep Genech on the timeline without details (not clickable), or remove it and keep NEOMA + EGC.
 - Smaller: "Business, Analytics & Strategy of the Firm": one course or two?; an M1 tile for the Treasurer role (Key experience, happened during M1) would match the gap year and Year 3; check the phone layout with the tiles and right-aligned dates.
-- **User's decision (12 Oct):** first finish the courses (EGC Years 1 and 2 coming soon), then decide if something else is needed. Points 1–3 were proposed as the next quick wins; not started yet.
+- **User's decision (12 Oct):** first finish the courses, then decide if something else is needed. **Courses done 13 Oct** (EGC Years 1 and 2 added). Points 1–3 were proposed as the next quick wins; not started yet.
 
 **Facts:**
-- NEOMA: M1 major **Supply Chain & Economy**, M2 **MSc Business Analytics** (user, 12 Oct). ⚠ LinkedIn still says "Data Analysis and Supply Chain".
+- NEOMA: M1 major **Data Analysis & Supply Chain** (user, 13 Oct; matches LinkedIn), M2 **MSc Business Analytics** (user, 12 Oct).
 - EGC: top of the class in the Budget Management and Financial Analysis module.
 - Genech: bac général 2021, specialties Maths + SES + NSI in Première, Maths + SES in Terminale. Bac mention unknown.
 
@@ -424,19 +424,19 @@ ONLINE (each question)
 - **Tools on this PC:** no Python. Use Node.js for scripts and PowerShell `System.Drawing` for image cropping (logos).
 
 ### ▶ Next session: start here
-1. **Education:** add the **EGC Year 1 and Year 2 courses** (the user will send them). Then go through the "Review of the Education page" list in section 3: fix the NEOMA dates/degree contradictions and locations, remove the repeated card header, open NEOMA by default, add results (Top of the class, TOEIC), decide on high school. Maybe a square NEOMA icon for a more readable circle.
+1. **Education:** all courses are in (13 Oct). Go through the "Review of the Education page" list in section 3: fix the NEOMA dates/degree contradictions and locations, remove the repeated card header, open NEOMA by default, add results (Top of the class, TOEIC), decide on high school. Maybe a square NEOMA icon for a more readable circle.
 2. **Fix the CV** (public version without the phone, headline "Data & Business Analyst", Business Analytics major, resolve the differences listed below), then replace `CV.pdf` and remove it from `.gitignore`.
 3. **Put the site online with Firebase Hosting.** In `firebase.json`: exclude `photo.jpg`/`photo2.jpg`, the original logo files and `docs/` from deploy (`ignore`), and add a `Content-Disposition: attachment` header for the PDF so it always downloads.
 4. **Experience cards:** bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
 5. **Open question:** use the CV's figures and extra skills on the site? (see "Open questions" below).
 6. **Design:** keep the current clean & light design. Claude Design canvas (A "Data notebook", B "Night mode"), tried on 8 Oct and **reverted at the user's request**: https://claude.ai/artifact/6Zu9cPTzvpTMLmgyEFszgD (private).
-7. **User to do:** update LinkedIn (headline "Data & Business Analyst"; NEOMA: M1 major Supply Chain & Economy, M2 MSc Business Analytics) and check the NEOMA end date there.
+7. **User to do:** update LinkedIn (headline "Data & Business Analyst"; NEOMA: M2 MSc Business Analytics) and check the NEOMA end date there.
 
 ## Roadmap
 **Phase 1: the website (free, no card)**
 1. ✅ Install the tools (Node.js, Git, Firebase CLI), create GitHub + Firebase accounts
 2. ✅ Build the site: HTML structure → CSS design → JavaScript. 12 Oct: 4 pages, Home carousel, Education zoom view with per-year cards
-3. 🔄 Write the content (Hero done 12 Oct; Experience mostly done, short descriptions to expand; Education per-year cards with courses, EGC Years 1–2 to fill; About and Skills removed for now)
+3. 🔄 Write the content (Hero done 12 Oct; Experience mostly done, short descriptions to expand; Education per-year cards with courses, all years filled 13 Oct; About and Skills removed for now)
 4. Put it online with Firebase Hosting + save the code on GitHub
 
 **Phase 2: the RAG chatbot (card needed, ≈ €0 + budget alert)**
@@ -467,7 +467,7 @@ _LinkedIn wins when dates conflict._
 | Availability | "Available immediately for 6 months, Gap year" | "From May 2027: internship, VIE or full-time" |
 | NEOMA end date | May 2027 | Jan 2028 |
 | Target role | Demand / Supply planning / S&OP intern | "Data & Business Analyst" (tech) |
-| NEOMA major | Data Analysis and Supply Chain? | M1 Supply Chain & Economy, M2 MSc Business Analytics |
+| NEOMA major | Data Analysis and Supply Chain? | M1 Data Analysis & Supply Chain, M2 MSc Business Analytics |
 | Treasurer | "Cordée de la réussite", Jan–Jun 2025, 86 invoices | "Envie d'Sup", Dec 2024–Jun 2025, 84 invoices |
 | Typo | "S&0P" (zero) | "S&OP" |
 
