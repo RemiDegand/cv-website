@@ -42,7 +42,7 @@
 - ⚠ The 3 cards are **copies** of those in `experience.html`: when one of these cards changes, update **both** pages.
 - Ideas not done yet: narrower card on big screens, add Pain de Minuit as a 4th card.
 
-**Home layout (14 Oct, user's request):** Key experience (left) and Key projects (right) **side by side** in one section, stacked on phones. Arrows moved **under** each carousel, in one row with the dots (‹ • • • ›), so the half-width cards keep their room.
+**Home layout (14 Oct, user's request):** Key experience (left) and Key projects (right) **side by side** in one section, stacked on phones. Arrows moved **under** each carousel, in one row with the dots (‹ • • • ›), so the half-width cards keep their room. **Both sides have the same height** (user's request): the shorter card stretches to match the taller one, so the arrow rows line up.
 
 **Key projects carousel (14 Oct, user's request):** same carousel (one card at a time, arrows, dots, swipe), "See all projects →" link to `projects.html`. Cards: Glovo forecasting web app · OSLO revenue recognition model · OSLO VAT automation (Claude's pick of the 3 strongest results).
 - ⚠ These 3 cards are **copies** of the matching cards in `projects.html`: when one changes, update **both** pages.

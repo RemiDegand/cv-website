@@ -427,7 +427,11 @@ h4 { font-size: 1.1rem; }
 .carousel-dots button.active { width: 24px; background: var(--accent); }
 
 /* Home: key experience (left) and key projects (right) side by side; stacked on phones */
-.home-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; align-items: start; }
+.home-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+/* Same height on both sides: each column stretches, its carousel fills the space, cards fill the carousel,
+   so the cards and the arrow rows line up */
+.home-col { display: flex; flex-direction: column; }
+.home-col .carousel { flex: 1; align-items: stretch; }
 .home-split .section-head { margin-bottom: 20px; }
 .home-split h2 { font-size: 1.6rem; }
 /* Arrows and dots in one row under each carousel */
