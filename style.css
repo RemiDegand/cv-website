@@ -194,6 +194,24 @@ h4 { font-size: 1.1rem; }
 .card-title > div, .card-title > span:not(.card-logo) { min-width: 0; }
 .card-org { font-size: 0.875rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+/* Small "↗" button after "Company · industry": opens the company website in a new tab */
+.org-link {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+.org-link:hover, .org-link:focus-visible { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); outline: none; }
+
 /* Top-right block: dates, location underneath */
 .card-meta { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; text-align: right; }
 .card .card-meta p { margin: 0; }
