@@ -1,10 +1,10 @@
 // The menu link of the current page is marked "active" directly in each HTML file.
 
-// Home: key experience and key projects carousels (arrows + dots, one card at a time).
+// Home: key experience and key projects carousels (one card at a time; arrows + dots in a row underneath).
 document.querySelectorAll(".carousel").forEach((carousel) => {
   const track = carousel.querySelector(".carousel-track");
   const cards = [...track.children];
-  const [prev, next] = carousel.querySelectorAll(".carousel-arrow");
+  const [prev, next] = carousel.parentElement.querySelectorAll(".carousel-arrow");   // in the nav row under the carousel
   const dotsBox = carousel.parentElement.querySelector(".carousel-dots");
 
   const current = () => Math.round(track.scrollLeft / (cards[1].offsetLeft - cards[0].offsetLeft));

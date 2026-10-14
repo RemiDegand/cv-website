@@ -48,131 +48,135 @@
       </div>
     </section>
 
-    <!-- 2. KEY EXPERIENCE: carousel, one card at a time (copies of the cards in experience.html) -->
+    <!-- 2. KEY EXPERIENCE (left) and KEY PROJECTS (right), side by side (stacked on phones).
+         Each is a carousel, one card at a time, arrows + dots underneath.
+         Cards are copies: experience cards from experience.html, project cards from projects.html (update both pages) -->
     <section id="highlights">
-      <div class="container">
-        <div class="section-head">
-          <h2>Key experience</h2>
-          <a href="experience.html" class="see-all">See all experience →</a>
-        </div>
-        <div class="carousel">
-          <button type="button" class="carousel-arrow" data-dir="-1" aria-label="Previous experience">‹</button>
-          <div class="carousel-track" tabindex="0" aria-label="Key experience, scroll sideways">
-            <article class="card" style="--brand: #FED42A">
-              <header class="card-header">
-                <div class="card-title">
-                  <img src="logos/glovo.png" alt="Glovo logo" class="card-logo" width="48" height="48">
-                  <div>
-                  <h4>Forecasting Analyst Intern</h4>
-                  <p class="card-org">Glovo · Delivery Platform</p>
-                  </div>
-                </div>
-                <div class="card-meta"><p class="card-date">Mar – Sep 2026</p><p class="card-location">Barcelona, Spain</p></div>
-              </header>
-              <p class="card-desc">Forecaster in the Supply Ops department for the PLECA market. Forecasted weekly rider supply from customer demand and designed tools to make processes more efficient.</p>
-              <ul class="figures">
-                <li><strong>5</strong> countries forecast weekly</li>
-                <li><strong>1</strong> web app designed, used daily by the team</li>
-                <li><strong>+8 pts</strong> forecast accuracy vs. target</li>
-              </ul>
-              <ul class="tags">
-                <li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>Apps Script</li><li>LLMs</li>
-              </ul>
-            </article>
-
-            <article class="card" style="--brand: #D3A26E">
-              <header class="card-header">
-                <div class="card-title">
-                  <img src="logos/oslo.png" alt="OSLO logo" class="card-logo" width="48" height="48">
-                  <div>
-                  <h4>Data Analyst Intern</h4>
-                  <p class="card-org">OSLO · IT &amp; SaaS Solutions</p>
-                  </div>
-                </div>
-                <div class="card-meta"><p class="card-date">Sep – Dec 2025</p><p class="card-location">Villeneuve d'Ascq, France</p></div>
-              </header>
-              <p class="card-desc">Analyst in the Information Systems department. Improved data reliability to build KPIs for steering the business, and created BI tools for the software OSLO distributes.</p>
-              <ul class="figures">
-                <li><strong>€350k → €8k</strong> annual revenue discrepancies</li>
-                <li><strong>13</strong> data models · <strong>6</strong> dashboards</li>
-                <li><strong>4</strong> business units supported</li>
-              </ul>
-              <ul class="tags">
-                <li>Excel</li><li>Data modeling</li><li>Dashboards</li><li>Finance</li>
-              </ul>
-            </article>
-
-            <article class="card" style="--brand: #E1311D">
-              <header class="card-header">
-                <div class="card-title">
-                  <img src="logos/envie-dsup.png" alt="Envie d'Sup logo" class="card-logo" width="48" height="48">
-                  <div>
-                  <h4>Treasurer</h4>
-                  <p class="card-org">Envie d'Sup · State-Supported NPO</p>
-                  </div>
-                </div>
-                <div class="card-meta"><p class="card-date">Dec 2024 – Jun 2025</p><p class="card-location">Rouen, France</p></div>
-              </header>
-              <p class="card-desc">Managed the public budget of a non-profit serving 229 students from priority education zones.</p>
-              <ul class="figures">
-                <li><strong>€49k</strong> public budget managed</li>
-                <li><strong>84+</strong> supplier invoices processed</li>
-                <li><strong>100%</strong> program execution</li>
-              </ul>
-              <ul class="tags">
-                <li>Budgeting</li><li>Forecasting</li><li>Cost analysis</li>
-              </ul>
-            </article>
+      <div class="container home-split">
+        <div class="home-col">
+          <div class="section-head">
+            <h2>Key experience</h2>
+            <a href="experience.html" class="see-all">See all experience →</a>
           </div>
-          <button type="button" class="carousel-arrow" data-dir="1" aria-label="Next experience">›</button>
-        </div>
-        <div class="carousel-dots"></div>
-      </div>
-    </section>
+          <div class="carousel">
+            <div class="carousel-track" tabindex="0" aria-label="Key experience, scroll sideways">
+              <article class="card" style="--brand: #FED42A">
+                <header class="card-header">
+                  <div class="card-title">
+                    <img src="logos/glovo.png" alt="Glovo logo" class="card-logo" width="48" height="48">
+                    <div>
+                    <h4>Forecasting Analyst Intern</h4>
+                    <p class="card-org">Glovo · Delivery Platform</p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Mar – Sep 2026</p><p class="card-location">Barcelona, Spain</p></div>
+                </header>
+                <p class="card-desc">Forecaster in the Supply Ops department for the PLECA market. Forecasted weekly rider supply from customer demand and designed tools to make processes more efficient.</p>
+                <ul class="figures">
+                  <li><strong>5</strong> countries forecast weekly</li>
+                  <li><strong>1</strong> web app designed, used daily by the team</li>
+                  <li><strong>+8 pts</strong> forecast accuracy vs. target</li>
+                </ul>
+                <ul class="tags">
+                  <li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>Apps Script</li><li>LLMs</li>
+                </ul>
+              </article>
 
-    <!-- 3. KEY PROJECTS: same carousel, copies of 3 cards in projects.html (update both pages) -->
-    <section id="projects">
-      <div class="container">
-        <div class="section-head">
-          <h2>Key projects</h2>
-          <a href="projects.html" class="see-all">See all projects →</a>
-        </div>
-        <div class="carousel">
-          <button type="button" class="carousel-arrow" data-dir="-1" aria-label="Previous project">‹</button>
-          <div class="carousel-track" tabindex="0" aria-label="Key projects, scroll sideways">
-            <article class="card project" style="--brand: #FED42A">
-              <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
-              <h4>Forecasting web app</h4>
-              <p class="card-desc">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
-              <p class="project-result"><strong>Daily use</strong> by all forecasting team members</p>
-              <ul class="tags">
-                <li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>LLMs</li>
-              </ul>
-            </article>
+              <article class="card" style="--brand: #D3A26E">
+                <header class="card-header">
+                  <div class="card-title">
+                    <img src="logos/oslo.png" alt="OSLO logo" class="card-logo" width="48" height="48">
+                    <div>
+                    <h4>Data Analyst Intern</h4>
+                    <p class="card-org">OSLO · IT &amp; SaaS Solutions</p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Sep – Dec 2025</p><p class="card-location">Villeneuve d'Ascq, France</p></div>
+                </header>
+                <p class="card-desc">Analyst in the Information Systems department. Improved data reliability to build KPIs for steering the business, and created BI tools for the software OSLO distributes.</p>
+                <ul class="figures">
+                  <li><strong>€350k → €8k</strong> annual revenue discrepancies</li>
+                  <li><strong>13</strong> data models · <strong>6</strong> dashboards</li>
+                  <li><strong>4</strong> business units supported</li>
+                </ul>
+                <ul class="tags">
+                  <li>Excel</li><li>Data modeling</li><li>Dashboards</li><li>Finance</li>
+                </ul>
+              </article>
 
-            <article class="card project" style="--brand: #D3A26E">
-              <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
-              <h4>Revenue recognition model</h4>
-              <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
-              <p class="project-result"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
-              <ul class="tags">
-                <li>Excel</li><li>Data modeling</li>
-              </ul>
-            </article>
-
-            <article class="card project" style="--brand: #D3A26E">
-              <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
-              <h4>VAT calculation automation</h4>
-              <p class="card-desc">Automated VAT calculations based on unmatched supplier accounting entries.</p>
-              <p class="project-result"><strong>2 h saved</strong> per month, no more manual errors</p>
-              <ul class="tags">
-                <li>Excel</li><li>Finance</li>
-              </ul>
-            </article>
+              <article class="card" style="--brand: #E1311D">
+                <header class="card-header">
+                  <div class="card-title">
+                    <img src="logos/envie-dsup.png" alt="Envie d'Sup logo" class="card-logo" width="48" height="48">
+                    <div>
+                    <h4>Treasurer</h4>
+                    <p class="card-org">Envie d'Sup · State-Supported NPO</p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Dec 2024 – Jun 2025</p><p class="card-location">Rouen, France</p></div>
+                </header>
+                <p class="card-desc">Managed the public budget of a non-profit serving 229 students from priority education zones.</p>
+                <ul class="figures">
+                  <li><strong>€49k</strong> public budget managed</li>
+                  <li><strong>84+</strong> supplier invoices processed</li>
+                  <li><strong>100%</strong> program execution</li>
+                </ul>
+                <ul class="tags">
+                  <li>Budgeting</li><li>Forecasting</li><li>Cost analysis</li>
+                </ul>
+              </article>
+            </div>
           </div>
-          <button type="button" class="carousel-arrow" data-dir="1" aria-label="Next project">›</button>
+          <div class="carousel-nav">
+            <button type="button" class="carousel-arrow" data-dir="-1" aria-label="Previous experience">‹</button>
+            <div class="carousel-dots"></div>
+            <button type="button" class="carousel-arrow" data-dir="1" aria-label="Next experience">›</button>
+          </div>
         </div>
-        <div class="carousel-dots"></div>
+        <div class="home-col" id="projects">
+          <div class="section-head">
+            <h2>Key projects</h2>
+            <a href="projects.html" class="see-all">See all projects →</a>
+          </div>
+          <div class="carousel">
+            <div class="carousel-track" tabindex="0" aria-label="Key projects, scroll sideways">
+              <article class="card project" style="--brand: #FED42A">
+                <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
+                <h4>Forecasting web app</h4>
+                <p class="card-desc">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
+                <p class="project-result"><strong>Daily use</strong> by all forecasting team members</p>
+                <ul class="tags">
+                  <li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>LLMs</li>
+                </ul>
+              </article>
+
+              <article class="card project" style="--brand: #D3A26E">
+                <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+                <h4>Revenue recognition model</h4>
+                <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
+                <p class="project-result"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
+                <ul class="tags">
+                  <li>Excel</li><li>Data modeling</li>
+                </ul>
+              </article>
+
+              <article class="card project" style="--brand: #D3A26E">
+                <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+                <h4>VAT calculation automation</h4>
+                <p class="card-desc">Automated VAT calculations based on unmatched supplier accounting entries.</p>
+                <p class="project-result"><strong>2 h saved</strong> per month, no more manual errors</p>
+                <ul class="tags">
+                  <li>Excel</li><li>Finance</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+          <div class="carousel-nav">
+            <button type="button" class="carousel-arrow" data-dir="-1" aria-label="Previous project">‹</button>
+            <div class="carousel-dots"></div>
+            <button type="button" class="carousel-arrow" data-dir="1" aria-label="Next project">›</button>
+          </div>
+        </div>
       </div>
     </section>
   </main>

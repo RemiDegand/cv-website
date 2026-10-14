@@ -426,6 +426,14 @@ h4 { font-size: 1.1rem; }
 }
 .carousel-dots button.active { width: 24px; background: var(--accent); }
 
+/* Home: key experience (left) and key projects (right) side by side; stacked on phones */
+.home-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; align-items: start; }
+.home-split .section-head { margin-bottom: 20px; }
+.home-split h2 { font-size: 1.6rem; }
+/* Arrows and dots in one row under each carousel */
+.carousel-nav { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.carousel-nav .carousel-arrow { width: 36px; height: 36px; font-size: 1.3rem; }
+
 /* ===== Education timeline ===== */
 /* Room on the left for the level labels, and for the logo circles that sit on the line */
 .timeline {
@@ -639,4 +647,6 @@ h4 { font-size: 1.1rem; }
   .menu-name { display: none; }
   .menu nav { gap: 14px; font-size: 0.9rem; }   /* 5 links fit on a phone width */
   .carousel-arrow { display: none; }   /* swipe on phones; dots show the position */
+  .home-split { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .home-split h2 { font-size: 1.4rem; white-space: nowrap; }
 }
