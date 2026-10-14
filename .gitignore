@@ -4,3 +4,7 @@ photo2.jpg
 
 # Draft CV: contains my phone number, keep it off GitHub until a public version exists.
 CV.pdf
+
+# Project sources (Word context + full-size dashboard PDFs, ~14 MB): kept on my PC only.
+# The site uses the WebP images made from them, in images/projects/.
+/projects/

@@ -44,21 +44,71 @@
           <div><dt>Role</dt><dd>Data Analyst Intern</dd></div>
           <div><dt>When</dt><dd>Sep – Dec 2025</dd></div>
           <div><dt>Where</dt><dd>Villeneuve d'Ascq, France</dd></div>
+          <div><dt>Business unit</dt><dd>PDV · ~€4M revenue a year</dd></div>
         </dl>
 
+        <!-- Content from projects/Aged receivables/Content.docx (written by Rémi, 14 Oct 2026).
+             Screens: made from the anonymised PDFs in the same folder (overall + Sales Team 1) -->
         <h2 class="project-h2">Context</h2>
-        <p>Analyst in the Information Systems department, supporting financial and operational decisions across 4 business units and 3 entities. In total: 13 data models, 6 dashboards and 6 automated Excel tools.</p>
+        <p>The PDV business unit of OSLO generates about €4M in revenue a year, serves several hundred clients and issues several thousand invoices a year. The accounting tool provided by the finance department only showed the total amount of overdue payments and a raw list of unpaid invoices.</p>
 
-        <h2 class="project-h2">What I did</h2>
+        <h2 class="project-h2">The problem</h2>
         <ul class="project-did">
-          <li>Automated the aged receivables report</li>
-          <li>Split by business unit and by sales representative</li>
-          <li>Used to support cash collection and cash flow monitoring</li>
+          <li>With this many clients and invoices, it was hard to see quickly which disputes to handle first and what action to take.</li>
+          <li>Unpaid invoices built up over time, with no monitoring tool and no clear owner in the sales teams.</li>
         </ul>
+
+        <h2 class="project-h2">What I built</h2>
+        <p>An automated aged receivables reporting system, directly connected to the payment data extracted from the ERP.</p>
+        <ol class="project-flow" aria-label="How the reporting works">
+          <li><strong>ERP</strong><span>Payment data extracted automatically</span></li>
+          <li><strong>Data model</strong><span>Payments structured by status and sales representative</span></li>
+          <li><strong>MyReport dashboards</strong><span>Designed for day-to-day use</span></li>
+        </ol>
+
+        <p class="project-statuses">Each payment gets a status by days overdue:
+          <span class="status status-ok">Not due</span><span class="status status-1">&lt; 30 days</span><span class="status status-2">30–60 days</span><span class="status status-3">60–90 days</span><span class="status status-4">90+ days</span>
+        </p>
+
+        <h2 class="project-h2">Two dashboards</h2>
+        <div class="project-dash">
+          <h3>1. Global receivables dashboard</h3>
+          <p>An overview of the business unit's collections, for management.</p>
+          <ul class="project-did">
+            <li>Total payment amounts by payment status</li>
+            <li>Number of payments by status</li>
+            <li>Bar chart of receivable amounts by sales representative and payment status</li>
+          </ul>
+          <figure class="project-shot">
+            <a href="images/projects/aged-receivables-overall.webp" target="_blank" rel="noopener">
+              <img src="images/projects/aged-receivables-overall.webp" alt="Global dashboard: total payments and number of payments by status, pie charts by status, and a bar chart of amounts by sales team" width="1600" height="1081" loading="lazy">
+            </a>
+            <figcaption>Global dashboard. Anonymised data. Click to enlarge.</figcaption>
+          </figure>
+        </div>
+
+        <div class="project-dash">
+          <h3>2. One dashboard per sales representative</h3>
+          <p>Each sales representative sees only their own portfolio, for targeted follow-up and dispute resolution.</p>
+          <ul class="project-did">
+            <li>Total payment amounts and number of payments by status</li>
+            <li>Chart of receivables by status</li>
+            <li>Detailed list of outstanding payments with customer information, sorted by days overdue</li>
+          </ul>
+          <figure class="project-shot">
+            <a href="images/projects/aged-receivables-sales-team.webp" target="_blank" rel="noopener">
+              <img src="images/projects/aged-receivables-sales-team.webp" alt="Sales team dashboard: totals by status, a bar chart by status and the list of outstanding payments sorted by days overdue" width="1600" height="1704" loading="lazy">
+            </a>
+            <figcaption>Dashboard of one sales team. Anonymised data. Click to enlarge.</figcaption>
+          </figure>
+        </div>
+
+        <h2 class="project-h2">Impact</h2>
+        <p>Receivables are managed proactively, and the sales teams are accountable for resolving their disputes, contributing to cash control for the business unit.</p>
 
         <h2 class="project-h2">Tools</h2>
         <ul class="tags">
-          <li>Excel</li><li>Dashboards</li><li>Finance</li>
+          <li>ERP</li><li>Data modeling</li><li>MyReport</li><li>Dashboards</li><li>Finance</li>
         </ul>
 
         <a href="experience.html#oslo" class="see-all project-xp-link">See the OSLO experience →</a>

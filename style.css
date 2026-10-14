@@ -413,7 +413,7 @@ h4 { font-size: 1.1rem; }
 .project-page .project-result strong { font-size: 1.15rem; }
 
 /* Role · When · Where, in one row */
-.project-facts { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 32px 0 0; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.project-facts { display: flex; flex-wrap: wrap; gap: 12px 32px; margin: 32px 0 0; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .project-facts dt { color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 .project-facts dd { margin: 2px 0 0; font-weight: 500; }
 
@@ -422,6 +422,33 @@ h4 { font-size: 1.1rem; }
 .project-did { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .project-page .tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .project-xp-link { display: inline-block; margin-top: 40px; }
+
+/* "What I built": data flow in 3 steps (ERP → data model → dashboards) */
+.project-flow { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; counter-reset: step; }
+.project-flow li { position: relative; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); }
+.project-flow li:not(:last-child)::after { content: "→"; position: absolute; right: -22px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
+.project-flow strong { display: block; color: var(--accent); }
+.project-flow span { display: block; color: var(--text-muted); font-size: 0.85rem; line-height: 1.4; margin-top: 2px; }
+
+/* Payment status chips, same colours as the dashboards (green = not due, then yellow → dark red) */
+.project-page .project-statuses { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; }
+.status { padding: 2px 10px; border-radius: 999px; color: var(--text); font-size: 0.8rem; font-weight: 600; background: color-mix(in srgb, var(--dot) 22%, var(--bg)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--dot) 50%, transparent); }
+.status-ok { --dot: #67D1C4; }
+.status-1 { --dot: #F5B95F; }
+.status-2 { --dot: #EE9550; }
+.status-3 { --dot: #E8686B; }
+.status-4 { --dot: #B06070; }
+
+/* One block per dashboard: title, what it shows, screenshot */
+.project-dash { margin-top: 24px; }
+.project-dash + .project-dash { margin-top: 40px; }
+.project-dash h3 { font-size: 1.05rem; margin: 0 0 6px; }
+.project-dash > p { color: var(--text-muted); margin-bottom: 10px; }
+.project-shot { margin: 20px 0 0; }
+.project-shot a { display: block; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: box-shadow 0.2s ease, border-color 0.2s ease; }
+.project-shot a:hover { border-color: var(--accent); box-shadow: 0 8px 24px rgba(16, 24, 40, 0.1); }
+.project-shot img { display: block; width: 100%; height: auto; }
+.project-shot figcaption { margin-top: 8px; color: var(--text-muted); font-size: 0.8rem; text-align: center; }
 
 /* Previous / next project at the bottom */
 .project-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
@@ -432,6 +459,8 @@ h4 { font-size: 1.1rem; }
 @media (max-width: 720px) {
   .project-page-title { font-size: 1.8rem; }
   .project-pager { grid-template-columns: minmax(0, 1fr); }
+  .project-flow { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .project-flow li:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -22px; transform: translateX(-50%); }
 }
 
 /* ===== Home: key experience carousel (one card at a time) ===== */
