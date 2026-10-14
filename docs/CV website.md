@@ -13,14 +13,15 @@
 - **Source of content:** `about-me.md` (single source of truth for the site and the chatbot)
 
 ## Website structure (decided)
-**Layout (changed 12 Oct 2026):** 4 separate pages instead of one long page. They share the same sticky top menu, and the current page's link is blue (set directly in each HTML file with `class="active"`).
+**Layout (changed 12 Oct 2026; Projects page added 14 Oct):** 5 separate pages instead of one long page. They share the same sticky top menu, and the current page's link is blue (set directly in each HTML file with `class="active"`).
 
 ```
 ┌───────────────────────────────────────────────────────┐
-│ Rémi Degand        Home  Experience  Education  Contact │ <- sticky menu, every page
+│ Rémi Degand  Home  Experience  Projects  Education  Contact │ <- sticky menu, every page
 ├───────────────────────────────────────────────────────┤
 │ index.html       HERO + KEY EXPERIENCE carousel        │
 │ experience.html  Key · Leadership & volunteering · Hands-on │
+│ projects.html    one card per project done in a company │
 │ education.html   timeline + zoom view with year details │
 │ contact.html     email · LinkedIn · CV                 │
 └───────────────────────────────────────────────────────┘
@@ -109,6 +110,14 @@ HANDS-ON EXPERIENCE               (compact list, one line each)
   - **Pain de Minuit:** "Acquired new B2B clients, mainly bakeries, and managed end-to-end logistics." (1 sentence, **to expand to 2–3**)
   - Leadership cards also have 1-sentence descriptions, **to expand to 2–3**.
 - **Hover effect (8 Oct):** cards lift and hands-on rows get a soft background, both in the **main colour of the experience's logo** (set per card in `experience.html`, and on the 3 carousel copies in `index.html`, with `style="--brand: #…"`): Glovo yellow `#FED42A`, OSLO orange `#D3A26E`, Envie d'Sup red `#E1311D`, Pain de Minuit beige `#BA9B6D`, Cheer Up blue `#006699`, EGC/EuropEvent dark grey `#333333`, Intermarché red `#EE1C22`, Hilton navy `#013252`, Decathlon blue `#3642BB`, Florimond Desprez green `#088A62`. Charity raffle (no logo) = site blue. Key figures stay blue (yellow/beige would be unreadable). Turned off for people who disable animations.
+
+### 2b. Projects (`projects.html`, added 14 Oct)
+- **Purpose:** specific tasks/projects done **in companies** (not personal side projects). Name discussed with the user: menu and title are just **"Projects" for now**; candidates for later: "Professional projects", "Projects from my internships" (Claude's pick), "Projects delivered at work" (lasts after a first full-time job).
+- **Subtitle:** "Tools, data models and automations I built during my internships, used by real teams."
+- **Card (2 per row, 1 on phones):** company logo (32px) + name, category pill on the right (AI tool, Data model, Finance automation, Finance reporting, Finance tool), short title, 1–2 sentence description (user's wording), **one result in bold** at the bottom (results line up across a row). Logo-coloured hover like the Experience cards.
+- **First 5 projects (14 Oct, from the user's examples):** Glovo forecasting web app · OSLO revenue recognition model (€350k → €8k) · VAT automation (2 h/month saved) · aged receivables reporting (3 BUs) · cash flow tools (3 entities). Titles and categories written by Claude, to confirm.
+- **Waiting for the user:** more projects. Open: add tool tags per project (not known per project yet), a filter by category or company once there are more cards.
+- This page is where most of the saved "See more" details (below) can go.
 
 ### Skills (removed from the site on 12 Oct, content kept here)
 - Grouped: Data tools · Business skills · Languages
@@ -418,6 +427,7 @@ ONLINE (each question)
 | `index.html` | Home: hero (final headline + pitch) + Key experience carousel (Glovo, OSLO, Treasurer) |
 | `experience.html` | Key experience timeline (4 wide cards, figures on the right) · Leadership & volunteering + Hands-on as a list + details panel (cards in `<template>` blocks). Glovo, OSLO and Pain de Minuit cards have `id`s (linked from the Education tiles) |
 | `education.html` | Timeline with level labels + logo circles; click = zoom view with the school's card (per-year mini timeline: courses + experience tiles), content in `<template>` blocks |
+| `projects.html` | Projects done in companies: one card per project (company, category, title, description, result). 5 cards so far |
 | `contact.html` | Email, LinkedIn, CV download |
 | `style.css` | Clean & light design, blue accent, design tokens in `:root`, responsive (phone layout under 720px). Page width 1120px. Logo-coloured hover on experience cards (Experience page + Home carousel). Sections: Experience timeline + list/details (`xp-…`), carousel styles, Education timeline/panel styles. The old `.compact-list` and `.cards-large/-medium` rules are no longer used on the Experience page |
 | `script.js` | Home carousel (arrows, dots, position) + Experience list + details + Education zoom view (builds the cards from the templates, shows the clicked school's card with a FLIP slide animation, close). Chatbot placeholder for Phase 2 |
@@ -439,7 +449,8 @@ ONLINE (each question)
 1. **Education:** all courses are in (13 Oct). Go through the "Review of the Education page" list in section 3: fix the NEOMA dates/degree contradictions and locations, remove the repeated card header, open NEOMA by default, add results (Top of the class, TOEIC), decide on high school. Maybe a square NEOMA icon for a more readable circle.
 2. **Fix the CV** (public version without the phone, headline "Data & Business Analyst", Business Analytics major, resolve the differences listed below), then replace `CV.pdf` and remove it from `.gitignore`.
 3. **Put the site online with Firebase Hosting.** In `firebase.json`: exclude `photo.jpg`/`photo2.jpg`, the original logo files and `docs/` from deploy (`ignore`), and add a `Content-Disposition: attachment` header for the PDF so it always downloads.
-4. **Experience:** new layout done 13 Oct (see section 2). Next: (a) **context labels for the list rows** (leadership, hands-on): Claude asked the user when/why for each (summer job? which school-year internship?), waiting for answers; (b) user to check the timeline labels ("Alongside classes" for Treasurer, "Final internship" for Pain de Minuit); (c) review the new Hands-on descriptions; (d) bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
+4. **Projects page (14 Oct):** the user will send more projects; check the 5 first titles/categories with them.
+5. **Experience:** new layout done 13 Oct (see section 2). Next: (a) **context labels for the list rows** (leadership, hands-on): Claude asked the user when/why for each (summer job? which school-year internship?), waiting for answers; (b) user to check the timeline labels ("Alongside classes" for Treasurer, "Final internship" for Pain de Minuit); (c) review the new Hands-on descriptions; (d) bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
 5. **Open question:** use the CV's figures and extra skills on the site? (see "Open questions" below).
 6. **Design:** keep the current clean & light design. Claude Design canvas (A "Data notebook", B "Night mode"), tried on 8 Oct and **reverted at the user's request**: https://claude.ai/artifact/6Zu9cPTzvpTMLmgyEFszgD (private).
 7. **User to do:** update LinkedIn (headline "Data & Business Analyst"; NEOMA: M2 MSc Business Analytics) and check the NEOMA end date there.

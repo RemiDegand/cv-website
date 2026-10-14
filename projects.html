@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Rémi Degand</title>
+  <meta name="description" content="Tools, data models and automations built by Rémi Degand during his internships.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky top menu (same on every page; "active" marks the current page) -->
+  <header class="menu">
+    <div class="container menu-inner">
+      <a href="index.html" class="menu-name">Rémi Degand</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html" class="active" aria-current="page">Projects</a>
+        <a href="education.html">Education</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="projects">
+      <div class="container">
+        <h1 class="page-title projects-title">Projects</h1>
+        <p class="lead projects-lead">Tools, data models and automations I built during my internships, used by real teams.</p>
+
+        <!-- One card per project: company + category, short title, what I did, one result in bold.
+             --brand = the company's logo colour (same as on the Experience page) -->
+        <div class="projects">
+          <article class="card project" style="--brand: #FED42A">
+            <header class="project-head">
+              <img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="32" height="32">
+              <span class="project-org">Glovo</span>
+              <span class="project-cat">AI tool</span>
+            </header>
+            <h4>Forecasting web app</h4>
+            <p class="card-desc">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
+            <p class="project-result"><strong>Daily use</strong> by all forecasting team members</p>
+          </article>
+
+          <article class="card project" style="--brand: #D3A26E">
+            <header class="project-head">
+              <img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="32" height="32">
+              <span class="project-org">OSLO</span>
+              <span class="project-cat">Data model</span>
+            </header>
+            <h4>Revenue recognition model</h4>
+            <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
+            <p class="project-result"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
+          </article>
+
+          <article class="card project" style="--brand: #D3A26E">
+            <header class="project-head">
+              <img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="32" height="32">
+              <span class="project-org">OSLO</span>
+              <span class="project-cat">Finance automation</span>
+            </header>
+            <h4>VAT calculation automation</h4>
+            <p class="card-desc">Automated VAT calculations based on unmatched supplier accounting entries.</p>
+            <p class="project-result"><strong>2 h saved</strong> per month, no more manual errors</p>
+          </article>
+
+          <article class="card project" style="--brand: #D3A26E">
+            <header class="project-head">
+              <img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="32" height="32">
+              <span class="project-org">OSLO</span>
+              <span class="project-cat">Finance reporting</span>
+            </header>
+            <h4>Aged receivables reporting</h4>
+            <p class="card-desc">Automated aged receivables reporting by business unit and by sales representative to support cash collection and cash flow monitoring.</p>
+            <p class="project-result"><strong>3</strong> business units covered</p>
+          </article>
+
+          <article class="card project" style="--brand: #D3A26E">
+            <header class="project-head">
+              <img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="32" height="32">
+              <span class="project-org">OSLO</span>
+              <span class="project-cat">Finance tool</span>
+            </header>
+            <h4>Cash flow calculation tools</h4>
+            <p class="card-desc">Developed automated cash flow calculation tools, configurable by analysis period.</p>
+            <p class="project-result"><strong>3</strong> entities covered</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Rémi Degand</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

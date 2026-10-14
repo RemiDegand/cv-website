@@ -201,7 +201,7 @@ h4 { font-size: 1.1rem; }
 .card-location { color: var(--text-muted); font-size: 0.85rem; white-space: nowrap; margin: 2px 0 0; }
 
 /* Leadership cards: 2 per row so the title has room next to the date block */
-:is(#experience, #highlights) .cards-medium { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
+:is(#experience, #highlights, #projects) .cards-medium { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
 
 /* Hands-on rows: role on top, company · industry underneath */
 .compact-list .card-org { display: block; font-size: 0.9rem; margin: 0; }
@@ -236,15 +236,15 @@ h4 { font-size: 1.1rem; }
 }
 
 /* ===== Hover effect on experiences (cards lift, rows highlight) ===== */
-:is(#experience, #highlights) .card,
-:is(#experience, #highlights) .card-logo,
+:is(#experience, #highlights, #projects) .card,
+:is(#experience, #highlights, #projects) .card-logo,
 .compact-list li {
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 }
 
 /* Each experience sets --brand to its logo's main color in experience.html and index.html
    (style="--brand: #FED42A"); without it the hover falls back to the blue accent */
-:is(#experience, #highlights) .card:hover {
+:is(#experience, #highlights, #projects) .card:hover {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--brand, var(--accent)) 70%, transparent);
   box-shadow: 0 4px 8px rgba(16, 24, 40, 0.06), 0 16px 32px color-mix(in srgb, var(--brand, var(--accent)) 28%, transparent);
@@ -261,16 +261,16 @@ h4 { font-size: 1.1rem; }
 .compact-list li:hover { background: color-mix(in srgb, var(--brand, var(--accent)) 9%, var(--bg)); }
 
 /* Logo pops slightly when its experience is hovered */
-:is(#experience, #highlights) .card:hover .card-logo,
+:is(#experience, #highlights, #projects) .card:hover .card-logo,
 .compact-list li:hover .card-logo { transform: scale(1.08); }
 
 /* No movement for people who turn animations off in their system settings */
 @media (prefers-reduced-motion: reduce) {
-  :is(#experience, #highlights) .card,
-  :is(#experience, #highlights) .card-logo,
+  :is(#experience, #highlights, #projects) .card,
+  :is(#experience, #highlights, #projects) .card-logo,
   .compact-list li { transition: none; }
-  :is(#experience, #highlights) .card:hover,
-  :is(#experience, #highlights) .card:hover .card-logo,
+  :is(#experience, #highlights, #projects) .card:hover,
+  :is(#experience, #highlights, #projects) .card:hover .card-logo,
   .compact-list li:hover .card-logo { transform: none; }
 }
 
@@ -362,6 +362,19 @@ h4 { font-size: 1.1rem; }
   .xp-browse { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .xp-detail { position: static; margin: 8px 0 16px; }
 }
+
+/* ===== Projects page: one card per project, 2 per row ===== */
+.projects-title { margin-bottom: 8px; }
+.projects-lead { margin: 0 0 32px; }
+.projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(420px, 100%), 1fr)); gap: 20px; }
+.project { display: flex; flex-direction: column; }
+.project-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.project-logo { width: 32px; height: 32px; flex-shrink: 0; border-radius: 8px; border: 1px solid var(--border); object-fit: cover; }
+.project-org { font-weight: 600; font-size: 0.9rem; }
+.project-cat { margin-left: auto; padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+/* Result at the bottom of the card, so results line up across a row */
+.card.project .project-result { margin: auto 0 0; padding-top: 16px; }
+.project-result strong { color: var(--accent); font-size: 1.1rem; }
 
 /* ===== Home: key experience carousel (one card at a time) ===== */
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
@@ -625,5 +638,6 @@ h4 { font-size: 1.1rem; }
   .card-header .card-meta { padding-left: 60px; }  /* line up dates under the text, not the logo */
   .compact-list .card-meta { padding-left: 60px; flex-direction: row; gap: 8px; }
   .menu-name { display: none; }
+  .menu nav { gap: 14px; font-size: 0.9rem; }   /* 5 links fit on a phone width */
   .carousel-arrow { display: none; }   /* swipe on phones; dots show the position */
 }
