@@ -387,11 +387,52 @@ h4 { font-size: 1.1rem; }
 .projects-lead { margin: 0 0 32px; }
 .projects { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
 .card.project { border-top: 4px solid var(--brand, var(--accent)); }
-.card .project-org { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+:is(.card, .project-page) .project-org { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 .project-logo { width: 24px; height: 24px; flex-shrink: 0; border-radius: 6px; border: 1px solid var(--border); object-fit: cover; }
 .project h4 { font-size: 1.35rem; }
-.card .project-result { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px; margin: 12px 0 0; padding: 6px 12px; font-size: 0.875rem; border-radius: 10px; background: var(--accent-soft); }
+:is(.card, .project-page) .project-result { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px; margin: 12px 0 0; padding: 6px 12px; font-size: 0.875rem; border-radius: 10px; background: var(--accent-soft); }
 .project-result strong { color: var(--accent); font-size: 1rem; line-height: 1.3; }
+
+/* The whole project card is a link to its page: the title's link stretches over the card */
+.card.project { position: relative; }
+.project-link { color: inherit; text-decoration: none; }
+.project-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.project-link:focus-visible { outline: none; }
+.card.project:has(.project-link:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card.project:hover h4 { color: var(--accent); }
+.project h4 { transition: color 0.2s ease; }
+
+/* ===== One page per project (project-*.html) ===== */
+.project-page-inner { max-width: 800px; }
+.back-link { display: inline-block; margin-bottom: 24px; font-weight: 600; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+.project-page-head { padding-top: 20px; border-top: 4px solid var(--brand, var(--accent)); }
+.project-page-title { font-size: 2.4rem; margin: 0 0 16px; }
+.project-page-head .lead { margin: 0; color: var(--text); }
+.project-page .project-result { display: inline-flex; margin-top: 20px; padding: 8px 14px; font-size: 1rem; }
+.project-page .project-result strong { font-size: 1.15rem; }
+
+/* Role · When · Where, in one row */
+.project-facts { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 32px 0 0; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.project-facts dt { color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.project-facts dd { margin: 2px 0 0; font-weight: 500; }
+
+.project-h2 { font-size: 1.25rem; margin: 40px 0 12px; }
+.project-page p { margin: 0; }
+.project-did { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.project-page .tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.project-xp-link { display: inline-block; margin-top: 40px; }
+
+/* Previous / next project at the bottom */
+.project-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+.project-pager a { padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-weight: 600; text-decoration: none; transition: border-color 0.2s ease, color 0.2s ease; }
+.project-pager a:hover { border-color: var(--accent); color: var(--accent); }
+.project-pager span { display: block; color: var(--text-muted); font-size: 0.8rem; font-weight: 500; }
+.project-pager-next { text-align: right; }
+@media (max-width: 720px) {
+  .project-page-title { font-size: 1.8rem; }
+  .project-pager { grid-template-columns: minmax(0, 1fr); }
+}
 
 /* ===== Home: key experience carousel (one card at a time) ===== */
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 32px; }

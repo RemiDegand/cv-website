@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAT calculation automation | Rémi Degand</title>
+  <meta name="description" content="VAT calculation automation: a project by Rémi Degand at OSLO.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky top menu (same on every page; "active" marks the current page) -->
+  <header class="menu">
+    <div class="container menu-inner">
+      <a href="index.html" class="menu-name">Rémi Degand</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="education.html">Education</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- One project, opened from its card on projects.html or the Home carousel.
+         Same content as the card (title, description, result, tags) + context and details -->
+    <section id="project" class="project-page" style="--brand: #D3A26E">
+      <div class="container project-page-inner">
+        <a href="projects.html" class="back-link">← All projects</a>
+
+        <header class="project-page-head">
+          <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+          <h1 class="project-page-title">VAT calculation automation</h1>
+          <p class="lead">Automated VAT calculations based on unmatched supplier accounting entries.</p>
+          <p class="project-result"><strong>2 h saved</strong> per month, no more manual errors</p>
+        </header>
+
+        <dl class="project-facts">
+          <div><dt>Role</dt><dd>Data Analyst Intern</dd></div>
+          <div><dt>When</dt><dd>Sep – Dec 2025</dd></div>
+          <div><dt>Where</dt><dd>Villeneuve d'Ascq, France</dd></div>
+        </dl>
+
+        <h2 class="project-h2">Context</h2>
+        <p>Analyst in the Information Systems department, supporting financial and operational decisions across 4 business units and 3 entities. In total: 13 data models, 6 dashboards and 6 automated Excel tools.</p>
+
+        <h2 class="project-h2">What I did</h2>
+        <ul class="project-did">
+          <li>Automated the VAT calculation from unmatched supplier accounting entries</li>
+          <li>Replaced a manual calculation, removing manual errors</li>
+        </ul>
+
+        <h2 class="project-h2">Tools</h2>
+        <ul class="tags">
+          <li>Excel</li><li>Finance</li>
+        </ul>
+
+        <a href="experience.html#oslo" class="see-all project-xp-link">See the OSLO experience →</a>
+
+        <nav class="project-pager" aria-label="Other projects">
+          <a href="project-revenue-recognition.html" class="project-pager-prev"><span>← Previous project</span>Revenue recognition model</a>
+          <a href="project-aged-receivables.html" class="project-pager-next"><span>Next project →</span>Aged receivables reporting</a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Rémi Degand</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
