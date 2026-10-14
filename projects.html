@@ -35,70 +35,106 @@
         <!-- One card per project: company + category, short title, what I did, one result in bold.
              --brand = the company's logo colour (same as on the Experience page) -->
         <div class="projects">
-          <article class="card project" style="--brand: #FED42A">
-            <header class="project-head">
-              <img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="32" height="32">
-              <span class="project-org">Glovo</span>
-              <span class="project-cat">AI tool</span>
-            </header>
-            <h4>Forecasting web app</h4>
-            <p class="card-desc">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
-            <p class="project-result"><strong>Daily use</strong> by all forecasting team members</p>
+          <article class="card xp-card project" style="--brand: #FED42A">
+            <div>
+              <header class="card-header">
+                <div class="card-title">
+                  <img src="logos/glovo.png" alt="Glovo logo" class="card-logo" width="48" height="48">
+                  <div>
+                    <h4>Forecasting web app</h4>
+                    <p class="card-org">Glovo · Delivery Platform</p>
+                  </div>
+                </div>
+              </header>
+              <p class="card-desc">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
+              <!-- Software used: tags to add (<ul class="tags"><li>Python</li>…</ul>) -->
+            </div>
+            <p class="project-proof"><strong>Daily use</strong> by all forecasting team members</p>
           </article>
 
           <!-- No result figure yet: ask the user (time saved? share of adjustments automated?) -->
-          <article class="card project" style="--brand: #FED42A">
-            <header class="project-head">
-              <img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="32" height="32">
-              <span class="project-org">Glovo</span>
-              <span class="project-cat">AI automation</span>
-            </header>
-            <h4>AI skills for forecast adjustments</h4>
-            <p class="card-desc">Created AI skills to automate forecast adjustments.</p>
+          <article class="card xp-card project no-proof" style="--brand: #FED42A">
+            <div>
+              <header class="card-header">
+                <div class="card-title">
+                  <img src="logos/glovo.png" alt="Glovo logo" class="card-logo" width="48" height="48">
+                  <div>
+                    <h4>AI skills for forecast adjustments</h4>
+                    <p class="card-org">Glovo · Delivery Platform</p>
+                  </div>
+                </div>
+              </header>
+              <p class="card-desc">Created AI skills to automate forecast adjustments.</p>
+              <!-- Software used: tags to add (<ul class="tags"><li>Python</li>…</ul>) -->
+            </div>
           </article>
 
-          <article class="card project" style="--brand: #D3A26E">
-            <header class="project-head">
-              <img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="32" height="32">
-              <span class="project-org">OSLO</span>
-              <span class="project-cat">Data model</span>
-            </header>
-            <h4>Revenue recognition model</h4>
-            <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
-            <p class="project-result"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
+          <article class="card xp-card project" style="--brand: #D3A26E">
+            <div>
+              <header class="card-header">
+                <div class="card-title">
+                  <img src="logos/oslo.png" alt="OSLO logo" class="card-logo" width="48" height="48">
+                  <div>
+                    <h4>Revenue recognition model</h4>
+                    <p class="card-org">OSLO · IT &amp; SaaS Solutions</p>
+                  </div>
+                </div>
+              </header>
+              <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
+              <!-- Software used: tags to add (<ul class="tags"><li>Python</li>…</ul>) -->
+            </div>
+            <p class="project-proof"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
           </article>
 
-          <article class="card project" style="--brand: #D3A26E">
-            <header class="project-head">
-              <img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="32" height="32">
-              <span class="project-org">OSLO</span>
-              <span class="project-cat">Finance automation</span>
-            </header>
-            <h4>VAT calculation automation</h4>
-            <p class="card-desc">Automated VAT calculations based on unmatched supplier accounting entries.</p>
-            <p class="project-result"><strong>2 h saved</strong> per month, no more manual errors</p>
+          <article class="card xp-card project" style="--brand: #D3A26E">
+            <div>
+              <header class="card-header">
+                <div class="card-title">
+                  <img src="logos/oslo.png" alt="OSLO logo" class="card-logo" width="48" height="48">
+                  <div>
+                    <h4>VAT calculation automation</h4>
+                    <p class="card-org">OSLO · IT &amp; SaaS Solutions</p>
+                  </div>
+                </div>
+              </header>
+              <p class="card-desc">Automated VAT calculations based on unmatched supplier accounting entries.</p>
+              <!-- Software used: tags to add (<ul class="tags"><li>Python</li>…</ul>) -->
+            </div>
+            <p class="project-proof"><strong>2 h saved</strong> per month, no more manual errors</p>
           </article>
 
-          <article class="card project" style="--brand: #D3A26E">
-            <header class="project-head">
-              <img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="32" height="32">
-              <span class="project-org">OSLO</span>
-              <span class="project-cat">Finance reporting</span>
-            </header>
-            <h4>Aged receivables reporting</h4>
-            <p class="card-desc">Automated aged receivables reporting by business unit and by sales representative to support cash collection and cash flow monitoring.</p>
-            <p class="project-result"><strong>3</strong> business units covered</p>
+          <article class="card xp-card project" style="--brand: #D3A26E">
+            <div>
+              <header class="card-header">
+                <div class="card-title">
+                  <img src="logos/oslo.png" alt="OSLO logo" class="card-logo" width="48" height="48">
+                  <div>
+                    <h4>Aged receivables reporting</h4>
+                    <p class="card-org">OSLO · IT &amp; SaaS Solutions</p>
+                  </div>
+                </div>
+              </header>
+              <p class="card-desc">Automated aged receivables reporting by business unit and by sales representative to support cash collection and cash flow monitoring.</p>
+              <!-- Software used: tags to add (<ul class="tags"><li>Python</li>…</ul>) -->
+            </div>
+            <p class="project-proof"><strong>3</strong> business units covered</p>
           </article>
 
-          <article class="card project" style="--brand: #D3A26E">
-            <header class="project-head">
-              <img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="32" height="32">
-              <span class="project-org">OSLO</span>
-              <span class="project-cat">Finance tool</span>
-            </header>
-            <h4>Cash flow calculation tools</h4>
-            <p class="card-desc">Developed automated cash flow calculation tools, configurable by analysis period.</p>
-            <p class="project-result"><strong>3</strong> entities covered</p>
+          <article class="card xp-card project" style="--brand: #D3A26E">
+            <div>
+              <header class="card-header">
+                <div class="card-title">
+                  <img src="logos/oslo.png" alt="OSLO logo" class="card-logo" width="48" height="48">
+                  <div>
+                    <h4>Cash flow calculation tools</h4>
+                    <p class="card-org">OSLO · IT &amp; SaaS Solutions</p>
+                  </div>
+                </div>
+              </header>
+              <p class="card-desc">Developed automated cash flow calculation tools, configurable by analysis period.</p>
+              <!-- Software used: tags to add (<ul class="tags"><li>Python</li>…</ul>) -->
+            </div>
+            <p class="project-proof"><strong>3</strong> entities covered</p>
           </article>
         </div>
       </div>
