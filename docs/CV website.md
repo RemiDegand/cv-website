@@ -43,7 +43,7 @@
 - Ideas not done yet: narrower card on big screens, add Pain de Minuit as a 4th card.
 
 **Key projects carousel (14 Oct, user's request):** under Key experience, same carousel (one card at a time, arrows, dots, swipe), "See all projects →" link to `projects.html`. Cards: Glovo forecasting web app · OSLO revenue recognition model · OSLO VAT automation (Claude's pick of the 3 strongest results).
-- ⚠ These 3 cards are **copies** of the first 3 in `projects.html`: when one changes, update **both** pages.
+- ⚠ These 3 cards are **copies** of the matching cards in `projects.html`: when one changes, update **both** pages.
 
 ### 2. Experience (`experience.html`): 3 groups (decided)
 **Layout (changed 13 Oct 2026, chosen by the user from 3 prototypes: A timeline, B list + details, C filters + sort):**
@@ -118,7 +118,7 @@ HANDS-ON EXPERIENCE               (compact list, one line each)
 - **Purpose:** specific tasks/projects done **in companies** (not personal side projects). Name discussed with the user: menu and title are just **"Projects" for now**; candidates for later: "Professional projects", "Projects from my internships" (Claude's pick), "Projects delivered at work" (lasts after a first full-time job).
 - **Subtitle:** "Tools, data models and automations I built during my internships, used by real teams."
 - **Card (2 per row, 1 on phones):** company logo (32px) + name, category pill on the right (AI tool, Data model, Finance automation, Finance reporting, Finance tool), short title, 1–2 sentence description (user's wording), **one result in bold** at the bottom (results line up across a row). Logo-coloured hover like the Experience cards.
-- **First 5 projects (14 Oct, from the user's examples):** Glovo forecasting web app · OSLO revenue recognition model (€350k → €8k) · VAT automation (2 h/month saved) · aged receivables reporting (3 BUs) · cash flow tools (3 entities). Titles and categories written by Claude, to confirm.
+- **Full list confirmed by the user (14 Oct), 6 projects:** Glovo forecasting web app · Glovo AI skills for forecast adjustments (added 14 Oct; description = notes wording "Created AI skills to automate forecast adjustments"; **no result line yet, ask the user** for a figure and what the skills do) · OSLO revenue recognition model (€350k → €8k) · VAT automation (2 h/month saved) · aged receivables reporting (3 BUs) · cash flow tools (3 entities). Titles and categories written by Claude, to confirm.
 - **Waiting for the user:** more projects. Open: add tool tags per project (not known per project yet), a filter by category or company once there are more cards.
 - This page is where most of the saved "See more" details (below) can go.
 
@@ -430,7 +430,7 @@ ONLINE (each question)
 | `index.html` | Home: hero (final headline + pitch) + Key experience carousel (Glovo, OSLO, Treasurer) + Key projects carousel (web app, revenue model, VAT) |
 | `experience.html` | Key experience timeline (4 wide cards, figures on the right) · Leadership & volunteering + Hands-on as a list + details panel (cards in `<template>` blocks). Glovo, OSLO and Pain de Minuit cards have `id`s (linked from the Education tiles) |
 | `education.html` | Timeline with level labels + logo circles; click = zoom view with the school's card (per-year mini timeline: courses + experience tiles), content in `<template>` blocks |
-| `projects.html` | Projects done in companies: one card per project (company, category, title, description, result). 5 cards so far |
+| `projects.html` | Projects done in companies: one card per project (company, category, title, description, result). 6 cards (2 Glovo, 4 OSLO) |
 | `contact.html` | Email, LinkedIn, CV download |
 | `style.css` | Clean & light design, blue accent, design tokens in `:root`, responsive (phone layout under 720px). Page width 1120px. Logo-coloured hover on experience cards (Experience page + Home carousel). Sections: Experience timeline + list/details (`xp-…`), carousel styles, Education timeline/panel styles. The old `.compact-list` and `.cards-large/-medium` rules are no longer used on the Experience page |
 | `script.js` | Home carousel (arrows, dots, position) + Experience list + details + Education zoom view (builds the cards from the templates, shows the clicked school's card with a FLIP slide animation, close). Chatbot placeholder for Phase 2 |
@@ -452,7 +452,7 @@ ONLINE (each question)
 1. **Education:** all courses are in (13 Oct). Go through the "Review of the Education page" list in section 3: fix the NEOMA dates/degree contradictions and locations, remove the repeated card header, open NEOMA by default, add results (Top of the class, TOEIC), decide on high school. Maybe a square NEOMA icon for a more readable circle.
 2. **Fix the CV** (public version without the phone, headline "Data & Business Analyst", Business Analytics major, resolve the differences listed below), then replace `CV.pdf` and remove it from `.gitignore`.
 3. **Put the site online with Firebase Hosting.** In `firebase.json`: exclude `photo.jpg`/`photo2.jpg`, the original logo files and `docs/` from deploy (`ignore`), and add a `Content-Disposition: attachment` header for the PDF so it always downloads.
-4. **Projects page (14 Oct):** the user will send more projects; check the 5 first titles/categories with them.
+4. **Projects page (14 Oct):** 6 projects, list confirmed by the user. To do: result + better description for Glovo "AI skills"; confirm titles/categories; tool tags per project.
 5. **Experience:** new layout done 13 Oct (see section 2). Next: (a) **context labels for the list rows** (leadership, hands-on): Claude asked the user when/why for each (summer job? which school-year internship?), waiting for answers; (b) user to check the timeline labels ("Alongside classes" for Treasurer, "Final internship" for Pain de Minuit); (c) review the new Hands-on descriptions; (d) bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
 6. **Open question:** use the CV's figures and extra skills on the site? (see "Open questions" below).
 7. **Design:** keep the current clean & light design. Claude Design canvas (A "Data notebook", B "Night mode"), tried on 8 Oct and **reverted at the user's request**: https://claude.ai/artifact/6Zu9cPTzvpTMLmgyEFszgD (private).
