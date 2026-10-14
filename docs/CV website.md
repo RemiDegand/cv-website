@@ -451,9 +451,9 @@ ONLINE (each question)
 3. **Put the site online with Firebase Hosting.** In `firebase.json`: exclude `photo.jpg`/`photo2.jpg`, the original logo files and `docs/` from deploy (`ignore`), and add a `Content-Disposition: attachment` header for the PDF so it always downloads.
 4. **Projects page (14 Oct):** the user will send more projects; check the 5 first titles/categories with them.
 5. **Experience:** new layout done 13 Oct (see section 2). Next: (a) **context labels for the list rows** (leadership, hands-on): Claude asked the user when/why for each (summer job? which school-year internship?), waiting for answers; (b) user to check the timeline labels ("Alongside classes" for Treasurer, "Final internship" for Pain de Minuit); (c) review the new Hands-on descriptions; (d) bring the Treasurer, Pain de Minuit and Leadership descriptions to 2–3 sentences (max 3 lines; update the Home carousel copy of Treasurer too); decide where the saved "See more" details go; find the location of Intermarché Dec 2021.
-5. **Open question:** use the CV's figures and extra skills on the site? (see "Open questions" below).
-6. **Design:** keep the current clean & light design. Claude Design canvas (A "Data notebook", B "Night mode"), tried on 8 Oct and **reverted at the user's request**: https://claude.ai/artifact/6Zu9cPTzvpTMLmgyEFszgD (private).
-7. **User to do:** update LinkedIn (headline "Data & Business Analyst"; NEOMA: M2 MSc Business Analytics) and check the NEOMA end date there.
+6. **Open question:** use the CV's figures and extra skills on the site? (see "Open questions" below).
+7. **Design:** keep the current clean & light design. Claude Design canvas (A "Data notebook", B "Night mode"), tried on 8 Oct and **reverted at the user's request**: https://claude.ai/artifact/6Zu9cPTzvpTMLmgyEFszgD (private).
+8. **User to do:** update LinkedIn (headline "Data & Business Analyst"; NEOMA: M2 MSc Business Analytics) and check the NEOMA end date there.
 
 ## Roadmap
 **Phase 1: the website (free, no card)**
