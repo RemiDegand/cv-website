@@ -363,16 +363,35 @@ h4 { font-size: 1.1rem; }
   .xp-detail { position: static; margin: 8px 0 16px; }
 }
 
-/* ===== Projects page: same card format as the Experience timeline (.xp-card) =====
-   Left: logo, title, "Company · industry", description, software tags. Right: one proof sentence. */
+/* ===== Projects page (and Home copies): result first =====
+   Left: the proof in a block tinted with the company colour (--brand), big number on top.
+   Right: title, small logo + "Company · industry", description, software tags. */
 .projects-title { margin-bottom: 8px; }
 .projects-lead { margin: 0 0 32px; }
 .projects { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
-.project-proof { align-self: center; margin: 0; padding-left: 24px; border-left: 1px solid var(--border); font-size: 1.05rem; }
-.project-proof strong { color: var(--accent); font-size: 1.2rem; }
-.xp-card.no-proof { grid-template-columns: minmax(0, 1fr); }   /* no proof sentence yet: text takes the full width */
+.card.project { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr); padding: 0; overflow: hidden; }
+.card.project.no-proof { grid-template-columns: minmax(0, 1fr); }   /* no proof yet: text takes the full width */
+.card .project-proof {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 28px 24px;
+  background: color-mix(in srgb, var(--brand, var(--accent)) 12%, var(--bg));
+  border-right: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.project-proof strong { display: block; margin-bottom: 6px; color: var(--accent); font-size: 1.9rem; line-height: 1.15; }
+.project-body { padding: 24px; }
+.card .project-org { display: flex; align-items: center; gap: 8px; margin: 6px 0 0; color: var(--text-muted); font-size: 0.875rem; }
+.project-logo { width: 28px; height: 28px; flex-shrink: 0; border-radius: 6px; border: 1px solid var(--border); object-fit: cover; }
 @media (max-width: 720px) {
-  .project-proof { margin-top: 16px; padding-left: 0; border-left: 0; }
+  .card.project { grid-template-columns: minmax(0, 1fr); }
+  .card .project-proof { padding: 20px; border-right: 0; border-bottom: 1px solid var(--border); }
+  .project-proof strong { font-size: 1.6rem; }
+  .project-body { padding: 20px; }
 }
 
 /* ===== Home: key experience carousel (one card at a time) ===== */
