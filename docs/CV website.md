@@ -19,7 +19,7 @@
 ┌───────────────────────────────────────────────────────┐
 │ Rémi Degand  Home  Experience  Projects  Education  Contact │ <- sticky menu, every page
 ├───────────────────────────────────────────────────────┤
-│ index.html       HERO + KEY EXPERIENCE carousel        │
+│ index.html       HERO + KEY EXPERIENCE + KEY PROJECTS carousels │
 │ experience.html  Key · Leadership & volunteering · Hands-on │
 │ projects.html    one card per project done in a company │
 │ education.html   timeline + zoom view with year details │
@@ -41,6 +41,9 @@
 **Key experience carousel (12 Oct):** Glovo → OSLO → Envie d'Sup Treasurer, **one card at a time**. Arrows ‹ › on the sides (greyed out at each end), dots underneath (clickable), swipe on phones (arrows hidden), "See all experience →" link to `experience.html`. Same cards and logo-coloured hover as the Experience page.
 - ⚠ The 3 cards are **copies** of those in `experience.html`: when one of these cards changes, update **both** pages.
 - Ideas not done yet: narrower card on big screens, add Pain de Minuit as a 4th card.
+
+**Key projects carousel (14 Oct, user's request):** under Key experience, same carousel (one card at a time, arrows, dots, swipe), "See all projects →" link to `projects.html`. Cards: Glovo forecasting web app · OSLO revenue recognition model · OSLO VAT automation (Claude's pick of the 3 strongest results).
+- ⚠ These 3 cards are **copies** of the first 3 in `projects.html`: when one changes, update **both** pages.
 
 ### 2. Experience (`experience.html`): 3 groups (decided)
 **Layout (changed 13 Oct 2026, chosen by the user from 3 prototypes: A timeline, B list + details, C filters + sort):**
@@ -424,7 +427,7 @@ ONLINE (each question)
 
 | File | Content |
 |---|---|
-| `index.html` | Home: hero (final headline + pitch) + Key experience carousel (Glovo, OSLO, Treasurer) |
+| `index.html` | Home: hero (final headline + pitch) + Key experience carousel (Glovo, OSLO, Treasurer) + Key projects carousel (web app, revenue model, VAT) |
 | `experience.html` | Key experience timeline (4 wide cards, figures on the right) · Leadership & volunteering + Hands-on as a list + details panel (cards in `<template>` blocks). Glovo, OSLO and Pain de Minuit cards have `id`s (linked from the Education tiles) |
 | `education.html` | Timeline with level labels + logo circles; click = zoom view with the school's card (per-year mini timeline: courses + experience tiles), content in `<template>` blocks |
 | `projects.html` | Projects done in companies: one card per project (company, category, title, description, result). 5 cards so far |

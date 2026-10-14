@@ -1,6 +1,6 @@
 // The menu link of the current page is marked "active" directly in each HTML file.
 
-// Home: key experience carousel (arrows + dots, one card at a time).
+// Home: key experience and key projects carousels (arrows + dots, one card at a time).
 document.querySelectorAll(".carousel").forEach((carousel) => {
   const track = carousel.querySelector(".carousel-track");
   const cards = [...track.children];
@@ -13,7 +13,7 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
   const dots = cards.map((card, i) => {
     const dot = document.createElement("button");
     dot.type = "button";
-    dot.setAttribute("aria-label", "Show experience " + (i + 1) + " of " + cards.length);
+    dot.setAttribute("aria-label", "Show card " + (i + 1) + " of " + cards.length);
     dot.addEventListener("click", () => goTo(i));
     dotsBox.append(dot);
     return dot;
