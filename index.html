@@ -9,52 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <!-- PROTOTYPE styles for the 3 Key projects options (14 Oct): move the chosen one to style.css, delete the rest -->
-  <style>
-    .option-label { display: inline-block; margin-bottom: 12px; padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
-    .option-note { margin: -16px 0 24px; color: var(--text-muted); }
-    :is(#projects-b, #projects-c) .card { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
-    :is(#projects-b, #projects-c) .card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--brand) 70%, transparent); box-shadow: 0 4px 8px rgba(16, 24, 40, 0.06), 0 16px 32px color-mix(in srgb, var(--brand) 28%, transparent); }
-    .card p.pa-name, .card p.pa-ind, .card p.pc-name { margin: 0; }
-
-    /* A: company | project */
-    .card.pa { display: grid; grid-template-columns: 220px minmax(0, 1fr); padding: 0; overflow: hidden; }
-    .pa-company { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 24px; text-align: center; background: color-mix(in srgb, var(--brand) 12%, var(--bg)); border-right: 1px solid var(--border); }
-    .pa-logo { width: 64px; height: 64px; margin-bottom: 8px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); object-fit: cover; }
-    .card .pa-name { font-weight: 700; font-size: 1.1rem; }
-    .card .pa-ind { color: var(--text-muted); font-size: 0.875rem; }
-    .pa-project { padding: 24px 28px; }
-    .card .pa-proof { margin: 6px 0 0; color: var(--text-muted); }
-    .pa-proof strong { color: var(--accent); font-size: 1.25rem; }
-
-    /* B: result callout, one column, company colour bar on top */
-    .card.pb { border-top: 4px solid var(--brand); }
-    .card .pb-org { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-    .pb-logo { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--border); object-fit: cover; }
-    .pb h4 { font-size: 1.35rem; }
-    .pb-result { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; margin-top: 16px; padding: 14px 18px; border-radius: 10px; background: var(--accent-soft); }
-    .pb-result strong { color: var(--accent); font-size: 1.6rem; line-height: 1.2; }
-    .pb-result span { color: var(--text); }
-
-    /* C: company | project | result */
-    .card.pc { display: grid; grid-template-columns: 120px minmax(0, 1fr) 220px; padding: 0; }
-    .pc-company { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 24px 12px; border-right: 1px solid var(--border); text-align: center; }
-    .pc-logo { width: 48px; height: 48px; border-radius: 10px; border: 1px solid var(--border); object-fit: cover; }
-    .card .pc-name { font-weight: 600; font-size: 0.9rem; }
-    .pc-project { padding: 24px; }
-    .pc-result { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 24px; border-left: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; }
-    .pc-result strong { color: var(--accent); font-size: 1.7rem; line-height: 1.15; }
-
-    @media (max-width: 720px) {
-      .card.pa, .card.pc { grid-template-columns: minmax(0, 1fr); }
-      .pa-company { flex-direction: row; justify-content: flex-start; gap: 12px; text-align: left; border-right: 0; border-bottom: 1px solid var(--border); padding: 16px 20px; }
-      .pa-logo { width: 40px; height: 40px; margin: 0; }
-      .pa-project, .pc-project { padding: 20px; }
-      .pc-company { flex-direction: row; justify-content: flex-start; border-right: 0; border-bottom: 1px solid var(--border); padding: 16px 20px; }
-      .pc-logo { width: 32px; height: 32px; }
-      .pc-result { border-left: 0; border-top: 1px solid var(--border); padding: 16px 20px; }
-    }
-  </style>
 </head>
 <body>
 
@@ -176,149 +130,44 @@
       </div>
     </section>
 
-    <!-- 3. KEY PROJECTS: PROTOTYPE (14 Oct), 3 card designs for the user to choose. Keep one, then apply it to projects.html -->
+    <!-- 3. KEY PROJECTS: same carousel, copies of 3 cards in projects.html (update both pages) -->
     <section id="projects">
       <div class="container">
-        <span class="option-label">Option A</span>
         <div class="section-head">
           <h2>Key projects</h2>
           <a href="projects.html" class="see-all">See all projects →</a>
         </div>
-        <p class="option-note">Company | Project: company on the left (logo, name, industry), everything about the project on the right.</p>
         <div class="carousel">
           <button type="button" class="carousel-arrow" data-dir="-1" aria-label="Previous project">‹</button>
           <div class="carousel-track" tabindex="0" aria-label="Key projects, scroll sideways">
-            <article class="card pa" style="--brand: #FED42A">
-              <div class="pa-company">
-                <img src="logos/glovo.png" alt="Glovo logo" class="pa-logo" width="64" height="64">
-                <p class="pa-name">Glovo</p>
-                <p class="pa-ind">Delivery Platform</p>
-              </div>
-              <div class="pa-project">
-                <h4>Forecasting web app</h4>
-                <p class="pa-proof"><strong>Daily use</strong> by all forecasting team members</p>
-                <p class="card-desc">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
-                <ul class="tags"><li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>LLMs</li></ul>
-              </div>
-            </article>
-            <article class="card pa" style="--brand: #D3A26E">
-              <div class="pa-company">
-                <img src="logos/oslo.png" alt="OSLO logo" class="pa-logo" width="64" height="64">
-                <p class="pa-name">OSLO</p>
-                <p class="pa-ind">IT &amp; SaaS Solutions</p>
-              </div>
-              <div class="pa-project">
-                <h4>Revenue recognition model</h4>
-                <p class="pa-proof"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
-                <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
-                <ul class="tags"><li>Excel</li><li>Data modeling</li></ul>
-              </div>
-            </article>
-            <article class="card pa" style="--brand: #D3A26E">
-              <div class="pa-company">
-                <img src="logos/oslo.png" alt="OSLO logo" class="pa-logo" width="64" height="64">
-                <p class="pa-name">OSLO</p>
-                <p class="pa-ind">IT &amp; SaaS Solutions</p>
-              </div>
-              <div class="pa-project">
-                <h4>VAT calculation automation</h4>
-                <p class="pa-proof"><strong>2 h saved</strong> per month, no more manual errors</p>
-                <p class="card-desc">Automated VAT calculations based on unmatched supplier accounting entries.</p>
-                <ul class="tags"><li>Excel</li><li>Finance</li></ul>
-              </div>
-            </article>
-          </div>
-          <button type="button" class="carousel-arrow" data-dir="1" aria-label="Next project">›</button>
-        </div>
-        <div class="carousel-dots"></div>
-      </div>
-    </section>
-
-    <section id="projects-b">
-      <div class="container">
-        <span class="option-label">Option B</span>
-        <div class="section-head">
-          <h2>Key projects</h2>
-          <a href="projects.html" class="see-all">See all projects →</a>
-        </div>
-        <p class="option-note">Result callout: one column; company line on top, title, the result in a highlighted box, then description and tags.</p>
-        <div class="carousel">
-          <button type="button" class="carousel-arrow" data-dir="-1" aria-label="Previous project">‹</button>
-          <div class="carousel-track" tabindex="0" aria-label="Key projects, scroll sideways">
-            <article class="card pb" style="--brand: #FED42A">
-              <p class="pb-org"><img src="logos/glovo.png" alt="Glovo logo" class="pb-logo" width="24" height="24">Glovo · Delivery Platform</p>
+            <article class="card project" style="--brand: #FED42A">
+              <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
               <h4>Forecasting web app</h4>
-              <div class="pb-result"><strong>Daily use</strong><span>by all forecasting team members</span></div>
               <p class="card-desc">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
-              <ul class="tags"><li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>LLMs</li></ul>
+              <p class="project-result"><strong>Daily use</strong> by all forecasting team members</p>
+              <ul class="tags">
+                <li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>LLMs</li>
+              </ul>
             </article>
-            <article class="card pb" style="--brand: #D3A26E">
-              <p class="pb-org"><img src="logos/oslo.png" alt="OSLO logo" class="pb-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
-              <h4>Revenue recognition model</h4>
-              <div class="pb-result"><strong>€350k → €8k</strong><span>annual revenue discrepancies</span></div>
-              <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
-              <ul class="tags"><li>Excel</li><li>Data modeling</li></ul>
-            </article>
-            <article class="card pb" style="--brand: #D3A26E">
-              <p class="pb-org"><img src="logos/oslo.png" alt="OSLO logo" class="pb-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
-              <h4>VAT calculation automation</h4>
-              <div class="pb-result"><strong>2 h saved</strong><span>per month, no more manual errors</span></div>
-              <p class="card-desc">Automated VAT calculations based on unmatched supplier accounting entries.</p>
-              <ul class="tags"><li>Excel</li><li>Finance</li></ul>
-            </article>
-          </div>
-          <button type="button" class="carousel-arrow" data-dir="1" aria-label="Next project">›</button>
-        </div>
-        <div class="carousel-dots"></div>
-      </div>
-    </section>
 
-    <section id="projects-c">
-      <div class="container">
-        <span class="option-label">Option C</span>
-        <div class="section-head">
-          <h2>Key projects</h2>
-          <a href="projects.html" class="see-all">See all projects →</a>
-        </div>
-        <p class="option-note">Company | Project | Result: three columns like a table row: company, the project, and the result on the right.</p>
-        <div class="carousel">
-          <button type="button" class="carousel-arrow" data-dir="-1" aria-label="Previous project">‹</button>
-          <div class="carousel-track" tabindex="0" aria-label="Key projects, scroll sideways">
-            <article class="card pc" style="--brand: #FED42A">
-              <div class="pc-company">
-                <img src="logos/glovo.png" alt="Glovo logo" class="pc-logo" width="48" height="48">
-                <p class="pc-name">Glovo</p>
-              </div>
-              <div class="pc-project">
-                <h4>Forecasting web app</h4>
-                <p class="card-desc">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
-                <ul class="tags"><li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>LLMs</li></ul>
-              </div>
-              <div class="pc-result"><strong>Daily use</strong><span>by all forecasting team members</span></div>
+            <article class="card project" style="--brand: #D3A26E">
+              <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+              <h4>Revenue recognition model</h4>
+              <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
+              <p class="project-result"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
+              <ul class="tags">
+                <li>Excel</li><li>Data modeling</li>
+              </ul>
             </article>
-            <article class="card pc" style="--brand: #D3A26E">
-              <div class="pc-company">
-                <img src="logos/oslo.png" alt="OSLO logo" class="pc-logo" width="48" height="48">
-                <p class="pc-name">OSLO</p>
-              </div>
-              <div class="pc-project">
-                <h4>Revenue recognition model</h4>
-                <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
-                <ul class="tags"><li>Excel</li><li>Data modeling</li></ul>
-              </div>
-              <div class="pc-result"><strong>€350k → €8k</strong><span>annual revenue discrepancies</span></div>
-            </article>
-            <article class="card pc" style="--brand: #D3A26E">
-              <div class="pc-company">
-                <img src="logos/oslo.png" alt="OSLO logo" class="pc-logo" width="48" height="48">
-                <p class="pc-name">OSLO</p>
-              </div>
-              <div class="pc-project">
-                <h4>VAT calculation automation</h4>
-                <p class="card-desc">Automated VAT calculations based on unmatched supplier accounting entries.</p>
-                <ul class="tags"><li>Excel</li><li>Finance</li></ul>
-              </div>
-              <div class="pc-result"><strong>2 h saved</strong><span>per month, no more manual errors</span></div>
+
+            <article class="card project" style="--brand: #D3A26E">
+              <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+              <h4>VAT calculation automation</h4>
+              <p class="card-desc">Automated VAT calculations based on unmatched supplier accounting entries.</p>
+              <p class="project-result"><strong>2 h saved</strong> per month, no more manual errors</p>
+              <ul class="tags">
+                <li>Excel</li><li>Finance</li>
+              </ul>
             </article>
           </div>
           <button type="button" class="carousel-arrow" data-dir="1" aria-label="Next project">›</button>

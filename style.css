@@ -363,33 +363,17 @@ h4 { font-size: 1.1rem; }
   .xp-detail { position: static; margin: 8px 0 16px; }
 }
 
-/* ===== Projects page (and Home copies) =====
-   Left: the project title in a block tinted with the company colour (--brand).
-   Right: the proof sentence (key part big and blue), small logo + "Company · industry", description, software tags. */
+/* ===== Projects page (and Home copies): one column, company colour bar on top =====
+   Company line, title, description, result in a highlighted box, software tags */
 .projects-title { margin-bottom: 8px; }
 .projects-lead { margin: 0 0 32px; }
 .projects { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
-.card.project { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr); padding: 0; overflow: hidden; }
-.card .project-title {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 28px 24px;
-  background: color-mix(in srgb, var(--brand, var(--accent)) 12%, var(--bg));
-  border-right: 1px solid var(--border);
-  font-size: 1.35rem;
-  line-height: 1.25;
-}
-.project-body { padding: 24px; }
-.card .project-proof { margin: 0; font-size: 1rem; color: var(--text-muted); }
-.project-proof strong { color: var(--accent); font-size: 1.35rem; margin-right: 2px; }
-.card .project-org { display: flex; align-items: center; gap: 8px; margin: 8px 0 0; color: var(--text-muted); font-size: 0.875rem; }
-.project-logo { width: 28px; height: 28px; flex-shrink: 0; border-radius: 6px; border: 1px solid var(--border); object-fit: cover; }
-@media (max-width: 720px) {
-  .card.project { grid-template-columns: minmax(0, 1fr); }
-  .card .project-title { padding: 20px; border-right: 0; border-bottom: 1px solid var(--border); font-size: 1.2rem; }
-  .project-body { padding: 20px; }
-}
+.card.project { border-top: 4px solid var(--brand, var(--accent)); }
+.card .project-org { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.project-logo { width: 24px; height: 24px; flex-shrink: 0; border-radius: 6px; border: 1px solid var(--border); object-fit: cover; }
+.project h4 { font-size: 1.35rem; }
+.card .project-result { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; margin: 16px 0 0; padding: 14px 18px; border-radius: 10px; background: var(--accent-soft); }
+.project-result strong { color: var(--accent); font-size: 1.6rem; line-height: 1.2; }
 
 /* ===== Home: key experience carousel (one card at a time) ===== */
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
