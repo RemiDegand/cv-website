@@ -202,23 +202,27 @@ document.querySelectorAll(".report").forEach((report) => {
   show(0);
 });
 
-// Project pages: "How it started" conversation. Each message appears when it scrolls into view
-// (CSS slides it in from its side). Messages that arrive together come one after the other.
+// Project pages: scroll reveal. Each .reveal block (sections, chat messages, dashboards) appears
+// when it scrolls into view; CSS slides it in from its side. Blocks that arrive together come one
+// after the other (waiting at most 1.6 s, so a tall screen doesn't leave blocks empty for long).
 // Without JavaScript, or with "reduce motion", everything is simply shown.
-const story = document.querySelector(".story");
-if (story && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const items = [...story.querySelectorAll(".story-line"), ...document.querySelectorAll(".story ~ .story-end")];
-  story.classList.add("is-animated");
+const reveals = [...document.querySelectorAll(".reveal")];
+if (reveals.length && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.documentElement.classList.add("reveal-on");
+  // Items of a .reveal-stagger list pop in one by one: give each its position
+  document.querySelectorAll(".reveal-stagger").forEach((list) => {
+    [...list.children].forEach((child, i) => child.style.setProperty("--i", i));
+  });
   const observer = new IntersectionObserver((entries) => {
     entries.filter((e) => e.isIntersecting)
-      .sort((a, b) => items.indexOf(a.target) - items.indexOf(b.target))
+      .sort((a, b) => reveals.indexOf(a.target) - reveals.indexOf(b.target))
       .forEach((entry, i) => {
-        entry.target.style.transitionDelay = `${i * 0.45}s`;
+        entry.target.style.setProperty("--d", `${Math.min(i * 0.4, 1.6)}s`);
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       });
-  }, { rootMargin: "0px 0px -15% 0px" });
-  items.forEach((item) => observer.observe(item));
+  }, { rootMargin: "0px 0px -12% 0px" });
+  reveals.forEach((el) => observer.observe(el));
 }
 
 // Later: chatbot window (Phase 2).
