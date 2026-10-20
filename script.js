@@ -202,4 +202,23 @@ document.querySelectorAll(".report").forEach((report) => {
   show(0);
 });
 
+// Project pages: "How it started" conversation. Each message appears when it scrolls into view
+// (CSS slides it in from its side). Messages that arrive together come one after the other.
+// Without JavaScript, or with "reduce motion", everything is simply shown.
+const story = document.querySelector(".story");
+if (story && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const items = [...story.querySelectorAll(".story-line"), ...document.querySelectorAll(".story ~ .story-end")];
+  story.classList.add("is-animated");
+  const observer = new IntersectionObserver((entries) => {
+    entries.filter((e) => e.isIntersecting)
+      .sort((a, b) => items.indexOf(a.target) - items.indexOf(b.target))
+      .forEach((entry, i) => {
+        entry.target.style.transitionDelay = `${i * 0.45}s`;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+  }, { rootMargin: "0px 0px -15% 0px" });
+  items.forEach((item) => observer.observe(item));
+}
+
 // Later: chatbot window (Phase 2).
