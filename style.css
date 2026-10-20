@@ -459,14 +459,6 @@ h4 { font-size: 1.1rem; }
 .story-bubble { padding: 10px 14px; border-radius: 16px; line-height: 1.45; }
 .story-left .story-bubble { background: var(--bg); border: 1px solid var(--border); border-top-left-radius: 4px; }
 .story-right .story-bubble { background: var(--accent-soft); border-top-right-radius: 4px; }
-/* The old accounting tool, as a small grey screen on the sales rep's side: just two totals */
-.story-tool { justify-self: end; width: min(340px, 92%); border: 1px solid var(--border); border-radius: 10px; background: var(--bg); overflow: hidden; box-shadow: var(--shadow); }
-.project-page .story-tool-bar { padding: 6px 12px; background: #eef0f3; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; border-bottom: 1px solid var(--border); }
-.story-tool-figures { display: grid; grid-template-columns: 1fr 1fr; }
-.project-page .story-tool-figures p { padding: 12px; display: flex; flex-direction: column; }
-.story-tool-figures p + p { border-left: 1px solid var(--border); }
-.story-tool-figures span { color: var(--text-muted); font-size: 0.75rem; }
-.story-tool-figures strong { font-size: 1.3rem; }
 .project-page .story-end { margin-top: 12px; color: var(--text-muted); }
 .project-page .story-answer { margin-top: 16px; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; }
 
