@@ -202,44 +202,64 @@ document.querySelectorAll(".report").forEach((report) => {
   show(0);
 });
 
-// Project pages: scroll reveal, block by block. Each .reveal block (a numbered part) appears when
-// it scrolls into view; CSS slides every element of the block in from the block's side, one after
-// the other. Blocks that arrive together come one after the other (waiting at most 1.6 s, so a
-// tall screen doesn't leave blocks empty for long).
-// Without JavaScript, or with "reduce motion", everything is simply shown.
+// Project pages: scroll reveal, always top to bottom. Each .reveal (a block's title, then each of
+// its parts) appears when it scrolls into view; CSS fades its elements up one after the other.
+// Parts that arrive together come in page order (waiting at most 1.2 s), and showing a part also
+// shows every part above it, so nothing stays hidden behind the reader (e.g. after a jump from
+// the block bar). Without JavaScript, or with "reduce motion", everything is simply shown.
 const reveals = [...document.querySelectorAll(".reveal")];
 if (reveals.length && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   document.documentElement.classList.add("reveal-on");
-  // Number the elements of each block in reading order (--i): its children, and the items of
+  // Number the elements of each part in reading order (--i): its children, and the items of
   // its .reveal-stagger lists (chat messages, bullets, steps, pills, tags) right after their list
-  reveals.forEach((block) => {
+  reveals.forEach((part) => {
     let i = 0;
-    [...block.children].forEach((child) => {
+    [...part.children].forEach((child) => {
       child.style.setProperty("--i", i++);
       if (child.matches(".reveal-stagger")) [...child.children].forEach((item) => item.style.setProperty("--i", i++));
     });
   });
-  const observer = new IntersectionObserver((entries) => {
-    entries.filter((e) => e.isIntersecting)
-      .sort((a, b) => reveals.indexOf(a.target) - reveals.indexOf(b.target))
-      .forEach((entry, i) => {
-        entry.target.style.setProperty("--d", `${Math.min(i * 0.4, 1.6)}s`);
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-  }, { rootMargin: "0px 0px -25% 0px" });   // a part appears once it's a quarter of the way up the screen
-  reveals.forEach((el) => observer.observe(el));
-  // At the bottom of the page (or on a screen taller than the page), show whatever is left
-  const showRest = () => {
-    if (innerHeight + scrollY < document.documentElement.scrollHeight - 2) return;
-    reveals.filter((el) => !el.classList.contains("is-visible")).forEach((el, i) => {
-      el.style.setProperty("--d", `${Math.min(i * 0.4, 1.6)}s`);
+  // Show every hidden part up to (and including) index `last`, one after the other
+  const showUpTo = (last) => {
+    reveals.slice(0, last + 1).filter((el) => !el.classList.contains("is-visible")).forEach((el, i) => {
+      el.style.setProperty("--d", `${Math.min(i * 0.3, 1.2)}s`);
       el.classList.add("is-visible");
       observer.unobserve(el);
     });
   };
+  const observer = new IntersectionObserver((entries) => {
+    const seen = entries.filter((e) => e.isIntersecting).map((e) => reveals.indexOf(e.target));
+    if (seen.length) showUpTo(Math.max(...seen));
+  }, { rootMargin: "0px 0px -20% 0px" });   // a part appears once it's a fifth of the way up the screen
+  reveals.forEach((el) => observer.observe(el));
+  // At the bottom of the page (or on a screen taller than the page), show whatever is left
+  const showRest = () => {
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) showUpTo(reveals.length - 1);
+  };
   addEventListener("scroll", showRest, { passive: true });
   addEventListener("load", showRest);
+}
+
+// Project pages: block bar (1 How it started · 2 Context… ). Highlights the block being read
+// (the last one whose top has passed 40% of the screen) and marks the ones above as read.
+const blockNav = document.querySelector(".block-nav");
+if (blockNav) {
+  const links = [...blockNav.querySelectorAll("a")];
+  const blocks = links.map((link) => document.querySelector(link.hash));
+  const update = () => {
+    let current = 0;
+    blocks.forEach((block, i) => { if (block.getBoundingClientRect().top < innerHeight * 0.4) current = i; });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) current = blocks.length - 1;
+    links.forEach((link, i) => {
+      link.classList.toggle("active", i === current);
+      link.classList.toggle("done", i < current);
+      if (i === current) link.setAttribute("aria-current", "step");
+      else link.removeAttribute("aria-current");
+    });
+  };
+  addEventListener("scroll", update, { passive: true });
+  addEventListener("resize", update);
+  update();
 }
 
 // Later: chatbot window (Phase 2).

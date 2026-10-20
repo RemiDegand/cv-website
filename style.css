@@ -439,11 +439,7 @@ h4 { font-size: 1.1rem; }
 .status-3 { --dot: #E8686B; }
 .status-4 { --dot: #B06070; }
 
-/* One block per dashboard: title, what it shows, screenshot */
-.project-dash { margin-top: 24px; }
-.project-dash + .project-dash { margin-top: 40px; }
-.project-dash h3 { font-size: 1.05rem; margin: 0 0 6px; }
-.project-dash > p { color: var(--text-muted); margin-bottom: 10px; }
+/* Screenshot of a dashboard (click to enlarge) */
 .project-shot { margin: 20px 0 0; }
 .project-shot a { display: block; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: box-shadow 0.2s ease, border-color 0.2s ease; }
 .project-shot a:hover { border-color: var(--accent); box-shadow: 0 8px 24px rgba(16, 24, 40, 0.1); }
@@ -460,24 +456,76 @@ h4 { font-size: 1.1rem; }
 .story-left .story-bubble { background: var(--bg); border: 1px solid var(--border); border-top-left-radius: 4px; }
 .story-right .story-bubble { background: var(--accent-soft); border-top-right-radius: 4px; }
 
-/* Scroll reveal (project pages), block by block: script.js adds .reveal-on to <html>, then
-   .is-visible to each .part when it is a quarter of the way up the screen. Every element of a
-   block (title, text, chat messages, list items, steps, pills, tags) slides in from the block's
-   side (--x), one after the other (--i). Blocks alternate left / right.
-   Without JavaScript or with "reduce motion", .reveal-on is never added: everything is shown. */
-.project-page { overflow-x: clip; }   /* no sideways scroll while an element slides in from the right */
-.reveal-left { --x: -90px; }
-.reveal-right { --x: 90px; }
-.reveal-on .part > *, .reveal-on .part .reveal-stagger > * { opacity: 0; transform: translateX(var(--x, 0)); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(var(--d, 0s) + var(--i, 0) * 0.15s); }
-.reveal-on .part > .reveal-stagger { transform: none; }   /* a list fades in, its items do the sliding */
-.reveal-on .part.is-visible > *, .reveal-on .part.is-visible .reveal-stagger > * { opacity: 1; transform: none; }
+/* ===== Project page in numbered blocks (project-aged-receivables.html) =====
+   4 blocks on one vertical line, like the Experience timeline: number circle + title, then
+   the block's parts (small h3 headings). A sticky bar above shows the 4 blocks. */
+.block-nav {
+  position: sticky;
+  top: var(--menu-height);
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin: 32px 0 8px;
+  padding: 8px 0;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.block-nav a { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 6px 8px; border-radius: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: color 0.2s ease, background-color 0.2s ease; }
+.block-nav a:hover { color: var(--text); background: var(--bg-soft); }
+.block-nav-num { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg); font-size: 0.75rem; transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.block-nav-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.block-nav a.done .block-nav-num { border-color: var(--brand, var(--accent)); color: var(--text); }   /* blocks already read */
+.block-nav a.active { color: var(--text); background: color-mix(in srgb, var(--brand, var(--accent)) 14%, var(--bg)); }
+.block-nav a.active .block-nav-num { border-color: var(--brand, var(--accent)); background: var(--brand, var(--accent)); color: #fff; }
+html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   /* a clicked block lands under the bar */
 
-/* The page as numbered parts (1 How it started, 2 Context…), each one sliding in from the
-   other side than the one before, so the project reads like a story */
-.parts { counter-reset: part; }
-.part > .project-h2 { display: flex; align-items: center; gap: 12px; }
-.part > .project-h2::before { counter-increment: part; content: counter(part); flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--brand, var(--accent)); color: #fff; font-size: 0.95rem; }
-.part-sub { margin-top: 40px; }
+.block { position: relative; padding: 40px 0 16px 56px; }
+.block:not(:last-child)::before {   /* line down to the next block's number */
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 84px;
+  bottom: -40px;
+  width: 2px;
+  background: color-mix(in srgb, var(--brand, var(--accent)) 45%, var(--border));
+  transform-origin: top;
+}
+.block-head { display: flex; align-items: center; gap: 20px; margin-left: -56px; }
+.block-num { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--brand, var(--accent)); color: #fff; font-weight: 700; }
+.project-page .block-kicker { color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.block-title { font-size: 1.5rem; margin: 2px 0 0; }
+.block-part { margin-top: 28px; }
+.block-part h3 { font-size: 1.05rem; margin: 0 0 8px; }
+.block-label { display: inline-block; margin-right: 8px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; vertical-align: 2px; }
+.project-page .block-muted { color: var(--text-muted); margin-bottom: 10px; }
+.block-part > .project-did { margin-top: 4px; }
+
+/* Scroll reveal, always the same way: script.js adds .reveal-on to <html>, then .is-visible to
+   each .reveal (a block's title, then each of its parts) when it is a fifth of the way up the
+   screen. Its elements fade up one after the other in reading order (--i): heading, text,
+   then the items of .reveal-stagger lists (chat messages, bullets, steps, pills, tags).
+   The line to the next block draws itself once the block's title is shown.
+   Without JavaScript or with "reduce motion", .reveal-on is never added: everything is shown. */
+.reveal-on .reveal > *, .reveal-on .reveal .reveal-stagger > * { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(var(--d, 0s) + var(--i, 0) * 0.12s); }
+.reveal-on .reveal > .reveal-stagger { transform: none; }   /* a list fades in, its items move up */
+.reveal-on .reveal.is-visible > *, .reveal-on .reveal.is-visible .reveal-stagger > * { opacity: 1; transform: none; }
+.reveal-on .block-head:not(.is-visible) .block-num { transform: scale(0.6); }
+.reveal-on .block:not(:last-child)::before { transform: scaleY(0); transition: transform 1.2s ease 0.3s; }
+.reveal-on .block:has(> .block-head.is-visible)::before { transform: none; }
+
+@media (max-width: 720px) {
+  .block-nav { margin-left: -16px; margin-right: -16px; padding: 6px 12px; }
+  .block-nav a { justify-content: center; padding: 6px 4px; }
+  .block-nav a:not(.active) .block-nav-text { display: none; }   /* numbers only, except the block being read */
+  .block-nav:has(a.active) { grid-template-columns: auto auto auto auto; justify-content: space-between; }
+  .block { padding-left: 44px; }
+  .block-head { gap: 14px; margin-left: -44px; }
+  .block-num { width: 30px; height: 30px; font-size: 0.9rem; }
+  .block:not(:last-child)::before { left: 14px; top: 78px; }
+  .block-title { font-size: 1.3rem; }
+}
 
 /* The last answer: three dots, like someone typing who can't find the answer */
 .story-typing { display: inline-flex; gap: 5px; padding: 14px 16px; }
