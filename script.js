@@ -221,8 +221,19 @@ if (reveals.length && "IntersectionObserver" in window && !matchMedia("(prefers-
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       });
-  }, { rootMargin: "0px 0px -12% 0px" });
+  }, { rootMargin: "0px 0px -25% 0px" });   // a part appears once it's a quarter of the way up the screen
   reveals.forEach((el) => observer.observe(el));
+  // At the bottom of the page (or on a screen taller than the page), show whatever is left
+  const showRest = () => {
+    if (innerHeight + scrollY < document.documentElement.scrollHeight - 2) return;
+    reveals.filter((el) => !el.classList.contains("is-visible")).forEach((el, i) => {
+      el.style.setProperty("--d", `${Math.min(i * 0.4, 1.6)}s`);
+      el.classList.add("is-visible");
+      observer.unobserve(el);
+    });
+  };
+  addEventListener("scroll", showRest, { passive: true });
+  addEventListener("load", showRest);
 }
 
 // Later: chatbot window (Phase 2).

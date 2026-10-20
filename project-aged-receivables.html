@@ -50,21 +50,24 @@
         <!-- Content from projects/Aged receivables/Content.docx (written by Rémi, 14 Oct 2026).
              Screens: made from the anonymised PDFs in the same folder (overall + Sales Teams 1–4).
              The story (20 Oct, user's idea) shows the problem as a short conversation -->
-        <h2 class="project-h2 reveal reveal-left">How it started</h2>
+        <div class="parts">
+        <div class="part reveal reveal-left">
+        <h2 class="project-h2">How it started</h2>
         <div class="story" aria-label="Conversation that started the project">
           <p class="story-line story-left reveal reveal-left"><span class="story-who">Manager</span><span class="story-bubble">Our sales are good. So where is the cash?</span></p>
           <p class="story-line story-right reveal reveal-right"><span class="story-who">Sales rep</span><span class="story-bubble">I don't know… The accounting tool only shows the total overdue and a long list of unpaid invoices.</span></p>
           <p class="story-line story-left reveal reveal-left"><span class="story-who">Manager</span><span class="story-bubble">Then which clients haven't paid, and who should call them?</span></p>
           <p class="story-line story-right reveal reveal-right"><span class="story-who">Sales rep</span><span class="story-bubble story-typing" aria-label="…"><span></span><span></span><span></span></span></p>
         </div>
-        <p class="story-end reveal reveal-up">Nobody could answer quickly. This project gives both of them the answer on one screen.</p>
+        <p class="story-end">Nobody could answer quickly. This project gives both of them the answer on one screen.</p>
+        </div>
 
-        <div class="reveal reveal-right">
+        <div class="part reveal reveal-right">
         <h2 class="project-h2">Context</h2>
         <p>The PDV business unit of OSLO generates about €4M in revenue a year, serves several hundred clients and issues several thousand invoices a year. The accounting tool provided by the finance department only showed the total amount of overdue payments and a raw list of unpaid invoices.</p>
         </div>
 
-        <div class="reveal reveal-left">
+        <div class="part reveal reveal-left">
         <h2 class="project-h2">The problem</h2>
         <ul class="project-did reveal-stagger">
           <li>With this many clients and invoices, it was hard to see quickly which disputes to handle first and what action to take.</li>
@@ -72,7 +75,7 @@
         </ul>
         </div>
 
-        <div class="reveal reveal-right">
+        <div class="part reveal reveal-right">
         <h2 class="project-h2">What I built</h2>
         <p>An automated aged receivables reporting system, directly connected to the payment data extracted from the ERP.</p>
         <ol class="project-flow reveal-stagger" aria-label="How the reporting works">
@@ -86,8 +89,9 @@
         </p>
         </div>
 
-        <h2 class="project-h2 reveal reveal-left">Two dashboards</h2>
-        <div class="project-dash reveal reveal-left">
+        <div class="part reveal reveal-left">
+        <h2 class="project-h2">Two dashboards</h2>
+        <div class="project-dash">
           <h3>1. For the manager: where is the cash?</h3>
           <p>An overview of the business unit's collections, for management.</p>
           <ul class="project-did">
@@ -101,10 +105,11 @@
             </a>
             <figcaption>Global dashboard. Anonymised data. Click to enlarge.</figcaption>
           </figure>
-          <p class="story-answer reveal reveal-up"><strong>The answer:</strong> €3.81M is more than 90 days overdue, and most of it (€3.15M) sits with Sales&nbsp;Team&nbsp;1.</p>
+          <p class="story-answer"><strong>The answer:</strong> €3.81M is more than 90 days overdue, and most of it (€3.15M) sits with Sales&nbsp;Team&nbsp;1.</p>
+        </div>
         </div>
 
-        <div class="project-dash reveal reveal-right">
+        <div class="part part-sub reveal reveal-right"><div class="project-dash">
           <h3>2. For each sales team: who do I call?</h3>
           <p>Each sales representative sees only their own portfolio, for targeted follow-up and dispute resolution.</p>
           <ul class="project-did">
@@ -144,16 +149,19 @@
             <figcaption>One page per sales team: pick a team to switch. Anonymised data. Click a screen to enlarge.</figcaption>
           </figure>
         </div>
+        </div>
 
-        <div class="reveal reveal-left">
+        <div class="part reveal reveal-left">
+        <h2 class="project-h2">Impact</h2>
         <p>Receivables are managed proactively, and the sales teams are accountable for resolving their disputes, contributing to cash control for the business unit.</p>
         </div>
 
-        <div class="reveal reveal-right">
+        <div class="part reveal reveal-right">
         <h2 class="project-h2">Tools</h2>
         <ul class="tags reveal-stagger">
           <li>ERP</li><li>Data modeling</li><li>MyReport</li><li>Dashboards</li><li>Finance</li>
         </ul>
+        </div>
         </div>
 
         <a href="experience.html#oslo" class="see-all project-xp-link">See the OSLO experience →</a>
