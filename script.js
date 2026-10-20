@@ -202,16 +202,22 @@ document.querySelectorAll(".report").forEach((report) => {
   show(0);
 });
 
-// Project pages: scroll reveal. Each .reveal block (sections, chat messages, dashboards) appears
-// when it scrolls into view; CSS slides it in from its side. Blocks that arrive together come one
-// after the other (waiting at most 1.6 s, so a tall screen doesn't leave blocks empty for long).
+// Project pages: scroll reveal, block by block. Each .reveal block (a numbered part) appears when
+// it scrolls into view; CSS slides every element of the block in from the block's side, one after
+// the other. Blocks that arrive together come one after the other (waiting at most 1.6 s, so a
+// tall screen doesn't leave blocks empty for long).
 // Without JavaScript, or with "reduce motion", everything is simply shown.
 const reveals = [...document.querySelectorAll(".reveal")];
 if (reveals.length && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   document.documentElement.classList.add("reveal-on");
-  // Items of a .reveal-stagger list pop in one by one: give each its position
-  document.querySelectorAll(".reveal-stagger").forEach((list) => {
-    [...list.children].forEach((child, i) => child.style.setProperty("--i", i));
+  // Number the elements of each block in reading order (--i): its children, and the items of
+  // its .reveal-stagger lists (chat messages, bullets, steps, pills, tags) right after their list
+  reveals.forEach((block) => {
+    let i = 0;
+    [...block.children].forEach((child) => {
+      child.style.setProperty("--i", i++);
+      if (child.matches(".reveal-stagger")) [...child.children].forEach((item) => item.style.setProperty("--i", i++));
+    });
   });
   const observer = new IntersectionObserver((entries) => {
     entries.filter((e) => e.isIntersecting)
