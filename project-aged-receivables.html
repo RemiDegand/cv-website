@@ -48,7 +48,17 @@
         </dl>
 
         <!-- Content from projects/Aged receivables/Content.docx (written by Rémi, 14 Oct 2026).
-             Screens: made from the anonymised PDFs in the same folder (overall + Sales Team 1) -->
+             Screens: made from the anonymised PDFs in the same folder (overall + Sales Teams 1–4).
+             The story (20 Oct, user's idea) shows the problem as a short conversation -->
+        <h2 class="project-h2">How it started</h2>
+        <div class="story" aria-label="Conversation that started the project">
+          <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">Our sales are good. So where is the cash?</span></p>
+          <p class="story-line story-right"><span class="story-who">Sales rep</span><span class="story-bubble">I don't know… The accounting tool only shows the total overdue and a long list of unpaid invoices.</span></p>
+          <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">Then which clients haven't paid, and who should call them?</span></p>
+          <p class="story-line story-right"><span class="story-who">Sales rep</span><span class="story-bubble">…</span></p>
+        </div>
+        <p class="story-end">Nobody could answer quickly. This project gives both of them the answer on one screen.</p>
+
         <h2 class="project-h2">Context</h2>
         <p>The PDV business unit of OSLO generates about €4M in revenue a year, serves several hundred clients and issues several thousand invoices a year. The accounting tool provided by the finance department only showed the total amount of overdue payments and a raw list of unpaid invoices.</p>
 
@@ -72,7 +82,7 @@
 
         <h2 class="project-h2">Two dashboards</h2>
         <div class="project-dash">
-          <h3>1. Global receivables dashboard</h3>
+          <h3>1. For the manager: where is the cash?</h3>
           <p>An overview of the business unit's collections, for management.</p>
           <ul class="project-did">
             <li>Total payment amounts by payment status</li>
@@ -85,21 +95,47 @@
             </a>
             <figcaption>Global dashboard. Anonymised data. Click to enlarge.</figcaption>
           </figure>
+          <p class="story-answer"><strong>The answer:</strong> €3.81M is more than 90 days overdue, and most of it (€3.15M) sits with Sales&nbsp;Team&nbsp;1.</p>
         </div>
 
         <div class="project-dash">
-          <h3>2. One dashboard per sales representative</h3>
+          <h3>2. For each sales team: who do I call?</h3>
           <p>Each sales representative sees only their own portfolio, for targeted follow-up and dispute resolution.</p>
           <ul class="project-did">
             <li>Total payment amounts and number of payments by status</li>
             <li>Chart of receivables by status</li>
             <li>Detailed list of outstanding payments with customer information, sorted by days overdue</li>
           </ul>
-          <figure class="project-shot">
-            <a href="images/projects/aged-receivables-sales-team.webp" target="_blank" rel="noopener">
-              <img src="images/projects/aged-receivables-sales-team.webp" alt="Sales team dashboard: totals by status, a bar chart by status and the list of outstanding payments sorted by days overdue" width="1600" height="1704" loading="lazy">
+          <!-- Report viewer like Looker: one page per sales team, switch with the tabs or the arrows.
+               script.js shows the chosen page -->
+          <figure class="project-shot report">
+            <div class="report-bar">
+              <span class="report-name">Customer Payments</span>
+              <div class="report-tabs" role="tablist" aria-label="Sales team">
+                <button type="button" role="tab" aria-selected="true" aria-controls="team-1" id="tab-team-1">Team 1</button>
+                <button type="button" role="tab" aria-selected="false" aria-controls="team-2" id="tab-team-2" tabindex="-1">Team 2</button>
+                <button type="button" role="tab" aria-selected="false" aria-controls="team-3" id="tab-team-3" tabindex="-1">Team 3</button>
+                <button type="button" role="tab" aria-selected="false" aria-controls="team-4" id="tab-team-4" tabindex="-1">Team 4</button>
+              </div>
+            </div>
+            <a href="images/projects/aged-receivables-team-1.webp" target="_blank" rel="noopener" id="team-1" role="tabpanel" aria-labelledby="tab-team-1">
+              <img src="images/projects/aged-receivables-team-1.webp" alt="Sales Team 1 dashboard: totals by status, a bar chart by status and the list of outstanding payments sorted by days overdue" width="1600" height="1704" loading="lazy">
             </a>
-            <figcaption>Dashboard of one sales team. Anonymised data. Click to enlarge.</figcaption>
+            <a href="images/projects/aged-receivables-team-2.webp" target="_blank" rel="noopener" id="team-2" role="tabpanel" aria-labelledby="tab-team-2" hidden>
+              <img src="images/projects/aged-receivables-team-2.webp" alt="Sales Team 2 dashboard" width="1600" height="1704" loading="lazy">
+            </a>
+            <a href="images/projects/aged-receivables-team-3.webp" target="_blank" rel="noopener" id="team-3" role="tabpanel" aria-labelledby="tab-team-3" hidden>
+              <img src="images/projects/aged-receivables-team-3.webp" alt="Sales Team 3 dashboard" width="1600" height="1704" loading="lazy">
+            </a>
+            <a href="images/projects/aged-receivables-team-4.webp" target="_blank" rel="noopener" id="team-4" role="tabpanel" aria-labelledby="tab-team-4" hidden>
+              <img src="images/projects/aged-receivables-team-4.webp" alt="Sales Team 4 dashboard" width="1600" height="1704" loading="lazy">
+            </a>
+            <div class="report-pager">
+              <button type="button" class="report-arrow" data-dir="-1" aria-label="Previous team">‹</button>
+              <span class="report-count" aria-live="polite">Page 1 of 4</span>
+              <button type="button" class="report-arrow" data-dir="1" aria-label="Next team">›</button>
+            </div>
+            <figcaption>One page per sales team: pick a team to switch. Anonymised data. Click a screen to enlarge.</figcaption>
           </figure>
         </div>
 

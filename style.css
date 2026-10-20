@@ -450,6 +450,35 @@ h4 { font-size: 1.1rem; }
 .project-shot img { display: block; width: 100%; height: auto; }
 .project-shot figcaption { margin-top: 8px; color: var(--text-muted); font-size: 0.8rem; text-align: center; }
 
+/* "How it started": a short conversation in chat bubbles (manager left, sales rep right) */
+.story { display: grid; gap: 12px; margin-top: 8px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); }
+.project-page .story-line { display: flex; flex-direction: column; gap: 4px; max-width: 80%; }
+.story-left { align-items: flex-start; }
+.story-right { align-items: flex-end; margin-left: auto; }
+.story-who { color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.story-bubble { padding: 10px 14px; border-radius: 16px; line-height: 1.45; }
+.story-left .story-bubble { background: var(--bg); border: 1px solid var(--border); border-top-left-radius: 4px; }
+.story-right .story-bubble { background: var(--accent-soft); border-top-right-radius: 4px; }
+.project-page .story-end { margin-top: 12px; color: var(--text-muted); }
+.project-page .story-answer { margin-top: 16px; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; }
+
+/* Report viewer like Looker: tabs on top, one page per sales team, ‹ page › underneath */
+.report { border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; background: var(--bg); }
+.report-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--bg-soft); }
+.report-name { font-weight: 600; font-size: 0.9rem; }
+.report-tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+.report-tabs button, .report-arrow { font: inherit; font-size: 0.85rem; font-weight: 600; padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-muted); cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease; }
+.report-tabs button:hover, .report-arrow:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.report-tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.project-shot.report > a { border: 0; border-radius: 0; box-shadow: none; }
+.project-shot.report > a:hover { box-shadow: none; }
+.project-shot.report > a[hidden] { display: none; }
+.report-pager { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 10px; border-top: 1px solid var(--border); background: var(--bg-soft); }
+.report-arrow { padding: 2px 12px; font-size: 1.1rem; }
+.report-arrow:disabled { opacity: 0.4; cursor: default; }
+.report-count { color: var(--text-muted); font-size: 0.85rem; min-width: 7em; text-align: center; }
+.project-shot.report figcaption { margin: 0; padding: 0 12px 10px; background: var(--bg-soft); }
+
 /* Previous / next project at the bottom */
 .project-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
 .project-pager a { padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-weight: 600; text-decoration: none; transition: border-color 0.2s ease, color 0.2s ease; }
@@ -459,6 +488,7 @@ h4 { font-size: 1.1rem; }
 @media (max-width: 720px) {
   .project-page-title { font-size: 1.8rem; }
   .project-pager { grid-template-columns: minmax(0, 1fr); }
+  .project-page .story-line { max-width: 92%; }
   .project-flow { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .project-flow li:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -22px; transform: translateX(-50%); }
 }

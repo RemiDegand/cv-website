@@ -167,4 +167,39 @@ if (xpBrowse) {
   show(rows[0]);
 }
 
+// Project pages: report viewer like Looker (one page per sales team). Tabs, ‹ › arrows and the
+// left/right keys on a tab switch the page shown.
+document.querySelectorAll(".report").forEach((report) => {
+  const tabs = [...report.querySelectorAll('[role="tab"]')];
+  const arrows = report.querySelectorAll(".report-arrow");
+  const count = report.querySelector(".report-count");
+  let current = 0;
+
+  const show = (i, focus) => {
+    current = Math.max(0, Math.min(tabs.length - 1, i));
+    tabs.forEach((tab, t) => {
+      const on = t === current;
+      tab.setAttribute("aria-selected", on);
+      tab.tabIndex = on ? 0 : -1;
+      document.getElementById(tab.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) tabs[current].focus();
+    count.textContent = `Page ${current + 1} of ${tabs.length}`;
+    arrows[0].disabled = current === 0;
+    arrows[1].disabled = current === tabs.length - 1;
+  };
+
+  tabs.forEach((tab, t) => {
+    tab.addEventListener("click", () => show(t));
+    tab.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") show(current + 1, true);
+      if (e.key === "ArrowLeft") show(current - 1, true);
+    });
+  });
+  arrows.forEach((arrow) => arrow.addEventListener("click", () => show(current + Number(arrow.dataset.dir))));
+  // Load the hidden pages once the page is ready, so switching team is instant
+  window.addEventListener("load", () => report.querySelectorAll("img").forEach((img) => (img.loading = "eager")));
+  show(0);
+});
+
 // Later: chatbot window (Phase 2).
