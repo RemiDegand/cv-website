@@ -32,9 +32,12 @@
         <h1 class="page-title projects-title">Projects</h1>
         <p class="lead projects-lead">Tools, data models and automations I built during my internships, used by real teams.</p>
 
-        <!-- One card per project: company line, title, description, result in a highlighted box, software tags.
+        <!-- Projects grouped by category (21 Oct): Apps & Tools · Automation & AI · Dashboards & Reporting · Data Modeling.
+             One card per project: company line, title, description, result in a highlighted box, software tags.
              --brand = the company's logo colour (bar on top of the card). The Home page has copies of 3 of these cards.
-             Each card links to its own page (project-*.html): the title link covers the whole card -->
+             Each card links to its own page (project-*.html): the title link covers the whole card.
+             The previous / next links on the project pages follow this order -->
+        <h2 class="group-title" id="apps-tools">Apps &amp; Tools</h2>
         <div class="projects">
           <article class="card project" style="--brand: #FED42A">
             <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
@@ -46,22 +49,25 @@
             </ul>
           </article>
 
+          <article class="card project" style="--brand: #D3A26E">
+            <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+            <h4><a href="project-cash-flow-tools.html" class="project-link">Cash flow calculation tools</a></h4>
+            <p class="card-desc">Developed automated cash flow calculation tools, configurable by analysis period.</p>
+            <p class="project-result"><strong>3</strong> entities covered</p>
+            <ul class="tags">
+              <li>Excel</li><li>Finance</li>
+            </ul>
+          </article>
+        </div>
+
+        <h2 class="group-title" id="automation-ai">Automation &amp; AI</h2>
+        <div class="projects">
           <article class="card project" style="--brand: #FED42A">
             <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
             <h4><a href="project-ai-forecast-adjustments.html" class="project-link">AI skills for forecast adjustments</a></h4>
             <p class="card-desc">Created AI skills to automate forecast adjustments.</p>
             <ul class="tags">
               <li>LLMs</li><li>OpenCode</li>
-            </ul>
-          </article>
-
-          <article class="card project" style="--brand: #D3A26E">
-            <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
-            <h4><a href="project-revenue-recognition.html" class="project-link">Revenue recognition model</a></h4>
-            <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
-            <p class="project-result"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
-            <ul class="tags">
-              <li>Excel</li><li>Data modeling</li>
             </ul>
           </article>
 
@@ -74,7 +80,10 @@
               <li>Excel</li><li>Finance</li>
             </ul>
           </article>
+        </div>
 
+        <h2 class="group-title" id="dashboards-reporting">Dashboards &amp; Reporting</h2>
+        <div class="projects">
           <article class="card project" style="--brand: #D3A26E">
             <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
             <h4><a href="project-aged-receivables.html" class="project-link">Aged receivables reporting</a></h4>
@@ -84,14 +93,17 @@
               <li>ERP</li><li>Data modeling</li><li>MyReport</li><li>Dashboards</li><li>Finance</li>
             </ul>
           </article>
+        </div>
 
+        <h2 class="group-title" id="data-modeling">Data Modeling</h2>
+        <div class="projects">
           <article class="card project" style="--brand: #D3A26E">
             <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
-            <h4><a href="project-cash-flow-tools.html" class="project-link">Cash flow calculation tools</a></h4>
-            <p class="card-desc">Developed automated cash flow calculation tools, configurable by analysis period.</p>
-            <p class="project-result"><strong>3</strong> entities covered</p>
+            <h4><a href="project-revenue-recognition.html" class="project-link">Revenue recognition model</a></h4>
+            <p class="card-desc">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
+            <p class="project-result"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
             <ul class="tags">
-              <li>Excel</li><li>Finance</li>
+              <li>Excel</li><li>Data modeling</li>
             </ul>
           </article>
         </div>
