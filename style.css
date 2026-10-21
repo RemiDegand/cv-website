@@ -402,8 +402,11 @@ h4 { font-size: 1.1rem; }
 
 /* One section per category: thin line on top, icon + heading + description, cards 2 per row (1 on phones) */
 .cat-section + .cat-section { margin-top: 56px; }
-.cat-section-head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
-.cat-section-head h2 { margin: 0 0 2px; font-size: 1.4rem; }
+/* Icon and title on the same line (centred on each other), description underneath, aligned with the title */
+.cat-section-head { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 6px 16px; margin-bottom: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+.cat-section-head > div { display: contents; }   /* the title and description sit in the grid directly */
+.cat-section-head h2 { margin: 0; font-size: 1.4rem; }
+.cat-section-head .cat-desc { grid-column: 2; }
 .cat-overview + .cat-section .cat-section-head { border-top: 0; padding-top: 0; }   /* no line right under the tiles */
 .cat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 @media (max-width: 720px) { .cat-grid { grid-template-columns: minmax(0, 1fr); } }
