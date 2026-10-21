@@ -386,6 +386,27 @@ h4 { font-size: 1.1rem; }
 .projects-title { margin-bottom: 8px; }
 .projects-lead { margin: 0 0 32px; }
 .projects { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.projects + .group-title { margin-top: 56px; }
+
+/* Overview table: the 4 categories side by side. The 1px gap on a border-coloured background
+   draws the table lines, whatever the number of columns */
+.project-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin: 0 0 56px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--border); box-shadow: var(--shadow); }
+.board-col { background: var(--bg); }
+.board-head { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 14px 16px; background: var(--bg-soft); border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+.board-head a { color: var(--text); text-decoration: none; }
+.board-head a:hover { color: var(--accent); }
+.board-head a::after { content: " ↓"; color: var(--text-muted); font-weight: 500; }
+.board-head span { color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.board-list { list-style: none; margin: 0; padding: 8px; display: grid; gap: 4px; }
+.board-list a { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 2px 10px; padding: 10px 8px; border-radius: 8px; color: var(--text); text-decoration: none; transition: background-color 0.2s ease; }
+.board-list a:hover, .board-list a:focus-visible { background: var(--accent-soft); outline: none; }
+.board-list a:hover strong { color: var(--accent); }
+.board-list img { grid-row: span 2; margin-top: 2px; border-radius: 5px; border: 1px solid var(--border); object-fit: cover; }
+.board-list strong { font-size: 0.9rem; line-height: 1.35; transition: color 0.2s ease; }
+.board-list span { color: var(--text-muted); font-size: 0.8rem; line-height: 1.35; }
+.board-list b { color: var(--accent); font-weight: 600; }
+@media (max-width: 900px) { .project-board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .project-board { grid-template-columns: minmax(0, 1fr); } }
 .card.project { border-top: 4px solid var(--brand, var(--accent)); }
 :is(.card, .project-page) .project-org { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 .project-logo { width: 24px; height: 24px; flex-shrink: 0; border-radius: 6px; border: 1px solid var(--border); object-fit: cover; }
