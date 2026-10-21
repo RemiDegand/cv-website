@@ -33,39 +33,42 @@
         <p class="lead projects-lead">Tools, data models and automations I built during my internships, used by real teams.</p>
 
         <!-- Projects by category (21 Oct, option C chosen by the user from 3 options: A filter tabs, B table rows, C sections).
-             Top: overview of the 4 categories (name, count, description); a tile jumps to its section.
-             Then one section per category: heading + count, cards 2 per row (1 on phones).
+             Top: overview of the 4 categories (icon, name, description); a tile jumps to its section.
+             Then one section per category: same icon + heading + description, cards 2 per row (1 on phones).
              Cards: company line, title, description, result in a highlighted box, software tags.
              --brand = the company's logo colour (bar on top of the card). The Home page has copies of 3 of these cards.
              Each card links to its own page (project-*.html): the title link covers the whole card.
              The previous / next links on the project pages follow this order -->
         <nav class="cat-overview" aria-label="Project categories">
           <a href="#apps-tools" class="cat-tile">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span>
             <strong>Apps &amp; Tools</strong>
-            <span class="cat-pill">2 projects</span>
             <span class="cat-desc">Apps and calculation tools that teams use day to day.</span>
           </a>
           <a href="#automation-ai" class="cat-tile">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
             <strong>Automation &amp; AI</strong>
-            <span class="cat-pill">2 projects</span>
             <span class="cat-desc">Manual tasks automated, with scripts and AI.</span>
           </a>
           <a href="#dashboards-reporting" class="cat-tile">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><rect x="5" y="11" width="3" height="7" rx="1"/><rect x="10.5" y="5" width="3" height="13" rx="1"/><rect x="16" y="14" width="3" height="4" rx="1"/></svg></span>
             <strong>Dashboards &amp; Reporting</strong>
-            <span class="cat-pill">1 project</span>
             <span class="cat-desc">Reports that show where to act.</span>
           </a>
           <a href="#data-modeling" class="cat-tile">
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>
             <strong>Data Modeling</strong>
-            <span class="cat-pill">1 project</span>
             <span class="cat-desc">The data structures behind reliable numbers.</span>
           </a>
         </nav>
 
         <div class="cat-section" id="apps-tools">
           <header class="cat-section-head">
-            <h2>Apps &amp; Tools</h2>
-            <span class="cat-pill">2 projects</span>
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span>
+            <div>
+              <h2>Apps &amp; Tools</h2>
+              <p class="cat-desc">Apps and calculation tools that teams use day to day.</p>
+            </div>
           </header>
           <div class="cat-grid">
             <article class="card project" style="--brand: #FED42A">
@@ -92,8 +95,11 @@
 
         <div class="cat-section" id="automation-ai">
           <header class="cat-section-head">
-            <h2>Automation &amp; AI</h2>
-            <span class="cat-pill">2 projects</span>
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
+            <div>
+              <h2>Automation &amp; AI</h2>
+              <p class="cat-desc">Manual tasks automated, with scripts and AI.</p>
+            </div>
           </header>
           <div class="cat-grid">
             <article class="card project" style="--brand: #FED42A">
@@ -119,8 +125,11 @@
 
         <div class="cat-section" id="dashboards-reporting">
           <header class="cat-section-head">
-            <h2>Dashboards &amp; Reporting</h2>
-            <span class="cat-pill">1 project</span>
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><rect x="5" y="11" width="3" height="7" rx="1"/><rect x="10.5" y="5" width="3" height="13" rx="1"/><rect x="16" y="14" width="3" height="4" rx="1"/></svg></span>
+            <div>
+              <h2>Dashboards &amp; Reporting</h2>
+              <p class="cat-desc">Reports that show where to act.</p>
+            </div>
           </header>
           <div class="cat-grid">
             <article class="card project" style="--brand: #D3A26E">
@@ -137,8 +146,11 @@
 
         <div class="cat-section" id="data-modeling">
           <header class="cat-section-head">
-            <h2>Data Modeling</h2>
-            <span class="cat-pill">1 project</span>
+            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>
+            <div>
+              <h2>Data Modeling</h2>
+              <p class="cat-desc">The data structures behind reliable numbers.</p>
+            </div>
           </header>
           <div class="cat-grid">
             <article class="card project" style="--brand: #D3A26E">
