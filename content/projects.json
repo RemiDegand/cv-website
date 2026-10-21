@@ -1,0 +1,75 @@
+{
+  "_about": "DISPLAY space: the short summary of each project shown on the website. Run `node tools/build-projects.js` after a change: it rebuilds the cards on projects.html and the Key projects carousel on index.html. Everything else known about a project (context, details, open questions) lives in knowledge/projects/<id>.md, for the chatbot. The project pages (project-<id>.html) are still edited by hand.",
+  "companies": {
+    "glovo": { "name": "Glovo", "industry": "Delivery Platform", "logo": "logos/glovo.png", "brand": "#FED42A" },
+    "oslo": { "name": "OSLO", "industry": "IT & SaaS Solutions", "logo": "logos/oslo.png", "brand": "#D3A26E" }
+  },
+  "categories": [
+    { "id": "apps-tools", "name": "Apps & Tools", "icon": "app-window", "description": "Apps and calculation tools that teams use day to day." },
+    { "id": "automation-ai", "name": "Automation & AI", "icon": "sparkles", "description": "Manual tasks automated, with scripts and AI." },
+    { "id": "dashboards-reporting", "name": "Dashboards & Reporting", "icon": "bar-chart", "description": "Reports that show where to act." },
+    { "id": "data-modeling", "name": "Data Modeling", "icon": "database", "description": "The data structures behind reliable numbers." }
+  ],
+  "projects": [
+    {
+      "id": "forecasting-web-app",
+      "category": "apps-tools",
+      "company": "glovo",
+      "title": "Forecasting web app",
+      "description": "Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.",
+      "result": { "key": "Daily use", "text": "by all forecasting team members" },
+      "tags": ["Python", "SQL", "BigQuery", "Looker", "LLMs"],
+      "home": true
+    },
+    {
+      "id": "cash-flow-tools",
+      "category": "apps-tools",
+      "company": "oslo",
+      "title": "Cash flow calculation tools",
+      "description": "Developed automated cash flow calculation tools, configurable by analysis period.",
+      "result": { "key": "3", "text": "entities covered" },
+      "tags": ["Excel", "Finance"],
+      "home": false
+    },
+    {
+      "id": "ai-forecast-adjustments",
+      "category": "automation-ai",
+      "company": "glovo",
+      "title": "AI skills for forecast adjustments",
+      "description": "Created AI skills to automate forecast adjustments.",
+      "result": null,
+      "tags": ["LLMs", "OpenCode"],
+      "home": false
+    },
+    {
+      "id": "vat-automation",
+      "category": "automation-ai",
+      "company": "oslo",
+      "title": "VAT calculation automation",
+      "description": "Automated VAT calculations based on unmatched supplier accounting entries.",
+      "result": { "key": "2 h saved", "text": "per month, no more manual errors" },
+      "tags": ["Excel", "Finance"],
+      "home": true
+    },
+    {
+      "id": "aged-receivables",
+      "category": "dashboards-reporting",
+      "company": "oslo",
+      "title": "Aged receivables reporting",
+      "description": "Automated aged receivables reporting by business unit and by sales representative to support cash collection and cash flow monitoring.",
+      "result": { "key": "3", "text": "business units covered" },
+      "tags": ["ERP", "Data modeling", "MyReport", "Dashboards", "Finance"],
+      "home": false
+    },
+    {
+      "id": "revenue-recognition",
+      "category": "data-modeling",
+      "company": "oslo",
+      "title": "Revenue recognition model",
+      "description": "Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.",
+      "result": { "key": "€350k → €8k", "text": "annual revenue discrepancies" },
+      "tags": ["Excel", "Data modeling"],
+      "home": true
+    }
+  ]
+}

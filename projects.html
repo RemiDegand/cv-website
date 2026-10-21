@@ -35,10 +35,9 @@
         <!-- Projects by category (21 Oct, option C chosen by the user from 3 options: A filter tabs, B table rows, C sections).
              Top: overview of the 4 categories (icon, name, description); a tile jumps to its section.
              Then one section per category: same icon + heading + description, cards 2 per row (1 on phones).
-             Cards: company line, title, description, result in a highlighted box, software tags.
-             --brand = the company's logo colour (bar on top of the card). The Home page has copies of 3 of these cards.
-             Each card links to its own page (project-*.html): the title link covers the whole card.
-             The previous / next links on the project pages follow this order -->
+             GENERATED from content/projects.json by "node tools/build-projects.js": edit the JSON, not the HTML
+             between the build markers. The previous / next links on the project pages follow this order -->
+        <!-- build:projects -->
         <nav class="cat-overview" aria-label="Project categories">
           <a href="#apps-tools" class="cat-tile">
             <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span>
@@ -164,6 +163,7 @@
             </article>
           </div>
         </div>
+        <!-- /build:projects -->
       </div>
     </section>
   </main>
