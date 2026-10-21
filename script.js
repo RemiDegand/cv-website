@@ -167,6 +167,23 @@ if (xpBrowse) {
   show(rows[0]);
 }
 
+// Projects page: every project card as tall as the tallest one, across all the categories
+// (cards 2 per row only; on phones each card keeps its own height). Measured again once the
+// font is loaded and when the window is resized.
+const catCards = [...document.querySelectorAll(".cat-grid .card")];
+if (catCards.length) {
+  const twoColumns = matchMedia("(min-width: 721px)");
+  const root = document.documentElement;
+  const equalize = () => {
+    root.style.removeProperty("--card-h");
+    if (!twoColumns.matches) return;
+    root.style.setProperty("--card-h", Math.max(...catCards.map((card) => card.offsetHeight)) + "px");
+  };
+  equalize();
+  document.fonts.ready.then(equalize);
+  addEventListener("resize", equalize);
+}
+
 // Project pages: report viewer like Looker (one page per sales team). Tabs, ‹ › arrows and the
 // left/right keys on a tab switch the page shown.
 document.querySelectorAll(".report").forEach((report) => {

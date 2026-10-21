@@ -403,8 +403,12 @@ h4 { font-size: 1.1rem; }
 .cat-section-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-bottom: 20px; padding-top: 16px; border-top: 2px solid var(--text); }
 .cat-section-head h2 { margin: 0; font-size: 1.4rem; }
 .cat-pill { padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.8rem; font-weight: 600; }
-.cat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.cat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 @media (max-width: 720px) { .cat-grid { grid-template-columns: minmax(0, 1fr); } }
+/* Every card the same size: script.js sets --card-h to the tallest card's height (2 columns only;
+   on phones the cards keep their own height). The tool tags stay at the bottom of each card */
+.cat-grid .card { display: flex; flex-direction: column; min-height: var(--card-h, auto); }
+.cat-grid .card .tags { margin-top: auto; padding-top: 16px; }
 .card.project { border-top: 4px solid var(--brand, var(--accent)); }
 :is(.card, .project-page) .project-org { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 .project-logo { width: 24px; height: 24px; flex-shrink: 0; border-radius: 6px; border: 1px solid var(--border); object-fit: cover; }
