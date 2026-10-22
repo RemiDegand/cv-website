@@ -220,6 +220,7 @@ document.querySelectorAll(".report").forEach((report) => {
     });
   });
   arrows.forEach((arrow) => arrow.addEventListener("click", () => show(current + Number(arrow.dataset.dir))));
+  people.forEach((icon, p) => icon.addEventListener("click", () => show(p)));
   // Load the hidden pages once the page is ready, so switching team is instant
   window.addEventListener("load", () => report.querySelectorAll("img").forEach((img) => (img.loading = "eager")));
   show(0);

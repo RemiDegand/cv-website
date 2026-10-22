@@ -484,7 +484,8 @@ h4 { font-size: 1.1rem; }
 .persona-kicker { display: block; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 /* Dashboard 2: one icon per sales team; the team shown in the report viewer is black, the others light grey (script.js) */
 .persona-icons { display: flex; gap: 2px; }
-.persona-icons .persona-icon { color: #c9ced8; transition: color 0.25s ease; }
+.persona-icons .persona-icon { padding: 0; border: 0; border-radius: 8px; background: none; color: #c9ced8; cursor: pointer; transition: color 0.25s ease; }   /* click = show that team */
+.persona-icons .persona-icon:hover { color: #7d8595; }
 .persona-icons .persona-icon.active { color: var(--text); }
 
 /* Annotated screenshot: bubbles above / below the screen, each with an arrow to a framed zone.
