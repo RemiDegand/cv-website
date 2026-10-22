@@ -58,7 +58,7 @@
       "title": "Aged receivables reporting",
       "description": "Automated aged receivables reporting by business unit and by sales representative to support cash collection and cash flow monitoring.",
       "result": { "key": "3", "text": "business units covered" },
-      "tags": ["ERP", "Data modeling", "MyReport", "Dashboards", "Finance"],
+      "tags": ["MyReport Data (Data modeling)", "MyReport Page (Data visualization)", "SQL"],
       "home": false
     },
     {

@@ -7,7 +7,7 @@ experience: Data Analyst Intern, Information Systems department, OSLO (Sep – D
 category: Dashboards & Reporting
 on_site: true
 page: project-aged-receivables.html
-tools: [ERP, Data modeling, MyReport, Dashboards, Finance]
+tools: [MyReport Data (data modeling), MyReport Page (data visualization), SQL]
 sources: [projects/Aged receivables/Content.docx (written by Rémi, 14 Oct 2026; local only), anonymised dashboard PDFs (local only; screens in images/projects/), docs/CV website.md (OSLO summary), about-me.md]
 updated: 2026-10-21
 ---
@@ -47,7 +47,7 @@ Each payment gets a status by days overdue: Not due, < 30 days, 30–60 days, 60
 Management of the business unit (global dashboard) and each sales representative (own portfolio dashboard). 4 sales teams appear in the anonymised dashboards.
 
 ## Tools
-ERP (payment data), data modeling, MyReport (dashboards), finance (aged receivables, payment statuses).
+MyReport Data (data modeling), MyReport Page (data visualization), SQL (confirmed by Rémi, 22 Oct 2026). The payment data comes from the ERP.
 
 ## Questions a recruiter might ask
 - **What is the aged receivables project?** → An automated reporting system at OSLO: ERP payment data, a data model and two MyReport dashboards showing overdue payments by status, for management and for each sales representative.
