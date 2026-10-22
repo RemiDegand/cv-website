@@ -477,9 +477,10 @@ h4 { font-size: 1.1rem; }
 .project-shot img { display: block; width: 100%; height: auto; }
 .project-shot figcaption { margin-top: 8px; color: var(--text-muted); font-size: 0.8rem; text-align: center; }
 
-/* Who a dashboard is for: head-and-shoulders icon + "Made for / The manager" */
-.persona { display: flex; align-items: center; gap: 12px; margin: 4px 0 0; }
-.persona-icon { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: color-mix(in srgb, var(--brand, var(--accent)) 18%, var(--bg)); color: color-mix(in srgb, var(--brand, var(--accent)) 70%, #000); }
+/* Who a dashboard is for: head-and-shoulders icon (black, no circle) + "Made for / The manager" */
+.persona { display: flex; align-items: center; gap: 10px; margin: 4px 0 0; }
+.persona-icon { flex: none; display: grid; color: var(--text); }
+.persona-icon svg { width: 52px; height: 52px; }
 .persona-kicker { display: block; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 
 /* Annotated screenshot: bubbles above / below the screen, each with an arrow to a framed zone */
@@ -488,13 +489,14 @@ h4 { font-size: 1.1rem; }
 .shot-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 26px; }
 .shot-notes-below { grid-template-columns: minmax(0, 28rem); justify-content: center; margin: 26px 0 0; }
 /* Top arrows go down into the screen to the top of the tiles: 11.2% of the image height = 7.57% of its width */
-.shot-note { --reach: calc(26px + 7.57cqw - 12px); position: relative; z-index: 1; margin: 0; padding: 8px 12px; border-radius: 12px; background: var(--accent-soft); color: var(--text); font-size: 0.875rem; font-weight: 500; line-height: 1.4; text-align: center; }
-.shot-note::before { content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: var(--reach); margin-left: -1px; background: var(--accent); }   /* arrow line */
-.shot-note::after { content: ""; position: absolute; left: 50%; top: calc(100% + var(--reach) - 2px); margin-left: -6px; border: 6px solid transparent; border-top-color: var(--accent); }   /* arrow head */
+/* Kept light so the dashboard stays the main thing: very pale blue, muted text, soft blue arrows and frames */
+.shot-note { --reach: calc(26px + 7.57cqw - 12px); --note-line: #a9c1f5; position: relative; z-index: 1; margin: 0; padding: 8px 12px; border-radius: 12px; background: #f4f7fe; border: 1px solid #e3ebfc; color: var(--text-muted); font-size: 0.875rem; font-weight: 500; line-height: 1.4; text-align: center; }
+.shot-note::before { content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: var(--reach); margin-left: -1px; background: var(--note-line); }   /* arrow line */
+.shot-note::after { content: ""; position: absolute; left: 50%; top: calc(100% + var(--reach) - 2px); margin-left: -6px; border: 6px solid transparent; border-top-color: var(--note-line); }   /* arrow head */
 .shot-notes-below .shot-note { --reach: 14px; }   /* the bar chart ends at the bottom of the screen */
 .shot-notes-below .shot-note::before { top: auto; bottom: 100%; }
-.shot-notes-below .shot-note::after { top: auto; bottom: calc(100% + var(--reach) - 2px); border-top-color: transparent; border-bottom-color: var(--accent); }
-.shot-zone { position: absolute; box-sizing: border-box; border: 2px solid var(--accent); border-radius: 6px; pointer-events: none; }
+.shot-notes-below .shot-note::after { top: auto; bottom: calc(100% + var(--reach) - 2px); border-top-color: transparent; border-bottom-color: var(--note-line); }
+.shot-zone { position: absolute; box-sizing: border-box; border: 2px solid #a9c1f5; border-radius: 6px; pointer-events: none; }
 @media (max-width: 720px) {
   .shot-notes { gap: 8px; }
   .shot-note { padding: 6px 8px; font-size: 0.8rem; }
