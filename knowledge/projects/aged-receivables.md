@@ -18,7 +18,7 @@ updated: 2026-10-22
 At OSLO, Rémi built an automated aged receivables reporting system for 3 business units: payment data from the ERP, a dedicated data model and two MyReport dashboards (one for management, one per sales representative). It made receivables management proactive and gave the sales teams clear accountability for resolving disputes.
 
 ## Context
-The aged receivables project was carried out during Rémi's Data Analyst internship at OSLO, for 3 of OSLO's business units, with hundreds of clients and thousands of invoices a year (Rémi, 22 Oct 2026: say "3 business units", don't name them). The accounting tool provided by the finance department only showed the total amount of overdue payments and a raw list of unpaid invoices.
+The aged receivables project was carried out during Rémi's Data Analyst internship at OSLO, covering 3 of OSLO's business units (Rémi, 22 Oct 2026: say "3 business units", don't name them). In these business units, there were hundreds of clients and thousands of invoices a year. The accounting tool provided by the finance department only showed the total amount of overdue payments and a raw list of unpaid invoices.
 
 ## Problem
 - The existing tool gave limited visibility: only the total overdue amount and an unstructured list of late payments.
