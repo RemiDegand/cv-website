@@ -62,6 +62,16 @@
       "home": false
     },
     {
+      "id": "sales-performance-reporting",
+      "category": "dashboards-reporting",
+      "company": "oslo",
+      "title": "Production plan & sales performance reporting",
+      "description": "Rebuilt a business unit's production plan and created sales performance dashboards for management and for each sales representative.",
+      "result": { "key": "~1,000 orders", "text": "a year, reporting used weekly by management" },
+      "tags": ["Excel", "MyReport Data (Data modeling)", "MyReport Page (Data visualization)"],
+      "home": false
+    },
+    {
       "id": "revenue-recognition",
       "category": "data-modeling",
       "company": "oslo",

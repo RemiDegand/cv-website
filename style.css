@@ -479,6 +479,11 @@ h4 { font-size: 1.1rem; }
 
 /* Who a dashboard is for: head-and-shoulders icon (black, no circle) + "Made for / The manager" */
 .persona { display: flex; align-items: center; gap: 10px; margin: 4px 0 0; }
+.personas { display: flex; flex-wrap: wrap; gap: 8px 40px; margin-top: 16px; }   /* several roles side by side */
+/* Rows of small chips with a label ("Indicators", "Analysed by") */
+.project-page .chip-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0 0; color: var(--text-muted); font-size: 0.9rem; }
+.chip-label { min-width: 6.5rem; font-weight: 600; }
+.chip { padding: 2px 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-soft); color: var(--text); font-size: 0.8rem; font-weight: 600; }
 .persona-icon { flex: none; display: grid; color: var(--text); }
 .persona-icon svg { width: 52px; height: 52px; }
 .persona-kicker { display: block; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }

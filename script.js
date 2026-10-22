@@ -184,17 +184,25 @@ if (catCards.length) {
   addEventListener("resize", equalize);
 }
 
-// Project pages: report viewer like Looker (one page per sales team). Tabs, ‹ › arrows and the
-// left/right keys on a tab switch the page shown.
+// Project pages: report viewer like Looker. Tabs, ‹ › arrows and the left/right keys on a tab switch
+// the page shown. Two kinds:
+//  - one tab per sales team (aged receivables): the team icons above follow the tabs, a click on an
+//    icon shows its team;
+//  - one tab per report page, with data-by-team on the .report (sales performance): the team icons
+//    choose the team, and the page shown is the panel "<tab's aria-controls>-team-<n>".
 document.querySelectorAll(".report").forEach((report) => {
   const tabs = [...report.querySelectorAll('[role="tab"]')];
   const arrows = report.querySelectorAll(".report-arrow");
   const count = report.querySelector(".report-count");
+  const byTeam = report.hasAttribute("data-by-team");
   // Sales team icons above the report: the team shown is black, and its name is written next to them
   const part = report.closest(".block-part");
   const people = part ? [...part.querySelectorAll(".persona-icons .persona-icon")] : [];
   const personaName = part && part.querySelector(".persona-name");
+  const teams = byTeam ? people.length : 1;
+  const panel = (t, k) => document.getElementById(tabs[t].getAttribute("aria-controls") + (byTeam ? "-team-" + (k + 1) : ""));
   let current = 0;
+  let team = 0;
 
   const show = (i, focus) => {
     current = Math.max(0, Math.min(tabs.length - 1, i));
@@ -202,12 +210,13 @@ document.querySelectorAll(".report").forEach((report) => {
       const on = t === current;
       tab.setAttribute("aria-selected", on);
       tab.tabIndex = on ? 0 : -1;
-      document.getElementById(tab.getAttribute("aria-controls")).hidden = !on;
+      for (let k = 0; k < teams; k++) panel(t, k).hidden = !(on && k === team);
     });
     if (focus) tabs[current].focus();
     count.textContent = `Page ${current + 1} of ${tabs.length}`;
-    people.forEach((icon, p) => icon.classList.toggle("active", p === current));
-    if (personaName) personaName.textContent = "Sales " + tabs[current].textContent;
+    const who = byTeam ? team : current;
+    people.forEach((icon, p) => icon.classList.toggle("active", p === who));
+    if (personaName) personaName.textContent = byTeam ? `Sales Team ${team + 1}` : "Sales " + tabs[current].textContent;
     arrows[0].disabled = current === 0;
     arrows[1].disabled = current === tabs.length - 1;
   };
@@ -220,7 +229,9 @@ document.querySelectorAll(".report").forEach((report) => {
     });
   });
   arrows.forEach((arrow) => arrow.addEventListener("click", () => show(current + Number(arrow.dataset.dir))));
-  people.forEach((icon, p) => icon.addEventListener("click", () => show(p)));
+  people.forEach((icon, p) => icon.addEventListener("click", () => {
+    if (byTeam) { team = p; show(current); } else show(p);
+  }));
   // Load the hidden pages once the page is ready, so switching team is instant
   window.addEventListener("load", () => report.querySelectorAll("img").forEach((img) => (img.loading = "eager")));
   show(0);
