@@ -110,16 +110,27 @@
 
             <div class="block-part reveal">
               <h3><span class="block-label">Dashboard 1</span>For the manager: where is the cash?</h3>
-              <p class="block-muted">An overview of the business unit's collections, for management.</p>
-              <ul class="project-did">
-                <li>Total payment amounts by payment status</li>
-                <li>Number of payments by status</li>
-                <li>Bar chart of receivable amounts by sales representative and payment status</li>
-              </ul>
-              <figure class="project-shot">
+              <!-- Who reads it (22 Oct, user's request: an icon instead of an overview sentence) -->
+              <p class="persona">
+                <span class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span>
+                <span><span class="persona-kicker">Made for</span><strong>The manager</strong></span>
+              </p>
+              <!-- What the dashboard shows: bubbles with an arrow to their part of the screen
+                   (22 Oct, user's request; replaces a bullet list). The framed zones are in % of the image -->
+              <figure class="project-shot annotated">
+                <div class="shot-notes">
+                  <p class="shot-note">Total payment amounts by payment status</p>
+                  <p class="shot-note">Number of payments by status</p>
+                </div>
                 <a href="images/projects/aged-receivables-overall.webp" target="_blank" rel="noopener">
                   <img src="images/projects/aged-receivables-overall.webp" alt="Global dashboard: total payments and number of payments by status, pie charts by status, and a bar chart of amounts by sales team" width="1600" height="1081" loading="lazy">
+                  <span class="shot-zone" style="left: 0; top: 11.2%; width: 49.7%; height: 21.4%"></span>
+                  <span class="shot-zone" style="left: 50.3%; top: 11.2%; width: 49.7%; height: 21.4%"></span>
+                  <span class="shot-zone" style="left: 0; top: 67.4%; width: 100%; height: 32.6%"></span>
                 </a>
+                <div class="shot-notes shot-notes-below">
+                  <p class="shot-note">Receivable amounts by sales representative and payment status</p>
+                </div>
                 <figcaption>Global dashboard. Anonymised data. Click to enlarge.</figcaption>
               </figure>
               <p class="story-answer"><strong>The answer:</strong> €3.81M is more than 90 days overdue, and most of it (€3.15M) sits with Sales&nbsp;Team&nbsp;1.</p>
