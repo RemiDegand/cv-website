@@ -567,6 +567,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .block-label { display: inline-block; margin-right: 8px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; vertical-align: 2px; }
 .project-page .block-muted { color: var(--text-muted); margin-bottom: 10px; }
 .block-part > .project-did { margin-top: 4px; }
+.block-part > .project-did + p { margin-top: 12px; }
 
 /* Scroll reveal, always the same way: script.js adds .reveal-on to <html>, then .is-visible to
    each .reveal (a block's title, then each of its parts) when it is a fifth of the way up the
