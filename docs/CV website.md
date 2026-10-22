@@ -456,14 +456,15 @@ ONLINE (each question)
 - GitHub: never share a password or token in chat.
 - The project folder is **outside OneDrive** on purpose (OneDrive sync can lock or corrupt Git/npm files).
 
-## Current state of the website (21 October 2026)
-**Folder:** `C:\Users\remid\cv-website` · **Last commit:** `eb0dd17` + this notes update (**pushed to GitHub**: https://github.com/RemiDegand/cv-website, `main` tracks `origin/main`).
+## Current state of the website (22 October 2026)
+**Folder:** `C:\Users\remid\cv-website` · **Last commit:** `d3b5147` + this notes update (**pushed to GitHub**: https://github.com/RemiDegand/cv-website, `main` tracks `origin/main`).
 - Commits on 12 Oct: `a3cf660` (8 Oct work: logos, card layout, hover) · `4a87e45` (split into 4 pages, Skills removed) · `ce88cb1` (original logo files) · `95de957` (Home carousel + hero, About removed, Education panel + logos + level labels) · `b1b7103` (project notes moved into the repo).
 - `b4edb06` (12 Oct evening): Education zoom view, per-year cards, courses, experience tiles, notes rewrite.
 - Commits on 13 Oct: `2dce272` · `910f44f` · `49b33f4` (Education: M1 major Data Analysis & Supply Chain, EGC Year 1 and 2 courses) · `8b5bbec` (Experience: key experience timeline + list + details) · `7c671cf` (Experience: when/why context left of the timeline).
 - Commits on 14 Oct: `04b4702` · `eb45e03` (Experience: empty "next experience" card, tags Full-time · VIE · Internship) · `2d08993` (Projects page + menu link) · `5ffcabb` (Home: Key projects carousel) · `c2a9c43` (Glovo AI skills project) · `ea4bd98` → `dc83f96` (project card designs tried, final = result callout) · `fe639ed` · `81346ef` (smaller proof box) · `69ebd46` · `7d7849b` (Home: experience and projects side by side, same height) · `e43d026` (company website buttons) · `2621a38` (Envie d'Sup and Pain de Minuit website buttons) · `ac119a2` (one page per project) · `4b64f1e` (richer aged receivables page: context + dashboard screens).
 - Commits on 20 Oct (aged receivables page, see section 2b): `0d77077` (story + sales team switcher) · `d45190e` → `efd06a4` (tool screen tried, back to the first conversation) · `9d4cb98` (messages appear one by one) · `c416263` → `f25724e` (parts sliding in, 7 numbered parts alternating sides) · `6c3fbf2` (**final: 4 numbered blocks, sticky block bar, one fade-up animation**).
-- Commits on 21 Oct (Projects page, see section 2b): `4eeac3e` (grouped by category) · `dd1b0f1` → `537adc9` (overview table, then a 4-column board: both replaced) · `25d71e5` (**final: overview tiles + one section per category, cards 2 per row**) · `16c0fad` (all cards the same size) · `fa2ff2c` (category icons, no count, no arrow) · `fdd9f97` · `e84ed0b` (icon and title on the same line) · `eb0dd17` (**knowledge space `knowledge/` + display space `content/projects.json` + `tools/build-projects.js`**). **Everything is committed and pushed.**
+- Commits on 21 Oct (Projects page, see section 2b): `4eeac3e` (grouped by category) · `dd1b0f1` → `537adc9` (overview table, then a 4-column board: both replaced) · `25d71e5` (**final: overview tiles + one section per category, cards 2 per row**) · `16c0fad` (all cards the same size) · `fa2ff2c` (category icons, no count, no arrow) · `fdd9f97` · `e84ed0b` (icon and title on the same line) · `eb0dd17` (**knowledge space `knowledge/` + display space `content/projects.json` + `tools/build-projects.js`**).
+- Commits on 22 Oct (aged receivables page reworked, then the 7th project, see section 2b): `3fec1aa` · `b063fcc` (3 parts, "Problem & context") · `ac342a8` · `4f46991` (manager icon, dashboard notes) · `c607875` · `6033bd7` · `a063e58` (sales team icons following the tabs, clickable; dashboard 2 notes; more space) · `5746e20` (impact per role) · `7712a2a` (tools MyReport Data / MyReport Page / SQL) · `495749a` · `947b1f9` (context: 3 business units, situation before) · `1cc5d78` (**dashboards on a computer screen, neutral notes**) · `42964c6` (**⭐ Project page format**) · `d3b5147` (**Production plan & sales performance reporting page**). **Everything is committed and pushed.**
 
 | File | Content |
 |---|---|
@@ -493,6 +494,14 @@ ONLINE (each question)
 - **Tools on this PC:** no Python. Use Node.js for scripts and PowerShell `System.Drawing` for image cropping (logos).
 
 ### ▶ Next session: start here
+0. **⭐ First, the open questions on the new project (22 Oct, user: "we will check your questions next time"):** Production plan & sales performance reporting (`project-sales-performance-reporting.html`):
+   (a) business unit revenue: **~€3M** (Content.docx) or **€4M** (OSLO summary)? The page says ~€3M;
+   (b) result box "**~1,000 orders** a year, reporting used weekly by management" comes from the OSLO summary, not from the docx: OK?
+   (c) **SQL** in the tools (like aged receivables)? The docx doesn't mention it;
+   (d) the "How it started" conversation (Manager / Production manager), written by Claude: wording and role OK?
+   (e) the title "Production plan & sales performance reporting" (chosen by Claude): OK?
+   (f) phone width not checked yet for this page (aged receivables was checked).
+   Also still open on aged receivables: "client and contact details" in the Impact (contact details not visible in the screens) and "modeling" vs "modelling".
 1. **Education:** all courses are in (13 Oct). Go through the "Review of the Education page" list in section 3: fix the NEOMA dates/degree contradictions and locations, remove the repeated card header, open NEOMA by default, add results (Top of the class, TOEIC), decide on high school. Maybe a square NEOMA icon for a more readable circle.
 2. **Fix the CV** (public version without the phone, headline "Data & Business Analyst", Business Analytics major, resolve the differences listed below), then replace `CV.pdf` and remove it from `.gitignore`.
 3. **Put the site online with Firebase Hosting.** In `firebase.json`: exclude `photo.jpg`/`photo2.jpg`, the original logo files, `docs/`, `knowledge/`, `content/` and `tools/` from deploy (`ignore`), and add a `Content-Disposition: attachment` header for the PDF so it always downloads.
