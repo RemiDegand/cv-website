@@ -482,18 +482,25 @@ h4 { font-size: 1.1rem; }
 .persona-icon { flex: none; display: grid; color: var(--text); }
 .persona-icon svg { width: 52px; height: 52px; }
 .persona-kicker { display: block; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+/* Dashboard 2: one icon per sales team; the team shown in the report viewer is black, the others light grey (script.js) */
+.persona-icons { display: flex; gap: 2px; }
+.persona-icons .persona-icon { color: #c9ced8; transition: color 0.25s ease; }
+.persona-icons .persona-icon.active { color: var(--text); }
 
-/* Annotated screenshot: bubbles above / below the screen, each with an arrow to a framed zone */
-.project-shot.annotated { container-type: inline-size; }   /* cqw = 1% of the screenshot width */
+/* Annotated screenshot: bubbles above / below the screen, each with an arrow to a framed zone.
+   On each bubble: --at = where its arrow is, in % of the screenshot width; --to = how far down the
+   screen its zone starts, in cqw (% of the screenshot width: zone top in % of the image height × height / width) */
+.project-shot.annotated { container-type: inline-size; }
 .project-shot.annotated > a { position: relative; }
-.shot-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 26px; }
+.shot-notes { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 26px; }
 .shot-notes-below { grid-template-columns: minmax(0, 28rem); justify-content: center; margin: 26px 0 0; }
-/* Top arrows go down into the screen to the top of the tiles: 11.2% of the image height = 7.57% of its width */
+.report .shot-notes { padding: 16px 14px 0; }   /* inside the report viewer, between the tabs and the screen */
+.report .shot-notes-below { padding: 0 14px 16px; }
 /* Kept light so the dashboard stays the main thing: very pale blue, muted text, soft blue arrows and frames */
-.shot-note { --reach: calc(26px + 7.57cqw - 12px); --note-line: #a9c1f5; position: relative; z-index: 1; margin: 0; padding: 8px 12px; border-radius: 12px; background: #f4f7fe; border: 1px solid #e3ebfc; color: var(--text-muted); font-size: 0.875rem; font-weight: 500; line-height: 1.4; text-align: center; }
-.shot-note::before { content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: var(--reach); margin-left: -1px; background: var(--note-line); }   /* arrow line */
-.shot-note::after { content: ""; position: absolute; left: 50%; top: calc(100% + var(--reach) - 2px); margin-left: -6px; border: 6px solid transparent; border-top-color: var(--note-line); }   /* arrow head */
-.shot-notes-below .shot-note { --reach: 14px; }   /* the bar chart ends at the bottom of the screen */
+.shot-note { --at: 50%; --to: 0px; --reach: calc(26px + var(--to) - 12px); --note-line: #a9c1f5; margin: 0; padding: 8px 12px; border-radius: 12px; background: #f4f7fe; border: 1px solid #e3ebfc; color: var(--text-muted); font-size: 0.875rem; font-weight: 500; line-height: 1.4; text-align: center; }
+.shot-note::before { content: ""; position: absolute; left: var(--at); top: 100%; width: 2px; height: var(--reach); margin-left: -1px; background: var(--note-line); }   /* arrow line */
+.shot-note::after { content: ""; position: absolute; left: var(--at); top: calc(100% + var(--reach) - 2px); margin-left: -6px; border: 6px solid transparent; border-top-color: var(--note-line); }   /* arrow head */
+.shot-notes-below .shot-note { --reach: 14px; }   /* the zone below ends at the bottom of the screen */
 .shot-notes-below .shot-note::before { top: auto; bottom: 100%; }
 .shot-notes-below .shot-note::after { top: auto; bottom: calc(100% + var(--reach) - 2px); border-top-color: transparent; border-bottom-color: var(--note-line); }
 .shot-zone { position: absolute; box-sizing: border-box; border: 2px solid #a9c1f5; border-radius: 6px; pointer-events: none; }
@@ -555,6 +562,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .block-title { font-size: 1.5rem; margin: 2px 0 0; }
 .block-part { margin-top: 28px; }
 .block-part h3 { font-size: 1.05rem; margin: 0 0 8px; }
+.block-part:has(> h3 .block-label) { margin-top: 72px; }   /* more room before "Dashboard 1", "Dashboard 2" (22 Oct, user's request) */
 .block-label { display: inline-block; margin-right: 8px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; vertical-align: 2px; }
 .project-page .block-muted { color: var(--text-muted); margin-bottom: 10px; }
 .block-part > .project-did { margin-top: 4px; }

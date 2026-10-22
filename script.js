@@ -190,6 +190,10 @@ document.querySelectorAll(".report").forEach((report) => {
   const tabs = [...report.querySelectorAll('[role="tab"]')];
   const arrows = report.querySelectorAll(".report-arrow");
   const count = report.querySelector(".report-count");
+  // Sales team icons above the report: the team shown is black, and its name is written next to them
+  const part = report.closest(".block-part");
+  const people = part ? [...part.querySelectorAll(".persona-icons .persona-icon")] : [];
+  const personaName = part && part.querySelector(".persona-name");
   let current = 0;
 
   const show = (i, focus) => {
@@ -202,6 +206,8 @@ document.querySelectorAll(".report").forEach((report) => {
     });
     if (focus) tabs[current].focus();
     count.textContent = `Page ${current + 1} of ${tabs.length}`;
+    people.forEach((icon, p) => icon.classList.toggle("active", p === current));
+    if (personaName) personaName.textContent = "Sales " + tabs[current].textContent;
     arrows[0].disabled = current === 0;
     arrows[1].disabled = current === tabs.length - 1;
   };
