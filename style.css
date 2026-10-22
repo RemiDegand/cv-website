@@ -488,24 +488,42 @@ h4 { font-size: 1.1rem; }
 .persona-icons .persona-icon:hover { color: #7d8595; }
 .persona-icons .persona-icon.active { color: var(--text); }
 
-/* Annotated screenshot: bubbles above / below the screen, each with an arrow to a framed zone.
-   On each bubble: --at = where its arrow is, in % of the screenshot width; --to = how far down the
-   screen its zone starts, in cqw (% of the screenshot width: zone top in % of the image height × height / width) */
-.project-shot.annotated { container-type: inline-size; }
-.project-shot.annotated > a { position: relative; }
+/* Annotated dashboard on a computer screen (22 Oct, user's request: make it clear it is a report).
+   The screenshot sits in a monitor (dark bezel, app title bar, stand). Notes outside the monitor point
+   to dashed frames on the screen. On each note: --at = x of its arrow and --to = top of its zone, both
+   as a share of the screenshot width (zone top in % of the image height × height / width). */
+.project-shot.annotated { --bezel: 12px; --bar: 26px; --stand: 38px; --shot-w: calc(100cqw - 2 * var(--bezel)); container-type: inline-size; }
+.monitor-screen { padding: var(--bezel); border-radius: 16px; background: #1d2230; box-shadow: 0 10px 30px rgba(16, 24, 40, 0.18); }
+.monitor-bar { position: relative; display: flex; align-items: center; height: var(--bar); padding: 0 10px; border-radius: 6px 6px 0 0; background: #eef1f6; }
+.monitor-dots { display: flex; gap: 6px; }
+.monitor-dots i { width: 9px; height: 9px; border-radius: 50%; background: #ff5f57; }
+.monitor-dots i:nth-child(2) { background: #febc2e; }
+.monitor-dots i:nth-child(3) { background: #28c840; }
+.monitor-title { position: absolute; left: 50%; transform: translateX(-50%); color: var(--text-muted); font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.project-shot .monitor-screen > a { position: relative; border: 0; border-radius: 0 0 6px 6px; box-shadow: none; }
+.project-shot .monitor-screen > a[hidden] { display: none; }
+.monitor-stand { position: relative; width: 64px; height: calc(var(--stand) - 10px); margin: 0 auto 10px; background: linear-gradient(#2c3344, #1d2230); }
+.monitor-stand::after { content: ""; position: absolute; left: 50%; top: 100%; width: 34cqw; height: 10px; transform: translateX(-50%); border-radius: 6px 6px 3px 3px; background: #1d2230; }   /* base */
+
 .shot-notes { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 26px; }
-.shot-notes-below { grid-template-columns: minmax(0, 28rem); justify-content: center; margin: 26px 0 0; }
-.report .shot-notes { padding: 16px 14px 0; }   /* inside the report viewer, between the tabs and the screen */
-.report .shot-notes-below { padding: 0 14px 16px; }
-/* Kept light so the dashboard stays the main thing: very pale blue, muted text, soft blue arrows and frames */
-.shot-note { --at: 50%; --to: 0px; --reach: calc(26px + var(--to) - 12px); --note-line: #a9c1f5; margin: 0; padding: 8px 12px; border-radius: 12px; background: #f4f7fe; border: 1px solid #e3ebfc; color: var(--text-muted); font-size: 0.875rem; font-weight: 500; line-height: 1.4; text-align: center; }
-.shot-note::before { content: ""; position: absolute; left: var(--at); top: 100%; width: 2px; height: var(--reach); margin-left: -1px; background: var(--note-line); }   /* arrow line */
-.shot-note::after { content: ""; position: absolute; left: var(--at); top: calc(100% + var(--reach) - 2px); margin-left: -6px; border: 6px solid transparent; border-top-color: var(--note-line); }   /* arrow head */
-.shot-notes-below .shot-note { --reach: 14px; }   /* the zone below ends at the bottom of the screen */
+.shot-notes-below { grid-template-columns: minmax(0, 28rem); justify-content: center; margin: 14px 0 0; }
+/* Neutral notes (white, grey arrows, dashed frames) so they read as comments, not as part of the dashboard */
+.shot-note { --at: 0.5; --to: 0; --note-line: #8a93a3; margin: 0; padding: 8px 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); box-shadow: var(--shadow); color: var(--text-muted); font-size: 0.875rem; font-weight: 500; line-height: 1.4; text-align: center; }
+/* Top notes: the arrow goes down through the bezel and the title bar to the top of the zone */
+.shot-note { --reach: calc(26px + var(--bezel) + var(--bar) + var(--to) * var(--shot-w) - 12px); }
+.shot-note::before { content: ""; position: absolute; left: calc(var(--bezel) + var(--at) * (100% - 2 * var(--bezel))); top: 100%; width: 2px; height: var(--reach); margin-left: -1px; background: var(--note-line); }   /* arrow line */
+.shot-note::after { content: ""; position: absolute; left: calc(var(--bezel) + var(--at) * (100% - 2 * var(--bezel))); top: calc(100% + var(--reach) - 2px); margin-left: -6px; border: 6px solid transparent; border-top-color: var(--note-line); }   /* arrow head */
+/* Notes below: the arrow goes up beside the stand and through the bezel to the bottom of the screen */
+.shot-notes-below .shot-note { --reach: calc(14px + var(--stand) + var(--bezel) - 12px); }
 .shot-notes-below .shot-note::before { top: auto; bottom: 100%; }
 .shot-notes-below .shot-note::after { top: auto; bottom: calc(100% + var(--reach) - 2px); border-top-color: transparent; border-bottom-color: var(--note-line); }
-.shot-zone { position: absolute; box-sizing: border-box; border: 2px solid #a9c1f5; border-radius: 6px; pointer-events: none; }
+.shot-zone { position: absolute; box-sizing: border-box; border: 2px dashed #5b6475; border-radius: 6px; pointer-events: none; }
 @media (max-width: 720px) {
+  .project-shot.annotated { --bezel: 6px; --bar: 20px; }
+  .monitor-screen { border-radius: 10px; }
+  .monitor-dots i { width: 7px; height: 7px; }
+  .monitor-title { display: none; }   /* too wide on phones: an arrow would cross it */
+  .persona-icons svg { width: 34px; height: 34px; }
   .shot-notes { gap: 8px; }
   .shot-note { padding: 6px 8px; font-size: 0.8rem; }
 }
@@ -605,22 +623,16 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .project-page .story-end { margin-top: 12px; color: var(--text-muted); }
 .project-page .story-answer { margin-top: 16px; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; }
 
-/* Report viewer like Looker: tabs on top, one page per sales team, ‹ page › underneath */
-.report { border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; background: var(--bg); }
-.report-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--bg-soft); }
-.report-name { font-weight: 600; font-size: 0.9rem; }
+/* Report viewer like Looker: tabs and ‹ page › above the screen, one page per sales team */
+.report-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-bottom: 18px; }
 .report-tabs { display: flex; flex-wrap: wrap; gap: 4px; }
 .report-tabs button, .report-arrow { font: inherit; font-size: 0.85rem; font-weight: 600; padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-muted); cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease; }
 .report-tabs button:hover, .report-arrow:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .report-tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
-.project-shot.report > a { border: 0; border-radius: 0; box-shadow: none; }
-.project-shot.report > a:hover { box-shadow: none; }
-.project-shot.report > a[hidden] { display: none; }
-.report-pager { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 10px; border-top: 1px solid var(--border); background: var(--bg-soft); }
+.report-pager { display: flex; align-items: center; gap: 8px; }
 .report-arrow { padding: 2px 12px; font-size: 1.1rem; }
 .report-arrow:disabled { opacity: 0.4; cursor: default; }
 .report-count { color: var(--text-muted); font-size: 0.85rem; min-width: 7em; text-align: center; }
-.project-shot.report figcaption { margin: 0; padding: 0 12px 10px; background: var(--bg-soft); }
 
 /* Previous / next project at the bottom */
 .project-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }

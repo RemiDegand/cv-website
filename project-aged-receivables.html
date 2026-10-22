@@ -115,21 +115,28 @@
                 <span class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span>
                 <span><span class="persona-kicker">Made for</span><strong>The manager</strong></span>
               </p>
-              <!-- What the dashboard shows: bubbles with an arrow to their part of the screen
-                   (22 Oct, user's request; replaces a bullet list). The framed zones are in % of the image -->
+              <!-- What the dashboard shows, on a computer screen (22 Oct, user's request: show it is a report).
+                   Notes outside the screen, each with an arrow to a dashed frame. On each note: --at = x of the arrow and
+                   --to = top of its zone, both as a share of the screenshot width. Frames in % of the image -->
               <figure class="project-shot annotated">
                 <div class="shot-notes">
-                  <p class="shot-note" style="--at: calc(25% - 4px); --to: 7.57cqw">Total payment amounts by payment status</p>
-                  <p class="shot-note" style="--at: calc(75% + 4px); --to: 7.57cqw">Number of payments by status</p>
+                  <p class="shot-note" style="--at: 0.25; --to: 0.0757">Total payment amounts by payment status</p>
+                  <p class="shot-note" style="--at: 0.75; --to: 0.0757">Number of payments by status</p>
                 </div>
-                <a href="images/projects/aged-receivables-overall.webp" target="_blank" rel="noopener">
-                  <img src="images/projects/aged-receivables-overall.webp" alt="Global dashboard: total payments and number of payments by status, pie charts by status, and a bar chart of amounts by sales team" width="1600" height="1081" loading="lazy">
-                  <span class="shot-zone" style="left: 0; top: 11.2%; width: 49.7%; height: 21.4%"></span>
-                  <span class="shot-zone" style="left: 50.3%; top: 11.2%; width: 49.7%; height: 21.4%"></span>
-                  <span class="shot-zone" style="left: 0; top: 67.4%; width: 100%; height: 32.6%"></span>
-                </a>
+                <div class="monitor">
+                  <div class="monitor-screen">
+                    <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">MyReport · Customer Payments</span></div>
+                    <a href="images/projects/aged-receivables-overall.webp" target="_blank" rel="noopener">
+                      <img src="images/projects/aged-receivables-overall.webp" alt="Global dashboard: total payments and number of payments by status, pie charts by status, and a bar chart of amounts by sales team" width="1600" height="1081" loading="lazy">
+                      <span class="shot-zone" style="left: 0; top: 11.2%; width: 49.7%; height: 21.4%"></span>
+                      <span class="shot-zone" style="left: 50.3%; top: 11.2%; width: 49.7%; height: 21.4%"></span>
+                      <span class="shot-zone" style="left: 0; top: 67.4%; width: 100%; height: 32.6%"></span>
+                    </a>
+                  </div>
+                  <div class="monitor-stand" aria-hidden="true"></div>
+                </div>
                 <div class="shot-notes shot-notes-below">
-                  <p class="shot-note">Receivable amounts by sales representative and payment status</p>
+                  <p class="shot-note" style="--at: 0.25">Receivable amounts by sales representative and payment status</p>
                 </div>
                 <figcaption>Global dashboard. Anonymised data. Click to enlarge.</figcaption>
               </figure>
@@ -148,53 +155,59 @@
                 </span>
                 <span><span class="persona-kicker">Made for each sales team</span><strong class="persona-name" aria-live="polite">Sales Team 1</strong></span>
               </p>
-              <!-- Report viewer like Looker: one page per sales team, switch with the tabs or the arrows.
-                   script.js shows the chosen page. Bubbles + framed zones like Dashboard 1 (same layout on the 4 screens) -->
+              <!-- Report viewer like Looker: one page per sales team, switch with the tabs, the arrows or the icons
+                   above. script.js shows the chosen page. Same computer screen + notes as Dashboard 1; the tabs and
+                   arrows sit above the screen so no arrow crosses them (same layout on the 4 screens) -->
               <figure class="project-shot report annotated">
                 <div class="report-bar">
-                  <span class="report-name">Customer Payments</span>
                   <div class="report-tabs" role="tablist" aria-label="Sales team">
                     <button type="button" role="tab" aria-selected="true" aria-controls="team-1" id="tab-team-1">Team 1</button>
                     <button type="button" role="tab" aria-selected="false" aria-controls="team-2" id="tab-team-2" tabindex="-1">Team 2</button>
                     <button type="button" role="tab" aria-selected="false" aria-controls="team-3" id="tab-team-3" tabindex="-1">Team 3</button>
                     <button type="button" role="tab" aria-selected="false" aria-controls="team-4" id="tab-team-4" tabindex="-1">Team 4</button>
                   </div>
+                  <div class="report-pager">
+                    <button type="button" class="report-arrow" data-dir="-1" aria-label="Previous team">‹</button>
+                    <span class="report-count" aria-live="polite">Page 1 of 4</span>
+                    <button type="button" class="report-arrow" data-dir="1" aria-label="Next team">›</button>
+                  </div>
                 </div>
                 <div class="shot-notes">
-                  <p class="shot-note" style="--at: 25%; --to: 8.95cqw">Total payment amounts and number of payments by status</p>
-                  <p class="shot-note" style="--at: 83.56%; --to: 26.84cqw">Chart of receivables by status</p>
+                  <p class="shot-note" style="--at: 0.25; --to: 0.0895">Total payment amounts and number of payments by status</p>
+                  <p class="shot-note" style="--at: 0.8356; --to: 0.2684">Chart of receivables by status</p>
                 </div>
-                <a href="images/projects/aged-receivables-team-1.webp" target="_blank" rel="noopener" id="team-1" role="tabpanel" aria-labelledby="tab-team-1">
-                  <img src="images/projects/aged-receivables-team-1.webp" alt="Sales Team 1 dashboard: totals by status, a bar chart by status and the list of outstanding payments sorted by days overdue" width="1600" height="1704" loading="lazy">
-                  <span class="shot-zone" style="left: 0; top: 8.4%; width: 100%; height: 16%"></span>
-                  <span class="shot-zone" style="left: 0; top: 25.2%; width: 100%; height: 24.4%"></span>
-                  <span class="shot-zone" style="left: 0; top: 50.4%; width: 100%; height: 49.6%"></span>
-                </a>
-                <a href="images/projects/aged-receivables-team-2.webp" target="_blank" rel="noopener" id="team-2" role="tabpanel" aria-labelledby="tab-team-2" hidden>
-                  <img src="images/projects/aged-receivables-team-2.webp" alt="Sales Team 2 dashboard" width="1600" height="1704" loading="lazy">
-                  <span class="shot-zone" style="left: 0; top: 8.4%; width: 100%; height: 16%"></span>
-                  <span class="shot-zone" style="left: 0; top: 25.2%; width: 100%; height: 24.4%"></span>
-                  <span class="shot-zone" style="left: 0; top: 50.4%; width: 100%; height: 49.6%"></span>
-                </a>
-                <a href="images/projects/aged-receivables-team-3.webp" target="_blank" rel="noopener" id="team-3" role="tabpanel" aria-labelledby="tab-team-3" hidden>
-                  <img src="images/projects/aged-receivables-team-3.webp" alt="Sales Team 3 dashboard" width="1600" height="1704" loading="lazy">
-                  <span class="shot-zone" style="left: 0; top: 8.4%; width: 100%; height: 16%"></span>
-                  <span class="shot-zone" style="left: 0; top: 25.2%; width: 100%; height: 24.4%"></span>
-                  <span class="shot-zone" style="left: 0; top: 50.4%; width: 100%; height: 49.6%"></span>
-                </a>
-                <a href="images/projects/aged-receivables-team-4.webp" target="_blank" rel="noopener" id="team-4" role="tabpanel" aria-labelledby="tab-team-4" hidden>
-                  <img src="images/projects/aged-receivables-team-4.webp" alt="Sales Team 4 dashboard" width="1600" height="1704" loading="lazy">
-                  <span class="shot-zone" style="left: 0; top: 8.4%; width: 100%; height: 16%"></span>
-                  <span class="shot-zone" style="left: 0; top: 25.2%; width: 100%; height: 24.4%"></span>
-                  <span class="shot-zone" style="left: 0; top: 50.4%; width: 100%; height: 49.6%"></span>
-                </a>
+                <div class="monitor">
+                  <div class="monitor-screen">
+                    <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">MyReport · Customer Payments</span></div>
+                    <a href="images/projects/aged-receivables-team-1.webp" target="_blank" rel="noopener" id="team-1" role="tabpanel" aria-labelledby="tab-team-1">
+                      <img src="images/projects/aged-receivables-team-1.webp" alt="Sales Team 1 dashboard: totals by status, a bar chart by status and the list of outstanding payments sorted by days overdue" width="1600" height="1704" loading="lazy">
+                      <span class="shot-zone" style="left: 0; top: 8.4%; width: 100%; height: 16%"></span>
+                      <span class="shot-zone" style="left: 0; top: 25.2%; width: 100%; height: 24.4%"></span>
+                      <span class="shot-zone" style="left: 0; top: 50.4%; width: 100%; height: 49.6%"></span>
+                    </a>
+                    <a href="images/projects/aged-receivables-team-2.webp" target="_blank" rel="noopener" id="team-2" role="tabpanel" aria-labelledby="tab-team-2" hidden>
+                      <img src="images/projects/aged-receivables-team-2.webp" alt="Sales Team 2 dashboard" width="1600" height="1704" loading="lazy">
+                      <span class="shot-zone" style="left: 0; top: 8.4%; width: 100%; height: 16%"></span>
+                      <span class="shot-zone" style="left: 0; top: 25.2%; width: 100%; height: 24.4%"></span>
+                      <span class="shot-zone" style="left: 0; top: 50.4%; width: 100%; height: 49.6%"></span>
+                    </a>
+                    <a href="images/projects/aged-receivables-team-3.webp" target="_blank" rel="noopener" id="team-3" role="tabpanel" aria-labelledby="tab-team-3" hidden>
+                      <img src="images/projects/aged-receivables-team-3.webp" alt="Sales Team 3 dashboard" width="1600" height="1704" loading="lazy">
+                      <span class="shot-zone" style="left: 0; top: 8.4%; width: 100%; height: 16%"></span>
+                      <span class="shot-zone" style="left: 0; top: 25.2%; width: 100%; height: 24.4%"></span>
+                      <span class="shot-zone" style="left: 0; top: 50.4%; width: 100%; height: 49.6%"></span>
+                    </a>
+                    <a href="images/projects/aged-receivables-team-4.webp" target="_blank" rel="noopener" id="team-4" role="tabpanel" aria-labelledby="tab-team-4" hidden>
+                      <img src="images/projects/aged-receivables-team-4.webp" alt="Sales Team 4 dashboard" width="1600" height="1704" loading="lazy">
+                      <span class="shot-zone" style="left: 0; top: 8.4%; width: 100%; height: 16%"></span>
+                      <span class="shot-zone" style="left: 0; top: 25.2%; width: 100%; height: 24.4%"></span>
+                      <span class="shot-zone" style="left: 0; top: 50.4%; width: 100%; height: 49.6%"></span>
+                    </a>
+                  </div>
+                  <div class="monitor-stand" aria-hidden="true"></div>
+                </div>
                 <div class="shot-notes shot-notes-below">
-                  <p class="shot-note">Detailed list of outstanding payments with customer information, sorted by days overdue</p>
-                </div>
-                <div class="report-pager">
-                  <button type="button" class="report-arrow" data-dir="-1" aria-label="Previous team">‹</button>
-                  <span class="report-count" aria-live="polite">Page 1 of 4</span>
-                  <button type="button" class="report-arrow" data-dir="1" aria-label="Next team">›</button>
+                  <p class="shot-note" style="--at: 0.25">Detailed list of outstanding payments with customer information, sorted by days overdue</p>
                 </div>
                 <figcaption>One page per sales team: pick a team to switch. Anonymised data. Click a screen to enlarge.</figcaption>
               </figure>
