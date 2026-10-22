@@ -488,14 +488,15 @@ h4 { font-size: 1.1rem; }
 .story-right .story-bubble { background: var(--accent-soft); border-top-right-radius: 4px; }
 
 /* ===== Project page in numbered blocks (project-aged-receivables.html) =====
-   4 blocks on one vertical line, like the Experience timeline: number circle + title, then
-   the block's parts (small h3 headings). A sticky bar above shows the 4 blocks. */
+   Numbered blocks on one vertical line, like the Experience timeline: number circle + title, then
+   the block's parts (small h3 headings). A sticky bar above shows the blocks. */
 .block-nav {
   position: sticky;
   top: var(--menu-height);
   z-index: 5;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: column;   /* one column per block, whatever the number of blocks */
+  grid-auto-columns: minmax(0, 1fr);
   gap: 4px;
   margin: 32px 0 8px;
   padding: 8px 0;
@@ -550,7 +551,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .block-nav { margin-left: -16px; margin-right: -16px; padding: 6px 12px; }
   .block-nav a { justify-content: center; padding: 6px 4px; }
   .block-nav a:not(.active) .block-nav-text { display: none; }   /* numbers only, except the block being read */
-  .block-nav:has(a.active) { grid-template-columns: auto auto auto auto; justify-content: space-between; }
+  .block-nav:has(a.active) { grid-auto-columns: auto; justify-content: space-between; }
   .block { padding-left: 44px; }
   .block-head { gap: 14px; margin-left: -44px; }
   .block-num { width: 30px; height: 30px; font-size: 0.9rem; }
