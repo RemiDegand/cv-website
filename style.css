@@ -1039,3 +1039,16 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .project-page .rev-months { font-size: 0.55rem; }
 }
 
+
+/* Sales performance page, Step 1: Before / After table, one row per aspect, the "after" column in soft blue */
+.ba-table { display: grid; margin: 16px 0 24px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.ba-row { display: grid; grid-template-columns: 8rem minmax(0, 1fr) minmax(0, 1fr); }
+.ba-row > * { padding: 10px 14px; border-top: 1px solid var(--border); font-size: 0.9rem; line-height: 1.4; }
+.ba-row > :nth-child(2) { color: var(--text-muted); }
+.ba-row > :nth-child(3) { background: var(--accent-soft); }
+.ba-head > * { border-top: 0; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.ba-head > :nth-child(3) { color: var(--accent); }
+@media (max-width: 720px) {
+  .ba-row { grid-template-columns: 5.5rem minmax(0, 1fr) minmax(0, 1fr); }
+  .ba-row > * { padding: 8px 10px; font-size: 0.8rem; }
+}
