@@ -93,14 +93,6 @@
               <span class="block-num" aria-hidden="true">2</span>
               <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: a reliable production plan, then the reporting on top of it</h2></div>
             </header>
-            <!-- Overview of the 2 steps (27 Oct, user's request: make the plan and the reporting phases clearer) -->
-            <div class="block-part reveal">
-              <ol class="project-flow project-flow-2 reveal-stagger" aria-label="The 2 steps of the project">
-                <li><a href="#step-1" class="flow-link"><strong>Step 1 · Rebuild the production plan</strong><span>Reliable data at the source: one clean, protected table</span></a></li>
-                <li><a href="#step-2" class="flow-link"><strong>Step 2 · Build the reporting</strong><span>Dashboards on top of the plan, for the manager and each sales team</span></a></li>
-              </ol>
-            </div>
-
             <!-- Step 1. Before / after: the same orders in the old sheet and in the new plan, drawn in HTML on a computer
                  screen (tabs, script.js). "After" follows the real file (Plan de Prod Randomisé Enligsh.xlsx: one
                  table, drop-downs, colour rules, protected ranges "ADV" and "Prod", lookup sheets); "Before" is an
@@ -108,14 +100,6 @@
             <div class="block-part reveal" id="step-1">
               <h3><span class="block-label">Step 1</span>Rebuild the production plan</h3>
               <p class="block-muted">The reporting can only be as reliable as the file it reads, so the plan came first.</p>
-              <div class="ba-table reveal-stagger" role="table" aria-label="The production plan, before and after">
-                <div class="ba-row ba-head" role="row"><span role="columnheader"></span><span role="columnheader">Before</span><span role="columnheader">After</span></div>
-                <div class="ba-row" role="row"><strong role="rowheader">Structure</strong><span role="cell">One table per order status, stacked on one sheet</span><span role="cell">One table, one row per order</span></div>
-                <div class="ba-row" role="row"><strong role="rowheader">Data entry</strong><span role="cell">Free text, typed differently by each person</span><span role="cell">Drop-down lists and set formats in each column</span></div>
-                <div class="ba-row" role="row"><strong role="rowheader">Checks</strong><span role="cell">None</span><span role="cell">A status column and colour rules that flag anomalies</span></div>
-                <div class="ba-row" role="row"><strong role="rowheader">Access</strong><span role="cell">Anyone could change any cell</span><span role="cell">Locked cells: production managers and sales administration, each on their own columns</span></div>
-              </div>
-              <p class="map-label">In the file: the same orders, before and after</p>
               <figure class="project-shot annotated compare">
                 <div class="report-bar">
                   <div class="report-tabs" role="tablist" aria-label="Version of the production plan">
@@ -229,25 +213,8 @@
                 <li><strong>2 · Model</strong><span>MyReport Data structures it and calculates the indicators</span></li>
                 <li><strong>3 · Show</strong><span>MyReport Page dashboards, for the manager and each sales team</span></li>
               </ol>
-              <p class="map-label">What the data model calculates</p>
-              <p class="chip-row reveal-stagger"><span class="chip-label">Indicators</span><span class="chip">Revenue</span><span class="chip">Margin</span><span class="chip">Order count</span><span class="chip">New business</span><span class="chip">Target</span></p>
+                            <p class="chip-row reveal-stagger"><span class="chip-label">Indicators</span><span class="chip">Revenue</span><span class="chip">Margin</span><span class="chip">Order count</span><span class="chip">New business</span><span class="chip">Target</span></p>
               <p class="chip-row reveal-stagger"><span class="chip-label">Analysed by</span><span class="chip">Sales representative</span><span class="chip">Product</span><span class="chip">Production manager</span><span class="chip">Order status</span></p>
-              <!-- How the columns of the clean plan become the dashboards (columns of the real file) -->
-              <p class="map-label">Where the numbers come from: each column of the plan feeds the dashboards</p>
-              <ul class="col-map reveal-stagger">
-                <li><span class="col-name">Status</span><span class="col-arrow" aria-hidden="true">→</span><span>Invoiced, to be invoiced and in progress totals</span></li>
-                <li><span class="col-name">Order date · Billing date</span><span class="col-arrow" aria-hidden="true">→</span><span>Month, quarter and year-to-date pages</span></li>
-                <li><span class="col-name">Sales team</span><span class="col-arrow" aria-hidden="true">→</span><span>One dashboard for each sales team</span></li>
-                <li><span class="col-name">Product · Production manager</span><span class="col-arrow" aria-hidden="true">→</span><span>Charts by product and by production manager</span></li>
-                <li><span class="col-name">Amount · Margin</span><span class="col-arrow" aria-hidden="true">→</span><span>Revenue, margin and average order value</span></li>
-                <li><span class="col-name">New business · Target</span><span class="col-arrow" aria-hidden="true">→</span><span>New business, and orders vs the target</span></li>
-              </ul>
-              <!-- The 2 dashboards at a glance; each card jumps to its screens below -->
-              <p class="map-label">The result: two dashboards</p>
-              <div class="dash-cards reveal-stagger">
-                <a href="#dashboard-1" class="dash-card"><span class="dash-kicker">Dashboard 1 · For the manager</span><strong>The whole business unit</strong><span class="dash-pages"><span class="chip">Month</span><span class="chip">Quarter</span><span class="chip">Year to date</span><span class="chip">Clients</span></span><span class="dash-more">See the screens ↓</span></a>
-                <a href="#dashboard-2" class="dash-card"><span class="dash-kicker">Dashboard 2 · For each sales team</span><strong>Only their own data</strong><span class="dash-pages"><span class="chip">Month</span><span class="chip">Year to date</span><span class="chip">Clients</span></span><span class="dash-more">See the screens ↓</span></a>
-              </div>
             </div>
 
             <div class="block-part reveal" id="dashboard-1">

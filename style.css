@@ -696,17 +696,9 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .compare .story-answer { margin-top: 18px; }
 .compare figcaption { margin-top: 14px; }
 
-/* The reporting system: which column of the plan feeds which part of the dashboards */
-.project-page .map-label { margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
-.col-map { list-style: none; display: grid; gap: 8px; margin: 10px 0 0; padding: 0; }
-.col-map li { display: grid; grid-template-columns: 14rem 1.2rem minmax(0, 1fr); align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem; }
-.col-name { justify-self: start; padding: 2px 8px; border: 1px solid #c8ced8; border-radius: 4px; background: #f3f4f6; color: var(--text); font-size: 0.8rem; font-weight: 600; }
-.col-arrow { color: var(--text-muted); text-align: center; }
 @media (max-width: 720px) {
   .compare .shot-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; margin-bottom: 16px; }
   .compare .shot-note::before, .compare .shot-note::after { display: none; }   /* the sheet scrolls sideways: no arrows, the frames stay */
-  .col-map li { grid-template-columns: minmax(0, 1fr); gap: 2px; }   /* column name above, what it feeds under it */
-  .col-arrow { display: none; }
   .monitor-badge { font-size: 0.65rem; }
 }
 
@@ -1047,30 +1039,3 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .project-page .rev-months { font-size: 0.55rem; }
 }
 
-/* ===== Sales performance page: the 2 steps of "What I built" (27 Oct, user's request: clearer phases) ===== */
-/* Overview: 2 linked steps (Step 1 plan → Step 2 reporting) */
-.project-flow-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.project-flow-2 li { padding: 0; transition: border-color 0.2s ease; }
-.project-flow-2 li:hover { border-color: var(--accent); }
-.flow-link { display: block; height: 100%; padding: 14px 16px; color: inherit; text-decoration: none; }
-/* Before / After table: one row per aspect, the "after" column in the accent colour */
-.ba-table { display: grid; margin-top: 16px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-.ba-row { display: grid; grid-template-columns: 8rem minmax(0, 1fr) minmax(0, 1fr); }
-.ba-row > * { padding: 10px 14px; border-top: 1px solid var(--border); font-size: 0.9rem; line-height: 1.4; }
-.ba-row > :nth-child(2) { color: var(--text-muted); }
-.ba-row > :nth-child(3) { background: var(--accent-soft); }
-.ba-head > * { border-top: 0; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-.ba-head > :nth-child(3) { color: var(--accent); }
-/* The 2 dashboards at a glance: each card jumps to its screens */
-.dash-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 10px; }
-.dash-card { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); color: var(--text); text-decoration: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
-.dash-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
-.dash-kicker { color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-.dash-pages { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-.dash-more { margin-top: auto; padding-top: 6px; color: var(--accent); font-size: 0.85rem; font-weight: 600; }
-@media (max-width: 720px) {
-  .project-flow-2 { grid-template-columns: minmax(0, 1fr); }
-  .ba-row { grid-template-columns: 5.5rem minmax(0, 1fr) minmax(0, 1fr); }
-  .ba-row > * { padding: 8px 10px; font-size: 0.8rem; }
-  .dash-cards { grid-template-columns: minmax(0, 1fr); }
-}
