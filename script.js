@@ -237,6 +237,27 @@ document.querySelectorAll(".report").forEach((report) => {
   show(0);
 });
 
+// Project pages: before / after switch (production plan). A tab shows its view; the left/right keys
+// on a tab move to the other one.
+document.querySelectorAll(".compare").forEach((box) => {
+  const tabs = [...box.querySelectorAll('[role="tab"]')];
+  const show = (i, focus) => {
+    tabs.forEach((tab, t) => {
+      tab.setAttribute("aria-selected", t === i);
+      tab.tabIndex = t === i ? 0 : -1;
+      document.getElementById(tab.getAttribute("aria-controls")).hidden = t !== i;
+    });
+    if (focus) tabs[i].focus();
+  };
+  tabs.forEach((tab, t) => {
+    tab.addEventListener("click", () => show(t));
+    tab.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") show(Math.min(t + 1, tabs.length - 1), true);
+      if (e.key === "ArrowLeft") show(Math.max(t - 1, 0), true);
+    });
+  });
+});
+
 // Project pages: scroll reveal, always top to bottom. Each .reveal (a block's title, then each of
 // its parts) appears when it scrolls into view; CSS fades its elements up one after the other.
 // Parts that arrive together come in page order (waiting at most 1.2 s), and showing a part also

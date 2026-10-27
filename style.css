@@ -639,6 +639,58 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .report-arrow:disabled { opacity: 0.4; cursor: default; }
 .report-count { color: var(--text-muted); font-size: 0.85rem; min-width: 7em; text-align: center; }
 
+/* Production plan before / after: an Excel sheet drawn in HTML on the computer screen, 2 tabs (script.js).
+   Black numbered pins on the sheet match the notes underneath. Scrolls sideways on phones. */
+.sheet { overflow-x: auto; border-radius: 0 0 6px 6px; background: #fff; font-size: 0.72rem; }
+.sheet-grid { border-collapse: collapse; width: 100%; min-width: 620px; font-variant-numeric: tabular-nums; }
+.sheet-grid th, .sheet-grid td { position: relative; height: 24px; padding: 0 5px; border: 1px solid #e1e4ea; color: var(--text); font-weight: 400; text-align: left; white-space: nowrap; }
+.sheet-grid thead th, .sheet-grid tbody th { background: #f3f4f6; color: #6b7280; font-size: 0.7rem; text-align: center; }   /* column letters, row numbers */
+.sheet-grid tbody th { width: 28px; }
+.sheet-grid .num { text-align: right; }
+.sheet-grid .cell-head td { font-weight: 700; }
+.sheet-grid .cell-title { font-size: 0.8rem; font-weight: 700; }
+.sheet-grid .cell-band { font-weight: 700; letter-spacing: 0.04em; }
+.sheet-grid .fill-yellow { background: #fff3c4; }
+.sheet-grid .fill-orange { background: #ffe1c4; }
+.sheet-grid .fill-green { background: #dcf2df; }
+.sheet-grid .fill-red { background: #fbd5d5; }
+.sheet-grid .sheet-frozen td { border-bottom: 2px solid #9aa3b2; }   /* frozen header row */
+.sheet-grid .cell-filter { padding-right: 20px; }
+.sheet-grid .cell-filter::after { content: "▾"; position: absolute; right: 4px; top: 50%; width: 13px; height: 13px; transform: translateY(-50%); border: 1px solid #c8ced8; border-radius: 2px; background: #fff; color: #6b7280; font-size: 0.6rem; line-height: 12px; text-align: center; }   /* filter button */
+.sheet-grid .cell-selected { outline: 2px solid #107c41; outline-offset: -2px; }   /* Excel's selected cell */
+.sheet-dropdown { position: absolute; left: -1px; top: 100%; z-index: 2; min-width: 100%; margin: 0; padding: 2px 0; list-style: none; border: 1px solid #9aa3b2; background: #fff; box-shadow: 0 4px 12px rgba(16, 24, 40, 0.15); }
+.sheet-dropdown li { padding: 2px 8px; }
+.sheet-dropdown li.on { background: var(--accent-soft); }
+/* Who edits which column (protected ranges): blue = sales administration, gold = production managers */
+.sheet-grid thead .col-adv { background: color-mix(in srgb, var(--accent) 18%, #f3f4f6); color: var(--accent); font-weight: 700; }
+.sheet-grid thead .col-prod { background: color-mix(in srgb, var(--brand) 45%, #f3f4f6); color: #6b4a1f; font-weight: 700; }
+.key-adv { color: var(--accent); font-weight: 600; }
+.key-prod { color: #9a6d32; font-weight: 600; }
+.sheet-tabs { display: flex; align-items: center; margin: 0; padding: 0 8px; border-top: 1px solid #e1e4ea; background: #f3f4f6; color: #6b7280; font-size: 0.7rem; white-space: nowrap; }
+.sheet-tabs span:not(.sheet-pin) { padding: 4px 10px; }
+.sheet-tabs .on { background: #fff; color: #107c41; font-weight: 600; box-shadow: inset 0 -2px #107c41; }
+.sheet-pin { flex: none; display: inline-grid; place-items: center; width: 18px; height: 18px; margin-left: 4px; border-radius: 50%; background: var(--text); color: #fff; font-size: 0.68rem; font-weight: 700; line-height: 1; letter-spacing: 0; vertical-align: middle; }
+.monitor-badge { margin-left: auto; display: flex; align-items: center; color: #b42318; font-size: 0.7rem; font-weight: 600; }
+.sheet-notes { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 28px; margin: 28px 0 0; padding: 0; }
+.sheet-notes li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.45; }
+.sheet-notes li strong { color: var(--text); }
+.sheet-notes .sheet-pin { margin: 1px 0 0; }
+.compare .story-answer { margin-top: 18px; }
+.compare figcaption { margin-top: 14px; }
+
+/* The reporting system: which column of the plan feeds which part of the dashboards */
+.project-page .map-label { margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.col-map { list-style: none; display: grid; gap: 8px; margin: 10px 0 0; padding: 0; }
+.col-map li { display: grid; grid-template-columns: 12rem 1.2rem minmax(0, 1fr); align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem; }
+.col-name { justify-self: start; padding: 2px 8px; border: 1px solid #c8ced8; border-radius: 4px; background: #f3f4f6; color: var(--text); font-size: 0.8rem; font-weight: 600; }
+.col-arrow { color: var(--text-muted); text-align: center; }
+@media (max-width: 720px) {
+  .sheet-notes { grid-template-columns: minmax(0, 1fr); }
+  .col-map li { grid-template-columns: minmax(0, 1fr); gap: 2px; }   /* column name above, what it feeds under it */
+  .col-arrow { display: none; }
+  .monitor-badge { font-size: 0.65rem; }
+}
+
 /* Previous / next project at the bottom */
 .project-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
 .project-pager a { padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-weight: 600; text-decoration: none; transition: border-color 0.2s ease, color 0.2s ease; }

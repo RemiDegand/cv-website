@@ -8,7 +8,7 @@ category: Dashboards & Reporting
 on_site: true
 page: project-sales-performance-reporting.html
 tools: [Excel, MyReport Data (data modeling), MyReport Page (data visualization)]
-sources: [projects/Reporting Sales and Prod/Content.docx (written by Rémi, 22 Oct 2026; local only), anonymised dashboard PDFs (local only; screens in images/projects/sales-performance-*.webp), docs/CV website.md (OSLO summary), about-me.md]
+sources: [projects/Reporting Sales and Prod/Content.docx (written by Rémi, 22 Oct 2026; local only), projects/Reporting Sales and Prod/Plan de Prod Randomisé Enligsh.xlsx (anonymised production plan; local only), anonymised dashboard PDFs (local only; screens in images/projects/sales-performance-*.webp), docs/CV website.md (OSLO summary), about-me.md]
 updated: 2026-10-22
 ---
 
@@ -31,6 +31,13 @@ The production plan and sales performance reporting project was carried out duri
 - data validation and set formats in each column (drop-down lists), so every entry follows the same rules and the data is reliable;
 - a status column and conditional formatting rules, to follow each order and detect anomalies;
 - locked cells and access rights (Excel Review tab): only production managers and sales administration (ADV) can edit, and each user only their own columns.
+
+**Details from the anonymised production plan file (Excel, read 27 Oct 2026):**
+- Sheet `Plan_de_Prod`: one row per order (783 orders between January and December 2025 in the anonymised copy), 19 columns: index, client account, client, project, new business (Y/N), order date, status, quote number, invoice number, amount excl. VAT, in-house licences, margin, margin rate, billing date, production manager, sales team, product, comments, target. Header row frozen, filters on.
+- Drop-down lists and validation: status (Cancelled, In progress, To be invoiced, Invoiced), new business (Y/N), valid dates, numeric amounts.
+- Conditional formatting: client missing on an active order, quote or invoice number missing on an invoiced order, duplicate invoice numbers, gaps or duplicates in the index, amount coloured by status, billing date already passed for an order in progress.
+- Protected ranges: "ADV" (sales administration) and "Prod" (production managers: status, billing date, comments), each open only to the people of that role.
+- Reference sheets: Clients, Products (4), Sales Teams (4), production managers (4, one per product).
 
 **2. Reporting:** the data of the Excel production plan is loaded with MyReport and structured in a data model. The dashboards show revenue, margin, order count, new business and target, analysed by sales representative, product, production manager and order status.
 
