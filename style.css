@@ -683,6 +683,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .sheet-canvas { position: relative; min-width: 680px; }
 .sheet-canvas .sheet-grid { table-layout: fixed; min-width: 0; }
 .sheet-canvas .sheet-grid td { overflow: hidden; text-overflow: ellipsis; }
+.sheet-canvas .sheet-grid th, .sheet-canvas .sheet-grid td { padding: 0 3px; }   /* fixed columns: a little more room for the text */
+.sheet-canvas .sheet-grid td.cell-indent { padding-left: 16px; }
 .sheet-grid .cell-input { background: #fff8db; box-shadow: inset 0 0 0 1px #e0b400; }   /* cells the user fills in */
 .sheet-grid .cell-indent { padding-left: 18px; }
 .sheet-grid .cell-sub td { background: #eef2f8; font-weight: 700; }   /* subtotals */

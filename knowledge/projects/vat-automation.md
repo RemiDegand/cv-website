@@ -7,38 +7,49 @@ experience: Data Analyst Intern, Information Systems department, OSLO (Sep – D
 category: Automation & AI
 on_site: true
 page: project-vat-automation.html
-tools: [Excel, Finance]
-sources: [docs/CV website.md (OSLO summary), about-me.md]
-updated: 2026-10-21
+tools: [Excel, MyReport Data (ETL, data modeling), VBA, Finance]
+sources: [projects/VAT Automation/Content.docx (written by Rémi, 27 Oct 2026; local only), projects/VAT Automation/Controle_Fournisseur_Non_Lettre.xltm (the file with its VBA macro; local only), docs/CV website.md (OSLO summary), about-me.md]
+updated: 2026-10-27
 ---
 
 # VAT calculation automation (OSLO)
 
 ## Summary
-At OSLO, Rémi automated VAT calculations based on unmatched supplier accounting entries, saving 2 hours per month and eliminating manual errors.
+At OSLO, Rémi automated the monthly VAT calculation on unmatched supplier entries: an Excel file connected to the ERP through MyReport extracts the right accounting entries, calculates the VAT of each entry, and a VBA macro puts each amount in its VAT account column and freezes the data. It saves about 1 h 30 a month (Rémi's estimate) and removes manual entries.
 
 ## Context
-Rémi was Data Analyst Intern in OSLO's Information Systems department, supporting financial and operational decisions across 4 business units and 3 entities (13 data models, 6 dashboards and 6 automated Excel tools in total). This project is part of the "financial tools & operations" work.
+OSLO sells IT solutions and software licences and makes about €10M in revenue a year. Every month, the accounting department had to calculate, for each VAT account, the VAT on the supplier entries of journal A1 that were not yet matched. This was done in an Excel file filled in by hand: the amounts of the invoices concerned were copied one by one to calculate the total VAT.
 
 ## Problem
-The VAT on unmatched supplier accounting entries was calculated manually, which took time and could lead to errors.
+- The task came back every month and relied entirely on manual entries, so it was time-consuming and error-prone.
+- The process lacked reliability and took time on a low-value task.
 
 ## What I built
-An automated VAT calculation based on the unmatched supplier accounting entries, replacing the manual calculation.
+An Excel file that automates the extraction of the accounting entries and the calculation of the VAT amounts.
+- Connected to the ERP through MyReport: it automatically extracts the entries needed (journal A1, supplier entries, not matched or matched in the last 45 days; the cut-off is "today − 45 days" in the file).
+- A data model that filters the entries automatically.
+- For each selected entry, the VAT is calculated by VAT account: VAT on debits (44566000), VAT on payments (44566020), intra-EU VAT (44520000 and 44566200). Extra information is added for checks and analysis: business unit, entry number, supplier.
+- A VBA macro ("TVA", button "Affecter la TVA" / Assign VAT) that sums the VAT of each entry number from the extract, writes it into the right VAT columns of the supplier ledger sheet, freezes the values (so later ERP updates don't change a month already calculated) and applies a rule for credit notes, found from the entry label.
+- Process for the user: refresh the data, then click the "Affecter la TVA" button.
+
+Workbook structure (from the file): Feuil2 = MyReport extract, one block per supplier (account and name) with business unit, entry number, line, document, date, offset account, amount, side, VAT account, VAT amount and the 4 VAT columns; Feuil1 = supplier ledger (journal, dates, label, debit, credit) with the 4 VAT columns filled by the macro.
 
 ## Results and impact
-- 2 hours saved per month.
-- Manual errors eliminated.
+- About 1 h 30 saved per month (estimate in Rémi's document; the OSLO summary on the CV says 2 hours: to align).
+- No more manual entries, so fewer errors and a more reliable calculation.
+- A secured recurring accounting process.
 
 ## Users
-Not documented yet (finance team?).
+The accounting department, every month.
 
 ## Tools
-Shown on the website (example tags, to confirm): Excel, Finance.
+Excel, MyReport Data (ETL, data modeling), VBA, the company's ERP.
 
 ## Questions a recruiter might ask
-- **Give an example of an automation Rémi built.** → At OSLO, an automated VAT calculation on unmatched supplier entries that saves 2 hours a month and removed manual errors.
+- **Give an example of an automation Rémi built.** → At OSLO, the monthly VAT calculation on unmatched supplier entries: an Excel file connected to the ERP and a VBA macro that assigns each VAT amount to its account, saving about 1 h 30 a month and removing manual entries.
+- **Did Rémi write code at OSLO?** → Yes, a VBA macro that aggregates the VAT by entry, fills the VAT columns, freezes the values and handles credit notes.
+- **Why freeze the values?** → So that later updates in the ERP don't change a month that has already been calculated.
 
 ## Open questions
-- Who did the calculation before and who uses the tool.
-- Tools used and how the automation works.
+- 1 h 30 (document) or 2 hours (CV and OSLO summary) saved per month?
+- The website story (Manager / Accountant) was written by Claude: wording and roles to confirm.

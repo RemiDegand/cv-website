@@ -46,9 +46,9 @@
       "category": "automation-ai",
       "company": "oslo",
       "title": "VAT calculation automation",
-      "description": "Automated VAT calculations based on unmatched supplier accounting entries.",
-      "result": { "key": "2 h saved", "text": "per month, no more manual errors" },
-      "tags": ["Excel", "Finance"],
+      "description": "Automated the monthly VAT calculation on unmatched supplier entries, from the ERP to each VAT account, with a VBA macro.",
+      "result": { "key": "1 h 30 saved", "text": "per month, no more manual entries" },
+      "tags": ["Excel", "MyReport Data (ETL, Data modeling)", "VBA", "Finance"],
       "home": true
     },
     {

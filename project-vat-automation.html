@@ -36,29 +36,215 @@
         <header class="project-page-head">
           <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
           <h1 class="project-page-title">VAT calculation automation</h1>
-          <p class="lead">Automated VAT calculations based on unmatched supplier accounting entries.</p>
-          <p class="project-result"><strong>2 h saved</strong> per month, no more manual errors</p>
+          <p class="lead">Automated the monthly VAT calculation on unmatched supplier entries, from the ERP to each VAT account, with a VBA macro.</p>
+          <p class="project-result"><strong>1 h 30 saved</strong> per month, no more manual entries</p>
         </header>
 
         <dl class="project-facts">
           <div><dt>Role</dt><dd>Data Analyst Intern</dd></div>
           <div><dt>When</dt><dd>Sep – Dec 2025</dd></div>
           <div><dt>Where</dt><dd>Villeneuve d'Ascq, France</dd></div>
+          <div><dt>Scope</dt><dd>Accounting department · every month</dd></div>
         </dl>
 
-        <h2 class="project-h2">Context</h2>
-        <p>Analyst in the Information Systems department, supporting financial and operational decisions across 4 business units and 3 entities. In total: 13 data models, 6 dashboards and 6 automated Excel tools.</p>
+        <!-- Content from projects/VAT Automation/Content.docx (written by Rémi, 27 Oct 2026) and the file
+             Controle_Fournisseur_Non_Lettre.xltm (sheets Feuil2 = MyReport extract, Feuil1 = supplier ledger
+             filled by the VBA macro "TVA", button "Affecter la TVA"). The Excel screens are drawn in HTML from that
+             file: amounts and account numbers from the file, supplier names, BUs and labels made generic (the
+             file has real names). Same format as project-aged-receivables.html (see "Project page format" in
+             docs/CV website.md) -->
+        <nav class="block-nav" aria-label="Parts of this project">
+          <a href="#block-1"><span class="block-nav-num">1</span><span class="block-nav-text">Problem &amp; context</span></a>
+          <a href="#block-2"><span class="block-nav-num">2</span><span class="block-nav-text">What I built</span></a>
+          <a href="#block-3"><span class="block-nav-num">3</span><span class="block-nav-text">Impact &amp; tools</span></a>
+        </nav>
 
-        <h2 class="project-h2">What I did</h2>
-        <ul class="project-did">
-          <li>Automated the VAT calculation from unmatched supplier accounting entries</li>
-          <li>Replaced a manual calculation, removing manual errors</li>
-        </ul>
+        <div class="blocks">
+          <!-- Block 1: the story, then the context and the problem behind it -->
+          <div class="block" id="block-1" role="region" aria-labelledby="block-1-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">1</span>
+              <div><p class="block-kicker">Part 1 of 3</p><h2 class="block-title" id="block-1-title">Problem &amp; context</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>How it started</h3>
+              <div class="story reveal-stagger" aria-label="Conversation that started the project">
+                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">Is this month's VAT ready?</span></p>
+                <p class="story-line story-right"><span class="story-who">Accountant</span><span class="story-bubble">Not yet, I'm still copying the supplier invoices one by one.</span></p>
+                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">Again? It's like that every month.</span></p>
+                <p class="story-line story-right"><span class="story-who">Accountant</span><span class="story-bubble story-typing" aria-label="…"><span></span><span></span><span></span></span></p>
+              </div>
+              <p class="story-end">A monthly task done by hand had to become automatic.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Context</h3>
+              <p>Every month, OSLO's accounting department calculated the VAT of each VAT account on the supplier entries of journal A1 that were not yet matched, in an Excel file filled in by hand.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>The problem</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Manual entries:</strong> each invoice amount was copied one by one to add up the VAT.</li>
+                <li><strong>Every month:</strong> time spent on a low-value task.</li>
+                <li><strong>Error-prone:</strong> the calculation was hard to trust.</li>
+              </ul>
+            </div>
+          </div>
 
-        <h2 class="project-h2">Tools</h2>
-        <ul class="tags">
-          <li>Excel</li><li>Finance</li>
-        </ul>
+          <!-- Block 2 -->
+          <div class="block" id="block-2" role="region" aria-labelledby="block-2-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">2</span>
+              <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: an Excel file connected to the ERP, and a macro</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>The process: before and after</h3>
+              <p class="flow-label">Before</p>
+              <ol class="project-flow project-flow-before reveal-stagger" aria-label="The process before">
+                <li><strong>Find the entries</strong><span>Unmatched supplier entries of journal A1</span></li>
+                <li><strong>Copy each amount</strong><span>Invoice by invoice, into Excel</span></li>
+                <li><strong>Add up the VAT</strong><span>For each VAT account, by hand</span></li>
+              </ol>
+              <p class="flow-label">After</p>
+              <ol class="project-flow reveal-stagger" aria-label="The process after">
+                <li><strong>Refresh</strong><span>MyReport extracts the right entries from the ERP</span></li>
+                <li><strong>Click "Assign VAT"</strong><span>The macro fills each VAT column and freezes the data</span></li>
+                <li><strong>VAT ready</strong><span>By VAT account, with the BU, entry number and supplier</span></li>
+              </ol>
+              <p class="chip-row reveal-stagger"><span class="chip-label">Built with</span><span class="chip">ETL from the ERP</span><span class="chip">Data model with filters</span><span class="chip">VAT by entry</span><span class="chip">VBA macro</span></p>
+            </div>
+
+            <!-- The file, drawn in HTML on a computer screen: 2 views (tabs, script.js), notes above pointing to
+                 dashed frames. Columns have fixed widths (colgroup, in %), so --at and the frames match them -->
+            <div class="block-part reveal">
+              <h3><span class="block-label">The file</span>From the ERP to each VAT account</h3>
+              <figure class="project-shot annotated compare">
+                <div class="report-bar">
+                  <div class="report-tabs" role="tablist" aria-label="Part of the VAT file">
+                    <button type="button" role="tab" aria-selected="true" aria-controls="vat-extract" id="tab-vat-extract">1. Extract from the ERP</button>
+                    <button type="button" role="tab" aria-selected="false" aria-controls="vat-ledger" id="tab-vat-ledger" tabindex="-1">2. Supplier ledger, after the macro</button>
+                  </div>
+                </div>
+
+                <!-- View 1: the MyReport extract (sheet Feuil2), one block per supplier -->
+                <div class="compare-view" id="vat-extract" role="tabpanel" aria-labelledby="tab-vat-extract">
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.2; --y: 54px">Unmatched entries, or matched in the last 45 days</p>
+                    <p class="shot-note" style="--at: 0.42; --y: 102px">One block per supplier, with the BU and entry number</p>
+                    <p class="shot-note" style="--at: 0.85; --y: 78px">VAT sorted by VAT account</p>
+                  </div>
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · VAT</span></div>
+                      <div class="sheet" tabindex="0" aria-label="Extract from the ERP: supplier entries and their VAT">
+                        <p class="sheet-ribbon" aria-hidden="true">MyReport <span class="sheet-button">⟳ Refresh</span></p>
+                        <div class="sheet-canvas">
+                          <table class="sheet-grid">
+                            <colgroup><col style="width: 4%"><col style="width: 6%"><col style="width: 9%"><col style="width: 10%"><col style="width: 9%"><col style="width: 11%"><col style="width: 8%"><col style="width: 11%"><col style="width: 11%"><col style="width: 11%"><col style="width: 10%"></colgroup>
+                            <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th></tr></thead>
+                            <tbody>
+                              <tr><th>1</th><td colspan="3">Cut-off: today − 45 days</td><td class="num fill-yellow">11/08/25</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                              <tr><th>2</th><td></td><td></td><td></td><td></td><td></td><td></td><td colspan="4" class="cell-bold">VAT by account</td></tr>
+                              <tr><th>3</th><td colspan="10" class="cell-band">Supplier F0000015 · Supplier 1</td></tr>
+                              <tr class="cell-head"><th>4</th><td>BU</td><td>Entry</td><td>Date</td><td class="num">Amount</td><td>VAT acct</td><td class="num">VAT</td><td class="num">VAT debits</td><td class="num">VAT paid</td><td class="num">VAT intra</td><td class="num">Intra 2</td></tr>
+                              <tr><th>5</th><td>BU 1</td><td>237685</td><td>20/07/25</td><td class="num">234.97</td><td>44520000</td><td class="num">46.99</td><td></td><td></td><td class="num">46.99</td><td></td></tr>
+                              <tr><th>6</th><td>BU 1</td><td>237685</td><td>20/07/25</td><td class="num">234.97</td><td>44566200</td><td class="num">46.99</td><td></td><td></td><td></td><td class="num">46.99</td></tr>
+                              <tr><th>7</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                              <tr><th>8</th><td colspan="10" class="cell-band">Supplier F0000027 · Supplier 2</td></tr>
+                              <tr class="cell-head"><th>9</th><td>BU</td><td>Entry</td><td>Date</td><td class="num">Amount</td><td>VAT acct</td><td class="num">VAT</td><td class="num">VAT debits</td><td class="num">VAT paid</td><td class="num">VAT intra</td><td class="num">Intra 2</td></tr>
+                              <tr><th>10</th><td>BU 1</td><td>238296</td><td>01/08/25</td><td class="num">81.59</td><td>44566020</td><td class="num">13.60</td><td></td><td class="num">13.60</td><td></td><td></td></tr>
+                              <tr><th>11</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                              <tr><th>12</th><td colspan="10" class="cell-band">Supplier F0000090 · Supplier 3</td></tr>
+                              <tr class="cell-head"><th>13</th><td>BU</td><td>Entry</td><td>Date</td><td class="num">Amount</td><td>VAT acct</td><td class="num">VAT</td><td class="num">VAT debits</td><td class="num">VAT paid</td><td class="num">VAT intra</td><td class="num">Intra 2</td></tr>
+                              <tr><th>14</th><td>BU 2</td><td>239224</td><td>20/08/25</td><td class="num">413.16</td><td>44566000</td><td class="num">68.80</td><td class="num">68.80</td><td></td><td></td><td></td></tr>
+                              <tr><th>15</th><td>BU 2</td><td>239224</td><td>20/08/25</td><td class="num">413.16</td><td>44566020</td><td class="num">0.06</td><td></td><td class="num">0.06</td><td></td><td></td></tr>
+                            </tbody>
+                          </table>
+                          <!-- Frames: cut-off date (row 1, A–D), supplier blocks (rows 3, 8, 12), VAT columns (G–J, rows 2–15) -->
+                          <span class="shot-zone" style="left: 4.3%; width: 33.4%; top: 26px; height: 20px"></span>
+                          <span class="shot-zone" style="left: 4.3%; width: 52.4%; top: 74px; height: 20px"></span>
+                          <span class="shot-zone" style="left: 4.3%; width: 51.4%; top: 194px; height: 20px"></span>
+                          <span class="shot-zone" style="left: 4.3%; width: 52.4%; top: 290px; height: 20px"></span>
+                          <span class="shot-zone" style="left: 57.3%; width: 42.4%; top: 50px; height: 332px"></span>
+                        </div>
+                        <p class="sheet-tabs" aria-hidden="true"><span>Ledger</span><span class="on">Extract</span></p>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="story-answer"><strong>The result:</strong> the right entries come straight from the ERP, each with its VAT already calculated.</p>
+                </div>
+
+                <!-- View 2: the supplier ledger (sheet Feuil1), VAT columns filled by the macro -->
+                <div class="compare-view" id="vat-ledger" role="tabpanel" aria-labelledby="tab-vat-ledger" hidden>
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.27; --y: 2px">One click on the macro button</p>
+                    <p class="shot-note" style="--at: 0.38; --y: 222px">Credit notes get the opposite sign</p>
+                    <p class="shot-note" style="--at: 0.81; --y: 54px">Each entry gets its VAT, by VAT account</p>
+                  </div>
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · VAT</span></div>
+                      <div class="sheet" tabindex="0" aria-label="Supplier ledger with the VAT columns filled by the macro">
+                        <p class="sheet-ribbon" aria-hidden="true">MyReport <span class="sheet-button">⟳ Refresh</span><span class="sheet-button is-zone">▶ Assign VAT</span></p>
+                        <div class="sheet-canvas">
+                          <table class="sheet-grid">
+                            <colgroup><col style="width: 4%"><col style="width: 5%"><col style="width: 10%"><col style="width: 16%"><col style="width: 10%"><col style="width: 11%"><col style="width: 11%"><col style="width: 11%"><col style="width: 11%"><col style="width: 11%"></colgroup>
+                            <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th></tr></thead>
+                            <tbody>
+                              <tr class="cell-head"><th>1</th><td>Jnl</td><td>Date</td><td>Label</td><td class="num">Debit</td><td class="num">Credit</td><td class="num">VAT debits</td><td class="num">VAT paid</td><td class="num">VAT intra</td><td class="num">Intra 2</td></tr>
+                              <tr><th>2</th><td></td><td></td><td></td><td></td><td></td><td class="num">44566000</td><td class="num">44566020</td><td class="num">44520000</td><td class="num">44566200</td></tr>
+                              <tr><th>3</th><td colspan="9" class="cell-band">F0000015 · Supplier 1</td></tr>
+                              <tr><th>4</th><td>A1</td><td>20/08/25</td><td>Licence 08/25</td><td></td><td class="num">234.97</td><td></td><td></td><td class="num">46.99</td><td class="num">46.99</td></tr>
+                              <tr><th>5</th><td colspan="9" class="cell-band">F0000047 · Supplier 4</td></tr>
+                              <tr><th>6</th><td>A1</td><td>01/04/23</td><td>Backup 12/21</td><td></td><td class="num">1,542.00</td><td class="num">257.00</td><td></td><td></td><td></td></tr>
+                              <tr><th>7</th><td colspan="9" class="cell-band">F0000055 · Supplier 5</td></tr>
+                              <tr><th>8</th><td>A1</td><td>06/08/25</td><td>Credit note</td><td class="num">499.08</td><td></td><td class="num">-83.18</td><td></td><td></td><td></td></tr>
+                              <tr><th>9</th><td colspan="9" class="cell-band">F0000090 · Supplier 3</td></tr>
+                              <tr><th>10</th><td>A1</td><td>31/08/25</td><td>Delivery 08/25</td><td></td><td class="num">193.70</td><td class="num">32.28</td><td></td><td></td><td></td></tr>
+                              <tr><th>11</th><td>A1</td><td>31/08/25</td><td>Delivery 08/25</td><td></td><td class="num">32.90</td><td class="num">5.48</td><td></td><td></td><td></td></tr>
+                              <tr><th>12</th><td colspan="9" class="cell-band">F9000011 · Supplier 6</td></tr>
+                              <tr><th>13</th><td>A1</td><td>01/07/25</td><td>Rent Q3 2025</td><td></td><td class="num">52,338.53</td><td></td><td class="num">8,723.09</td><td></td><td></td></tr>
+                            </tbody>
+                          </table>
+                          <!-- Frames: credit note (row 8), VAT columns (F–I, rows 1–13) -->
+                          <span class="shot-zone" style="left: 4.3%; width: 51.4%; top: 194px; height: 20px"></span>
+                          <span class="shot-zone" style="left: 56.3%; width: 43.4%; top: 26px; height: 308px"></span>
+                        </div>
+                        <p class="sheet-tabs" aria-hidden="true"><span class="on">Ledger</span><span>Extract</span></p>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="story-answer"><strong>The result:</strong> the VAT of every entry is in the right column, and the values are frozen, so later ERP updates don't change a month already done.</p>
+                </div>
+                <figcaption>Drawn from the real file. Supplier names, business units and labels made generic.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <!-- Block 3 -->
+          <div class="block" id="block-3" role="region" aria-labelledby="block-3-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">3</span>
+              <div><p class="block-kicker">Part 3 of 3</p><h2 class="block-title" id="block-3-title">Impact &amp; tools</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>Impact</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>1 h 30 saved</strong> every month (estimate).</li>
+                <li><strong>No more manual entries:</strong> fewer errors, and a VAT calculation the accounting department can rely on.</li>
+                <li><strong>A month stays as calculated:</strong> frozen values are not changed by later updates in the ERP.</li>
+              </ul>
+              <p>The monthly VAT process is automated, more reliable and secure.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Tools</h3>
+              <ul class="tags reveal-stagger">
+                <li>Excel</li><li>MyReport Data (ETL, Data modeling)</li><li>VBA</li><li>Finance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <a href="experience.html#oslo" class="see-all project-xp-link">See the OSLO experience →</a>
 
