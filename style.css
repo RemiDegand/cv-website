@@ -640,8 +640,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .report-count { color: var(--text-muted); font-size: 0.85rem; min-width: 7em; text-align: center; }
 
 /* Production plan before / after: an Excel sheet drawn in HTML on the computer screen, 2 tabs (script.js).
-   Black numbered pins on the sheet match the notes underneath. Scrolls sideways on phones. */
-.sheet { overflow-x: auto; border-radius: 0 0 6px 6px; background: #fff; font-size: 0.72rem; }
+   Notes above the screen point to dashed frames on the sheet, like the dashboards. Scrolls sideways on phones. */
+.sheet { position: relative; overflow-x: auto; border-radius: 0 0 6px 6px; background: #fff; font-size: 0.72rem; }
 .sheet-grid { border-collapse: collapse; width: 100%; min-width: 620px; font-variant-numeric: tabular-nums; }
 .sheet-grid th, .sheet-grid td { position: relative; height: 24px; padding: 0 5px; border: 1px solid #e1e4ea; color: var(--text); font-weight: 400; text-align: left; white-space: nowrap; }
 .sheet-grid thead th, .sheet-grid tbody th { background: #f3f4f6; color: #6b7280; font-size: 0.7rem; text-align: center; }   /* column letters, row numbers */
@@ -667,14 +667,15 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .key-adv { color: var(--accent); font-weight: 600; }
 .key-prod { color: #9a6d32; font-weight: 600; }
 .sheet-tabs { display: flex; align-items: center; margin: 0; padding: 0 8px; border-top: 1px solid #e1e4ea; background: #f3f4f6; color: #6b7280; font-size: 0.7rem; white-space: nowrap; }
-.sheet-tabs span:not(.sheet-pin) { padding: 4px 10px; }
+.sheet-tabs span { padding: 4px 10px; }
 .sheet-tabs .on { background: #fff; color: #107c41; font-weight: 600; box-shadow: inset 0 -2px #107c41; }
-.sheet-pin { flex: none; display: inline-grid; place-items: center; width: 18px; height: 18px; margin-left: 4px; border-radius: 50%; background: var(--text); color: #fff; font-size: 0.68rem; font-weight: 700; line-height: 1; letter-spacing: 0; vertical-align: middle; }
 .monitor-badge { margin-left: auto; display: flex; align-items: center; color: #b42318; font-size: 0.7rem; font-weight: 600; }
-.sheet-notes { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 28px; margin: 28px 0 0; padding: 0; }
-.sheet-notes li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.45; }
-.sheet-notes li strong { color: var(--text); }
-.sheet-notes .sheet-pin { margin: 1px 0 0; }
+/* Notes: --y = top of the frame in px from the top of the sheet (its rows have a fixed height, unlike a screenshot) */
+.compare .shot-notes { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.compare .shot-note { --reach: calc(26px + var(--bezel) + var(--bar) + var(--y, 0px) - 4px); font-size: 0.8rem; }
+.sheet .shot-zone { z-index: 3; }   /* above the cells and the drop-down */
+.sheet > .shot-zone { left: 2px; right: 2px; }   /* full-width frames (rows) */
+.monitor-badge.is-zone { padding: 1px 4px; border-radius: 4px; outline: 2px dashed #5b6475; outline-offset: 1px; }
 .compare .story-answer { margin-top: 18px; }
 .compare figcaption { margin-top: 14px; }
 
@@ -685,7 +686,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .col-name { justify-self: start; padding: 2px 8px; border: 1px solid #c8ced8; border-radius: 4px; background: #f3f4f6; color: var(--text); font-size: 0.8rem; font-weight: 600; }
 .col-arrow { color: var(--text-muted); text-align: center; }
 @media (max-width: 720px) {
-  .sheet-notes { grid-template-columns: minmax(0, 1fr); }
+  .compare .shot-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 16px; }
+  .compare .shot-note::before, .compare .shot-note::after { display: none; }   /* the sheet scrolls sideways: no arrows, the frames stay */
   .col-map li { grid-template-columns: minmax(0, 1fr); gap: 2px; }   /* column name above, what it feeds under it */
   .col-arrow { display: none; }
   .monitor-badge { font-size: 0.65rem; }

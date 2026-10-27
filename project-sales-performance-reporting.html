@@ -109,22 +109,30 @@
                 </div>
 
                 <div class="compare-view" id="plan-before" role="tabpanel" aria-labelledby="tab-plan-before">
+                  <!-- Notes above the screen, like the dashboards: --at = x of the arrow (share of the screen width),
+                       --y = top of its dashed frame in px from the top of the sheet (rows are 24px high) -->
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.035; --y: 74px">One table per order status, stacked on one sheet</p>
+                    <p class="shot-note" style="--at: 0.43; --y: 98px">Different columns in each table</p>
+                    <p class="shot-note" style="--at: 0.634; --y: 242px">Free text: dates, amounts and names typed differently</p>
+                    <p class="shot-note" style="--at: 0.866; --y: -16px">Anyone can edit any cell</p>
+                  </div>
                   <div class="monitor">
                     <div class="monitor-screen">
-                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Production plan (before)</span><span class="monitor-badge">Editable by everyone <span class="sheet-pin">4</span></span></div>
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Production plan (before)</span><span class="monitor-badge is-zone">Editable by everyone</span></div>
                       <div class="sheet" tabindex="0" aria-label="Old production plan (illustration)">
                         <table class="sheet-grid">
                           <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr></thead>
                           <tbody>
                             <tr><th>1</th><td colspan="6" class="cell-title">PRODUCTION PLAN 2025</td></tr>
                             <tr><th>2</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                            <tr><th>3</th><td colspan="6" class="cell-band fill-yellow">IN PROGRESS <span class="sheet-pin">1</span></td></tr>
+                            <tr><th>3</th><td colspan="6" class="cell-band fill-yellow">IN PROGRESS</td></tr>
                             <tr class="cell-head"><th>4</th><td>Client</td><td>Project</td><td>Amount</td><td>Prod.</td><td>Date</td><td>Notes</td></tr>
                             <tr><th>5</th><td>Client 62</td><td>Consulting package</td><td class="num">46 273 €</td><td>PM 2</td><td>02/01</td><td></td></tr>
-                            <tr><th>6</th><td>client 12</td><td>Custom development</td><td class="num">14,584</td><td>Manager 2</td><td>Jan 3 <span class="sheet-pin">3</span></td><td>call back</td></tr>
+                            <tr><th>6</th><td>client 12</td><td>Custom development</td><td class="num">14,584</td><td>Manager 2</td><td>Jan 3</td><td>call back</td></tr>
                             <tr><th>7</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                             <tr><th>8</th><td colspan="6" class="cell-band fill-orange">TO BE INVOICED</td></tr>
-                            <tr class="cell-head"><th>9</th><td>Amount <span class="sheet-pin">2</span></td><td>Client</td><td>Date</td><td>Sales</td><td>Project</td><td></td></tr>
+                            <tr class="cell-head"><th>9</th><td>Amount</td><td>Client</td><td>Date</td><td>Sales</td><td>Project</td><td></td></tr>
                             <tr><th>10</th><td class="num">56k</td><td>Client 21</td><td>7 jan</td><td>Team 4</td><td>Experience program</td><td></td></tr>
                             <tr><th>11</th><td class="num">83 208 €</td><td>CLIENT 103</td><td>?</td><td>T1</td><td>Managed IT</td><td></td></tr>
                             <tr><th>12</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -135,52 +143,55 @@
                             <tr><th>17</th><td>Client 106</td><td>34236708</td><td class="num">69 449 €</td><td>shipped 9th Jan</td><td></td><td></td></tr>
                           </tbody>
                         </table>
+                        <!-- Dashed frames: status titles (rows 3, 8, 13), column headers (rows 4, 9), free text (rows 10–11) -->
+                        <span class="shot-zone" style="top: 74px; height: 20px"></span>
+                        <span class="shot-zone" style="top: 194px; height: 20px"></span>
+                        <span class="shot-zone" style="top: 314px; height: 20px"></span>
+                        <span class="shot-zone" style="top: 98px; height: 20px"></span>
+                        <span class="shot-zone" style="top: 218px; height: 20px"></span>
+                        <span class="shot-zone" style="top: 242px; height: 44px"></span>
                         <p class="sheet-tabs" aria-hidden="true"><span class="on">Sheet1</span></p>
                       </div>
                     </div>
                     <div class="monitor-stand" aria-hidden="true"></div>
                   </div>
-                  <ol class="sheet-notes reveal-stagger">
-                    <li><span class="sheet-pin">1</span><span><strong>One table per order status</strong>, stacked on the same sheet with titles and blank rows.</span></li>
-                    <li><span class="sheet-pin">2</span><span><strong>Different columns</strong> in each table, in a different order.</span></li>
-                    <li><span class="sheet-pin">3</span><span><strong>Free text everywhere:</strong> dates, amounts and names typed in different ways.</span></li>
-                    <li><span class="sheet-pin">4</span><span><strong>No control:</strong> anyone could change any cell.</span></li>
-                  </ol>
                   <p class="story-answer"><strong>The result:</strong> no tool could read the file as one dataset, so no reliable statistics could be produced.</p>
                 </div>
 
                 <div class="compare-view" id="plan-after" role="tabpanel" aria-labelledby="tab-plan-after" hidden>
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.11; --y: 26px">One table, one row per order, with filters</p>
+                    <p class="shot-note" style="--at: 0.27; --y: 93px">Drop-down lists: only valid entries</p>
+                    <p class="shot-note" style="--at: 0.622; --y: 117px">Colour rules flag anomalies</p>
+                    <p class="shot-note" style="--at: 0.895; --y: 2px">Locked columns: <span class="key-adv">sales admin</span> or <span class="key-prod">production</span></p>
+                  </div>
                   <div class="monitor">
                     <div class="monitor-screen">
                       <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Production plan (after)</span></div>
                       <div class="sheet" tabindex="0" aria-label="New production plan">
                         <table class="sheet-grid">
                           <!-- Column letters coloured by who can edit them (protected ranges of the real file) -->
-                          <thead><tr><th></th><th class="col-adv">A</th><th class="col-prod">B</th><th class="col-adv">C</th><th class="col-adv">D</th><th class="col-prod">E <span class="sheet-pin">4</span></th><th class="col-adv">F</th><th class="col-adv">G</th></tr></thead>
+                          <thead><tr><th></th><th class="col-adv">A</th><th class="col-prod">B</th><th class="col-adv">C</th><th class="col-adv">D</th><th class="col-prod">E</th><th class="col-adv">F</th><th class="col-adv">G</th></tr></thead>
                           <tbody>
-                            <tr class="cell-head sheet-frozen"><th>1</th><td class="cell-filter">Client <span class="sheet-pin">1</span></td><td class="cell-filter">Status</td><td class="cell-filter">Invoice No</td><td class="cell-filter">Amount excl. VAT</td><td class="cell-filter">Billing date</td><td class="cell-filter">Sales team</td><td class="cell-filter">Product</td></tr>
+                            <tr class="cell-head sheet-frozen"><th>1</th><td class="cell-filter">Client</td><td class="cell-filter">Status</td><td class="cell-filter">Invoice No</td><td class="cell-filter">Amount excl. VAT</td><td class="cell-filter">Billing date</td><td class="cell-filter">Sales team</td><td class="cell-filter">Product</td></tr>
                             <tr><th>2</th><td>Client 62</td><td>Invoiced</td><td>34236700</td><td class="num fill-green">46,273</td><td>02/01/2025</td><td>Sales Team 1</td><td>Product X</td></tr>
                             <tr><th>3</th><td>Client 12</td><td>Invoiced</td><td>34236701</td><td class="num fill-green">14,584</td><td>03/01/2025</td><td>Sales Team 4</td><td>Product X</td></tr>
-                            <tr><th>4</th><td>Client 21</td><td class="cell-selected">To be invoiced ▾ <span class="sheet-pin">2</span>
+                            <tr><th>4</th><td>Client 21</td><td class="cell-selected">To be invoiced ▾<span class="shot-zone" style="inset: -3px -3px auto -3px; height: 126px"></span>
                               <ul class="sheet-dropdown" aria-label="Allowed statuses"><li>Cancelled</li><li>In progress</li><li class="on">To be invoiced</li><li>Invoiced</li></ul></td><td></td><td class="num fill-orange">56,638</td><td>07/01/2025</td><td>Sales Team 4</td><td>Product X</td></tr>
-                            <tr><th>5</th><td>Client 103</td><td>In progress</td><td></td><td class="num fill-yellow">83,208</td><td class="fill-red">31/10/2025</td><td>Sales Team 1</td><td>Product Z</td></tr>
-                            <tr><th>6</th><td>Client 5</td><td>Invoiced</td><td class="fill-red"><span class="sheet-pin">3</span></td><td class="num fill-green">95,132</td><td>07/01/2025</td><td>Sales Team 4</td><td>Product X</td></tr>
+                            <tr><th>5</th><td>Client 103</td><td>In progress</td><td></td><td class="num fill-yellow">83,208</td><td class="fill-red">31/10/2025<span class="shot-zone" style="inset: -3px"></span></td><td>Sales Team 1</td><td>Product Z</td></tr>
+                            <tr><th>6</th><td>Client 5</td><td>Invoiced</td><td class="fill-red"><span class="shot-zone" style="inset: -3px"></span></td><td class="num fill-green">95,132</td><td>07/01/2025</td><td>Sales Team 4</td><td>Product X</td></tr>
                             <tr><th>7</th><td>Client 37</td><td>Invoiced</td><td>34236707</td><td class="num fill-green">40,126</td><td>09/01/2025</td><td>Sales Team 4</td><td>Product Y</td></tr>
                             <tr><th>8</th><td>Client 106</td><td>Invoiced</td><td>34236708</td><td class="num fill-green">69,449</td><td>09/01/2025</td><td>Sales Team 4</td><td>Product Y</td></tr>
                           </tbody>
                         </table>
-                        <p class="sheet-tabs" aria-hidden="true"><span class="on">Plan_de_Prod</span><span>Clients</span><span>Products</span><span>Sales Teams</span><span>Production managers</span><span class="sheet-pin">5</span></p>
+                        <!-- Dashed frames: header row (row 1), column letters coloured by who edits them -->
+                        <span class="shot-zone" style="top: 26px; height: 20px"></span>
+                        <span class="shot-zone" style="top: 2px; height: 20px"></span>
+                        <p class="sheet-tabs" aria-hidden="true"><span class="on">Plan_de_Prod</span><span>Clients</span><span>Products</span><span>Sales Teams</span><span>Production managers</span></p>
                       </div>
                     </div>
                     <div class="monitor-stand" aria-hidden="true"></div>
                   </div>
-                  <ol class="sheet-notes reveal-stagger">
-                    <li><span class="sheet-pin">1</span><span><strong>One table, one row per order:</strong> a single header row, frozen, with filters.</span></li>
-                    <li><span class="sheet-pin">2</span><span><strong>Drop-down lists and set formats:</strong> status, new business, dates and amounts only accept valid entries.</span></li>
-                    <li><span class="sheet-pin">3</span><span><strong>Colour rules flag anomalies:</strong> an invoiced order without an invoice number, duplicate invoice numbers, a billing date already passed.</span></li>
-                    <li><span class="sheet-pin">4</span><span><strong>Locked columns:</strong> sales administration edits the <span class="key-adv">blue</span> ones, production managers the <span class="key-prod">gold</span> ones (status, billing date).</span></li>
-                    <li><span class="sheet-pin">5</span><span><strong>Reference lists</strong> on their own sheets: clients, products, sales teams and production managers.</span></li>
-                  </ol>
                   <p class="story-answer"><strong>The result:</strong> each row is one order and each column one field, so the reporting tool loads the table as it is.</p>
                 </div>
                 <figcaption>"Before" is an illustration of the old layout; "After" follows the real file. Anonymised data.</figcaption>
