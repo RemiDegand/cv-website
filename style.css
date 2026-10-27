@@ -671,11 +671,26 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .sheet-tabs .on { background: #fff; color: #107c41; font-weight: 600; box-shadow: inset 0 -2px #107c41; }
 .monitor-badge { margin-left: auto; display: flex; align-items: center; color: #b42318; font-size: 0.7rem; font-weight: 600; }
 /* Notes: --y = top of the frame in px from the top of the sheet (its rows have a fixed height, unlike a screenshot) */
-.compare .shot-notes { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.compare .shot-notes { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 12px; }   /* one row of notes, whatever their number */
 .compare .shot-note { --reach: calc(26px + var(--bezel) + var(--bar) + var(--y, 0px) - 4px); font-size: 0.8rem; }
 .sheet .shot-zone { z-index: 3; }   /* above the cells and the drop-down */
 .sheet > .shot-zone { left: 2px; right: 2px; }   /* full-width frames (rows) */
-.monitor-badge.is-zone { padding: 1px 4px; border-radius: 4px; outline: 2px dashed #5b6475; outline-offset: 1px; }
+.is-zone { padding: 1px 4px; border-radius: 4px; outline: 2px dashed #5b6475; outline-offset: 1px; }   /* dashed frame on a label or a button */
+/* Cash flow file (project-cash-flow-tools.html): MyReport ribbon above the sheet (28px high, counted in --y),
+   then a canvas whose columns have fixed widths (colgroup in %), so frames are placed in % of its width */
+.sheet-ribbon { display: flex; align-items: center; gap: 8px; height: 28px; margin: 0; padding: 0 8px; border-bottom: 1px solid #e1e4ea; background: #f8fafc; color: #6b7280; font-size: 0.7rem; font-weight: 600; box-sizing: border-box; }
+.sheet-button { padding: 1px 8px; border: 1px solid #c8ced8; border-radius: 4px; background: #fff; color: var(--text); }
+.sheet-canvas { position: relative; min-width: 680px; }
+.sheet-canvas .sheet-grid { table-layout: fixed; min-width: 0; }
+.sheet-canvas .sheet-grid td { overflow: hidden; text-overflow: ellipsis; }
+.sheet-grid .cell-input { background: #fff8db; box-shadow: inset 0 0 0 1px #e0b400; }   /* cells the user fills in */
+.sheet-grid .cell-indent { padding-left: 18px; }
+.sheet-grid .cell-sub td { background: #eef2f8; font-weight: 700; }   /* subtotals */
+.sheet-grid .cell-bold { font-weight: 700; }
+/* "The process: before and after" (two 3-step flows, the old one in grey) */
+.project-page .flow-label { margin: 16px 0 -8px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.project-flow-before li { background: var(--bg); border-style: dashed; }
+.project-flow-before strong { color: var(--text-muted); }
 .compare .story-answer { margin-top: 18px; }
 .compare figcaption { margin-top: 14px; }
 
@@ -686,7 +701,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .col-name { justify-self: start; padding: 2px 8px; border: 1px solid #c8ced8; border-radius: 4px; background: #f3f4f6; color: var(--text); font-size: 0.8rem; font-weight: 600; }
 .col-arrow { color: var(--text-muted); text-align: center; }
 @media (max-width: 720px) {
-  .compare .shot-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 16px; }
+  .compare .shot-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; margin-bottom: 16px; }
   .compare .shot-note::before, .compare .shot-note::after { display: none; }   /* the sheet scrolls sideways: no arrows, the frames stay */
   .col-map li { grid-template-columns: minmax(0, 1fr); gap: 2px; }   /* column name above, what it feeds under it */
   .col-arrow { display: none; }

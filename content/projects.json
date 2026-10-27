@@ -26,9 +26,9 @@
       "category": "apps-tools",
       "company": "oslo",
       "title": "Cash flow calculation tools",
-      "description": "Developed automated cash flow calculation tools, configurable by analysis period.",
-      "result": { "key": "3", "text": "entities covered" },
-      "tags": ["Excel", "Finance"],
+      "description": "Automated the cash flow calculation of 3 entities in an Excel file connected to the ERP, for any period chosen by the user.",
+      "result": { "key": "3 entities", "text": "cash flow for any period, in one refresh" },
+      "tags": ["Excel", "MyReport Data (ETL, Data modeling)", "Finance"],
       "home": false
     },
     {

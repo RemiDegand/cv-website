@@ -27,7 +27,7 @@
   </header>
 
   <main>
-    <!-- One project, opened from its card on projects.html or the Home carousel.
+    <!-- One project, opened from its card on projects.html.
          Same content as the card (title, description, result, tags) + context and details -->
     <section id="project" class="project-page" style="--brand: #D3A26E">
       <div class="container project-page-inner">
@@ -36,29 +36,262 @@
         <header class="project-page-head">
           <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
           <h1 class="project-page-title">Cash flow calculation tools</h1>
-          <p class="lead">Developed automated cash flow calculation tools, configurable by analysis period.</p>
-          <p class="project-result"><strong>3</strong> entities covered</p>
+          <p class="lead">Automated the cash flow calculation of 3 entities in an Excel file connected to the ERP, for any period chosen by the user.</p>
+          <p class="project-result"><strong>3 entities</strong> cash flow for any period, in one refresh</p>
         </header>
 
         <dl class="project-facts">
           <div><dt>Role</dt><dd>Data Analyst Intern</dd></div>
           <div><dt>When</dt><dd>Sep – Dec 2025</dd></div>
           <div><dt>Where</dt><dd>Villeneuve d'Ascq, France</dd></div>
+          <div><dt>Scope</dt><dd>3 entities · ~€10M revenue a year</dd></div>
         </dl>
 
-        <h2 class="project-h2">Context</h2>
-        <p>Analyst in the Information Systems department, supporting financial and operational decisions across 4 business units and 3 entities. In total: 13 data models, 6 dashboards and 6 automated Excel tools.</p>
+        <!-- Content from projects/Cashflow tools/Content.docx (written by Rémi, 27 Oct 2026) and the anonymised
+             file Cashflow Oslo V2.xlsx (sheets Génération, Concatenation, Affectation, Check, Cashlow_Trimestre).
+             The Excel screens are drawn in HTML from that file: amounts from the summary sheets only (randomised),
+             account labels made generic (the file has real names). Same format as project-aged-receivables.html
+             (see "Project page format" in docs/CV website.md) -->
+        <nav class="block-nav" aria-label="Parts of this project">
+          <a href="#block-1"><span class="block-nav-num">1</span><span class="block-nav-text">Problem &amp; context</span></a>
+          <a href="#block-2"><span class="block-nav-num">2</span><span class="block-nav-text">What I built</span></a>
+          <a href="#block-3"><span class="block-nav-num">3</span><span class="block-nav-text">Impact &amp; tools</span></a>
+        </nav>
 
-        <h2 class="project-h2">What I did</h2>
-        <ul class="project-did">
-          <li>Built automated cash flow calculation tools for 3 entities</li>
-          <li>The analysis period can be configured</li>
-        </ul>
+        <div class="blocks">
+          <!-- Block 1: the story, then the context and the problem behind it -->
+          <div class="block" id="block-1" role="region" aria-labelledby="block-1-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">1</span>
+              <div><p class="block-kicker">Part 1 of 3</p><h2 class="block-title" id="block-1-title">Problem &amp; context</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>How it started</h3>
+              <div class="story reveal-stagger" aria-label="Conversation that started the project">
+                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">Can I have the cash flow for last quarter?</span></p>
+                <p class="story-line story-right"><span class="story-who">Accountant</span><span class="story-bubble">I need to export the entries from the ERP and paste them into the file first… if it doesn't crash again.</span></p>
+                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">So, when can I have it?</span></p>
+                <p class="story-line story-right"><span class="story-who">Accountant</span><span class="story-bubble story-typing" aria-label="…"><span></span><span></span><span></span></span></p>
+              </div>
+              <p class="story-end">Calculating the cash flow had to become quick and reliable.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Context</h3>
+              <p>OSLO, with about €10M revenue a year, calculated its cash flow and that of 2 other entities in an Excel file, fed with accounting entries exported from the ERP as CSV files, pasted in, and completed by hand.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>The problem</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Heavy and unstable:</strong> every year's extractions were stored in the same file, which crashed regularly.</li>
+                <li><strong>Manual entries</strong> every time: a risk of errors, so the cash flow was hard to trust.</li>
+                <li><strong>Time-consuming:</strong> the process did not suit regular use.</li>
+              </ul>
+            </div>
+          </div>
 
-        <h2 class="project-h2">Tools</h2>
-        <ul class="tags">
-          <li>Excel</li><li>Finance</li>
-        </ul>
+          <!-- Block 2 -->
+          <div class="block" id="block-2" role="region" aria-labelledby="block-2-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">2</span>
+              <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: a cash flow file connected to the ERP</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>The process: before and after</h3>
+              <p class="flow-label">Before</p>
+              <ol class="project-flow project-flow-before reveal-stagger" aria-label="The process before">
+                <li><strong>Export from the ERP</strong><span>Accounting entries as CSV files</span></li>
+                <li><strong>Paste and complete</strong><span>Copied into the file, plus manual entries</span></li>
+                <li><strong>One heavy file</strong><span>Every year stored in it, regular crashes</span></li>
+              </ol>
+              <p class="flow-label">After</p>
+              <ol class="project-flow reveal-stagger" aria-label="The process after">
+                <li><strong>Pick a period</strong><span>Start and end date, in the Excel file</span></li>
+                <li><strong>Refresh</strong><span>MyReport pulls the day's entries from the ERP, nothing stored</span></li>
+                <li><strong>Cash flow ready</strong><span>With checks and financial ratios</span></li>
+              </ol>
+              <p class="chip-row reveal-stagger"><span class="chip-label">Built with</span><span class="chip">ETL from the ERP</span><span class="chip">Data model by account</span><span class="chip">Account mapping</span><span class="chip">Control table</span></p>
+            </div>
+
+            <!-- The file, drawn in HTML on a computer screen: 3 views (tabs, script.js), notes above pointing to
+                 dashed frames. Columns have fixed widths (colgroup, in %), so --at and the frames match them -->
+            <div class="block-part reveal">
+              <h3><span class="block-label">The file</span>From the accounts to the cash flow</h3>
+              <figure class="project-shot annotated compare">
+                <div class="report-bar">
+                  <div class="report-tabs" role="tablist" aria-label="Part of the cash flow file">
+                    <button type="button" role="tab" aria-selected="true" aria-controls="cf-statement" id="tab-cf-statement">Cash flow statement</button>
+                    <button type="button" role="tab" aria-selected="false" aria-controls="cf-accounts" id="tab-cf-accounts" tabindex="-1">Account detail</button>
+                    <button type="button" role="tab" aria-selected="false" aria-controls="cf-checks" id="tab-cf-checks" tabindex="-1">Checks &amp; ratios</button>
+                  </div>
+                </div>
+
+                <!-- View 1: the cash flow statement for the chosen period (sheet Cashlow_Trimestre, in k€) -->
+                <div class="compare-view" id="cf-statement" role="tabpanel" aria-labelledby="tab-cf-statement">
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.3; --y: 54px">Pick the period, then refresh</p>
+                    <p class="shot-note" style="--at: 0.6; --y: 366px">Operating, investing and financing cash flow</p>
+                    <p class="shot-note" style="--at: 0.72; --y: 582px">Change in cash over the period</p>
+                  </div>
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Cash flow</span></div>
+                      <div class="sheet" tabindex="0" aria-label="Cash flow statement for the chosen period">
+                        <p class="sheet-ribbon" aria-hidden="true">MyReport <span class="sheet-button is-zone">⟳ Refresh</span></p>
+                        <div class="sheet-canvas">
+                          <table class="sheet-grid">
+                            <colgroup><col style="width: 4%"><col style="width: 76%"><col style="width: 20%"></colgroup>
+                            <thead><tr><th></th><th>A</th><th>B</th></tr></thead>
+                            <tbody>
+                              <tr><th>1</th><td>Period start</td><td class="num cell-input">01/01/2025</td></tr>
+                              <tr><th>2</th><td>Period end</td><td class="num cell-input">31/12/2025</td></tr>
+                              <tr><th>3</th><td></td><td></td></tr>
+                              <tr class="cell-head"><th>4</th><td>In k€</td><td class="num">2025</td></tr>
+                              <tr><th>5</th><td>EBITDA</td><td class="num">392</td></tr>
+                              <tr><th>6</th><td>Change in working capital</td><td class="num">619</td></tr>
+                              <tr><th>7</th><td class="cell-indent">Trade receivables</td><td class="num">533</td></tr>
+                              <tr><th>8</th><td class="cell-indent">Trade payables</td><td class="num">-107</td></tr>
+                              <tr><th>9</th><td class="cell-indent">Payroll and tax liabilities</td><td class="num">192</td></tr>
+                              <tr><th>10</th><td class="cell-indent">Inventory</td><td class="num">30</td></tr>
+                              <tr><th>11</th><td class="cell-indent">Other balance sheet items</td><td class="num">-29</td></tr>
+                              <tr><th>12</th><td>Financial and exceptional items</td><td class="num">7</td></tr>
+                              <tr><th>13</th><td>Corporate tax</td><td class="num">0</td></tr>
+                              <tr class="cell-sub"><th>14</th><td>Operating cash flow</td><td class="num">1,018</td></tr>
+                              <tr><th>15</th><td>CAPEX</td><td class="num">-460</td></tr>
+                              <tr><th>16</th><td>Other (disposals)</td><td class="num">20</td></tr>
+                              <tr class="cell-sub"><th>17</th><td>Investing cash flow</td><td class="num">-439</td></tr>
+                              <tr><th>18</th><td>Loan repayments</td><td class="num">-37</td></tr>
+                              <tr><th>19</th><td>New loans</td><td class="num"></td></tr>
+                              <tr><th>20</th><td>Other</td><td class="num">9</td></tr>
+                              <tr><th>21</th><td>Current accounts</td><td class="num">-384</td></tr>
+                              <tr class="cell-sub"><th>22</th><td>Financing cash flow</td><td class="num">-413</td></tr>
+                              <tr class="cell-head"><th>23</th><td>Change in cash</td><td class="num">166</td></tr>
+                              <tr><th>24</th><td>Cash at the start of the period</td><td class="num">236</td></tr>
+                              <tr><th>25</th><td>Cash at the end of the period</td><td class="num">402</td></tr>
+                            </tbody>
+                          </table>
+                          <!-- Frames: period (rows 1–2), the 3 cash flow subtotals (rows 14, 17, 22), change in cash (rows 23–25) -->
+                          <span class="shot-zone" style="left: 4%; width: 96%; top: 26px; height: 44px"></span>
+                          <span class="shot-zone" style="left: 4%; width: 96%; top: 338px; height: 20px"></span>
+                          <span class="shot-zone" style="left: 4%; width: 96%; top: 410px; height: 20px"></span>
+                          <span class="shot-zone" style="left: 4%; width: 96%; top: 530px; height: 20px"></span>
+                          <span class="shot-zone" style="left: 4%; width: 96%; top: 554px; height: 68px"></span>
+                        </div>
+                        <p class="sheet-tabs" aria-hidden="true"><span class="on">Cash flow</span><span>Check</span><span>Concatenation</span><span>Generation</span><span>Mapping</span></p>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="story-answer"><strong>The result:</strong> the user picks a period and refreshes; the cash flow is calculated from the day's accounting entries.</p>
+                </div>
+
+                <!-- View 2: each account with its balances and its cash flow category (sheet Check, detail part) -->
+                <div class="compare-view" id="cf-accounts" role="tabpanel" aria-labelledby="tab-cf-accounts" hidden>
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.3; --y: 54px">Every account, from the ERP</p>
+                    <p class="shot-note" style="--at: 0.62; --y: 54px">Opening balance, movement over the period, closing balance</p>
+                    <p class="shot-note" style="--at: 0.93; --y: 54px">Cash flow category, found automatically</p>
+                  </div>
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Check</span></div>
+                      <div class="sheet" tabindex="0" aria-label="Account detail: balances and cash flow category of each account">
+                        <p class="sheet-ribbon" aria-hidden="true">MyReport <span class="sheet-button">⟳ Refresh</span></p>
+                        <div class="sheet-canvas">
+                          <table class="sheet-grid">
+                            <colgroup><col style="width: 4%"><col style="width: 11%"><col style="width: 25%"><col style="width: 12%"><col style="width: 12%"><col style="width: 12%"><col style="width: 24%"></colgroup>
+                            <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr></thead>
+                            <tbody>
+                              <tr class="cell-head"><th>1</th><td>Account</td><td>Label</td><td class="num">Opening</td><td class="num">Movement</td><td class="num">Closing</td><td>Cash flow category</td></tr>
+                              <tr><th>2</th><td>41810000</td><td>Clients, invoices to issue</td><td class="num">-471,390</td><td class="num">199,327</td><td class="num">-272,062</td><td>Trade receivables</td></tr>
+                              <tr><th>3</th><td>41910000</td><td>Clients, advances received</td><td class="num">54,273</td><td class="num">-7,651</td><td class="num">46,622</td><td>Trade receivables</td></tr>
+                              <tr><th>4</th><td>40810000</td><td>Suppliers, invoices not received</td><td class="num">540,019</td><td class="num">-163,916</td><td class="num">376,103</td><td>Trade payables</td></tr>
+                              <tr><th>5</th><td>42820000</td><td>Accrued paid leave</td><td class="num">463,265</td><td class="num">-47,977</td><td class="num">415,289</td><td>Payroll and tax</td></tr>
+                              <tr><th>6</th><td>37010000</td><td>Inventory, site 1</td><td class="num">-138,296</td><td class="num">24,960</td><td class="num">-113,336</td><td>Inventory</td></tr>
+                              <tr><th>7</th><td>20300000</td><td>Research and development costs</td><td class="num">-1,043,004</td><td class="num">-1,325,044</td><td class="num">-2,368,048</td><td>CAPEX</td></tr>
+                              <tr><th>8</th><td>16410106</td><td>Bank loan 1</td><td class="num">63,000</td><td class="num">-7,000</td><td class="num">56,000</td><td>Loan repayments</td></tr>
+                              <tr><th>9</th><td>15180000</td><td>Other provisions for risks</td><td class="num">895,885</td><td class="num">-555,567</td><td class="num">340,318</td><td>Financial and exceptional</td></tr>
+                            </tbody>
+                          </table>
+                          <!-- Frames: accounts (A–B), balances (C–E), category (F), rows 1–9 -->
+                          <span class="shot-zone" style="left: 4.3%; width: 35.4%; top: 26px; height: 212px"></span>
+                          <span class="shot-zone" style="left: 40.3%; width: 35.4%; top: 26px; height: 212px"></span>
+                          <span class="shot-zone" style="left: 76.3%; width: 23.4%; top: 26px; height: 212px"></span>
+                        </div>
+                        <p class="sheet-tabs" aria-hidden="true"><span>Cash flow</span><span class="on">Check</span><span>Concatenation</span><span>Generation</span><span>Mapping</span></p>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="story-answer"><strong>The result:</strong> each account's movement goes to its cash flow category through a mapping table, with no manual entry.</p>
+                </div>
+
+                <!-- View 3: control table, ratios and indicators (sheet Check, top part) -->
+                <div class="compare-view" id="cf-checks" role="tabpanel" aria-labelledby="tab-cf-checks" hidden>
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.3; --y: 54px">Control table: every check must be 0</p>
+                    <p class="shot-note" style="--at: 0.66; --y: 54px">Financial ratios</p>
+                    <p class="shot-note" style="--at: 0.9; --y: 150px">Indicators behind the ratios</p>
+                  </div>
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Check</span></div>
+                      <div class="sheet" tabindex="0" aria-label="Control table, financial ratios and indicators">
+                        <p class="sheet-ribbon" aria-hidden="true">MyReport <span class="sheet-button">⟳ Refresh</span></p>
+                        <div class="sheet-canvas">
+                          <table class="sheet-grid">
+                            <colgroup><col style="width: 4%"><col style="width: 15%"><col style="width: 21%"><col style="width: 8%"><col style="width: 2%"><col style="width: 17%"><col style="width: 23%"><col style="width: 10%"></colgroup>
+                            <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr></thead>
+                            <tbody>
+                              <tr class="cell-head"><th>1</th><td>Sheet</td><td>Check</td><td class="num">Gap</td><td></td><td>Ratio</td><td>Calculation</td><td class="num">Value</td></tr>
+                              <tr><th>2</th><td>Generation</td><td>Sum of movements</td><td class="num fill-green">0</td><td></td><td>Profitability</td><td>EBITDA / Revenue</td><td class="num">3.9%</td></tr>
+                              <tr><th>3</th><td>Concatenation</td><td>Sum of movements</td><td class="num fill-green">0</td><td></td><td>Current ratio</td><td>Current assets / liabilities</td><td class="num">2.02</td></tr>
+                              <tr><th>4</th><td>Concatenation</td><td>Closing − opening</td><td class="num fill-green">0</td><td></td><td></td><td></td><td></td></tr>
+                              <tr><th>5</th><td>Check</td><td>Sum of account checks</td><td class="num fill-green">0</td><td></td><td class="cell-bold">Indicator</td><td></td><td class="num cell-bold">k€</td></tr>
+                              <tr><th>6</th><td>Check</td><td>Sum of cash flow</td><td class="num fill-green">0</td><td></td><td>Revenue</td><td></td><td class="num">10,154</td></tr>
+                              <tr><th>7</th><td>Check</td><td>Working capital</td><td class="num fill-green">0</td><td></td><td>Current assets</td><td></td><td class="num">601</td></tr>
+                              <tr><th>8</th><td>Check</td><td>Cash</td><td class="num fill-green">0</td><td></td><td>Current liabilities</td><td></td><td class="num">298</td></tr>
+                            </tbody>
+                          </table>
+                          <!-- Frames: control table (A–C, rows 1–8), ratios (E–G, rows 1–3), indicators (E–G, rows 5–8) -->
+                          <span class="shot-zone" style="left: 4.3%; width: 43.4%; top: 26px; height: 188px"></span>
+                          <span class="shot-zone" style="left: 50.3%; width: 49.4%; top: 26px; height: 68px"></span>
+                          <span class="shot-zone" style="left: 50.3%; width: 49.4%; top: 122px; height: 92px"></span>
+                        </div>
+                        <p class="sheet-tabs" aria-hidden="true"><span>Cash flow</span><span class="on">Check</span><span>Concatenation</span><span>Generation</span><span>Mapping</span></p>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="story-answer"><strong>The result:</strong> an inconsistency shows up at once, with the sheet it comes from.</p>
+                </div>
+                <figcaption>Drawn from the real file, with randomised amounts. Account labels made generic.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <!-- Block 3 -->
+          <div class="block" id="block-3" role="region" aria-labelledby="block-3-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">3</span>
+              <div><p class="block-kicker">Part 3 of 3</p><h2 class="block-title" id="block-3-title">Impact &amp; tools</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>Impact</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Up to date:</strong> the entries come from the ERP the same day, and no extraction is stored, so the file stays light.</li>
+                <li><strong>Any period:</strong> pick a start and end date, refresh, and the cash flow is ready.</li>
+                <li><strong>Reliable:</strong> no more manual entries, and the control table shows any inconsistency and where it comes from.</li>
+              </ul>
+              <p>The cash flow calculation is now automated and reliable, with an up-to-date view for managing the company's cash.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Tools</h3>
+              <ul class="tags reveal-stagger">
+                <li>Excel</li><li>MyReport Data (ETL, Data modeling)</li><li>Finance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <a href="experience.html#oslo" class="see-all project-xp-link">See the OSLO experience →</a>
 
