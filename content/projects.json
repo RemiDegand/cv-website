@@ -76,9 +76,9 @@
       "category": "data-modeling",
       "company": "oslo",
       "title": "Revenue recognition model",
-      "description": "Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.",
+      "description": "Designed a data model that spreads the revenue of each invoice line over the months of the activity, instead of booking it all on the invoice date.",
       "result": { "key": "€350k → €8k", "text": "annual revenue discrepancies" },
-      "tags": ["Excel", "Data modeling"],
+      "tags": ["MyReport Data (Data modeling)", "SQL", "Finance"],
       "home": true
     }
   ]

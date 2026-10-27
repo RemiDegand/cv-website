@@ -36,7 +36,7 @@
         <header class="project-page-head">
           <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
           <h1 class="project-page-title">Revenue recognition model</h1>
-          <p class="lead">Redesigned a revenue recognition data model to allocate revenue monthly based on actual business activity.</p>
+          <p class="lead">Designed a data model that spreads the revenue of each invoice line over the months of the activity, instead of booking it all on the invoice date.</p>
           <p class="project-result"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
         </header>
 
@@ -44,21 +44,219 @@
           <div><dt>Role</dt><dd>Data Analyst Intern</dd></div>
           <div><dt>When</dt><dd>Sep – Dec 2025</dd></div>
           <div><dt>Where</dt><dd>Villeneuve d'Ascq, France</dd></div>
+          <div><dt>Scope</dt><dd>Orders, contracts and bundles</dd></div>
         </dl>
 
-        <h2 class="project-h2">Context</h2>
-        <p>Analyst in the Information Systems department, supporting financial and operational decisions across 4 business units and 3 entities. In total: 13 data models, 6 dashboards and 6 automated Excel tools.</p>
+        <!-- Content from projects/Revenue recognition model/Content.docx (written by Rémi, 27 Oct 2026) and
+             "Schema of mapping.pdf" (3 steps: map product types, aggregate, allocate; "98% reduction in errors").
+             No company file: the invoice and the charts are an illustrative example with round numbers.
+             Same format as project-aged-receivables.html (see "Project page format" in docs/CV website.md) -->
+        <nav class="block-nav" aria-label="Parts of this project">
+          <a href="#block-1"><span class="block-nav-num">1</span><span class="block-nav-text">Problem &amp; context</span></a>
+          <a href="#block-2"><span class="block-nav-num">2</span><span class="block-nav-text">What I built</span></a>
+          <a href="#block-3"><span class="block-nav-num">3</span><span class="block-nav-text">Impact &amp; tools</span></a>
+        </nav>
 
-        <h2 class="project-h2">What I did</h2>
-        <ul class="project-did">
-          <li>Redesigned the revenue recognition data model</li>
-          <li>Revenue is now allocated month by month, based on actual business activity</li>
-        </ul>
+        <div class="blocks">
+          <!-- Block 1: the story, then the context and the problem behind it -->
+          <div class="block" id="block-1" role="region" aria-labelledby="block-1-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">1</span>
+              <div><p class="block-kicker">Part 1 of 3</p><h2 class="block-title" id="block-1-title">Problem &amp; context</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>How it started</h3>
+              <div class="story reveal-stagger" aria-label="Conversation that started the project">
+                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">Revenue jumped in January, then dropped in February. What happened?</span></p>
+                <p class="story-line story-right"><span class="story-who">Controller</span><span class="story-bubble">January is when the yearly contracts are invoiced. The dashboards put it all on that month.</span></p>
+                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">So what is our real activity each month?</span></p>
+                <p class="story-line story-right"><span class="story-who">Controller</span><span class="story-bubble story-typing" aria-label="…"><span></span><span></span><span></span></span></p>
+              </div>
+              <p class="story-end">Revenue had to follow the activity, not the invoice date.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Context</h3>
+              <p>OSLO, with about €10M revenue a year, bills in several ways: one-time orders, multi-period contracts and bundles. Its dashboards used accounting data that put the full amount of an invoice on its invoice date.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>The problem</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>A biased monthly view:</strong> revenue was not spread over the duration of the contracts and services.</li>
+                <li><strong>Limited analysis:</strong> financial and operational data could hardly be compared.</li>
+                <li><strong>A first model already existed</strong>, with <strong>10–15 %</strong> discrepancies: not reliable enough for decisions.</li>
+              </ul>
+            </div>
+          </div>
 
-        <h2 class="project-h2">Tools</h2>
-        <ul class="tags">
-          <li>Excel</li><li>Data modeling</li>
-        </ul>
+          <!-- Block 2 -->
+          <div class="block" id="block-2" role="region" aria-labelledby="block-2-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">2</span>
+              <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: a data model that spreads revenue over the activity</h2></div>
+            </header>
+            <!-- The model in 3 steps, from "Schema of mapping.pdf". The 3 billing types keep the colours of the chart below -->
+            <div class="block-part reveal">
+              <h3>The model in 3 steps</h3>
+              <p class="chip-row reveal-stagger"><span class="chip-label">Source</span><span class="chip">Invoice lines from the SQL database</span><span class="chip">MyReport Data</span></p>
+              <ol class="model-map reveal-stagger" aria-label="The model in 3 steps">
+                <li>
+                  <p class="model-head"><span class="model-num">1</span>Map each line to a type</p>
+                  <p class="model-boxes"><span class="model-box type-order">One-time orders</span><span class="model-box type-contract">Contracts</span><span class="model-box type-bundle">Bundles</span></p>
+                  <p class="model-sub">One sub-model per billing type, found from the general ledger account</p>
+                </li>
+                <li>
+                  <p class="model-head"><span class="model-num">2</span>Aggregate</p>
+                  <p class="model-boxes"><span class="model-box">Consolidation layer</span></p>
+                  <p class="model-sub">The same data fields for every revenue stream</p>
+                </li>
+                <li>
+                  <p class="model-head"><span class="model-num">3</span>Allocate</p>
+                  <p class="model-boxes"><span class="model-box">Revenue by month</span></p>
+                  <p class="model-sub">Start date, months covered, then the net amount spread evenly</p>
+                </li>
+              </ol>
+            </div>
+
+            <!-- Example: one invoice with 3 lines (round numbers, not company data), then the monthly revenue
+                 before and after the model. Same tabs and notes as the other project pages (script.js, .compare).
+                 Chart: 8px per k€ (scale 0–25k over 200px, top of the plot 16px under the title bar); month i
+                 centred at 8% + 7.5% × (i + 0.5) of the screen width -->
+            <div class="block-part reveal">
+              <h3><span class="block-label">Example</span>One invoice, three lines</h3>
+              <figure class="project-shot annotated compare">
+                <div class="report-bar">
+                  <div class="report-tabs" role="tablist" aria-label="Step of the example">
+                    <button type="button" role="tab" aria-selected="true" aria-controls="rr-lines" id="tab-rr-lines">1. Invoice lines</button>
+                    <button type="button" role="tab" aria-selected="false" aria-controls="rr-before" id="tab-rr-before" tabindex="-1">2. Before: on the invoice date</button>
+                    <button type="button" role="tab" aria-selected="false" aria-controls="rr-after" id="tab-rr-after" tabindex="-1">3. After: spread over the activity</button>
+                  </div>
+                </div>
+
+                <!-- View 1: the invoice lines in the model (also the table view of the charts) -->
+                <div class="compare-view" id="rr-lines" role="tabpanel" aria-labelledby="tab-rr-lines">
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.15; --y: 26px">Each invoice line on its own</p>
+                    <p class="shot-note" style="--at: 0.37; --y: 26px">Type found from the general ledger account</p>
+                    <p class="shot-note" style="--at: 0.77; --y: 26px">Start date and months covered give the amount per month</p>
+                  </div>
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">MyReport Data</span></div>
+                      <div class="sheet" tabindex="0" aria-label="The 3 lines of the example invoice in the model">
+                        <div class="sheet-canvas">
+                          <table class="sheet-grid">
+                            <colgroup><col style="width: 4%"><col style="width: 15%"><col style="width: 7%"><col style="width: 12%"><col style="width: 16%"><col style="width: 11%"><col style="width: 12%"><col style="width: 10%"><col style="width: 13%"></colgroup>
+                            <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th></tr></thead>
+                            <tbody>
+                              <tr class="cell-head"><th>1</th><td>Invoice</td><td>Line</td><td>GL account</td><td>Type</td><td class="num">Net amount</td><td>Start</td><td class="num">Months</td><td class="num">Per month</td></tr>
+                              <tr><th>2</th><td>N° xxxx01</td><td>1</td><td>Account 1</td><td><span class="type-dot type-contract"></span>Contract</td><td class="num">12,000</td><td>01/01/25</td><td class="num">12</td><td class="num">1,000</td></tr>
+                              <tr><th>3</th><td>N° xxxx01</td><td>2</td><td>Account 2</td><td><span class="type-dot type-order"></span>One-time order</td><td class="num">3,000</td><td>01/01/25</td><td class="num">1</td><td class="num">3,000</td></tr>
+                              <tr><th>4</th><td>N° xxxx01</td><td>3</td><td>Account 3</td><td><span class="type-dot type-bundle"></span>Bundle</td><td class="num">6,000</td><td>01/01/25</td><td class="num">6</td><td class="num">1,000</td></tr>
+                            </tbody>
+                          </table>
+                          <!-- Frames: invoice and line (A–B), account and type (C–D), amount to amount per month (E–H) -->
+                          <span class="shot-zone" style="left: 4.3%; width: 21.4%; top: 26px; height: 92px"></span>
+                          <span class="shot-zone" style="left: 26.3%; width: 27.4%; top: 26px; height: 92px"></span>
+                          <span class="shot-zone" style="left: 54.3%; width: 45.4%; top: 26px; height: 92px"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="story-answer"><strong>The result:</strong> every line knows when its revenue starts, how many months it covers and how much it brings each month.</p>
+                </div>
+
+                <!-- View 2: monthly revenue before (all on the invoice date) -->
+                <div class="compare-view" id="rr-before" role="tabpanel" aria-labelledby="tab-rr-before" hidden>
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.1175; --y: 44px">The whole invoice on the invoice date: €21k</p>
+                    <p class="shot-note" style="--at: 0.75; --y: 176px">Nothing in the next months, while the contract and the bundle still run</p>
+                  </div>
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Dashboard · Monthly revenue (k€)</span></div>
+                      <div class="rev-chart" role="img" aria-label="Monthly revenue before the model: 21 k€ in January (contract 12, one-time order 3, bundle 6), 0 from February to December">
+                        <div class="rev-grid" aria-hidden="true"><span style="--k: 0">0</span><span style="--k: 5">5k</span><span style="--k: 10">10k</span><span style="--k: 15">15k</span><span style="--k: 20">20k</span><span style="--k: 25">25k</span></div>
+                        <div class="rev-plot">
+                          <div class="rev-col" title="Jan: €21k (contract 12k, one-time order 3k, bundle 6k)"><span class="rev-seg type-contract" style="--v: 12"></span><span class="rev-seg type-bundle" style="--v: 6"></span><span class="rev-seg type-order" style="--v: 3"></span></div>
+                          <div class="rev-col" title="Feb: €0"></div><div class="rev-col" title="Mar: €0"></div><div class="rev-col" title="Apr: €0"></div><div class="rev-col" title="May: €0"></div><div class="rev-col" title="Jun: €0"></div><div class="rev-col" title="Jul: €0"></div><div class="rev-col" title="Aug: €0"></div><div class="rev-col" title="Sep: €0"></div><div class="rev-col" title="Oct: €0"></div><div class="rev-col" title="Nov: €0"></div><div class="rev-col" title="Dec: €0"></div>
+                        </div>
+                        <p class="rev-months" aria-hidden="true"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></p>
+                        <span class="shot-zone" style="left: 8.5%; width: 6.5%; top: 44px; height: 176px"></span>
+                        <span class="shot-zone" style="left: 16%; width: 81.5%; top: 176px; height: 44px"></span>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="rev-legend" aria-hidden="true"><span><i class="type-contract"></i>Contract</span><span><i class="type-bundle"></i>Bundle</span><span><i class="type-order"></i>One-time order</span></p>
+                  <p class="story-answer"><strong>The result:</strong> January looks huge and the rest of the year looks empty, although the activity runs all year.</p>
+                </div>
+
+                <!-- View 3: monthly revenue after (spread over the months covered) -->
+                <div class="compare-view" id="rr-after" role="tabpanel" aria-labelledby="tab-rr-after" hidden>
+                  <div class="shot-notes">
+                    <p class="shot-note" style="--at: 0.1175; --y: 172px">One-time order: all in its month</p>
+                    <p class="shot-note" style="--at: 0.34; --y: 196px">Bundle: €1k a month for 6 months</p>
+                    <p class="shot-note" style="--at: 0.75; --y: 204px">Contract: €1k a month for 12 months</p>
+                  </div>
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Dashboard · Monthly revenue (k€)</span></div>
+                      <div class="rev-chart" role="img" aria-label="Monthly revenue after the model: 5 k€ in January (contract 1, bundle 1, one-time order 3), 2 k€ from February to June (contract 1, bundle 1), 1 k€ from July to December (contract)">
+                        <div class="rev-grid" aria-hidden="true"><span style="--k: 0">0</span><span style="--k: 5">5k</span><span style="--k: 10">10k</span><span style="--k: 15">15k</span><span style="--k: 20">20k</span><span style="--k: 25">25k</span></div>
+                        <div class="rev-plot">
+                          <div class="rev-col" title="Jan: €5k (contract 1k, bundle 1k, one-time order 3k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span><span class="rev-seg type-order" style="--v: 3"></span></div>
+                          <div class="rev-col" title="Feb: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
+                          <div class="rev-col" title="Mar: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
+                          <div class="rev-col" title="Apr: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
+                          <div class="rev-col" title="May: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
+                          <div class="rev-col" title="Jun: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
+                          <div class="rev-col" title="Jul: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
+                          <div class="rev-col" title="Aug: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
+                          <div class="rev-col" title="Sep: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
+                          <div class="rev-col" title="Oct: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
+                          <div class="rev-col" title="Nov: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
+                          <div class="rev-col" title="Dec: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
+                        </div>
+                        <p class="rev-months" aria-hidden="true"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></p>
+                        <span class="shot-zone" style="left: 8.5%; width: 6.5%; top: 172px; height: 30px"></span>
+                        <span class="shot-zone" style="left: 16%; width: 37%; top: 196px; height: 24px"></span>
+                        <span class="shot-zone" style="left: 53.5%; width: 44%; top: 204px; height: 16px"></span>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="rev-legend" aria-hidden="true"><span><i class="type-contract"></i>Contract</span><span><i class="type-bundle"></i>Bundle</span><span><i class="type-order"></i>One-time order</span></p>
+                  <p class="story-answer"><strong>The result:</strong> the same €21k in total, spread over the months of the activity: a realistic monthly view.</p>
+                </div>
+                <figcaption>Illustrative example with round numbers, not company data.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <!-- Block 3 -->
+          <div class="block" id="block-3" role="region" aria-labelledby="block-3-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">3</span>
+              <div><p class="block-kicker">Part 3 of 3</p><h2 class="block-title" id="block-3-title">Impact &amp; tools</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>Impact</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>€350k → €8k</strong> annual revenue discrepancies: <strong>98 %</strong> fewer errors than the previous model.</li>
+                <li><strong>A realistic monthly view</strong> of performance, that follows the company's actual activity.</li>
+                <li><strong>Reliable analyses</strong> for performance monitoring and decisions, with financial and operational data side by side.</li>
+              </ul>
+              <p>Revenue analysis now reflects the company's real economic activity.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Tools</h3>
+              <ul class="tags reveal-stagger">
+                <li>MyReport Data (Data modeling)</li><li>SQL</li><li>Finance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <a href="experience.html#oslo" class="see-all project-xp-link">See the OSLO experience →</a>
 
