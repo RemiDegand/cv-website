@@ -580,7 +580,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   transform-origin: top;
 }
 .block-head { display: flex; align-items: center; gap: 20px; margin-left: -56px; }
-.block-num { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--brand, var(--accent)); color: #fff; font-weight: 700; }
+.block-num { position: relative; z-index: 1; flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--brand, var(--accent)); color: #fff; font-weight: 700; box-shadow: 0 0 0 4px var(--bg); }   /* above the line (a 2-line title moves the circle down onto it), with a white ring */
 .project-page .block-kicker { color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 .block-title { font-size: 1.5rem; margin: 2px 0 0; }
 .block-part { margin-top: 28px; }
