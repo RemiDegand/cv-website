@@ -479,7 +479,6 @@ h4 { font-size: 1.1rem; }
 
 /* Who a dashboard is for: head-and-shoulders icon (black, no circle) + "Made for / The manager" */
 .persona { display: flex; align-items: center; gap: 10px; margin: 4px 0 0; }
-.personas { display: flex; flex-wrap: wrap; gap: 8px 40px; margin-top: 16px; }   /* several roles side by side */
 /* Rows of small chips with a label ("Indicators", "Analysed by") */
 .project-page .chip-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0 0; color: var(--text-muted); font-size: 0.9rem; }
 .chip-label { min-width: 6.5rem; font-weight: 600; }
