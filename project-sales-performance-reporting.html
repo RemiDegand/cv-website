@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Production plan &amp; sales performance reporting | Rémi Degand</title>
-  <meta name="description" content="Production plan and sales performance reporting: a project by Rémi Degand at OSLO.">
+  <title>Production schedule &amp; sales performance reporting | Rémi Degand</title>
+  <meta name="description" content="Production schedule and sales performance reporting: a project by Rémi Degand at OSLO.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,8 +35,8 @@
 
         <header class="project-page-head">
           <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
-          <h1 class="project-page-title">Production plan &amp; sales performance reporting</h1>
-          <p class="lead">Rebuilt a business unit's production plan and created sales performance dashboards for management and for each sales representative.</p>
+          <h1 class="project-page-title">Production schedule &amp; sales performance reporting</h1>
+          <p class="lead">Rebuilt a business unit's production schedule and created sales performance dashboards for management and for each sales representative.</p>
           <p class="project-result"><strong>~1,000 orders</strong> a year, reporting used weekly by management</p>
         </header>
 
@@ -67,15 +67,15 @@
               <h3>How it started</h3>
               <div class="story reveal-stagger" aria-label="Conversation that started the project">
                 <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">Are we on target this month? And how is each sales rep doing?</span></p>
-                <p class="story-line story-right"><span class="story-who">Production manager</span><span class="story-bubble">Let me check the production plan… Someone has changed my columns again.</span></p>
+                <p class="story-line story-right"><span class="story-who">Production manager</span><span class="story-bubble">Let me check the production schedule… Someone has changed my columns again.</span></p>
                 <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">So we can't trust the numbers?</span></p>
                 <p class="story-line story-right"><span class="story-who">Production manager</span><span class="story-bubble story-typing" aria-label="…"><span></span><span></span><span></span></span></p>
               </div>
-              <p class="story-end">The production plan had to be rebuilt before any reporting could be trusted.</p>
+              <p class="story-end">The production schedule had to be rebuilt before any reporting could be trusted.</p>
             </div>
             <div class="block-part reveal">
               <h3>Context</h3>
-              <p>In one of OSLO's business units, selling payment solutions to several hundred clients for about €3M a year, every order was tracked in an Excel production plan shared by the whole team.</p>
+              <p>In one of OSLO's business units, selling payment solutions to several hundred clients for about €3M a year, every order was tracked in an Excel production schedule shared by the whole team.</p>
             </div>
             <div class="block-part reveal">
               <h3>The problem</h3>
@@ -91,17 +91,17 @@
           <div class="block" id="block-2" role="region" aria-labelledby="block-2-title">
             <header class="block-head reveal">
               <span class="block-num" aria-hidden="true">2</span>
-              <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: a reliable production plan, then the reporting on top of it</h2></div>
+              <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: a reliable production schedule, then the reporting on top of it</h2></div>
             </header>
             <!-- Step 1. Before / after: the same orders in the old sheet and in the new plan, drawn in HTML on a computer
                  screen (tabs, script.js). "After" follows the real file (Plan de Prod Randomisé Enligsh.xlsx: one
                  table, drop-downs, colour rules, protected ranges "ADV" and "Prod", lookup sheets); "Before" is an
                  illustration of the problem described in Content.docx (several tables, one per status, on one sheet) -->
             <div class="block-part reveal" id="step-1">
-              <h3><span class="block-label">Step 1</span>Rebuild the production plan</h3>
-              <p class="block-muted">The reporting can only be as reliable as the file it reads, so the plan came first.</p>
+              <h3><span class="block-label">Step 1</span>Rebuild the production schedule</h3>
+              <p class="block-muted">The reporting can only be as reliable as the file it reads, so the schedule came first.</p>
               <!-- Before / After table (27 Oct, removed then put back at the user's request: "I like it") -->
-              <div class="ba-table reveal-stagger" role="table" aria-label="The production plan, before and after">
+              <div class="ba-table reveal-stagger" role="table" aria-label="The production schedule, before and after">
                 <div class="ba-row ba-head" role="row"><span role="columnheader"></span><span role="columnheader">Before</span><span role="columnheader">After</span></div>
                 <div class="ba-row" role="row"><strong role="rowheader">Structure</strong><span role="cell">One table per order status, stacked on one sheet</span><span role="cell">One table, one row per order</span></div>
                 <div class="ba-row" role="row"><strong role="rowheader">Data entry</strong><span role="cell">Free text, typed differently by each person</span><span role="cell">Drop-down lists and set formats in each column</span></div>
@@ -110,7 +110,7 @@
               </div>
               <figure class="project-shot annotated compare">
                 <div class="report-bar">
-                  <div class="report-tabs" role="tablist" aria-label="Version of the production plan">
+                  <div class="report-tabs" role="tablist" aria-label="Version of the production schedule">
                     <button type="button" role="tab" aria-selected="true" aria-controls="plan-before" id="tab-plan-before">Before: one table per status</button>
                     <button type="button" role="tab" aria-selected="false" aria-controls="plan-after" id="tab-plan-after" tabindex="-1">After: one clean table</button>
                   </div>
@@ -127,12 +127,12 @@
                   </div>
                   <div class="monitor">
                     <div class="monitor-screen">
-                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Production plan (before)</span><span class="monitor-badge is-zone">Editable by everyone</span></div>
-                      <div class="sheet" tabindex="0" aria-label="Old production plan (illustration)">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Production schedule (before)</span><span class="monitor-badge is-zone">Editable by everyone</span></div>
+                      <div class="sheet" tabindex="0" aria-label="Old production schedule (illustration)">
                         <table class="sheet-grid">
                           <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr></thead>
                           <tbody>
-                            <tr><th>1</th><td colspan="6" class="cell-title">PRODUCTION PLAN 2025</td></tr>
+                            <tr><th>1</th><td colspan="6" class="cell-title">PRODUCTION SCHEDULE 2025</td></tr>
                             <tr><th>2</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                             <tr><th>3</th><td colspan="6" class="cell-band fill-yellow">IN PROGRESS</td></tr>
                             <tr class="cell-head"><th>4</th><td>Client</td><td>Project</td><td>Amount</td><td>Prod.</td><td>Date</td><td>Notes</td></tr>
@@ -175,8 +175,8 @@
                   </div>
                   <div class="monitor">
                     <div class="monitor-screen">
-                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Production plan (after)</span></div>
-                      <div class="sheet" tabindex="0" aria-label="New production plan">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Production schedule (after)</span></div>
+                      <div class="sheet" tabindex="0" aria-label="New production schedule">
                         <table class="sheet-grid">
                           <!-- Column letters coloured by who can edit them (protected ranges of the real file) -->
                           <thead><tr><th></th><th class="col-adv">A</th><th class="col-prod">B</th><th class="col-adv">C</th><th class="col-adv">D</th><th class="col-prod">E</th><th class="col-adv">F</th><th class="col-adv">G</th></tr></thead>
@@ -205,13 +205,13 @@
               </figure>
             </div>
 
-            <!-- Step 2: how the reporting is built on the plan (Content.docx: data loaded with MyReport, structured in a
+            <!-- Step 2: how the reporting is built on the schedule (Content.docx: data loaded with MyReport, structured in a
                  data model; indicators and analysis axes; one global dashboard + one per sales representative) -->
             <div class="block-part reveal" id="step-2">
-              <h3><span class="block-label">Step 2</span>Build the reporting on top of the plan</h3>
-              <p class="block-muted">Once the plan was clean, it became the data source of the reporting.</p>
+              <h3><span class="block-label">Step 2</span>Build the reporting on top of the schedule</h3>
+              <p class="block-muted">Once the schedule was clean, it became the data source of the reporting.</p>
               <ol class="project-flow reveal-stagger" aria-label="How the reporting works">
-                <li><strong>1 · Load</strong><span>MyReport reads the production plan straight from Excel</span></li>
+                <li><strong>1 · Load</strong><span>MyReport reads the production schedule straight from Excel</span></li>
                 <li><strong>2 · Model</strong><span>MyReport Data structures it and calculates the indicators</span></li>
                 <li><strong>3 · Show</strong><span>MyReport Page dashboards, for the manager and each sales team</span></li>
               </ol>
@@ -602,7 +602,7 @@
               <ul class="project-did reveal-stagger">
                 <li><strong>The manager</strong> follows revenue, margin, orders and the target for the whole business unit, by month, quarter and year.</li>
                 <li><strong>Each sales representative</strong> sees their own performance, year-to-date statistics and client base.</li>
-                <li><strong>Production managers and sales administration</strong> work in one production plan, each on their own columns.</li>
+                <li><strong>Production managers and sales administration</strong> work in one production schedule, each on their own columns.</li>
               </ul>
               <p>Production data is now reliable, and sales performance is steered with a clear view of the business unit's activity.</p>
             </div>
