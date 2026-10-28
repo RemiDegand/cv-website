@@ -1097,8 +1097,19 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .copy-sim th { color: #6b7280; font-size: 0.7rem; font-weight: 600; }
 .copy-sim .num { text-align: right; }
 .copy-sim tfoot td { font-weight: 700; border-top: 2px solid #c8ced8; }
-.copy-sim td { transition: background-color 0.3s ease; }
-.copy-sim-arrow { color: var(--text-muted); font-size: 1.3rem; }
+.copy-sim-erp td { transition: background-color 0.3s ease; }   /* the red of the last loop goes at once */
+.copy-sim-human { display: grid; justify-items: center; gap: 4px; }
+.copy-sim-person { width: 30px; height: 25px; fill: #9aa3b2; }
+.copy-sim-keyboard { width: 52px; height: 23px; }
+.copy-sim-board { fill: #fff; stroke: #9aa3b2; stroke-width: 1.5; }
+.copy-sim-keyboard .key { fill: #c8ced8; }
+.copy-sim.is-keying .copy-sim-person { fill: var(--accent); }
+.copy-sim.is-keying .key { animation: copy-sim-key 0.45s steps(1) infinite; }   /* keys light up one after the other */
+.copy-sim.is-keying .key:nth-of-type(3n + 2) { animation-delay: 0.15s; }
+.copy-sim.is-keying .key:nth-of-type(3n + 3) { animation-delay: 0.3s; }
+@keyframes copy-sim-key { 0% { fill: var(--accent); } 33% { fill: #c8ced8; } }
+.copy-sim-who { color: var(--text-muted); font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.copy-sim-arrow { color: var(--text-muted); font-size: 1.3rem; line-height: 1; }
 .copy-sim-erp tr.is-copying td { background: #fff3c4; }   /* the line being copied */
 .copy-sim-excel td.is-typing { outline: 2px solid #107c41; outline-offset: -2px; }   /* Excel's selected cell */
 .copy-sim-excel td.is-typing::after { content: "|"; margin-left: 1px; animation: copy-sim-caret 0.8s steps(1) infinite; }
@@ -1109,5 +1120,6 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 @media (max-width: 720px) {
   .copy-sim { padding: 14px; }
   .copy-sim-panels { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .copy-sim-arrow { justify-self: center; transform: rotate(90deg); }
+  .copy-sim-human { grid-template-columns: auto auto auto auto; align-items: center; justify-content: center; gap: 8px; }   /* one row between the 2 tables */
+  .copy-sim-arrow { transform: rotate(90deg); }
 }

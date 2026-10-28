@@ -355,7 +355,7 @@ if (blockNav) {
   update();
 }
 
-// VAT page, "How it started": replays the accountant copying 3 VAT amounts from the ERP into
+// VAT page, "How it started": replays the accountant (icon + keyboard in the middle) copying 3 VAT amounts from the ERP into
 // Excel, character by character, then the total that doesn't match (the 3rd amount is mistyped).
 // Starts once on screen and loops. The HTML holds the final state, kept as is with "reduce motion".
 const copySim = document.querySelector(".copy-sim");
@@ -368,7 +368,9 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const type = async (cell, speed) => {
     cell.classList.add("is-typing");
+    copySim.classList.add("is-keying");   // the accountant's keyboard taps
     for (const ch of cell.dataset.typed) { cell.textContent += ch; await wait(speed); }
+    copySim.classList.remove("is-keying");
     await wait(350);
     cell.classList.remove("is-typing");
   };
