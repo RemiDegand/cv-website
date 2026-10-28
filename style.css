@@ -1072,6 +1072,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 
 /* Sales performance page, Step 1: Before / After table, one row per aspect, the "after" column in soft blue */
 .ba-table { display: grid; margin: 16px 0 24px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.compare + .ba-table { margin-top: 32px; }   /* under the before / after picture (28 Oct) */
 .ba-row { display: grid; grid-template-columns: 8rem minmax(0, 1fr) minmax(0, 1fr); }
 .ba-row > * { padding: 10px 14px; border-top: 1px solid var(--border); font-size: 0.9rem; line-height: 1.4; }
 .ba-row > :nth-child(2) { color: var(--text-muted); }

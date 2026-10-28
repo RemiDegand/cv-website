@@ -100,14 +100,6 @@
             <div class="block-part reveal" id="step-1">
               <h3><span class="block-label">Step 1</span>Rebuild the production schedule</h3>
               <p class="block-muted">The reporting can only be as reliable as the file it reads, so the schedule came first.</p>
-              <!-- Before / After table (27 Oct, removed then put back at the user's request: "I like it") -->
-              <div class="ba-table reveal-stagger" role="table" aria-label="The production schedule, before and after">
-                <div class="ba-row ba-head" role="row"><span role="columnheader"></span><span role="columnheader">Before</span><span role="columnheader">After</span></div>
-                <div class="ba-row" role="row"><strong role="rowheader">Structure</strong><span role="cell">One table per order status, stacked on one sheet</span><span role="cell">One table, one row per order</span></div>
-                <div class="ba-row" role="row"><strong role="rowheader">Data entry</strong><span role="cell">Free text, typed differently by each person</span><span role="cell">Drop-down lists and set formats in each column</span></div>
-                <div class="ba-row" role="row"><strong role="rowheader">Checks</strong><span role="cell">None</span><span role="cell">A status column and colour rules that flag anomalies</span></div>
-                <div class="ba-row" role="row"><strong role="rowheader">Access</strong><span role="cell">Anyone could change any cell</span><span role="cell">Locked cells: production managers and sales administration, each on their own columns</span></div>
-              </div>
               <figure class="project-shot annotated compare">
                 <div class="report-bar">
                   <div class="report-tabs" role="tablist" aria-label="Version of the production schedule">
@@ -203,6 +195,14 @@
                   <p class="story-answer"><strong>The result:</strong> each row is one order and each column one field, so the reporting tool loads the table as it is.</p>
                 </div>
               </figure>
+              <!-- Before / After table (27 Oct, removed then put back at the user's request: "I like it"; moved under the picture on 28 Oct, user's request) -->
+              <div class="ba-table reveal-stagger" role="table" aria-label="The production schedule, before and after">
+                <div class="ba-row ba-head" role="row"><span role="columnheader"></span><span role="columnheader">Before</span><span role="columnheader">After</span></div>
+                <div class="ba-row" role="row"><strong role="rowheader">Structure</strong><span role="cell">One table per order status, stacked on one sheet</span><span role="cell">One table, one row per order</span></div>
+                <div class="ba-row" role="row"><strong role="rowheader">Data entry</strong><span role="cell">Free text, typed differently by each person</span><span role="cell">Drop-down lists and set formats in each column</span></div>
+                <div class="ba-row" role="row"><strong role="rowheader">Checks</strong><span role="cell">None</span><span role="cell">A status column and colour rules that flag anomalies</span></div>
+                <div class="ba-row" role="row"><strong role="rowheader">Access</strong><span role="cell">Anyone could change any cell</span><span role="cell">Locked cells: production managers and sales administration, each on their own columns</span></div>
+              </div>
             </div>
 
             <!-- Step 2: how the reporting is built on the schedule (Content.docx: data loaded with MyReport, structured in a
