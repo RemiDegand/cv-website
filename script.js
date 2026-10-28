@@ -182,6 +182,43 @@ if (catCards.length) {
   equalize();
   document.fonts.ready.then(equalize);
   addEventListener("resize", equalize);
+
+  // Filters: one business area at a time (All = every area) and the "Uses AI" switch, combined.
+  // Hides the cards that don't match, then each category left empty (its section and its tile).
+  // Every button shows how many projects it would give with the other filter as it is; a button
+  // that would give none is disabled, so the page is never empty
+  const filters = document.querySelector(".filters");
+  if (filters) {
+    const chips = [...filters.querySelectorAll(".filter-chip")];
+    const aiSwitch = filters.querySelector(".filter-switch");
+    let area = "";
+    let aiOnly = false;
+    const matches = (card, a, ai) => (!a || card.dataset.areas.split(" ").includes(a)) && (!ai || card.dataset.ai === "true");
+    const count = (a, ai) => catCards.filter((card) => matches(card, a, ai)).length;
+    const update = () => {
+      catCards.forEach((card) => { card.hidden = !matches(card, area, aiOnly); });
+      document.querySelectorAll(".cat-section").forEach((section) => {
+        const empty = !section.querySelector(".card:not([hidden])");
+        section.hidden = empty;
+        document.querySelector(`.cat-tile[href="#${section.id}"]`).hidden = empty;
+      });
+      chips.forEach((chip) => {
+        const n = count(chip.dataset.area, aiOnly);
+        chip.setAttribute("aria-pressed", chip.dataset.area === area);
+        chip.querySelector(".filter-count").textContent = n;
+        chip.disabled = n === 0;
+      });
+      const nAi = count(area, true);
+      aiSwitch.setAttribute("aria-checked", aiOnly);
+      aiSwitch.querySelector(".filter-count").textContent = nAi;
+      aiSwitch.disabled = nAi === 0 && !aiOnly;
+      equalize();
+    };
+    chips.forEach((chip) => chip.addEventListener("click", () => { area = chip.dataset.area; update(); }));
+    aiSwitch.addEventListener("click", () => { aiOnly = !aiOnly; update(); });
+    filters.hidden = false;
+    update();
+  }
 }
 
 // Project pages: report viewer like Looker. Tabs, ‹ › arrows and the left/right keys on a tab switch

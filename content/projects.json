@@ -1,5 +1,5 @@
 {
-  "_about": "DISPLAY space: the short summary of each project shown on the website. Run `node tools/build-projects.js` after a change: it rebuilds the cards on projects.html and the Key projects carousel on index.html. Everything else known about a project (context, details, open questions) lives in knowledge/projects/<id>.md, for the chatbot. The project pages (project-<id>.html) are still edited by hand.",
+  "_about": "DISPLAY space: the short summary of each project shown on the website. Run `node tools/build-projects.js` after a change: it rebuilds the cards on projects.html and the Key projects carousel on index.html. Everything else known about a project (context, details, open questions) lives in knowledge/projects/<id>.md, for the chatbot. The project pages (project-<id>.html) are still edited by hand. Filters on the Projects page: \"areas\" = the business area(s) the project was built for (2 only when it really served 2 teams), \"ai\" = AI is part of the final tool (not just used to build it).",
   "companies": {
     "glovo": { "name": "Glovo", "industry": "Delivery Platform", "logo": "logos/glovo.png", "brand": "#FED42A" },
     "oslo": { "name": "OSLO", "industry": "IT & SaaS Solutions", "logo": "logos/oslo.png", "brand": "#D3A26E" }
@@ -10,10 +10,17 @@
     { "id": "dashboards-reporting", "name": "Dashboards & Reporting", "icon": "bar-chart", "description": "Reports that show where to act." },
     { "id": "data-modeling", "name": "Data Modeling", "icon": "database", "description": "The data structures behind reliable numbers." }
   ],
+  "areas": [
+    { "id": "finance", "name": "Finance" },
+    { "id": "operations", "name": "Operations" },
+    { "id": "sales", "name": "Sales" }
+  ],
   "projects": [
     {
       "id": "forecasting-web-app",
       "category": "apps-tools",
+      "areas": ["operations"],
+      "ai": true,
       "company": "glovo",
       "title": "Forecasting web app",
       "description": "Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.",
@@ -24,6 +31,8 @@
     {
       "id": "cash-flow-tools",
       "category": "apps-tools",
+      "areas": ["finance"],
+      "ai": false,
       "company": "oslo",
       "title": "Cash flow calculation tools",
       "description": "Automated the cash flow calculation of 3 entities in an Excel file connected to the ERP, for any period chosen by the user.",
@@ -34,6 +43,8 @@
     {
       "id": "ai-forecast-adjustments",
       "category": "automation-ai",
+      "areas": ["operations"],
+      "ai": true,
       "company": "glovo",
       "title": "AI skills for forecast adjustments",
       "description": "Created AI skills to automate forecast adjustments.",
@@ -44,6 +55,8 @@
     {
       "id": "vat-automation",
       "category": "automation-ai",
+      "areas": ["finance"],
+      "ai": false,
       "company": "oslo",
       "title": "VAT calculation automation",
       "description": "Automated the monthly VAT calculation on unmatched supplier entries, from the ERP to each VAT account, with a VBA macro.",
@@ -54,6 +67,8 @@
     {
       "id": "aged-receivables",
       "category": "dashboards-reporting",
+      "areas": ["finance"],
+      "ai": false,
       "company": "oslo",
       "title": "Aged receivables reporting",
       "description": "Automated aged receivables reporting by business unit and by sales representative to support cash collection and cash flow monitoring.",
@@ -64,6 +79,8 @@
     {
       "id": "sales-performance-reporting",
       "category": "dashboards-reporting",
+      "areas": ["operations", "sales"],
+      "ai": false,
       "company": "oslo",
       "title": "Production plan & sales performance reporting",
       "description": "Rebuilt a business unit's production plan and created sales performance dashboards for management and for each sales representative.",
@@ -74,6 +91,8 @@
     {
       "id": "revenue-recognition",
       "category": "data-modeling",
+      "areas": ["finance"],
+      "ai": false,
       "company": "oslo",
       "title": "Revenue recognition model",
       "description": "Designed a data model that spreads the revenue of each invoice line over the months of the activity, instead of booking it all on the invoice date.",

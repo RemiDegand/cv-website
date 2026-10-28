@@ -403,14 +403,40 @@ h4 { font-size: 1.1rem; }
 @media (max-width: 560px) { .cat-overview { gap: 12px; } .cat-tile { padding: 14px; gap: 10px; } .cat-tile .cat-icon { width: 34px; height: 34px; } .cat-tile strong { font-size: 0.9rem; line-height: 1.15; } .cat-tile .cat-desc { font-size: 0.8rem; } }
 @media (prefers-reduced-motion: reduce) { .cat-tile, .cat-icon { transition: none; } .cat-tile:hover { transform: none; } }
 
+/* Filters under the tiles: business area buttons (one at a time) + "Uses AI" on/off switch.
+   script.js hides the cards that don't match, then the categories left empty (section + tile).
+   Each button shows how many projects it would give; a button that would give none is disabled */
+.cat-overview:has(+ .filters:not([hidden])) { margin-bottom: 24px; }
+.filters { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-bottom: 48px; }
+.filters[hidden], .cat-tile[hidden], .cat-section[hidden], .cat-grid .card[hidden] { display: none; }
+.filters-label { color: var(--text-muted); font-size: 0.875rem; font-weight: 600; }
+.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-chip, .filter-switch { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--text); font: inherit; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.filter-chip:hover:not(:disabled), .filter-switch:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.filter-chip:focus-visible, .filter-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.filter-chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.filter-chip:disabled, .filter-switch:disabled { opacity: 0.45; cursor: default; }
+.filter-count { min-width: 1.4em; padding: 0 6px; border-radius: 999px; background: var(--bg-soft); color: var(--text-muted); font-size: 0.75rem; font-weight: 600; line-height: 1.6; text-align: center; }
+.filter-chip[aria-pressed="true"] .filter-count { background: rgba(255, 255, 255, 0.22); color: #fff; }
+/* The switch sits at the right end of the row (under the chips on phones) */
+.filter-switch { margin-left: auto; padding-left: 10px; }
+.filter-ai-icon { color: var(--accent); }
+.switch-track { position: relative; flex: none; width: 34px; height: 20px; border-radius: 999px; background: var(--border); transition: background-color 0.2s ease; }
+.switch-track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.2); transition: transform 0.2s ease; }
+.filter-switch[aria-checked="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.filter-switch[aria-checked="true"] .switch-track { background: var(--accent); }
+.filter-switch[aria-checked="true"] .switch-track::after { transform: translateX(14px); }
+@media (max-width: 720px) { .filters { gap: 10px; } .filters-label { width: 100%; } .filter-switch { margin-left: 0; } }
+@media (prefers-reduced-motion: reduce) { .filter-chip, .filter-switch, .switch-track, .switch-track::after { transition: none; } }
+
 /* One section per category: thin line on top, icon + heading + description, cards 2 per row (1 on phones) */
-.cat-section + .cat-section { margin-top: 56px; }
+.cat-section:not([hidden]) ~ .cat-section { margin-top: 56px; }   /* not on the first section shown */
 /* Icon and title on the same line (centred on each other), description underneath, aligned with the title */
-.cat-section-head { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 6px 16px; margin-bottom: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+.cat-section-head { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 6px 16px; margin-bottom: 24px; }
 .cat-section-head > div { display: contents; }   /* the title and description sit in the grid directly */
 .cat-section-head h2 { margin: 0; font-size: 1.4rem; }
 .cat-section-head .cat-desc { grid-column: 2; }
-.cat-overview + .cat-section .cat-section-head { border-top: 0; padding-top: 0; }   /* no line right under the tiles */
+.cat-section:not([hidden]) ~ .cat-section .cat-section-head { padding-top: 24px; border-top: 1px solid var(--border); }   /* no line above the first section shown */
 .cat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 @media (max-width: 720px) { .cat-grid { grid-template-columns: minmax(0, 1fr); } }
 /* Every card the same size: script.js sets --card-h to the tallest card's height (2 columns only;

@@ -61,6 +61,17 @@
           </a>
         </nav>
 
+        <div class="filters" role="group" aria-label="Filter projects" hidden>
+          <span class="filters-label">Business area</span>
+          <div class="filter-chips">
+            <button type="button" class="filter-chip" data-area="" aria-pressed="true">All <span class="filter-count"></span></button>
+            <button type="button" class="filter-chip" data-area="finance" aria-pressed="false">Finance <span class="filter-count"></span></button>
+            <button type="button" class="filter-chip" data-area="operations" aria-pressed="false">Operations <span class="filter-count"></span></button>
+            <button type="button" class="filter-chip" data-area="sales" aria-pressed="false">Sales <span class="filter-count"></span></button>
+          </div>
+          <button type="button" class="filter-switch" role="switch" aria-checked="false"><span class="switch-track" aria-hidden="true"></span><svg class="filter-ai-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg>Uses AI <span class="filter-count"></span></button>
+        </div>
+
         <div class="cat-section" id="apps-tools">
           <header class="cat-section-head">
             <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span>
@@ -70,7 +81,7 @@
             </div>
           </header>
           <div class="cat-grid">
-            <article class="card project" style="--brand: #FED42A">
+            <article class="card project" style="--brand: #FED42A" data-areas="operations" data-ai="true">
               <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
               <h4><a href="project-forecasting-web-app.html" class="project-link">Forecasting web app</a></h4>
               <p class="card-desc">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
@@ -80,7 +91,7 @@
               </ul>
             </article>
 
-            <article class="card project" style="--brand: #D3A26E">
+            <article class="card project" style="--brand: #D3A26E" data-areas="finance" data-ai="false">
               <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
               <h4><a href="project-cash-flow-tools.html" class="project-link">Cash flow calculation tools</a></h4>
               <p class="card-desc">Automated the cash flow calculation of 3 entities in an Excel file connected to the ERP, for any period chosen by the user.</p>
@@ -101,7 +112,7 @@
             </div>
           </header>
           <div class="cat-grid">
-            <article class="card project" style="--brand: #FED42A">
+            <article class="card project" style="--brand: #FED42A" data-areas="operations" data-ai="true">
               <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
               <h4><a href="project-ai-forecast-adjustments.html" class="project-link">AI skills for forecast adjustments</a></h4>
               <p class="card-desc">Created AI skills to automate forecast adjustments.</p>
@@ -110,7 +121,7 @@
               </ul>
             </article>
 
-            <article class="card project" style="--brand: #D3A26E">
+            <article class="card project" style="--brand: #D3A26E" data-areas="finance" data-ai="false">
               <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
               <h4><a href="project-vat-automation.html" class="project-link">VAT calculation automation</a></h4>
               <p class="card-desc">Automated the monthly VAT calculation on unmatched supplier entries, from the ERP to each VAT account, with a VBA macro.</p>
@@ -131,7 +142,7 @@
             </div>
           </header>
           <div class="cat-grid">
-            <article class="card project" style="--brand: #D3A26E">
+            <article class="card project" style="--brand: #D3A26E" data-areas="finance" data-ai="false">
               <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
               <h4><a href="project-aged-receivables.html" class="project-link">Aged receivables reporting</a></h4>
               <p class="card-desc">Automated aged receivables reporting by business unit and by sales representative to support cash collection and cash flow monitoring.</p>
@@ -141,7 +152,7 @@
               </ul>
             </article>
 
-            <article class="card project" style="--brand: #D3A26E">
+            <article class="card project" style="--brand: #D3A26E" data-areas="operations sales" data-ai="false">
               <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
               <h4><a href="project-sales-performance-reporting.html" class="project-link">Production plan &amp; sales performance reporting</a></h4>
               <p class="card-desc">Rebuilt a business unit's production plan and created sales performance dashboards for management and for each sales representative.</p>
@@ -162,7 +173,7 @@
             </div>
           </header>
           <div class="cat-grid">
-            <article class="card project" style="--brand: #D3A26E">
+            <article class="card project" style="--brand: #D3A26E" data-areas="finance" data-ai="false">
               <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
               <h4><a href="project-revenue-recognition.html" class="project-link">Revenue recognition model</a></h4>
               <p class="card-desc">Designed a data model that spreads the revenue of each invoice line over the months of the activity, instead of booking it all on the invoice date.</p>

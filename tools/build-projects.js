@@ -1,7 +1,7 @@
 // Builds the project cards of the website from content/projects.json (the display space).
 //   node tools/build-projects.js
 // Rewrites only what sits between the build markers:
-//   projects.html  <!-- build:projects -->      … <!-- /build:projects -->       (category tiles + sections + cards)
+//   projects.html  <!-- build:projects -->      … <!-- /build:projects -->       (category tiles + filters + sections + cards)
 //   index.html     <!-- build:home-projects --> … <!-- /build:home-projects -->  (Key projects carousel: projects with "home": true)
 // Everything known about a project lives in knowledge/projects/<id>.md (for the chatbot); the
 // project pages (project-<id>.html) are still edited by hand.
@@ -31,7 +31,7 @@ const card = (p, pad) => {
   const co = data.companies[p.company];
   if (!co) throw new Error(`Unknown company "${p.company}" in project "${p.id}"`);
   return [
-    `<article class="card project" style="--brand: ${co.brand}">`,
+    `<article class="card project" style="--brand: ${co.brand}" data-areas="${p.areas.join(" ")}" data-ai="${p.ai}">`,
     `  <p class="project-org"><img src="${co.logo}" alt="${esc(co.name)} logo" class="project-logo" width="24" height="24">${esc(co.name)} · ${esc(co.industry)}</p>`,
     `  <h4><a href="project-${p.id}.html" class="project-link">${esc(p.title)}</a></h4>`,
     `  <p class="card-desc">${esc(p.description)}</p>`,
@@ -54,6 +54,19 @@ const projectsHtml = () => [
   ].join("\n")),
   `        </nav>`,
   "",
+  // Filters: one button per business area (only areas that have projects, so a new area such as
+  // HR shows up by itself once a project uses it) + the "Uses AI" switch. Hidden until script.js
+  // makes them work; it also writes the counts
+  `        <div class="filters" role="group" aria-label="Filter projects" hidden>`,
+  `          <span class="filters-label">Business area</span>`,
+  `          <div class="filter-chips">`,
+  `            <button type="button" class="filter-chip" data-area="" aria-pressed="true">All <span class="filter-count"></span></button>`,
+  ...data.areas.filter((a) => data.projects.some((p) => p.areas.includes(a.id))).map((a) =>
+    `            <button type="button" class="filter-chip" data-area="${a.id}" aria-pressed="false">${esc(a.name)} <span class="filter-count"></span></button>`),
+  `          </div>`,
+  `          <button type="button" class="filter-switch" role="switch" aria-checked="false"><span class="switch-track" aria-hidden="true"></span><svg class="filter-ai-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons.sparkles}</svg>Uses AI <span class="filter-count"></span></button>`,
+  `        </div>`,
+  "",
   data.categories.map((c) => {
     const items = data.projects.filter((p) => p.category === c.id);
     return [
@@ -75,9 +88,12 @@ const projectsHtml = () => [
 
 const homeHtml = () => data.projects.filter((p) => p.home).map((p) => card(p, "              ")).join("\n\n");
 
-// Every project needs a known category, and its page must exist
+// Every project needs a known category, known business area(s), "ai" true/false, and its page must exist
 data.projects.forEach((p) => {
   if (!data.categories.some((c) => c.id === p.category)) throw new Error(`Unknown category "${p.category}" in project "${p.id}"`);
+  if (!Array.isArray(p.areas) || !p.areas.length) throw new Error(`Project "${p.id}" needs at least one business area`);
+  p.areas.forEach((a) => { if (!data.areas.some((x) => x.id === a)) throw new Error(`Unknown business area "${a}" in project "${p.id}"`); });
+  if (typeof p.ai !== "boolean") throw new Error(`Project "${p.id}" needs "ai": true or false`);
   if (!fs.existsSync(path.join(root, `project-${p.id}.html`))) throw new Error(`Missing page project-${p.id}.html`);
 });
 
