@@ -71,7 +71,7 @@
       "ai": false,
       "company": "oslo",
       "title": "Aged receivables reporting",
-      "description": "Automated aged receivables reporting by business unit and by sales representative to support cash collection and cash flow monitoring.",
+      "description": "Automated aged receivables reporting by business unit and by sales representative to support and optimize cash collection and cash flow monitoring.",
       "result": { "key": "3", "text": "business units covered" },
       "tags": ["MyReport Data (Data modeling)", "MyReport Page (Data visualization)", "SQL"],
       "home": false

@@ -466,6 +466,7 @@ h4 { font-size: 1.1rem; }
 .project-page-head { padding-top: 20px; border-top: 4px solid var(--brand, var(--accent)); }
 .project-page-title { font-size: 2.4rem; margin: 0 0 16px; }
 .project-page-head .lead { margin: 0; color: var(--text); }
+.project-page-head .project-context { margin: 8px 0 0; color: var(--text-muted); font-size: 0.95rem; }   /* e.g. "Built during my … internship" */
 .project-page .project-result { display: inline-flex; margin-top: 20px; padding: 8px 14px; font-size: 1rem; }
 .project-page .project-result strong { font-size: 1.15rem; }
 
@@ -489,7 +490,11 @@ h4 { font-size: 1.1rem; }
 
 /* Payment status chips, same colours as the dashboards (green = not due, then yellow → dark red) */
 .project-page .project-statuses { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; }
-.status { padding: 2px 10px; border-radius: 999px; color: var(--text); font-size: 0.8rem; font-weight: 600; background: color-mix(in srgb, var(--dot) 22%, var(--bg)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--dot) 50%, transparent); }
+/* The 5 statuses stay together on one line (they wrap only on very narrow phones) */
+.status-list { display: inline-flex; flex-wrap: nowrap; gap: 6px; }
+@media (max-width: 720px) { .status-list { gap: 4px; } .status-list .status { padding: 2px 6px; font-size: 0.68rem; } }
+@media (max-width: 359px) { .status-list { flex-wrap: wrap; } }
+.status { padding: 2px 8px; border-radius: 999px; color: var(--text); font-size: 0.72rem; font-weight: 600; white-space: nowrap; background: color-mix(in srgb, var(--dot) 22%, var(--bg)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--dot) 50%, transparent); }
 .status-ok { --dot: #67D1C4; }
 .status-1 { --dot: #F5B95F; }
 .status-2 { --dot: #EE9550; }
