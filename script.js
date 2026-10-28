@@ -355,4 +355,48 @@ if (blockNav) {
   update();
 }
 
+// VAT page, "How it started": replays the accountant copying 3 VAT amounts from the ERP into
+// Excel, character by character, then the total that doesn't match (the 3rd amount is mistyped).
+// Starts once on screen and loops. The HTML holds the final state, kept as is with "reduce motion".
+const copySim = document.querySelector(".copy-sim");
+if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const erpRows = [...copySim.querySelectorAll(".copy-sim-erp tbody tr")];
+  const cells = [...copySim.querySelectorAll(".copy-sim-excel tbody [data-typed]")];
+  const total = copySim.querySelector(".copy-sim-total");
+  const status = copySim.querySelector(".copy-sim-status");
+  const finalStatus = status.textContent;
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const type = async (cell, speed) => {
+    cell.classList.add("is-typing");
+    for (const ch of cell.dataset.typed) { cell.textContent += ch; await wait(speed); }
+    await wait(350);
+    cell.classList.remove("is-typing");
+  };
+  const run = async () => {
+    for (;;) {
+      copySim.classList.remove("is-wrong");
+      [...cells, total].forEach((cell) => { cell.textContent = ""; });
+      await wait(900);
+      for (const [i, cell] of cells.entries()) {
+        status.textContent = `Copying entry ${i + 1} of ${cells.length} by hand…`;
+        erpRows[i].classList.add("is-copying");
+        await wait(700);
+        await type(cell, 160);
+        erpRows[i].classList.remove("is-copying");
+        await wait(300);
+      }
+      status.textContent = "Adding up the VAT…";
+      await type(total, 90);
+      await wait(400);
+      copySim.classList.add("is-wrong");
+      status.textContent = finalStatus;
+      await wait(4500);
+    }
+  };
+  const start = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
+  }, { rootMargin: "0px 0px -20% 0px" });
+  start.observe(copySim);
+}
+
 // Later: chatbot window (Phase 2).

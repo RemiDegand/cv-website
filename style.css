@@ -1083,3 +1083,31 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .ba-row { grid-template-columns: 5.5rem minmax(0, 1fr) minmax(0, 1fr); }
   .ba-row > * { padding: 8px 10px; font-size: 0.8rem; }
 }
+
+/* VAT page, "How it started": the accountant copies VAT amounts from the ERP into Excel by hand,
+   in a loop (script.js), and the 3rd one is mistyped. Without JS or with "reduce motion": final state */
+.copy-sim { margin-top: 8px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); }
+.copy-sim-panels { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 12px; }
+.copy-sim-panel { overflow: hidden; border: 1px solid #e1e4ea; border-radius: 8px; background: #fff; color: #1f2937; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.copy-sim-title { margin: 0; padding: 6px 10px; font-size: 0.72rem; font-weight: 600; }
+.copy-sim-erp .copy-sim-title { background: #1d2230; color: #fff; }
+.copy-sim-excel .copy-sim-title { background: #107c41; color: #fff; }
+.copy-sim table { width: 100%; border-collapse: collapse; }
+.copy-sim th, .copy-sim td { height: 26px; padding: 0 8px; border-top: 1px solid #e1e4ea; text-align: left; white-space: nowrap; }
+.copy-sim th { color: #6b7280; font-size: 0.7rem; font-weight: 600; }
+.copy-sim .num { text-align: right; }
+.copy-sim tfoot td { font-weight: 700; border-top: 2px solid #c8ced8; }
+.copy-sim td { transition: background-color 0.3s ease; }
+.copy-sim-arrow { color: var(--text-muted); font-size: 1.3rem; }
+.copy-sim-erp tr.is-copying td { background: #fff3c4; }   /* the line being copied */
+.copy-sim-excel td.is-typing { outline: 2px solid #107c41; outline-offset: -2px; }   /* Excel's selected cell */
+.copy-sim-excel td.is-typing::after { content: "|"; margin-left: 1px; animation: copy-sim-caret 0.8s steps(1) infinite; }
+@keyframes copy-sim-caret { 50% { opacity: 0; } }
+.copy-sim.is-wrong .copy-sim-typo, .copy-sim.is-wrong .copy-sim-total { background: #fbd5d5; color: #b42318; }
+.copy-sim .copy-sim-status { min-height: 1.5em; margin: 12px 0 0; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+.copy-sim.is-wrong .copy-sim-status { color: #b42318; font-weight: 600; }
+@media (max-width: 720px) {
+  .copy-sim { padding: 14px; }
+  .copy-sim-panels { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .copy-sim-arrow { justify-self: center; transform: rotate(90deg); }
+}

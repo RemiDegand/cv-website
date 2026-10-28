@@ -68,11 +68,39 @@
             </header>
             <div class="block-part reveal">
               <h3>How it started</h3>
-              <div class="story reveal-stagger" aria-label="Conversation that started the project">
-                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">Is this month's VAT ready?</span></p>
-                <p class="story-line story-right"><span class="story-who">Accountant</span><span class="story-bubble">Not yet, I'm still copying the supplier invoices one by one.</span></p>
-                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">Again? It's like that every month.</span></p>
-                <p class="story-line story-right"><span class="story-who">Accountant</span><span class="story-bubble story-typing" aria-label="…"><span></span><span></span><span></span></span></p>
+              <!-- Simulation instead of a conversation: the accountant copies 3 VAT amounts from the ERP into
+                   Excel, the 3rd is mistyped (86.80 instead of 68.80) and the total no longer matches.
+                   The HTML is the final state (shown as is without JS or with "reduce motion");
+                   script.js empties it and replays it in a loop. Amounts from the extract shown in Part 2 -->
+              <div class="copy-sim is-wrong" role="img" aria-label="Simulation: the accountant copies 3 VAT amounts from the ERP into Excel by hand. The third one is mistyped, 86.80 instead of 68.80, so the Excel total no longer matches the ERP.">
+                <div class="copy-sim-panels" aria-hidden="true">
+                  <div class="copy-sim-panel copy-sim-erp">
+                    <p class="copy-sim-title">ERP · Journal A1</p>
+                    <table>
+                      <thead><tr><th>Entry</th><th>Supplier</th><th class="num">VAT</th></tr></thead>
+                      <tbody>
+                        <tr><td>237685</td><td>Supplier 1</td><td class="num">46.99</td></tr>
+                        <tr><td>238296</td><td>Supplier 2</td><td class="num">13.60</td></tr>
+                        <tr><td>239224</td><td>Supplier 3</td><td class="num">68.80</td></tr>
+                      </tbody>
+                      <tfoot><tr><td colspan="2">Total</td><td class="num">129.39</td></tr></tfoot>
+                    </table>
+                  </div>
+                  <span class="copy-sim-arrow">→</span>
+                  <div class="copy-sim-panel copy-sim-excel">
+                    <p class="copy-sim-title">Excel · VAT</p>
+                    <table>
+                      <thead><tr><th>Entry</th><th>Supplier</th><th class="num">VAT</th></tr></thead>
+                      <tbody>
+                        <tr><td>237685</td><td>Supplier 1</td><td class="num" data-typed="46.99">46.99</td></tr>
+                        <tr><td>238296</td><td>Supplier 2</td><td class="num" data-typed="13.60">13.60</td></tr>
+                        <tr><td>239224</td><td>Supplier 3</td><td class="num copy-sim-typo" data-typed="86.80">86.80</td></tr>
+                      </tbody>
+                      <tfoot><tr><td colspan="2">Total</td><td class="num copy-sim-total" data-typed="147.39">147.39</td></tr></tfoot>
+                    </table>
+                  </div>
+                </div>
+                <p class="copy-sim-status" aria-hidden="true">Total doesn't match the ERP: 68.80 was typed 86.80.</p>
               </div>
               <p class="story-end">A monthly task done by hand had to become automatic.</p>
             </div>
