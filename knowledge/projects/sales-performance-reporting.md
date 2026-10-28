@@ -1,6 +1,6 @@
 ---
 id: sales-performance-reporting
-title: Production schedule & sales performance reporting
+title: Production schedule & sales reporting
 company: OSLO
 industry: IT & SaaS Solutions
 experience: Data Analyst Intern, Information Systems department, OSLO (Sep – Dec 2025, Villeneuve d'Ascq, France, on site)
@@ -12,13 +12,13 @@ sources: [projects/Reporting Sales and Prod/Content.docx (written by Rémi, 22 O
 updated: 2026-10-22
 ---
 
-# Production schedule & sales performance reporting (OSLO)
+# Production schedule & sales reporting (OSLO)
 
 ## Summary
 At OSLO, Rémi rebuilt the Excel production schedule of a business unit and created MyReport dashboards to steer its sales performance: one global dashboard for management and one dashboard for each sales representative. The production data became reliable and the business unit's activity can be steered with clear figures. This project replaces two earlier entries, "production planning framework" and "business unit performance reporting".
 
 ## Context
-The production schedule and sales performance reporting project was carried out during Rémi's Data Analyst internship at OSLO, for one business unit that sells payment (checkout) solutions, offers several products, and makes about €3M in revenue a year with several hundred clients. Every order was tracked in an Excel file used as the production schedule, shared by the whole team.
+The production schedule and sales reporting project was carried out during Rémi's Data Analyst internship at OSLO, for one business unit that sells payment (checkout) solutions, offers several products, and makes about €3M in revenue a year with several hundred clients. Every order was tracked in an Excel file used as the production schedule, shared by the whole team.
 
 ## Problem
 - The production schedule file was badly structured: several tables, one per order status, on the same sheet, so the data could not be used for analysis.
@@ -59,7 +59,7 @@ Management (global dashboard, weekly according to the OSLO summary), each sales 
 Excel (data validation, conditional formatting, cell protection), MyReport Data (data modeling), MyReport Page (data visualization).
 
 ## Questions a recruiter might ask
-- **What is the production schedule & sales performance project?** → At OSLO, Rémi rebuilt a business unit's Excel production schedule into one clean, protected table, then built MyReport dashboards on it: a global one for management and one per sales representative.
+- **What is the production schedule & sales reporting project?** → At OSLO, Rémi rebuilt a business unit's Excel production schedule into one clean, protected table, then built MyReport dashboards on it: a global one for management and one per sales representative.
 - **What was wrong before?** → The schedule had several tables per order status on one sheet, anyone could edit it, and there were no reliable statistics.
 - **What do the dashboards show?** → Revenue, margin, order count, new business and target, by sales representative, product, production manager and order status, per month, quarter and year, plus a client database.
 - **What was the impact?** → Reliable production data and a structured way to steer sales performance; the reporting is used weekly by management.

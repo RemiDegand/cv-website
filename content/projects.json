@@ -82,7 +82,7 @@
       "areas": ["operations", "sales"],
       "ai": false,
       "company": "oslo",
-      "title": "Production schedule & sales performance reporting",
+      "title": "Production schedule & sales reporting",
       "description": "Rebuilt a business unit's production schedule and created sales performance dashboards for management and for each sales representative.",
       "result": { "key": "~1,000 orders", "text": "a year, reporting used weekly by management" },
       "tags": ["Excel", "MyReport Data (Data modeling)", "MyReport Page (Data visualization)"],
