@@ -7,7 +7,7 @@ experience: Data Analyst Intern, Information Systems department, OSLO (Sep – D
 category: Automation & AI
 on_site: true
 page: project-vat-automation.html
-tools: [Excel, MyReport Data (ETL, data modeling), VBA, Finance]
+tools: [Excel (VBA), MyReport Data (ETL, data modeling)]
 sources: [projects/VAT Automation/Content.docx (written by Rémi, 27 Oct 2026; local only), projects/VAT Automation/Controle_Fournisseur_Non_Lettre.xltm (the file with its VBA macro; local only), docs/CV website.md (OSLO summary), about-me.md]
 updated: 2026-10-27
 ---
@@ -15,7 +15,7 @@ updated: 2026-10-27
 # VAT calculation automation (OSLO)
 
 ## Summary
-At OSLO, Rémi automated the monthly VAT calculation on unmatched supplier entries: an Excel file connected to the ERP through MyReport extracts the right accounting entries, calculates the VAT of each entry, and a VBA macro puts each amount in its VAT account column and freezes the data. It saves about 1 h 30 a month (Rémi's estimate) and removes manual entries.
+At OSLO, Rémi automated the monthly VAT calculation on unmatched supplier entries: an Excel file connected to the ERP through MyReport extracts the right accounting entries, calculates the VAT of each entry, and a VBA macro puts each amount in its VAT account column and freezes the data. It saves about 2 hours a month (Rémi, 29 Oct 2026), time freed for more valuable tasks, and removes manual entries.
 
 ## Context
 OSLO sells IT solutions and software licences and makes about €10M in revenue a year. Every month, the accounting department had to calculate, for each VAT account, the VAT on the supplier entries of journal A1 that were not yet matched. This was done in an Excel file filled in by hand: the amounts of the invoices concerned were copied one by one to calculate the total VAT.
@@ -35,7 +35,7 @@ An Excel file that automates the extraction of the accounting entries and the ca
 Workbook structure (from the file): Feuil2 = MyReport extract, one block per supplier (account and name) with business unit, entry number, line, document, date, offset account, amount, side, VAT account, VAT amount and the 4 VAT columns; Feuil1 = supplier ledger (journal, dates, label, debit, credit) with the 4 VAT columns filled by the macro.
 
 ## Results and impact
-- About 1 h 30 saved per month (estimate in Rémi's document; the OSLO summary on the CV says 2 hours: to align).
+- About 2 hours saved per month, time freed for more valuable tasks (Rémi, 29 Oct 2026; Rémi's first document said 1 h 30, the CV and OSLO summary say 2 hours).
 - No more manual entries, so fewer errors and a more reliable calculation.
 - A secured recurring accounting process.
 
@@ -43,13 +43,12 @@ Workbook structure (from the file): Feuil2 = MyReport extract, one block per sup
 The accounting department, every month.
 
 ## Tools
-Excel, MyReport Data (ETL, data modeling), VBA, the company's ERP.
+Excel (VBA macro), MyReport Data (ETL, data modeling), the company's ERP.
 
 ## Questions a recruiter might ask
-- **Give an example of an automation Rémi built.** → At OSLO, the monthly VAT calculation on unmatched supplier entries: an Excel file connected to the ERP and a VBA macro that assigns each VAT amount to its account, saving about 1 h 30 a month and removing manual entries.
+- **Give an example of an automation Rémi built.** → At OSLO, the monthly VAT calculation on unmatched supplier entries: an Excel file connected to the ERP and a VBA macro that assigns each VAT amount to its account, saving about 2 hours a month and removing manual entries.
 - **Did Rémi write code at OSLO?** → Yes, a VBA macro that aggregates the VAT by entry, fills the VAT columns, freezes the values and handles credit notes.
 - **Why freeze the values?** → So that later updates in the ERP don't change a month that has already been calculated.
 
 ## Open questions
-- 1 h 30 (document) or 2 hours (CV and OSLO summary) saved per month?
 - The website story (Manager / Accountant) was written by Claude: wording and roles to confirm.
