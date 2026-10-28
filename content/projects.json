@@ -84,7 +84,7 @@
       "company": "oslo",
       "title": "Production schedule & sales reporting",
       "description": "Rebuilt a business unit's production schedule and created sales performance dashboards for management and for each sales representative.",
-      "result": { "key": "~1,000 orders a year", "text": "covered, weekly reporting for management" },
+      "result": { "key": "~1,000 orders", "text": "a year covered, weekly reporting for management" },
       "tags": ["Excel (Advanced)", "MyReport Data (Data modeling)", "MyReport Page (Data visualization)"],
       "home": false
     },
