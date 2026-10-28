@@ -46,8 +46,8 @@
       "areas": ["operations"],
       "ai": true,
       "company": "glovo",
-      "title": "AI skills for forecast adjustments",
-      "description": "Created AI skills to automate forecast adjustments.",
+      "title": "AI automation skills for forecast adjustments",
+      "description": "Created AI automation skills for forecast adjustments.",
       "result": null,
       "tags": ["LLMs", "OpenCode"],
       "home": false
