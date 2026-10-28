@@ -7,7 +7,7 @@ experience: Data Analyst Intern, Information Systems department, OSLO (Sep – D
 category: Dashboards & Reporting
 on_site: true
 page: project-sales-performance-reporting.html
-tools: [Excel, MyReport Data (data modeling), MyReport Page (data visualization)]
+tools: [Excel (advanced), MyReport Data (data modeling), MyReport Page (data visualization)]
 sources: [projects/Reporting Sales and Prod/Content.docx (written by Rémi, 22 Oct 2026; local only), projects/Reporting Sales and Prod/Plan de Prod Randomisé Enligsh.xlsx (anonymised production schedule; local only), anonymised dashboard PDFs (local only; screens in images/projects/sales-performance-*.webp), docs/CV website.md (OSLO summary), about-me.md]
 updated: 2026-10-22
 ---
@@ -56,7 +56,7 @@ The production schedule and sales reporting project was carried out during Rémi
 Management (global dashboard, weekly according to the OSLO summary), each sales representative (own dashboard), production managers and sales administration (production schedule).
 
 ## Tools
-Excel (data validation, conditional formatting, cell protection), MyReport Data (data modeling), MyReport Page (data visualization).
+Excel (advanced: data validation with drop-down lists read from reference sheets, 31 conditional formatting rules written as formulas (COUNTIF for duplicates, TODAY() for overdue billing dates), protected ranges by role, XLOOKUP for client locations, automatic order number with IF/COUNTA/MAX, SUMIF/SUMIFS check totals by sales team and product; checked in the anonymised file on 28 Oct 2026), MyReport Data (data modeling), MyReport Page (data visualization).
 
 ## Questions a recruiter might ask
 - **What is the production schedule & sales reporting project?** → At OSLO, Rémi rebuilt a business unit's Excel production schedule into one clean, protected table, then built MyReport dashboards on it: a global one for management and one per sales representative.
