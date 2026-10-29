@@ -9,7 +9,7 @@ on_site: true
 page: project-cash-flow-tools.html
 tools: [Excel, MyReport Data (ETL, data modeling), Finance]
 sources: [projects/Cashflow tools/Content.docx (written by Rémi, 27 Oct 2026; local only), projects/Cashflow tools/Cashflow Oslo V2.xlsx (file with randomised amounts; local only), docs/CV website.md (OSLO summary), about-me.md]
-updated: 2026-10-27
+updated: 2026-10-29
 ---
 
 # Cash flow calculation tools (OSLO)
@@ -18,11 +18,11 @@ updated: 2026-10-27
 At OSLO, Rémi automated the cash flow calculation of the company and 2 other entities (3 in total) in an Excel file connected to the ERP through MyReport. The user picks a start and end date, refreshes, and gets a reliable, up-to-date cash flow with checks and financial ratios.
 
 ## Context
-OSLO sells IT solutions and software licences and makes about €10M in revenue a year. It calculated its cash flow, and that of 2 other entities, in an Excel file. To feed it, accounting entries were exported from the ERP as CSV files, copied into the file, and completed with several manual entries.
+OSLO sells IT solutions and software licences and makes about €10M in revenue a year. It calculated its cash flow, and that of 2 other entities, in an Excel file. To feed it, accounting entries were exported from the ERP as CSV files, copied into the file, and completed with several complementary manual entries.
 
 ## Problem
 - The file had become heavy and unstable: every year's extractions were stored in the same file, so it crashed regularly.
-- Recurring manual entries increased the risk of errors and made the cash flow less reliable.
+- Copying and pasting the exports (risk of pasting into the wrong sheet, missing or duplicating rows) and recurring complementary manual entries increased the risk of errors and made the cash flow less reliable.
 - The process was time-consuming and not suited to regular use.
 
 ## What I built
@@ -39,7 +39,7 @@ Workbook structure (from the file): Génération (MyReport extract for the perio
 ## Results and impact
 - The cash flow calculation is reliable and automated, with an up-to-date financial view for managing the company's cash.
 - The user only picks the period and refreshes.
-- No stored extractions, so the file stays light; no manual entries.
+- No stored extractions, so the file stays light; no copy-paste and no manual entries.
 
 ## Users
 Not named in the document ("the user"); used to manage the company's cash (financial steering).
@@ -49,7 +49,7 @@ Excel, MyReport Data (ETL, data modeling), the company's ERP.
 
 ## Questions a recruiter might ask
 - **What did Rémi build for cash flow at OSLO?** → An Excel file connected to the ERP through MyReport that calculates the cash flow of 3 entities for any period, with checks and financial ratios.
-- **What was wrong before?** → Entries were exported from the ERP as CSV and pasted into one file that stored every year, so it was heavy, crashed often and needed manual entries.
+- **What was wrong before?** → Entries were exported from the ERP as CSV and pasted into one file that stored every year, so it was heavy, crashed often and needed complementary manual entries; the copy-paste and the manual entries were a risk of errors.
 - **How does it make the numbers reliable?** → Each account is mapped automatically to a cash flow category, and a control table checks that everything balances and shows where an error comes from.
 
 ## Open questions
