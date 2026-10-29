@@ -61,4 +61,4 @@ MyReport Data (data modeling), SQL database (invoice lines), finance knowledge (
 ## Open questions
 - The scope: the document mentions "the Business Unit"; one business unit or the whole company?
 - How the discrepancy (€350k → €8k) was measured.
-- The website story (Manager / Controller) was written by Claude: wording and roles to confirm.
+- The website story (29 Oct 2026, user's idea, wording by Claude): the Manager asks for a monthly revenue dashboard for the board meeting, with each contract spread over its months; the Data Analyst answers that one model matches the accounting but uses the invoice date, and the other spreads revenue but is several hundred k€ off. "Board meeting" is Claude's example of a reason: to confirm.
