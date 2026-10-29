@@ -23,6 +23,7 @@ OSLO sells software solutions and licences and makes about €10M in revenue a y
 - A first revenue recognition model, rarely used because its figures differed from the accounting by several hundred k€.
 
 ## Problem
+On the website (user, 29 Oct 2026): "No correct reporting or BI dashboard could show revenue allocated over time." Details from Content.docx:
 - The monthly view did not reflect the business unit's real economic activity: revenue was not spread over the duration of the contracts or services, so monthly activity analyses were biased.
 - Cross-analysis between financial and operational data was limited.
 - The existing revenue recognition model was not reliable: discrepancies of several hundred k€ (€350k a year in the result, see Results), unsuitable for decisions. (Content.docx gave "10–15%"; the user chose to show the amount instead, 29 Oct 2026.)
