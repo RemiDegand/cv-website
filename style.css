@@ -1202,8 +1202,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 /* Cash flow page, "What I built": the file at work (script.js). A step bar above the screen; the 3 views of the file
    sit in the same grid cell, so the screen keeps the height of the tallest. Cells marked b-* are filled in by script */
 .build-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 0 0 16px; padding: 0; list-style: none; counter-reset: build-step; font-size: 0.8rem; }
-.build-steps li { counter-increment: build-step; display: flex; align-items: center; gap: 6px; padding: 3px 10px 3px 3px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--text-muted); transition: border-color 0.3s ease, color 0.3s ease; }
-.build-steps li::before { content: counter(build-step); display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--bg-soft); font-size: 0.7rem; font-weight: 700; transition: background 0.3s ease, color 0.3s ease; }
+.build-steps li { counter-increment: build-step; display: flex; align-items: center; gap: 6px; padding: 3px 10px 3px 3px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--text-muted); }
+.build-steps li::before { content: counter(build-step); display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--bg-soft); font-size: 0.7rem; font-weight: 700; }
 .build-steps .is-done::before { content: "✓"; background: #dcf2df; color: #107c41; }
 .build-steps .is-on { border-color: var(--accent); color: var(--accent); font-weight: 600; }
 .build-steps .is-on::before { background: var(--accent); color: #fff; }
@@ -1224,4 +1224,10 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .build-sim td.b-gap.is-blank { background: none; }
 .build-sim .is-new { animation: build-flash 1.2s ease; }
 @keyframes build-flash { from { background-color: #b9e4c2; } }
+/* Short notes above the screen, one set per step (shown by script.js), arrows down to the cells like the other pages */
+.build-notes { display: grid; }
+.build-notes > .shot-notes { grid-area: 1 / 1; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; visibility: hidden; }
+.build-notes > .is-shown { visibility: visible; }
+.build-sim .shot-note { --reach: calc(26px + var(--bezel) + var(--bar) + var(--y, 0px) - 4px); align-self: end; padding: 6px 10px; font-size: 0.8rem; }
+@media (max-width: 720px) { .build-sim .shot-note::before, .build-sim .shot-note::after { display: none; } }   /* the sheet scrolls sideways: no arrows */
 .build-status { min-height: 2.9em; margin: 14px 0 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; }

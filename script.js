@@ -481,6 +481,7 @@ const buildSim = document.querySelector(".build-sim");
 if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const all = (sel) => [...buildSim.querySelectorAll(sel)];
   const steps = all(".build-steps li");
+  const notes = all(".build-notes > .shot-notes");
   const views = all(".build-views > .sheet-canvas");
   const tabs = all(".sheet-tabs span");
   const title = buildSim.querySelector(".monitor-title");
@@ -494,6 +495,7 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const step = (n, text) => {
     steps.forEach((li, i) => { li.classList.toggle("is-done", i < n); li.classList.toggle("is-on", i === n); });
+    notes.forEach((set, i) => set.classList.toggle("is-shown", i === Math.min(n, notes.length - 1)));   // the last step keeps its notes
     status.textContent = text;
   };
   const show = (view, sheet) => {
