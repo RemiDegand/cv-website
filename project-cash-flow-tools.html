@@ -76,7 +76,7 @@
                    The file size meter fills up, a busy cursor spins, Excel stops responding, then crashes.
                    The HTML is the final state (shown as is without JS or with "reduce motion"); script.js replays it
                    in a loop. Accounts and amounts are illustrative -->
-              <div class="paste-sim is-busy is-frozen is-crashed" role="img" aria-label="Simulation: the CFO copies all the accounting entries of the new quarter from the ERP and pastes them into the cash flow file, which already holds every past year. The file gets heavier and slower, Excel stops responding, then crashes.">
+              <div class="paste-sim is-busy is-frozen is-crashed" role="img" aria-label="Simulation: the CFO copies all the accounting entries of the new quarter from the ERP and pastes them into the cash flow file, which already holds one sheet per past quarter. The file gets heavier and slower, Excel stops responding, then crashes.">
                 <div class="paste-desk" aria-hidden="true">
                   <div class="paste-win paste-erp">
                     <p class="paste-win-bar">ERP · Export</p>
@@ -100,7 +100,7 @@
                         <tr><th>6</th><td>…</td><td>Every entry</td><td class="num">…</td></tr>
                       </tbody>
                     </table>
-                    <p class="paste-tabs"><span>2023</span><span>2024</span><span>Q1 2025</span><span>Q2 2025</span><span class="paste-new is-active">Q3 2025</span></p>
+                    <p class="paste-tabs"><span class="paste-new is-active">Q3 2025</span><span>Q2 2025</span><span>Q1 2025</span><span>Q4 2024</span><span>Q3 2024</span><span>Q2 2024</span><span>Q1 2024</span><span>Q4 2023</span><span>Q3 2023</span><span>Q2 2023</span><span>Q1 2023</span><span>Q4 2022</span><span>Q3 2022</span><span>Q2 2022</span><span>Q1 2022</span><span>Q4 2021</span><span>Q3 2021</span><span>Q2 2021</span><span>Q1 2021</span><b class="paste-tab-add">+</b></p>
                     <p class="paste-statusbar"><span class="paste-calc">Calculating: 58%</span><span class="paste-meter">File size <span class="paste-meter-bar"><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i></span></span></p>
                     <!-- Busy badge: appears as the file gets slower -->
                     <p class="paste-busy"><svg viewBox="0 0 20 20"><circle class="paste-busy-ring" cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="30 14"/></svg>Working…</p>
@@ -108,7 +108,7 @@
                   </div>
                   <p class="paste-taskbar"><i class="paste-app-erp"></i><i class="paste-app-xl"></i><span>CFO's computer</span></p>
                 </div>
-                <p class="paste-status" aria-hidden="true">The file held every year's entries: it slowed down, then crashed.</p>
+                <p class="paste-status" aria-hidden="true">One sheet per quarter, all in one file: it slowed down, then crashed.</p>
               </div>
               <p class="story-end">Calculating the cash flow had to become quick and reliable.</p>
             </div>

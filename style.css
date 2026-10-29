@@ -1154,10 +1154,15 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .paste-grid tbody th { width: 26px; padding: 0; }
 .paste-grid .num { text-align: right; }
 .paste-grid tr.is-empty td { color: transparent; }
-.paste-tabs { display: flex; gap: 2px; overflow: hidden; margin: 0; padding: 3px 6px 0; border-top: 1px solid #e1e4ea; background: #f3f4f6; font-size: 0.66rem; white-space: nowrap; }
-.paste-tabs span { padding: 2px 7px; color: #6b7280; }
-.paste-tabs .is-active { background: #fff; color: #107c41; font-weight: 600; box-shadow: inset 0 -2px #107c41; }
-.paste-tabs .is-hidden { visibility: hidden; }
+/* Sheet tabs: one per quarter, newest first. So many that they shrink like browser tabs (names cut off);
+   the active one keeps its full name. The new quarter's tab is hidden until it's added (script.js) */
+.paste-tabs { display: flex; align-items: flex-end; overflow: hidden; margin: 0; padding: 3px 4px 0; border-top: 1px solid #e1e4ea; background: #f3f4f6; font-size: 0.66rem; white-space: nowrap; }
+.paste-tabs span { flex: 1 1 0; min-width: 0; overflow: hidden; padding: 2px 3px; border-right: 1px solid #d9dee6; color: #6b7280; }   /* names cut short ("Q2…"), like crowded browser tabs */
+.paste-tabs .is-active { flex: none; background: #fff; color: #107c41; font-weight: 600; box-shadow: inset 0 -2px #107c41; }
+.paste-tabs .is-hidden { display: none; }
+.paste-tabs .is-renaming { outline: 1px solid #107c41; outline-offset: -1px; }
+.paste-tabs .is-renaming::after { content: "|"; animation: copy-sim-caret 0.8s steps(1) infinite; }
+.paste-tab-add { flex: none; padding: 1px 6px; color: #6b7280; font-weight: 400; }
 /* Status bar: calculation progress + the file size meter (green → orange → red as the years pile up) */
 .paste-statusbar { display: flex; align-items: center; gap: 10px; margin: 0; padding: 4px 8px; border-top: 1px solid #e1e4ea; background: #f3f4f6; color: #6b7280; font-size: 0.66rem; white-space: nowrap; }
 .paste-meter { display: flex; align-items: center; gap: 6px; margin-left: auto; }

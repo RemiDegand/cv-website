@@ -411,6 +411,7 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   const rows = [...pasteSim.querySelectorAll(".paste-grid tbody tr")];
   const tabs = [...pasteSim.querySelectorAll(".paste-tabs span")];
   const newTab = pasteSim.querySelector(".paste-new");
+  const newName = newTab.textContent;
   const segments = [...pasteSim.querySelectorAll(".paste-meter-bar i")];
   const calc = pasteSim.querySelector(".paste-calc");
   const title = pasteSim.querySelector(".paste-xl .paste-win-bar");
@@ -426,19 +427,29 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
       title.textContent = finalTitle.replace(" (Not Responding)", "");
       rows.slice(1).forEach((row) => row.classList.add("is-empty"));   // row 1 = the headers
       newTab.classList.add("is-hidden");
-      activeTab(newTab.previousElementSibling);
-      size(6);   // already heavy: every past year is in the file
+      newTab.textContent = newName;
+      activeTab(newTab.nextElementSibling);
+      size(6);   // already heavy: every past quarter is in the file
       calc.textContent = "Ready";
       status.textContent = "The new quarter's entries, exported from the ERP.";
       await wait(1500);
       status.textContent = "Copying every entry of the quarter…";
       pasteSim.classList.add("is-selected");
       await wait(1400);
-      status.textContent = "Pasting them into the file, next to every past year…";
-      pasteSim.classList.add("is-flying");
-      await wait(1000);
+      // A new sheet in front of all the others, renamed by hand after the quarter: the tabs get even narrower
+      status.textContent = "Adding one more sheet for the quarter…";
+      newTab.textContent = "Sheet" + tabs.length;
       newTab.classList.remove("is-hidden");
       activeTab(newTab);
+      await wait(900);
+      newTab.textContent = "";
+      newTab.classList.add("is-renaming");
+      for (const ch of newName) { newTab.textContent += ch; await wait(140); }
+      newTab.classList.remove("is-renaming");
+      await wait(400);
+      status.textContent = "Pasting the entries, next to every past quarter…";
+      pasteSim.classList.add("is-flying");
+      await wait(1000);
       // Each row takes longer than the one before: the file is getting heavier
       const steps = [[300, 12, 7], [700, 27, 8], [1200, 41, 8], [1700, 52, 9], [2300, 58, 10]];
       for (const [i, [ms, pct, n]] of steps.entries()) {
