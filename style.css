@@ -1231,8 +1231,14 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .build-sim .shot-note { --reach: calc(26px + var(--bezel) + var(--bar) + var(--y, 0px) - 4px); align-self: end; padding: 6px 10px; font-size: 0.8rem; }
 @media (max-width: 720px) { .build-sim .shot-note::before, .build-sim .shot-note::after { display: none; } }   /* the sheet scrolls sideways: no arrows */
 .build-status { min-height: 2.9em; margin: 14px 0 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; }
-/* Pause / Restart under the simulation. Paused: the CSS animations (loading bar, caret, flash) stop too */
-.sim-controls { display: flex; justify-content: center; gap: 8px; margin: 10px 0 0; }
+/* Pause / Restart icons on the right of the screen's top bar. Paused: the CSS animations (loading bar, caret, flash) stop too */
+.sim-controls { display: flex; gap: 2px; margin-left: auto; }
 .sim-controls[hidden] { display: none; }
-.sim-controls .button { padding: 5px 14px; font-size: 0.8rem; }
+.sim-controls button { display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 0; border-radius: 4px; background: none; color: var(--text-muted); cursor: pointer; }
+.sim-controls button:hover, .sim-controls button:focus-visible { background: #dde3ec; color: var(--accent); }
+.sim-controls svg { width: 13px; height: 13px; fill: currentColor; }
+.sim-controls .build-restart svg { fill: none; }
+.build-sim .icon-play, .build-sim.is-paused .icon-pause { display: none; }
+.build-sim.is-paused .icon-play { display: block; }
 .build-sim.is-paused, .build-sim.is-paused * { animation-play-state: paused !important; }
+@media (max-width: 720px) { .sim-controls button { width: 16px; height: 16px; } .sim-controls svg { width: 11px; height: 11px; } }

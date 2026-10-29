@@ -165,7 +165,8 @@
                 </div>
                 <div class="monitor" role="img" aria-label="The cash flow file: the user enters a start and end date and clicks Refresh; the file loads the entries from the ERP, maps each account to its cash flow category, builds the cash flow statement and checks that every control gap is 0.">
                   <div class="monitor-screen">
-                    <div class="monitor-bar"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Cash flow</span></div>
+                    <div class="monitor-bar"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Excel · Cash flow</span><!-- Pause / Restart, shown by script.js once the simulation runs -->
+                      <span class="sim-controls" hidden><button type="button" class="build-pause" aria-label="Pause" title="Pause"><svg class="icon-pause" viewBox="0 0 16 16"><rect x="4" y="3" width="3" height="10" rx="1"/><rect x="9" y="3" width="3" height="10" rx="1"/></svg><svg class="icon-play" viewBox="0 0 16 16"><path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg></button><button type="button" class="build-restart" aria-label="Restart" title="Restart"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a5 5 0 1 0 1.5-3.6"/><path d="M3 2.5v2.5h2.5"/></svg></button></span></div>
                     <div class="sheet">
                       <p class="sheet-ribbon">MyReport <span class="sheet-button build-refresh">⟳ Refresh</span><span class="build-loading"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="30 14"/></svg>Loading the entries from the ERP<i></i></span></p>
                       <div class="build-views">
@@ -254,8 +255,6 @@
                   <div class="monitor-stand"></div>
                 </div>
                 <p class="build-status">Pick a period and refresh: the cash flow is calculated from the day's accounting entries, then checked.</p>
-                <!-- Shown by script.js once the simulation runs -->
-                <p class="sim-controls" hidden><button type="button" class="button button-ghost build-pause">❚❚ Pause</button><button type="button" class="button button-ghost build-restart">↻ Restart</button></p>
                 <figcaption>Drawn from the real file, with randomised amounts. Account labels made generic.</figcaption>
               </figure>
             </div>

@@ -477,7 +477,7 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
 
 // Cash flow page, "What I built": the file at work. The user types the period and clicks Refresh, then the file shows
 // the account detail, the cash flow statement and the checks. The HTML holds the statement, shown as is without JS.
-// Pause / Restart buttons under it (hidden without JS or with "reduce motion", where nothing moves)
+// Pause / Restart icons in the screen's top bar (hidden without JS or with "reduce motion", where nothing moves)
 const buildSim = document.querySelector(".build-sim");
 if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const all = (sel) => [...buildSim.querySelectorAll(sel)];
@@ -514,7 +514,7 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   const setPaused = (value) => {
     paused = value;
     buildSim.classList.toggle("is-paused", paused);
-    pauseButton.textContent = paused ? "▶ Play" : "❚❚ Pause";
+    pauseButton.ariaLabel = pauseButton.title = paused ? "Play" : "Pause";   // the icon follows .is-paused (CSS)
   };
   pauseButton.addEventListener("click", () => setPaused(!paused));
   buildSim.querySelector(".build-restart").addEventListener("click", () => { restart = true; setPaused(false); });
