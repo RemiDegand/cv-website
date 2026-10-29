@@ -594,4 +594,66 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   start.observe(buildSim);
 }
 
+// Revenue recognition page, "How it started": the analyst opens the dashboard's "Data source" list and tries Model 1
+// (matches the accounting, but a January spike: everything on the invoice date), then Model 2 (spread over the months,
+// but far from the accounting). Starts once on screen and loops; the HTML holds the final state, kept as is with "reduce motion".
+const sourceSim = document.querySelector(".source-sim");
+if (sourceSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const bars = [...sourceSim.querySelectorAll(".source-bars i")];
+  const name = sourceSim.querySelector(".source-name");
+  const options = [...sourceSim.querySelectorAll(".source-menu span")];
+  const checks = Object.fromEntries([...sourceSim.querySelectorAll(".source-check")].map((li) => [li.dataset.check, li]));
+  const status = sourceSim.querySelector(".source-status");
+  const finalStatus = status.textContent;
+  const models = {
+    1: { bars: [100, 14, 12, 15, 13, 12, 14, 11, 13, 12, 15, 12], accounting: [true, ""], spread: [false, "all on the invoice date"],
+         status: "Model 1: matches the accounting, but every invoice sits on its invoice date." },
+    2: { bars: bars.map((b) => +b.style.getPropertyValue("--h")), accounting: [false, "several hundred k€ off"], spread: [true, ""],
+         status: "Model 2: spread over the months, but far from the accounting." },
+  };
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const setBars = (values) => bars.forEach((b, i) => b.style.setProperty("--h", values[i]));
+  const setCheck = (li, state) => {
+    li.classList.remove("is-ok", "is-ko");
+    if (state) { li.classList.add(state[0] ? "is-ok" : "is-ko"); li.querySelector("small").textContent = state[1]; }
+  };
+  const pick = async (n) => {
+    sourceSim.classList.add("is-open");
+    await wait(700);
+    options.forEach((o) => o.classList.toggle("is-hover", o.dataset.model === String(n)));
+    await wait(600);
+    sourceSim.classList.remove("is-open");
+    options.forEach((o) => o.classList.remove("is-hover"));
+    name.textContent = "Model " + n;
+    setCheck(checks.accounting, null); setCheck(checks.spread, null);
+    setBars(models[n].bars);
+    status.textContent = models[n].status;
+    await wait(1100);
+    setCheck(checks.accounting, models[n].accounting);
+    await wait(700);
+    setCheck(checks.spread, models[n].spread);
+  };
+  const run = async () => {
+    for (;;) {
+      sourceSim.classList.remove("is-done", "is-open");
+      name.textContent = "Choose…";
+      setCheck(checks.accounting, null); setCheck(checks.spread, null);
+      setBars(bars.map(() => 0));
+      status.textContent = "The dashboard needs revenue spread over the months.";
+      await wait(1500);
+      await pick(1);
+      await wait(2800);
+      await pick(2);
+      await wait(2200);
+      sourceSim.classList.add("is-done");
+      status.textContent = finalStatus;
+      await wait(4000);
+    }
+  };
+  const start = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
+  }, { rootMargin: "0px 0px -20% 0px" });
+  start.observe(sourceSim);
+}
+
 // Later: chatbot window (Phase 2).

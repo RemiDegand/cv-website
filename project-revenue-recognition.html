@@ -68,10 +68,32 @@
               <h3>How it started</h3>
               <div class="story reveal-stagger" aria-label="Conversation that started the project">
                 <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">For the board meeting, I need a dashboard of our monthly revenue, with each contract spread over the months it covers.</span></p>
-                <p class="story-line story-right"><span class="story-who">Data Analyst</span><span class="story-bubble">We have two models. The first matches the accounting, but puts each invoice on its invoice date.</span></p>
-                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">And the second?</span></p>
-                <p class="story-line story-right"><span class="story-who">Data Analyst</span><span class="story-bubble">It spreads revenue over the months, but it's several hundred k€ off the accounting.</span></p>
+                <p class="story-line story-right"><span class="story-who">Data Analyst</span><span class="story-bubble">One model matches the accounting but puts everything on the invoice date; the other spreads revenue but is several hundred k€ off.</span></p>
               </div>
+              <!-- The analyst tries each existing model as the dashboard's data source (script.js): Model 1 matches the
+                   accounting but puts everything on the invoice date (January spike), Model 2 spreads revenue but is far
+                   from the accounting. The HTML is the final state (Model 2), shown as is without JS or with "reduce motion".
+                   Bars are illustrative, different from the example in Part 2 -->
+              <figure class="project-shot annotated source-sim is-done" role="img" aria-label="Simulation: the analyst tries the two existing models as the source of the monthly revenue dashboard. Model 1 matches the accounting but puts all the revenue on the invoice date, so January shows a spike. Model 2 spreads revenue over the months but is several hundred k€ off the accounting. Neither model fits the dashboard.">
+                <div class="monitor" aria-hidden="true">
+                  <div class="monitor-screen">
+                    <div class="monitor-bar"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Dashboard · Monthly revenue</span></div>
+                    <div class="source-dash">
+                      <p class="source-bar">Data source <span class="source-pick"><span class="source-name">Model 2</span> ▾<span class="source-menu"><span data-model="1">Model 1</span><span data-model="2">Model 2</span></span></span></p>
+                      <div class="source-chart">
+                        <div class="source-bars"><i style="--h: 62"></i><i style="--h: 58"></i><i style="--h: 66"></i><i style="--h: 54"></i><i style="--h: 60"></i><i style="--h: 57"></i><i style="--h: 49"></i><i style="--h: 52"></i><i style="--h: 47"></i><i style="--h: 55"></i><i style="--h: 50"></i><i style="--h: 44"></i></div>
+                        <p class="source-months"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></p>
+                      </div>
+                      <ul class="source-checks">
+                        <li class="source-check is-ko" data-check="accounting">Matches the accounting <small>several hundred k€ off</small></li>
+                        <li class="source-check is-ok" data-check="spread">Spread over the months <small></small></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="monitor-stand"></div>
+                </div>
+                <p class="source-status" aria-hidden="true">Neither model fits the dashboard.</p>
+              </figure>
               <p class="story-end">A new model had to spread revenue over time and match the accounting.</p>
             </div>
             <div class="block-part reveal">
