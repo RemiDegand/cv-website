@@ -377,13 +377,14 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
   const run = async () => {
     for (;;) {
       copySim.classList.remove("is-wrong");
-      [...cells, total].forEach((cell) => { cell.textContent = ""; });
+      [...cells, total].forEach((cell) => { cell.textContent = ""; cell.classList.remove("is-red"); });
       await wait(900);
       for (const [i, cell] of cells.entries()) {
         status.textContent = `Copying entry ${i + 1} of ${cells.length} by hand…`;
         erpRows[i].classList.add("is-copying");
         await wait(700);
         await type(cell, 160);
+        if (cell.matches(".copy-sim-typo")) cell.classList.add("is-red");   // the mistyped amount turns red as soon as it's written
         erpRows[i].classList.remove("is-copying");
         await wait(300);
       }

@@ -1114,7 +1114,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .copy-sim-excel td.is-typing { outline: 2px solid #107c41; outline-offset: -2px; }   /* Excel's selected cell */
 .copy-sim-excel td.is-typing::after { content: "|"; margin-left: 1px; animation: copy-sim-caret 0.8s steps(1) infinite; }
 @keyframes copy-sim-caret { 50% { opacity: 0; } }
-.copy-sim.is-wrong .copy-sim-typo, .copy-sim.is-wrong .copy-sim-total { background: #fbd5d5; color: #b42318; }
+.copy-sim .copy-sim-typo.is-red, .copy-sim.is-wrong .copy-sim-typo, .copy-sim.is-wrong .copy-sim-total { background: #fbd5d5; color: #b42318; }
 .copy-sim .copy-sim-status { min-height: 1.5em; margin: 12px 0 0; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
 .copy-sim.is-wrong .copy-sim-status { color: #b42318; font-weight: 600; }
 @media (max-width: 720px) {
