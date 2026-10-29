@@ -1115,6 +1115,23 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .copy-sim-excel td.is-typing::after { content: "|"; margin-left: 1px; animation: copy-sim-caret 0.8s steps(1) infinite; }
 @keyframes copy-sim-caret { 50% { opacity: 0; } }
 .copy-sim .copy-sim-typo.is-red, .copy-sim.is-wrong .copy-sim-typo, .copy-sim.is-wrong .copy-sim-total { background: #fbd5d5; color: #b42318; }
+/* Cash flow page, "How it started": the same two panels, but the CFO pastes a whole quarter into a file that
+   already holds every year, until Excel stops responding and crashes (script.js) */
+.copy-sim-erp tr.is-selected td { background: #dbe7fb; }   /* Ctrl+A: every entry selected */
+.paste-sim .copy-sim-excel { position: relative; }
+.paste-sim .copy-sim-excel tr.is-empty td { color: transparent; }   /* empty rows keep their height: the box doesn't jump */
+.paste-sim-tabs { display: flex; gap: 2px; margin: 0; padding: 3px 6px 0; overflow: hidden; border-top: 1px solid #e1e4ea; background: #f3f4f6; font-size: 0.66rem; white-space: nowrap; }
+.paste-sim-tabs span { padding: 2px 7px; color: #6b7280; }
+.paste-sim-tabs .is-active { background: #fff; color: #107c41; font-weight: 600; box-shadow: inset 0 -2px #107c41; }
+.paste-sim-tabs .is-hidden { visibility: hidden; }
+.paste-sim-bar { margin: 0; padding: 3px 8px; border-top: 1px solid #e1e4ea; background: #f3f4f6; color: #6b7280; font-size: 0.66rem; }
+.paste-sim.is-frozen .copy-sim-excel .copy-sim-title { background: #7d8a83; }   /* "Not Responding": the window turns pale */
+.paste-sim.is-frozen .copy-sim-excel::after { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.55); cursor: wait; }
+.paste-sim-crash { display: none; position: absolute; top: 50%; left: 50%; z-index: 1; width: 86%; padding: 10px 12px; transform: translate(-50%, -50%); border: 1px solid #c8ced8; border-radius: 6px; background: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18); font-size: 0.75rem; }
+.paste-sim-crash strong { display: block; margin-bottom: 2px; color: #b42318; }
+.paste-sim-crash span { color: var(--text-muted); white-space: normal; }
+.paste-sim.is-crashed .paste-sim-crash { display: block; }
+.paste-sim.is-crashed .copy-sim-status { color: #b42318; font-weight: 600; }
 .copy-sim .copy-sim-status { min-height: 1.5em; margin: 12px 0 0; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
 .copy-sim.is-wrong .copy-sim-status { color: #b42318; font-weight: 600; }
 @media (max-width: 720px) {

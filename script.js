@@ -358,7 +358,7 @@ if (blockNav) {
 // VAT page, "How it started": replays the accountant (icon + keyboard in the middle) copying 3 VAT amounts from the ERP into
 // Excel, character by character, then the total that doesn't match (the 3rd amount is mistyped).
 // Starts once on screen and loops. The HTML holds the final state, kept as is with "reduce motion".
-const copySim = document.querySelector(".copy-sim");
+const copySim = document.querySelector(".copy-sim:not(.paste-sim)");
 if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const erpRows = [...copySim.querySelectorAll(".copy-sim-erp tbody tr")];
   const cells = [...copySim.querySelectorAll(".copy-sim-excel tbody [data-typed]")];
@@ -400,6 +400,66 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
     if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
   }, { rootMargin: "0px 0px -20% 0px" });
   start.observe(copySim);
+}
+
+// Cash flow page, "How it started": the CFO selects every entry of the new quarter in the ERP and pastes
+// them into the cash flow file, which already holds every past year. Each row takes longer to arrive, then
+// Excel stops responding and crashes. Starts once on screen and loops; the HTML holds the final state.
+const pasteSim = document.querySelector(".paste-sim");
+if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const erpRows = [...pasteSim.querySelectorAll(".copy-sim-erp tbody tr")];
+  const xlRows = [...pasteSim.querySelectorAll(".copy-sim-excel tbody tr")];
+  const tabs = [...pasteSim.querySelectorAll(".paste-sim-tabs span")];
+  const newTab = pasteSim.querySelector(".paste-sim-new");
+  const bar = pasteSim.querySelector(".paste-sim-bar");
+  const title = pasteSim.querySelector(".copy-sim-excel .copy-sim-title");
+  const status = pasteSim.querySelector(".copy-sim-status");
+  const finalStatus = status.textContent;
+  const finalTitle = title.textContent;
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const keys = async (ms) => { pasteSim.classList.add("is-keying"); await wait(ms); pasteSim.classList.remove("is-keying"); };
+  const activeTab = (tab) => tabs.forEach((t) => t.classList.toggle("is-active", t === tab));
+  const run = async () => {
+    for (;;) {
+      pasteSim.classList.remove("is-frozen", "is-crashed");
+      title.textContent = finalTitle.replace(" (Not Responding)", "");
+      erpRows.forEach((row) => row.classList.remove("is-selected"));
+      xlRows.forEach((row) => row.classList.add("is-empty"));
+      newTab.classList.add("is-hidden");
+      activeTab(newTab.previousElementSibling);
+      bar.textContent = "Ready";
+      status.textContent = "The new quarter's entries, exported from the ERP.";
+      await wait(1500);
+      status.textContent = "Copying every entry of the quarter…";
+      await keys(500);   // Ctrl+A, Ctrl+C
+      for (const row of erpRows) { row.classList.add("is-selected"); await wait(120); }
+      await wait(700);
+      status.textContent = "Pasting them into the file, next to every past year…";
+      newTab.classList.remove("is-hidden");
+      activeTab(newTab);
+      await keys(500);   // Ctrl+V
+      // Each row takes longer than the one before: the file is getting heavier
+      const steps = [[300, 12], [700, 27], [1100, 41], [1600, 52], [2200, 58]];
+      for (const [i, [ms, pct]] of steps.entries()) {
+        await wait(ms);
+        xlRows[i].classList.remove("is-empty");
+        bar.textContent = `Calculating: ${pct}%`;
+        if (i === 2) status.textContent = "Excel is getting slower…";
+      }
+      await wait(1200);
+      pasteSim.classList.add("is-frozen");
+      title.textContent = finalTitle;
+      status.textContent = "Excel stopped responding…";
+      await wait(2500);
+      pasteSim.classList.add("is-crashed");
+      status.textContent = finalStatus;
+      await wait(5000);
+    }
+  };
+  const start = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
+  }, { rootMargin: "0px 0px -20% 0px" });
+  start.observe(pasteSim);
 }
 
 // Later: chatbot window (Phase 2).
