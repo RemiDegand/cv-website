@@ -475,4 +475,89 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   start.observe(pasteSim);
 }
 
+// Cash flow page, "What I built": the file at work. The user types the period and clicks Refresh, then the file shows
+// the account detail, the cash flow statement and the checks. The HTML holds the statement, shown as is without JS
+const buildSim = document.querySelector(".build-sim");
+if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const all = (sel) => [...buildSim.querySelectorAll(sel)];
+  const steps = all(".build-steps li");
+  const views = all(".build-views > .sheet-canvas");
+  const tabs = all(".sheet-tabs span");
+  const title = buildSim.querySelector(".monitor-title");
+  const button = buildSim.querySelector(".build-refresh");
+  const status = buildSim.querySelector(".build-status");
+  const inputs = all(".b-in");
+  const dates = inputs.map((td) => td.textContent);
+  const filled = all(".b-val, .b-cat, .b-gap, .b-ratio");
+  const rows = all(".b-row");
+  const finalStatus = status.textContent;
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const step = (n, text) => {
+    steps.forEach((li, i) => { li.classList.toggle("is-done", i < n); li.classList.toggle("is-on", i === n); });
+    status.textContent = text;
+  };
+  const show = (view, sheet) => {
+    views.forEach((v) => v.classList.toggle("is-shown", v.dataset.view === view));
+    tabs.forEach((t) => t.classList.toggle("on", t.textContent === sheet));
+    title.textContent = "Excel · " + sheet;
+  };
+  const reveal = async (els, ms) => {
+    for (const el of els) { el.classList.remove("is-blank", "is-empty"); el.classList.add("is-new"); await wait(ms); }
+  };
+  const run = async () => {
+    for (;;) {
+      buildSim.classList.remove("is-loading");
+      button.classList.remove("is-hover", "is-pressed");
+      all(".is-new").forEach((el) => el.classList.remove("is-new"));
+      filled.forEach((el) => el.classList.add("is-blank"));
+      rows.forEach((row) => row.classList.add("is-empty"));
+      inputs.forEach((td) => { td.textContent = ""; });
+      show("statement", "Cash flow");
+      step(0, "The user picks the start and end of the period.");
+      await wait(900);
+      for (const [i, td] of inputs.entries()) {
+        td.classList.add("is-typing");
+        for (const ch of dates[i]) { td.textContent += ch; await wait(90); }
+        await wait(300);
+        td.classList.remove("is-typing");
+      }
+      await wait(500);
+      step(1, "One click on Refresh: MyReport loads the day's entries from the ERP. Nothing is stored in the file.");
+      button.classList.add("is-hover");
+      await wait(700);
+      button.classList.add("is-pressed");
+      await wait(250);
+      button.classList.remove("is-pressed", "is-hover");
+      buildSim.classList.add("is-loading");
+      await wait(2000);
+      buildSim.classList.remove("is-loading");
+      step(2, "Every account with its balances; a mapping table gives each one its cash flow category.");
+      show("accounts", "Check");
+      await wait(500);
+      await reveal(rows, 180);
+      await wait(300);
+      await reveal(all(".b-cat"), 260);
+      await wait(1800);
+      step(3, "The cash flow statement for the period: operating, investing and financing cash flow, then the change in cash.");
+      show("statement", "Cash flow");
+      await wait(500);
+      await reveal(all(".b-val"), 110);
+      await wait(2400);
+      step(4, "The control table: every check must be 0, so an inconsistency shows up at once. Then the financial ratios.");
+      show("checks", "Check");
+      await wait(500);
+      await reveal(all(".b-gap"), 300);
+      await wait(300);
+      await reveal(all(".b-ratio"), 250);
+      await wait(1500);
+      step(5, finalStatus);
+      await wait(4000);
+    }
+  };
+  const start = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
+  }, { rootMargin: "0px 0px -20% 0px" });
+  start.observe(buildSim);
+}
+
 // Later: chatbot window (Phase 2).

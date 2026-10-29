@@ -1198,3 +1198,30 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .paste-erp { margin-top: 0; }
   .paste-clip { display: none; }
 }
+
+/* Cash flow page, "What I built": the file at work (script.js). A step bar above the screen; the 3 views of the file
+   sit in the same grid cell, so the screen keeps the height of the tallest. Cells marked b-* are filled in by script */
+.build-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 0 0 16px; padding: 0; list-style: none; counter-reset: build-step; font-size: 0.8rem; }
+.build-steps li { counter-increment: build-step; display: flex; align-items: center; gap: 6px; padding: 3px 10px 3px 3px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--text-muted); transition: border-color 0.3s ease, color 0.3s ease; }
+.build-steps li::before { content: counter(build-step); display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--bg-soft); font-size: 0.7rem; font-weight: 700; transition: background 0.3s ease, color 0.3s ease; }
+.build-steps .is-done::before { content: "✓"; background: #dcf2df; color: #107c41; }
+.build-steps .is-on { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.build-steps .is-on::before { background: var(--accent); color: #fff; }
+.build-views { display: grid; }
+.build-views > .sheet-canvas { grid-area: 1 / 1; visibility: hidden; }
+.build-views > .is-shown { visibility: visible; }
+.build-sim .sheet-button { transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease; }
+.build-sim .sheet-button.is-hover { border-color: #107c41; box-shadow: 0 0 0 3px #dcf2df; }
+.build-sim .sheet-button.is-pressed { border-color: #107c41; background: #107c41; color: #fff; transform: scale(0.94); }
+.build-loading { display: none; align-items: center; gap: 6px; color: #107c41; }
+.build-loading svg { width: 13px; height: 13px; animation: paste-spin 0.9s linear infinite; }
+.build-loading i { width: 70px; height: 4px; border-radius: 2px; background: linear-gradient(#107c41, #107c41) 0 0 / 0 100% no-repeat #dcf2df; }
+.build-sim.is-loading .build-loading { display: flex; }
+.build-sim.is-loading .build-loading i { animation: build-load 1.8s ease-in-out forwards; }
+@keyframes build-load { to { background-size: 100% 100%; } }
+.build-sim td.is-typing::after { content: "|"; margin-left: 1px; animation: copy-sim-caret 0.8s steps(1) infinite; }
+.build-sim .is-blank, .build-sim .is-empty td { color: transparent; }
+.build-sim td.b-gap.is-blank { background: none; }
+.build-sim .is-new { animation: build-flash 1.2s ease; }
+@keyframes build-flash { from { background-color: #b9e4c2; } }
+.build-status { min-height: 2.9em; margin: 14px 0 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; }
