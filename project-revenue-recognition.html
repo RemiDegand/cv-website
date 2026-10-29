@@ -69,7 +69,7 @@
               <!-- Cartoon illustration (no animation): an office in perspective. The manager comes in through the door at
                    the top left, with his request in the bubble (HTML, so it stays readable on phones); the data analyst
                    sits in the foreground, back to us, in front of his screen showing the 2 existing data models -->
-              <figure class="office-art" role="img" aria-label="Illustration: a manager walks into the office and asks the data analyst: For my meeting, I need a monthly revenue dashboard for product A, with each contract spread over the months it covers. The data analyst, seen from behind, looks at two options on his screen: option A matches the accounting but does not spread revenue over time; option B spreads revenue over time but is several hundred k€ off the accounting.">
+              <figure class="office-art" role="img" aria-label="Illustration: a manager walks into the office and asks the data analyst: For my meeting, I need a monthly revenue dashboard for product A, with each contract spread over the months it covers. The data analyst, seen from behind, looks at two data models on his screen: A, the invoice data model, matches the accounting but does not spread revenue over time; B, the first revenue recognition model, spreads revenue over time but is several hundred k€ off the accounting.">
                 <p class="office-art-bubble" aria-hidden="true">For my meeting, I need a monthly revenue dashboard for <strong>product A</strong>, with each contract spread over the months it covers.</p>
                 <svg viewBox="0 0 720 500" aria-hidden="true" font-family="Inter, system-ui, sans-serif">
                   <defs><clipPath id="office-floor"><polygon points="0,330 140,250 720,250 720,500 0,500"/></clipPath></defs>
@@ -113,11 +113,11 @@
                   <text x="336" y="150" font-size="14" font-weight="600" fill="#6b7280">Which data model?</text>
                   <g font-size="15.5">
                     <rect x="336" y="168" width="348" height="86" rx="9" fill="#fff" stroke="#e1e4ea" stroke-width="1.5"/>
-                    <text x="352" y="192" font-size="17" font-weight="700" fill="#1f2937">Option A</text>
+                    <circle cx="360" cy="186" r="12" fill="#2563eb"/><text x="360" y="191" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">A</text><text x="380" y="192" font-size="16.5" font-weight="700" fill="#1f2937">Invoice data model</text>
                     <circle cx="360" cy="213" r="9" fill="#dcf2df"/><text x="360" y="218" font-size="12" font-weight="700" fill="#107c41" text-anchor="middle">✓</text><text x="377" y="218" fill="#107c41">Matches the accounting</text>
                     <circle cx="360" cy="238" r="9" fill="#fde4e1"/><text x="360" y="243" font-size="12" font-weight="700" fill="#b42318" text-anchor="middle">✗</text><text x="377" y="243" fill="#b42318">Revenue not spread over time</text>
                     <rect x="336" y="264" width="348" height="86" rx="9" fill="#fff" stroke="#e1e4ea" stroke-width="1.5"/>
-                    <text x="352" y="288" font-size="17" font-weight="700" fill="#1f2937">Option B</text>
+                    <circle cx="360" cy="282" r="12" fill="#2563eb"/><text x="360" y="287" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">B</text><text x="380" y="288" font-size="16.5" font-weight="700" fill="#1f2937">First revenue recognition model</text>
                     <circle cx="360" cy="309" r="9" fill="#dcf2df"/><text x="360" y="314" font-size="12" font-weight="700" fill="#107c41" text-anchor="middle">✓</text><text x="377" y="314" fill="#107c41">Revenue spread over time</text>
                     <circle cx="360" cy="334" r="9" fill="#fde4e1"/><text x="360" y="339" font-size="12" font-weight="700" fill="#b42318" text-anchor="middle">✗</text><text x="377" y="339" fill="#b42318">Several hundred k€ off the accounting</text>
                   </g>
