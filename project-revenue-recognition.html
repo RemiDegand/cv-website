@@ -66,33 +66,75 @@
             </header>
             <div class="block-part reveal">
               <h3>How it started</h3>
-              <!-- Office scene (script.js): the manager walks to the data analyst's desk and asks for a dashboard (bubble),
-                   then the analyst's screen shows the 2 existing data models, each failing one need, and a "?" above the
-                   analyst. The HTML is the final state, shown as is without JS or with "reduce motion" -->
-              <div class="office-sim has-bubble has-a has-b is-done" role="img" aria-label="Illustration: a manager walks to the data analyst's desk and asks: For my meeting, I need a monthly revenue dashboard for product A, with each contract spread over the months it covers. On the analyst's screen, two options: option A, a data model that matches the accounting but does not spread revenue over time; option B, a data model that spreads revenue over time but is several hundred k€ off the accounting.">
-                <div class="office-stage" aria-hidden="true">
-                  <p class="office-bubble">For my meeting, I need a monthly revenue dashboard for <strong>product A</strong>, with each contract spread over the months it covers.</p>
-                  <div class="office-manager">
-                    <svg class="office-person" viewBox="0 0 60 130"><g class="office-legs"><rect class="leg-a" x="21" y="76" width="8" height="46" rx="4" fill="#1f2937"/><rect class="leg-b" x="31" y="76" width="8" height="46" rx="4" fill="#1f2937"/></g><rect x="16" y="32" width="28" height="50" rx="10" fill="#334155"/><path d="M25 32h10l-5 12z" fill="#fff"/><path d="M29 36h2l1.5 16-2.5 3-2.5-3z" fill="#2563eb"/><rect class="office-arm" x="36" y="36" width="8" height="34" rx="4" fill="#334155"/><circle cx="30" cy="17" r="11" fill="#f1c9a5"/><path d="M19 15a11 11 0 0 1 22 0c-3-4-8-5-11-5s-8 1-11 5z" fill="#4b3621"/></svg>
-                    <span class="office-label">Manager</span>
-                  </div>
-                  <div class="office-analyst">
-                    <span class="office-think">?</span>
-                    <svg class="office-person" viewBox="0 0 120 130"><rect x="8" y="40" width="7" height="52" rx="3" fill="#9aa3b2"/><rect x="8" y="86" width="44" height="7" rx="3" fill="#9aa3b2"/><rect x="27" y="93" width="5" height="30" fill="#9aa3b2"/><rect x="17" y="121" width="26" height="4" rx="2" fill="#9aa3b2"/><rect x="28" y="78" width="40" height="12" rx="6" fill="#1f2937"/><rect x="58" y="80" width="10" height="42" rx="5" fill="#1f2937"/><rect x="18" y="38" width="26" height="50" rx="10" fill="#2563eb"/><path d="M38 46l34 22" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><circle cx="32" cy="23" r="11" fill="#c99a76"/><path d="M21 22a11 11 0 0 1 22-1c-4-3-9-4-12-3s-7 2-10 4z" fill="#1f2937"/><rect x="62" y="70" width="58" height="6" fill="#c8a77e"/><rect x="74" y="66" width="22" height="4" rx="1" fill="#6b7280"/></svg>
-                    <span class="office-label">Data Analyst</span>
-                  </div>
-                  <div class="office-desk">
-                    <div class="office-screen">
-                      <p class="office-screen-bar">Which data model?</p>
-                      <div class="office-option" data-option="a"><strong>Option A</strong><span class="office-check is-ok">Matches the accounting</span><span class="office-check is-ko">Revenue not spread over time</span></div>
-                      <div class="office-option" data-option="b"><strong>Option B</strong><span class="office-check is-ok">Revenue spread over time</span><span class="office-check is-ko">Several hundred k€ off the accounting</span></div>
-                    </div>
-                    <span class="office-neck"></span>
-                    <span class="office-desk-top"></span>
-                  </div>
-                </div>
-                <p class="office-status" aria-hidden="true">Correct or spread over time: not both.</p>
-              </div>
+              <!-- Cartoon illustration (no animation): an office in perspective. The manager comes in through the door at
+                   the top left, with his request in the bubble (HTML, so it stays readable on phones); the data analyst
+                   sits in the foreground, back to us, in front of his screen showing the 2 existing data models -->
+              <figure class="office-art" role="img" aria-label="Illustration: a manager walks into the office and asks the data analyst: For my meeting, I need a monthly revenue dashboard for product A, with each contract spread over the months it covers. The data analyst, seen from behind, looks at two options on his screen: option A matches the accounting but does not spread revenue over time; option B spreads revenue over time but is several hundred k€ off the accounting.">
+                <p class="office-art-bubble" aria-hidden="true">For my meeting, I need a monthly revenue dashboard for <strong>product A</strong>, with each contract spread over the months it covers.</p>
+                <svg viewBox="0 0 720 500" aria-hidden="true" font-family="Inter, system-ui, sans-serif">
+                  <defs><clipPath id="office-floor"><polygon points="0,330 140,250 720,250 720,500 0,500"/></clipPath></defs>
+                  <!-- Room: back wall, left wall, floor with planks towards the vanishing point -->
+                  <rect x="140" y="0" width="580" height="250" fill="#eef2f8"/>
+                  <polygon points="0,0 140,0 140,250 0,330" fill="#dfe6f1"/>
+                  <polygon points="0,330 140,250 720,250 720,500 0,500" fill="#f1e6d4"/>
+                  <g clip-path="url(#office-floor)" stroke="#e3d2b6" stroke-width="2"><path d="M289 250L-150 500M362 250L150 500M435 250L450 500M508 250L750 500M580 250L1050 500"/></g>
+                  <path d="M0 330L140 250H720" fill="none" stroke="#cfd6e2" stroke-width="5"/>
+                  <!-- Wall details: clock, framed chart -->
+                  <circle cx="640" cy="62" r="24" fill="#fff" stroke="#1f2937" stroke-width="3"/><path d="M640 62V46M640 62l10 6" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
+                  <rect x="176" y="150" width="104" height="74" rx="4" fill="#fff" stroke="#1f2937" stroke-width="3"/><path d="M192 208V190M210 208V176M228 208V196M246 208V170M264 208V184" stroke="#93c5fd" stroke-width="10"/>
+                  <!-- Door on the left wall, open, dark corridor behind -->
+                  <polygon points="45,120 112,108 112,266 45,304" fill="#3b4252" stroke="#1f2937" stroke-width="3" stroke-linejoin="round"/>
+                  <polygon points="45,120 18,130 18,318 45,304" fill="#c8a77e" stroke="#1f2937" stroke-width="3" stroke-linejoin="round"/><circle cx="25" cy="222" r="3" fill="#1f2937"/>
+                  <!-- Manager walking in, holding a folder -->
+                  <ellipse cx="96" cy="303" rx="30" ry="6" fill="#1f2937" opacity="0.15"/>
+                  <path d="M50 192q6 6 0 12M44 210q6 6 0 12M52 228q6 6 0 12" fill="none" stroke="#9aa3b2" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M84 182L72 218" stroke="#1f2937" stroke-width="13" stroke-linecap="round"/><path d="M84 182L72 218" stroke="#2b3646" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M92 238L76 297M100 238L116 296" stroke="#1f2937" stroke-width="12" stroke-linecap="round"/>
+                  <ellipse cx="72" cy="300" rx="10" ry="4.5" fill="#111827"/><ellipse cx="121" cy="299" rx="10" ry="4.5" fill="#111827"/>
+                  <rect x="76" y="172" width="40" height="72" rx="14" fill="#334155" stroke="#1f2937" stroke-width="3"/>
+                  <path d="M88 173l8 14 8-14z" fill="#fff"/><path d="M95 179h2l2.5 22-3.5 4-3.5-4z" fill="#2563eb"/>
+                  <path d="M110 182L122 212" stroke="#1f2937" stroke-width="13" stroke-linecap="round"/><path d="M110 182L122 212" stroke="#334155" stroke-width="8" stroke-linecap="round"/>
+                  <rect x="114" y="202" width="22" height="28" rx="2" transform="rotate(-8 125 216)" fill="#fbbf24" stroke="#1f2937" stroke-width="2.5"/>
+                  <circle cx="96" cy="152" r="18" fill="#f1c9a5" stroke="#1f2937" stroke-width="3"/>
+                  <path d="M79 148a18 18 0 0 1 35-4c-6-6-14-8-20-7s-11 4-15 11z" fill="#4b3621" stroke="#1f2937" stroke-width="2"/>
+                  <circle cx="106" cy="152" r="2" fill="#1f2937"/><path d="M103 161q4 3 8 0" fill="none" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+                  <!-- Desk (top and front), keyboard, mug -->
+                  <polygon points="200,382 720,382 720,420 168,420" fill="#d9b88a" stroke="#1f2937" stroke-width="3" stroke-linejoin="round"/>
+                  <polygon points="168,420 720,420 720,446 168,446" fill="#b8956b" stroke="#1f2937" stroke-width="3" stroke-linejoin="round"/>
+                  <rect x="178" y="446" width="14" height="60" fill="#a07f57" stroke="#1f2937" stroke-width="3"/>
+                  <polygon points="405,402 600,402 610,416 396,416" fill="#e5e7eb" stroke="#1f2937" stroke-width="2.5" stroke-linejoin="round"/>
+                  <rect x="630" y="380" width="24" height="28" rx="3" fill="#fff" stroke="#1f2937" stroke-width="2.5"/><path d="M654 386q10 0 10 8t-10 8" fill="none" stroke="#1f2937" stroke-width="2.5"/>
+                  <!-- Monitor with a bit of depth, then the screen: the 2 existing data models -->
+                  <polygon points="310,128 296,137 296,364 310,370" fill="#0f131b"/>
+                  <path d="M492 372h36l5 20h-46z" fill="#2c3344" stroke="#1f2937" stroke-width="2"/><ellipse cx="510" cy="393" rx="62" ry="9" fill="#1d2230"/>
+                  <rect x="310" y="120" width="400" height="252" rx="14" fill="#1d2230" stroke="#0f131b" stroke-width="3"/>
+                  <rect x="322" y="132" width="376" height="226" rx="6" fill="#fff"/>
+                  <path d="M328 132h364a6 6 0 0 1 6 6v20H322v-20a6 6 0 0 1 6-6z" fill="#eef1f6"/>
+                  <text x="336" y="150" font-size="14" font-weight="600" fill="#6b7280">Which data model?</text>
+                  <g font-size="15.5">
+                    <rect x="336" y="168" width="348" height="86" rx="9" fill="#fff" stroke="#e1e4ea" stroke-width="1.5"/>
+                    <text x="352" y="192" font-size="17" font-weight="700" fill="#1f2937">Option A</text>
+                    <circle cx="360" cy="213" r="9" fill="#dcf2df"/><text x="360" y="218" font-size="12" font-weight="700" fill="#107c41" text-anchor="middle">✓</text><text x="377" y="218" fill="#107c41">Matches the accounting</text>
+                    <circle cx="360" cy="238" r="9" fill="#fde4e1"/><text x="360" y="243" font-size="12" font-weight="700" fill="#b42318" text-anchor="middle">✗</text><text x="377" y="243" fill="#b42318">Revenue not spread over time</text>
+                    <rect x="336" y="264" width="348" height="86" rx="9" fill="#fff" stroke="#e1e4ea" stroke-width="1.5"/>
+                    <text x="352" y="288" font-size="17" font-weight="700" fill="#1f2937">Option B</text>
+                    <circle cx="360" cy="309" r="9" fill="#dcf2df"/><text x="360" y="314" font-size="12" font-weight="700" fill="#107c41" text-anchor="middle">✓</text><text x="377" y="314" fill="#107c41">Revenue spread over time</text>
+                    <circle cx="360" cy="334" r="9" fill="#fde4e1"/><text x="360" y="339" font-size="12" font-weight="700" fill="#b42318" text-anchor="middle">✗</text><text x="377" y="339" fill="#b42318">Several hundred k€ off the accounting</text>
+                  </g>
+                  <!-- Data analyst, back to us: arm to the keyboard, torso, chair back, neck, head; a "?" next to the head -->
+                  <path d="M296 352Q350 384 392 406" fill="none" stroke="#1f2937" stroke-width="22" stroke-linecap="round"/><path d="M296 352Q350 384 392 406" fill="none" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
+                  <circle cx="397" cy="408" r="8" fill="#c99a76" stroke="#1f2937" stroke-width="2.5"/>
+                  <rect x="190" y="328" width="120" height="120" rx="46" fill="#2563eb" stroke="#1f2937" stroke-width="3"/>
+                  <rect x="244" y="470" width="12" height="32" fill="#4b5563" stroke="#1f2937" stroke-width="2.5"/>
+                  <rect x="182" y="384" width="136" height="96" rx="26" fill="#374151" stroke="#1f2937" stroke-width="3"/>
+                  <path d="M200 402h100" stroke="#4b5563" stroke-width="4" stroke-linecap="round"/>
+                  <rect x="238" y="312" width="24" height="24" fill="#c99a76" stroke="#1f2937" stroke-width="2.5"/>
+                  <ellipse cx="216" cy="296" rx="7" ry="10" fill="#c99a76" stroke="#1f2937" stroke-width="2.5"/><ellipse cx="284" cy="296" rx="7" ry="10" fill="#c99a76" stroke="#1f2937" stroke-width="2.5"/>
+                  <ellipse cx="250" cy="292" rx="33" ry="37" fill="#1f2937"/><path d="M232 270q18-10 36 0" fill="none" stroke="#374151" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="180" cy="262" r="17" fill="#fff" stroke="#1f2937" stroke-width="2.5"/><text x="180" y="270" font-size="22" font-weight="800" fill="#2563eb" text-anchor="middle">?</text>
+                  <circle cx="198" cy="282" r="4" fill="#fff" stroke="#1f2937" stroke-width="2"/>
+                </svg>
+              </figure>
               <p class="story-end">A new model had to spread revenue over time and match the accounting.</p>
             </div>
             <div class="block-part reveal">

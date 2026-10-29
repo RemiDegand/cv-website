@@ -1244,56 +1244,14 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .build-sim.is-paused, .build-sim.is-paused * { animation-play-state: paused !important; }
 @media (max-width: 720px) { .sim-controls button { width: 16px; height: 16px; } .sim-controls svg { width: 11px; height: 11px; } }
 
-/* Revenue recognition page, "How it started": office scene (script.js). The manager walks in (is-away → in place,
-   legs swing while is-walking), the bubble shows (has-bubble), then each option on the analyst's screen (has-a, has-b)
-   and the "?" above the analyst (is-done). The analyst's drawing ends with the left part of the desk; .office-desk-top
-   continues it under the screen, at the same height (60px above the floor) */
-.office-sim { margin-top: 8px; padding: 20px 20px 16px; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); }
-.office-stage { display: grid; grid-template-columns: 70px 170px minmax(0, 1fr); grid-template-rows: minmax(250px, auto); grid-template-areas: "man ana screen"; column-gap: 12px; align-items: end; padding-bottom: 22px; }
-.office-sim .office-bubble { grid-area: man; align-self: end; position: relative; z-index: 2; width: 250px; margin: 0 0 146px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); box-shadow: var(--shadow); font-size: 0.82rem; line-height: 1.45; opacity: 0; transform: translateY(6px) scale(0.96); transform-origin: 30px 100%; transition: opacity 0.35s ease, transform 0.35s ease; }
-.office-bubble::after { content: ""; position: absolute; left: 22px; top: 100%; border: 8px solid transparent; border-top-color: var(--bg); filter: drop-shadow(0 1px 0 var(--border)); }
-.office-sim.has-bubble .office-bubble { opacity: 1; transform: none; }
-.office-manager, .office-analyst { position: relative; }
-.office-manager { grid-area: man; transition: transform 2.4s linear; }
-.office-sim.is-away .office-manager { transform: translateX(-130px); transition: none; }
-.office-analyst { grid-area: ana; }
-.office-person { display: block; height: 130px; width: auto; }
-.office-label { position: absolute; top: calc(100% + 4px); left: 0; color: var(--text-muted); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
-.office-manager .office-label { left: 50%; transform: translateX(-50%); }
-.office-analyst .office-label { left: 8px; }
-.office-sim.is-walking .office-manager .office-person { animation: office-bob 0.3s ease-in-out infinite alternate; }
-.office-legs rect { transform-box: fill-box; transform-origin: top center; }
-.office-sim.is-walking .leg-a { animation: office-step 0.6s ease-in-out infinite alternate; }
-.office-sim.is-walking .leg-b { animation: office-step 0.6s ease-in-out infinite alternate-reverse; }
-@keyframes office-step { from { transform: rotate(14deg); } to { transform: rotate(-14deg); } }
-@keyframes office-bob { to { transform: translateY(-2px); } }
-.office-think { position: absolute; left: 50px; top: 0; display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--border); border-radius: 50%; background: var(--bg); color: var(--accent); font-weight: 800; opacity: 0; transform: scale(0.6); transition: opacity 0.3s ease, transform 0.3s ease; }
-.office-sim.is-done .office-think { opacity: 1; transform: none; }
-.office-desk { grid-area: screen; display: flex; flex-direction: column; align-items: center; }
-.office-screen { width: min(100%, 400px); box-sizing: border-box; padding-bottom: 10px; border: 7px solid #1d2230; border-radius: 10px; background: #fff; font-size: 0.78rem; }
-.office-sim .office-screen-bar { margin: 0 0 2px; padding: 4px 10px; background: #eef1f6; color: var(--text-muted); font-size: 0.72rem; font-weight: 600; }
-.office-option { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 8px 10px 0; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; visibility: hidden; }
-.office-option strong { width: 100%; }
-.office-sim.has-a [data-option="a"], .office-sim.has-b [data-option="b"] { visibility: visible; animation: office-in 0.4s ease; }
-@keyframes office-in { from { opacity: 0; transform: translateY(4px); } }
-.office-check { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px 2px 3px; border: 1px solid; border-radius: 999px; font-size: 0.72rem; }
-.office-check::before { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; font-size: 0.65rem; font-weight: 700; }
-.office-check.is-ok { border-color: #b7e1c0; color: #107c41; }
-.office-check.is-ok::before { content: "✓"; background: #dcf2df; }
-.office-check.is-ko { border-color: #f4c5c0; color: #b42318; }
-.office-check.is-ko::before { content: "✗"; background: #fde4e1; }
-.office-neck { width: 30px; height: 10px; margin: 0 auto; background: #2c3344; }
-.office-desk-top { position: relative; align-self: stretch; height: 6px; margin: 0 0 54px -62px; background: #c8a77e; }   /* -62px: the 12px gap + the 50px of the analyst column right of the drawing */
-.office-desk-top::after { content: ""; position: absolute; right: 10px; top: 100%; width: 6px; height: 54px; background: #b8956b; }
-.office-sim .office-status { min-height: 1.5em; margin: 6px 0 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; }
-.office-sim.is-done .office-status { color: #b42318; font-weight: 600; }
+/* Revenue recognition page, "How it started": cartoon office illustration (inline SVG, no animation). The manager's
+   bubble is HTML on top of the drawing (top left, pointing down to his head), so its text stays readable; on phones
+   it sits above the drawing */
+.office-art { position: relative; margin: 8px 0 0; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: #eef2f8; }
+.office-art svg { display: block; width: 100%; height: auto; }
+.office-art .office-art-bubble { position: absolute; z-index: 1; left: 17%; top: 2%; width: min(50%, 340px); margin: 0; padding: 10px 14px; border: 2px solid #1f2937; border-radius: 16px; background: #fff; font-size: 0.82rem; line-height: 1.45; }
+.office-art-bubble::after { content: ""; position: absolute; left: 10px; top: 100%; width: 14px; height: 14px; margin-top: -7px; border: solid #1f2937; border-width: 0 2px 2px 0; background: #fff; transform: skewX(30deg) rotate(45deg); }
 @media (max-width: 720px) {
-  .office-sim { padding: 14px 12px 12px; }
-  .office-stage { grid-template-columns: 60px minmax(0, 1fr); grid-template-rows: auto auto auto; grid-template-areas: "bubble bubble" "man ana" "screen screen"; row-gap: 14px; padding-bottom: 0; }
-  .office-sim .office-bubble { grid-area: bubble; width: auto; margin: 0; }
-  .office-desk { margin-top: 18px; }
-  .office-desk-top { margin: 0; }
-  .office-check { font-size: 0.65rem; white-space: nowrap; }
-  .office-option { margin: 8px 8px 0; padding: 8px; }
-  .office-desk-top::after { display: none; }
+  .office-art .office-art-bubble { position: relative; left: auto; top: auto; width: auto; margin: 12px 12px 16px; }
+  .office-art-bubble::after { left: 24px; }
 }

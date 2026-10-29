@@ -594,43 +594,4 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   start.observe(buildSim);
 }
 
-// Revenue recognition page, "How it started": the manager walks to the data analyst's desk and asks for a dashboard,
-// then the analyst's screen shows the 2 existing data models, each failing one need. Starts once on screen and loops;
-// the HTML holds the final state, kept as is with "reduce motion".
-const officeSim = document.querySelector(".office-sim");
-if (officeSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const status = officeSim.querySelector(".office-status");
-  const finalStatus = status.textContent;
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  const run = async () => {
-    for (;;) {
-      officeSim.classList.remove("has-bubble", "has-a", "has-b", "is-done");
-      officeSim.classList.add("is-away");
-      status.textContent = "";
-      await wait(800);
-      void officeSim.offsetWidth;   // apply the start position before the walk begins
-      officeSim.classList.remove("is-away");
-      officeSim.classList.add("is-walking");
-      status.textContent = "The manager comes to the data analyst's desk…";
-      await wait(2400);
-      officeSim.classList.remove("is-walking");
-      officeSim.classList.add("has-bubble");
-      status.textContent = "";
-      await wait(3200);
-      status.textContent = "Two data models exist:";
-      officeSim.classList.add("has-a");
-      await wait(1800);
-      officeSim.classList.add("has-b");
-      await wait(2000);
-      officeSim.classList.add("is-done");
-      status.textContent = finalStatus;
-      await wait(5000);
-    }
-  };
-  const start = new IntersectionObserver((entries) => {
-    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
-  }, { rootMargin: "0px 0px -20% 0px" });
-  start.observe(officeSim);
-}
-
 // Later: chatbot window (Phase 2).
