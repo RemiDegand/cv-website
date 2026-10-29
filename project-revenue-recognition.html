@@ -7,7 +7,7 @@
   <meta name="description" content="Revenue recognition model: a project by Rémi Degand at OSLO.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Patrick+Hand+SC&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kalam:wght@700&family=Patrick+Hand&family=Patrick+Hand+SC&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -66,85 +66,81 @@
             </header>
             <div class="block-part reveal">
               <h3>How it started</h3>
-              <!-- Ink-sketch cartoon (no animation), style asked by the user from cartoon examples: an office. The manager comes in through the door at
-                   the top left, with his request in the bubble (HTML, so it stays readable on phones); the data analyst
-                   sits in the foreground, back to us, in front of his screen showing the 2 existing data models -->
-              <figure class="office-art" role="img" aria-label="Illustration: a manager walks into the office and asks the data analyst: For my meeting, I need a monthly revenue dashboard for product A, with each contract spread over the months it covers. The data analyst, seen from behind, looks at two data models on his screen: A, the invoice data model, matches the accounting but does not spread revenue over time; B, the first revenue recognition model, spreads revenue over time but is several hundred k€ off the accounting.">
-                <p class="office-art-bubble" aria-hidden="true">For my meeting, I need a monthly revenue dashboard for <strong>product A</strong>, with each contract spread over the months it covers.</p>
-                <svg viewBox="0 0 720 500" aria-hidden="true">
-                  <defs>
-                    <!-- Hand-drawn ink: a light displacement makes the straight lines wobble a little -->
-                    <filter id="fx-ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="2.6"/></filter>
-                  </defs>
-                  <g filter="url(#fx-ink)" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round" fill="none">
-                    <!-- Floor: a few strokes and pale blue shadows -->
-                    <ellipse cx="96" cy="324" rx="40" ry="7" fill="#cfdbe8" stroke="none"/>
-                    <ellipse cx="450" cy="486" rx="280" ry="16" fill="#cfdbe8" stroke="none"/>
+              <!-- Ink-sketch cartoon (no animation), version 5 chosen by the user on the Design canvas (style from the
+                   cartoon examples in Projects/Revenue recognition model/). One SVG: the drawing (moved down 78 to leave
+                   room for the bubble), the bubble and its tail, the "?" and the screen text. On phones the SVG bubble is
+                   hidden and the HTML copy above it is shown, so the request stays readable -->
+              <figure class="office-art" role="img" aria-label="Illustration: a manager walks into the office and asks the data analyst: For my meeting, I need a monthly revenue dashboard for product A, with each contract spread over the months it covers! The data analyst, seen from behind, looks at two data models on his screen. A, the data model based on the invoice date, works properly and matches the accounting, but revenue is not spread over time. B, the data model spreading revenue over time, is several hundred k€ off the accounting.">
+                <p class="office-art-bubble" aria-hidden="true">For my meeting, I need a monthly revenue dashboard for product A, with each contract spread over the months it covers!</p>
+                <svg viewBox="0 0 720 580" aria-hidden="true">
+                  <defs><filter id="fx-ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="2.6"/></filter></defs>
+                  <g transform="translate(0 78)">
+                    <g filter="url(#fx-ink)" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                    <ellipse cx="96" cy="324" rx="40" ry="7" fill="#f3d9c0" stroke="none"/>
+                    <ellipse cx="450" cy="486" rx="280" ry="16" fill="#f3d9c0" stroke="none"/>
                     <path d="M4 338Q70 333 150 332M176 330Q230 329 290 331" stroke-width="2"/>
-                    <!-- Open door on the left -->
-                    <polygon points="28,96 122,92 122,318 28,322" fill="#e3ebf3" stroke="none"/>
+                    <polygon points="28,96 122,92 122,318 28,322" fill="#f7e6d4" stroke="none"/>
                     <path d="M28 96V322M28 96L122 92V318" stroke-width="3"/>
                     <polygon points="28,96 6,108 6,334 28,322" fill="#fff" stroke-width="3"/><circle cx="12" cy="222" r="2.5" fill="#1a1a1a"/>
-                    <path d="M40 118l20 30M40 150l14 22" stroke="#b9c8d8" stroke-width="2"/>
-                    <!-- Manager walking in: yellow blazer, a sheet in his hand, talking -->
+                    <path d="M40 118l20 30M40 150l14 22" stroke="#e2b98f" stroke-width="2"/>
                     <path d="M44 214h-14M46 232h-18M44 250h-12" stroke-width="2.2"/>
-                    <path d="M86 252L74 316" stroke-width="14"/><path d="M86 252L74 316" stroke="#e6edf5" stroke-width="8"/>
-                    <path d="M98 252L114 314" stroke-width="14"/><path d="M98 252L114 314" stroke="#e6edf5" stroke-width="8"/>
+                    <path d="M86 252L74 316" stroke-width="14"/><path d="M86 252L74 316" stroke="#fff" stroke-width="8"/>
+                    <path d="M98 252L114 314" stroke-width="14"/><path d="M98 252L114 314" stroke="#fff" stroke-width="8"/>
                     <path d="M62 316q12-6 20 0q2 5-4 6H64q-5-1-2-6zM106 314q12-6 20 0q2 5-4 6h-14q-5-1-2-6z" fill="#1a1a1a" stroke-width="1.5"/>
-                    <path d="M78 190L66 236" stroke-width="13"/><path d="M78 190L66 236" stroke="#f4cf3a" stroke-width="7"/><circle cx="65" cy="240" r="6" fill="#fff" stroke-width="2.5"/>
-                    <path d="M72 184Q93 172 114 184L118 256Q94 264 70 256Z" fill="#f4cf3a" stroke-width="3"/>
+                    <path d="M78 190L66 236" stroke-width="13"/><path d="M78 190L66 236" stroke="#f39a1e" stroke-width="7"/><circle cx="65" cy="240" r="6" fill="#fff" stroke-width="2.5"/>
+                    <path d="M72 184Q93 172 114 184L118 256Q94 264 70 256Z" fill="#f39a1e" stroke-width="3"/>
                     <path d="M86 181L93 202L100 181" fill="#fff" stroke-width="2.2"/><path d="M93 210v34" stroke-width="1.6"/><circle cx="97" cy="226" r="1.6" fill="#1a1a1a"/>
-                    <path d="M110 190Q124 200 128 214" stroke-width="13"/><path d="M110 190Q124 200 128 214" stroke="#f4cf3a" stroke-width="7"/>
+                    <path d="M110 190Q124 200 128 214" stroke-width="13"/><path d="M110 190Q124 200 128 214" stroke="#f39a1e" stroke-width="7"/>
                     <polygon points="122,206 146,200 152,230 128,236" fill="#fff" stroke-width="2.5"/><path d="M130 212l14-3M132 220l14-3M133 228l10-2" stroke-width="1.4"/>
                     <circle cx="129" cy="216" r="6" fill="#fff" stroke-width="2.5"/>
                     <ellipse cx="96" cy="150" rx="20" ry="24" fill="#fff" stroke-width="3"/>
                     <path d="M111 142Q136 148 118 162" fill="#fff" stroke-width="3"/>
                     <path d="M80 150q-6 3 0 9" stroke-width="2.5"/>
-                    <circle cx="105" cy="140" r="2.6" fill="#1a1a1a" stroke="none"/><path d="M100 132l10-2" stroke-width="2.5"/>
-                    <path d="M103 168q7 6 13-1" fill="#1a1a1a" stroke-width="2"/>
+                    <path d="M100 140q5-4 10 0" stroke-width="2.5"/><path d="M99 131l11-3" stroke-width="2.5"/><path d="M98 162q12 12 22-2z" fill="#fff" stroke-width="2.5"/><path d="M101 165h16" stroke-width="1.4"/>
                     <path d="M77 148Q73 125 96 126Q117 126 116 140Q105 131 93 135Q83 139 77 148Z" fill="#1a1a1a" stroke-width="2"/>
-                    <!-- Desk: white top, pale blue front, legs -->
                     <polygon points="196,388 720,388 720,414 166,414" fill="#fff" stroke-width="3"/>
-                    <polygon points="166,414 720,414 720,436 166,436" fill="#cfdbe8" stroke-width="3"/>
+                    <polygon points="166,414 720,414 720,436 166,436" fill="#fff" stroke-width="3"/>
                     <path d="M180 436V500M704 436V500" stroke-width="3"/>
                     <polygon points="404,396 598,396 606,408 398,408" fill="#fff" stroke-width="2.2"/><path d="M420 402h160" stroke-width="1.2" stroke-dasharray="6 5"/>
-                    <path d="M650 376h24l-3 22h-18z" fill="#f4cf3a" stroke-width="2.5"/><path d="M674 381q9 1 7 8t-9 6" stroke-width="2.2"/>
-                    <!-- Monitor -->
-                    <path d="M496 372L490 392H530L524 372" fill="#cfdbe8" stroke-width="2.5"/><path d="M466 393h88" stroke-width="4"/>
+                    <path d="M650 376h24l-3 22h-18z" fill="#fff" stroke-width="2.5"/><path d="M674 381q9 1 7 8t-9 6" stroke-width="2.2"/>
+                    <path d="M496 372L490 392H530L524 372" fill="#f3d9c0" stroke-width="2.5"/><path d="M466 393h88" stroke-width="4"/>
                     <rect x="312" y="116" width="396" height="256" rx="10" fill="#fff" stroke-width="3.5"/>
                     <rect x="324" y="128" width="372" height="232" rx="4" stroke-width="1.5"/>
-                    <path d="M338 156h132" stroke-width="1.4"/>
-                    <rect x="338" y="164" width="344" height="88" rx="6" stroke-width="1.6"/>
-                    <rect x="338" y="262" width="344" height="88" rx="6" stroke-width="1.6"/>
-                    <circle cx="360" cy="186" r="13" fill="#f4cf3a" stroke-width="2.2"/><circle cx="360" cy="284" r="13" fill="#f4cf3a" stroke-width="2.2"/>
-                    <path d="M352 214l4 5 8-10M352 312l4 5 8-10" stroke="#1f8f4e" stroke-width="3"/>
-                    <path d="M353 232l9 10M362 232l-9 10M353 330l9 10M362 330l-9 10" stroke="#c62828" stroke-width="3"/>
-                    <!-- Data analyst, back to us: yellow chair, pale blue sweater, arm to the keyboard, a bit stressed -->
-                    <path d="M298 356Q350 386 394 404" stroke-width="20"/><path d="M298 356Q350 386 394 404" stroke="#cfdbe8" stroke-width="13"/>
+                    <path d="M298 356Q350 386 394 404" stroke-width="20"/><path d="M298 356Q350 386 394 404" stroke="#fff" stroke-width="13"/>
                     <circle cx="398" cy="405" r="8" fill="#fff" stroke-width="2.5"/>
-                    <path d="M196 452Q190 342 250 332Q310 342 304 452Z" fill="#cfdbe8" stroke-width="3"/>
-                    <path d="M214 360l10 14M280 362l-8 14" stroke="#9fb3c8" stroke-width="2"/>
+                    <path d="M196 452Q190 342 250 332Q310 342 304 452Z" fill="#fff" stroke-width="3"/>
+                    <path d="M214 360l10 14M280 362l-8 14" stroke="#e2b98f" stroke-width="2"/>
                     <path d="M250 478V500M226 500h48" stroke-width="3"/>
-                    <rect x="186" y="386" width="128" height="92" rx="24" fill="#f4cf3a" stroke-width="3"/>
+                    <rect x="186" y="386" width="128" height="92" rx="24" fill="#3f3f46" stroke-width="3"/>
                     <path d="M204 404q46-8 92 0" stroke-width="2"/>
                     <path d="M240 312v24M260 312v24" stroke-width="3"/>
                     <path d="M218 300q-10 0-8-10t9-6M282 300q10 0 8-10t-9-6" fill="#fff" stroke-width="2.5"/>
                     <ellipse cx="250" cy="290" rx="32" ry="34" fill="#fff" stroke-width="3"/>
-                    <path d="M218 290Q212 252 250 254Q290 252 282 290Q272 276 250 278Q230 276 218 290Z" fill="#1a1a1a" stroke-width="2"/>
-                    <path d="M226 262l-6-10M240 256l-2-12M256 255l3-12M272 260l7-10" stroke-width="2.5"/>
+                    <!--HAIR--><path d="M218 290Q212 252 250 254Q290 252 282 290Q272 276 250 278Q230 276 218 290Z" fill="#1a1a1a" stroke-width="2"/><path d="M226 262l-6-10M240 256l-2-12M256 255l3-12M272 260l7-10" stroke-width="2.5"/><!--/HAIR-->
                     <path d="M290 254l14-10M294 270l16-2M290 286l13 7" stroke-width="2.2"/>
-                    <path d="M286 268q-4 8 0 11q5-2 0-11z" fill="#cfdbe8" stroke-width="1.5"/>
+                    <path d="M286 268q-4 8 0 11q5-2 0-11z" fill="#f3d9c0" stroke-width="1.5"/>
+                    </g>
                   </g>
-                  <!-- Hand lettering (no wobble, so it stays readable) -->
-                  <g font-family="'Patrick Hand SC', 'Comic Sans MS', cursive" fill="#1a1a1a">
-                    <text x="338" y="150" font-size="16" fill="#555">WHICH DATA MODEL?</text>
-                    <text x="360" y="192" font-size="18" text-anchor="middle">A</text><text x="384" y="192" font-size="18">INVOICE DATA MODEL</text>
-                    <text x="374" y="219" font-size="15">MATCHES THE ACCOUNTING</text>
-                    <text x="374" y="243" font-size="15">REVENUE NOT SPREAD OVER TIME</text>
-                    <text x="360" y="290" font-size="18" text-anchor="middle">B</text><text x="384" y="290" font-size="18">FIRST REVENUE RECOGNITION MODEL</text>
-                    <text x="374" y="317" font-size="15">REVENUE SPREAD OVER TIME</text>
-                    <text x="374" y="341" font-size="15">SEVERAL HUNDRED K€ OFF THE ACCOUNTING</text>
-                    <text x="192" y="250" font-size="40" font-weight="700">?</text>
+                  <!-- Manager's bubble (open, like the examples) and its tail; hidden on phones, where the HTML copy above takes over -->
+                  <g class="oa-bubble">
+                    <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M89.6 13.8Q41.6 18.4 39.2 55.2Q39.2 93.8 84.8 99.3Q137.6 103 272 103L478.4 102.1Q507.2 101.2 507.2 93.8" stroke-width="2.8"/>
+                      <path d="M387.2 12.8Q488 14.7 502.4 34.9" stroke-width="1.3"/>
+                      <path d="M94 103L104 111L96 115Q97 160 98 200" stroke-width="2.4"/>
+                    </g>
+                    <text font-family="Kalam, cursive" font-weight="700" font-size="17" fill="#1a1a1a" text-anchor="middle"><tspan x="276" y="41">FOR MY MEETING, I NEED A MONTHLY REVENUE</tspan><tspan x="276" y="62">DASHBOARD FOR PRODUCT A, WITH EACH CONTRACT</tspan><tspan x="276" y="83">SPREAD OVER THE MONTHS IT COVERS!</tspan></text>
+                  </g>
+                  <!-- The analyst's "?" and the screen: the 2 existing data models, each a title and one sentence
+                       (green = what works, red = the problem) -->
+                  <text x="190" y="316" font-family="'Patrick Hand SC', cursive" font-size="42" fill="#1a1a1a">?</text>
+                  <text x="334" y="224" font-family="'Patrick Hand SC', cursive" font-size="15" fill="#555">WHICH DATA MODEL?</text>
+                  <g stroke="#1a1a1a" stroke-width="2"><rect x="335" y="236" width="350" height="76" rx="8" fill="#fff"/><rect x="335" y="320" width="350" height="76" rx="8" fill="#fff"/><circle cx="360" cy="259" r="13" fill="#f39a1e"/><circle cx="360" cy="343" r="13" fill="#f39a1e"/></g>
+                  <g font-family="Kalam, cursive" font-weight="700" fill="#1a1a1a"><text x="360" y="265" font-size="16" text-anchor="middle">A</text><text x="360" y="349" font-size="16" text-anchor="middle">B</text><text x="384" y="258" font-size="14.5">Data model based on the invoice date</text><text x="384" y="342" font-size="14.5">Data model spreading revenue over time</text></g>
+                  <g font-family="'Patrick Hand', cursive" font-size="15" fill="#1a1a1a">
+                    <text x="384" y="279"><tspan fill="#1f7a45">Works properly and matches the accounting</tspan>,</text>
+                    <text x="384" y="297">but <tspan fill="#c62828">revenue is not spread over time</tspan>.</text>
+                    <text x="384" y="363"><tspan fill="#1f7a45">Revenue is spread over time</tspan>, but it is</text>
+                    <text x="384" y="381"><tspan fill="#c62828">several hundred k€ off the accounting</tspan>.</text>
                   </g>
                 </svg>
               </figure>

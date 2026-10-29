@@ -1244,15 +1244,16 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .build-sim.is-paused, .build-sim.is-paused * { animation-play-state: paused !important; }
 @media (max-width: 720px) { .sim-controls button { width: 16px; height: 16px; } .sim-controls svg { width: 11px; height: 11px; } }
 
-/* Revenue recognition page, "How it started": office cartoon in ink-sketch style (inline SVG, no animation):
-   black ink lines, one spot colour (yellow) + pale blue shadows, hand lettering (Patrick Hand SC, loaded on this page).
-   The manager's bubble is HTML on top of the drawing (top left, wavy tail down to his head) so its text stays
-   readable; on phones it sits above the drawing */
+/* Revenue recognition page, "How it started": office cartoon in ink-sketch style (version 5 from the Design canvas).
+   One inline SVG holds the drawing, the open bubble and the screen text (fonts Kalam, Patrick Hand, Patrick Hand SC,
+   loaded on this page). On phones the SVG's bubble would be too small to read: it is hidden, and the HTML copy
+   above the drawing is shown instead, with the same open-bubble look */
 .office-art { position: relative; margin: 8px 0 0; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; }
 .office-art svg { display: block; width: 100%; height: auto; }
-.office-art .office-art-bubble { position: absolute; z-index: 1; left: 7%; top: 1.5%; width: min(62%, 420px); margin: 0; padding: 10px 16px; background: #f4cf3a; color: #1a1a1a; font-family: "Patrick Hand SC", "Comic Sans MS", cursive; font-size: 1.05rem; line-height: 1.2; letter-spacing: 0.02em; }
-.office-art-bubble strong { font-weight: inherit; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.office-art-bubble::after { content: ""; position: absolute; left: 26px; top: 100%; width: 24px; height: 30px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'%3E%3Cpath d='M12 0c-9 5 9 10 0 15s9 10 0 15' fill='none' stroke='%231a1a1a' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat; }
+.office-art .office-art-bubble { display: none; }
 @media (max-width: 720px) {
-  .office-art .office-art-bubble { position: relative; left: auto; top: auto; width: auto; margin: 12px 12px 0; font-size: 0.95rem; }
+  .office-art .office-art-bubble { display: block; position: relative; margin: 14px 14px 0; padding: 8px 12px 12px 18px; border: 2.5px solid #1a1a1a; border-color: transparent transparent #1a1a1a #1a1a1a; border-radius: 0 0 0 28px; color: #1a1a1a; font-family: "Kalam", cursive; font-size: 0.85rem; font-weight: 700; line-height: 1.3; text-align: center; text-transform: uppercase; }
+  .office-art-bubble::after { content: ""; position: absolute; left: 22px; top: 100%; width: 20px; height: 52px; margin-top: 2px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 52'%3E%3Cpath d='M4 0L13 6L6 10Q7 31 8 52' fill='none' stroke='%231a1a1a' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat; }
+  .office-art .oa-bubble { display: none; }
+  .office-art svg { margin-top: -9%; }
 }
