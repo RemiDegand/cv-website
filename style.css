@@ -1231,3 +1231,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .build-sim .shot-note { --reach: calc(26px + var(--bezel) + var(--bar) + var(--y, 0px) - 4px); align-self: end; padding: 6px 10px; font-size: 0.8rem; }
 @media (max-width: 720px) { .build-sim .shot-note::before, .build-sim .shot-note::after { display: none; } }   /* the sheet scrolls sideways: no arrows */
 .build-status { min-height: 2.9em; margin: 14px 0 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; }
+/* Pause / Restart under the simulation. Paused: the CSS animations (loading bar, caret, flash) stop too */
+.sim-controls { display: flex; justify-content: center; gap: 8px; margin: 10px 0 0; }
+.sim-controls[hidden] { display: none; }
+.sim-controls .button { padding: 5px 14px; font-size: 0.8rem; }
+.build-sim.is-paused, .build-sim.is-paused * { animation-play-state: paused !important; }
