@@ -1115,23 +1115,6 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .copy-sim-excel td.is-typing::after { content: "|"; margin-left: 1px; animation: copy-sim-caret 0.8s steps(1) infinite; }
 @keyframes copy-sim-caret { 50% { opacity: 0; } }
 .copy-sim .copy-sim-typo.is-red, .copy-sim.is-wrong .copy-sim-typo, .copy-sim.is-wrong .copy-sim-total { background: #fbd5d5; color: #b42318; }
-/* Cash flow page, "How it started": the same two panels, but the CFO pastes a whole quarter into a file that
-   already holds every year, until Excel stops responding and crashes (script.js) */
-.copy-sim-erp tr.is-selected td { background: #dbe7fb; }   /* Ctrl+A: every entry selected */
-.paste-sim .copy-sim-excel { position: relative; }
-.paste-sim .copy-sim-excel tr.is-empty td { color: transparent; }   /* empty rows keep their height: the box doesn't jump */
-.paste-sim-tabs { display: flex; gap: 2px; margin: 0; padding: 3px 6px 0; overflow: hidden; border-top: 1px solid #e1e4ea; background: #f3f4f6; font-size: 0.66rem; white-space: nowrap; }
-.paste-sim-tabs span { padding: 2px 7px; color: #6b7280; }
-.paste-sim-tabs .is-active { background: #fff; color: #107c41; font-weight: 600; box-shadow: inset 0 -2px #107c41; }
-.paste-sim-tabs .is-hidden { visibility: hidden; }
-.paste-sim-bar { margin: 0; padding: 3px 8px; border-top: 1px solid #e1e4ea; background: #f3f4f6; color: #6b7280; font-size: 0.66rem; }
-.paste-sim.is-frozen .copy-sim-excel .copy-sim-title { background: #7d8a83; }   /* "Not Responding": the window turns pale */
-.paste-sim.is-frozen .copy-sim-excel::after { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.55); cursor: wait; }
-.paste-sim-crash { display: none; position: absolute; top: 50%; left: 50%; z-index: 1; width: 86%; padding: 10px 12px; transform: translate(-50%, -50%); border: 1px solid #c8ced8; border-radius: 6px; background: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18); font-size: 0.75rem; }
-.paste-sim-crash strong { display: block; margin-bottom: 2px; color: #b42318; }
-.paste-sim-crash span { color: var(--text-muted); white-space: normal; }
-.paste-sim.is-crashed .paste-sim-crash { display: block; }
-.paste-sim.is-crashed .copy-sim-status { color: #b42318; font-weight: 600; }
 .copy-sim .copy-sim-status { min-height: 1.5em; margin: 12px 0 0; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
 .copy-sim.is-wrong .copy-sim-status { color: #b42318; font-weight: 600; }
 @media (max-width: 720px) {
@@ -1139,4 +1122,74 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .copy-sim-panels { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .copy-sim-human { grid-template-columns: auto auto auto auto; align-items: center; justify-content: center; gap: 8px; }   /* one row between the 2 tables */
   .copy-sim-arrow { transform: rotate(90deg); }
+}
+
+/* Cash flow page, "How it started": the CFO's desktop (its own look, unlike the VAT page's flat panels).
+   The quarter's entries fly from the ERP export into the cash flow file; its size meter fills up, a busy
+   cursor spins, Excel stops responding, then crashes (script.js). The HTML holds the crashed state */
+.paste-sim { margin-top: 8px; }
+.paste-desk { position: relative; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr); gap: 28px; align-items: start; overflow: hidden; padding: 22px 22px 48px; border-radius: var(--radius); background: linear-gradient(135deg, #e3eaf5, #c7d4e8); color: #1f2937; font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+.paste-win { position: relative; overflow: hidden; border-radius: 8px; background: #fff; box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18); }
+.paste-win-bar { margin: 0; padding: 6px 10px; color: #fff; font-size: 0.7rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.paste-erp { margin-top: 26px; }
+.paste-erp .paste-win-bar { background: #1d2230; }
+.paste-xl .paste-win-bar { background: #107c41; transition: background-color 0.3s ease; }
+/* The exported file, selected on Ctrl+A, and the shortcut keys lighting up */
+.paste-file { display: flex; align-items: center; gap: 10px; margin: 12px 10px 8px; padding: 8px; border: 1px dashed transparent; border-radius: 6px; transition: background-color 0.3s ease, border-color 0.3s ease; }
+.paste-file svg { flex: none; width: 28px; height: 34px; }
+.paste-file strong { display: block; font-size: 0.74rem; overflow-wrap: anywhere; }
+.paste-file span { color: var(--text-muted); font-size: 0.7rem; }
+.paste-erp .paste-keys { display: flex; gap: 4px; margin: 0 10px 12px; }   /* .paste-erp: stronger than the page's paragraph margins */
+.paste-keys kbd { padding: 1px 6px; border: 1px solid #c8ced8; border-bottom-width: 2px; border-radius: 4px; background: #f9fafb; color: #6b7280; font-family: inherit; font-size: 0.66rem; font-weight: 600; line-height: 1.5; transition: background-color 0.2s ease, color 0.2s ease; }
+.paste-sim.is-selected .paste-file { border-color: #7aa2e3; background: #dbe7fb; }
+.paste-sim.is-selected .paste-keys kbd { border-color: var(--accent); background: var(--accent); color: #fff; }
+/* Clipboard chip flying from the export to the Excel window */
+.paste-clip { position: absolute; top: 92px; left: 14%; z-index: 4; margin: 0; padding: 4px 10px; border-radius: 999px; background: #fff; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2); color: var(--accent); font-size: 0.7rem; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; }
+.paste-sim.is-flying .paste-clip { animation: paste-fly 1s ease-in-out forwards; }
+@keyframes paste-fly { 0% { left: 14%; opacity: 0; } 15%, 85% { opacity: 1; } 100% { left: 60%; opacity: 0; } }
+/* The sheet: column letters, row numbers, pasted rows (empty rows keep their height so the box doesn't jump) */
+.paste-grid { width: 100%; border-collapse: collapse; }
+.paste-grid th, .paste-grid td { height: 24px; padding: 0 8px; border: 1px solid #e5e7eb; text-align: left; white-space: nowrap; }
+.paste-grid thead th, .paste-grid tbody th { background: #f3f4f6; color: #6b7280; font-size: 0.66rem; font-weight: 500; text-align: center; }
+.paste-grid tbody th { width: 26px; padding: 0; }
+.paste-grid .num { text-align: right; }
+.paste-grid tr.is-empty td { color: transparent; }
+.paste-tabs { display: flex; gap: 2px; overflow: hidden; margin: 0; padding: 3px 6px 0; border-top: 1px solid #e1e4ea; background: #f3f4f6; font-size: 0.66rem; white-space: nowrap; }
+.paste-tabs span { padding: 2px 7px; color: #6b7280; }
+.paste-tabs .is-active { background: #fff; color: #107c41; font-weight: 600; box-shadow: inset 0 -2px #107c41; }
+.paste-tabs .is-hidden { visibility: hidden; }
+/* Status bar: calculation progress + the file size meter (green → orange → red as the years pile up) */
+.paste-statusbar { display: flex; align-items: center; gap: 10px; margin: 0; padding: 4px 8px; border-top: 1px solid #e1e4ea; background: #f3f4f6; color: #6b7280; font-size: 0.66rem; white-space: nowrap; }
+.paste-meter { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.paste-meter-bar { display: flex; gap: 2px; }
+.paste-meter-bar i { width: 6px; height: 11px; border-radius: 1px; background: #d9dee6; transition: background-color 0.3s ease; }
+.paste-meter-bar i.is-on { background: #22a35a; }
+.paste-meter-bar i.is-on:nth-child(n+6) { background: #e8a317; }
+.paste-meter-bar i.is-on:nth-child(n+9) { background: #d92d20; }
+/* Busy badge over the sheet: a spinning wheel + "Working…", shown as the file gets slower */
+.paste-busy { position: absolute; top: 52%; left: 50%; z-index: 2; display: flex; align-items: center; gap: 8px; margin: 0; padding: 7px 14px 7px 10px; transform: translate(-50%, -50%); border-radius: 999px; background: rgba(17, 24, 39, 0.88); box-shadow: 0 6px 18px rgba(15, 23, 42, 0.3); color: #fff; font-size: 0.75rem; font-weight: 600; white-space: nowrap; opacity: 0; transition: opacity 0.3s ease; }
+.paste-busy svg { width: 18px; height: 18px; }
+.paste-busy-ring { transform-box: fill-box; transform-origin: center; animation: paste-spin 0.9s linear infinite; }
+@keyframes paste-spin { to { transform: rotate(360deg); } }
+.paste-sim.is-busy .paste-busy { opacity: 1; }
+.paste-sim.is-crashed .paste-busy { opacity: 0; }
+/* "Not Responding": the window turns pale; then the crash message */
+.paste-sim.is-frozen .paste-xl .paste-win-bar { background: #7d8a83; }
+.paste-sim.is-frozen .paste-xl::after { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(255, 255, 255, 0.55); }
+.paste-crash { display: none; position: absolute; top: 50%; left: 50%; z-index: 3; width: 80%; padding: 10px 12px; transform: translate(-50%, -50%); border: 1px solid #c8ced8; border-radius: 6px; background: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18); font-size: 0.75rem; }
+.paste-crash strong { display: block; margin-bottom: 2px; color: #b42318; }
+.paste-crash span { color: var(--text-muted); }
+.paste-sim.is-crashed .paste-crash { display: block; }
+/* Taskbar at the bottom of the desktop */
+.paste-taskbar { position: absolute; right: 0; bottom: 0; left: 0; display: flex; align-items: center; gap: 8px; height: 28px; margin: 0; padding: 0 12px; background: rgba(255, 255, 255, 0.72); color: #4b5563; font-size: 0.68rem; }
+.paste-taskbar i { width: 14px; height: 14px; border-radius: 3px; }
+.paste-app-erp { background: #1d2230; }
+.paste-app-xl { background: #107c41; }
+.paste-taskbar span { margin-left: auto; }
+.paste-status { min-height: 1.5em; margin: 12px 0 0; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+.paste-sim.is-crashed .paste-status { color: #b42318; font-weight: 600; }
+@media (max-width: 720px) {
+  .paste-desk { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 14px 14px 42px; }
+  .paste-erp { margin-top: 0; }
+  .paste-clip { display: none; }
 }

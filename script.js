@@ -358,7 +358,7 @@ if (blockNav) {
 // VAT page, "How it started": replays the accountant (icon + keyboard in the middle) copying 3 VAT amounts from the ERP into
 // Excel, character by character, then the total that doesn't match (the 3rd amount is mistyped).
 // Starts once on screen and loops. The HTML holds the final state, kept as is with "reduce motion".
-const copySim = document.querySelector(".copy-sim:not(.paste-sim)");
+const copySim = document.querySelector(".copy-sim");
 if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const erpRows = [...copySim.querySelectorAll(".copy-sim-erp tbody tr")];
   const cells = [...copySim.querySelectorAll(".copy-sim-excel tbody [data-typed]")];
@@ -402,49 +402,51 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
   start.observe(copySim);
 }
 
-// Cash flow page, "How it started": the CFO selects every entry of the new quarter in the ERP and pastes
-// them into the cash flow file, which already holds every past year. Each row takes longer to arrive, then
-// Excel stops responding and crashes. Starts once on screen and loops; the HTML holds the final state.
+// Cash flow page, "How it started": on the CFO's desktop, the quarter's entries are copied from the ERP export
+// and pasted into the cash flow file, which already holds every past year. Each row takes longer to arrive,
+// the file size meter fills up to red, a busy cursor spins, then Excel stops responding and crashes.
+// Starts once on screen and loops; the HTML holds the final state, kept as is with "reduce motion".
 const pasteSim = document.querySelector(".paste-sim");
 if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const erpRows = [...pasteSim.querySelectorAll(".copy-sim-erp tbody tr")];
-  const xlRows = [...pasteSim.querySelectorAll(".copy-sim-excel tbody tr")];
-  const tabs = [...pasteSim.querySelectorAll(".paste-sim-tabs span")];
-  const newTab = pasteSim.querySelector(".paste-sim-new");
-  const bar = pasteSim.querySelector(".paste-sim-bar");
-  const title = pasteSim.querySelector(".copy-sim-excel .copy-sim-title");
-  const status = pasteSim.querySelector(".copy-sim-status");
+  const rows = [...pasteSim.querySelectorAll(".paste-grid tbody tr")];
+  const tabs = [...pasteSim.querySelectorAll(".paste-tabs span")];
+  const newTab = pasteSim.querySelector(".paste-new");
+  const segments = [...pasteSim.querySelectorAll(".paste-meter-bar i")];
+  const calc = pasteSim.querySelector(".paste-calc");
+  const title = pasteSim.querySelector(".paste-xl .paste-win-bar");
+  const status = pasteSim.querySelector(".paste-status");
   const finalStatus = status.textContent;
   const finalTitle = title.textContent;
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  const keys = async (ms) => { pasteSim.classList.add("is-keying"); await wait(ms); pasteSim.classList.remove("is-keying"); };
+  const size = (n) => segments.forEach((s, i) => s.classList.toggle("is-on", i < n));   // file size meter
   const activeTab = (tab) => tabs.forEach((t) => t.classList.toggle("is-active", t === tab));
   const run = async () => {
     for (;;) {
-      pasteSim.classList.remove("is-frozen", "is-crashed");
+      pasteSim.classList.remove("is-selected", "is-flying", "is-busy", "is-frozen", "is-crashed");
       title.textContent = finalTitle.replace(" (Not Responding)", "");
-      erpRows.forEach((row) => row.classList.remove("is-selected"));
-      xlRows.forEach((row) => row.classList.add("is-empty"));
+      rows.slice(1).forEach((row) => row.classList.add("is-empty"));   // row 1 = the headers
       newTab.classList.add("is-hidden");
       activeTab(newTab.previousElementSibling);
-      bar.textContent = "Ready";
+      size(6);   // already heavy: every past year is in the file
+      calc.textContent = "Ready";
       status.textContent = "The new quarter's entries, exported from the ERP.";
       await wait(1500);
       status.textContent = "Copying every entry of the quarter…";
-      await keys(500);   // Ctrl+A, Ctrl+C
-      for (const row of erpRows) { row.classList.add("is-selected"); await wait(120); }
-      await wait(700);
+      pasteSim.classList.add("is-selected");
+      await wait(1400);
       status.textContent = "Pasting them into the file, next to every past year…";
+      pasteSim.classList.add("is-flying");
+      await wait(1000);
       newTab.classList.remove("is-hidden");
       activeTab(newTab);
-      await keys(500);   // Ctrl+V
       // Each row takes longer than the one before: the file is getting heavier
-      const steps = [[300, 12], [700, 27], [1100, 41], [1600, 52], [2200, 58]];
-      for (const [i, [ms, pct]] of steps.entries()) {
+      const steps = [[300, 12, 7], [700, 27, 8], [1200, 41, 8], [1700, 52, 9], [2300, 58, 10]];
+      for (const [i, [ms, pct, n]] of steps.entries()) {
         await wait(ms);
-        xlRows[i].classList.remove("is-empty");
-        bar.textContent = `Calculating: ${pct}%`;
-        if (i === 2) status.textContent = "Excel is getting slower…";
+        rows[i + 1].classList.remove("is-empty");
+        calc.textContent = `Calculating: ${pct}%`;
+        size(n);
+        if (i === 1) { pasteSim.classList.add("is-busy"); status.textContent = "Excel is getting slower…"; }
       }
       await wait(1200);
       pasteSim.classList.add("is-frozen");
