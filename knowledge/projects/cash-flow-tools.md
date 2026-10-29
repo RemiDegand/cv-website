@@ -37,9 +37,9 @@ An Excel file that calculates the cash flow for a period chosen by the user (sta
 Workbook structure (from the file): Génération (MyReport extract for the period, by account plus client, supplier and staff sub-ledgers), Concatenation (opening, movement, closing by account), Affectation (account → category mapping, month → quarter), Check (detail by account and category, control table, ratios), Cashlow_Trimestre (cash flow statement for the period), Cashlow (quarters of several years side by side).
 
 ## Results and impact
-- The cash flow calculation is reliable and automated, with an up-to-date financial view for managing the company's cash.
-- The user only picks the period and refreshes.
-- No stored extractions, so the file stays light; no copy-paste and no manual entries.
+- A structured process: the entries load straight from the ERP for any period (the user only picks the dates and refreshes), with no copy-paste, manual entries or stored extractions. The file stays light and no longer crashes, and typing mistakes are gone.
+- Checks at every step: each stage of the calculation (Generation, Concatenation, Check sheets) has its own control that must be 0, so a mistake shows up at once, along with when and where it happened.
+- Ratios (profitability = EBITDA / revenue, current ratio = current assets / current liabilities) complement the cash flow, for a fuller view of the company's financial health.
 
 ## Users
 Not named in the document ("the user"); used to manage the company's cash (financial steering).
