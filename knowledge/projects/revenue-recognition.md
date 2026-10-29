@@ -20,7 +20,7 @@ At OSLO, Rémi designed an activity-based revenue recognition data model in MyRe
 ## Context
 OSLO sells software solutions and licences and makes about €10M in revenue a year. It bills in several ways: one-time orders, multi-period contracts and bundled solutions. Two models already existed (Rémi, 29 Oct 2026):
 - A model that calculated revenue from the invoices. It worked, but put the full revenue of each invoice on its invoice date, whatever the actual duration of the activity behind it, so revenue was not split over the months it covered.
-- A first revenue recognition model, rarely used because of its large discrepancies.
+- A first revenue recognition model, rarely used because its figures differed from the accounting by several hundred k€.
 
 ## Problem
 - The monthly view did not reflect the business unit's real economic activity: revenue was not spread over the duration of the contracts or services, so monthly activity analyses were biased.
