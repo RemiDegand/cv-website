@@ -1244,32 +1244,56 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .build-sim.is-paused, .build-sim.is-paused * { animation-play-state: paused !important; }
 @media (max-width: 720px) { .sim-controls button { width: 16px; height: 16px; } .sim-controls svg { width: 11px; height: 11px; } }
 
-/* Revenue recognition page, "How it started": the dashboard tries each existing model as its data source (script.js).
-   The bars grow with a scale transition; each check shows ✓ (is-ok), ✗ (is-ko) or nothing yet */
-.source-sim { margin-top: 16px; }
-.source-dash { padding: 12px 16px 14px; border-radius: 0 0 6px 6px; background: #fff; font-size: 0.8rem; }
-.source-bar { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; }
-.source-pick { position: relative; display: inline-flex; align-items: center; gap: 6px; min-width: 110px; padding: 3px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); transition: border-color 0.15s ease, box-shadow 0.15s ease; }
-.source-name { flex: 1; }
-.source-sim.is-open .source-pick { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-.source-menu { position: absolute; z-index: 3; top: calc(100% + 4px); left: -1px; right: -1px; display: none; padding: 4px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); box-shadow: var(--shadow); }
-.source-sim.is-open .source-menu { display: grid; }
-.source-menu span { padding: 3px 6px; border-radius: 4px; }
-.source-menu .is-hover { background: var(--accent-soft); color: var(--accent); }
-.source-bars { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: stretch; gap: 6px; height: 120px; border-bottom: 1px solid #e1e4ea; }
-.source-bars i { height: 100%; border-radius: 2px 2px 0 0; background: var(--accent); transform: scaleY(calc(var(--h) / 100)); transform-origin: bottom; transition: transform 0.8s ease; }   /* scale, not height: smooth and leaves no trace */
-.source-months { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px; margin: 4px 0 0; color: var(--text-muted); font-size: 0.7rem; text-align: center; }
-.source-checks { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
-.source-check { display: flex; align-items: center; gap: 6px; padding: 3px 10px 3px 4px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-muted); visibility: hidden; }
-.source-check::before { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; font-size: 0.7rem; font-weight: 700; }
-.source-check small { font-size: 0.72rem; }
-.source-check small:empty { display: none; }
-.source-check.is-ok, .source-check.is-ko { visibility: visible; animation: source-in 0.4s ease; }
-@keyframes source-in { from { opacity: 0; transform: translateY(4px); } }
-.source-check.is-ok { border-color: #b7e1c0; color: #107c41; }
-.source-check.is-ok::before { content: "✓"; background: #dcf2df; }
-.source-check.is-ko { border-color: #f4c5c0; color: #b42318; }
-.source-check.is-ko::before { content: "✗"; background: #fde4e1; }
-.source-status { min-height: 1.5em; margin: 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; }
-.source-sim.is-done .source-status { color: #b42318; font-weight: 600; }
-@media (max-width: 720px) { .source-dash { padding: 10px; } .source-check { white-space: nowrap; font-size: 0.7rem; } .source-check small { font-size: 0.65rem; } .source-bars, .source-months { gap: 3px; } }
+/* Revenue recognition page, "How it started": office scene (script.js). The manager walks in (is-away → in place,
+   legs swing while is-walking), the bubble shows (has-bubble), then each option on the analyst's screen (has-a, has-b)
+   and the "?" above the analyst (is-done). The analyst's drawing ends with the left part of the desk; .office-desk-top
+   continues it under the screen, at the same height (60px above the floor) */
+.office-sim { margin-top: 8px; padding: 20px 20px 16px; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); }
+.office-stage { display: grid; grid-template-columns: 70px 170px minmax(0, 1fr); grid-template-rows: minmax(250px, auto); grid-template-areas: "man ana screen"; column-gap: 12px; align-items: end; padding-bottom: 22px; }
+.office-sim .office-bubble { grid-area: man; align-self: end; position: relative; z-index: 2; width: 250px; margin: 0 0 146px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); box-shadow: var(--shadow); font-size: 0.82rem; line-height: 1.45; opacity: 0; transform: translateY(6px) scale(0.96); transform-origin: 30px 100%; transition: opacity 0.35s ease, transform 0.35s ease; }
+.office-bubble::after { content: ""; position: absolute; left: 22px; top: 100%; border: 8px solid transparent; border-top-color: var(--bg); filter: drop-shadow(0 1px 0 var(--border)); }
+.office-sim.has-bubble .office-bubble { opacity: 1; transform: none; }
+.office-manager, .office-analyst { position: relative; }
+.office-manager { grid-area: man; transition: transform 2.4s linear; }
+.office-sim.is-away .office-manager { transform: translateX(-130px); transition: none; }
+.office-analyst { grid-area: ana; }
+.office-person { display: block; height: 130px; width: auto; }
+.office-label { position: absolute; top: calc(100% + 4px); left: 0; color: var(--text-muted); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.office-manager .office-label { left: 50%; transform: translateX(-50%); }
+.office-analyst .office-label { left: 8px; }
+.office-sim.is-walking .office-manager .office-person { animation: office-bob 0.3s ease-in-out infinite alternate; }
+.office-legs rect { transform-box: fill-box; transform-origin: top center; }
+.office-sim.is-walking .leg-a { animation: office-step 0.6s ease-in-out infinite alternate; }
+.office-sim.is-walking .leg-b { animation: office-step 0.6s ease-in-out infinite alternate-reverse; }
+@keyframes office-step { from { transform: rotate(14deg); } to { transform: rotate(-14deg); } }
+@keyframes office-bob { to { transform: translateY(-2px); } }
+.office-think { position: absolute; left: 50px; top: 0; display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--border); border-radius: 50%; background: var(--bg); color: var(--accent); font-weight: 800; opacity: 0; transform: scale(0.6); transition: opacity 0.3s ease, transform 0.3s ease; }
+.office-sim.is-done .office-think { opacity: 1; transform: none; }
+.office-desk { grid-area: screen; display: flex; flex-direction: column; align-items: center; }
+.office-screen { width: min(100%, 400px); box-sizing: border-box; padding-bottom: 10px; border: 7px solid #1d2230; border-radius: 10px; background: #fff; font-size: 0.78rem; }
+.office-sim .office-screen-bar { margin: 0 0 2px; padding: 4px 10px; background: #eef1f6; color: var(--text-muted); font-size: 0.72rem; font-weight: 600; }
+.office-option { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 8px 10px 0; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; visibility: hidden; }
+.office-option strong { width: 100%; }
+.office-sim.has-a [data-option="a"], .office-sim.has-b [data-option="b"] { visibility: visible; animation: office-in 0.4s ease; }
+@keyframes office-in { from { opacity: 0; transform: translateY(4px); } }
+.office-check { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px 2px 3px; border: 1px solid; border-radius: 999px; font-size: 0.72rem; }
+.office-check::before { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; font-size: 0.65rem; font-weight: 700; }
+.office-check.is-ok { border-color: #b7e1c0; color: #107c41; }
+.office-check.is-ok::before { content: "✓"; background: #dcf2df; }
+.office-check.is-ko { border-color: #f4c5c0; color: #b42318; }
+.office-check.is-ko::before { content: "✗"; background: #fde4e1; }
+.office-neck { width: 30px; height: 10px; margin: 0 auto; background: #2c3344; }
+.office-desk-top { position: relative; align-self: stretch; height: 6px; margin: 0 0 54px -62px; background: #c8a77e; }   /* -62px: the 12px gap + the 50px of the analyst column right of the drawing */
+.office-desk-top::after { content: ""; position: absolute; right: 10px; top: 100%; width: 6px; height: 54px; background: #b8956b; }
+.office-sim .office-status { min-height: 1.5em; margin: 6px 0 0; color: var(--text-muted); font-size: 0.9rem; text-align: center; }
+.office-sim.is-done .office-status { color: #b42318; font-weight: 600; }
+@media (max-width: 720px) {
+  .office-sim { padding: 14px 12px 12px; }
+  .office-stage { grid-template-columns: 60px minmax(0, 1fr); grid-template-rows: auto auto auto; grid-template-areas: "bubble bubble" "man ana" "screen screen"; row-gap: 14px; padding-bottom: 0; }
+  .office-sim .office-bubble { grid-area: bubble; width: auto; margin: 0; }
+  .office-desk { margin-top: 18px; }
+  .office-desk-top { margin: 0; }
+  .office-check { font-size: 0.65rem; white-space: nowrap; }
+  .office-option { margin: 8px 8px 0; padding: 8px; }
+  .office-desk-top::after { display: none; }
+}

@@ -66,34 +66,33 @@
             </header>
             <div class="block-part reveal">
               <h3>How it started</h3>
-              <div class="story reveal-stagger" aria-label="Conversation that started the project">
-                <p class="story-line story-left"><span class="story-who">Manager</span><span class="story-bubble">For the board meeting, I need a dashboard of our monthly revenue, with each contract spread over the months it covers.</span></p>
-                <p class="story-line story-right"><span class="story-who">Data Analyst</span><span class="story-bubble">One model matches the accounting but puts everything on the invoice date; the other spreads revenue but is several hundred k€ off.</span></p>
-              </div>
-              <!-- The analyst tries each existing model as the dashboard's data source (script.js): Model 1 matches the
-                   accounting but puts everything on the invoice date (January spike), Model 2 spreads revenue but is far
-                   from the accounting. The HTML is the final state (Model 2), shown as is without JS or with "reduce motion".
-                   Bars are illustrative, different from the example in Part 2 -->
-              <figure class="project-shot annotated source-sim is-done" role="img" aria-label="Simulation: the analyst tries the two existing models as the source of the monthly revenue dashboard. Model 1 matches the accounting but puts all the revenue on the invoice date, so January shows a spike. Model 2 spreads revenue over the months but is several hundred k€ off the accounting. Neither model fits the dashboard.">
-                <div class="monitor" aria-hidden="true">
-                  <div class="monitor-screen">
-                    <div class="monitor-bar"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Dashboard · Monthly revenue</span></div>
-                    <div class="source-dash">
-                      <p class="source-bar">Data source <span class="source-pick"><span class="source-name">Model 2</span> ▾<span class="source-menu"><span data-model="1">Model 1</span><span data-model="2">Model 2</span></span></span></p>
-                      <div class="source-chart">
-                        <div class="source-bars"><i style="--h: 62"></i><i style="--h: 58"></i><i style="--h: 66"></i><i style="--h: 54"></i><i style="--h: 60"></i><i style="--h: 57"></i><i style="--h: 49"></i><i style="--h: 52"></i><i style="--h: 47"></i><i style="--h: 55"></i><i style="--h: 50"></i><i style="--h: 44"></i></div>
-                        <p class="source-months"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></p>
-                      </div>
-                      <ul class="source-checks">
-                        <li class="source-check is-ko" data-check="accounting">Matches the accounting <small>several hundred k€ off</small></li>
-                        <li class="source-check is-ok" data-check="spread">Spread over the months <small></small></li>
-                      </ul>
-                    </div>
+              <!-- Office scene (script.js): the manager walks to the data analyst's desk and asks for a dashboard (bubble),
+                   then the analyst's screen shows the 2 existing data models, each failing one need, and a "?" above the
+                   analyst. The HTML is the final state, shown as is without JS or with "reduce motion" -->
+              <div class="office-sim has-bubble has-a has-b is-done" role="img" aria-label="Illustration: a manager walks to the data analyst's desk and asks: For my meeting, I need a monthly revenue dashboard for product A, with each contract spread over the months it covers. On the analyst's screen, two options: option A, a data model that matches the accounting but does not spread revenue over time; option B, a data model that spreads revenue over time but is several hundred k€ off the accounting.">
+                <div class="office-stage" aria-hidden="true">
+                  <p class="office-bubble">For my meeting, I need a monthly revenue dashboard for <strong>product A</strong>, with each contract spread over the months it covers.</p>
+                  <div class="office-manager">
+                    <svg class="office-person" viewBox="0 0 60 130"><g class="office-legs"><rect class="leg-a" x="21" y="76" width="8" height="46" rx="4" fill="#1f2937"/><rect class="leg-b" x="31" y="76" width="8" height="46" rx="4" fill="#1f2937"/></g><rect x="16" y="32" width="28" height="50" rx="10" fill="#334155"/><path d="M25 32h10l-5 12z" fill="#fff"/><path d="M29 36h2l1.5 16-2.5 3-2.5-3z" fill="#2563eb"/><rect class="office-arm" x="36" y="36" width="8" height="34" rx="4" fill="#334155"/><circle cx="30" cy="17" r="11" fill="#f1c9a5"/><path d="M19 15a11 11 0 0 1 22 0c-3-4-8-5-11-5s-8 1-11 5z" fill="#4b3621"/></svg>
+                    <span class="office-label">Manager</span>
                   </div>
-                  <div class="monitor-stand"></div>
+                  <div class="office-analyst">
+                    <span class="office-think">?</span>
+                    <svg class="office-person" viewBox="0 0 120 130"><rect x="8" y="40" width="7" height="52" rx="3" fill="#9aa3b2"/><rect x="8" y="86" width="44" height="7" rx="3" fill="#9aa3b2"/><rect x="27" y="93" width="5" height="30" fill="#9aa3b2"/><rect x="17" y="121" width="26" height="4" rx="2" fill="#9aa3b2"/><rect x="28" y="78" width="40" height="12" rx="6" fill="#1f2937"/><rect x="58" y="80" width="10" height="42" rx="5" fill="#1f2937"/><rect x="18" y="38" width="26" height="50" rx="10" fill="#2563eb"/><path d="M38 46l34 22" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><circle cx="32" cy="23" r="11" fill="#c99a76"/><path d="M21 22a11 11 0 0 1 22-1c-4-3-9-4-12-3s-7 2-10 4z" fill="#1f2937"/><rect x="62" y="70" width="58" height="6" fill="#c8a77e"/><rect x="74" y="66" width="22" height="4" rx="1" fill="#6b7280"/></svg>
+                    <span class="office-label">Data Analyst</span>
+                  </div>
+                  <div class="office-desk">
+                    <div class="office-screen">
+                      <p class="office-screen-bar">Which data model?</p>
+                      <div class="office-option" data-option="a"><strong>Option A</strong><span class="office-check is-ok">Matches the accounting</span><span class="office-check is-ko">Revenue not spread over time</span></div>
+                      <div class="office-option" data-option="b"><strong>Option B</strong><span class="office-check is-ok">Revenue spread over time</span><span class="office-check is-ko">Several hundred k€ off the accounting</span></div>
+                    </div>
+                    <span class="office-neck"></span>
+                    <span class="office-desk-top"></span>
+                  </div>
                 </div>
-                <p class="source-status" aria-hidden="true">Neither model fits the dashboard.</p>
-              </figure>
+                <p class="office-status" aria-hidden="true">Correct or spread over time: not both.</p>
+              </div>
               <p class="story-end">A new model had to spread revenue over time and match the accounting.</p>
             </div>
             <div class="block-part reveal">
