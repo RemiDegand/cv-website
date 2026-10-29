@@ -45,7 +45,7 @@ Workbook structure (from the file): Génération (MyReport extract for the perio
 Not named in the document ("the user"); used to manage the company's cash (financial steering).
 
 ## Tools
-Excel, MyReport Data (ETL, data modeling), the company's ERP.
+Excel (VBA), MyReport Data (ETL, data modeling), the company's ERP.
 
 ## Questions a recruiter might ask
 - **What did Rémi build for cash flow at OSLO?** → An Excel file connected to the ERP through MyReport that calculates the cash flow of 3 entities for any period, with checks and financial ratios.

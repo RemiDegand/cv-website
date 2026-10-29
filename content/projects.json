@@ -37,7 +37,7 @@
       "title": "Cash flow calculation tools",
       "description": "Designed and automated the cash flow calculation of 3 entities in an Excel file connected to the ERP, for any period chosen by the user, with checks and financial ratios.",
       "result": { "key": "3 entities", "text": "cash flow for any period, in one refresh" },
-      "tags": ["Excel", "MyReport Data (ETL, Data modeling)", "Finance"],
+      "tags": ["Excel (VBA)", "MyReport Data (ETL, Data modeling)"],
       "home": false
     },
     {
