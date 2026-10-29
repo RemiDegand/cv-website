@@ -18,12 +18,14 @@ updated: 2026-10-27
 At OSLO, Rémi designed an activity-based revenue recognition data model in MyReport Data: the revenue of each invoice line is spread over the months of the activity it pays for, instead of being booked entirely on the invoice date. Annual revenue discrepancies went from €350k to €8k, a 98% reduction in errors compared with the company's previous model.
 
 ## Context
-OSLO sells software solutions and licences and makes about €10M in revenue a year. It bills in several ways: one-time orders, multi-period contracts and bundled solutions. Its decision-making dashboards were based on accounting data that put the full revenue of an invoice on the invoice date, whatever the actual duration of the activity behind it.
+OSLO sells software solutions and licences and makes about €10M in revenue a year. It bills in several ways: one-time orders, multi-period contracts and bundled solutions. Two models already existed (Rémi, 29 Oct 2026):
+- A model that calculated revenue from the invoices. It worked, but put the full revenue of each invoice on its invoice date, whatever the actual duration of the activity behind it, so revenue was not split over the months it covered.
+- A first revenue recognition model, rarely used because of its large discrepancies.
 
 ## Problem
 - The monthly view did not reflect the business unit's real economic activity: revenue was not spread over the duration of the contracts or services, so monthly activity analyses were biased.
 - Cross-analysis between financial and operational data was limited.
-- A first model had been built before, but it was not reliable: 10–15% discrepancies, unsuitable for decisions.
+- The existing revenue recognition model was not reliable: discrepancies of several hundred k€ (€350k a year in the result, see Results), unsuitable for decisions. (Content.docx gave "10–15%"; the user chose to show the amount instead, 29 Oct 2026.)
 
 ## What I built
 A data model in MyReport Data that allocates revenue over the actual duration of the activity, based on invoice line items extracted from the SQL database. It has:
@@ -52,7 +54,7 @@ MyReport Data (data modeling), SQL database (invoice lines), finance knowledge (
 ## Questions a recruiter might ask
 - **What is Rémi's strongest result at OSLO?** → The revenue recognition model: annual discrepancies went from €350k to €8k.
 - **How does the model work?** → Each invoice line is mapped to a type (order, contract, bundle) from its general ledger account, the three streams are consolidated with the same fields, then each line's net amount is spread evenly over the months it covers, from its start date.
-- **Why was it needed?** → The dashboards booked all revenue on the invoice date, so a yearly contract looked like a spike in one month; a first model had 10–15% discrepancies.
+- **Why was it needed?** → The dashboards booked all revenue on the invoice date, so a yearly contract looked like a spike in one month; the existing revenue recognition model had discrepancies of several hundred k€, so it was rarely used.
 - **Does Rémi have data modeling experience?** → Yes: 13 analytical data models at OSLO, including this one and the aged receivables data model.
 
 ## Open questions
