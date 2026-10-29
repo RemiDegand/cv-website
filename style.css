@@ -1244,13 +1244,13 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .build-sim.is-paused, .build-sim.is-paused * { animation-play-state: paused !important; }
 @media (max-width: 720px) { .sim-controls button { width: 16px; height: 16px; } .sim-controls svg { width: 11px; height: 11px; } }
 
-/* Revenue recognition page, "How it started": cartoon office illustration (inline SVG, no animation). The manager's
+/* Revenue recognition page, "How it started": flat office illustration (inline SVG, no animation). The manager's
    bubble is HTML on top of the drawing (top left, pointing down to his head), so its text stays readable; on phones
    it sits above the drawing */
-.office-art { position: relative; margin: 8px 0 0; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: #eef2f8; }
+.office-art { position: relative; margin: 8px 0 0; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: #e7ecf7; }
 .office-art svg { display: block; width: 100%; height: auto; }
-.office-art .office-art-bubble { position: absolute; z-index: 1; left: 17%; top: 2%; width: min(50%, 340px); margin: 0; padding: 10px 14px; border: 2px solid #1f2937; border-radius: 16px; background: #fff; font-size: 0.82rem; line-height: 1.45; }
-.office-art-bubble::after { content: ""; position: absolute; left: 10px; top: 100%; width: 14px; height: 14px; margin-top: -7px; border: solid #1f2937; border-width: 0 2px 2px 0; background: #fff; transform: skewX(30deg) rotate(45deg); }
+.office-art .office-art-bubble { position: absolute; z-index: 1; left: 17%; top: 2%; width: min(50%, 340px); margin: 0; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 16px; background: #fff; box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12); font-size: 0.82rem; line-height: 1.45; }
+.office-art-bubble::after { content: ""; position: absolute; left: 10px; top: 100%; width: 14px; height: 14px; margin-top: -7px; border: solid #e2e8f0; border-width: 0 1px 1px 0; background: #fff; transform: skewX(30deg) rotate(45deg); }
 @media (max-width: 720px) {
   .office-art .office-art-bubble { position: relative; left: auto; top: auto; width: auto; margin: 12px 12px 16px; }
   .office-art-bubble::after { left: 24px; }
