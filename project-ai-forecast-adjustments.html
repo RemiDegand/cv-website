@@ -67,9 +67,50 @@
             </header>
             <div class="block-part reveal">
               <h3>How it started</h3>
-              <div class="story reveal-stagger" aria-label="Conversation that started the project">
-                <p class="story-line story-left"><span class="story-who">Local team</span><span class="story-bubble">Thanks for next week's adjustments: +0.2 UTR from 10:00 to 19:00 in Kyiv, −0.2 late in the evening. All clear!</span></p>
-                <p class="story-line story-right"><span class="story-who">Forecaster</span><span class="story-bubble">Great. Now I just have to type them all again in the sheet, zone by zone…</span></p>
+              <!-- Part 2 shows the same sentences given to the AI skill, with the same values in its export.
+                   Simulation (script.js, like the VAT page): the forecaster between 2 screens. Left: next week's
+                   adjustments, already written in sentences for the local teams. Right: the old Google Sheet, where
+                   each one is typed again: select the zone, current UTR loaded from BigQuery, type every changed cell
+                   of the hour x day grid, click "Add Adjustments", next zone. Kyiv values from Example.xlsx (random),
+                   Lviv values made up. The HTML is the final state of Kyiv (shown as is without JS or with
+                   "reduce motion"); script.js replays the whole thing in a loop -->
+              <div class="adj-sim" role="img" aria-label="Simulation: the forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends; for Lviv, increase UTR by 0.2 for Monday to Thursday and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, he selects each zone, types every new value in the hour-by-day grid and clicks Add Adjustments, then starts again with the next zone.">
+                <div class="adj-sim-desk" aria-hidden="true">
+                  <div class="adj-sim-screen adj-sim-notes">
+                    <p class="adj-sim-title">Next week's adjustments</p>
+                    <ul class="adj-sim-zones">
+                      <li class="is-done"><strong>Kyiv</strong><span class="is-done">Increase UTR by 0.2 for Mon to Fri</span><span class="is-done">Decrease UTR by 10% for weekends</span></li>
+                      <li><strong>Lviv</strong><span>Increase UTR by 0.2 for Mon to Thu</span><span>Decrease UTR by 0.1 from 12:00 to 14:00</span></li>
+                      <li><strong>Tbilisi</strong><span>Increase UTR by 5% for Fri and Sat</span></li>
+                      <li class="adj-sim-more">+ the other zones…</li>
+                    </ul>
+                  </div>
+                  <div class="adj-sim-human">
+                    <svg class="adj-sim-person" viewBox="0 0 48 40"><circle cx="24" cy="11" r="8"/><path d="M8 40c0-10 7-17 16-17s16 7 16 17z"/></svg>
+                    <svg class="adj-sim-keyboard" viewBox="0 0 60 26">
+                      <rect class="adj-sim-board" x="1" y="1" width="58" height="24" rx="4"/>
+                      <rect class="key" x="6" y="6" width="7" height="5" rx="1"/><rect class="key" x="16" y="6" width="7" height="5" rx="1"/><rect class="key" x="26" y="6" width="7" height="5" rx="1"/><rect class="key" x="36" y="6" width="7" height="5" rx="1"/><rect class="key" x="46" y="6" width="7" height="5" rx="1"/>
+                      <rect class="key" x="11" y="14" width="7" height="5" rx="1"/><rect class="key" x="21" y="14" width="18" height="5" rx="1"/><rect class="key" x="42" y="14" width="7" height="5" rx="1"/>
+                    </svg>
+                    <span class="adj-sim-who">Forecaster</span>
+                    <span class="adj-sim-arrow">→</span>
+                  </div>
+                  <div class="adj-sim-screen adj-sim-sheet">
+                    <p class="adj-sim-title">Google Sheets · Forecast adjustments</p>
+                    <p class="adj-sim-bar">Zone <span class="adj-sim-pick">Kyiv</span><span class="adj-sim-load">Loading from BigQuery…</span></p>
+                    <table>
+                      <thead><tr><th>UTR</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
+                      <tbody>
+                        <tr><th>10:00</th><td class="is-changed">2.96</td><td class="is-changed">3.67</td><td class="is-changed">3.48</td><td class="is-changed">3.89</td><td class="is-changed">2.83</td><td class="is-changed">2.29</td><td class="is-changed">3.36</td></tr>
+                        <tr><th>11:00</th><td class="is-changed">3.45</td><td class="is-changed">3.09</td><td class="is-changed">4.12</td><td class="is-changed">3.99</td><td class="is-changed">2.97</td><td class="is-changed">3.55</td><td class="is-changed">3.54</td></tr>
+                        <tr><th>12:00</th><td class="is-changed">3.39</td><td class="is-changed">3.94</td><td class="is-changed">2.77</td><td class="is-changed">3.10</td><td class="is-changed">3.07</td><td class="is-changed">3.44</td><td class="is-changed">2.93</td></tr>
+                        <tr><th>13:00</th><td class="is-changed">3.48</td><td class="is-changed">2.76</td><td class="is-changed">3.28</td><td class="is-changed">4.16</td><td class="is-changed">2.45</td><td class="is-changed">2.91</td><td class="is-changed">2.26</td></tr>
+                      </tbody>
+                    </table>
+                    <p class="adj-sim-foot"><span class="adj-sim-button">▶ Add Adjustments</span><span class="adj-sim-saved">Saved: Kyiv</span></p>
+                  </div>
+                </div>
+                <p class="adj-sim-status" aria-hidden="true">Zone after zone, every week: about 2 h of typing what was already written.</p>
               </div>
               <p class="story-end">Adjustments already written in sentences had to reach the forecasting tool without being typed again.</p>
             </div>
@@ -110,64 +151,24 @@
               <p class="chip-row reveal-stagger"><span class="chip-label">Built with</span><span class="chip">AI skill (prompt + rules)</span><span class="chip">BigQuery query</span><span class="chip">JSON output, no guessing</span><span class="chip">Format examples</span><span class="chip">Shared on GitHub</span></p>
             </div>
 
-            <!-- The 2 ways of entering the same adjustments, on a computer screen: 2 views (tabs, script.js) -->
+            <!-- The AI skill on a computer screen: the sentences in, the export table out (the old sheet is in the
+                 simulation of Part 1) -->
             <div class="block-part reveal">
-              <h3><span class="block-label">Example</span>The same adjustments, two ways</h3>
-              <figure class="project-shot annotated compare">
-                <div class="report-bar">
-                  <div class="report-tabs" role="tablist" aria-label="Way of entering the adjustments">
-                    <button type="button" role="tab" aria-selected="true" aria-controls="ai-before" id="tab-ai-before">1. Before: the Google Sheet</button>
-                    <button type="button" role="tab" aria-selected="false" aria-controls="ai-after" id="tab-ai-after" tabindex="-1">2. After: the AI skill</button>
-                  </div>
-                </div>
-
-                <!-- View 1: the old sheet (Example.xlsx, Sheet1): zone, current UTR, adjusted UTR typed by hand -->
-                <div class="compare-view" id="ai-before" role="tabpanel" aria-labelledby="tab-ai-before">
-                  <div class="monitor">
-                    <div class="monitor-screen">
-                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Google Sheets · Forecast adjustments</span></div>
-                      <div class="sheet" tabindex="0" aria-label="The old Google Sheet: the zone Kyiv, the current UTR by hour and day, and the adjusted UTR typed by hand next to it">
-                        <p class="sheet-ribbon" aria-hidden="true">Apps Script <span class="sheet-button">▶ Add Adjustments</span></p>
-                        <div class="sheet-canvas">
-                          <table class="sheet-grid">
-                            <colgroup><col style="width: 4%"><col style="width: 14%"><col style="width: 11%"><col style="width: 11%"><col style="width: 11%"><col style="width: 6%"><col style="width: 4%"><col style="width: 11%"><col style="width: 11%"><col style="width: 11%"><col style="width: 6%"></colgroup>
-                            <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th></tr></thead>
-                            <tbody>
-                              <tr><th>1</th><td class="cell-bold">Zone</td><td class="fill-yellow">Kyiv ▾</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                              <tr><th>2</th><td></td><td colspan="4" class="cell-bold">UTR input (current)</td><td></td><td colspan="4" class="cell-bold">UTR adjustments (typed)</td></tr>
-                              <tr class="cell-head"><th>3</th><td>Hour</td><td class="num">Mon</td><td class="num">Tue</td><td class="num">Wed</td><td class="num">…</td><td></td><td class="num">Mon</td><td class="num">Tue</td><td class="num">Wed</td><td class="num">…</td></tr>
-                              <tr><th>4</th><td>09:00</td><td class="num">2.33</td><td class="num">3.12</td><td class="num">2.46</td><td class="num">…</td><td></td><td></td><td></td><td></td><td></td></tr>
-                              <tr><th>5</th><td>10:00</td><td class="num">2.76</td><td class="num">3.47</td><td class="num">3.28</td><td class="num">…</td><td></td><td class="num fill-yellow">2.96</td><td class="num fill-yellow">3.67</td><td class="num fill-yellow">3.48</td><td class="num">…</td></tr>
-                              <tr><th>6</th><td>11:00</td><td class="num">3.25</td><td class="num">2.89</td><td class="num">3.92</td><td class="num">…</td><td></td><td class="num fill-yellow">3.45</td><td class="num fill-yellow">3.09</td><td class="num fill-yellow">4.12</td><td class="num">…</td></tr>
-                              <tr><th>7</th><td>12:00</td><td class="num">3.19</td><td class="num">3.74</td><td class="num">2.57</td><td class="num">…</td><td></td><td class="num fill-yellow">3.39</td><td class="num fill-yellow">3.94</td><td class="num fill-yellow">2.77</td><td class="num">…</td></tr>
-                              <tr><th>8</th><td>…</td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td></td><td></td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td></td></tr>
-                              <tr><th>9</th><td>22:00</td><td class="num">3.77</td><td class="num">3.53</td><td class="num">2.77</td><td class="num">…</td><td></td><td class="num fill-yellow">3.57</td><td class="num fill-yellow">3.33</td><td class="num fill-yellow">2.57</td><td class="num">…</td></tr>
-                              <tr><th>10</th><td>23:00</td><td class="num">3.00</td><td class="num">3.52</td><td class="num">2.39</td><td class="num">…</td><td></td><td class="num fill-yellow">2.80</td><td class="num fill-yellow">3.32</td><td class="num fill-yellow">2.19</td><td class="num">…</td></tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <p class="sheet-tabs" aria-hidden="true"><span class="on">Adjustments</span><span>Export</span></p>
-                      </div>
-                    </div>
-                    <div class="monitor-stand" aria-hidden="true"></div>
-                  </div>
-                  <p class="story-answer"><strong>For one zone:</strong> 77 values typed by hand (11 hours × 7 days), one click to save, then the same for the next zone.</p>
-                </div>
-
-                <!-- View 2: the AI skill: the sentences in, the export table out -->
-                <div class="compare-view" id="ai-after" role="tabpanel" aria-labelledby="tab-ai-after" hidden>
+              <h3><span class="block-label">Example</span>The same adjustments, with the AI skill</h3>
+              <figure class="project-shot annotated">
+                <div>
                   <div class="monitor">
                     <div class="monitor-screen">
                       <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">OpenCode · forecast-adjustments skill</span></div>
-                      <div class="sheet ai-chat" tabindex="0" aria-label="The AI skill: the forecaster pastes the adjustments in sentences, the AI reads the current UTR from BigQuery and returns the export table">
-                        <p class="story-line story-left"><span class="story-who">Forecaster</span><span class="story-bubble">Increase UTR by 0.2 from 10:00 to 19:00, Monday to Sunday, for Kyiv. Decrease UTR by 0.2 from 22:00 to midnight for Kyiv.</span></p>
-                        <p class="story-line story-right"><span class="story-who">AI skill</span><span class="story-bubble">Current UTR for Kyiv read from BigQuery. 77 slots updated (11 hours × 7 days), no big change to confirm. Export ready ↓</span></p>
+                      <div class="sheet ai-chat" tabindex="0" aria-label="The AI skill: the forecaster pastes the same adjustment sentences for Kyiv, Lviv and Tbilisi, the AI reads the current UTR from BigQuery and returns the export table">
+                        <p class="story-line story-left"><span class="story-who">Forecaster</span><span class="story-bubble">Kyiv: Increase UTR by 0.2 for Mon to Fri. Decrease UTR by 10% for weekends.<br>Lviv: Increase UTR by 0.2 for Mon to Thu. Decrease UTR by 0.1 from 12:00 to 14:00.<br>Tbilisi: Increase UTR by 5% for Fri and Sat.</span></p>
+                        <p class="story-line story-right"><span class="story-who">AI skill</span><span class="story-bubble">Current UTR of the 3 zones read from BigQuery. Every slot recalculated, no big change to confirm. Export ready ↓</span></p>
                         <table class="sheet-grid ai-export">
                           <thead><tr><th>Zone ID</th><th>Day</th><th>Start</th><th>End</th><th class="num">New UTR</th></tr></thead>
                           <tbody>
                             <tr><td>4</td><td>Monday</td><td>10:00</td><td>11:00</td><td class="num">2.96</td></tr>
-                            <tr><td>4</td><td>Tuesday</td><td>10:00</td><td>11:00</td><td class="num">3.67</td></tr>
-                            <tr><td>4</td><td>Wednesday</td><td>10:00</td><td>11:00</td><td class="num">3.48</td></tr>
+                            <tr><td>4</td><td>Saturday</td><td>10:00</td><td>11:00</td><td class="num">2.29</td></tr>
+                            <tr><td>5</td><td>Monday</td><td>12:00</td><td>13:00</td><td class="num">3.72</td></tr>
                             <tr><td>…</td><td>…</td><td>…</td><td>…</td><td class="num">…</td></tr>
                           </tbody>
                         </table>

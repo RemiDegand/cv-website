@@ -730,6 +730,60 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .ai-chat .story-left .story-bubble { background: #fff; }
 .ai-export { width: 100%; min-width: 0; margin-top: 2px; background: #fff; }   /* no sideways scroll: the chat wraps */
 @media (max-width: 720px) { .ai-export { font-size: 0.62rem; } .ai-export th, .ai-export td { padding: 3px 4px; } }
+/* AI forecast adjustments page, "How it started": the forecaster between 2 screens (script.js), same look as the VAT
+   simulation (.copy-sim). Left: the adjustments in sentences (the zone and the sentence being typed light up, done ones
+   are ticked). Right: the old Google Sheet (zone picker, current UTR, typed cells in yellow, "Add Adjustments") */
+.adj-sim { margin-top: 8px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); }
+.adj-sim-desk { display: grid; grid-template-columns: minmax(0, 0.85fr) auto minmax(0, 1.15fr); align-items: center; gap: 12px; }
+.adj-sim-screen { overflow: hidden; border: 5px solid #1d2230; border-radius: 8px; background: #fff; color: #1f2937; font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+.adj-sim-title { margin: 0; padding: 5px 10px; background: #1d2230; color: #fff; font-size: 0.7rem; font-weight: 600; }
+.adj-sim-sheet .adj-sim-title { background: #188038; }
+.adj-sim-zones { display: grid; gap: 8px; margin: 0; padding: 10px; list-style: none; }
+.adj-sim-zones li { display: grid; gap: 3px; padding: 6px 8px; border: 1px solid #e1e4ea; border-radius: 6px; transition: border-color 0.2s ease, background-color 0.2s ease; }
+.adj-sim-zones strong { font-size: 0.78rem; }
+.adj-sim-zones span { padding: 1px 4px; border-radius: 3px; color: #4b5563; transition: background-color 0.2s ease; }
+.adj-sim-zones span::before { content: "• "; }
+.adj-sim-zones span.is-done::before { content: "✓ "; color: #188038; font-weight: 700; }
+.adj-sim-zones li.is-on { border-color: var(--accent); background: var(--accent-soft); }
+.adj-sim-zones span.is-on { background: #fff3c4; color: #1f2937; }
+.adj-sim-zones li.is-done { opacity: 0.6; }
+.adj-sim-zones .adj-sim-more { border-style: dashed; color: var(--text-muted); }
+.adj-sim-human { display: grid; justify-items: center; gap: 4px; }
+.adj-sim-person { width: 30px; height: 25px; fill: #9aa3b2; }
+.adj-sim-keyboard { width: 52px; height: 23px; }
+.adj-sim-board { fill: #fff; stroke: #9aa3b2; stroke-width: 1.5; }
+.adj-sim-keyboard .key { fill: #c8ced8; }
+.adj-sim.is-keying .adj-sim-person { fill: var(--accent); }
+.adj-sim.is-keying .key { animation: copy-sim-key 0.45s steps(1) infinite; }
+.adj-sim.is-keying .key:nth-of-type(3n + 2) { animation-delay: 0.15s; }
+.adj-sim.is-keying .key:nth-of-type(3n + 3) { animation-delay: 0.3s; }
+.adj-sim-who { color: var(--text-muted); font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.adj-sim-arrow { color: var(--text-muted); font-size: 1.3rem; line-height: 1; }
+.adj-sim-bar { display: flex; align-items: center; gap: 6px; margin: 0; padding: 6px 8px; color: #6b7280; font-size: 0.7rem; font-weight: 600; }
+.adj-sim-pick { min-width: 64px; padding: 1px 18px 1px 6px; border: 1px solid #c8ced8; border-radius: 3px; background: #fff3c4 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%236b7280'/%3E%3C/svg%3E") no-repeat right 5px center / 7px; color: #1f2937; transition: box-shadow 0.15s ease; }
+.adj-sim.is-picking .adj-sim-pick { box-shadow: 0 0 0 2px #188038; }
+.adj-sim-load { display: none; color: #188038; font-weight: 500; }
+.adj-sim.is-loading .adj-sim-load { display: inline; }
+.adj-sim table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.adj-sim th, .adj-sim td { height: 22px; padding: 0 4px; border-top: 1px solid #e1e4ea; text-align: right; white-space: nowrap; }
+.adj-sim th { color: #6b7280; font-size: 0.66rem; font-weight: 600; }
+.adj-sim tbody th { text-align: left; }
+.adj-sim thead th:first-child { width: 17%; text-align: left; }
+.adj-sim td { border-left: 1px solid #f0f2f5; transition: background-color 0.2s ease; }
+.adj-sim td.is-changed { background: #fff3c4; }   /* a value typed by hand */
+.adj-sim td.is-typing { outline: 2px solid #188038; outline-offset: -2px; }
+.adj-sim td.is-typing::after { content: "|"; margin-left: 1px; animation: copy-sim-caret 0.8s steps(1) infinite; }
+.adj-sim-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0; padding: 6px 8px; border-top: 1px solid #e1e4ea; font-size: 0.7rem; }
+.adj-sim-button { padding: 2px 8px; border: 1px solid #c8ced8; border-radius: 4px; background: #f8fafc; font-weight: 600; transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease; }
+.adj-sim-button.is-pressed { border-color: #188038; background: #188038; color: #fff; transform: scale(0.94); }
+.adj-sim-saved { color: #188038; font-weight: 600; }
+.adj-sim-status { min-height: 1.5em; margin: 12px 0 0; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+@media (max-width: 720px) {
+  .adj-sim { padding: 14px; }
+  .adj-sim-desk { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .adj-sim-human { grid-template-columns: auto auto auto auto; align-items: center; justify-content: center; gap: 8px; }   /* one row between the 2 screens */
+  .adj-sim-arrow { transform: rotate(90deg); }
+}
 .compare figcaption { margin-top: 14px; }
 
 @media (max-width: 720px) {

@@ -594,4 +594,97 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   start.observe(buildSim);
 }
 
+// AI forecast adjustments page, "How it started": the forecaster types again, in the old Google Sheet, the adjustments
+// already written in sentences on the other screen: select the zone, current UTR loaded, every changed cell typed,
+// "Add Adjustments", next zone. Starts once on screen and loops; the HTML holds the final state of Kyiv, kept as is
+// with "reduce motion"
+const adjSim = document.querySelector(".adj-sim");
+if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const all = (sel) => [...adjSim.querySelectorAll(sel)];
+  const items = all(".adj-sim-zones li:not(.adj-sim-more)");
+  const cells = all(".adj-sim tbody td");   // 4 hours x 7 days, row by row
+  const pick = adjSim.querySelector(".adj-sim-pick");
+  const button = adjSim.querySelector(".adj-sim-button");
+  const saved = adjSim.querySelector(".adj-sim-saved");
+  const status = adjSim.querySelector(".adj-sim-status");
+  const finalStatus = status.textContent;
+  const days = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => from + i);
+  const hours = [0, 1, 2, 3];
+  // Current UTR (10:00 to 13:00, Mon to Sun) and the sentences of each zone, as cells to change
+  const zones = [
+    { name: "Kyiv", utr: [[2.76, 3.47, 3.28, 3.69, 2.63, 2.54, 3.73], [3.25, 2.89, 3.92, 3.79, 2.77, 3.94, 3.93], [3.19, 3.74, 2.57, 2.90, 2.87, 3.82, 3.26], [3.28, 2.56, 3.08, 3.96, 2.25, 3.23, 2.51]],
+      rules: [{ days: days(0, 4), hours, f: (v) => v + 0.2 }, { days: [5, 6], hours, f: (v) => v * 0.9 }] },
+    { name: "Lviv", utr: [[2.48, 2.91, 3.05, 2.62, 3.34, 3.71, 3.12], [3.17, 2.66, 2.84, 3.41, 3.58, 3.26, 2.95], [3.62, 3.09, 2.73, 2.98, 3.21, 3.84, 3.47], [2.87, 3.35, 3.52, 3.14, 2.69, 3.03, 3.66]],
+      rules: [{ days: days(0, 3), hours, f: (v) => v + 0.2 }, { days: days(0, 6), hours: [2, 3], f: (v) => v - 0.1 }] },
+  ];
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const type = async (cell, text) => {
+    cell.textContent = "";
+    cell.classList.add("is-typing", "is-changed");
+    adjSim.classList.add("is-keying");
+    for (const ch of text) { cell.textContent += ch; await wait(35); }
+    adjSim.classList.remove("is-keying");
+    cell.classList.remove("is-typing");
+    await wait(40);
+  };
+  const run = async () => {
+    for (;;) {
+      items.forEach((li) => { li.classList.remove("is-on", "is-done"); li.querySelectorAll("span").forEach((s) => s.classList.remove("is-on", "is-done")); });
+      cells.forEach((td) => { td.textContent = ""; td.classList.remove("is-changed", "is-typing"); });
+      pick.textContent = "Select…";
+      saved.textContent = "";
+      status.textContent = "Next week's adjustments, already written for the local teams.";
+      await wait(1800);
+      const done = [];
+      for (const [z, zone] of zones.entries()) {
+        const li = items[z];
+        const sentences = [...li.querySelectorAll("span")];
+        li.classList.add("is-on");
+        status.textContent = `Zone ${z + 1}: select ${zone.name} in the sheet…`;
+        cells.forEach((td) => { td.textContent = ""; td.classList.remove("is-changed"); });
+        adjSim.classList.add("is-picking");
+        await wait(700);
+        pick.textContent = zone.name;
+        adjSim.classList.remove("is-picking");
+        adjSim.classList.add("is-loading");
+        await wait(900);
+        adjSim.classList.remove("is-loading");
+        const utr = zone.utr.map((row) => [...row]);
+        cells.forEach((td, i) => { td.textContent = utr[Math.floor(i / 7)][i % 7].toFixed(2); });
+        await wait(500);
+        for (const [r, rule] of zone.rules.entries()) {
+          sentences[r].classList.add("is-on");
+          status.textContent = `Typing by hand: "${sentences[r].textContent}"`;
+          for (const h of rule.hours) {
+            for (const d of rule.days) {
+              utr[h][d] = rule.f(utr[h][d]);
+              await type(cells[h * 7 + d], utr[h][d].toFixed(2));
+            }
+          }
+          sentences[r].classList.remove("is-on");
+          sentences[r].classList.add("is-done");
+          await wait(300);
+        }
+        status.textContent = "Click \"Add Adjustments\" to save the zone…";
+        await wait(500);
+        button.classList.add("is-pressed");
+        await wait(250);
+        button.classList.remove("is-pressed");
+        done.push(zone.name);
+        saved.textContent = "Saved: " + done.join(", ");
+        li.classList.remove("is-on");
+        li.classList.add("is-done");
+        await wait(1000);
+      }
+      items[zones.length].classList.add("is-on");
+      status.textContent = finalStatus;
+      await wait(4500);
+    }
+  };
+  const start = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
+  }, { rootMargin: "0px 0px -20% 0px" });
+  start.observe(adjSim);
+}
+
 // Later: chatbot window (Phase 2).

@@ -35,7 +35,7 @@ An AI skill shared with the forecasting team, hosted on GitHub (folders for Open
 - For a big change, the AI asks for validation; when a request is unclear, it asks for details.
 - At the end, the export with all the adjustments is ready: download it and upload it to the tool.
 
-The website shows an example drawn from Example.xlsx (random values): zone Kyiv (ID 4), +0.2 UTR from 10:00 to 19:00 and −0.2 from 22:00 to midnight, every day, i.e. 77 values (11 hours × 7 days) typed by hand in the old sheet, and the same adjustments as two sentences for the AI skill.
+The website shows a simulation ("How it started"): the forecaster has next week's adjustments in sentences on one screen (Kyiv: increase UTR by 0.2 for Mon to Fri, decrease by 10% for weekends; Lviv: increase by 0.2 for Mon to Thu, decrease by 0.1 from 12:00 to 14:00; Tbilisi: increase by 5% for Fri and Sat) and types them again, zone by zone, in the old Google Sheet (select the zone, type every changed cell of the hour × day grid, click "Add Adjustments"). Kyiv's current UTR comes from Example.xlsx (random values), Lviv's is made up. Part 2 shows the same sentences pasted into the AI skill and the export table it returns (same values).
 
 ## Results and impact
 - About 2 hours a week of manual entries automated (the old process took about 2 h a week, per Rémi's document; the time the new process takes is not measured).
@@ -58,4 +58,4 @@ LLMs through an AI skill (OpenCode), BigQuery (SQL query), GitHub. Before: Googl
 - Which AI tools exactly: OpenCode only, or also Claude Code (".Open Claude" in the document)? Which LLM?
 - Time the new process takes (to state the time saved precisely), and how many zones a week.
 - The "Impact" paragraph of Content.docx talks about VAT (copied from the VAT project): what should it say?
-- The "How it started" conversation (Local team / Forecaster) was written by Claude: wording to confirm.
+- The "How it started" simulation (zones Kyiv, Lviv, Tbilisi and their sentences, Lviv values) was written by Claude from the docx examples: to confirm. Zone IDs in the export (Kyiv 4, Lviv 5) are illustrative.
