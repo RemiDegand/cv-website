@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI automation skills for forecast adjustments | Rémi Degand</title>
-  <meta name="description" content="AI automation skills for forecast adjustments: a project by Rémi Degand at Glovo.">
+  <meta name="description" content="AI automation skills for forecast adjustments: an AI skill that turns written forecast adjustments into the forecasting tool&#39;s import file, by Rémi Degand at Glovo.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -36,27 +36,174 @@
         <header class="project-page-head">
           <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
           <h1 class="project-page-title">AI automation skills for forecast adjustments</h1>
-          <p class="lead">Created AI automation skills for forecast adjustments.</p>
+          <p class="lead">Created an AI skill that turns the week's forecast adjustments, written as sentences, into the import file of the forecasting tool. Shared with the whole forecasting team.</p>
+          <p class="project-result"><strong>~2 h a week</strong> of manual entries automated</p>
         </header>
 
         <dl class="project-facts">
           <div><dt>Role</dt><dd>Forecasting Analyst Intern</dd></div>
           <div><dt>When</dt><dd>Mar – Sep 2026</dd></div>
           <div><dt>Where</dt><dd>Barcelona, Spain</dd></div>
+          <div><dt>Scope</dt><dd>Forecasting team · every week</dd></div>
         </dl>
 
-        <h2 class="project-h2">Context</h2>
-        <p>Forecaster in the Supply Ops department for the PLECA market. I forecast weekly rider supply for 5 countries (Poland, Ukraine, Armenia, Georgia and Kyrgyzstan), covering several hundred thousand orders and rider slots per week.</p>
+        <!-- Content from projects/AI Skills for forecast adjsutments/Content.docx (written by Rémi, 30 Oct 2026; its
+             "Impact" paragraph was copied from the VAT project, so not used) and Example.xlsx (the old Google Sheet:
+             zone selector, "UTR input" and "UTR Adjustments" grids by hour and day, "Add Adjustments" button, export
+             sheet). Values in the screens come from that example file (random numbers). Same format as
+             project-aged-receivables.html (see "Project page format" in docs/CV website.md) -->
+        <nav class="block-nav" aria-label="Parts of this project">
+          <a href="#block-1"><span class="block-nav-num">1</span><span class="block-nav-text">Problem &amp; context</span></a>
+          <a href="#block-2"><span class="block-nav-num">2</span><span class="block-nav-text">What I built</span></a>
+          <a href="#block-3"><span class="block-nav-num">3</span><span class="block-nav-text">Impact &amp; tools</span></a>
+        </nav>
 
-        <h2 class="project-h2">What I did</h2>
-        <ul class="project-did">
-          <li>Created AI automation skills for forecast adjustments</li>
-        </ul>
+        <div class="blocks">
+          <!-- Block 1: the story, then the context and the problem behind it -->
+          <div class="block" id="block-1" role="region" aria-labelledby="block-1-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">1</span>
+              <div><p class="block-kicker">Part 1 of 3</p><h2 class="block-title" id="block-1-title">Problem &amp; context</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>How it started</h3>
+              <div class="story reveal-stagger" aria-label="Conversation that started the project">
+                <p class="story-line story-left"><span class="story-who">Local team</span><span class="story-bubble">Thanks for next week's adjustments: +0.2 UTR from 10:00 to 19:00 in Kyiv, −0.2 late in the evening. All clear!</span></p>
+                <p class="story-line story-right"><span class="story-who">Forecaster</span><span class="story-bubble">Great. Now I just have to type them all again in the sheet, zone by zone…</span></p>
+              </div>
+              <p class="story-end">Adjustments already written in sentences had to reach the forecasting tool without being typed again.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Context</h3>
+              <p>Glovo's forecasting team updated the rider supply forecast every week. At the start of the week, it analysed past performance and collected inputs from the local teams; at the end, it decided on adjustments and entered them in a Google Sheet with Apps Script, connected to BigQuery.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>The problem</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Repetitive:</strong> for each zone, select it, type every adjusted value in the hour-by-day grid, save with a button, then start again with the next zone.</li>
+                <li><strong>About 2 h every week</strong>, before exporting the final sheet into the company's forecasting tool.</li>
+                <li><strong>Double work:</strong> the same adjustments were already written in sentences for the local teams.</li>
+              </ul>
+            </div>
+          </div>
 
-        <h2 class="project-h2">Tools</h2>
-        <ul class="tags">
-          <li>LLMs</li><li>OpenCode</li>
-        </ul>
+          <!-- Block 2 -->
+          <div class="block" id="block-2" role="region" aria-labelledby="block-2-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">2</span>
+              <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: an AI skill for the forecasting team</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>The process: before and after</h3>
+              <p class="flow-label">Before</p>
+              <ol class="project-flow project-flow-before reveal-stagger" aria-label="The process before">
+                <li><strong>Pick a zone</strong><span>Current values loaded from BigQuery</span></li>
+                <li><strong>Type the grid</strong><span>Each new value, hour by hour and day by day</span></li>
+                <li><strong>Save, next zone</strong><span>Button "Add Adjustments", again and again</span></li>
+              </ol>
+              <p class="flow-label">After</p>
+              <ol class="project-flow reveal-stagger" aria-label="The process after">
+                <li><strong>Paste the sentences</strong><span>The ones already written for the local teams</span></li>
+                <li><strong>The AI calculates</strong><span>Current values queried from BigQuery, new value for each zone, day and hour</span></li>
+                <li><strong>Export ready</strong><span>In the tool's format, to download and upload</span></li>
+              </ol>
+              <p class="chip-row reveal-stagger"><span class="chip-label">Built with</span><span class="chip">AI skill (prompt + rules)</span><span class="chip">BigQuery query</span><span class="chip">JSON output, no guessing</span><span class="chip">Format examples</span><span class="chip">Shared on GitHub</span></p>
+            </div>
+
+            <!-- The 2 ways of entering the same adjustments, on a computer screen: 2 views (tabs, script.js) -->
+            <div class="block-part reveal">
+              <h3><span class="block-label">Example</span>The same adjustments, two ways</h3>
+              <figure class="project-shot annotated compare">
+                <div class="report-bar">
+                  <div class="report-tabs" role="tablist" aria-label="Way of entering the adjustments">
+                    <button type="button" role="tab" aria-selected="true" aria-controls="ai-before" id="tab-ai-before">1. Before: the Google Sheet</button>
+                    <button type="button" role="tab" aria-selected="false" aria-controls="ai-after" id="tab-ai-after" tabindex="-1">2. After: the AI skill</button>
+                  </div>
+                </div>
+
+                <!-- View 1: the old sheet (Example.xlsx, Sheet1): zone, current UTR, adjusted UTR typed by hand -->
+                <div class="compare-view" id="ai-before" role="tabpanel" aria-labelledby="tab-ai-before">
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Google Sheets · Forecast adjustments</span></div>
+                      <div class="sheet" tabindex="0" aria-label="The old Google Sheet: the zone Kyiv, the current UTR by hour and day, and the adjusted UTR typed by hand next to it">
+                        <p class="sheet-ribbon" aria-hidden="true">Apps Script <span class="sheet-button">▶ Add Adjustments</span></p>
+                        <div class="sheet-canvas">
+                          <table class="sheet-grid">
+                            <colgroup><col style="width: 4%"><col style="width: 14%"><col style="width: 11%"><col style="width: 11%"><col style="width: 11%"><col style="width: 6%"><col style="width: 4%"><col style="width: 11%"><col style="width: 11%"><col style="width: 11%"><col style="width: 6%"></colgroup>
+                            <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th></tr></thead>
+                            <tbody>
+                              <tr><th>1</th><td class="cell-bold">Zone</td><td class="fill-yellow">Kyiv ▾</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                              <tr><th>2</th><td></td><td colspan="4" class="cell-bold">UTR input (current)</td><td></td><td colspan="4" class="cell-bold">UTR adjustments (typed)</td></tr>
+                              <tr class="cell-head"><th>3</th><td>Hour</td><td class="num">Mon</td><td class="num">Tue</td><td class="num">Wed</td><td class="num">…</td><td></td><td class="num">Mon</td><td class="num">Tue</td><td class="num">Wed</td><td class="num">…</td></tr>
+                              <tr><th>4</th><td>09:00</td><td class="num">2.33</td><td class="num">3.12</td><td class="num">2.46</td><td class="num">…</td><td></td><td></td><td></td><td></td><td></td></tr>
+                              <tr><th>5</th><td>10:00</td><td class="num">2.76</td><td class="num">3.47</td><td class="num">3.28</td><td class="num">…</td><td></td><td class="num fill-yellow">2.96</td><td class="num fill-yellow">3.67</td><td class="num fill-yellow">3.48</td><td class="num">…</td></tr>
+                              <tr><th>6</th><td>11:00</td><td class="num">3.25</td><td class="num">2.89</td><td class="num">3.92</td><td class="num">…</td><td></td><td class="num fill-yellow">3.45</td><td class="num fill-yellow">3.09</td><td class="num fill-yellow">4.12</td><td class="num">…</td></tr>
+                              <tr><th>7</th><td>12:00</td><td class="num">3.19</td><td class="num">3.74</td><td class="num">2.57</td><td class="num">…</td><td></td><td class="num fill-yellow">3.39</td><td class="num fill-yellow">3.94</td><td class="num fill-yellow">2.77</td><td class="num">…</td></tr>
+                              <tr><th>8</th><td>…</td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td></td><td></td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td></td></tr>
+                              <tr><th>9</th><td>22:00</td><td class="num">3.77</td><td class="num">3.53</td><td class="num">2.77</td><td class="num">…</td><td></td><td class="num fill-yellow">3.57</td><td class="num fill-yellow">3.33</td><td class="num fill-yellow">2.57</td><td class="num">…</td></tr>
+                              <tr><th>10</th><td>23:00</td><td class="num">3.00</td><td class="num">3.52</td><td class="num">2.39</td><td class="num">…</td><td></td><td class="num fill-yellow">2.80</td><td class="num fill-yellow">3.32</td><td class="num fill-yellow">2.19</td><td class="num">…</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <p class="sheet-tabs" aria-hidden="true"><span class="on">Adjustments</span><span>Export</span></p>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="story-answer"><strong>For one zone:</strong> 77 values typed by hand (11 hours × 7 days), one click to save, then the same for the next zone.</p>
+                </div>
+
+                <!-- View 2: the AI skill: the sentences in, the export table out -->
+                <div class="compare-view" id="ai-after" role="tabpanel" aria-labelledby="tab-ai-after" hidden>
+                  <div class="monitor">
+                    <div class="monitor-screen">
+                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">OpenCode · forecast-adjustments skill</span></div>
+                      <div class="sheet ai-chat" tabindex="0" aria-label="The AI skill: the forecaster pastes the adjustments in sentences, the AI reads the current UTR from BigQuery and returns the export table">
+                        <p class="story-line story-left"><span class="story-who">Forecaster</span><span class="story-bubble">Increase UTR by 0.2 from 10:00 to 19:00, Monday to Sunday, for Kyiv. Decrease UTR by 0.2 from 22:00 to midnight for Kyiv.</span></p>
+                        <p class="story-line story-right"><span class="story-who">AI skill</span><span class="story-bubble">Current UTR for Kyiv read from BigQuery. 77 slots updated (11 hours × 7 days), no big change to confirm. Export ready ↓</span></p>
+                        <table class="sheet-grid ai-export">
+                          <thead><tr><th>Zone ID</th><th>Day</th><th>Start</th><th>End</th><th class="num">New UTR</th></tr></thead>
+                          <tbody>
+                            <tr><td>4</td><td>Monday</td><td>10:00</td><td>11:00</td><td class="num">2.96</td></tr>
+                            <tr><td>4</td><td>Tuesday</td><td>10:00</td><td>11:00</td><td class="num">3.67</td></tr>
+                            <tr><td>4</td><td>Wednesday</td><td>10:00</td><td>11:00</td><td class="num">3.48</td></tr>
+                            <tr><td>…</td><td>…</td><td>…</td><td>…</td><td class="num">…</td></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="monitor-stand" aria-hidden="true"></div>
+                  </div>
+                  <p class="story-answer"><strong>For every zone:</strong> the sentences in, the file out. The AI asks for validation on big changes and for details when a request is unclear.</p>
+                </div>
+                <figcaption>Drawn from an example file, with random values.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <!-- Block 3 -->
+          <div class="block" id="block-3" role="region" aria-labelledby="block-3-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">3</span>
+              <div><p class="block-kicker">Part 3 of 3</p><h2 class="block-title" id="block-3-title">Impact &amp; tools</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>Impact</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>~2 h a week</strong> of manual entries handed to the AI: the forecaster only pastes the sentences and downloads the file.</li>
+                <li><strong>Fewer errors:</strong> no values typed by hand, calculations based on the real data, and a fixed output format.</li>
+                <li><strong>For the whole team:</strong> the skill is shared on GitHub and used by every forecaster.</li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>Tools</h3>
+              <ul class="tags reveal-stagger">
+                <li>LLMs (AI skills)</li><li>OpenCode</li><li>BigQuery (SQL)</li><li>GitHub</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <a href="experience.html#glovo" class="see-all project-xp-link">See the Glovo experience →</a>
 

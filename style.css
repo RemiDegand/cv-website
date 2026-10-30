@@ -725,6 +725,11 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .project-flow-before li { background: var(--bg); border-style: dashed; }
 .project-flow-before strong { color: var(--text-muted); }
 .compare .story-answer { margin-top: 18px; }
+/* AI forecast adjustments page: the AI skill as a chat on the screen, then the export table it returns */
+.ai-chat { display: grid; gap: 10px; padding: 14px; background: #f8fafc; font-size: 0.82rem; }
+.ai-chat .story-left .story-bubble { background: #fff; }
+.ai-export { width: 100%; min-width: 0; margin-top: 2px; background: #fff; }   /* no sideways scroll: the chat wraps */
+@media (max-width: 720px) { .ai-export { font-size: 0.62rem; } .ai-export th, .ai-export td { padding: 3px 4px; } }
 .compare figcaption { margin-top: 14px; }
 
 @media (max-width: 720px) {

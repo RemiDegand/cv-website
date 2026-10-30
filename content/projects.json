@@ -47,9 +47,9 @@
       "ai": true,
       "company": "glovo",
       "title": "AI automation skills for forecast adjustments",
-      "description": "Created AI automation skills for forecast adjustments.",
-      "result": null,
-      "tags": ["LLMs", "OpenCode"],
+      "description": "Created an AI skill that turns the week's forecast adjustments, written as sentences, into the import file of the forecasting tool. Shared with the whole forecasting team.",
+      "result": { "key": "~2 h a week", "text": "of manual entries automated" },
+      "tags": ["LLMs (AI skills)", "OpenCode", "BigQuery (SQL)", "GitHub"],
       "home": false
     },
     {
