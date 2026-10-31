@@ -734,8 +734,10 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
    simulation (.copy-sim). Left: the adjustments in sentences (the zone and the sentence being typed light up, done ones
    are ticked). Right: the old Google Sheet (zone picker, current UTR, typed cells in yellow, "Add Adjustments") */
 .adj-sim { margin-top: 8px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); }
-.adj-sim-desk { display: grid; grid-template-columns: minmax(0, 0.85fr) auto minmax(0, 1.15fr); align-items: center; gap: 12px; }
-.adj-sim-head { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 16px; }
+.adj-sim-desk { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 0 10px; }   /* a double screen: same height, on stands */
+.adj-sim-stand { width: 44px; height: 14px; margin: 0 auto; border-bottom: 4px solid #1d2230; border-radius: 0 0 3px 3px; background: linear-gradient(#2c3344, #1d2230) no-repeat center top / 14px 100%; }
+.adj-sim-head { display: grid; grid-template-columns: minmax(0, 0.9fr) auto minmax(0, 1.1fr); align-items: center; gap: 18px; margin-top: 14px; }
+.adj-sim-head .adj-sim-human { grid-column: 2; }
 .project-page .adj-sim-say { position: relative; padding: 10px 14px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg); line-height: 1.45; transition: opacity 0.3s ease; }
 .adj-sim-say::before { content: ""; position: absolute; top: 50%; left: -7px; width: 12px; height: 12px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); background: var(--bg); transform: translateY(-50%) rotate(45deg); }   /* the tail, towards the forecaster */
 .adj-sim.is-waiting .adj-sim-say { opacity: 0; }
@@ -762,14 +764,15 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .adj-sim.is-keying .key:nth-of-type(3n + 2) { animation-delay: 0.15s; }
 .adj-sim.is-keying .key:nth-of-type(3n + 3) { animation-delay: 0.3s; }
 .adj-sim-who { color: var(--text-muted); font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-.adj-sim-arrow { color: var(--text-muted); font-size: 1.3rem; line-height: 1; }
 .adj-sim-bar { display: flex; align-items: center; gap: 6px; margin: 0; padding: 6px 8px; color: #6b7280; font-size: 0.7rem; font-weight: 600; }
 .adj-sim-pick { min-width: 64px; padding: 1px 18px 1px 6px; border: 1px solid #c8ced8; border-radius: 3px; background: #fff3c4 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%236b7280'/%3E%3C/svg%3E") no-repeat right 5px center / 7px; color: #1f2937; transition: box-shadow 0.15s ease; }
 .adj-sim.is-picking .adj-sim-pick { box-shadow: 0 0 0 2px #188038; }
 .adj-sim-load { display: none; color: #188038; font-weight: 500; }
 .adj-sim.is-loading .adj-sim-load { display: inline; }
 .adj-sim table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-.adj-sim th, .adj-sim td { height: 22px; padding: 0 4px; border-top: 1px solid #e1e4ea; text-align: right; white-space: nowrap; }
+.adj-sim-sheet { display: flex; flex-direction: column; }
+.adj-sim-sheet .adj-sim-foot { margin-top: auto; }
+.adj-sim th, .adj-sim td { height: 28px; padding: 0 4px; border-top: 1px solid #e1e4ea; text-align: right; white-space: nowrap; }
 .adj-sim th { color: #6b7280; font-size: 0.66rem; font-weight: 600; }
 .adj-sim tbody th { text-align: left; }
 .adj-sim thead th:first-child { width: 17%; text-align: left; }
@@ -785,8 +788,9 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 @media (max-width: 720px) {
   .adj-sim { padding: 14px; }
   .adj-sim-desk { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .adj-sim-head { gap: 14px; margin-bottom: 12px; }
-  .adj-sim-arrow { justify-self: center; transform: rotate(90deg); }
+  .adj-sim-stand { display: none; }
+  .adj-sim-head { display: flex; justify-content: center; gap: 14px; margin-top: 12px; }
+  .adj-sim th, .adj-sim td { height: 24px; }
 }
 .compare figcaption { margin-top: 14px; }
 
