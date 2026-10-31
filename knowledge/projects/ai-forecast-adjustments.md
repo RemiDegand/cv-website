@@ -30,7 +30,7 @@ Rémi was Forecasting Analyst Intern in Glovo's Supply Ops department for the PL
 An AI skill shared with the forecasting team, hosted on GitHub (folders for OpenCode and other AI tools: "`.opencode`, `.claude`…" in Rémi's document, to confirm):
 - The forecaster pastes the adjustment sentences already written for the local teams, e.g. "Increase UTR by 0.2 for Mon to Thu for LVI" or "Decrease UTR by 10% for weekends".
 - The AI has access to the BigQuery table and a query to get the current values (current UTR); the query result comes as JSON to avoid hallucinations.
-- It calculates the new value (current UTR + / − / × / ÷ depending on the request) and writes each parameter in a file: zone, days, hours, new UTR.
+- It is also given JSON code to do the calculation (Rémi, 31 Oct 2026). It calculates the new value (current UTR + / − / × / ÷ depending on the request) and writes each parameter in a file: zone, days, hours, new UTR.
 - A file of rules and examples gives the exact format the forecasting tool expects.
 - For a big change, the AI asks for validation; when a request is unclear, it asks for details.
 - At the end, the export with all the adjustments is ready: download it and upload it to the tool.
@@ -54,6 +54,7 @@ LLMs through an AI skill (OpenCode), BigQuery (SQL query), GitHub. Before: Googl
 - **What did it save?** → About 2 hours of manual entries every week.
 
 ## Open questions
+- JSON: Rémi's document says the query result comes as JSON to avoid hallucinations; on 31 Oct he described JSON code given to the AI to do the calculation. Is it the same thing, or two things?
 - What UTR stands for at Glovo, in one short line for recruiters (the page uses "UTR" without explaining it).
 - Which AI tools exactly: OpenCode only, or also Claude Code (".Open Claude" in the document)? Which LLM?
 - Time the new process takes (to state the time saved precisely), and how many zones a week.

@@ -724,6 +724,19 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .project-page .flow-label { margin: 16px 0 -8px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 .project-flow-before li { background: var(--bg); border-style: dashed; }
 .project-flow-before strong { color: var(--text-muted); }
+/* The inside of a step of the flow above it: a panel linked to the middle step, with its own numbered steps */
+.flow-detail { position: relative; margin-top: 20px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; }
+.flow-detail::before { content: ""; position: absolute; left: 50%; top: -21px; height: 20px; border-left: 1.5px dashed var(--text-muted); }
+.project-page .flow-detail-title { margin-bottom: 12px; font-size: 0.875rem; font-weight: 600; }
+.flow-detail-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: detail; }
+.flow-detail-steps li { counter-increment: detail; }
+.flow-detail-steps li::before { content: counter(detail); display: grid; place-items: center; width: 22px; height: 22px; margin-bottom: 6px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; font-weight: 700; }
+.flow-detail-steps strong { display: block; }
+.flow-detail-steps span { display: block; margin-top: 2px; color: var(--text-muted); font-size: 0.85rem; line-height: 1.4; }
+@media (max-width: 720px) {
+  .flow-detail::before { display: none; }   /* the 3 steps are stacked: the middle one isn't above any more */
+  .flow-detail-steps { grid-template-columns: minmax(0, 1fr); }
+}
 /* A flow with a loop: the first 3 steps repeat (line from the 3rd step back to the 1st), then a last step */
 .project-flow-loop { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 28px; }
 .project-flow-loop .flow-back { padding: 0; border: 0; background: none; text-align: center; }

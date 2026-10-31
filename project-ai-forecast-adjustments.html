@@ -154,11 +154,19 @@
               </ol>
               <p class="flow-label">After</p>
               <ol class="project-flow reveal-stagger" aria-label="The process after">
-                <li><strong>Paste the sentences</strong><span>The ones already written for the local teams</span></li>
-                <li><strong>The AI calculates</strong><span>Current values queried from BigQuery, new value for each zone, day and hour</span></li>
+                <li><strong>Send adjustments through sentences to the AI</strong><span>The ones already written for the local teams</span></li>
+                <li><strong>The AI calculates</strong><span>A new value for each zone, day and hour</span></li>
                 <li><strong>Export ready</strong><span>In the tool's format, to download and upload</span></li>
               </ol>
-              <p class="chip-row reveal-stagger"><span class="chip-label">Built with</span><span class="chip">AI skill (prompt + rules)</span><span class="chip">BigQuery query</span><span class="chip">JSON output, no guessing</span><span class="chip">Format examples</span><span class="chip">Shared on GitHub</span></p>
+              <div class="flow-detail">
+                <p class="flow-detail-title">How the AI calculates: what it is given</p>
+                <ol class="flow-detail-steps reveal-stagger">
+                  <li><strong>BigQuery access</strong><span>To read the current values of each zone</span></li>
+                  <li><strong>The right query</strong><span>To get the current UTR by zone, day and hour</span></li>
+                  <li><strong>A prompt</strong><span>Rules + examples of how to describe a sentence, to get the right format</span></li>
+                  <li><strong>JSON code</strong><span>To do the calculation, so each new value is calculated, not guessed</span></li>
+                </ol>
+              </div>
             </div>
 
             <!-- The AI skill on a computer screen: the sentences in, the export table out (the old sheet is in the
