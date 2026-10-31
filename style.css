@@ -771,7 +771,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .adj-sim.is-loading .adj-sim-load { display: inline; }
 .adj-sim table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .adj-sim-sheet { display: flex; flex-direction: column; }
-.adj-sim-sheet .adj-sim-foot { margin-top: auto; }
+.adj-sim-sheet table { flex: 1; }   /* the rows share the height of the screen */
 .adj-sim th, .adj-sim td { height: 28px; padding: 0 4px; border-top: 1px solid #e1e4ea; text-align: right; white-space: nowrap; }
 .adj-sim th { color: #6b7280; font-size: 0.66rem; font-weight: 600; }
 .adj-sim tbody th { text-align: left; }

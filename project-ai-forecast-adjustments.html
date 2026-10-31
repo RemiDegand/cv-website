@@ -75,14 +75,14 @@
                    Only 10:00 to 13:00 is adjusted, 08:00, 09:00, 14:00 and 15:00 keep their value. Kyiv values from Example.xlsx (random),
                    Lviv values made up. The HTML is the final state of Kyiv (shown as is without JS or with
                    "reduce motion"); script.js replays the whole thing in a loop -->
-              <div class="adj-sim" role="img" aria-label="Simulation: the forecaster says: analyses done, now let's apply the adjustments for next week. The forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends; for Lviv, increase UTR by 0.2 for Monday to Thursday and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, each zone is selected, every new value is typed in the hour-by-day grid, some hours keep their value, then Add Adjustments is clicked and it starts again with the next zone.">
+              <div class="adj-sim" role="img" aria-label="Simulation: the forecaster says: analyses done, now let's apply the adjustments for next week. The forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends, both from 10:00 to 14:00; for Lviv, increase UTR by 0.2 for Monday to Thursday from 10:00 to 12:00 and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, each zone is selected, every new value is typed in the hour-by-day grid, some hours keep their value, then Add Adjustments is clicked and it starts again with the next zone.">
                 <div class="adj-sim-desk" aria-hidden="true">
                   <div class="adj-sim-screen adj-sim-notes">
                     <p class="adj-sim-title">Next week's adjustments</p>
                     <ul class="adj-sim-zones">
-                      <li class="is-done"><strong>Kyiv</strong><span class="is-done">Increase UTR by 0.2 for Mon to Fri</span><span class="is-done">Decrease UTR by 10% for weekends</span></li>
-                      <li><strong>Lviv</strong><span>Increase UTR by 0.2 for Mon to Thu</span><span>Decrease UTR by 0.1 from 12:00 to 14:00</span></li>
-                      <li><strong>Tbilisi</strong><span>Increase UTR by 5% for Fri and Sat</span></li>
+                      <li class="is-done"><strong>Kyiv</strong><span class="is-done">Increase UTR by 0.2 for Mon to Fri from 10:00 to 14:00</span><span class="is-done">Decrease UTR by 10% for weekends from 10:00 to 14:00</span></li>
+                      <li><strong>Lviv</strong><span>Increase UTR by 0.2 for Mon to Thu from 10:00 to 12:00</span><span>Decrease UTR by 0.1 from 12:00 to 14:00</span></li>
+                      <li><strong>Tbilisi</strong><span>Increase UTR by 5% for Fri and Sat from 10:00 to 14:00</span></li>
                       <li class="adj-sim-more">+ the other zones…</li>
                     </ul>
                   </div>
@@ -169,14 +169,14 @@
                     <div class="monitor-screen">
                       <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">OpenCode · forecast-adjustments skill</span></div>
                       <div class="sheet ai-chat" tabindex="0" aria-label="The AI skill: the forecaster pastes the same adjustment sentences for Kyiv, Lviv and Tbilisi, the AI reads the current UTR from BigQuery and returns the export table">
-                        <p class="story-line story-left"><span class="story-who">Forecaster</span><span class="story-bubble">Kyiv: Increase UTR by 0.2 for Mon to Fri. Decrease UTR by 10% for weekends.<br>Lviv: Increase UTR by 0.2 for Mon to Thu. Decrease UTR by 0.1 from 12:00 to 14:00.<br>Tbilisi: Increase UTR by 5% for Fri and Sat.</span></p>
+                        <p class="story-line story-left"><span class="story-who">Forecaster</span><span class="story-bubble">Kyiv: Increase UTR by 0.2 for Mon to Fri from 10:00 to 14:00. Decrease UTR by 10% for weekends from 10:00 to 14:00.<br>Lviv: Increase UTR by 0.2 for Mon to Thu from 10:00 to 12:00. Decrease UTR by 0.1 from 12:00 to 14:00.<br>Tbilisi: Increase UTR by 5% for Fri and Sat from 10:00 to 14:00.</span></p>
                         <p class="story-line story-right"><span class="story-who">AI skill</span><span class="story-bubble">Current UTR of the 3 zones read from BigQuery. Every slot recalculated, no big change to confirm. Export ready ↓</span></p>
                         <table class="sheet-grid ai-export">
                           <thead><tr><th>Zone ID</th><th>Day</th><th>Start</th><th>End</th><th class="num">New UTR</th></tr></thead>
                           <tbody>
                             <tr><td>4</td><td>Monday</td><td>10:00</td><td>11:00</td><td class="num">2.96</td></tr>
                             <tr><td>4</td><td>Saturday</td><td>10:00</td><td>11:00</td><td class="num">2.29</td></tr>
-                            <tr><td>5</td><td>Monday</td><td>12:00</td><td>13:00</td><td class="num">3.72</td></tr>
+                            <tr><td>5</td><td>Monday</td><td>12:00</td><td>13:00</td><td class="num">3.52</td></tr>
                             <tr><td>…</td><td>…</td><td>…</td><td>…</td><td class="num">…</td></tr>
                           </tbody>
                         </table>
