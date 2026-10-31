@@ -692,4 +692,50 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   start.observe(adjSim);
 }
 
+// AI forecast adjustments page, the example: the sentences are typed in the message box and sent, the AI thinks and replies,
+// then the export appears row by row. Starts once on screen and loops; the HTML holds the final state, kept as is with
+// "reduce motion"
+const aiChat = document.querySelector(".ai-chat");
+if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const [sent, reply] = aiChat.querySelectorAll(".story-line");
+  const table = aiChat.querySelector(".ai-export");
+  const rows = [...table.querySelectorAll("tbody tr")];
+  const input = aiChat.querySelector(".ai-input");
+  const inputText = aiChat.querySelector(".ai-input-text");
+  const send = aiChat.querySelector(".ai-send");
+  const placeholder = inputText.textContent;
+  const sentences = sent.querySelector(".story-bubble").textContent;
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const run = async () => {
+    for (;;) {
+      [sent, reply, table, ...rows].forEach((el) => el.classList.add("is-off"));
+      await wait(1000);
+      input.classList.add("is-filled");
+      inputText.textContent = "";
+      for (let i = 1; i <= 70; i++) { inputText.textContent = sentences.slice(0, i); await wait(20); }
+      inputText.textContent = sentences;
+      await wait(600);
+      send.classList.add("is-pressed");
+      await wait(200);
+      send.classList.remove("is-pressed");
+      input.classList.remove("is-filled");
+      inputText.textContent = placeholder;
+      sent.classList.remove("is-off");
+      await wait(900);
+      aiChat.classList.add("is-thinking");
+      reply.classList.remove("is-off");
+      await wait(2000);
+      aiChat.classList.remove("is-thinking");
+      await wait(1000);
+      table.classList.remove("is-off");
+      for (const row of rows) { await wait(400); row.classList.remove("is-off"); }
+      await wait(6000);
+    }
+  };
+  const start = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
+  }, { rootMargin: "0px 0px -20% 0px" });
+  start.observe(aiChat);
+}
+
 // Later: chatbot window (Phase 2).

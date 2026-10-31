@@ -724,6 +724,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .project-page .flow-label { margin: 16px 0 -8px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 .project-flow-before li { background: var(--bg); border-style: dashed; }
 .project-flow-before strong { color: var(--text-muted); }
+.project-page .flow-note { margin-top: 14px; }
 /* The inside of a step of the flow above it: a panel linked to the middle step, with its own numbered steps */
 .flow-detail { position: relative; margin-top: 20px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; }
 .flow-detail::before { content: ""; position: absolute; left: 50%; top: -21px; height: 20px; border-left: 1.5px dashed var(--text-muted); }
@@ -749,7 +750,17 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .compare .story-answer { margin-top: 18px; }
 /* AI forecast adjustments page: the AI skill as a chat on the screen, then the export table it returns */
 .ai-chat { display: grid; gap: 10px; padding: 14px; background: #f8fafc; font-size: 0.82rem; }
-.ai-chat .story-left .story-bubble { background: #fff; }
+.ai-chat .story-left .story-bubble { border-color: transparent; background: var(--accent-soft); color: var(--accent); }   /* the sentences sent */
+.ai-chat .story-right .story-bubble { position: relative; border: 1px solid var(--border); background: #fff; }
+.ai-chat .is-off { visibility: hidden; }   /* keeps its place, so the screen never changes height */
+.ai-dots { display: none; position: absolute; top: 0; left: 0; }
+.ai-chat.is-thinking .ai-dots { display: inline-flex; }
+.ai-chat.is-thinking .ai-reply { visibility: hidden; }
+.ai-input { display: flex; align-items: center; gap: 8px; margin-top: 2px; padding: 5px 5px 5px 12px; border: 1px solid var(--border); border-radius: 18px; background: #fff; }
+.ai-input-text { flex: 1; min-width: 0; overflow: hidden; color: var(--text-muted); text-overflow: ellipsis; white-space: nowrap; }
+.ai-input.is-filled .ai-input-text { color: var(--text); }
+.ai-send { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; line-height: 1; transition: transform 0.15s ease; }
+.ai-send.is-pressed { transform: scale(0.8); }
 .ai-export { width: 100%; min-width: 0; margin-top: 2px; background: #fff; }   /* no sideways scroll: the chat wraps */
 @media (max-width: 720px) { .ai-export { font-size: 0.62rem; } .ai-export th, .ai-export td { padding: 3px 4px; } }
 /* AI forecast adjustments page, "How it started": the forecaster between 2 screens (script.js), same look as the VAT

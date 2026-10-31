@@ -167,10 +167,13 @@
                   <li><strong>JSON code</strong><span>To do the calculation, so each new value is calculated, not guessed</span></li>
                 </ol>
               </div>
+              <p class="flow-note">The skill was on GitHub, so anyone on the forecasting team could use it.</p>
             </div>
 
             <!-- The AI skill on a computer screen: the sentences in, the export table out (the old sheet is in the
-                 simulation of Part 1) -->
+                 simulation of Part 1). Simulation (script.js): the sentences are typed in the message box and sent, the
+                 AI thinks and replies, then the export appears row by row. The HTML is the final state (shown as is
+                 without JS or with "reduce motion") -->
             <div class="block-part reveal">
               <h3><span class="block-label">Example</span>The same adjustments, with the AI skill</h3>
               <figure class="project-shot annotated">
@@ -180,7 +183,7 @@
                       <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">OpenCode · forecast-adjustments skill</span></div>
                       <div class="sheet ai-chat" tabindex="0" aria-label="The AI skill: the forecaster pastes the same adjustment sentences for Kyiv, Lviv and Tbilisi, the AI reads the current UTR from BigQuery and returns the export table">
                         <p class="story-line story-left"><span class="story-who">Forecaster</span><span class="story-bubble">Kyiv: Increase UTR by 0.2 for Mon to Fri from 10:00 to 14:00. Decrease UTR by 10% for weekends from 10:00 to 14:00.<br>Lviv: Increase UTR by 0.2 for Mon to Thu from 10:00 to 12:00. Decrease UTR by 0.1 from 12:00 to 14:00.<br>Tbilisi: Increase UTR by 5% for Fri and Sat from 10:00 to 14:00.</span></p>
-                        <p class="story-line story-right"><span class="story-who">AI skill</span><span class="story-bubble">Current UTR of the 3 zones read from BigQuery. Every slot recalculated, no big change to confirm. Export ready ↓</span></p>
+                        <p class="story-line story-right"><span class="story-who">AI skill</span><span class="story-bubble"><span class="ai-reply">Current UTR of the 3 zones read from BigQuery. Every slot recalculated, no unclear change. Export ready ↓</span><span class="story-typing ai-dots"><span></span><span></span><span></span></span></span></p>
                         <table class="sheet-grid ai-export">
                           <thead><tr><th>Zone ID</th><th>Day</th><th>Start</th><th>End</th><th class="num">New UTR</th></tr></thead>
                           <tbody>
@@ -190,6 +193,7 @@
                             <tr><td>…</td><td>…</td><td>…</td><td>…</td><td class="num">…</td></tr>
                           </tbody>
                         </table>
+                        <p class="ai-input" aria-hidden="true"><span class="ai-input-text">Message the AI skill…</span><span class="ai-send">↑</span></p>
                       </div>
                     </div>
                     <div class="monitor-stand" aria-hidden="true"></div>
