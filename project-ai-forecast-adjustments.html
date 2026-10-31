@@ -145,10 +145,12 @@
             <div class="block-part reveal">
               <h3>The process: before and after</h3>
               <p class="flow-label">Before</p>
-              <ol class="project-flow project-flow-before reveal-stagger" aria-label="The process before">
+              <ol class="project-flow project-flow-before project-flow-loop reveal-stagger" aria-label="The process before">
                 <li><strong>Pick a zone</strong><span>Current values loaded from BigQuery</span></li>
                 <li><strong>Type the grid</strong><span>Each new value, hour by hour and day by day</span></li>
-                <li><strong>Save, next zone</strong><span>Button "Add Adjustments", again and again</span></li>
+                <li><strong>Save adjustments</strong><span>Button "Add Adjustments", to save them in another sheet in the right format</span></li>
+                <li class="flow-back"><span>↺ Repeat for each zone</span></li>
+                <li><strong>Export</strong><span>The final sheet, exported into the forecasting tool</span></li>
               </ol>
               <p class="flow-label">After</p>
               <ol class="project-flow reveal-stagger" aria-label="The process after">

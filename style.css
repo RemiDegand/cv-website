@@ -724,6 +724,15 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .project-page .flow-label { margin: 16px 0 -8px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 .project-flow-before li { background: var(--bg); border-style: dashed; }
 .project-flow-before strong { color: var(--text-muted); }
+/* A flow with a loop: the first 3 steps repeat (line from the 3rd step back to the 1st), then a last step */
+.project-flow-loop { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 28px; }
+.project-flow-loop .flow-back { padding: 0; border: 0; background: none; text-align: center; }
+@media (min-width: 721px) {
+  .project-flow-loop .flow-back { grid-area: 2 / 1 / auto / 4; height: 24px; margin: 8px calc((100% - 56px) / 6) 12px; border: 1.5px dashed var(--text-muted); border-top: 0; border-radius: 0 0 10px 10px; }
+  .project-flow-loop .flow-back span { position: absolute; left: 50%; bottom: -0.7em; margin: 0; padding: 0 8px; background: var(--bg); transform: translateX(-50%); white-space: nowrap; }
+  .project-flow-loop li.flow-back::after { content: "↑"; right: auto; left: -8px; top: -12px; transform: none; }
+  .project-flow-loop .flow-back + li { grid-area: 1 / 4; }
+}
 .compare .story-answer { margin-top: 18px; }
 /* AI forecast adjustments page: the AI skill as a chat on the screen, then the export table it returns */
 .ai-chat { display: grid; gap: 10px; padding: 14px; background: #f8fafc; font-size: 0.82rem; }
