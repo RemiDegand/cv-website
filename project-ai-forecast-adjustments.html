@@ -70,11 +70,13 @@
               <!-- Part 2 shows the same sentences given to the AI skill, with the same values in its export.
                    Simulation (script.js, like the VAT page): the forecaster between 2 screens. Left: next week's
                    adjustments, already written in sentences for the local teams. Right: the old Google Sheet, where
-                   each one is typed again: select the zone, current UTR loaded from BigQuery, type every changed cell
-                   of the hour x day grid, click "Add Adjustments", next zone. Kyiv values from Example.xlsx (random),
+                   each one is entered again: select the zone, current UTR loaded from BigQuery, type a formula (like
+                   K15 = B15+0.2 in Example.xlsx), copy it with Ctrl + Shift + arrows, click "Add Adjustments", next zone.
+                   Only 10:00 to 13:00 is adjusted, 08:00, 09:00, 14:00 and 15:00 keep their value. Kyiv values from Example.xlsx (random),
                    Lviv values made up. The HTML is the final state of Kyiv (shown as is without JS or with
                    "reduce motion"); script.js replays the whole thing in a loop -->
-              <div class="adj-sim" role="img" aria-label="Simulation: the forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends; for Lviv, increase UTR by 0.2 for Monday to Thursday and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, he selects each zone, types every new value in the hour-by-day grid and clicks Add Adjustments, then starts again with the next zone.">
+              <div class="adj-sim" role="img" aria-label="Simulation: the forecaster says: analyses done, now let's apply the adjustments for next week. The forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends; for Lviv, increase UTR by 0.2 for Monday to Thursday and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, each zone is selected, a formula is typed in the first cell of the hour-by-day grid and copied to the other cells with Ctrl + Shift + arrows, some hours keep their value, then Add Adjustments is clicked and it starts again with the next zone.">
+                <p class="story-line story-left adj-sim-say" aria-hidden="true"><span class="story-who">Forecaster</span><span class="story-bubble">Analyses done, now let's apply the adjustments for next week.</span></p>
                 <div class="adj-sim-desk" aria-hidden="true">
                   <div class="adj-sim-screen adj-sim-notes">
                     <p class="adj-sim-title">Next week's adjustments</p>
@@ -98,13 +100,18 @@
                   <div class="adj-sim-screen adj-sim-sheet">
                     <p class="adj-sim-title">Google Sheets · Forecast adjustments</p>
                     <p class="adj-sim-bar">Zone <span class="adj-sim-pick">Kyiv</span><span class="adj-sim-load">Loading from BigQuery…</span></p>
+                    <p class="adj-sim-fx"><span class="adj-sim-name">P15</span><i>fx</i><span class="adj-sim-formula">=G15*0.9</span><span class="adj-sim-keys"></span></p>
                     <table>
                       <thead><tr><th>UTR</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
                       <tbody>
+                        <tr><th>08:00</th><td>3.47</td><td>2.72</td><td>4.00</td><td>2.96</td><td>3.97</td><td>2.97</td><td>2.62</td></tr>
+                        <tr><th>09:00</th><td>2.33</td><td>3.12</td><td>2.46</td><td>3.64</td><td>3.21</td><td>3.98</td><td>3.86</td></tr>
                         <tr><th>10:00</th><td class="is-changed">2.96</td><td class="is-changed">3.67</td><td class="is-changed">3.48</td><td class="is-changed">3.89</td><td class="is-changed">2.83</td><td class="is-changed">2.29</td><td class="is-changed">3.36</td></tr>
                         <tr><th>11:00</th><td class="is-changed">3.45</td><td class="is-changed">3.09</td><td class="is-changed">4.12</td><td class="is-changed">3.99</td><td class="is-changed">2.97</td><td class="is-changed">3.55</td><td class="is-changed">3.54</td></tr>
                         <tr><th>12:00</th><td class="is-changed">3.39</td><td class="is-changed">3.94</td><td class="is-changed">2.77</td><td class="is-changed">3.10</td><td class="is-changed">3.07</td><td class="is-changed">3.44</td><td class="is-changed">2.93</td></tr>
                         <tr><th>13:00</th><td class="is-changed">3.48</td><td class="is-changed">2.76</td><td class="is-changed">3.28</td><td class="is-changed">4.16</td><td class="is-changed">2.45</td><td class="is-changed">2.91</td><td class="is-changed">2.26</td></tr>
+                        <tr><th>14:00</th><td>2.94</td><td>3.68</td><td>2.54</td><td>2.93</td><td>2.66</td><td>3.89</td><td>3.03</td></tr>
+                        <tr><th>15:00</th><td>2.97</td><td>2.35</td><td>2.95</td><td>2.40</td><td>3.31</td><td>2.37</td><td>3.45</td></tr>
                       </tbody>
                     </table>
                     <p class="adj-sim-foot"><span class="adj-sim-button">▶ Add Adjustments</span><span class="adj-sim-saved">Saved: Kyiv</span></p>
@@ -121,7 +128,7 @@
             <div class="block-part reveal">
               <h3>The problem</h3>
               <ul class="project-did reveal-stagger">
-                <li><strong>Repetitive:</strong> for each zone, select it, type every adjusted value in the hour-by-day grid, save with a button, then start again with the next zone.</li>
+                <li><strong>Repetitive:</strong> for each zone, select it, enter each adjustment in the hour-by-day grid and copy it to the right hours and days, save with a button, then start again with the next zone.</li>
                 <li><strong>About 2 h every week</strong>, before exporting the final sheet into the company's forecasting tool.</li>
                 <li><strong>Double work:</strong> the same adjustments were already written in sentences for the local teams.</li>
               </ul>
@@ -139,7 +146,7 @@
               <p class="flow-label">Before</p>
               <ol class="project-flow project-flow-before reveal-stagger" aria-label="The process before">
                 <li><strong>Pick a zone</strong><span>Current values loaded from BigQuery</span></li>
-                <li><strong>Type the grid</strong><span>Each new value, hour by hour and day by day</span></li>
+                <li><strong>Fill the grid</strong><span>Each adjustment entered, then copied to the right hours and days</span></li>
                 <li><strong>Save, next zone</strong><span>Button "Add Adjustments", again and again</span></li>
               </ol>
               <p class="flow-label">After</p>
