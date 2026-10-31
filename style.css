@@ -734,8 +734,10 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
    simulation (.copy-sim). Left: the adjustments in sentences (the zone and the sentence being typed light up, done ones
    are ticked). Right: the old Google Sheet (zone picker, current UTR, typed cells in yellow, "Add Adjustments") */
 .adj-sim { margin-top: 8px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); }
-.adj-sim-desk { display: grid; grid-template-columns: minmax(0, 0.72fr) auto minmax(0, 1.28fr); align-items: center; gap: 12px; }
-.project-page .adj-sim-say { max-width: 100%; margin-bottom: 14px; transition: opacity 0.3s ease; }
+.adj-sim-desk { display: grid; grid-template-columns: minmax(0, 0.85fr) auto minmax(0, 1.15fr); align-items: center; gap: 12px; }
+.adj-sim-head { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 16px; }
+.project-page .adj-sim-say { position: relative; padding: 10px 14px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg); line-height: 1.45; transition: opacity 0.3s ease; }
+.adj-sim-say::before { content: ""; position: absolute; top: 50%; left: -7px; width: 12px; height: 12px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); background: var(--bg); transform: translateY(-50%) rotate(45deg); }   /* the tail, towards the forecaster */
 .adj-sim.is-waiting .adj-sim-say { opacity: 0; }
 .adj-sim-screen { overflow: hidden; border: 5px solid #1d2230; border-radius: 8px; background: #fff; color: #1f2937; font-size: 0.78rem; font-variant-numeric: tabular-nums; }
 .adj-sim-title { margin: 0; padding: 5px 10px; background: #1d2230; color: #fff; font-size: 0.7rem; font-weight: 600; }
@@ -766,22 +768,14 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .adj-sim.is-picking .adj-sim-pick { box-shadow: 0 0 0 2px #188038; }
 .adj-sim-load { display: none; color: #188038; font-weight: 500; }
 .adj-sim.is-loading .adj-sim-load { display: inline; }
-.adj-sim-fx { display: flex; align-items: center; gap: 6px; min-height: 26px; margin: 0; padding: 2px 8px; border-top: 1px solid #e1e4ea; font-size: 0.7rem; }
-.adj-sim-name { min-width: 34px; color: #6b7280; font-weight: 600; white-space: nowrap; }
-.adj-sim-fx i { color: #9aa3b2; font-weight: 600; }
-.adj-sim-formula { color: #1f2937; white-space: nowrap; }
-.adj-sim-keys { display: inline-flex; gap: 3px; margin-left: auto; }
-.adj-sim-keys kbd { padding: 1px 5px; border: 1px solid #c8ced8; border-bottom-width: 2px; border-radius: 4px; background: #f8fafc; color: #1f2937; font: inherit; font-weight: 600; white-space: nowrap; }
 .adj-sim table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .adj-sim th, .adj-sim td { height: 22px; padding: 0 4px; border-top: 1px solid #e1e4ea; text-align: right; white-space: nowrap; }
 .adj-sim th { color: #6b7280; font-size: 0.66rem; font-weight: 600; }
 .adj-sim tbody th { text-align: left; }
 .adj-sim thead th:first-child { width: 17%; text-align: left; }
 .adj-sim td { border-left: 1px solid #f0f2f5; transition: background-color 0.2s ease; }
-.adj-sim td.is-changed { background: #fff3c4; }   /* an adjusted value */
-.adj-sim td.is-sel { background: #d6eedd; }   /* selected with Ctrl + Shift + arrows */
-.adj-sim td.is-active, .adj-sim td.is-typing { outline: 2px solid #188038; outline-offset: -2px; }
-.adj-sim td.is-copied { outline: 2px dashed #188038; outline-offset: -2px; }   /* after Ctrl + C */
+.adj-sim td.is-changed { background: #fff3c4; }   /* a value typed by hand */
+.adj-sim td.is-typing { outline: 2px solid #188038; outline-offset: -2px; }
 .adj-sim td.is-typing::after { content: "|"; margin-left: 1px; animation: copy-sim-caret 0.8s steps(1) infinite; }
 .adj-sim-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0; padding: 6px 8px; border-top: 1px solid #e1e4ea; font-size: 0.7rem; }
 .adj-sim-button { padding: 2px 8px; border: 1px solid #c8ced8; border-radius: 4px; background: #f8fafc; font-weight: 600; transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease; }
@@ -791,8 +785,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 @media (max-width: 720px) {
   .adj-sim { padding: 14px; }
   .adj-sim-desk { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .adj-sim-human { grid-template-columns: auto auto auto auto; align-items: center; justify-content: center; gap: 8px; }   /* one row between the 2 screens */
-  .adj-sim-arrow { transform: rotate(90deg); }
+  .adj-sim-head { gap: 14px; margin-bottom: 12px; }
+  .adj-sim-arrow { justify-self: center; transform: rotate(90deg); }
 }
 .compare figcaption { margin-top: 14px; }
 

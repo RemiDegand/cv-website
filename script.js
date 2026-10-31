@@ -594,10 +594,10 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   start.observe(buildSim);
 }
 
-// AI forecast adjustments page, "How it started": the analyses are done, so the forecaster enters in the old Google Sheet
-// the adjustments already written in sentences on the other screen: select the zone, current UTR loaded, type one formula,
-// copy it with Ctrl + C, select the other cells with Ctrl + Shift + arrows, paste with Ctrl + V, "Add Adjustments", next
-// zone. Starts once on screen and loops; the HTML holds the final state of Kyiv, kept as is with "reduce motion"
+// AI forecast adjustments page, "How it started": the forecaster says the analyses are done, then types again, in the old
+// Google Sheet, the adjustments already written in sentences on the other screen: select the zone, current UTR loaded,
+// every changed cell typed, "Add Adjustments", next zone. Starts once on screen and loops; the HTML holds the final state
+// of Kyiv, kept as is with "reduce motion"
 const adjSim = document.querySelector(".adj-sim");
 if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const all = (sel) => [...adjSim.querySelectorAll(sel)];
@@ -607,89 +607,30 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   const button = adjSim.querySelector(".adj-sim-button");
   const saved = adjSim.querySelector(".adj-sim-saved");
   const status = adjSim.querySelector(".adj-sim-status");
-  const nameBox = adjSim.querySelector(".adj-sim-name");
-  const formulaBox = adjSim.querySelector(".adj-sim-formula");
-  const keysBox = adjSim.querySelector(".adj-sim-keys");
   const finalStatus = status.textContent;
-  const LAST_ROW = 7, LAST_DAY = 6;
-  // Same addresses as Example.xlsx: UTR input in B:H, UTR Adjustments in K:Q, 08:00 on row 13
-  const inputCol = "BCDEFGH", adjCol = "KLMNOPQ", sheetRow = (r) => 13 + r;
-  // Current UTR (08:00 to 15:00, Mon to Sun) and the sentences of each zone. Each sentence = the formulas to enter
-  // and copy: rows 2 to 5 = 10:00 to 13:00, days 0 to 6 = Mon to Sun
+  const days = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => from + i);
+  const hours = [2, 3, 4, 5];   // 10:00 to 13:00: the other hours keep their value
+  // Current UTR (08:00 to 15:00, Mon to Sun) and the sentences of each zone, as cells to change
   const zones = [
     { name: "Kyiv", utr: [[3.47, 2.72, 4.00, 2.96, 3.97, 2.97, 2.62], [2.33, 3.12, 2.46, 3.64, 3.21, 3.98, 3.86], [2.76, 3.47, 3.28, 3.69, 2.63, 2.54, 3.73], [3.25, 2.89, 3.92, 3.79, 2.77, 3.94, 3.93], [3.19, 3.74, 2.57, 2.90, 2.87, 3.82, 3.26], [3.28, 2.56, 3.08, 3.96, 2.25, 3.23, 2.51], [2.94, 3.68, 2.54, 2.93, 2.66, 3.89, 3.03], [2.97, 2.35, 2.95, 2.40, 3.31, 2.37, 3.45]],
-      rules: [[{ rows: [2, 5], days: [0, 4], op: "+0.2", f: (v) => v + 0.2 }], [{ rows: [2, 5], days: [5, 6], op: "*0.9", f: (v) => v * 0.9 }]] },
+      rules: [{ days: days(0, 4), hours, f: (v) => v + 0.2 }, { days: [5, 6], hours, f: (v) => v * 0.9 }] },
     { name: "Lviv", utr: [[2.74, 3.18, 2.59, 3.43, 2.96, 3.27, 2.83], [3.06, 2.77, 3.39, 2.68, 3.55, 2.91, 3.22], [2.48, 2.91, 3.05, 2.62, 3.34, 3.71, 3.12], [3.17, 2.66, 2.84, 3.41, 3.58, 3.26, 2.95], [3.62, 3.09, 2.73, 2.98, 3.21, 3.84, 3.47], [2.87, 3.35, 3.52, 3.14, 2.69, 3.03, 3.66], [3.31, 2.88, 3.46, 2.72, 3.09, 3.63, 2.79], [2.65, 3.24, 2.93, 3.57, 2.81, 3.15, 3.38]],
-      rules: [[{ rows: [2, 5], days: [0, 3], op: "+0.2", f: (v) => v + 0.2 }], [{ rows: [4, 5], days: [0, 3], op: "+0.2-0.1", f: (v) => v - 0.1 }, { rows: [4, 5], days: [4, 6], op: "-0.1", f: (v) => v - 0.1 }]] },
+      rules: [{ days: days(0, 3), hours, f: (v) => v + 0.2 }, { days: days(0, 6), hours: [4, 5], f: (v) => v - 0.1 }] },
   ];
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  const cell = (r, d) => cells[r * 7 + d];
-  const clearSelection = () => cells.forEach((td) => td.classList.remove("is-sel", "is-active", "is-copied", "is-typing"));
-  const select = (r0, d0, r1, d1) => {
-    cells.forEach((td) => td.classList.remove("is-sel"));
-    for (let r = r0; r <= r1; r++) for (let d = d0; d <= d1; d++) cell(r, d).classList.add("is-sel");
-    const first = adjCol[d0] + sheetRow(r0);
-    nameBox.textContent = r0 === r1 && d0 === d1 ? first : `${first}:${adjCol[d1]}${sheetRow(r1)}`;
-  };
-  const press = async (keys, ms = 480) => {
-    keysBox.replaceChildren(...keys.map((k) => { const kbd = document.createElement("kbd"); kbd.textContent = k; return kbd; }));
+  const type = async (cell, text) => {
+    cell.textContent = "";
+    cell.classList.add("is-typing", "is-changed");
     adjSim.classList.add("is-keying");
-    await wait(ms);
+    for (const ch of text) { cell.textContent += ch; await wait(35); }
     adjSim.classList.remove("is-keying");
-  };
-  const showGrid = (utr) => cells.forEach((td, i) => { td.textContent = utr[Math.floor(i / 7)][i % 7].toFixed(2); });
-  // One formula typed in the first cell, then copied over the range. Ctrl + Shift + arrow runs to the end of the grid
-  // (Sunday, 15:00), as in a real sheet, so Shift + arrow comes back when the adjustment stops earlier
-  const enterAndCopy = async (utr, { rows: [r0, r1], days: [d0, d1], op, f }) => {
-    const first = cell(r0, d0);
-    keysBox.replaceChildren();
-    select(r0, d0, r0, d0);
-    first.classList.add("is-active", "is-typing");
-    first.textContent = "";
-    const formula = `=${inputCol[d0]}${sheetRow(r0)}${op}`;
-    formulaBox.textContent = "";
-    adjSim.classList.add("is-keying");
-    for (const ch of formula) { formulaBox.textContent += ch; await wait(55); }
-    adjSim.classList.remove("is-keying");
-    await press(["Enter"], 300);
-    first.classList.remove("is-typing");
-    utr[r0][d0] = f(utr[r0][d0]);
-    first.textContent = utr[r0][d0].toFixed(2);
-    first.classList.add("is-changed");
-    await press(["Ctrl", "C"]);
-    first.classList.remove("is-active");
-    first.classList.add("is-copied");
-    let d = d0, r = r0;
-    if (d1 > d0) {
-      d = LAST_DAY; select(r, d0, r, d);
-      await press(["Ctrl", "Shift", "→"]);
-      while (d > d1) { d--; select(r, d0, r, d); await press(["Shift", "←"], 200); }
-    }
-    if (r1 > r0) {
-      r = LAST_ROW; select(r0, d0, r, d);
-      await press(["Ctrl", "Shift", "↓"]);
-      while (r > r1) { r--; select(r0, d0, r, d); await press(["Shift", "↑"], 200); }
-    }
-    await press(["Ctrl", "V"]);
-    for (let row = r0; row <= r1; row++) {
-      for (let day = d0; day <= d1; day++) {
-        if (row === r0 && day === d0) continue;
-        utr[row][day] = f(utr[row][day]);
-        cell(row, day).textContent = utr[row][day].toFixed(2);
-        cell(row, day).classList.add("is-changed");
-      }
-    }
-    await wait(550);
-    clearSelection();
-    keysBox.replaceChildren();
+    cell.classList.remove("is-typing");
+    await wait(40);
   };
   const run = async () => {
     for (;;) {
       items.forEach((li) => { li.classList.remove("is-on", "is-done"); li.querySelectorAll("span").forEach((s) => s.classList.remove("is-on", "is-done")); });
-      clearSelection();
-      cells.forEach((td) => { td.textContent = ""; td.classList.remove("is-changed"); });
-      nameBox.textContent = formulaBox.textContent = "";
-      keysBox.replaceChildren();
+      cells.forEach((td) => { td.textContent = ""; td.classList.remove("is-changed", "is-typing"); });
       pick.textContent = "Select…";
       saved.textContent = "";
       status.textContent = "";
@@ -706,7 +647,6 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
         li.classList.add("is-on");
         status.textContent = `Zone ${z + 1}: select ${zone.name} in the sheet…`;
         cells.forEach((td) => { td.textContent = ""; td.classList.remove("is-changed"); });
-        nameBox.textContent = formulaBox.textContent = "";
         adjSim.classList.add("is-picking");
         await wait(700);
         pick.textContent = zone.name;
@@ -715,14 +655,19 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
         await wait(900);
         adjSim.classList.remove("is-loading");
         const utr = zone.utr.map((row) => [...row]);
-        showGrid(utr);
-        await wait(600);
-        for (const [s, copies] of zone.rules.entries()) {
-          sentences[s].classList.add("is-on");
-          status.textContent = `By hand: "${sentences[s].textContent}"`;
-          for (const copy of copies) await enterAndCopy(utr, copy);
-          sentences[s].classList.remove("is-on");
-          sentences[s].classList.add("is-done");
+        cells.forEach((td, i) => { td.textContent = utr[Math.floor(i / 7)][i % 7].toFixed(2); });
+        await wait(500);
+        for (const [r, rule] of zone.rules.entries()) {
+          sentences[r].classList.add("is-on");
+          status.textContent = `Typing by hand: "${sentences[r].textContent}"`;
+          for (const h of rule.hours) {
+            for (const d of rule.days) {
+              utr[h][d] = rule.f(utr[h][d]);
+              await type(cells[h * 7 + d], utr[h][d].toFixed(2));
+            }
+          }
+          sentences[r].classList.remove("is-on");
+          sentences[r].classList.add("is-done");
           await wait(300);
         }
         status.textContent = "Click \"Add Adjustments\" to save the zone…";
