@@ -810,6 +810,11 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .adj-sim-bar { display: flex; align-items: center; gap: 6px; margin: 0; padding: 6px 8px; color: #6b7280; font-size: 0.7rem; font-weight: 600; }
 .adj-sim-pick { min-width: 64px; padding: 1px 18px 1px 6px; border: 1px solid #c8ced8; border-radius: 3px; background: #fff3c4 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%236b7280'/%3E%3C/svg%3E") no-repeat right 5px center / 7px; color: #1f2937; transition: box-shadow 0.15s ease; }
 .adj-sim.is-picking .adj-sim-pick { box-shadow: 0 0 0 2px #188038; }
+.adj-sim-pickwrap { position: relative; display: inline-block; }
+.adj-sim-menu { display: none; position: absolute; top: calc(100% + 3px); left: 0; z-index: 2; min-width: 100%; padding: 3px 0; border: 1px solid #c8ced8; border-radius: 4px; background: #fff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18); color: #1f2937; font-weight: 500; }
+.adj-sim.is-picking .adj-sim-menu { display: block; }
+.adj-sim-menu span { display: block; padding: 3px 18px 3px 6px; }
+.adj-sim-menu span.is-on { background: #188038; color: #fff; }   /* the zone being selected */
 .adj-sim-load { display: none; color: #188038; font-weight: 500; }
 .adj-sim.is-loading .adj-sim-load { display: inline; }
 .adj-sim table { width: 100%; border-collapse: collapse; table-layout: fixed; }
@@ -820,6 +825,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .adj-sim-export { visibility: hidden; }
 .adj-sim.is-export .adj-sim-input { visibility: hidden; }
 .adj-sim.is-export .adj-sim-export { visibility: visible; }
+.adj-sim-export tr.is-off { visibility: hidden; }
 .adj-sim .adj-sim-export th:first-child { width: 16%; }
 .adj-sim .adj-sim-export th:nth-child(2) { width: 29%; }   /* room for "Wednesday" */
 .adj-sim-tabs { display: flex; gap: 2px; margin: 0; padding: 3px 8px 0; border-top: 1px solid #e1e4ea; background: #f1f3f4; font-size: 0.7rem; }

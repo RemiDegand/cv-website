@@ -71,11 +71,11 @@
                    Simulation (script.js, like the VAT page): the forecaster seen from behind, in front of a double screen. Left: next week's
                    adjustments, already written in sentences for the local teams. Right: the old Google Sheet, where
                    each one is typed again: select the zone, current UTR loaded from BigQuery, type every changed cell
-                   of the hour x day grid, click "Add Adjustments" (after Kyiv: look at the Export sheet, as in Example.xlsx, and come back), next zone.
+                   of the hour x day grid, click "Add Adjustments", look at the Export sheet (as in Example.xlsx) and come back, next zone in the list.
                    Only 10:00 to 13:00 is adjusted, 08:00, 09:00, 14:00 and 15:00 keep their value. Kyiv values from Example.xlsx (random),
                    Lviv values made up. The HTML is the final state of Kyiv (shown as is without JS or with
                    "reduce motion"); script.js replays the whole thing in a loop -->
-              <div class="adj-sim" role="img" aria-label="Simulation: the forecaster says: analyses done, now let's apply the adjustments for next week. The forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends, both from 10:00 to 14:00; for Lviv, increase UTR by 0.2 for Monday to Thursday from 10:00 to 12:00 and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, each zone is selected, every new value is typed in the hour-by-day grid, some hours keep their value, then Add Adjustments is clicked. After Kyiv, the forecaster opens the Export sheet to see the saved adjustments, then comes back to the first sheet for the next zone.">
+              <div class="adj-sim" role="img" aria-label="Simulation: the forecaster says: analyses done, now let's apply the adjustments for next week. The forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends, both from 10:00 to 14:00; for Lviv, increase UTR by 0.2 for Monday to Thursday from 10:00 to 12:00 and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, each zone is selected, every new value is typed in the hour-by-day grid, some hours keep their value, then Add Adjustments is clicked. After each zone, the forecaster opens the Export sheet, where the saved adjustments appear line by line, then comes back to the first sheet and selects the next zone in the list.">
                 <div class="adj-sim-desk" aria-hidden="true">
                   <div class="adj-sim-screen adj-sim-notes">
                     <p class="adj-sim-title">Next week's adjustments</p>
@@ -90,7 +90,7 @@
                     <p class="adj-sim-title">Google Sheets · Forecast adjustments</p>
                     <div class="adj-sim-views">
                       <div class="adj-sim-input">
-                        <p class="adj-sim-bar">Zone <span class="adj-sim-pick">Kyiv</span><span class="adj-sim-load">Loading from BigQuery…</span></p>
+                        <p class="adj-sim-bar">Zone <span class="adj-sim-pickwrap"><span class="adj-sim-pick">Kyiv</span><span class="adj-sim-menu"><span>Bishkek</span><span>Kraków</span><span>Kyiv</span><span>Lviv</span><span>Tbilisi</span><span>Yerevan</span></span></span><span class="adj-sim-load">Loading from BigQuery…</span></p>
                         <table>
                           <thead><tr><th>UTR</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
                           <tbody>

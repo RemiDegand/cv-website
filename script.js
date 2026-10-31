@@ -596,7 +596,7 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
 
 // AI forecast adjustments page, "How it started": the forecaster says the analyses are done, then types again, in the old
 // Google Sheet, the adjustments already written in sentences on the other screen: select the zone, current UTR loaded,
-// every changed cell typed, "Add Adjustments" (after the first zone: a look at the Export sheet and back), next zone.
+// every changed cell typed, "Add Adjustments", a look at the Export sheet (lines appearing one by one) and back, next zone.
 // Starts once on screen and loops; the HTML holds the final state
 // of Kyiv, kept as is with "reduce motion"
 const adjSim = document.querySelector(".adj-sim");
@@ -611,12 +611,17 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   const finalStatus = status.textContent;
   const days = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => from + i);
   const hours = [2, 3, 4, 5];   // 10:00 to 13:00: the other hours keep their value
+  const menuItems = all(".adj-sim-menu span");
+  const exportRows = all(".adj-sim-export tbody tr");
+  const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   // Current UTR (08:00 to 15:00, Mon to Sun) and the sentences of each zone, as cells to change
   const zones = [
-    { name: "Kyiv", utr: [[3.47, 2.72, 4.00, 2.96, 3.97, 2.97, 2.62], [2.33, 3.12, 2.46, 3.64, 3.21, 3.98, 3.86], [2.76, 3.47, 3.28, 3.69, 2.63, 2.54, 3.73], [3.25, 2.89, 3.92, 3.79, 2.77, 3.94, 3.93], [3.19, 3.74, 2.57, 2.90, 2.87, 3.82, 3.26], [3.28, 2.56, 3.08, 3.96, 2.25, 3.23, 2.51], [2.94, 3.68, 2.54, 2.93, 2.66, 3.89, 3.03], [2.97, 2.35, 2.95, 2.40, 3.31, 2.37, 3.45]],
+    { name: "Kyiv", id: 4, utr: [[3.47, 2.72, 4.00, 2.96, 3.97, 2.97, 2.62], [2.33, 3.12, 2.46, 3.64, 3.21, 3.98, 3.86], [2.76, 3.47, 3.28, 3.69, 2.63, 2.54, 3.73], [3.25, 2.89, 3.92, 3.79, 2.77, 3.94, 3.93], [3.19, 3.74, 2.57, 2.90, 2.87, 3.82, 3.26], [3.28, 2.56, 3.08, 3.96, 2.25, 3.23, 2.51], [2.94, 3.68, 2.54, 2.93, 2.66, 3.89, 3.03], [2.97, 2.35, 2.95, 2.40, 3.31, 2.37, 3.45]],
       rules: [{ days: days(0, 4), hours, f: (v) => v + 0.2 }, { days: [5, 6], hours, f: (v) => v * 0.9 }] },
-    { name: "Lviv", utr: [[2.74, 3.18, 2.59, 3.43, 2.96, 3.27, 2.83], [3.06, 2.77, 3.39, 2.68, 3.55, 2.91, 3.22], [2.48, 2.91, 3.05, 2.62, 3.34, 3.71, 3.12], [3.17, 2.66, 2.84, 3.41, 3.58, 3.26, 2.95], [3.62, 3.09, 2.73, 2.98, 3.21, 3.84, 3.47], [2.87, 3.35, 3.52, 3.14, 2.69, 3.03, 3.66], [3.31, 2.88, 3.46, 2.72, 3.09, 3.63, 2.79], [2.65, 3.24, 2.93, 3.57, 2.81, 3.15, 3.38]],
+    { name: "Lviv", id: 5, utr: [[2.74, 3.18, 2.59, 3.43, 2.96, 3.27, 2.83], [3.06, 2.77, 3.39, 2.68, 3.55, 2.91, 3.22], [2.48, 2.91, 3.05, 2.62, 3.34, 3.71, 3.12], [3.17, 2.66, 2.84, 3.41, 3.58, 3.26, 2.95], [3.62, 3.09, 2.73, 2.98, 3.21, 3.84, 3.47], [2.87, 3.35, 3.52, 3.14, 2.69, 3.03, 3.66], [3.31, 2.88, 3.46, 2.72, 3.09, 3.63, 2.79], [2.65, 3.24, 2.93, 3.57, 2.81, 3.15, 3.38]],
       rules: [{ days: days(0, 3), hours: [2, 3], f: (v) => v + 0.2 }, { days: days(0, 6), hours: [4, 5], f: (v) => v - 0.1 }] },
+    // Last zone of the loop: selected and loaded, no rules typed
+    { name: "Tbilisi", utr: [[3.12, 2.84, 3.36, 2.67, 3.48, 2.95, 3.21], [2.76, 3.29, 2.91, 3.44, 3.07, 3.58, 2.82], [3.33, 2.71, 3.15, 3.62, 2.89, 3.26, 3.04], [2.98, 3.41, 2.63, 3.18, 3.52, 2.79, 3.37], [3.24, 2.87, 3.49, 2.94, 3.11, 3.65, 2.73], [2.69, 3.31, 3.02, 3.56, 2.83, 3.17, 3.43], [3.47, 2.92, 3.28, 2.75, 3.39, 3.08, 2.86], [2.81, 3.13, 3.54, 2.99, 3.23, 2.68, 3.35]] },
   ];
   const [firstTab, exportTab] = all(".adj-sim-tab");
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -627,6 +632,23 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
     firstTab.classList.toggle("is-active", tab === firstTab);
     exportTab.classList.toggle("is-active", tab === exportTab);
     adjSim.classList.toggle("is-export", tab === exportTab);
+  };
+  // The Export sheet: the zone's changed slots, one line at a time ("…" after the first 7)
+  const showExport = async (zone, utr) => {
+    const slots = [];
+    cells.forEach((td, i) => { if (td.classList.contains("is-changed")) slots.push(i); });
+    exportRows.forEach((tr) => tr.classList.add("is-off"));
+    await openSheet(exportTab);
+    status.textContent = "Loading the Export sheet…";
+    for (const [n, tr] of exportRows.entries()) {
+      if (n < exportRows.length - 1) {
+        const r = Math.floor(slots[n] / 7), d = slots[n] % 7;
+        const hour = (h) => String(h).padStart(2, "0") + ":00";
+        [zone.id, dayNames[d], hour(8 + r), hour(9 + r), utr[r][d].toFixed(2)].forEach((text, c) => { tr.children[c].textContent = text; });
+      }
+      await wait(300);
+      tr.classList.remove("is-off");
+    }
   };
   const type = async (cell, text) => {
     cell.textContent = "";
@@ -655,18 +677,24 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
         const li = items[z];
         const sentences = [...li.querySelectorAll("span")];
         li.classList.add("is-on");
-        status.textContent = `Zone ${z + 1}: select ${zone.name} in the sheet…`;
+        status.textContent = `Zone ${z + 1}: select ${zone.name} in the list…`;
         cells.forEach((td) => { td.textContent = ""; td.classList.remove("is-changed"); });
+        await wait(400);
+        menuItems.forEach((item) => item.classList.remove("is-on"));
         adjSim.classList.add("is-picking");
-        await wait(700);
+        await wait(800);
+        menuItems.forEach((item) => item.classList.toggle("is-on", item.textContent === zone.name));
+        await wait(600);
         pick.textContent = zone.name;
         adjSim.classList.remove("is-picking");
         adjSim.classList.add("is-loading");
-        await wait(900);
+        status.textContent = `Loading the current UTR of ${zone.name}…`;
+        await wait(1200);
         adjSim.classList.remove("is-loading");
         const utr = zone.utr.map((row) => [...row]);
         cells.forEach((td, i) => { td.textContent = utr[Math.floor(i / 7)][i % 7].toFixed(2); });
         await wait(500);
+        if (!zone.rules) { sentences[0].classList.add("is-on"); break; }
         for (const [r, rule] of zone.rules.entries()) {
           sentences[r].classList.add("is-on");
           status.textContent = `Typing by hand: "${sentences[r].textContent}"`;
@@ -690,19 +718,16 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
         li.classList.remove("is-on");
         li.classList.add("is-done");
         await wait(1000);
-        if (z === 0) {
-          status.textContent = "Open the Export sheet to see the adjustments…";
-          await wait(900);
-          await openSheet(exportTab);
-          status.textContent = `${zone.name}'s adjustments are saved in the Export sheet.`;
-          await wait(3000);
-          status.textContent = "Back to the first sheet for the next zone…";
-          await wait(700);
-          await openSheet(firstTab);
-          await wait(700);
-        }
+        status.textContent = "Open the Export sheet to see the adjustments…";
+        await wait(900);
+        await showExport(zone, utr);
+        status.textContent = `${zone.name}'s adjustments are saved in the Export sheet.`;
+        await wait(1800);
+        status.textContent = "Back to the first sheet for the next zone…";
+        await wait(700);
+        await openSheet(firstTab);
+        await wait(700);
       }
-      items[zones.length].classList.add("is-on");
       status.textContent = finalStatus;
       await wait(4500);
     }
