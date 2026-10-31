@@ -750,12 +750,22 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .compare .story-answer { margin-top: 18px; }
 /* AI forecast adjustments page: the AI skill as a chat on the screen, then the export table it returns */
 .ai-chat { display: grid; gap: 10px; padding: 14px; background: #f8fafc; font-size: 0.82rem; }
-.ai-chat .story-left .story-bubble { border-color: transparent; background: var(--accent-soft); color: var(--accent); }   /* the sentences sent */
+.ai-chat .story-left .story-bubble { border-color: transparent; background: var(--accent-soft); }   /* the sentences sent */
 .ai-chat .story-right .story-bubble { position: relative; border: 1px solid var(--border); background: #fff; }
 .ai-chat .is-off { visibility: hidden; }   /* keeps its place, so the screen never changes height */
+.ai-reply > span { display: block; }
 .ai-dots { display: none; position: absolute; top: 0; left: 0; }
 .ai-chat.is-thinking .ai-dots { display: inline-flex; }
 .ai-chat.is-thinking .ai-reply { visibility: hidden; }
+.ai-file { position: relative; display: flex; align-items: center; gap: 10px; margin-top: 2px; padding: 5px 5px 5px 10px; border: 1px solid var(--border); border-radius: 6px; background: #fff; }
+.ai-file-name { flex: 1; min-width: 0; font-weight: 600; }
+.ai-file-done { visibility: hidden; color: #188038; font-weight: 600; white-space: nowrap; }
+.ai-file.is-done .ai-file-done { visibility: visible; }
+.ai-download { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 6px; background: var(--accent); color: #fff; transition: transform 0.15s ease; }
+.ai-download.is-pressed { transform: scale(0.8); }
+.ai-cursor { position: absolute; right: 0; top: 14px; opacity: 0; transform: translate(-130px, 40px); transition: transform 0.9s ease, opacity 0.2s ease; pointer-events: none; }   /* the forecaster's mouse */
+.ai-file.is-cursor .ai-cursor { opacity: 1; }
+.ai-file.is-at .ai-cursor { transform: none; }
 .ai-input { display: flex; align-items: center; gap: 8px; margin-top: 2px; padding: 5px 5px 5px 12px; border: 1px solid var(--border); border-radius: 18px; background: #fff; }
 .ai-input-text { flex: 1; min-width: 0; overflow: hidden; color: var(--text-muted); text-overflow: ellipsis; white-space: nowrap; }
 .ai-input.is-filled .ai-input-text { color: var(--text); }

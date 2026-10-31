@@ -692,12 +692,15 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   start.observe(adjSim);
 }
 
-// AI forecast adjustments page, the example: the sentences are typed in the message box and sent, the AI thinks and replies,
-// then the export appears row by row. Starts once on screen and loops; the HTML holds the final state, kept as is with
+// AI forecast adjustments page, the example: the sentences are typed in the message box and sent, the AI thinks and replies
+// part by part, the export appears row by row, then the forecaster clicks its download icon. Starts once on screen and loops; the HTML holds the final state, kept as is with
 // "reduce motion"
 const aiChat = document.querySelector(".ai-chat");
 if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const [sent, reply] = aiChat.querySelectorAll(".story-line");
+  const replyParts = [...reply.querySelectorAll(".ai-reply > span")];
+  const file = aiChat.querySelector(".ai-file");
+  const download = aiChat.querySelector(".ai-download");
   const table = aiChat.querySelector(".ai-export");
   const rows = [...table.querySelectorAll("tbody tr")];
   const input = aiChat.querySelector(".ai-input");
@@ -708,7 +711,8 @@ if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const run = async () => {
     for (;;) {
-      [sent, reply, table, ...rows].forEach((el) => el.classList.add("is-off"));
+      [sent, reply, ...replyParts, file, table, ...rows].forEach((el) => el.classList.add("is-off"));
+      file.classList.remove("is-cursor", "is-at", "is-done");
       await wait(1000);
       input.classList.add("is-filled");
       inputText.textContent = "";
@@ -726,10 +730,22 @@ if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       reply.classList.remove("is-off");
       await wait(2000);
       aiChat.classList.remove("is-thinking");
-      await wait(1000);
+      for (const part of replyParts) { part.classList.remove("is-off"); await wait(900); }
+      file.classList.remove("is-off");
       table.classList.remove("is-off");
       for (const row of rows) { await wait(400); row.classList.remove("is-off"); }
-      await wait(6000);
+      await wait(900);
+      file.classList.add("is-cursor");
+      await wait(300);
+      file.classList.add("is-at");
+      await wait(1000);
+      download.classList.add("is-pressed");
+      await wait(200);
+      download.classList.remove("is-pressed");
+      file.classList.add("is-done");
+      await wait(500);
+      file.classList.remove("is-cursor");
+      await wait(4500);
     }
   };
   const start = new IntersectionObserver((entries) => {
