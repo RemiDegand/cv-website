@@ -596,13 +596,14 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
 
 // AI forecast adjustments page, "How it started": the forecaster says the analyses are done, then types again, in the old
 // Google Sheet, the adjustments already written in sentences on the other screen: select the zone, current UTR loaded,
-// every changed cell typed, "Add Adjustments", next zone. Starts once on screen and loops; the HTML holds the final state
+// every changed cell typed, "Add Adjustments" (after the first zone: a look at the Export sheet and back), next zone.
+// Starts once on screen and loops; the HTML holds the final state
 // of Kyiv, kept as is with "reduce motion"
 const adjSim = document.querySelector(".adj-sim");
 if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const all = (sel) => [...adjSim.querySelectorAll(sel)];
   const items = all(".adj-sim-zones li:not(.adj-sim-more)");
-  const cells = all(".adj-sim tbody td");   // 8 hours (08:00 to 15:00) x 7 days, row by row
+  const cells = all(".adj-sim-input tbody td");   // 8 hours (08:00 to 15:00) x 7 days, row by row
   const pick = adjSim.querySelector(".adj-sim-pick");
   const button = adjSim.querySelector(".adj-sim-button");
   const saved = adjSim.querySelector(".adj-sim-saved");
@@ -617,7 +618,16 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
     { name: "Lviv", utr: [[2.74, 3.18, 2.59, 3.43, 2.96, 3.27, 2.83], [3.06, 2.77, 3.39, 2.68, 3.55, 2.91, 3.22], [2.48, 2.91, 3.05, 2.62, 3.34, 3.71, 3.12], [3.17, 2.66, 2.84, 3.41, 3.58, 3.26, 2.95], [3.62, 3.09, 2.73, 2.98, 3.21, 3.84, 3.47], [2.87, 3.35, 3.52, 3.14, 2.69, 3.03, 3.66], [3.31, 2.88, 3.46, 2.72, 3.09, 3.63, 2.79], [2.65, 3.24, 2.93, 3.57, 2.81, 3.15, 3.38]],
       rules: [{ days: days(0, 3), hours: [2, 3], f: (v) => v + 0.2 }, { days: days(0, 6), hours: [4, 5], f: (v) => v - 0.1 }] },
   ];
+  const [firstTab, exportTab] = all(".adj-sim-tab");
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const openSheet = async (tab) => {
+    tab.classList.add("is-pressed");
+    await wait(250);
+    tab.classList.remove("is-pressed");
+    firstTab.classList.toggle("is-active", tab === firstTab);
+    exportTab.classList.toggle("is-active", tab === exportTab);
+    adjSim.classList.toggle("is-export", tab === exportTab);
+  };
   const type = async (cell, text) => {
     cell.textContent = "";
     cell.classList.add("is-typing", "is-changed");
@@ -680,6 +690,17 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
         li.classList.remove("is-on");
         li.classList.add("is-done");
         await wait(1000);
+        if (z === 0) {
+          status.textContent = "Open the Export sheet to see the adjustments…";
+          await wait(900);
+          await openSheet(exportTab);
+          status.textContent = `${zone.name}'s adjustments are saved in the Export sheet.`;
+          await wait(3000);
+          status.textContent = "Back to the first sheet for the next zone…";
+          await wait(700);
+          await openSheet(firstTab);
+          await wait(700);
+        }
       }
       items[zones.length].classList.add("is-on");
       status.textContent = finalStatus;
