@@ -727,7 +727,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .project-page .flow-note { margin-top: 14px; }
 /* The inside of a step of the flow above it: a panel linked to the middle step, with its own numbered steps */
 .flow-detail { position: relative; margin-top: 20px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; }
-.flow-detail::before { content: ""; position: absolute; left: 50%; top: -21px; height: 20px; border-left: 1.5px dashed var(--text-muted); }
+.flow-detail::before { content: ""; position: absolute; left: 50%; top: -21px; height: 20px; border-left: 2px dashed var(--text); }
 .project-page .flow-detail-title { margin-bottom: 12px; font-size: 0.875rem; font-weight: 600; }
 .flow-detail-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: detail; }
 .flow-detail-steps li { counter-increment: detail; }
@@ -738,13 +738,17 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .flow-detail::before { display: none; }   /* the 3 steps are stacked: the middle one isn't above any more */
   .flow-detail-steps { grid-template-columns: minmax(0, 1fr); }
 }
+/* A flow easier to see: larger boxes, darker outlines, larger arrows */
+.project-flow-big { gap: 32px; }
+.project-flow-big li { padding: 18px 16px; border-width: 1.5px; border-color: #9aa3b2; }
+.project-flow-big li:not(:last-child)::after { right: -28px; color: var(--text); font-size: 1.6rem; font-weight: 700; line-height: 1; }
 /* A flow with a loop: the first 3 steps repeat (line from the 3rd step back to the 1st), then a last step */
-.project-flow-loop { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 28px; }
+.project-flow-loop { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 32px; }
 .project-flow-loop .flow-back { padding: 0; border: 0; background: none; text-align: center; }
 @media (min-width: 721px) {
-  .project-flow-loop .flow-back { grid-area: 2 / 1 / auto / 4; height: 24px; margin: 8px calc((100% - 56px) / 6) 12px; border: 1.5px dashed var(--text-muted); border-top: 0; border-radius: 0 0 10px 10px; }
+  .project-flow-loop .flow-back { grid-area: 2 / 1 / auto / 4; height: 26px; margin: 10px calc((100% - 64px) / 6) 12px; border: 2px dashed var(--text); border-top: 0; border-radius: 0 0 10px 10px; }
   .project-flow-loop .flow-back span { position: absolute; left: 50%; bottom: -0.7em; margin: 0; padding: 0 8px; background: var(--bg); transform: translateX(-50%); white-space: nowrap; }
-  .project-flow-loop li.flow-back::after { content: "↑"; right: auto; left: -8px; top: -12px; transform: none; }
+  .project-flow-loop li.flow-back::after { content: "↑"; right: auto; left: -14px; top: -16px; transform: none; }
   .project-flow-loop .flow-back + li { grid-area: 1 / 4; }
 }
 .compare .story-answer { margin-top: 18px; }
@@ -881,6 +885,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .project-page .story-line { max-width: 92%; }
   .project-flow { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .project-flow li:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -22px; transform: translateX(-50%); }
+  .project-flow-big { gap: 32px; }
+  .project-flow-big li:not(:last-child)::after { bottom: -29px; }
 }
 
 /* ===== Home: key experience carousel (one card at a time) ===== */

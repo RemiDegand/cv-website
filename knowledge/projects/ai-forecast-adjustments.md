@@ -33,7 +33,7 @@ An AI skill shared with the forecasting team, hosted on GitHub (folders for Open
 - It is also given JSON code to do the calculation (Rémi, 31 Oct 2026). It calculates the new value (current UTR + / − / × / ÷ depending on the request) and writes each parameter in a file: zone, days, hours, new UTR.
 - A file of rules and examples gives the exact format the forecasting tool expects.
 - For a big change, the AI asks for validation; when a request is unclear, it asks for details.
-- At the end, the export with all the adjustments is ready: download it and upload it to the tool.
+- At the end, the export with all the adjustments is ready as a final CSV: download it and export it into the forecasting tool.
 
 The website shows a simulation ("How it started"): the forecaster has next week's adjustments in sentences on one screen (Kyiv: increase UTR by 0.2 for Mon to Fri, decrease by 10% for weekends, both from 10:00 to 14:00; Lviv: increase by 0.2 for Mon to Thu from 10:00 to 12:00, decrease by 0.1 from 12:00 to 14:00; Tbilisi: increase by 5% for Fri and Sat from 10:00 to 14:00) and types them again, zone by zone, in the old Google Sheet (select the zone in a list, type every changed cell of the hour × day grid, click "Add Adjustments", look at the Export sheet with the saved adjustments, then back to the first sheet for the next zone). Only 10:00 to 13:00 is adjusted; the other hours shown (08:00, 09:00, 14:00, 15:00) keep their value. Kyiv's current UTR comes from Example.xlsx (random values), Lviv's and Tbilisi's are made up. Part 2 shows the same sentences pasted into the AI skill and the export table it returns (same values).
 
