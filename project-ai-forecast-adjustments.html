@@ -74,8 +74,9 @@
                    of the hour x day grid, click "Add Adjustments", look at the Export sheet (as in Example.xlsx) and come back, next zone in the list.
                    Only 10:00 to 13:00 is adjusted, 08:00, 09:00, 14:00 and 15:00 keep their value. Kyiv values from Example.xlsx (random),
                    Lviv values made up. The HTML is the final state of Kyiv (shown as is without JS or with
-                   "reduce motion"); script.js replays the whole thing in a loop -->
-              <div class="adj-sim" role="img" aria-label="Simulation: the forecaster says: analyses done, now let's apply the adjustments for next week. The forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends, both from 10:00 to 14:00; for Lviv, increase UTR by 0.2 for Monday to Thursday from 10:00 to 12:00 and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, each zone is selected, every new value is typed in the hour-by-day grid, some hours keep their value, then Add Adjustments is clicked. After each zone, the forecaster opens the Export sheet, where the saved adjustments appear line by line, then comes back to the first sheet and selects the next zone in the list.">
+                   "reduce motion"); script.js plays it once on screen, then a faded restart arrow replays it on click -->
+              <div class="adj-sim" role="group" aria-label="Simulation: the forecaster says: analyses done, now let's apply the adjustments for next week. The forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends, both from 10:00 to 14:00; for Lviv, increase UTR by 0.2 for Monday to Thursday from 10:00 to 12:00 and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, each zone is selected, every new value is typed in the hour-by-day grid, some hours keep their value, then Add Adjustments is clicked. After each zone, the forecaster opens the Export sheet, where the saved adjustments appear line by line, then comes back to the first sheet and selects the next zone in the list.">
+                <div class="adj-sim-stage">
                 <div class="adj-sim-desk" aria-hidden="true">
                   <div class="adj-sim-screen adj-sim-notes">
                     <p class="adj-sim-title">Next week's adjustments</p>
@@ -126,6 +127,8 @@
                     <p class="adj-sim-tabs"><span class="adj-sim-tab is-active">Adjustments</span><span class="adj-sim-tab">Export</span></p>
                   </div>
                   <span class="adj-sim-stand"></span><span class="adj-sim-stand"></span>
+                </div>
+                <button type="button" class="adj-sim-restart" aria-label="Restart the simulation" title="Restart" hidden><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
                 </div>
                 <div class="adj-sim-head" aria-hidden="true">
                   <div class="adj-sim-human">

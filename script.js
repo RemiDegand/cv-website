@@ -597,7 +597,7 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
 // AI forecast adjustments page, "How it started": the forecaster says the analyses are done, then types again, in the old
 // Google Sheet, the adjustments already written in sentences on the other screen: select the zone, current UTR loaded,
 // every changed cell typed, "Add Adjustments", a look at the Export sheet (lines appearing one by one) and back, next zone.
-// Starts once on screen and loops; the HTML holds the final state
+// Starts once on screen and stops at the end on a faded restart arrow; the HTML holds the final state
 // of Kyiv, kept as is with "reduce motion"
 const adjSim = document.querySelector(".adj-sim");
 if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -609,6 +609,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   const saved = adjSim.querySelector(".adj-sim-saved");
   const status = adjSim.querySelector(".adj-sim-status");
   const finalStatus = status.textContent;
+  const restart = adjSim.querySelector(".adj-sim-restart");
   const days = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => from + i);
   const hours = [2, 3, 4, 5];   // 10:00 to 13:00: the other hours keep their value
   const menuItems = all(".adj-sim-menu span");
@@ -739,7 +740,12 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
         await wait(700);
       }
       status.textContent = finalStatus;
-      await wait(4500);
+      await wait(2500);
+      adjSim.classList.add("is-ended");
+      restart.hidden = false;
+      await new Promise((resolve) => restart.addEventListener("click", resolve, { once: true }));
+      restart.hidden = true;
+      adjSim.classList.remove("is-ended");
     }
   };
   const start = new IntersectionObserver((entries) => {
