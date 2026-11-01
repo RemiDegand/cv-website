@@ -633,22 +633,30 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
     exportTab.classList.toggle("is-active", tab === exportTab);
     adjSim.classList.toggle("is-export", tab === exportTab);
   };
-  // The Export sheet: the zone's changed slots, one line at a time ("…" after the first 7)
+  // The Export sheet: the zone's changed slots, one line at a time ("…" on the last row). From the second zone on, the
+  // first row already shows the last line of the previous zone: the new lines continue the same list
+  let lastLine = null;
   const showExport = async (zone, utr) => {
-    const slots = [];
-    cells.forEach((td, i) => { if (td.classList.contains("is-changed")) slots.push(i); });
-    exportRows.forEach((tr) => tr.classList.add("is-off"));
+    const hour = (h) => String(h).padStart(2, "0") + ":00";
+    const lines = [];
+    cells.forEach((td, i) => {
+      if (!td.classList.contains("is-changed")) return;
+      const r = Math.floor(i / 7), d = i % 7;
+      lines.push([zone.id, dayNames[d], hour(8 + r), hour(9 + r), utr[r][d].toFixed(2)]);
+    });
+    const shown = lastLine ? [lastLine, ...lines] : lines;
+    exportRows.forEach((tr, n) => {
+      tr.classList.toggle("is-off", !(lastLine && n === 0));
+      tr.classList.toggle("is-previous", Boolean(lastLine) && n === 0);
+      if (n < exportRows.length - 1) shown[n].forEach((text, c) => { tr.children[c].textContent = text; });
+    });
     await openSheet(exportTab);
     status.textContent = "Loading the Export sheet…";
-    for (const [n, tr] of exportRows.entries()) {
-      if (n < exportRows.length - 1) {
-        const r = Math.floor(slots[n] / 7), d = slots[n] % 7;
-        const hour = (h) => String(h).padStart(2, "0") + ":00";
-        [zone.id, dayNames[d], hour(8 + r), hour(9 + r), utr[r][d].toFixed(2)].forEach((text, c) => { tr.children[c].textContent = text; });
-      }
+    for (const tr of exportRows.slice(lastLine ? 1 : 0)) {
       await wait(300);
       tr.classList.remove("is-off");
     }
+    lastLine = lines[lines.length - 1];
   };
   const type = async (cell, text) => {
     cell.textContent = "";
@@ -666,10 +674,14 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       pick.textContent = "Select…";
       saved.textContent = "";
       status.textContent = "";
+      lastLine = null;
       adjSim.classList.add("is-waiting");
       await wait(500);
       adjSim.classList.remove("is-waiting");
-      await wait(1500);
+      adjSim.classList.add("is-flash");
+      await wait(1000);
+      adjSim.classList.remove("is-flash");
+      await wait(1000);
       status.textContent = "Next week's adjustments, already written for the local teams.";
       await wait(1800);
       const done = [];
