@@ -47,7 +47,7 @@
       "ai": true,
       "company": "glovo",
       "title": "AI automation skills for forecast adjustments",
-      "description": "Automated the weekly entry of forecast adjustments with an AI skill: written sentences in, final CSV out. Shared with the whole forecasting team.",
+      "description": "Automated the weekly entry of forecast adjustments with an AI skill: written sentences in, final CSV out.",
       "result": { "key": "~2 h a week", "text": "of manual entries automated" },
       "tags": ["LLMs (Gemini, Claude)", "AI agents (OpenCode)", "Prompt engineering", "BigQuery (SQL)", "GitHub"],
       "home": false
