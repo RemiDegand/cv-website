@@ -675,9 +675,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       saved.textContent = "";
       status.textContent = "";
       lastLine = null;
-      adjSim.classList.add("is-waiting");
-      await wait(500);
-      adjSim.classList.remove("is-waiting");
+      await wait(1000);
       adjSim.classList.add("is-flash");
       await wait(1000);
       adjSim.classList.remove("is-flash");
