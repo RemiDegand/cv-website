@@ -7,7 +7,7 @@ experience: Forecasting Analyst Intern, Global Operations / Supply Ops, Glovo (M
 category: Automation & AI
 on_site: true
 page: project-ai-forecast-adjustments.html
-tools: [LLMs (AI skills), OpenCode, BigQuery (SQL), GitHub]
+tools: [LLMs (Gemini, Claude), AI agents (OpenCode), Prompt engineering, BigQuery (SQL), GitHub]
 sources: [projects/AI Skills for forecast adjsutments/Content.docx (written by Rémi, 30 Oct 2026; local only), projects/AI Skills for forecast adjsutments/Example.xlsx (the old Google Sheet, random values; local only), docs/CV website.md (Glovo summary), linkedin-glovo-description.md]
 updated: 2026-10-30
 ---
@@ -46,7 +46,7 @@ The website shows a simulation ("How it started"): the forecaster has next week'
 The forecasting team (every forecaster, according to Rémi's document).
 
 ## Tools
-LLMs through an AI skill (OpenCode), BigQuery (SQL query), GitHub. Before: Google Sheets with Apps Script.
+LLMs (Gemini, Claude, from Rémi's Glovo tools list), AI agents (OpenCode), prompt engineering (the skill's rules and examples), BigQuery (SQL query), GitHub. Before: Google Sheets with Apps Script.
 
 ## Questions a recruiter might ask
 - **Has Rémi worked with AI at Glovo?** → Yes: he created an AI skill that turns written forecast adjustments into the forecasting tool's import file, and built a forecasting web app with AI-generated summaries and a chatbot.
