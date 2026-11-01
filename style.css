@@ -783,13 +783,13 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .adj-sim { margin-top: 8px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-soft); }
 .adj-sim-desk { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 0 10px; }   /* a double screen: same height, on stands */
 .adj-sim-stand { width: 44px; height: 14px; margin: 0 auto; border-bottom: 4px solid #1d2230; border-radius: 0 0 3px 3px; background: linear-gradient(#2c3344, #1d2230) no-repeat center top / 14px 100%; }
-.adj-sim-stage { position: relative; }
-.adj-sim-desk { transition: opacity 0.4s ease; }
-.adj-sim.is-ended .adj-sim-desk { opacity: 0.45; }   /* the end: the screens fade, the restart arrow appears */
-.adj-sim-restart { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 68px; height: 68px; padding: 0; border: 0; border-radius: 50%; background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); cursor: pointer; opacity: 0.75; transform: translate(-50%, -50%); transition: opacity 0.15s ease, transform 0.15s ease; animation: adj-restart-in 0.4s ease; }
-.adj-sim-restart[hidden] { display: none; }
-.adj-sim-restart:hover, .adj-sim-restart:focus-visible { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
-@keyframes adj-restart-in { from { opacity: 0; } }
+/* The end of every simulation: its content fades, a faded restart arrow appears over it (status lines stay readable) */
+.sim-stage { position: relative; }
+.sim-stage > * { transition: opacity 0.4s ease; }
+.sim-stage.is-ended > :not(.sim-restart, .copy-sim-status, .paste-status, .build-status, figcaption) { opacity: 0.45; }
+.sim-restart { position: absolute; top: 50%; left: 50%; z-index: 3; display: grid; place-items: center; width: 68px; height: 68px; padding: 0; border: 0; border-radius: 50%; background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); cursor: pointer; opacity: 0.75; transform: translate(-50%, -50%); transition: opacity 0.15s ease, transform 0.15s ease; animation: sim-restart-in 0.4s ease; }
+.sim-restart:hover, .sim-restart:focus-visible { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+@keyframes sim-restart-in { from { opacity: 0; } }
 .adj-sim-head { display: grid; grid-template-columns: minmax(0, 0.9fr) auto minmax(0, 1.1fr); align-items: center; gap: 18px; margin-top: 14px; }
 .adj-sim-head .adj-sim-human { grid-column: 2; }
 .project-page .adj-sim-say { position: relative; padding: 10px 14px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg); line-height: 1.45; transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease; }

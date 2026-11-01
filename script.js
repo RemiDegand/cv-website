@@ -355,9 +355,23 @@ if (blockNav) {
   update();
 }
 
+// Every simulation stops at its end: its content fades and a faded restart arrow appears over it, until it is clicked.
+// The arrow is created here, so nothing shows without JS or with "reduce motion"
+const restartAtEnd = (stage) => new Promise((resolve) => {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "sim-restart";
+  button.ariaLabel = "Restart the simulation";
+  button.title = "Restart";
+  button.innerHTML = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>';
+  stage.classList.add("sim-stage", "is-ended");
+  stage.append(button);
+  button.addEventListener("click", () => { button.remove(); stage.classList.remove("is-ended"); resolve(); });
+});
+
 // VAT page, "How it started": replays the accountant (icon + keyboard in the middle) copying 3 VAT amounts from the ERP into
 // Excel, character by character, then the total that doesn't match (the 3rd amount is mistyped).
-// Starts once on screen and loops. The HTML holds the final state, kept as is with "reduce motion".
+// Starts once on screen, then waits on the restart arrow. The HTML holds the final state, kept as is with "reduce motion".
 const copySim = document.querySelector(".copy-sim");
 if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const erpRows = [...copySim.querySelectorAll(".copy-sim-erp tbody tr")];
@@ -393,7 +407,8 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
       await wait(400);
       copySim.classList.add("is-wrong");
       status.textContent = finalStatus;
-      await wait(4500);
+      await wait(2500);
+      await restartAtEnd(copySim);
     }
   };
   const start = new IntersectionObserver((entries) => {
@@ -405,7 +420,7 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
 // Cash flow page, "How it started": on the CFO's desktop, the quarter's entries are copied from the ERP export
 // and pasted into the cash flow file, which already holds every past year. Each row takes longer to arrive,
 // the file size meter fills up to red, a busy cursor spins, then Excel stops responding and crashes.
-// Starts once on screen and loops; the HTML holds the final state, kept as is with "reduce motion".
+// Starts once on screen, then waits on the restart arrow; the HTML holds the final state, kept as is with "reduce motion".
 const pasteSim = document.querySelector(".paste-sim");
 if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const rows = [...pasteSim.querySelectorAll(".paste-grid tbody tr")];
@@ -466,7 +481,8 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
       await wait(2500);
       pasteSim.classList.add("is-crashed");
       status.textContent = finalStatus;
-      await wait(5000);
+      await wait(3000);
+      await restartAtEnd(pasteSim);
     }
   };
   const start = new IntersectionObserver((entries) => {
@@ -517,7 +533,11 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
     pauseButton.ariaLabel = pauseButton.title = paused ? "Play" : "Pause";   // the icon follows .is-paused (CSS)
   };
   pauseButton.addEventListener("click", () => setPaused(!paused));
-  buildSim.querySelector(".build-restart").addEventListener("click", () => { restart = true; setPaused(false); });
+  buildSim.querySelector(".build-restart").addEventListener("click", () => {
+    restart = true;
+    setPaused(false);
+    buildSim.querySelector(".sim-restart")?.click();   // already at the end: the icon acts like the arrow
+  });
   const step = (n, text) => {
     steps.forEach((li, i) => { li.classList.toggle("is-done", i < n); li.classList.toggle("is-on", i === n); });
     notes.forEach((set, i) => set.classList.toggle("is-shown", i === Math.min(n, notes.length - 1)));   // the last step keeps its notes
@@ -578,13 +598,13 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
     await reveal(all(".b-ratio"), 250);
     await wait(1500);
     step(5, finalStatus);
-    await wait(4000);
+    await wait(2500);
   };
-  // Starts over at the end, or as soon as Restart is clicked
+  // Waits on the restart arrow at the end; starts over at once when the Restart icon is clicked
   const run = async () => {
     controls.hidden = false;
     for (;;) {
-      try { await play(); }
+      try { await play(); await restartAtEnd(buildSim); setPaused(false); }
       catch (e) { if (e !== RESTART) throw e; restart = false; }
     }
   };
@@ -609,7 +629,6 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   const saved = adjSim.querySelector(".adj-sim-saved");
   const status = adjSim.querySelector(".adj-sim-status");
   const finalStatus = status.textContent;
-  const restart = adjSim.querySelector(".adj-sim-restart");
   const days = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => from + i);
   const hours = [2, 3, 4, 5];   // 10:00 to 13:00: the other hours keep their value
   const menuItems = all(".adj-sim-menu span");
@@ -741,11 +760,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       }
       status.textContent = finalStatus;
       await wait(2500);
-      adjSim.classList.add("is-ended");
-      restart.hidden = false;
-      await new Promise((resolve) => restart.addEventListener("click", resolve, { once: true }));
-      restart.hidden = true;
-      adjSim.classList.remove("is-ended");
+      await restartAtEnd(adjSim.querySelector(".adj-sim-stage"));
     }
   };
   const start = new IntersectionObserver((entries) => {
@@ -755,7 +770,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
 }
 
 // AI forecast adjustments page, the example: the sentences are typed in the message box and sent, the AI thinks and replies
-// part by part, the export appears row by row, then the forecaster clicks its download icon. Starts once on screen and loops; the HTML holds the final state, kept as is with
+// part by part, the export appears row by row, then the forecaster clicks its download icon. Starts once on screen, then waits on the restart arrow; the HTML holds the final state, kept as is with
 // "reduce motion"
 const aiChat = document.querySelector(".ai-chat");
 if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -807,7 +822,8 @@ if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       file.classList.add("is-done");
       await wait(500);
       file.classList.remove("is-cursor");
-      await wait(4500);
+      await wait(2500);
+      await restartAtEnd(aiChat);
     }
   };
   const start = new IntersectionObserver((entries) => {
