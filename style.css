@@ -1491,6 +1491,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 /* The mouse of the simulation (script.js) */
 .fa-cursor { position: absolute; z-index: 4; top: 0; left: 0; width: 20px; height: 20px; pointer-events: none; opacity: 0; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35)); transition: transform 0.7s ease, opacity 0.2s ease; }
 .fa-cursor.is-on { opacity: 1; }
+.fa-sim { position: relative; }
+.fa-sim > .fa-cursor:not(.is-on) { opacity: 0 !important; }   /* stays hidden when the end of the simulation fades everything */
 .fa-is-pressed { box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.45) !important; }
 /* A window over the view (Insights, Zone Insights), scrolled by the mouse */
 .fa-modal { position: absolute; z-index: 2; inset: 0; display: none; background: #fff; }

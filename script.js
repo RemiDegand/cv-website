@@ -981,7 +981,7 @@ if (faSim) {
   const cursor = document.createElement("span");
   cursor.className = "fa-cursor";
   cursor.innerHTML = '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 1l13 9.5-6 1 3.5 6.5-2.5 1.3-3.5-6.5L3 17z" fill="#fff" stroke="#1d2230" stroke-width="1.4" stroke-linejoin="round"/></svg>';
-  stage.append(cursor);
+  faSim.append(cursor);   // on the whole simulation, not the screen: the mouse also goes to the tabs above it
   const closeModals = () => faSim.querySelectorAll(".fa-modal.is-open").forEach((m) => m.classList.remove("is-open"));
   const openModal = (name) => { closeModals(); const m = modal(name); m.classList.add("is-open"); m.querySelector(".fa-modal-scroll").scrollTop = 0; };
   const show = (index) => {
@@ -1025,11 +1025,17 @@ if (faSim) {
       };
       // The mouse goes to an element, then presses it
       const mouseTo = async (el) => {
-        const box = stage.getBoundingClientRect();
+        const box = faSim.getBoundingClientRect();
         const r = el.getBoundingClientRect();
         cursor.classList.add("is-on");
         cursor.style.transform = `translate(${r.left - box.left + r.width / 2}px, ${r.top - box.top + r.height / 2}px)`;
         return pause(800);
+      };
+      // The mouse rests in the middle of the screen, ready to scroll
+      const mouseCentre = () => {
+        const box = faSim.getBoundingClientRect();
+        const r = stage.getBoundingClientRect();
+        cursor.style.transform = `translate(${r.left - box.left + r.width * 0.55}px, ${r.top - box.top + r.height * 0.55}px)`;
       };
       const press = async (el) => {
         el.classList.add("fa-is-pressed");
@@ -1075,10 +1081,12 @@ if (faSim) {
         if (!await mouseTo(insights) || !await press(insights)) return;
         openModal("market");
         if (!await pause(1500)) return;
-        cursor.style.transform = `translate(${stage.clientWidth * 0.55}px, ${stage.clientHeight * 0.55}px)`;
+        mouseCentre();
         if (!await pause(500) || !await readParts("market")) return;
 
-        // 2. Global Zones: list, click on a zone, Zone Insights, then the FC Schedule button
+        // 2. Global Zones: the mouse clicks its tab; list, click on a zone, Zone Insights, then the FC Schedule button
+        status.textContent = "Next section: Global Zones.";
+        if (!await mouseTo(steps[1]) || !await press(steps[1])) return;
         show(1);
         if (!await showAll(global, ".fa-a", 150) || !await pause(1500)) return;
         const zone = global.querySelector(".fa-link");
@@ -1091,7 +1099,7 @@ if (faSim) {
         if (!await mouseTo(zoneInsights) || !await press(zoneInsights)) return;
         openModal("zone");
         if (!await pause(1500)) return;
-        cursor.style.transform = `translate(${stage.clientWidth * 0.55}px, ${stage.clientHeight * 0.55}px)`;
+        mouseCentre();
         if (!await pause(500) || !await readParts("zone")) return;
         const scheduleButton = global.querySelector("[data-schedule]");
         status.textContent = "The most used view: a click on FC Schedule.";
@@ -1107,7 +1115,9 @@ if (faSim) {
         }
         if (!await pause(800) || !await showAll(schedule, ".fa-late", 500) || !await pause(3500)) return;
 
-        // 3. FC Alerts: the list, sorted by eligible slots, then Proper FC at 70 %: the zones above it disappear
+        // 3. FC Alerts: the mouse clicks its tab; the list, sorted by eligible slots, then Proper FC at 70 %: the zones above it disappear
+        status.textContent = "Next section: FC Alerts.";
+        if (!await mouseTo(steps[2]) || !await press(steps[2])) return;
         setSorted(false);
         setSlider(100);
         show(3);
@@ -1119,7 +1129,7 @@ if (faSim) {
         if (!await pause(1600)) return;
         status.textContent = "…then Proper FC at 70%: only the zones below stay.";
         const thumb = () => sliderFill;
-        const box = stage.getBoundingClientRect();
+        const box = faSim.getBoundingClientRect();
         const placeOnThumb = () => {
           const r = thumb().getBoundingClientRect();
           cursor.style.transform = `translate(${r.right - box.left}px, ${r.top - box.top}px)`;
