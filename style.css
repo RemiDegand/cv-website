@@ -1524,9 +1524,13 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-btn:hover { border-color: var(--accent); }
 .fa-btn-static { cursor: default; color: #6b7280; }
 .fa-btn-static:hover { border-color: #c9ced8; }
-.fa-link { padding: 0; border: 0; background: none; color: var(--accent); font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.fa-link { padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; white-space: nowrap; }
+.fa-toggle::before { content: "▶"; margin-right: 5px; color: #9aa3b2; font-size: 0.6rem; }
+/* The open zone, and only once it is open: coloured row, blue name, arrow pointing down */
+.fa-zone-row:has(+ .fa-details:not([hidden])) .fa-toggle::before { content: "▼"; color: var(--accent); }
+.fa-zone-row:has(+ .fa-details:not([hidden])) .fa-link { color: var(--accent); font-weight: 700; }
 .fa-zones .fa-super th { border-bottom: 0; color: #1f2937; text-align: center; }
-.fa-zone-row td { background: #fdecec; }
+.fa-zone-row:has(+ .fa-details:not([hidden])) td { background: #fdecec; }
 .fa-details[hidden] { display: none; }
 .fa-table .fa-details > td { padding: 6px 0 8px; text-align: left; white-space: normal; }
 .fa-dive-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 8px; padding: 6px 8px; border: 1px solid #e1e4ea; border-radius: 6px 6px 0 0; }
