@@ -953,7 +953,7 @@ if (faSim) {
   const details = faSim.querySelector(".fa-details");
   const modal = (name) => faSim.querySelector(`.fa-modal[data-modal="${name}"]`);
   const texts = [
-    "Market performance on top, then the breakdown by country and by area, with no selection.",
+    "Market Performance on top, then the breakdown by country and by area, down to the zone, with no selection.",
     "All the zones with their main KPIs, with no selection.",
     status.textContent,
     "Alerts keep only the zones below the threshold, biggest zones first.",
@@ -1031,7 +1031,7 @@ if (faSim) {
       setPlaying(true);
       // Waits for ms of play: the time doesn't run while the simulation is paused
       const pause = async (ms) => {
-        let left = ms;
+        let left = ms * 0.6;   // the speed of the whole simulation
         while (left > 0 && me === playing) {
           const step = Math.min(left, 50);
           await wait(step);
@@ -1099,17 +1099,8 @@ if (faSim) {
 
         // 1. Market Overview, then the Insights of a country
         show(0);
-        if (!await pause(500)) return;
-        // Part by part, each with its explanation under the screen
-        for (const el of overview.querySelectorAll(".fa-a")) {
-          if (el.dataset.text) {
-            if (el !== overview.querySelector(".fa-a") && !await pause(2200)) return;
-            status.textContent = el.dataset.text;
-          }
-          el.classList.add("is-in");
-          if (!await pause(160)) return;
-        }
-        if (!await pause(2200)) return;
+        // Almost at once: the market performance and both breakdowns
+        if (!await showAll(overview, ".fa-a", 15) || !await pause(3000)) return;
         const insights = overview.querySelector("[data-open]");
         status.textContent = "A click on Insights opens the country: KPIs on top, then 4 reports below.";
         if (!await mouseTo(insights) || !await press(insights)) return;

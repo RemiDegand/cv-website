@@ -1486,10 +1486,14 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-steps span { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: #eef1f6; font-size: 0.7rem; }
 .fa-steps button.is-on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
 .fa-steps button.is-on span { background: var(--accent); color: #fff; }
+.fa-markets { display: flex; align-items: center; gap: 6px; padding: 7px 14px; border-bottom: 1px solid #e1e4ea; background: #fff; color: #1f2937; font-size: 0.75rem; }
+.fa-markets span { margin-right: 4px; color: #6b7280; font-weight: 600; }
+.fa-markets b { padding: 2px 12px; border: 1px solid #c9ced8; border-radius: 999px; font-weight: 600; }
+.fa-markets b.is-on { border-color: var(--accent); background: var(--accent); color: #fff; }
 .fa-views { position: relative; display: grid; height: 515px; overflow: hidden; }
 .fa-view { grid-area: 1 / 1; box-sizing: border-box; min-width: 0; height: 100%; padding: 12px 14px; overflow-y: auto; visibility: hidden; }
 /* The mouse of the simulation (script.js) */
-.fa-cursor { position: absolute; z-index: 4; top: 0; left: 0; width: 20px; height: 20px; pointer-events: none; opacity: 0; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35)); transition: transform 0.7s ease, opacity 0.2s ease; }
+.fa-cursor { position: absolute; z-index: 4; top: 0; left: 0; width: 20px; height: 20px; pointer-events: none; opacity: 0; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35)); transition: transform 0.45s ease, opacity 0.2s ease; }
 .fa-cursor.is-on { opacity: 1; }
 .fa-sim { position: relative; }
 .fa-sim.is-playable .fa-views { cursor: pointer; }
