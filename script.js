@@ -938,37 +938,80 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
   start.observe(lookerSim);
 }
 
-// Forecast accuracy page, "The app at work": 4 views play once on screen (every zone, alerts, FC Schedule, AI summary), then the
-// restart arrow. A click on a step shows that view, complete, and stops the play. The HTML holds step 3, kept with "reduce motion".
+// Forecast accuracy page, "The app at work", following the real app: Market Overview and the Insights of a country, Global Zones with
+// the deep dive, Zone Insights and FC Schedule of one zone; FC Alerts sorted by eligible slots, with zones disappearing. Plays once on screen with a mouse, then the restart arrow.
+// The buttons really work: a click on a step, Insights, the zone, Zone Insights, × or FC Schedule stops the play and does it.
+// The HTML holds the FC Schedule (step 2), kept with "reduce motion".
 const faSim = document.querySelector(".fa-sim");
 if (faSim) {
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const steps = [...faSim.querySelectorAll(".fa-steps button")];
   const views = [...faSim.querySelectorAll(".fa-view")];
+  const stage = faSim.querySelector(".fa-views");
   const status = faSim.querySelector(".fa-status");
+  const details = faSim.querySelector(".fa-details");
+  const modal = (name) => faSim.querySelector(`.fa-modal[data-modal="${name}"]`);
   const texts = [
-    "All the zones at once, with no selection: market, country, city and zone.",
-    "Alerts raise the zones that deviate. The threshold can be changed.",
+    "Market performance on top, then the breakdown by country and by area, with no selection.",
+    "All the zones with their main KPIs, with no selection.",
     status.textContent,
-    "The AI summary explains the variation, with data from outside forecast accuracy.",
+    "Alerts keep only the zones below the threshold, sorted by eligible slots.",
   ];
+  const stepOfView = [0, 1, 1, 2];   // the FC Schedule opens from Global Zones, so it belongs to step 2
+  const viewOfStep = [0, 1, 3];
+  // FC Alerts in its final state: sorted by eligible slots, only the zones at or below 70 % of Proper FC
+  const alertRows = [...faSim.querySelectorAll(".fa-arow")];
+  const alertBody = faSim.querySelector(".fa-alert-rows");
+  const sortHead = faSim.querySelector(".fa-sort");
+  const sliderVal = faSim.querySelector(".fa-slider-val");
+  const sliderFill = faSim.querySelector(".fa-filters .fa-track i");
+  const alertCount = faSim.querySelector(".fa-alert-count");
+  const setSlider = (t) => {
+    sliderVal.textContent = `${t}%`;
+    sliderFill.style.setProperty("--v", `${t}%`);
+    alertRows.forEach((row) => { row.hidden = Number(row.dataset.pf) > t; });
+    alertCount.textContent = `Viewing ${Math.round(40 - (100 - t) * 0.6)} zones`;
+  };
+  const setSorted = (sorted) => {
+    const order = [...alertRows].sort((a, b) => (sorted ? b.dataset.elig - a.dataset.elig : a.dataset.n - b.dataset.n));
+    alertBody.append(...order);
+    sortHead.classList.toggle("is-sorted", sorted);
+    sortHead.querySelector("span").textContent = sorted ? "▼" : "↕";
+  };
+  const cursor = document.createElement("span");
+  cursor.className = "fa-cursor";
+  cursor.innerHTML = '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 1l13 9.5-6 1 3.5 6.5-2.5 1.3-3.5-6.5L3 17z" fill="#fff" stroke="#1d2230" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+  stage.append(cursor);
+  const closeModals = () => faSim.querySelectorAll(".fa-modal.is-open").forEach((m) => m.classList.remove("is-open"));
+  const openModal = (name) => { closeModals(); const m = modal(name); m.classList.add("is-open"); m.querySelector(".fa-modal-scroll").scrollTop = 0; };
   const show = (index) => {
+    closeModals();
     views.forEach((view, i) => view.classList.toggle("is-on", i === index));
+    views[index].scrollTop = 0;
     steps.forEach((step, i) => {
-      step.classList.toggle("is-on", i === index);
-      if (i === index) step.setAttribute("aria-current", "step");
+      step.classList.toggle("is-on", i === stepOfView[index]);
+      if (i === stepOfView[index]) step.setAttribute("aria-current", "step");
       else step.removeAttribute("aria-current");
     });
     status.textContent = texts[index];
   };
-  let playing = 0;   // changes when a step is clicked: the play in progress stops
-  steps.forEach((step, i) => step.addEventListener("click", () => {
+  let playing = 0;   // changes when a button is clicked: the play in progress stops
+  const stopPlay = () => {
     playing++;
     faSim.querySelector(".sim-restart")?.remove();
     faSim.classList.remove("is-ended");
     views.forEach((view) => view.classList.remove("is-playing"));
-    show(i);
-  }));
+    cursor.classList.remove("is-on");
+    details.hidden = false;
+    setSorted(true);
+    setSlider(70);
+  };
+  steps.forEach((step, i) => step.addEventListener("click", () => { stopPlay(); show(viewOfStep[i]); }));
+  faSim.querySelectorAll("[data-open]").forEach((button) => button.addEventListener("click", () => { stopPlay(); openModal(button.dataset.open); }));
+  faSim.querySelectorAll(".fa-close").forEach((button) => button.addEventListener("click", () => { stopPlay(); closeModals(); }));
+  faSim.querySelector("[data-schedule]").addEventListener("click", () => { stopPlay(); show(2); });
+  faSim.querySelector(".fa-link").addEventListener("click", () => { const wasHidden = details.hidden; stopPlay(); details.hidden = !wasHidden; });
+
   if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const run = async () => {
       const me = ++playing;
@@ -980,31 +1023,82 @@ if (faSim) {
         }
         return true;
       };
-      const [overview, alerts, schedule, summary] = views;
+      // The mouse goes to an element, then presses it
+      const mouseTo = async (el) => {
+        const box = stage.getBoundingClientRect();
+        const r = el.getBoundingClientRect();
+        cursor.classList.add("is-on");
+        cursor.style.transform = `translate(${r.left - box.left + r.width / 2}px, ${r.top - box.top + r.height / 2}px)`;
+        return pause(800);
+      };
+      const press = async (el) => {
+        el.classList.add("fa-is-pressed");
+        const alive = await pause(300);
+        el.classList.remove("fa-is-pressed");
+        return alive;
+      };
+      // The mouse wheel: scrolls a window so that a part comes to the top
+      const scrollTo = async (box, part) => {
+        const from = box.scrollTop;
+        const to = Math.min(from + part.getBoundingClientRect().top - box.getBoundingClientRect().top - 48, box.scrollHeight - box.clientHeight);
+        for (let i = 1; i <= 25; i++) {
+          box.scrollTop = from + ((to - from) * i) / 25;
+          if (!await pause(30)) return false;
+        }
+        return true;
+      };
+      const readParts = async (name) => {
+        const m = modal(name);
+        const box = m.querySelector(".fa-modal-scroll");
+        for (const part of m.querySelectorAll("[data-part]")) {
+          if (!await scrollTo(box, part) || !await pause(1500)) return false;
+        }
+        const close = m.querySelector(".fa-close");
+        if (!await mouseTo(close) || !await press(close)) return false;
+        m.classList.remove("is-open");
+        return pause(400);
+      };
+      const [overview, global, schedule, alerts] = views;
       for (;;) {
         views.forEach((view) => {
           view.classList.add("is-playing");
           view.querySelectorAll(".is-in").forEach((el) => el.classList.remove("is-in"));
         });
+        details.hidden = true;
+        cursor.classList.remove("is-on");
+
+        // 1. Market Overview, then the Insights of a country
         show(0);
-        if (!await pause(500) || !await showAll(overview, ".fa-a", 380) || !await pause(2200)) return;
+        if (!await pause(500) || !await showAll(overview, ".fa-a", 180) || !await pause(1800)) return;
+        const insights = overview.querySelector("[data-open]");
+        status.textContent = "A click on Insights opens the country: KPIs on top, then 4 reports.";
+        if (!await mouseTo(insights) || !await press(insights)) return;
+        openModal("market");
+        if (!await pause(1500)) return;
+        cursor.style.transform = `translate(${stage.clientWidth * 0.55}px, ${stage.clientHeight * 0.55}px)`;
+        if (!await pause(500) || !await readParts("market")) return;
 
-        const rows = [...alerts.querySelectorAll(".fa-alert")];
-        const fill = alerts.querySelector(".fa-track i");
-        const value = alerts.querySelector(".fa-slider-val");
-        const max = parseInt(value.textContent, 10);
-        value.textContent = `${max - 16}%`;   // the slider starts low, so no zone is listed yet
-        fill.style.setProperty("--v", `${max - 16}%`);
+        // 2. Global Zones: list, click on a zone, Zone Insights, then the FC Schedule button
         show(1);
-        if (!await showAll(alerts, ".fa-a", 300)) return;
-        for (let t = max - 16; t <= max; t++) {
-          value.textContent = `${t}%`;
-          fill.style.setProperty("--v", `${t}%`);
-          rows.forEach((row) => { if (Number(row.dataset.at) <= t) row.classList.add("is-in"); });
-          if (!await pause(170)) return;
-        }
-        if (!await pause(2000)) return;
+        if (!await showAll(global, ".fa-a", 150) || !await pause(1500)) return;
+        const zone = global.querySelector(".fa-link");
+        status.textContent = "A click on a zone: secondary KPIs, buttons and comments.";
+        if (!await mouseTo(zone) || !await press(zone)) return;
+        details.hidden = false;
+        if (!await pause(2500)) return;
+        const zoneInsights = global.querySelector('[data-open="zone"]');
+        status.textContent = "Zone Insights: KPIs on top, the AI summary, then 3 reports.";
+        if (!await mouseTo(zoneInsights) || !await press(zoneInsights)) return;
+        openModal("zone");
+        if (!await pause(1500)) return;
+        cursor.style.transform = `translate(${stage.clientWidth * 0.55}px, ${stage.clientHeight * 0.55}px)`;
+        if (!await pause(500) || !await readParts("zone")) return;
+        const scheduleButton = global.querySelector("[data-schedule]");
+        status.textContent = "The most used view: a click on FC Schedule.";
+        if (!await mouseTo(scheduleButton) || !await pause(600) || !await press(scheduleButton)) return;
 
+        // Still step 2: the FC Schedule of the zone
+        cursor.classList.remove("is-on");
         show(2);
         if (!await showAll(schedule, ".fa-a", 250)) return;
         for (const row of schedule.querySelectorAll(".fa-grid tbody tr")) {
@@ -1013,8 +1107,34 @@ if (faSim) {
         }
         if (!await pause(800) || !await showAll(schedule, ".fa-late", 500) || !await pause(3500)) return;
 
+        // 3. FC Alerts: the list, sorted by eligible slots, then Proper FC at 70 %: the zones above it disappear
+        setSorted(false);
+        setSlider(100);
         show(3);
-        if (!await showAll(summary, ".fa-a", 1200) || !await pause(2500)) return;
+        status.textContent = "FC Alerts: filters on top, then the zones with their main KPIs.";
+        if (!await showAll(alerts, ".fa-a", 200) || !await pause(1500)) return;
+        status.textContent = "Sort by eligible slots, biggest zones first…";
+        if (!await mouseTo(sortHead) || !await press(sortHead)) return;
+        setSorted(true);
+        if (!await pause(1600)) return;
+        status.textContent = "…then Proper FC at 70%: only the zones below stay.";
+        const thumb = () => sliderFill;
+        const box = stage.getBoundingClientRect();
+        const placeOnThumb = () => {
+          const r = thumb().getBoundingClientRect();
+          cursor.style.transform = `translate(${r.right - box.left}px, ${r.top - box.top}px)`;
+        };
+        placeOnThumb();
+        cursor.classList.add("is-on");
+        if (!await pause(900)) return;
+        for (let t = 100; t >= 70; t--) {
+          setSlider(t);
+          placeOnThumb();
+          if (!await pause(130)) return;
+        }
+        status.textContent = texts[3];
+        cursor.classList.remove("is-on");
+        if (!await pause(3000)) return;
         await restartAtEnd(faSim);
       }
     };
