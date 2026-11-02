@@ -1522,8 +1522,6 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-exp { margin-right: 5px; color: #9aa3b2; font-size: 0.6rem; }
 .fa-btn { display: inline-block; padding: 2px 7px; border: 1px solid #c9ced8; border-radius: 5px; background: #fff; color: #1f2937; font: inherit; font-size: 0.7rem; font-weight: 600; white-space: nowrap; cursor: pointer; }
 .fa-btn:hover { border-color: var(--accent); }
-.fa-btn-static { cursor: default; color: #6b7280; }
-.fa-btn-static:hover { border-color: #c9ced8; }
 .fa-link { padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; white-space: nowrap; }
 .fa-toggle::before { content: "▶"; margin-right: 5px; color: #9aa3b2; font-size: 0.6rem; }
 /* The open zone, and only once it is open: coloured row, blue name, arrow pointing down */
