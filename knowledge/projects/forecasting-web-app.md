@@ -25,9 +25,10 @@ Forecast accuracy was becoming more and more important: the team had to see the 
 Forecast accuracy is measured with the Utilization Rate, the average number of orders delivered by one rider in one hour. Each time slot is Proper FC (Utilization Rate close to its target), Under FC (too few slots opened, Utilization Rate above its target) or Over FC (too many slots opened, Utilization Rate below its target).
 
 ## Problem
-Looker had two limits:
+Looker had three limits:
 - No quick view of all the zones: a dashboard shows one selected zone or a whole country, and at country level the SUM or AVG hides deviations. Forecasters selected zones one by one, from the most important to the least.
-- No patterns: for the last week or the last 7 days, the dashboard gave an average aggregated by orders, with no view by day or by time slot.
+- Hard to find patterns: on Looker, data were aggregated as an average or a sum, depending on the metric, so a recurring pattern by day or by time slot stayed hidden.
+- Too general: root causes (Missing Capacity, Delivery Time, Orders FC deviation) sat on other dashboards, not linked to forecast accuracy.
 
 ## What I built
 Rémi's idea was to see all the zones at the same time, with alarms; the tool kept growing until it became a full web app. Every dashboard, metric and summary is designed to explain the performance and variation of Proper, Under and Over FC.
