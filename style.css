@@ -1499,6 +1499,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-sim.is-playable .fa-views { cursor: pointer; }
 .fa-paused { position: absolute; z-index: 5; top: 50%; left: 50%; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #1d2230; color: #fff; font-size: 0.8rem; font-weight: 600; white-space: nowrap; transform: translate(-50%, -50%); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); pointer-events: none; }
 .fa-paused[hidden] { display: none; }
+/* The app's chatbot button, bottom right of the screen, above everything but the mouse (no interaction yet) */
+.fa-chat { position: absolute; z-index: 3; right: 14px; bottom: 14px; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #0f172a; color: #fff; font-size: 1.15rem; font-weight: 700; box-shadow: 0 6px 16px rgba(15, 23, 42, 0.28); }
 /* AI summaries simulation: the day being explained lights up */
 .project-page .ais-day { padding: 2px 4px; border-radius: 4px; }
 .project-page .ais-day.is-on { background: #fff3c4; }
