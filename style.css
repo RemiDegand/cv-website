@@ -1496,9 +1496,11 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-cursor { position: absolute; z-index: 4; top: 0; left: 0; width: 20px; height: 20px; pointer-events: none; opacity: 0; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35)); transition: transform 0.45s ease, opacity 0.2s ease; }
 .fa-cursor.is-on { opacity: 1; }
 .fa-sim { position: relative; }
-.fa-sim.is-playable .fa-views { cursor: pointer; }
-.fa-paused { position: absolute; z-index: 5; top: 50%; left: 50%; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #1d2230; color: #fff; font-size: 0.8rem; font-weight: 600; white-space: nowrap; transform: translate(-50%, -50%); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); pointer-events: none; }
-.fa-paused[hidden] { display: none; }
+.sim-paused { position: absolute; z-index: 5; top: 50%; left: 50%; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #1d2230; color: #fff; font-size: 0.8rem; font-weight: 600; white-space: nowrap; transform: translate(-50%, -50%); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); pointer-events: none; }
+.sim-paused[hidden] { display: none; }
+.sim-stage.is-paused * { animation-play-state: paused !important; }
+.sim-stage.is-playable { cursor: pointer; }
+.sim-stage.is-waiting > :not(.sim-restart) { pointer-events: none; }   /* nothing to click before the start button */
 /* The app's chatbot button, bottom right of the screen, above everything but the mouse (no interaction yet) */
 .fa-chat { position: absolute; z-index: 3; right: 14px; bottom: 14px; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #0f172a; color: #fff; font-size: 1.15rem; font-weight: 700; box-shadow: 0 6px 16px rgba(15, 23, 42, 0.28); }
 /* AI summaries simulation: the day being explained lights up */

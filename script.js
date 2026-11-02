@@ -355,23 +355,74 @@ if (blockNav) {
   update();
 }
 
-// Every simulation stops at its end: its content fades and a faded restart arrow appears over it, until it is clicked.
-// The arrow is created here, so nothing shows without JS or with "reduce motion"
-const restartAtEnd = (stage) => new Promise((resolve) => {
+// Every simulation of the site works the same way (nothing moves without JS or with "reduce motion": the HTML holds its final state):
+// - it starts only on a click on its start button, over its faded final state (simStart);
+// - a click on it pauses it, another click resumes it (simClock; its wait stops counting during a pause);
+// - at its end its content fades and a restart arrow appears, until it is clicked (restartAtEnd).
+const simClocks = new WeakMap();
+const simClock = (stage, { ignore = "button, a", onChange } = {}) => {
+  let paused = false, playing = false;
+  stage.classList.add("sim-stage");
+  const badge = document.createElement("span");
+  badge.className = "sim-paused";
+  badge.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M7 5l13 7-13 7z"/></svg>Paused: click to resume';
+  badge.hidden = true;
+  stage.append(badge);
+  const setPaused = (value) => {
+    paused = value;
+    badge.hidden = !paused;
+    stage.classList.toggle("is-paused", paused);
+    onChange?.(paused);
+  };
+  stage.addEventListener("click", (event) => {
+    if (playing && !event.target.closest(ignore)) setPaused(!paused);
+  });
+  const clock = {
+    stage,
+    setPaused,
+    isPaused: () => paused,
+    play: (on) => { playing = on; stage.classList.toggle("is-playable", on); if (!on) setPaused(false); },
+    wait: async (ms) => {
+      let left = ms;
+      while (left > 0) {
+        const step = Math.min(left, 50);
+        await new Promise((resolve) => setTimeout(resolve, step));
+        if (!paused) left -= step;
+      }
+    },
+  };
+  simClocks.set(stage, clock);
+  return clock;
+};
+const simButton = (stage, label, title, icon) => new Promise((resolve) => {
   const button = document.createElement("button");
   button.type = "button";
   button.className = "sim-restart";
-  button.ariaLabel = "Restart the simulation";
-  button.title = "Restart";
-  button.innerHTML = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>';
+  button.ariaLabel = label;
+  button.title = title;
+  button.innerHTML = icon;
   stage.classList.add("sim-stage", "is-ended");
   stage.append(button);
   button.addEventListener("click", () => { button.remove(); stage.classList.remove("is-ended"); resolve(); });
 });
+const simStart = (clock, run) => {
+  clock.stage.classList.add("is-waiting");
+  simButton(clock.stage, "Start the simulation", "Start", '<svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M8 5l12 7-12 7z"/></svg>').then(() => {
+    clock.stage.classList.remove("is-waiting");
+    clock.play(true);
+    run();
+  });
+};
+const restartAtEnd = async (stage) => {
+  const clock = simClocks.get(stage);
+  clock?.play(false);
+  await simButton(stage, "Restart the simulation", "Restart", '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>');
+  clock?.play(true);
+};
 
 // VAT page, "How it started": replays the accountant (icon + keyboard in the middle) copying 3 VAT amounts from the ERP into
 // Excel, character by character, then the total that doesn't match (the 3rd amount is mistyped).
-// Starts once on screen, then waits on the restart arrow. The HTML holds the final state, kept as is with "reduce motion".
+// Starts on its start button, then waits on the restart arrow. The HTML holds the final state, kept as is with "reduce motion".
 const copySim = document.querySelector(".copy-sim");
 if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const erpRows = [...copySim.querySelectorAll(".copy-sim-erp tbody tr")];
@@ -379,7 +430,8 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
   const total = copySim.querySelector(".copy-sim-total");
   const status = copySim.querySelector(".copy-sim-status");
   const finalStatus = status.textContent;
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const clock = simClock(copySim);
+  const wait = clock.wait;
   const type = async (cell, speed) => {
     cell.classList.add("is-typing");
     copySim.classList.add("is-keying");   // the accountant's keyboard taps
@@ -411,16 +463,13 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
       await restartAtEnd(copySim);
     }
   };
-  const start = new IntersectionObserver((entries) => {
-    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
-  }, { rootMargin: "0px 0px -20% 0px" });
-  start.observe(copySim);
+  simStart(clock, run);
 }
 
 // Cash flow page, "How it started": on the CFO's desktop, the quarter's entries are copied from the ERP export
 // and pasted into the cash flow file, which already holds every past year. Each row takes longer to arrive,
 // the file size meter fills up to red, a busy cursor spins, then Excel stops responding and crashes.
-// Starts once on screen, then waits on the restart arrow; the HTML holds the final state, kept as is with "reduce motion".
+// Starts on its start button, then waits on the restart arrow; the HTML holds the final state, kept as is with "reduce motion".
 const pasteSim = document.querySelector(".paste-sim");
 if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const rows = [...pasteSim.querySelectorAll(".paste-grid tbody tr")];
@@ -433,7 +482,8 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   const status = pasteSim.querySelector(".paste-status");
   const finalStatus = status.textContent;
   const finalTitle = title.textContent;
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const clock = simClock(pasteSim);
+  const wait = clock.wait;
   const size = (n) => segments.forEach((s, i) => s.classList.toggle("is-on", i < n));   // file size meter
   const activeTab = (tab) => tabs.forEach((t) => t.classList.toggle("is-active", t === tab));
   const run = async () => {
@@ -485,10 +535,7 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
       await restartAtEnd(pasteSim);
     }
   };
-  const start = new IntersectionObserver((entries) => {
-    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
-  }, { rootMargin: "0px 0px -20% 0px" });
-  start.observe(pasteSim);
+  simStart(clock, run);
 }
 
 // Cash flow page, "What I built": the file at work. The user types the period and clicks Refresh, then the file shows
@@ -512,7 +559,7 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   const controls = buildSim.querySelector(".sim-controls");
   const pauseButton = buildSim.querySelector(".build-pause");
   // Pause stops the clock of every wait; Restart makes the current wait fail, so the loop starts over
-  let paused = false;
+  const clock = simClock(buildSim, { onChange: (paused) => { pauseButton.ariaLabel = pauseButton.title = paused ? "Play" : "Pause"; } });   // the icon follows .is-paused (CSS)
   let restart = false;
   const RESTART = Symbol("restart");
   const wait = (ms) => new Promise((resolve, reject) => {
@@ -520,22 +567,17 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
     const tick = () => {
       if (restart) return reject(RESTART);
       const now = performance.now();
-      if (!paused) ms -= now - last;
+      if (!clock.isPaused()) ms -= now - last;
       last = now;
       if (ms <= 0) return resolve();
       setTimeout(tick, Math.min(ms, 50));
     };
     tick();
   });
-  const setPaused = (value) => {
-    paused = value;
-    buildSim.classList.toggle("is-paused", paused);
-    pauseButton.ariaLabel = pauseButton.title = paused ? "Play" : "Pause";   // the icon follows .is-paused (CSS)
-  };
-  pauseButton.addEventListener("click", () => setPaused(!paused));
+  pauseButton.addEventListener("click", () => clock.setPaused(!clock.isPaused()));
   buildSim.querySelector(".build-restart").addEventListener("click", () => {
     restart = true;
-    setPaused(false);
+    clock.setPaused(false);
     buildSim.querySelector(".sim-restart")?.click();   // already at the end: the icon acts like the arrow
   });
   const step = (n, text) => {
@@ -604,20 +646,17 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   const run = async () => {
     controls.hidden = false;
     for (;;) {
-      try { await play(); await restartAtEnd(buildSim); setPaused(false); }
+      try { await play(); await restartAtEnd(buildSim); }
       catch (e) { if (e !== RESTART) throw e; restart = false; }
     }
   };
-  const start = new IntersectionObserver((entries) => {
-    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
-  }, { rootMargin: "0px 0px -20% 0px" });
-  start.observe(buildSim);
+  simStart(clock, run);
 }
 
 // AI forecast adjustments page, "How it started": the forecaster says the analyses are done, then types again, in the old
 // Google Sheet, the adjustments already written in sentences on the other screen: select the zone, current UTR loaded,
 // every changed cell typed, "Add Adjustments", a look at the Export sheet (lines appearing one by one) and back, next zone.
-// Starts once on screen and stops at the end on a faded restart arrow; the HTML holds the final state
+// Starts on its start button and stops at the end on a faded restart arrow; the HTML holds the final state
 // of Kyiv, kept as is with "reduce motion"
 const adjSim = document.querySelector(".adj-sim");
 if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -644,7 +683,8 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
     { name: "Tbilisi", utr: [[3.12, 2.84, 3.36, 2.67, 3.48, 2.95, 3.21], [2.76, 3.29, 2.91, 3.44, 3.07, 3.58, 2.82], [3.33, 2.71, 3.15, 3.62, 2.89, 3.26, 3.04], [2.98, 3.41, 2.63, 3.18, 3.52, 2.79, 3.37], [3.24, 2.87, 3.49, 2.94, 3.11, 3.65, 2.73], [2.69, 3.31, 3.02, 3.56, 2.83, 3.17, 3.43], [3.47, 2.92, 3.28, 2.75, 3.39, 3.08, 2.86], [2.81, 3.13, 3.54, 2.99, 3.23, 2.68, 3.35]] },
   ];
   const [firstTab, exportTab] = all(".adj-sim-tab");
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const clock = simClock(adjSim.querySelector(".adj-sim-stage"));
+  const wait = clock.wait;
   const openSheet = async (tab) => {
     tab.classList.add("is-pressed");
     await wait(250);
@@ -763,14 +803,11 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       await restartAtEnd(adjSim.querySelector(".adj-sim-stage"));
     }
   };
-  const start = new IntersectionObserver((entries) => {
-    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
-  }, { rootMargin: "0px 0px -20% 0px" });
-  start.observe(adjSim);
+  simStart(clock, run);
 }
 
 // AI forecast adjustments page, the example: the sentences are typed in the message box and sent, the AI thinks and replies
-// part by part, the export appears row by row, then the forecaster clicks its download icon. Starts once on screen, then waits on the restart arrow; the HTML holds the final state, kept as is with
+// part by part, the export appears row by row, then the forecaster clicks its download icon. Starts on its start button, then waits on the restart arrow; the HTML holds the final state, kept as is with
 // "reduce motion"
 const aiChat = document.querySelector(".ai-chat");
 if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -785,7 +822,8 @@ if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   const send = aiChat.querySelector(".ai-send");
   const placeholder = inputText.textContent;
   const sentences = sent.querySelector(".story-bubble").textContent;
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const clock = simClock(aiChat);
+  const wait = clock.wait;
   const run = async () => {
     for (;;) {
       [sent, reply, ...replyParts, file, table, ...rows].forEach((el) => el.classList.add("is-off"));
@@ -826,17 +864,15 @@ if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       await restartAtEnd(aiChat);
     }
   };
-  const start = new IntersectionObserver((entries) => {
-    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
-  }, { rootMargin: "0px 0px -20% 0px" });
-  start.observe(aiChat);
+  simStart(clock, run);
 }
 
 // Forecast accuracy page, "How it started": on Looker, the forecaster sets the filters (country, city, zone, last complete days
-// or weeks, how many, weekdays) and clicks Load, for one zone. Starts once on screen and stops on the restart arrow; the HTML holds the final state.
+// or weeks, how many, weekdays) and clicks Load, for one zone. Starts on its start button and stops on the restart arrow; the HTML holds the final state.
 const lookerSim = document.querySelector(".lk-sim");
 if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const clock = simClock(lookerSim);
+  const wait = clock.wait;
   const $ = (selector) => lookerSim.querySelector(selector);
   const panels = $(".lk-panels");
   const filter = (name) => $(`[data-filter="${name}"]`);
@@ -932,14 +968,11 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
       await restartAtEnd(lookerSim);
     }
   };
-  const start = new IntersectionObserver((entries) => {
-    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
-  }, { rootMargin: "0px 0px -20% 0px" });
-  start.observe(lookerSim);
+  simStart(clock, run);
 }
 
 // Forecast accuracy page, "The app at work", following the real app: Market Overview and the Insights of a country, Global Zones with
-// the deep dive, Zone Insights and FC Schedule of one zone; FC Alerts sorted by order volume, with zones disappearing. Plays once on screen with a mouse, then the restart arrow.
+// the deep dive, Zone Insights and FC Schedule of one zone; FC Alerts sorted by order volume, with zones disappearing. Plays with a mouse, then the restart arrow.
 // A click on the simulation pauses it, another click resumes it. The buttons really work: a click on a step, Insights, the zone,
 // Zone Insights, × or FC Schedule stops the play and does it.
 // The HTML holds the FC Schedule (step 2), kept with "reduce motion".
@@ -1005,19 +1038,9 @@ if (faSim) {
     status.textContent = texts[index];
   };
   let playing = 0;   // changes when a button is clicked: the play in progress stops
-  let isPlaying = false, isPaused = false;
-  const pausedBadge = document.createElement("span");
-  pausedBadge.className = "fa-paused";
-  pausedBadge.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M7 5l13 7-13 7z"/></svg>Paused: click to resume';
-  pausedBadge.hidden = true;
-  stage.append(pausedBadge);
-  const setPaused = (paused) => { isPaused = paused; pausedBadge.hidden = !paused; };
-  const setPlaying = (on) => { isPlaying = on; faSim.classList.toggle("is-playable", on); if (!on) setPaused(false); };
-  faSim.addEventListener("click", (event) => {
-    if (isPlaying && !event.target.closest("button")) setPaused(!isPaused);
-  });
+  const clock = simClock(faSim);
   const stopPlay = () => {
-    setPlaying(false);
+    clock.play(false);
     playing++;
     faSim.querySelector(".sim-restart")?.remove();
     faSim.classList.remove("is-ended");
@@ -1035,17 +1058,15 @@ if (faSim) {
   faSim.querySelector(".fa-link").addEventListener("click", () => { const wasHidden = details.hidden; stopPlay(); details.hidden = !wasHidden; });
 
   if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    setEmpty();
     const run = async () => {
       const me = ++playing;
-      setPlaying(true);
       // Waits for ms of play: the time doesn't run while the simulation is paused
       const pause = async (ms) => {
         let left = ms * 0.6;   // the speed of the whole simulation
         while (left > 0 && me === playing) {
           const step = Math.min(left, 50);
           await wait(step);
-          if (!isPaused) left -= step;
+          if (!clock.isPaused()) left -= step;
         }
         return me === playing;
       };
@@ -1189,24 +1210,19 @@ if (faSim) {
         status.textContent = texts[3];
         cursor.classList.remove("is-on");
         if (!await pause(3000)) return;
-        setPlaying(false);
         await restartAtEnd(faSim);
-        setPlaying(true);
       }
     };
-    const start = new IntersectionObserver((entries) => {
-      if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
-    }, { rootMargin: "0px 0px -20% 0px" });
-    start.observe(faSim);
+    simStart(clock, run);
   }
 }
 
 // Forecast accuracy page, "AI summaries": same view as the app above. In Global Zones the mouse opens a zone, then Zone Insights, and it stays
-// on the AI summary, explained day by day under the screen. A click pauses it. Starts once on screen, stops on the restart arrow.
+// on the AI summary, explained day by day under the screen. A click pauses it. Starts on its start button, stops on the restart arrow.
 // The HTML holds the final state, kept without JS or with "reduce motion".
 const aiSim = document.querySelector(".ais-sim");
 if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  
   const stage = aiSim.querySelector(".fa-views");
   const view = aiSim.querySelector(".fa-view");
   const details = aiSim.querySelector(".fa-details");
@@ -1218,6 +1234,9 @@ if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-m
   const days = [...aiSim.querySelectorAll(".ais-day")];
   const dayTexts = [
     "Monday: the AI sees Over FC up in the afternoon and links it to orders below Orders FC.",
+    "Tuesday: the same pattern as Monday: Over FC up in the afternoon, with orders below Orders FC.",
+    "Wednesday: no variation to explain: orders are in line with Orders FC.",
+    "Thursday: nearly stable, with the first signs of the weekend: orders start to grow in the evening.",
     "Friday: Under FC up in the evening, which the AI links to orders above Orders FC and more Missing Capacity.",
     "Saturday: Proper FC down in the evening, with orders rising and Delivery Time above target.",
     "Sunday: Under FC still high. Missing Capacity is stable, so the AI points to the orders.",
@@ -1226,24 +1245,8 @@ if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-m
   cursor.className = "fa-cursor";
   cursor.innerHTML = '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 1l13 9.5-6 1 3.5 6.5-2.5 1.3-3.5-6.5L3 17z" fill="#fff" stroke="#1d2230" stroke-width="1.4" stroke-linejoin="round"/></svg>';
   aiSim.append(cursor);
-  const paused = document.createElement("span");
-  paused.className = "fa-paused";
-  paused.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M7 5l13 7-13 7z"/></svg>Paused: click to resume';
-  paused.hidden = true;
-  stage.append(paused);
-  let isPlaying = false;
-  aiSim.addEventListener("click", (event) => {
-    if (isPlaying && !event.target.closest(".sim-restart")) paused.hidden = !paused.hidden;
-  });
-  // Waits for ms of play: the time doesn't run while the simulation is paused
-  const pause = async (ms) => {
-    let left = ms;
-    while (left > 0) {
-      const step = Math.min(left, 50);
-      await wait(step);
-      if (paused.hidden) left -= step;
-    }
-  };
+  const clock = simClock(aiSim, { ignore: ".sim-restart" });   // its buttons are only pictures: a click on them pauses too
+  const pause = clock.wait;
   const mouseTo = async (el) => {
     const box = aiSim.getBoundingClientRect();
     const r = el.getBoundingClientRect();
@@ -1264,10 +1267,7 @@ if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-m
     view.scrollTop = 0;
     status.textContent = "Global Zones: every zone with its main KPIs.";
   };
-  reset();
   const run = async () => {
-    isPlaying = true;
-    aiSim.classList.add("is-playable");
     for (;;) {
       reset();
       await pause(1200);
@@ -1288,23 +1288,16 @@ if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-m
         status.textContent = dayTexts[i];
         const box = modal.querySelector(".fa-modal-scroll");
         const below = day.getBoundingClientRect().bottom - box.getBoundingClientRect().bottom;
-        if (below > 0) box.scrollTop += below + 12;   // phones: the summary is taller than the screen
-        await pause(3200);
+        if (below > 0) box.scrollTop += below + 12;   // the summary is taller than the screen
+        await pause(2600);
       }
       days.forEach((d) => d.classList.remove("is-on"));
       status.textContent = finalStatus;
       await pause(2000);
-      isPlaying = false;
-      aiSim.classList.remove("is-playable");
       await restartAtEnd(aiSim);
-      isPlaying = true;
-      aiSim.classList.add("is-playable");
     }
   };
-  const start = new IntersectionObserver((entries) => {
-    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
-  }, { rootMargin: "0px 0px -20% 0px" });
-  start.observe(aiSim);
+  simStart(clock, run);
 }
 
 // Later: chatbot window (Phase 2).
