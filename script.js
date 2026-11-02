@@ -976,7 +976,7 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
 // A click on the simulation pauses it, another click resumes it. The buttons really work: a click on a step, Insights, the zone,
 // Zone Insights, × or FC Schedule stops the play and does it.
 // The HTML holds the FC Schedule (step 2), kept with "reduce motion".
-const faSim = document.querySelector(".fa-sim:not(.ais-sim)");
+const faSim = document.querySelector(".fa-sim:not(.ais-sim, .chat-sim)");
 if (faSim) {
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const steps = [...faSim.querySelectorAll(".fa-steps button")];
@@ -1295,6 +1295,94 @@ if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-m
       status.textContent = finalStatus;
       await pause(2000);
       await restartAtEnd(aiSim);
+    }
+  };
+  simStart(clock, run);
+}
+
+// Forecast accuracy page, "Chatbot": same view as the app above. On Market Overview the mouse opens the chatbot, then 2 questions are typed and sent,
+// and each answer arrives after the thinking dots. Starts on its start button; a click pauses it. The HTML holds the final state.
+const chatSim = document.querySelector(".chat-sim");
+if (chatSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const clock = simClock(chatSim, { ignore: ".sim-restart" });   // its buttons are only pictures: a click on them pauses too
+  const wait = clock.wait;
+  const panel = chatSim.querySelector(".chat-panel");
+  const button = chatSim.querySelector(".fa-chat");
+  const box = chatSim.querySelector(".chat-messages");
+  const messages = [...chatSim.querySelectorAll(".chat-msg")];
+  const texts = messages.map((m) => m.textContent);
+  const dots = chatSim.querySelector(".chat-dots");
+  const input = chatSim.querySelector(".chat-input");
+  const send = chatSim.querySelector(".chat-send");
+  const status = chatSim.querySelector(".fa-status");
+  const finalStatus = status.textContent;
+  const cursor = document.createElement("span");
+  cursor.className = "fa-cursor";
+  cursor.innerHTML = '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 1l13 9.5-6 1 3.5 6.5-2.5 1.3-3.5-6.5L3 17z" fill="#fff" stroke="#1d2230" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+  chatSim.append(cursor);
+  const mouseTo = async (el) => {
+    const frame = chatSim.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    cursor.classList.add("is-on");
+    cursor.style.transform = `translate(${r.left - frame.left + r.width / 2}px, ${r.top - frame.top + r.height / 2}px)`;
+    await wait(500);
+  };
+  const press = async (el) => {
+    el.classList.add("fa-is-pressed");
+    await wait(200);
+    el.classList.remove("fa-is-pressed");
+  };
+  const toBottom = () => { box.scrollTop = box.scrollHeight; };
+  const ask = async (i) => {
+    await mouseTo(input);
+    await wait(150);
+    cursor.classList.remove("is-on");
+    for (const ch of texts[i]) { input.textContent += ch; await wait(28); }
+    await wait(300);
+    await mouseTo(send);
+    await press(send);
+    cursor.classList.remove("is-on");
+    input.textContent = "";
+    messages[i].hidden = false;
+    toBottom();
+    await wait(300);
+    dots.hidden = false;
+    box.append(dots);
+    toBottom();
+    await wait(1100);
+    dots.hidden = true;
+    const answer = messages[i + 1];
+    answer.textContent = "";
+    answer.hidden = false;
+    for (const word of texts[i + 1].split(" ")) {
+      answer.textContent += (answer.textContent ? " " : "") + word;
+      toBottom();
+      await wait(45);
+    }
+  };
+  const run = async () => {
+    for (;;) {
+      panel.hidden = true;
+      messages.forEach((m) => { m.hidden = true; });
+      dots.hidden = true;
+      input.textContent = "";
+      cursor.classList.remove("is-on");
+      status.textContent = "A metric isn't clear? The chatbot is one click away, on every page of the app.";
+      await wait(1000);
+      await mouseTo(button);
+      await press(button);
+      panel.hidden = false;
+      status.textContent = "The chatbot opens: it knows the queries behind each metric.";
+      await wait(900);
+      await ask(0);
+      status.textContent = "It explains how the metric is computed…";
+      await wait(3000);
+      status.textContent = "…and a new question goes deeper.";
+      await ask(2);
+      await wait(1500);
+      status.textContent = finalStatus;
+      await wait(2500);
+      await restartAtEnd(chatSim);
     }
   };
   simStart(clock, run);

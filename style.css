@@ -1465,7 +1465,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-num { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 1rem; font-weight: 700; }
 .project-page .fa-subtitle { margin: 0 0 12px 46px; color: var(--text-muted); font-weight: 500; }   /* aligned with the title, after the 34px circle and its 12px gap */
 .project-page .fa-after-sim { margin-top: 16px; }
-.story.fa-after-text { margin-top: 14px; }
+.chat-sim { margin-top: 14px; }
 @media (min-width: 721px) {
   .fa-flow-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
   .fa-flow-4 li { padding: 12px; }
@@ -1498,6 +1498,27 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-sim { position: relative; }
 .sim-paused { position: absolute; z-index: 5; top: 50%; left: 50%; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #1d2230; color: #fff; font-size: 0.8rem; font-weight: 600; white-space: nowrap; transform: translate(-50%, -50%); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); pointer-events: none; }
 .sim-paused[hidden] { display: none; }
+/* Chatbot simulation: the panel opens above the "?" button, same look as the real app */
+.chat-panel { position: absolute; z-index: 3; right: 14px; bottom: 66px; display: flex; flex-direction: column; width: min(350px, calc(100% - 28px)); height: min(400px, calc(100% - 80px)); overflow: hidden; border: 1px solid #e1e4ea; border-radius: 12px; background: #fff; box-shadow: 0 20px 45px rgba(15, 23, 42, 0.24); }
+.chat-panel[hidden] { display: none; }
+.chat-head { padding: 10px 14px; background: #0f172a; color: #fff; }
+.chat-head strong { display: block; font-size: 0.8rem; }
+.chat-head span { display: block; margin-top: 2px; color: #cbd5e1; font-size: 0.64rem; line-height: 1.4; }
+.chat-messages { display: flex; flex: 1; flex-direction: column; gap: 8px; min-height: 0; padding: 12px; overflow-y: auto; background: #f9fafb; }
+.project-page .chat-msg { max-width: 88%; padding: 7px 10px; border-radius: 9px; font-size: 0.74rem; line-height: 1.5; }
+.chat-msg[hidden] { display: none; }
+.project-page .chat-user { align-self: flex-end; background: #fef3c7; color: #0f172a; }
+.project-page .chat-bot { align-self: flex-start; border: 1px solid #e1e4ea; background: #fff; color: #1f2937; }
+.project-page .chat-dots { display: flex; align-self: flex-start; gap: 4px; padding: 9px 11px; border: 1px solid #e1e4ea; border-radius: 9px; background: #fff; }
+.chat-dots[hidden] { display: none !important; }
+.chat-dots i { width: 6px; height: 6px; border-radius: 50%; background: #9aa3b2; animation: chat-dot 1s infinite ease-in-out; }
+.chat-dots i:nth-child(2) { animation-delay: 0.15s; }
+.chat-dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes chat-dot { 50% { transform: translateY(-3px); opacity: 0.5; } }
+.chat-form { display: flex; align-items: flex-end; gap: 8px; padding: 9px; border-top: 1px solid #e1e4ea; }
+.chat-input { flex: 1; min-width: 0; min-height: 2.9em; padding: 6px 8px; border: 1px solid #e1e4ea; border-radius: 6px; color: #0f172a; font-size: 0.72rem; line-height: 1.4; }
+.chat-input:empty::before { content: "e.g. How is Proper FC aggregated?"; color: #9aa3b2; }
+.chat-send { padding: 6px 11px; border-radius: 6px; background: #fed42a; color: #111827; font-size: 0.7rem; font-weight: 700; }
 .sim-stage.is-paused * { animation-play-state: paused !important; }
 .sim-stage.is-playable { cursor: pointer; }
 .sim-stage.is-waiting > :not(.sim-restart) { pointer-events: none; }   /* nothing to click before the start button */
