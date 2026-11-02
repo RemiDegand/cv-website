@@ -1090,8 +1090,7 @@ if (faSim) {
         const m = modal(name);
         const box = m.querySelector(".fa-modal-scroll");
         for (const part of m.querySelectorAll("[data-part]")) {
-          status.textContent = part.dataset.text;
-          if (!await scrollTo(box, part) || !await pause(2600)) return false;
+          if (!await scrollTo(box, part) || !await pause(3200)) return false;
         }
         const close = m.querySelector(".fa-close");
         if (!await mouseTo(close) || !await press(close)) return false;
@@ -1121,7 +1120,7 @@ if (faSim) {
         // Almost at once: the market performance and both breakdowns
         if (!await showAll(overview, ".fa-a", 15) || !await pause(3000)) return;
         const insights = overview.querySelector("[data-open]");
-        status.textContent = "A click on Insights opens the country: KPIs on top, then 4 reports below.";
+        status.textContent = "A click on Insights opens the country: KPIs on top, then 3 reports below.";
         if (!await mouseTo(insights) || !await press(insights)) return;
         openModal("market");
         if (!await pause(1500)) return;

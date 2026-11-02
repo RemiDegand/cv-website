@@ -1508,18 +1508,14 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .project-page .fa-modal-title { position: sticky; z-index: 1; top: 0; display: flex; align-items: center; justify-content: space-between; margin: 0 -14px 8px; padding: 10px 14px; border-bottom: 1px solid #e1e4ea; background: #fff; font-size: 0.95rem; font-weight: 700; }
 .fa-close { width: 24px; height: 24px; padding: 0; border: 1px solid #c9ced8; border-radius: 6px; background: #fff; color: #4b5563; font-size: 1rem; line-height: 1; cursor: pointer; }
 .fa-report { margin-top: 12px; padding: 10px 12px; border: 1px solid #e1e4ea; border-radius: 8px; }
-.fa-report h4 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 10px; margin: 0 0 8px; font-size: 0.78rem; font-weight: 700; }
+.fa-report h4 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 10px; margin: 0 0 2px; font-size: 0.78rem; font-weight: 700; }
+.project-page .fa-note-text { margin-bottom: 8px; color: #4b5563; font-size: 0.74rem; line-height: 1.35; }
 .fa-bars { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 4px; margin-bottom: 8px; }
 .fa-bars .lk-bar { height: 84px; }
 .fa-bars.is-w2 .lk-bar, .lk-bar.is-w2 { opacity: 0.45; }
 .fa-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
 .fa-days { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 2px; color: #6b7280; font-size: 0.66rem; font-weight: 600; }
 .fa-days i { padding: 1px 4px; border-radius: 3px; background: #1f2937; color: #fff; font-style: normal; }
-.fa-dists { display: flex; gap: 6px; }
-.fa-dist { flex: 1 1 0; min-width: 0; }
-.project-page .fa-dist p { margin-bottom: 4px; font-size: 0.7rem; font-weight: 700; text-align: center; }
-.fa-dist-box { display: flex; flex-wrap: wrap; gap: 2px; height: 110px; }
-.fa-dist-box span { flex-basis: 26px; display: grid; place-items: center; border-radius: 3px; background: var(--k); color: #fff; font-size: 0.62rem; font-weight: 600; }
 /* Tables of the app */
 .fa-tw { overflow-x: auto; }
 .project-page .fa-sub { margin: 10px 0 2px; font-size: 0.78rem; font-weight: 700; }
