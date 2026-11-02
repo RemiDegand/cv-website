@@ -149,8 +149,8 @@
               <span class="block-num" aria-hidden="true">2</span>
               <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: one app to understand forecast accuracy</h2></div>
             </header>
-            <div class="block-part reveal">
-              <h3>The app at work</h3>
+            <div class="block-part reveal fa-first">
+              <h3><span class="block-label">Reporting</span>The web app and its dashboards</h3>
               <p>Every dashboard, metric and summary answers one question: why did Proper, Under or Over FC move? Other metrics are there for their link to it.</p>
               <!-- Simulation (script.js): 4 views, playing once on screen; a click on a step shows that view and stops the play.
                    Grid made with made-up data by a scratch script; on the 2 notes --y = top of the frame in px. The HTML holds step 3 -->
@@ -254,35 +254,36 @@
                 </div>
                 <figcaption class="fa-status">Zone 12 in a schedule grid: one circle per slot. Patterns by day and hour appear at a glance.</figcaption>
               </figure>
-              <p class="chip-row reveal-stagger"><span class="chip-label">Also in the app</span><span class="chip">DT Alerts</span><span class="chip">Slot Filling</span><span class="chip">Rider Demand</span><span class="chip">Comments per zone</span><span class="chip">Last week or last 7 days</span></p>
+              <ul class="project-did fa-after-sim reveal-stagger">
+                <li><strong>Global Zones:</strong> all the zones in one table, filtered by area, country, city or zone.</li>
+                <li><strong>DT Alerts:</strong> the zones too far from their Delivery Time target, with thresholds that can be changed.</li>
+                <li><strong>Zone Deep Dive:</strong> accuracy by day and by time slot, Slot Filling, Rider Demand, and a comment box saved automatically.</li>
+                <li><strong>Two periods:</strong> last complete week or last 7 days, on every view.</li>
+                <li><strong>Two versions:</strong> first the PLECA market, a Google Apps Script web app reading a Google Sheet filled by BigQuery queries; then all markets, hosted on Google Cloud Run with the code in Python.</li>
+              </ul>
             </div>
 
             <div class="block-part reveal">
-              <h3><span class="block-label">AI</span>How the summaries are made</h3>
-              <ol class="project-flow reveal-stagger" aria-label="How the AI summaries are made">
-                <li><strong>A dedicated query</strong><span>Collects the required KPIs</span></li>
-                <li><strong>A file for the AI</strong><span>Links between the KPIs, examples of analysis, rules</span></li>
-                <li><strong>One goal</strong><span>Explain the variation of Proper, Under and Over FC</span></li>
+              <h3><span class="block-label">AI summaries</span>Explaining why forecast accuracy moved</h3>
+              <p>A written summary for each zone, with one goal: explain the variation of Proper, Under and Over FC.</p>
+              <ol class="project-flow fa-flow-4 reveal-stagger" aria-label="How the AI summaries are made">
+                <li><strong>A BigQuery query</strong><span>All the data needed to explain the variation</span></li>
+                <li><strong>An AI agent</strong><span>Given access to this query</span></li>
+                <li><strong>Context and examples</strong><span>How to read the data, with examples of analysis</span></li>
+                <li><strong>A Python script</strong><span>Sets when it runs, runs everything, keeps a token limit</span></li>
               </ol>
-              <p class="flow-note">Automated with Python: every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.</p>
+              <p class="flow-note">It runs every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.</p>
             </div>
 
             <div class="block-part reveal">
-              <h3><span class="block-label">AI</span>A chatbot for the definitions, and only for them</h3>
-              <div class="story reveal-stagger" aria-label="Example of a conversation with the metric help chatbot">
-                <p class="story-line story-right"><span class="story-who">Forecaster</span><span class="story-bubble">How is Proper FC aggregated?</span></p>
+              <h3><span class="block-label">Chatbot</span>How the data are computed and how to read them</h3>
+              <p>The metrics were complex, and some were new, so a chatbot explains them. To save tokens, I gave it the queries and only the complementary information it needed.</p>
+              <div class="story fa-after-text reveal-stagger" aria-label="Example of a conversation with the chatbot">
+                <p class="story-line story-right"><span class="story-who">Forecaster</span><span class="story-bubble">How is Proper FC computed?</span></p>
                 <p class="story-line story-left"><span class="story-who">Metric help</span><span class="story-bubble">Proper slots divided by eligible slots, both summed over the period.</span></p>
                 <p class="story-line story-right"><span class="story-who">Forecaster</span><span class="story-bubble">Why did Zone 12 drop?</span></p>
                 <p class="story-line story-left"><span class="story-who">Metric help</span><span class="story-bubble">I only explain metric definitions, calculations and data sources.</span></p>
               </div>
-            </div>
-
-            <div class="block-part reveal">
-              <h3>Two versions</h3>
-              <ul class="project-did reveal-stagger">
-                <li><strong>PLECA market:</strong> a Google Apps Script web app reading a Google Sheet filled by BigQuery queries.</li>
-                <li><strong>All markets:</strong> hosted on Google Cloud Run, with the code in Python.</li>
-              </ul>
             </div>
           </div>
 
@@ -303,7 +304,7 @@
             <div class="block-part reveal">
               <h3>Tools</h3>
               <ul class="tags reveal-stagger">
-                <li>Google Apps Script</li><li>HTML / CSS</li><li>JavaScript</li><li>Chart.js</li><li>Google Sheets</li><li>BigQuery (SQL)</li><li>Vertex AI (Gemini)</li><li>Python</li><li>Google Cloud Run</li>
+                <li>Google Apps Script</li><li>HTML / CSS</li><li>JavaScript</li><li>Chart.js</li><li>Google Sheets</li><li>BigQuery (SQL)</li><li>Vertex AI (Gemini)</li><li>AI agents (OpenCode)</li><li>Python</li><li>Google Cloud Run</li>
               </ul>
             </div>
           </div>
