@@ -939,7 +939,7 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
 }
 
 // Forecast accuracy page, "The app at work", following the real app: Market Overview and the Insights of a country, Global Zones with
-// the deep dive, Zone Insights and FC Schedule of one zone; FC Alerts sorted by eligible slots, with zones disappearing. Plays once on screen with a mouse, then the restart arrow.
+// the deep dive, Zone Insights and FC Schedule of one zone; FC Alerts sorted by order volume, with zones disappearing. Plays once on screen with a mouse, then the restart arrow.
 // A click on the simulation pauses it, another click resumes it. The buttons really work: a click on a step, Insights, the zone,
 // Zone Insights, × or FC Schedule stops the play and does it.
 // The HTML holds the FC Schedule (step 2), kept with "reduce motion".
@@ -956,11 +956,11 @@ if (faSim) {
     "Market performance on top, then the breakdown by country and by area, with no selection.",
     "All the zones with their main KPIs, with no selection.",
     status.textContent,
-    "Alerts keep only the zones below the threshold, sorted by eligible slots.",
+    "Alerts keep only the zones below the threshold, biggest zones first.",
   ];
   const stepOfView = [0, 1, 1, 2];   // the FC Schedule opens from Global Zones, so it belongs to step 2
   const viewOfStep = [0, 1, 3];
-  // FC Alerts in its final state: sorted by eligible slots, only the zones at or below 70 % of Proper FC
+  // FC Alerts in its final state: sorted by order volume, only the zones at or below 70 % of Proper FC
   const alertRows = [...faSim.querySelectorAll(".fa-arow")];
   const alertBody = faSim.querySelector(".fa-alert-rows");
   const sortHead = faSim.querySelector(".fa-sort");
@@ -974,7 +974,7 @@ if (faSim) {
     alertCount.textContent = `Viewing ${Math.round(40 - (100 - t) * 0.6)} zones`;
   };
   const setSorted = (sorted) => {
-    const order = [...alertRows].sort((a, b) => (sorted ? b.dataset.elig - a.dataset.elig : a.dataset.n - b.dataset.n));
+    const order = [...alertRows].sort((a, b) => (sorted ? b.dataset.orders - a.dataset.orders : a.dataset.n - b.dataset.n));
     alertBody.append(...order);
     sortHead.classList.toggle("is-sorted", sorted);
     sortHead.querySelector("span").textContent = sorted ? "▼" : "↕";
@@ -1080,7 +1080,8 @@ if (faSim) {
         const m = modal(name);
         const box = m.querySelector(".fa-modal-scroll");
         for (const part of m.querySelectorAll("[data-part]")) {
-          if (!await scrollTo(box, part) || !await pause(1500)) return false;
+          status.textContent = part.dataset.text;
+          if (!await scrollTo(box, part) || !await pause(2600)) return false;
         }
         const close = m.querySelector(".fa-close");
         if (!await mouseTo(close) || !await press(close)) return false;
@@ -1098,9 +1099,19 @@ if (faSim) {
 
         // 1. Market Overview, then the Insights of a country
         show(0);
-        if (!await pause(500) || !await showAll(overview, ".fa-a", 180) || !await pause(1800)) return;
+        if (!await pause(500)) return;
+        // Part by part, each with its explanation under the screen
+        for (const el of overview.querySelectorAll(".fa-a")) {
+          if (el.dataset.text) {
+            if (el !== overview.querySelector(".fa-a") && !await pause(2200)) return;
+            status.textContent = el.dataset.text;
+          }
+          el.classList.add("is-in");
+          if (!await pause(160)) return;
+        }
+        if (!await pause(2200)) return;
         const insights = overview.querySelector("[data-open]");
-        status.textContent = "A click on Insights opens the country: KPIs on top, then 4 reports.";
+        status.textContent = "A click on Insights opens the country: KPIs on top, then 4 reports below.";
         if (!await mouseTo(insights) || !await press(insights)) return;
         openModal("market");
         if (!await pause(1500)) return;
@@ -1111,12 +1122,13 @@ if (faSim) {
         status.textContent = "Next section: Global Zones.";
         if (!await mouseTo(steps[1]) || !await press(steps[1])) return;
         show(1);
-        if (!await showAll(global, ".fa-a", 150) || !await pause(1500)) return;
+        status.textContent = "Global Zones: every zone with its main KPIs: Delivery Time, Utilization Rate, forecast accuracy and capacity.";
+        if (!await showAll(global, ".fa-a", 150) || !await pause(2500)) return;
         const zone = global.querySelector(".fa-link");
-        status.textContent = "A click on a zone: secondary KPIs, buttons and comments.";
+        status.textContent = "A click on a zone opens its deep dive: secondary KPIs, buttons to go further, and comments for the action plan.";
         if (!await mouseTo(zone) || !await press(zone)) return;
         details.hidden = false;
-        if (!await pause(2500)) return;
+        if (!await pause(3500)) return;
         const zoneInsights = global.querySelector('[data-open="zone"]');
         status.textContent = "Zone Insights: KPIs on top, the AI summary, then 3 reports.";
         if (!await mouseTo(zoneInsights) || !await press(zoneInsights)) return;
@@ -1138,7 +1150,7 @@ if (faSim) {
         }
         if (!await pause(800) || !await showAll(schedule, ".fa-late", 500) || !await pause(3500)) return;
 
-        // 3. FC Alerts: the mouse clicks its tab; the list, sorted by eligible slots, then Proper FC at 70 %: the zones above it disappear
+        // 3. FC Alerts: the mouse clicks its tab; the list, sorted by order volume, then Proper FC at 70 %: the zones above it disappear
         status.textContent = "Next section: FC Alerts.";
         if (!await mouseTo(steps[2]) || !await press(steps[2])) return;
         setSorted(false);
@@ -1146,7 +1158,7 @@ if (faSim) {
         show(3);
         status.textContent = "FC Alerts: filters on top, then the zones with their main KPIs.";
         if (!await showAll(alerts, ".fa-a", 200) || !await pause(1500)) return;
-        status.textContent = "Sort by eligible slots, biggest zones first…";
+        status.textContent = "Sort by order volume, biggest zones first…";
         if (!await mouseTo(sortHead) || !await press(sortHead)) return;
         setSorted(true);
         if (!await pause(1600)) return;
