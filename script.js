@@ -833,8 +833,7 @@ if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
 }
 
 // Forecast accuracy page, "How it started": on Looker, the forecaster sets the filters (country, city, zone, last complete days
-// or weeks, how many, weekdays) and clicks Load; then the next zone, select and load again; then a whole country, whose average
-// hides the zones that deviate. Starts once on screen and stops on the restart arrow; the HTML holds the final state.
+// or weeks, how many, weekdays) and clicks Load, for one zone. Starts once on screen and stops on the restart arrow; the HTML holds the final state.
 const lookerSim = document.querySelector(".lk-sim");
 if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -862,14 +861,9 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
   };
   const utrTarget = [2.5, 2.5, 2.5, 2.5, 2.6, 2.7, 2.7];
   const dtTarget = [30, 30, 30, 30, 32, 32, 32];
-  // Made-up figures. Bars: [over, under, proper] %. Too few slots = Utilization Rate and Delivery Time above target; too many = below.
+  // Made-up figures for Zone 1. Bars: [over, under, proper] %. Too few slots = Utilization Rate and Delivery Time above target.
   // Slots: [assigned, unassigned] per day (total slots opened - assigned = unassigned)
-  const views = {
-    "Zone 1": { bars: [[18, 12, 70], [20, 14, 66], [16, 12, 72], [18, 16, 66], [14, 24, 62], [12, 38, 50], [14, 34, 52]], utr: [2.4, 2.4, 2.5, 2.5, 2.8, 3.2, 3.1], dt: [29, 30, 29, 31, 34, 41, 39], slots: [[400, 20], [400, 22], [410, 20], [415, 25], [450, 25], [470, 20], [465, 20]] },
-    "Zone 2": { bars: [[34, 10, 56], [30, 12, 58], [18, 14, 68], [20, 12, 68], [18, 16, 66], [22, 14, 64], [24, 12, 64]], utr: [1.9, 2.0, 2.5, 2.4, 2.6, 2.6, 2.5], dt: [24, 25, 29, 28, 31, 31, 30], slots: [[430, 110], [425, 95], [400, 25], [395, 25], [420, 30], [440, 30], [430, 25]] },
-    "Zone 3": { bars: [[20, 18, 62], [18, 22, 60], [22, 20, 58], [20, 16, 64], [16, 26, 58], [18, 24, 58], [20, 20, 60]], utr: [2.5, 2.6, 2.4, 2.5, 2.8, 2.8, 2.7], dt: [30, 32, 30, 29, 35, 34, 33], slots: [[405, 35], [395, 40], [410, 30], [400, 30], [430, 35], [450, 40], [440, 35]] },
-    country: { bars: [[20, 19, 61], [21, 19, 60], [19, 19, 62], [20, 20, 60], [19, 21, 60], [19, 22, 59], [20, 21, 59]], utr: [2.5, 2.4, 2.5, 2.5, 2.6, 2.8, 2.7], dt: [30, 29, 30, 31, 32, 33, 33], slots: [[5000, 300], [4900, 300], [5000, 280], [5100, 320], [5600, 350], [6100, 420], [5900, 380]] },
-  };
+  const zone1 = { bars: [[18,12,70],[20,14,66],[16,12,72],[18,16,66],[14,24,62],[12,38,50],[14,34,52]], utr: [2.4,2.4,2.5,2.5,2.8,3.2,3.1], dt: [29,30,29,31,34,41,39], slots: [[400,20],[400,22],[410,20],[415,25],[450,25],[470,20],[465,20]] };
   const draw = (view) => {
     bars.forEach((bar, d) => [...bar.children].forEach((part, p) => { part.style.height = `${view.bars[d][p]}%`; }));
     $('[data-chart="utr"]').innerHTML = lineChart(view.utr, utrTarget, 1.5, 3.5);
@@ -932,20 +926,7 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
       for (const check of checks) { await wait(170); check.classList.add("is-on"); }
       await wait(350);
       status.textContent = "Load, and wait.";
-      await clickLoad(views["Zone 1"]);
-      status.textContent = "Zone 1 checked. Next zone…";
-      await wait(2000);
-      for (const zone of ["Zone 2", "Zone 3"]) {
-        await choose("zone", zones, zone);
-        status.textContent = "Load, and wait again.";
-        await clickLoad(views[zone]);
-        status.textContent = `${zone} checked. Next zone…`;
-        await wait(2000);
-      }
-      status.textContent = "Faster with a whole country?";
-      await choose("zone", zones, "All");
-      await choose("city", ["City 1", "City 2", "All"], "All");
-      await clickLoad(views.country);
+      await clickLoad(zone1);
       status.textContent = finalStatus;
       await wait(2500);
       await restartAtEnd(lookerSim);
