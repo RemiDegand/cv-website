@@ -832,58 +832,113 @@ if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   start.observe(aiChat);
 }
 
-// Forecast accuracy page, "How it started": on Looker, zones are selected one by one, each one loading, then a whole country
-// whose average hides the zones that deviate. Starts once on screen and stops on the restart arrow; the HTML holds the final state.
+// Forecast accuracy page, "How it started": on Looker, the forecaster sets the filters (country, city, zone, last complete days
+// or weeks, how many, weekdays) and clicks Load; then the next zone, select and load again; then a whole country, whose average
+// hides the zones that deviate. Starts once on screen and stops on the restart arrow; the HTML holds the final state.
 const lookerSim = document.querySelector(".lk-sim");
 if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  const body = lookerSim.querySelector(".lk-body");
-  const chart = lookerSim.querySelector(".lk-chart");
-  const select = lookerSim.querySelector(".lk-select");
-  const menu = lookerSim.querySelector(".lk-menu");
-  const count = lookerSim.querySelector(".lk-count");
-  const status = lookerSim.querySelector(".lk-status");
+  const $ = (selector) => lookerSim.querySelector(selector);
+  const panels = $(".lk-panels");
+  const filter = (name) => $(`[data-filter="${name}"]`);
+  const bars = [...lookerSim.querySelectorAll(".lk-bar")];
+  const checks = [...lookerSim.querySelectorAll(".lk-check")];
+  const [segDays] = $(".lk-seg").children;
+  const number = $(".lk-number");
+  const load = $(".lk-load");
+  const count = $(".lk-count");
+  const status = $(".lk-status");
   const finalStatus = status.textContent;
-  const bars = [...chart.querySelectorAll(".lk-bar")];
-  const read = (bar) => [...bar.children].map((i) => i.style.height);
-  const country = bars.map(read);   // the HTML holds the country view
-  // Made-up zones: [over, under, proper] % for Monday to Sunday
-  const zones = {
-    "Zone 1": [[18, 12, 70], [20, 14, 66], [16, 12, 72], [18, 16, 66], [14, 24, 62], [12, 38, 50], [14, 34, 52]],
-    "Zone 2": [[34, 10, 56], [30, 12, 58], [18, 14, 68], [20, 12, 68], [18, 16, 66], [22, 14, 64], [24, 12, 64]],
-    "Zone 3": [[20, 18, 62], [18, 22, 60], [22, 20, 58], [20, 16, 64], [16, 26, 58], [18, 24, 58], [20, 20, 60]],
+  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  // Same drawing as the charts held in the HTML: one point per day for the actual and for the target, linked by a line
+  const lineChart = (actual, target, min, max) => {
+    const x = (i) => 32 + i * 42;
+    const y = (v) => 104 - ((v - min) / (max - min)) * 92;
+    const line = (values) => values.map((v, i) => `${x(i)},${y(v).toFixed(1)}`).join(" ");
+    const dots = (values, cls) => values.map((v, i) => `<circle class="${cls}" cx="${x(i)}" cy="${y(v).toFixed(1)}" r="3.2"/>`).join("");
+    return `<line class="lk-axis" x1="24" x2="296" y1="12" y2="12"/><line class="lk-axis" x1="24" x2="296" y1="104" y2="104"/><text x="0" y="16">${max}</text><text x="0" y="108">${min}</text>`
+      + days.map((d, i) => `<text x="${x(i)}" y="124" text-anchor="middle">${d}</text>`).join("")
+      + `<polyline class="lk-target" points="${line(target)}"/>${dots(target, "lk-dot-target")}<polyline class="lk-actual" points="${line(actual)}"/>${dots(actual, "lk-dot-actual")}`;
   };
-  const draw = (days) => bars.forEach((bar, d) => [...bar.children].forEach((part, p) => { part.style.height = typeof days[d][p] === "number" ? `${days[d][p]}%` : days[d][p]; }));
-  const pick = async (name) => {
-    menu.hidden = false;
-    const item = [...menu.children].find((li) => li.textContent === name);
-    item.classList.add("is-on");
-    await wait(800);
-    item.classList.remove("is-on");
-    menu.hidden = true;
-    select.textContent = name;
-    chart.classList.add("is-loading");
-    body.classList.add("is-loading");
-    await wait(1100);
-    chart.classList.remove("is-loading");
-    body.classList.remove("is-loading");
+  const utrTarget = [2.5, 2.5, 2.5, 2.5, 2.6, 2.7, 2.7];
+  const dtTarget = [30, 30, 30, 30, 32, 32, 32];
+  // Made-up figures. Bars: [over, under, proper] %. Too few slots = Utilization Rate and Delivery Time above target; too many = below
+  const views = {
+    "Zone 1": { bars: [[18, 12, 70], [20, 14, 66], [16, 12, 72], [18, 16, 66], [14, 24, 62], [12, 38, 50], [14, 34, 52]], utr: [2.4, 2.4, 2.5, 2.5, 2.8, 3.2, 3.1], dt: [29, 30, 29, 31, 34, 41, 39] },
+    "Zone 2": { bars: [[34, 10, 56], [30, 12, 58], [18, 14, 68], [20, 12, 68], [18, 16, 66], [22, 14, 64], [24, 12, 64]], utr: [1.9, 2.0, 2.5, 2.4, 2.6, 2.6, 2.5], dt: [24, 25, 29, 28, 31, 31, 30] },
+    "Zone 3": { bars: [[20, 18, 62], [18, 22, 60], [22, 20, 58], [20, 16, 64], [16, 26, 58], [18, 24, 58], [20, 20, 60]], utr: [2.5, 2.6, 2.4, 2.5, 2.8, 2.8, 2.7], dt: [30, 32, 30, 29, 35, 34, 33] },
+    country: { bars: [[20, 19, 61], [21, 19, 60], [19, 19, 62], [20, 20, 60], [19, 21, 60], [19, 22, 59], [20, 21, 59]], utr: [2.5, 2.4, 2.5, 2.5, 2.6, 2.8, 2.7], dt: [30, 29, 30, 31, 32, 33, 33] },
   };
+  const draw = (view) => {
+    bars.forEach((bar, d) => [...bar.children].forEach((part, p) => { part.style.height = `${view.bars[d][p]}%`; }));
+    $('[data-chart="utr"]').innerHTML = lineChart(view.utr, utrTarget, 1.5, 3.5);
+    $('[data-chart="dt"]').innerHTML = lineChart(view.dt, dtTarget, 20, 45);
+  };
+  // A drop-down opens under its filter, the choice lights up, then it is selected
+  const choose = async (name, options, value) => {
+    const select = filter(name);
+    const menu = document.createElement("ul");
+    menu.className = "lk-menu";
+    menu.innerHTML = options.map((o) => `<li${o === value ? ' class="is-on"' : ""}>${o}</li>`).join("");
+    select.parentElement.append(menu);
+    await wait(750);
+    menu.remove();
+    select.textContent = value;
+    await wait(250);
+  };
+  const clickLoad = async (view) => {
+    load.classList.add("is-pressed");
+    await wait(250);
+    load.classList.remove("is-pressed");
+    panels.classList.remove("is-empty");
+    panels.classList.add("is-loading");
+    await wait(1200);
+    draw(view);
+    panels.classList.remove("is-loading");
+  };
+  const zones = ["Zone 1", "Zone 2", "Zone 3", "All"];
   const run = async () => {
     for (;;) {
-      count.textContent = "Zones checked: 0 of 40";
-      status.textContent = "Selecting the most important zone first…";
-      let checked = 0;
-      for (const [name, days] of Object.entries(zones)) {
-        await pick(name);
-        draw(days);
-        count.textContent = `Zones checked: ${++checked} of 40`;
-        status.textContent = `${name} checked. Next zone…`;
-        await wait(1500);
+      ["country", "city", "zone"].forEach((name) => { filter(name).textContent = ""; });
+      segDays.classList.remove("is-on");
+      number.textContent = "";
+      checks.forEach((check) => check.classList.remove("is-on"));
+      panels.classList.add("is-empty");
+      count.textContent = "0 of 40";
+      await wait(700);
+      status.textContent = "Select a country, a city and a zone…";
+      await choose("country", ["Country A", "Country B"], "Country A");
+      await choose("city", ["City 1", "City 2", "All"], "City 1");
+      await choose("zone", zones, "Zone 1");
+      status.textContent = "Last complete days or weeks, and how many…";
+      await wait(500);
+      segDays.classList.add("is-on");
+      await wait(500);
+      number.classList.add("is-typing");
+      await wait(350);
+      number.textContent = "7";
+      await wait(350);
+      number.classList.remove("is-typing");
+      status.textContent = "Tick the weekdays…";
+      for (const check of checks) { await wait(170); check.classList.add("is-on"); }
+      await wait(350);
+      status.textContent = "Load, and wait.";
+      await clickLoad(views["Zone 1"]);
+      count.textContent = "1 of 40";
+      status.textContent = "Zone 1 checked. Next zone…";
+      await wait(2000);
+      for (const [i, zone] of ["Zone 2", "Zone 3"].entries()) {
+        await choose("zone", zones, zone);
+        status.textContent = "Load, and wait again.";
+        await clickLoad(views[zone]);
+        count.textContent = `${i + 2} of 40`;
+        status.textContent = `${zone} checked. Next zone…`;
+        await wait(2000);
       }
       status.textContent = "Faster with a whole country?";
-      await wait(1200);
-      await pick("Country A");
-      draw(country);
+      await choose("zone", zones, "All");
+      await choose("city", ["City 1", "City 2", "All"], "All");
+      await clickLoad(views.country);
       status.textContent = finalStatus;
       await wait(2500);
       await restartAtEnd(lookerSim);

@@ -66,31 +66,46 @@
             <div class="block-part reveal">
               <h3>How it started</h3>
               <!-- Simulation (script.js): zones selected one by one in Looker, then a whole country. The HTML holds the final state -->
-              <figure class="project-shot annotated lk-sim" role="group" aria-label="Simulation: on Looker, a forecaster selects zones one by one, waiting for each to load. At country level, the average hides the zones that deviate.">
+              <figure class="project-shot annotated lk-sim" role="group" aria-label="Simulation: on Looker, a forecaster sets the filters (country, city, zone, last complete days or weeks, how many, weekdays) and clicks Load for one zone, then again for the next zone. At country level, the average hides the zones that deviate.">
                 <div class="monitor-screen">
                   <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Looker · simulation</span></div>
                   <div class="lk-body">
-                    <div class="lk-top">
-                      <div class="lk-filter">
-                        <span class="lk-label">Zone</span>
-                        <span class="lk-select">Country A</span>
-                        <ul class="lk-menu" hidden>
-                          <li>Zone 1</li><li>Zone 2</li><li>Zone 3</li><li>Country A</li>
-                        </ul>
+                    <!-- Filter bar: country, city, zone, last complete days or weeks, how many, weekdays, Load -->
+                    <div class="lk-filters">
+                      <div class="lk-field"><span class="lk-label">Country</span><span class="lk-select" data-filter="country">Country A</span></div>
+                      <div class="lk-field"><span class="lk-label">City</span><span class="lk-select" data-filter="city">All</span></div>
+                      <div class="lk-field"><span class="lk-label">Zone</span><span class="lk-select" data-filter="zone">All</span></div>
+                      <div class="lk-field"><span class="lk-label">Last complete</span><span class="lk-seg"><span class="is-on">Days</span><span>Weeks</span></span></div>
+                      <div class="lk-field"><span class="lk-label">How many</span><span class="lk-number">7</span></div>
+                      <div class="lk-field lk-field-days"><span class="lk-label">Weekdays</span><span class="lk-checks"><span class="lk-check is-on">Mon</span><span class="lk-check is-on">Tue</span><span class="lk-check is-on">Wed</span><span class="lk-check is-on">Thu</span><span class="lk-check is-on">Fri</span><span class="lk-check is-on">Sat</span><span class="lk-check is-on">Sun</span></span></div>
+                      <span class="lk-load">Load</span>
+                    </div>
+                    <div class="lk-panels">
+                      <div class="lk-panel">
+                        <p class="lk-chart-title">Forecast accuracy</p>
+                        <div class="lk-chart">
+                          <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:20%"></i><i class="k-uf" style="height:19%"></i><i class="k-pf" style="height:61%"></i></span><b>Mon</b></div>
+                          <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:21%"></i><i class="k-uf" style="height:19%"></i><i class="k-pf" style="height:60%"></i></span><b>Tue</b></div>
+                          <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:19%"></i><i class="k-uf" style="height:19%"></i><i class="k-pf" style="height:62%"></i></span><b>Wed</b></div>
+                          <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:20%"></i><i class="k-uf" style="height:20%"></i><i class="k-pf" style="height:60%"></i></span><b>Thu</b></div>
+                          <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:19%"></i><i class="k-uf" style="height:21%"></i><i class="k-pf" style="height:60%"></i></span><b>Fri</b></div>
+                          <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:19%"></i><i class="k-uf" style="height:22%"></i><i class="k-pf" style="height:59%"></i></span><b>Sat</b></div>
+                          <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:20%"></i><i class="k-uf" style="height:21%"></i><i class="k-pf" style="height:59%"></i></span><b>Sun</b></div>
+                        </div>
+                        <div class="fa-legend" aria-hidden="true"><span><i class="k-pf"></i>Proper FC</span><span><i class="k-uf"></i>Under FC</span><span><i class="k-of"></i>Over FC</span></div>
                       </div>
-                      <span class="lk-count">Zones checked: 3 of 40</span>
+                      <div class="lk-panel">
+                        <p class="lk-chart-title">Utilization Rate vs target</p>
+                        <svg class="lk-line" data-chart="utr" viewBox="0 0 300 130" aria-hidden="true"><line class="lk-axis" x1="24" x2="296" y1="12" y2="12"/><line class="lk-axis" x1="24" x2="296" y1="104" y2="104"/><text x="0" y="16">3.5</text><text x="0" y="108">1.5</text><text x="32" y="124" text-anchor="middle">Mon</text><text x="74" y="124" text-anchor="middle">Tue</text><text x="116" y="124" text-anchor="middle">Wed</text><text x="158" y="124" text-anchor="middle">Thu</text><text x="200" y="124" text-anchor="middle">Fri</text><text x="242" y="124" text-anchor="middle">Sat</text><text x="284" y="124" text-anchor="middle">Sun</text><polyline class="lk-target" points="32,58.0 74,58.0 116,58.0 158,58.0 200,53.4 242,48.8 284,48.8"/><circle class="lk-dot-target" cx="32" cy="58.0" r="3.2"/><circle class="lk-dot-target" cx="74" cy="58.0" r="3.2"/><circle class="lk-dot-target" cx="116" cy="58.0" r="3.2"/><circle class="lk-dot-target" cx="158" cy="58.0" r="3.2"/><circle class="lk-dot-target" cx="200" cy="53.4" r="3.2"/><circle class="lk-dot-target" cx="242" cy="48.8" r="3.2"/><circle class="lk-dot-target" cx="284" cy="48.8" r="3.2"/><polyline class="lk-actual" points="32,58.0 74,62.6 116,58.0 158,58.0 200,53.4 242,44.2 284,48.8"/><circle class="lk-dot-actual" cx="32" cy="58.0" r="3.2"/><circle class="lk-dot-actual" cx="74" cy="62.6" r="3.2"/><circle class="lk-dot-actual" cx="116" cy="58.0" r="3.2"/><circle class="lk-dot-actual" cx="158" cy="58.0" r="3.2"/><circle class="lk-dot-actual" cx="200" cy="53.4" r="3.2"/><circle class="lk-dot-actual" cx="242" cy="44.2" r="3.2"/><circle class="lk-dot-actual" cx="284" cy="48.8" r="3.2"/></svg>
+                        <div class="fa-legend" aria-hidden="true"><span><i class="k-act"></i>Actual</span><span><i class="k-tgt"></i>Target</span></div>
+                      </div>
+                      <div class="lk-panel">
+                        <p class="lk-chart-title">Delivery Time vs target (min)</p>
+                        <svg class="lk-line" data-chart="dt" viewBox="0 0 300 130" aria-hidden="true"><line class="lk-axis" x1="24" x2="296" y1="12" y2="12"/><line class="lk-axis" x1="24" x2="296" y1="104" y2="104"/><text x="0" y="16">45</text><text x="0" y="108">20</text><text x="32" y="124" text-anchor="middle">Mon</text><text x="74" y="124" text-anchor="middle">Tue</text><text x="116" y="124" text-anchor="middle">Wed</text><text x="158" y="124" text-anchor="middle">Thu</text><text x="200" y="124" text-anchor="middle">Fri</text><text x="242" y="124" text-anchor="middle">Sat</text><text x="284" y="124" text-anchor="middle">Sun</text><polyline class="lk-target" points="32,67.2 74,67.2 116,67.2 158,67.2 200,59.8 242,59.8 284,59.8"/><circle class="lk-dot-target" cx="32" cy="67.2" r="3.2"/><circle class="lk-dot-target" cx="74" cy="67.2" r="3.2"/><circle class="lk-dot-target" cx="116" cy="67.2" r="3.2"/><circle class="lk-dot-target" cx="158" cy="67.2" r="3.2"/><circle class="lk-dot-target" cx="200" cy="59.8" r="3.2"/><circle class="lk-dot-target" cx="242" cy="59.8" r="3.2"/><circle class="lk-dot-target" cx="284" cy="59.8" r="3.2"/><polyline class="lk-actual" points="32,67.2 74,70.9 116,67.2 158,63.5 200,59.8 242,56.2 284,56.2"/><circle class="lk-dot-actual" cx="32" cy="67.2" r="3.2"/><circle class="lk-dot-actual" cx="74" cy="70.9" r="3.2"/><circle class="lk-dot-actual" cx="116" cy="67.2" r="3.2"/><circle class="lk-dot-actual" cx="158" cy="63.5" r="3.2"/><circle class="lk-dot-actual" cx="200" cy="59.8" r="3.2"/><circle class="lk-dot-actual" cx="242" cy="56.2" r="3.2"/><circle class="lk-dot-actual" cx="284" cy="56.2" r="3.2"/></svg>
+                        <div class="fa-legend" aria-hidden="true"><span><i class="k-act"></i>Actual</span><span><i class="k-tgt"></i>Target</span></div>
+                      </div>
+                      <div class="lk-tally"><span>Zones checked</span><b class="lk-count">3 of 40</b><em>One selection and one load per zone</em></div>
                     </div>
-                    <p class="lk-chart-title">Forecast accuracy by day</p>
-                    <div class="lk-chart">
-                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:20%"></i><i class="k-uf" style="height:19%"></i><i class="k-pf" style="height:61%"></i></span><b>Mon</b></div>
-                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:21%"></i><i class="k-uf" style="height:19%"></i><i class="k-pf" style="height:60%"></i></span><b>Tue</b></div>
-                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:19%"></i><i class="k-uf" style="height:19%"></i><i class="k-pf" style="height:62%"></i></span><b>Wed</b></div>
-                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:20%"></i><i class="k-uf" style="height:20%"></i><i class="k-pf" style="height:60%"></i></span><b>Thu</b></div>
-                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:19%"></i><i class="k-uf" style="height:21%"></i><i class="k-pf" style="height:60%"></i></span><b>Fri</b></div>
-                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:19%"></i><i class="k-uf" style="height:22%"></i><i class="k-pf" style="height:59%"></i></span><b>Sat</b></div>
-                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:20%"></i><i class="k-uf" style="height:21%"></i><i class="k-pf" style="height:59%"></i></span><b>Sun</b></div>
-                    </div>
-                    <div class="fa-legend" aria-hidden="true"><span><i class="k-pf"></i>Proper FC</span><span><i class="k-uf"></i>Under FC</span><span><i class="k-of"></i>Over FC</span></div>
                   </div>
                 </div>
                 <figcaption class="lk-status">At country level the average hides the zones that deviate, and by day it hides the time slots.</figcaption>
