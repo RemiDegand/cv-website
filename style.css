@@ -1492,6 +1492,9 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-cursor { position: absolute; z-index: 4; top: 0; left: 0; width: 20px; height: 20px; pointer-events: none; opacity: 0; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35)); transition: transform 0.7s ease, opacity 0.2s ease; }
 .fa-cursor.is-on { opacity: 1; }
 .fa-sim { position: relative; }
+.fa-sim.is-playable .fa-views { cursor: pointer; }
+.fa-paused { position: absolute; z-index: 5; top: 50%; left: 50%; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #1d2230; color: #fff; font-size: 0.8rem; font-weight: 600; white-space: nowrap; transform: translate(-50%, -50%); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); pointer-events: none; }
+.fa-paused[hidden] { display: none; }
 .fa-sim > .fa-cursor:not(.is-on) { opacity: 0 !important; }   /* stays hidden when the end of the simulation fades everything */
 .fa-is-pressed { box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.45) !important; }
 /* A window over the view (Insights, Zone Insights), scrolled by the mouse */

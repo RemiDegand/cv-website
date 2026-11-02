@@ -940,7 +940,8 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
 
 // Forecast accuracy page, "The app at work", following the real app: Market Overview and the Insights of a country, Global Zones with
 // the deep dive, Zone Insights and FC Schedule of one zone; FC Alerts sorted by eligible slots, with zones disappearing. Plays once on screen with a mouse, then the restart arrow.
-// The buttons really work: a click on a step, Insights, the zone, Zone Insights, × or FC Schedule stops the play and does it.
+// A click on the simulation pauses it, another click resumes it. The buttons really work: a click on a step, Insights, the zone,
+// Zone Insights, × or FC Schedule stops the play and does it.
 // The HTML holds the FC Schedule (step 2), kept with "reduce motion".
 const faSim = document.querySelector(".fa-sim");
 if (faSim) {
@@ -996,7 +997,19 @@ if (faSim) {
     status.textContent = texts[index];
   };
   let playing = 0;   // changes when a button is clicked: the play in progress stops
+  let isPlaying = false, isPaused = false;
+  const pausedBadge = document.createElement("span");
+  pausedBadge.className = "fa-paused";
+  pausedBadge.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M7 5l13 7-13 7z"/></svg>Paused: click to resume';
+  pausedBadge.hidden = true;
+  stage.append(pausedBadge);
+  const setPaused = (paused) => { isPaused = paused; pausedBadge.hidden = !paused; };
+  const setPlaying = (on) => { isPlaying = on; faSim.classList.toggle("is-playable", on); if (!on) setPaused(false); };
+  faSim.addEventListener("click", (event) => {
+    if (isPlaying && !event.target.closest("button")) setPaused(!isPaused);
+  });
   const stopPlay = () => {
+    setPlaying(false);
     playing++;
     faSim.querySelector(".sim-restart")?.remove();
     faSim.classList.remove("is-ended");
@@ -1015,7 +1028,17 @@ if (faSim) {
   if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const run = async () => {
       const me = ++playing;
-      const pause = async (ms) => { await wait(ms); return me === playing; };
+      setPlaying(true);
+      // Waits for ms of play: the time doesn't run while the simulation is paused
+      const pause = async (ms) => {
+        let left = ms;
+        while (left > 0 && me === playing) {
+          const step = Math.min(left, 50);
+          await wait(step);
+          if (!isPaused) left -= step;
+        }
+        return me === playing;
+      };
       const showAll = async (view, selector, ms) => {
         for (const el of view.querySelectorAll(selector)) {
           el.classList.add("is-in");
@@ -1145,7 +1168,9 @@ if (faSim) {
         status.textContent = texts[3];
         cursor.classList.remove("is-on");
         if (!await pause(3000)) return;
+        setPlaying(false);
         await restartAtEnd(faSim);
+        setPlaying(true);
       }
     };
     const start = new IntersectionObserver((entries) => {
