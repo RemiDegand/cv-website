@@ -832,4 +832,154 @@ if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   start.observe(aiChat);
 }
 
+// Forecast accuracy page, "How it started": on Looker, zones are selected one by one, each one loading, then a whole country
+// whose average hides the zones that deviate. Starts once on screen and stops on the restart arrow; the HTML holds the final state.
+const lookerSim = document.querySelector(".lk-sim");
+if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const body = lookerSim.querySelector(".lk-body");
+  const chart = lookerSim.querySelector(".lk-chart");
+  const select = lookerSim.querySelector(".lk-select");
+  const menu = lookerSim.querySelector(".lk-menu");
+  const count = lookerSim.querySelector(".lk-count");
+  const status = lookerSim.querySelector(".lk-status");
+  const finalStatus = status.textContent;
+  const bars = [...chart.querySelectorAll(".lk-bar")];
+  const read = (bar) => [...bar.children].map((i) => i.style.height);
+  const country = bars.map(read);   // the HTML holds the country view
+  // Made-up zones: [over, under, proper] % for Monday to Sunday
+  const zones = {
+    "Zone 1": [[18, 12, 70], [20, 14, 66], [16, 12, 72], [18, 16, 66], [14, 24, 62], [12, 38, 50], [14, 34, 52]],
+    "Zone 2": [[34, 10, 56], [30, 12, 58], [18, 14, 68], [20, 12, 68], [18, 16, 66], [22, 14, 64], [24, 12, 64]],
+    "Zone 3": [[20, 18, 62], [18, 22, 60], [22, 20, 58], [20, 16, 64], [16, 26, 58], [18, 24, 58], [20, 20, 60]],
+  };
+  const draw = (days) => bars.forEach((bar, d) => [...bar.children].forEach((part, p) => { part.style.height = typeof days[d][p] === "number" ? `${days[d][p]}%` : days[d][p]; }));
+  const pick = async (name) => {
+    menu.hidden = false;
+    const item = [...menu.children].find((li) => li.textContent === name);
+    item.classList.add("is-on");
+    await wait(800);
+    item.classList.remove("is-on");
+    menu.hidden = true;
+    select.textContent = name;
+    chart.classList.add("is-loading");
+    body.classList.add("is-loading");
+    await wait(1100);
+    chart.classList.remove("is-loading");
+    body.classList.remove("is-loading");
+  };
+  const run = async () => {
+    for (;;) {
+      count.textContent = "Zones checked: 0 of 40";
+      status.textContent = "Selecting the most important zone first…";
+      let checked = 0;
+      for (const [name, days] of Object.entries(zones)) {
+        await pick(name);
+        draw(days);
+        count.textContent = `Zones checked: ${++checked} of 40`;
+        status.textContent = `${name} checked. Next zone…`;
+        await wait(1500);
+      }
+      status.textContent = "Faster with a whole country?";
+      await wait(1200);
+      await pick("Country A");
+      draw(country);
+      status.textContent = finalStatus;
+      await wait(2500);
+      await restartAtEnd(lookerSim);
+    }
+  };
+  const start = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
+  }, { rootMargin: "0px 0px -20% 0px" });
+  start.observe(lookerSim);
+}
+
+// Forecast accuracy page, "The app at work": 4 views play once on screen (every zone, alerts, FC Schedule, AI summary), then the
+// restart arrow. A click on a step shows that view, complete, and stops the play. The HTML holds step 3, kept with "reduce motion".
+const faSim = document.querySelector(".fa-sim");
+if (faSim) {
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const steps = [...faSim.querySelectorAll(".fa-steps button")];
+  const views = [...faSim.querySelectorAll(".fa-view")];
+  const status = faSim.querySelector(".fa-status");
+  const texts = [
+    "All the zones at once, with no selection: market, country, city and zone.",
+    "Alerts raise the zones that deviate. The threshold can be changed.",
+    status.textContent,
+    "The AI summary explains the variation, with data from outside forecast accuracy.",
+  ];
+  const show = (index) => {
+    views.forEach((view, i) => view.classList.toggle("is-on", i === index));
+    steps.forEach((step, i) => {
+      step.classList.toggle("is-on", i === index);
+      if (i === index) step.setAttribute("aria-current", "step");
+      else step.removeAttribute("aria-current");
+    });
+    status.textContent = texts[index];
+  };
+  let playing = 0;   // changes when a step is clicked: the play in progress stops
+  steps.forEach((step, i) => step.addEventListener("click", () => {
+    playing++;
+    faSim.querySelector(".sim-restart")?.remove();
+    faSim.classList.remove("is-ended");
+    views.forEach((view) => view.classList.remove("is-playing"));
+    show(i);
+  }));
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const run = async () => {
+      const me = ++playing;
+      const pause = async (ms) => { await wait(ms); return me === playing; };
+      const showAll = async (view, selector, ms) => {
+        for (const el of view.querySelectorAll(selector)) {
+          el.classList.add("is-in");
+          if (!await pause(ms)) return false;
+        }
+        return true;
+      };
+      const [overview, alerts, schedule, summary] = views;
+      for (;;) {
+        views.forEach((view) => {
+          view.classList.add("is-playing");
+          view.querySelectorAll(".is-in").forEach((el) => el.classList.remove("is-in"));
+        });
+        show(0);
+        if (!await pause(500) || !await showAll(overview, ".fa-a", 380) || !await pause(2200)) return;
+
+        const rows = [...alerts.querySelectorAll(".fa-alert")];
+        const fill = alerts.querySelector(".fa-track i");
+        const value = alerts.querySelector(".fa-slider-val");
+        const max = parseInt(value.textContent, 10);
+        value.textContent = `${max - 16}%`;   // the slider starts low, so no zone is listed yet
+        fill.style.setProperty("--v", `${max - 16}%`);
+        show(1);
+        if (!await showAll(alerts, ".fa-a", 300)) return;
+        for (let t = max - 16; t <= max; t++) {
+          value.textContent = `${t}%`;
+          fill.style.setProperty("--v", `${t}%`);
+          rows.forEach((row) => { if (Number(row.dataset.at) <= t) row.classList.add("is-in"); });
+          if (!await pause(170)) return;
+        }
+        if (!await pause(2000)) return;
+
+        show(2);
+        if (!await showAll(schedule, ".fa-a", 250)) return;
+        for (const row of schedule.querySelectorAll(".fa-grid tbody tr")) {
+          row.querySelectorAll(".fa-c").forEach((c) => c.classList.add("is-in"));
+          if (!await pause(130)) return;
+        }
+        if (!await pause(800) || !await showAll(schedule, ".fa-late", 500) || !await pause(3500)) return;
+
+        show(3);
+        if (!await showAll(summary, ".fa-a", 1200) || !await pause(2500)) return;
+        await restartAtEnd(faSim);
+      }
+    };
+    const start = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
+    }, { rootMargin: "0px 0px -20% 0px" });
+    start.observe(faSim);
+  }
+}
+
 // Later: chatbot window (Phase 2).

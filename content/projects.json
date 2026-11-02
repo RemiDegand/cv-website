@@ -22,10 +22,10 @@
       "areas": ["operations"],
       "ai": true,
       "company": "glovo",
-      "title": "Forecasting web app",
-      "description": "Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.",
+      "title": "Forecast accuracy web app",
+      "description": "Designed and built a web app specialised in forecast accuracy: all the zones at a glance, alerts on the zones that deviate and AI summaries that explain why.",
       "result": { "key": "Daily use", "text": "by all forecasting team members" },
-      "tags": ["Python", "SQL", "BigQuery", "Looker", "LLMs"],
+      "tags": ["Python", "BigQuery (SQL)", "Vertex AI (Gemini)", "Apps Script", "Cloud Run"],
       "home": true
     },
     {

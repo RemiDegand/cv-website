@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forecasting web app | Rémi Degand</title>
-  <meta name="description" content="Forecasting web app: a project by Rémi Degand at Glovo.">
+  <title>Forecast accuracy web app | Rémi Degand</title>
+  <meta name="description" content="Forecast accuracy web app: a web app specialised in forecast accuracy, with alerts and AI summaries, by Rémi Degand at Glovo.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,8 +35,8 @@
 
         <header class="project-page-head">
           <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
-          <h1 class="project-page-title">Forecasting web app</h1>
-          <p class="lead">Designed and built a web app to improve forecast accuracy across 3 markets (Europe, Africa, Asia), combining multi-view dashboards, AI-generated summaries for each zone and a chatbot.</p>
+          <h1 class="project-page-title">Forecast accuracy web app</h1>
+          <p class="lead">Designed and built a web app specialised in forecast accuracy: all the zones at a glance, alerts on the zones that deviate and AI summaries that explain why.</p>
           <p class="project-result"><strong>Daily use</strong> by all forecasting team members</p>
         </header>
 
@@ -44,22 +44,244 @@
           <div><dt>Role</dt><dd>Forecasting Analyst Intern</dd></div>
           <div><dt>When</dt><dd>Mar – Sep 2026</dd></div>
           <div><dt>Where</dt><dd>Barcelona, Spain</dd></div>
+          <div><dt>Scope</dt><dd>PLECA market, then all markets</dd></div>
         </dl>
 
-        <h2 class="project-h2">Context</h2>
-        <p>Forecaster in the Supply Ops department for the PLECA market. I forecast weekly rider supply for 5 countries (Poland, Ukraine, Armenia, Georgia and Kyrgyzstan), covering several hundred thousand orders and rider slots per week.</p>
+        <!-- Content from Projects/Forecasting web app/Content.docx (written with Rémi, 2 Nov 2026). No real Glovo data and
+             not the exact app (user): both simulations use made-up data, based on the code of the first version.
+             Same format as project-aged-receivables.html (see "Project page format" in docs/CV website.md) -->
+        <nav class="block-nav" aria-label="Parts of this project">
+          <a href="#block-1"><span class="block-nav-num">1</span><span class="block-nav-text">Problem &amp; context</span></a>
+          <a href="#block-2"><span class="block-nav-num">2</span><span class="block-nav-text">What I built</span></a>
+          <a href="#block-3"><span class="block-nav-num">3</span><span class="block-nav-text">Impact &amp; tools</span></a>
+        </nav>
 
-        <h2 class="project-h2">What I did</h2>
-        <ul class="project-did">
-          <li>Multi-view dashboards covering the 3 markets (Europe, Africa, Asia)</li>
-          <li>AI-generated summaries for each zone</li>
-          <li>A chatbot built into the app</li>
-        </ul>
+        <div class="blocks">
+          <!-- Block 1 -->
+          <div class="block" id="block-1" role="region" aria-labelledby="block-1-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">1</span>
+              <div><p class="block-kicker">Part 1 of 3</p><h2 class="block-title" id="block-1-title">Problem &amp; context</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>How it started</h3>
+              <!-- Simulation (script.js): zones selected one by one in Looker, then a whole country. The HTML holds the final state -->
+              <figure class="project-shot annotated lk-sim" role="group" aria-label="Simulation: on Looker, a forecaster selects zones one by one, waiting for each to load. At country level, the average hides the zones that deviate.">
+                <div class="monitor-screen">
+                  <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Looker · simulation</span></div>
+                  <div class="lk-body">
+                    <div class="lk-top">
+                      <div class="lk-filter">
+                        <span class="lk-label">Zone</span>
+                        <span class="lk-select">Country A</span>
+                        <ul class="lk-menu" hidden>
+                          <li>Zone 1</li><li>Zone 2</li><li>Zone 3</li><li>Country A</li>
+                        </ul>
+                      </div>
+                      <span class="lk-count">Zones checked: 3 of 40</span>
+                    </div>
+                    <p class="lk-chart-title">Forecast accuracy by day</p>
+                    <div class="lk-chart">
+                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:20%"></i><i class="k-uf" style="height:19%"></i><i class="k-pf" style="height:61%"></i></span><b>Mon</b></div>
+                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:21%"></i><i class="k-uf" style="height:19%"></i><i class="k-pf" style="height:60%"></i></span><b>Tue</b></div>
+                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:19%"></i><i class="k-uf" style="height:19%"></i><i class="k-pf" style="height:62%"></i></span><b>Wed</b></div>
+                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:20%"></i><i class="k-uf" style="height:20%"></i><i class="k-pf" style="height:60%"></i></span><b>Thu</b></div>
+                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:19%"></i><i class="k-uf" style="height:21%"></i><i class="k-pf" style="height:60%"></i></span><b>Fri</b></div>
+                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:19%"></i><i class="k-uf" style="height:22%"></i><i class="k-pf" style="height:59%"></i></span><b>Sat</b></div>
+                      <div class="lk-col"><span class="lk-bar"><i class="k-of" style="height:20%"></i><i class="k-uf" style="height:21%"></i><i class="k-pf" style="height:59%"></i></span><b>Sun</b></div>
+                    </div>
+                    <div class="fa-legend" aria-hidden="true"><span><i class="k-pf"></i>Proper FC</span><span><i class="k-uf"></i>Under FC</span><span><i class="k-of"></i>Over FC</span></div>
+                  </div>
+                </div>
+                <figcaption class="lk-status">At country level the average hides the zones that deviate, and by day it hides the time slots.</figcaption>
+              </figure>
+              <p class="story-end">My own idea: see all the zones at the same time, with alarms. I kept developing it, and it became a full web app.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Context</h3>
+              <p>Every week, the forecasting team forecast rider supply for each zone. Accuracy was measured with UTR (Utilization Rate), the average number of orders delivered by one rider in one hour, which gives each time slot one of 3 results:</p>
+              <ul class="fa-kinds reveal-stagger">
+                <li><strong><i class="k-pf"></i>Proper FC</strong><span>UTR close to its target</span></li>
+                <li><strong><i class="k-uf"></i>Under FC</strong><span>Too few slots opened</span></li>
+                <li><strong><i class="k-of"></i>Over FC</strong><span>Too many slots opened</span></li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>The problem</h3>
+              <p>Forecast accuracy was becoming more and more important: the team had to see the zones that deviated and explain why. On Looker:</p>
+              <ul class="project-did reveal-stagger">
+                <li><strong>No quick view of all the zones:</strong> forecasters selected them one by one, from the most important to the least.</li>
+                <li><strong>No patterns:</strong> an average aggregated by orders, with nothing by day or by time slot for the last week.</li>
+                <li><strong>Too general:</strong> root causes (Missing Capacity, Delivery Time, Orders FC deviation) sat on other dashboards, not linked to forecast accuracy.</li>
+              </ul>
+            </div>
+          </div>
 
-        <h2 class="project-h2">Tools</h2>
-        <ul class="tags">
-          <li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>LLMs</li>
-        </ul>
+          <!-- Block 2 -->
+          <div class="block" id="block-2" role="region" aria-labelledby="block-2-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">2</span>
+              <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: one app to understand forecast accuracy</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>The app at work</h3>
+              <p>Every dashboard, metric and summary answers one question: why did Proper, Under or Over FC move? Other metrics are there for their link to it.</p>
+              <!-- Simulation (script.js): 4 views, playing once on screen; a click on a step shows that view and stops the play.
+                   Grid made with made-up data by a scratch script; on the 2 notes --y = top of the frame in px. The HTML holds step 3 -->
+              <figure class="project-shot annotated fa-sim" role="group" aria-label="Simulation of the app with made-up data: all the zones at once, alerts on the zones that deviate, the FC Schedule of one zone showing patterns by day and hour, and the AI summary explaining them.">
+                <div class="fa-steps">
+                  <button type="button"><span>1</span>See every zone</button>
+                  <button type="button"><span>2</span>Spot the alerts</button>
+                  <button type="button" class="is-on" aria-current="step"><span>3</span>Find the pattern</button>
+                  <button type="button"><span>4</span>Read the why</button>
+                </div>
+                <div class="monitor-screen">
+                  <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Forecast accuracy web app · simulation</span></div>
+                  <div class="fa-views">
+
+                    <!-- 1. Overview: every level at once, no selection -->
+                    <div class="fa-view">
+                      <p class="fa-head fa-a">Market performance <em>Last complete week · 40 zones</em></p>
+                      <div class="fa-tiles fa-a">
+                        <div><span>Orders</span><b>120k</b></div>
+                        <div><span>Under FC</span><b class="t-uf">21%</b><em>+2.1 pp</em></div>
+                        <div><span>Proper FC</span><b class="t-pf">60%</b><em>−1.4 pp</em></div>
+                        <div><span>Over FC</span><b class="t-of">19%</b><em>−0.7 pp</em></div>
+                      </div>
+                      <table class="fa-table">
+                        <thead><tr class="fa-a"><th>Segment</th><th>Orders</th><th>Under</th><th>Proper</th><th>Over</th></tr></thead>
+                        <tbody>
+                          <tr class="fa-a lvl-0"><td>Country A</td><td>64k</td><td>21%</td><td>60%</td><td>19%</td></tr>
+                          <tr class="fa-a lvl-1"><td>City 1</td><td>31k</td><td>26%</td><td>55%</td><td>19%</td></tr>
+                          <tr class="fa-a lvl-2 is-bad"><td>Zone 12</td><td>9k</td><td>24%</td><td>49%</td><td>27%</td></tr>
+                          <tr class="fa-a lvl-2"><td>Zone 4</td><td>12k</td><td>17%</td><td>66%</td><td>17%</td></tr>
+                          <tr class="fa-a lvl-1"><td>City 2</td><td>33k</td><td>16%</td><td>64%</td><td>20%</td></tr>
+                          <tr class="fa-a lvl-0"><td>Country B</td><td>56k</td><td>20%</td><td>61%</td><td>19%</td></tr>
+                          <tr class="fa-a lvl-1"><td>City 3</td><td>28k</td><td>19%</td><td>63%</td><td>18%</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!-- 2. FC Alerts: the zones under the threshold, which can be changed -->
+                    <div class="fa-view">
+                      <p class="fa-head fa-a">FC Alerts <em>Zones below the threshold</em></p>
+                      <div class="fa-slider fa-a"><span>Max Proper FC: <b class="fa-slider-val">59%</b></span><span class="fa-track"><i style="--v:59%"></i></span></div>
+                      <table class="fa-table">
+                        <thead><tr class="fa-a"><th>Zone</th><th>Under</th><th>Proper</th><th>Over</th></tr></thead>
+                        <tbody class="fa-alerts">
+                          <tr class="fa-alert is-bad" data-at="49"><td>Zone 12</td><td>24%</td><td>49%</td><td>27%</td></tr>
+                          <tr class="fa-alert" data-at="52"><td>Zone 7</td><td>31%</td><td>52%</td><td>17%</td></tr>
+                          <tr class="fa-alert" data-at="54"><td>Zone 21</td><td>28%</td><td>54%</td><td>18%</td></tr>
+                          <tr class="fa-alert" data-at="56"><td>Zone 33</td><td>14%</td><td>56%</td><td>30%</td></tr>
+                          <tr class="fa-alert" data-at="58"><td>Zone 18</td><td>26%</td><td>58%</td><td>16%</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!-- 3. FC Schedule: the most used view. Days in columns, hours in rows; colour = main result, size = orders -->
+                    <div class="fa-view is-on">
+                      <p class="fa-head fa-a">FC Schedule · Zone 12 <em>Week average: Proper 49% · Under 24% · Over 27%</em></p>
+                      <div class="fa-notes fa-late">
+                        <p class="fa-note" style="--y: 144px">Over FC: Monday and Tuesday afternoons</p>
+                        <p class="fa-note fa-note-2" style="--y: 240px">Under FC: Friday to Sunday evenings</p>
+                      </div>
+                      <div class="fa-grid-wrap">
+                        <table class="fa-grid">
+                          <colgroup><col style="width:12%"><col span="7" style="width:12.571%"></colgroup>
+                          <thead><tr><th></th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
+                          <tbody>
+                            <tr><th>10:00</th><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 36 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 34 · Proper FC: 54.0% · Under FC: 15.0% · Over FC: 31.0%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 35 · Proper FC: 58.0% · Under FC: 13.0% · Over FC: 29.0%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 34 · Proper FC: 53.0% · Under FC: 15.5% · Over FC: 31.5%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 45 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 43 · Proper FC: 52.0% · Under FC: 16.0% · Over FC: 32.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 45 · Proper FC: 56.0% · Under FC: 14.0% · Over FC: 30.0%"></span></td></tr>
+                            <tr><th>11:00</th><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 35 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 33 · Proper FC: 52.0% · Under FC: 16.0% · Over FC: 32.0%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 35 · Proper FC: 56.0% · Under FC: 14.0% · Over FC: 30.0%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 36 · Proper FC: 60.0% · Under FC: 12.0% · Over FC: 28.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 45 · Proper FC: 55.0% · Under FC: 14.5% · Over FC: 30.5%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 46 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 44 · Proper FC: 54.0% · Under FC: 15.0% · Over FC: 31.0%"></span></td></tr>
+                            <tr><th>12:00</th><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 98 · Proper FC: 55.0% · Under FC: 14.5% · Over FC: 30.5%"></span></td><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 102 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 97 · Proper FC: 54.0% · Under FC: 15.0% · Over FC: 31.0%"></span></td><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 101 · Proper FC: 58.0% · Under FC: 13.0% · Over FC: 29.0%"></span></td><td><span class="fa-c k-pf" style="--s:17px" title="Orders: 125 · Proper FC: 53.0% · Under FC: 15.5% · Over FC: 31.5%"></span></td><td><span class="fa-c k-pf" style="--s:17px" title="Orders: 130 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td><td><span class="fa-c k-pf" style="--s:17px" title="Orders: 124 · Proper FC: 52.0% · Under FC: 16.0% · Over FC: 32.0%"></span></td></tr>
+                            <tr><th>13:00</th><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 96 · Proper FC: 53.0% · Under FC: 15.5% · Over FC: 31.5%"></span></td><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 100 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 95 · Proper FC: 52.0% · Under FC: 16.0% · Over FC: 32.0%"></span></td><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 99 · Proper FC: 56.0% · Under FC: 14.0% · Over FC: 30.0%"></span></td><td><span class="fa-c k-pf" style="--s:17px" title="Orders: 133 · Proper FC: 60.0% · Under FC: 12.0% · Over FC: 28.0%"></span></td><td><span class="fa-c k-pf" style="--s:17px" title="Orders: 127 · Proper FC: 55.0% · Under FC: 14.5% · Over FC: 30.5%"></span></td><td><span class="fa-c k-pf" style="--s:17px" title="Orders: 132 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td></tr>
+                            <tr><th>14:00</th><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 103 · Proper FC: 60.0% · Under FC: 12.0% · Over FC: 28.0%"></span></td><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 98 · Proper FC: 55.0% · Under FC: 14.5% · Over FC: 30.5%"></span></td><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 102 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td><td><span class="fa-c k-pf" style="--s:16px" title="Orders: 97 · Proper FC: 54.0% · Under FC: 15.0% · Over FC: 31.0%"></span></td><td><span class="fa-c k-pf" style="--s:17px" title="Orders: 131 · Proper FC: 58.0% · Under FC: 13.0% · Over FC: 29.0%"></span></td><td><span class="fa-c k-pf" style="--s:17px" title="Orders: 125 · Proper FC: 53.0% · Under FC: 15.5% · Over FC: 31.5%"></span></td><td><span class="fa-c k-pf" style="--s:17px" title="Orders: 130 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td></tr>
+                            <tr><th>15:00</th><td><span class="fa-c k-of" style="--s:13px" title="Orders: 55 · Proper FC: 30.0% · Under FC: 8.0% · Over FC: 62.0%"></span></td><td><span class="fa-c k-of" style="--s:13px" title="Orders: 53 · Proper FC: 25.0% · Under FC: 8.0% · Over FC: 67.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 55 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 52 · Proper FC: 52.0% · Under FC: 16.0% · Over FC: 32.0%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 71 · Proper FC: 56.0% · Under FC: 14.0% · Over FC: 30.0%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 73 · Proper FC: 60.0% · Under FC: 12.0% · Over FC: 28.0%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 70 · Proper FC: 55.0% · Under FC: 14.5% · Over FC: 30.5%"></span></td></tr>
+                            <tr><th>16:00</th><td><span class="fa-c k-of" style="--s:13px" title="Orders: 54 · Proper FC: 28.0% · Under FC: 8.0% · Over FC: 64.0%"></span></td><td><span class="fa-c k-of" style="--s:13px" title="Orders: 56 · Proper FC: 32.0% · Under FC: 8.0% · Over FC: 60.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 54 · Proper FC: 55.0% · Under FC: 14.5% · Over FC: 30.5%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 56 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 69 · Proper FC: 54.0% · Under FC: 15.0% · Over FC: 31.0%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 72 · Proper FC: 58.0% · Under FC: 13.0% · Over FC: 29.0%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 69 · Proper FC: 53.0% · Under FC: 15.5% · Over FC: 31.5%"></span></td></tr>
+                            <tr><th>17:00</th><td><span class="fa-c k-of" style="--s:13px" title="Orders: 53 · Proper FC: 26.0% · Under FC: 8.0% · Over FC: 66.0%"></span></td><td><span class="fa-c k-of" style="--s:13px" title="Orders: 55 · Proper FC: 30.0% · Under FC: 8.0% · Over FC: 62.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 53 · Proper FC: 53.0% · Under FC: 15.5% · Over FC: 31.5%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 55 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 68 · Proper FC: 52.0% · Under FC: 16.0% · Over FC: 32.0%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 71 · Proper FC: 56.0% · Under FC: 14.0% · Over FC: 30.0%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 73 · Proper FC: 60.0% · Under FC: 12.0% · Over FC: 28.0%"></span></td></tr>
+                            <tr><th>18:00</th><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 52 · Proper FC: 52.0% · Under FC: 16.0% · Over FC: 32.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 54 · Proper FC: 56.0% · Under FC: 14.0% · Over FC: 30.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 56 · Proper FC: 60.0% · Under FC: 12.0% · Over FC: 28.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 54 · Proper FC: 55.0% · Under FC: 14.5% · Over FC: 30.5%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 73 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 69 · Proper FC: 54.0% · Under FC: 15.0% · Over FC: 31.0%"></span></td><td><span class="fa-c k-pf" style="--s:14px" title="Orders: 72 · Proper FC: 58.0% · Under FC: 13.0% · Over FC: 29.0%"></span></td></tr>
+                            <tr><th>19:00</th><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 152 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 145 · Proper FC: 54.0% · Under FC: 15.0% · Over FC: 31.0%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 151 · Proper FC: 58.0% · Under FC: 13.0% · Over FC: 29.0%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 144 · Proper FC: 53.0% · Under FC: 15.5% · Over FC: 31.5%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 195 · Proper FC: 31.0% · Under FC: 55.5% · Over FC: 13.5%"></span></td><td><span class="fa-c k-uf" style="--s:19px" title="Orders: 185 · Proper FC: 26.0% · Under FC: 58.0% · Over FC: 16.0%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 193 · Proper FC: 30.0% · Under FC: 56.0% · Over FC: 14.0%"></span></td></tr>
+                            <tr><th>20:00</th><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 150 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 143 · Proper FC: 52.0% · Under FC: 16.0% · Over FC: 32.0%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 148 · Proper FC: 56.0% · Under FC: 14.0% · Over FC: 30.0%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 154 · Proper FC: 60.0% · Under FC: 12.0% · Over FC: 28.0%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 191 · Proper FC: 29.0% · Under FC: 56.5% · Over FC: 14.5%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 198 · Proper FC: 33.0% · Under FC: 54.5% · Over FC: 12.5%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 189 · Proper FC: 28.0% · Under FC: 57.0% · Over FC: 15.0%"></span></td></tr>
+                            <tr><th>21:00</th><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 147 · Proper FC: 55.0% · Under FC: 14.5% · Over FC: 30.5%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 152 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 145 · Proper FC: 54.0% · Under FC: 15.0% · Over FC: 31.0%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 151 · Proper FC: 58.0% · Under FC: 13.0% · Over FC: 29.0%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 187 · Proper FC: 27.0% · Under FC: 57.5% · Over FC: 15.5%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 195 · Proper FC: 31.0% · Under FC: 55.5% · Over FC: 13.5%"></span></td><td><span class="fa-c k-uf" style="--s:19px" title="Orders: 185 · Proper FC: 26.0% · Under FC: 58.0% · Over FC: 16.0%"></span></td></tr>
+                            <tr><th>22:00</th><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 144 · Proper FC: 53.0% · Under FC: 15.5% · Over FC: 31.5%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 150 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 143 · Proper FC: 52.0% · Under FC: 16.0% · Over FC: 32.0%"></span></td><td><span class="fa-c k-pf" style="--s:18px" title="Orders: 148 · Proper FC: 56.0% · Under FC: 14.0% · Over FC: 30.0%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 200 · Proper FC: 34.0% · Under FC: 54.0% · Over FC: 12.0%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 191 · Proper FC: 29.0% · Under FC: 56.5% · Over FC: 14.5%"></span></td><td><span class="fa-c k-uf" style="--s:20px" title="Orders: 198 · Proper FC: 33.0% · Under FC: 54.5% · Over FC: 12.5%"></span></td></tr>
+                            <tr><th>23:00</th><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 36 · Proper FC: 60.0% · Under FC: 12.0% · Over FC: 28.0%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 34 · Proper FC: 55.0% · Under FC: 14.5% · Over FC: 30.5%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 36 · Proper FC: 59.0% · Under FC: 12.5% · Over FC: 28.5%"></span></td><td><span class="fa-c k-pf" style="--s:12px" title="Orders: 34 · Proper FC: 54.0% · Under FC: 15.0% · Over FC: 31.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 46 · Proper FC: 58.0% · Under FC: 13.0% · Over FC: 29.0%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 44 · Proper FC: 53.0% · Under FC: 15.5% · Over FC: 31.5%"></span></td><td><span class="fa-c k-pf" style="--s:13px" title="Orders: 45 · Proper FC: 57.0% · Under FC: 13.5% · Over FC: 29.5%"></span></td></tr>
+                          </tbody>
+                        </table>
+                        <span class="shot-zone fa-late" style="left:12%; top:144px; width:25.14%; height:72px"></span>
+                        <span class="shot-zone fa-late" style="left:62.29%; top:240px; width:37.71%; height:96px"></span>
+                      </div>
+                      <div class="fa-legend fa-a"><span><i class="k-pf"></i>Proper FC</span><span><i class="k-uf"></i>Under FC</span><span><i class="k-of"></i>Over FC</span><span class="fa-legend-size">Size = orders</span></div>
+                    </div>
+
+                    <!-- 4. AI summary: explains the variation with data from outside forecast accuracy -->
+                    <div class="fa-view">
+                      <p class="fa-head fa-a">Zone 12 <em>Zone Insights</em></p>
+                      <div class="fa-ai">
+                        <p class="fa-ai-title fa-a">✨ AI Summary <em>Generated on Monday morning</em></p>
+                        <p class="fa-a"><b>Mon:</b> <span class="t-of">Over FC rose by 9 pp</span> in the afternoon: orders came in 6% below Orders FC, with no change in capacity.</p>
+                        <p class="fa-a"><b>Fri:</b> <span class="t-uf">Under FC rose by 14 pp</span> in the evening: orders came in 8% above Orders FC and Missing Capacity rose by 3 pp.</p>
+                        <p class="fa-a"><b>Sat:</b> <span class="t-uf">Proper FC fell by 11 pp</span> in the evening: orders rose 12% week on week, and Delivery Time stayed above target.</p>
+                        <p class="fa-a"><b>Sun:</b> <span class="t-uf">Under FC stayed high</span> in the evening: the deviation comes from the orders, as Missing Capacity is stable.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <figcaption class="fa-status">Zone 12 in a schedule grid: one circle per slot. Patterns by day and hour appear at a glance.</figcaption>
+              </figure>
+              <p class="chip-row reveal-stagger"><span class="chip-label">Also in the app</span><span class="chip">DT Alerts</span><span class="chip">Slot Filling</span><span class="chip">Rider Demand</span><span class="chip">Comments per zone</span><span class="chip">Last week or last 7 days</span></p>
+            </div>
+
+            <div class="block-part reveal">
+              <h3><span class="block-label">AI</span>How the summaries are made</h3>
+              <ol class="project-flow reveal-stagger" aria-label="How the AI summaries are made">
+                <li><strong>A dedicated query</strong><span>Collects the required KPIs</span></li>
+                <li><strong>A file for the AI</strong><span>Links between the KPIs, examples of analysis, rules</span></li>
+                <li><strong>One goal</strong><span>Explain the variation of Proper, Under and Over FC</span></li>
+              </ol>
+              <p class="flow-note">Automated with Python: every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.</p>
+            </div>
+
+            <div class="block-part reveal">
+              <h3><span class="block-label">AI</span>A chatbot for the definitions, and only for them</h3>
+              <div class="story reveal-stagger" aria-label="Example of a conversation with the metric help chatbot">
+                <p class="story-line story-right"><span class="story-who">Forecaster</span><span class="story-bubble">How is Proper FC aggregated?</span></p>
+                <p class="story-line story-left"><span class="story-who">Metric help</span><span class="story-bubble">Proper slots divided by eligible slots, both summed over the period.</span></p>
+                <p class="story-line story-right"><span class="story-who">Forecaster</span><span class="story-bubble">Why did Zone 12 drop?</span></p>
+                <p class="story-line story-left"><span class="story-who">Metric help</span><span class="story-bubble">I only explain metric definitions, calculations and data sources.</span></p>
+              </div>
+            </div>
+
+            <div class="block-part reveal">
+              <h3>Two versions</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>PLECA market:</strong> a Google Apps Script web app reading a Google Sheet filled by BigQuery queries.</li>
+                <li><strong>All markets:</strong> hosted on Google Cloud Run, with the code in Python.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Block 3 -->
+          <div class="block" id="block-3" role="region" aria-labelledby="block-3-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">3</span>
+              <div><p class="block-kicker">Part 3 of 3</p><h2 class="block-title" id="block-3-title">Impact &amp; tools</h2></div>
+            </header>
+            <div class="block-part reveal">
+              <h3>Impact</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>For the whole team:</strong> a more organised and quicker way to check the performance of the zones.</li>
+                <li><strong>A new view, FC Schedule:</strong> forecast accuracy by day and by time slot, where Looker only gave an average.</li>
+                <li><strong>A new metric, Broken Correlation %:</strong> how much was delivered in bad conditions (Delivery Time above target and UTR below target). A high figure means bad conditions with regard to the target, or a target that cannot be reached.</li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>Tools</h3>
+              <ul class="tags reveal-stagger">
+                <li>Google Apps Script</li><li>HTML / CSS</li><li>JavaScript</li><li>Chart.js</li><li>Google Sheets</li><li>BigQuery (SQL)</li><li>Vertex AI (Gemini)</li><li>Python</li><li>Google Cloud Run</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <a href="experience.html#glovo" class="see-all project-xp-link">See the Glovo experience →</a>
 
