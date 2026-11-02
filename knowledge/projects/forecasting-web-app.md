@@ -26,7 +26,7 @@ Forecast accuracy is measured with the Utilization Rate, the average number of o
 
 ## Problem
 Looker had three limits:
-- No quick view of all the zones: a dashboard shows one selected zone or a whole country, and at country level the SUM or AVG hides deviations. Forecasters selected zones one by one, from the most important to the least.
+- No quick view of all the zones, no alerts: a dashboard shows one selected zone or a whole country, and at country level the SUM or AVG hides deviations. Forecasters selected zones one by one, from the most important to the least.
 - Hard to find patterns: on Looker, data were aggregated as an average or a sum, depending on the metric, so a recurring pattern by day or by time slot stayed hidden.
 - Too general: root causes (Missing Capacity, Delivery Time, Orders FC deviation) sat on other dashboards, not linked to forecast accuracy.
 
