@@ -1458,7 +1458,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .lk-stack i:first-of-type { border-radius: 3px 3px 0 0; }
 .lk-stack em { margin-bottom: 2px; color: #4b5563; font-size: 0.62rem; font-style: normal; font-weight: 600; line-height: 1; }
 
-/* Context: the 3 results */
+/* Context: second paragraph, then the 3 results */
+.project-page .fa-gap { margin-top: 8px; }
 .fa-kinds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; }
 .fa-kinds li { padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); }
 .fa-kinds strong { display: flex; align-items: center; gap: 6px; }

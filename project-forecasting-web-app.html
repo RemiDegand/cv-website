@@ -126,20 +126,20 @@
             </div>
             <div class="block-part reveal">
               <h3>Context</h3>
-              <p>Every week, the forecasting team forecast rider supply for each zone. Accuracy was measured with UTR (Utilization Rate), the average number of orders delivered by one rider in one hour, which gives each time slot one of 3 results:</p>
+              <p>Every week, the forecasting team forecast rider supply for each zone. Forecast accuracy was becoming more and more important: the team had to see the zones that deviated and explain why. We used a very global dashboard on Looker, not dedicated to forecast accuracy.</p>
+              <p class="fa-gap">Accuracy was measured with the Utilization Rate, the average number of orders delivered by one rider in one hour, which gives each time slot one of 3 results:</p>
               <ul class="fa-kinds reveal-stagger">
-                <li><strong><i class="k-pf"></i>Proper FC</strong><span>UTR close to its target</span></li>
-                <li><strong><i class="k-uf"></i>Under FC</strong><span>Too few slots opened</span></li>
-                <li><strong><i class="k-of"></i>Over FC</strong><span>Too many slots opened</span></li>
+                <li><strong><i class="k-pf"></i>Proper FC</strong><span>Utilization Rate close to its target</span></li>
+                <li><strong><i class="k-uf"></i>Under FC</strong><span>Too few slots opened, Utilization Rate above its target</span></li>
+                <li><strong><i class="k-of"></i>Over FC</strong><span>Too many slots opened, Utilization Rate below its target</span></li>
               </ul>
             </div>
             <div class="block-part reveal">
               <h3>The problem</h3>
-              <p>Forecast accuracy was becoming more and more important: the team had to see the zones that deviated and explain why. On Looker:</p>
+              <p>On Looker:</p>
               <ul class="project-did reveal-stagger">
                 <li><strong>No quick view of all the zones:</strong> forecasters selected them one by one, from the most important to the least.</li>
                 <li><strong>No patterns:</strong> an average aggregated by orders, with nothing by day or by time slot for the last week.</li>
-                <li><strong>Too general:</strong> root causes (Missing Capacity, Delivery Time, Orders FC deviation) sat on other dashboards, not linked to forecast accuracy.</li>
               </ul>
             </div>
           </div>
@@ -298,7 +298,7 @@
               <ul class="project-did reveal-stagger">
                 <li><strong>For the whole team:</strong> a more organised and quicker way to check the performance of the zones.</li>
                 <li><strong>A new view, FC Schedule:</strong> forecast accuracy by day and by time slot, where Looker only gave an average.</li>
-                <li><strong>A new metric, Broken Correlation %:</strong> how much was delivered in bad conditions (Delivery Time above target and UTR below target). A high figure means bad conditions with regard to the target, or a target that cannot be reached.</li>
+                <li><strong>A new metric, Broken Correlation %:</strong> how much was delivered in bad conditions (Delivery Time above target and Utilization Rate below target). A high figure means bad conditions with regard to the target, or a target that cannot be reached.</li>
               </ul>
             </div>
             <div class="block-part reveal">

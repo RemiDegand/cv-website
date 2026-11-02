@@ -20,13 +20,14 @@ The forecast accuracy web app is an internal tool Rémi designed and built durin
 ## Context
 Rémi was Forecasting Analyst Intern in Glovo's Global Operations, in the Supply Ops department, working on the PLECA market (Poland, Kazakhstan, Kyrgyzstan, Georgia, Armenia, Ukraine). Rémi forecast weekly rider supply for 5 countries (South Poland, West Ukraine, Armenia, Georgia, Kyrgyzstan), covering about 615K orders and 371K rider slots per week, to match rider availability with customer demand.
 
-Forecast accuracy is measured with UTR (Utilization Rate, the average number of orders delivered by one rider in one hour). Each time slot is Proper FC (UTR close to its target), Under FC (too few slots opened) or Over FC (too many slots opened).
+Forecast accuracy was becoming more and more important: the team had to see the zones that deviated and explain why. The team used a very global dashboard on Looker, not dedicated to forecast accuracy.
+
+Forecast accuracy is measured with the Utilization Rate, the average number of orders delivered by one rider in one hour. Each time slot is Proper FC (Utilization Rate close to its target), Under FC (too few slots opened, Utilization Rate above its target) or Over FC (too many slots opened, Utilization Rate below its target).
 
 ## Problem
-Forecast accuracy was becoming more and more important: the team had to see the zones that deviated and explain why. Forecasters used Looker, with 1 to 2 dashboards for forecast accuracy and other dashboards for root causes (Missing Capacity, Delivery Time, Orders FC deviation). It had three limits:
+Looker had two limits:
 - No quick view of all the zones: a dashboard shows one selected zone or a whole country, and at country level the SUM or AVG hides deviations. Forecasters selected zones one by one, from the most important to the least.
 - No patterns: for the last week or the last 7 days, the dashboard gave an average aggregated by orders, with no view by day or by time slot.
-- Too general: the other metrics were not really linked to forecast accuracy.
 
 ## What I built
 Rémi's idea was to see all the zones at the same time, with alarms; the tool kept growing until it became a full web app. Every dashboard, metric and summary is designed to explain the performance and variation of Proper, Under and Over FC.
@@ -50,7 +51,7 @@ A metric help chatbot (Gemini through Vertex AI) explains metric definitions, fo
 ## Results and impact
 - Used daily by every member of the forecasting team: a more organised and quicker way to check the performance of the zones.
 - New view, FC Schedule: forecast accuracy by day and by time slot, where Looker only gave an average.
-- New metric, Broken Correlation %: how much was delivered in bad conditions (Delivery Time above target and UTR below target). A high figure means bad conditions with regard to the target, or a target that cannot be reached.
+- New metric, Broken Correlation %: how much was delivered in bad conditions (Delivery Time above target and Utilization Rate below target). A high figure means bad conditions with regard to the target, or a target that cannot be reached.
 - Context figure for the role (not measured for the app alone): Rémi reached 58% forecast accuracy, 8 points above the 50% target, by reviewing past forecasts to fix gaps and leading weekly meetings with the 5 local teams.
 
 ## Users
