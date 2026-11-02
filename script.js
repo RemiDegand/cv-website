@@ -983,6 +983,14 @@ if (faSim) {
   cursor.className = "fa-cursor";
   cursor.innerHTML = '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 1l13 9.5-6 1 3.5 6.5-2.5 1.3-3.5-6.5L3 17z" fill="#fff" stroke="#1d2230" stroke-width="1.4" stroke-linejoin="round"/></svg>';
   faSim.append(cursor);   // on the whole simulation, not the screen: the mouse also goes to the tabs above it
+  const asia = faSim.querySelector(".fa-markets b");
+  // The very beginning: no market selected, no section, nothing on the screen
+  const setEmpty = () => {
+    asia.classList.remove("is-on");
+    views.forEach((view) => view.classList.remove("is-on"));
+    steps.forEach((step) => { step.classList.remove("is-on"); step.removeAttribute("aria-current"); });
+    status.textContent = "";
+  };
   const closeModals = () => faSim.querySelectorAll(".fa-modal.is-open").forEach((m) => m.classList.remove("is-open"));
   const openModal = (name) => { closeModals(); const m = modal(name); m.classList.add("is-open"); m.querySelector(".fa-modal-scroll").scrollTop = 0; };
   const show = (index) => {
@@ -1015,6 +1023,7 @@ if (faSim) {
     faSim.classList.remove("is-ended");
     views.forEach((view) => view.classList.remove("is-playing"));
     cursor.classList.remove("is-on");
+    asia.classList.add("is-on");
     details.hidden = false;
     setSorted(true);
     setSlider(70);
@@ -1026,6 +1035,7 @@ if (faSim) {
   faSim.querySelector(".fa-link").addEventListener("click", () => { const wasHidden = details.hidden; stopPlay(); details.hidden = !wasHidden; });
 
   if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    setEmpty();
     const run = async () => {
       const me = ++playing;
       setPlaying(true);
@@ -1097,7 +1107,16 @@ if (faSim) {
         details.hidden = true;
         cursor.classList.remove("is-on");
 
-        // 1. Market Overview, then the Insights of a country
+        // 1. Nothing on the screen; the mouse selects Asia, then Market Overview; then the Insights of a country
+        setEmpty();
+        mouseCentre();
+        cursor.classList.add("is-on");
+        if (!await pause(500)) return;
+        status.textContent = "Select a market…";
+        if (!await mouseTo(asia) || !await press(asia)) return;
+        asia.classList.add("is-on");
+        status.textContent = "…then a section.";
+        if (!await mouseTo(steps[0]) || !await press(steps[0])) return;
         show(0);
         // Almost at once: the market performance and both breakdowns
         if (!await showAll(overview, ".fa-a", 15) || !await pause(3000)) return;

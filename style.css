@@ -1480,13 +1480,13 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-kinds span { display: block; margin-top: 2px; color: var(--text-muted); font-size: 0.85rem; line-height: 1.35; }
 
 /* App: 4 steps above the screen (a click shows that view), the views share one place so the screen keeps its height */
-.fa-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-bottom: 12px; }
-.fa-steps button { display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 0; padding: 6px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-muted); font: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
-.fa-steps button:hover { border-color: var(--accent); color: var(--text); }
-.fa-steps span { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: #eef1f6; font-size: 0.7rem; }
-.fa-steps button.is-on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
-.fa-steps button.is-on span { background: var(--accent); color: #fff; }
-.fa-markets { display: flex; align-items: center; gap: 6px; padding: 7px 14px; border-bottom: 1px solid #e1e4ea; background: #fff; color: #1f2937; font-size: 0.75rem; }
+/* The app's bar: market buttons on the left, the 3 sections as tabs on the right */
+.fa-appbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; padding: 0 14px; border-bottom: 1px solid #e1e4ea; background: #fff; }
+.fa-steps { display: flex; gap: 2px; }
+.fa-steps button { padding: 9px 10px 7px; border: 0; border-bottom: 2px solid transparent; border-radius: 4px 4px 0 0; background: none; color: #6b7280; font: inherit; font-size: 0.78rem; font-weight: 600; white-space: nowrap; cursor: pointer; }
+.fa-steps button:hover { color: #1f2937; }
+.fa-steps button.is-on { border-bottom-color: var(--accent); color: var(--accent); }
+.fa-markets { display: flex; align-items: center; gap: 6px; padding: 6px 0; color: #1f2937; font-size: 0.75rem; }
 .fa-markets span { margin-right: 4px; color: #6b7280; font-weight: 600; }
 .fa-markets b { padding: 2px 12px; border: 1px solid #c9ced8; border-radius: 999px; font-weight: 600; }
 .fa-markets b.is-on { border-color: var(--accent); background: var(--accent); color: #fff; }
@@ -1593,7 +1593,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .lk-panels { grid-template-columns: minmax(0, 1fr); }
   .lk-load { margin-left: 0; }
   .fa-kinds { grid-template-columns: minmax(0, 1fr); }
-  .fa-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fa-appbar { padding: 0 8px; }
+  .fa-steps button { padding: 7px 6px 6px; font-size: 0.72rem; }
   .fa-views { height: 620px; }
   .fa-filters { grid-template-columns: minmax(0, 1fr); }
   .fa-view { padding: 10px 8px; }

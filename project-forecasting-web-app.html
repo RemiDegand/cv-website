@@ -157,14 +157,16 @@
                    Insights, a zone, Zone Insights or FC Schedule shows it and stops the play. Grid and charts: made-up data from a scratch script.
                    On the 2 notes --y = top of the frame in px. The HTML holds the FC Schedule (step 2) -->
               <figure class="project-shot annotated fa-sim" role="group" aria-label="Simulation of the app with made-up data: Market Overview and the Insights of a country; Global Zones with the deep dive, the Zone Insights and the FC Schedule of one zone; FC Alerts, sorted by order volume, where the zones above 70% of Proper FC disappear.">
-                <div class="fa-steps">
-                  <button type="button"><span>1</span>Market Overview</button>
-                  <button type="button" class="is-on" aria-current="step"><span>2</span>Global Zones</button>
-                  <button type="button"><span>3</span>FC Alerts</button>
-                </div>
                 <div class="monitor-screen">
                   <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Forecast accuracy web app · simulation</span></div>
-                  <div class="fa-markets"><span>Market</span><b class="is-on">Asia</b><b>Africa</b><b>Europe</b></div>
+                  <div class="fa-appbar">
+                    <div class="fa-markets"><span>Market</span><b class="is-on">Asia</b><b>Africa</b><b>Europe</b></div>
+                    <div class="fa-steps">
+                      <button type="button">Market Overview</button>
+                      <button type="button" class="is-on" aria-current="step">Global Zones</button>
+                      <button type="button">FC Alerts</button>
+                    </div>
+                  </div>
                   <div class="fa-views">
 
                     <!-- 1. Market Overview: market performance, breakdown by country and by area, Insights on a row -->
