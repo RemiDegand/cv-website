@@ -149,8 +149,9 @@
               <span class="block-num" aria-hidden="true">2</span>
               <div><p class="block-kicker">Part 2 of 3</p><h2 class="block-title" id="block-2-title">What I built: one app to understand forecast accuracy</h2></div>
             </header>
-            <div class="block-part reveal fa-first">
-              <h3><span class="block-label">Reporting</span>The web app and its dashboards</h3>
+            <div class="block-part reveal fa-section fa-first">
+              <h3>Reporting</h3>
+              <p class="fa-subtitle">The web app and its dashboards</p>
               <p>Every dashboard, metric and summary answers one question: why did Proper, Under or Over FC move? Other metrics are there for their link to it.</p>
               <!-- Simulation (script.js): 4 views, playing once on screen; a click on a step shows that view and stops the play.
                    Grid made with made-up data by a scratch script; on the 2 notes --y = top of the frame in px. The HTML holds step 3 -->
@@ -263,8 +264,9 @@
               </ul>
             </div>
 
-            <div class="block-part reveal">
-              <h3><span class="block-label">AI summaries</span>Explaining why forecast accuracy moved</h3>
+            <div class="block-part reveal fa-section">
+              <h3>AI summaries</h3>
+              <p class="fa-subtitle">Explaining why forecast accuracy moved</p>
               <p>A written summary for each zone, with one goal: explain the variation of Proper, Under and Over FC.</p>
               <ol class="project-flow fa-flow-4 reveal-stagger" aria-label="How the AI summaries are made">
                 <li><strong>A BigQuery query</strong><span>All the data needed to explain the variation</span></li>
@@ -275,8 +277,9 @@
               <p class="flow-note">It runs every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.</p>
             </div>
 
-            <div class="block-part reveal">
-              <h3><span class="block-label">Chatbot</span>How the data are computed and how to read them</h3>
+            <div class="block-part reveal fa-section">
+              <h3>Chatbot</h3>
+              <p class="fa-subtitle">How the data are computed and how to read them</p>
               <p>The metrics were complex, and some were new, so a chatbot explains them. To save tokens, I gave it the queries and only the complementary information it needed.</p>
               <div class="story fa-after-text reveal-stagger" aria-label="Example of a conversation with the chatbot">
                 <p class="story-line story-right"><span class="story-who">Forecaster</span><span class="story-bubble">How is Proper FC computed?</span></p>
