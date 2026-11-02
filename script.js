@@ -1132,7 +1132,7 @@ if (faSim) {
         if (!await mouseTo(steps[1]) || !await press(steps[1])) return;
         show(1);
         status.textContent = "Global Zones: every zone with its main KPIs: Delivery Time, Utilization Rate, forecast accuracy and capacity.";
-        if (!await showAll(global, ".fa-a", 150) || !await pause(2500)) return;
+        if (!await showAll(global, ".fa-a", 40) || !await pause(2500)) return;
         const zone = global.querySelector(".fa-link");
         status.textContent = "A click on a zone opens its deep dive: secondary KPIs, buttons to go further, and comments for the action plan.";
         if (!await mouseTo(zone) || !await press(zone)) return;
