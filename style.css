@@ -1433,7 +1433,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .lk-check.is-on::before { content: "✓"; border-color: var(--accent); background: var(--accent); }
 .lk-load { margin-left: auto; padding: 4px 16px; border-radius: 4px; background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 700; line-height: 16px; }
 .lk-load.is-pressed { background: #1d4ed8; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3); }
-/* 2 × 2: forecast accuracy top left, Utilization Rate top right, Delivery Time and the count underneath */
+/* 2 × 2: forecast accuracy top left, Utilization Rate top right, Delivery Time and slots opened underneath */
 .lk-panels { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; padding-top: 10px; }
 .lk-panel { display: grid; align-content: start; gap: 6px; min-width: 0; }
 .lk-panels.is-empty .lk-panel > :not(.lk-chart-title), .lk-panels.is-loading .lk-panel > :not(.lk-chart-title) { visibility: hidden; }
@@ -1452,10 +1452,11 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .lk-target { stroke: #6b7280; stroke-dasharray: 4 3; }
 .lk-dot-actual { fill: #2563eb; }
 .lk-dot-target { fill: #6b7280; }
-.lk-tally { display: grid; align-content: center; justify-items: center; gap: 2px; padding: 10px; border: 1px dashed #c9ced8; border-radius: 8px; color: #4b5563; text-align: center; }
-.lk-tally span { font-size: 0.72rem; font-weight: 600; }
-.lk-tally b { color: #1f2937; font-size: 1.5rem; }
-.lk-tally em { font-size: 0.72rem; font-style: normal; }
+/* Slots opened: each bar is the total, assigned (green) at the bottom and unassigned (red) on top; bars scaled on the day with the most slots */
+.lk-stack { display: flex; flex-direction: column; justify-content: flex-end; box-sizing: content-box; height: 100px; padding-top: 16px; }   /* the padding holds the total above the tallest bar */
+.lk-stack i { display: block; flex: none; background: var(--k); }
+.lk-stack i:first-of-type { border-radius: 3px 3px 0 0; }
+.lk-stack em { margin-bottom: 2px; color: #4b5563; font-size: 0.62rem; font-style: normal; font-weight: 600; line-height: 1; }
 
 /* Context: the 3 results */
 .fa-kinds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; }

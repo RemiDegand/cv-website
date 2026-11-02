@@ -846,7 +846,7 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
   const [segDays] = $(".lk-seg").children;
   const number = $(".lk-number");
   const load = $(".lk-load");
-  const count = $(".lk-count");
+  const slotCols = [...lookerSim.querySelectorAll(".lk-stack")];
   const status = $(".lk-status");
   const finalStatus = status.textContent;
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -862,17 +862,27 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
   };
   const utrTarget = [2.5, 2.5, 2.5, 2.5, 2.6, 2.7, 2.7];
   const dtTarget = [30, 30, 30, 30, 32, 32, 32];
-  // Made-up figures. Bars: [over, under, proper] %. Too few slots = Utilization Rate and Delivery Time above target; too many = below
+  // Made-up figures. Bars: [over, under, proper] %. Too few slots = Utilization Rate and Delivery Time above target; too many = below.
+  // Slots: [assigned, unassigned] per day (total slots opened - assigned = unassigned)
   const views = {
-    "Zone 1": { bars: [[18, 12, 70], [20, 14, 66], [16, 12, 72], [18, 16, 66], [14, 24, 62], [12, 38, 50], [14, 34, 52]], utr: [2.4, 2.4, 2.5, 2.5, 2.8, 3.2, 3.1], dt: [29, 30, 29, 31, 34, 41, 39] },
-    "Zone 2": { bars: [[34, 10, 56], [30, 12, 58], [18, 14, 68], [20, 12, 68], [18, 16, 66], [22, 14, 64], [24, 12, 64]], utr: [1.9, 2.0, 2.5, 2.4, 2.6, 2.6, 2.5], dt: [24, 25, 29, 28, 31, 31, 30] },
-    "Zone 3": { bars: [[20, 18, 62], [18, 22, 60], [22, 20, 58], [20, 16, 64], [16, 26, 58], [18, 24, 58], [20, 20, 60]], utr: [2.5, 2.6, 2.4, 2.5, 2.8, 2.8, 2.7], dt: [30, 32, 30, 29, 35, 34, 33] },
-    country: { bars: [[20, 19, 61], [21, 19, 60], [19, 19, 62], [20, 20, 60], [19, 21, 60], [19, 22, 59], [20, 21, 59]], utr: [2.5, 2.4, 2.5, 2.5, 2.6, 2.8, 2.7], dt: [30, 29, 30, 31, 32, 33, 33] },
+    "Zone 1": { bars: [[18, 12, 70], [20, 14, 66], [16, 12, 72], [18, 16, 66], [14, 24, 62], [12, 38, 50], [14, 34, 52]], utr: [2.4, 2.4, 2.5, 2.5, 2.8, 3.2, 3.1], dt: [29, 30, 29, 31, 34, 41, 39], slots: [[400, 20], [400, 22], [410, 20], [415, 25], [450, 25], [470, 20], [465, 20]] },
+    "Zone 2": { bars: [[34, 10, 56], [30, 12, 58], [18, 14, 68], [20, 12, 68], [18, 16, 66], [22, 14, 64], [24, 12, 64]], utr: [1.9, 2.0, 2.5, 2.4, 2.6, 2.6, 2.5], dt: [24, 25, 29, 28, 31, 31, 30], slots: [[430, 110], [425, 95], [400, 25], [395, 25], [420, 30], [440, 30], [430, 25]] },
+    "Zone 3": { bars: [[20, 18, 62], [18, 22, 60], [22, 20, 58], [20, 16, 64], [16, 26, 58], [18, 24, 58], [20, 20, 60]], utr: [2.5, 2.6, 2.4, 2.5, 2.8, 2.8, 2.7], dt: [30, 32, 30, 29, 35, 34, 33], slots: [[405, 35], [395, 40], [410, 30], [400, 30], [430, 35], [450, 40], [440, 35]] },
+    country: { bars: [[20, 19, 61], [21, 19, 60], [19, 19, 62], [20, 20, 60], [19, 21, 60], [19, 22, 59], [20, 21, 59]], utr: [2.5, 2.4, 2.5, 2.5, 2.6, 2.8, 2.7], dt: [30, 29, 30, 31, 32, 33, 33], slots: [[5000, 300], [4900, 300], [5000, 280], [5100, 320], [5600, 350], [6100, 420], [5900, 380]] },
   };
   const draw = (view) => {
     bars.forEach((bar, d) => [...bar.children].forEach((part, p) => { part.style.height = `${view.bars[d][p]}%`; }));
     $('[data-chart="utr"]').innerHTML = lineChart(view.utr, utrTarget, 1.5, 3.5);
     $('[data-chart="dt"]').innerHTML = lineChart(view.dt, dtTarget, 20, 45);
+    const most = Math.max(...view.slots.map(([assigned, unassigned]) => assigned + unassigned));
+    slotCols.forEach((col, d) => {
+      const [assigned, unassigned] = view.slots[d];
+      const total = assigned + unassigned;
+      const [label, red, green] = col.children;
+      label.textContent = total >= 1000 ? `${(total / 1000).toFixed(1)}k` : total;
+      red.style.height = `${unassigned / most * 100}%`;
+      green.style.height = `${assigned / most * 100}%`;
+    });
   };
   // A drop-down opens under its filter, the choice lights up, then it is selected
   const choose = async (name, options, value) => {
@@ -904,7 +914,6 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
       number.textContent = "";
       checks.forEach((check) => check.classList.remove("is-on"));
       panels.classList.add("is-empty");
-      count.textContent = "0 of 40";
       await wait(700);
       status.textContent = "Select a country, a city and a zone…";
       await choose("country", ["Country A", "Country B"], "Country A");
@@ -924,14 +933,12 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
       await wait(350);
       status.textContent = "Load, and wait.";
       await clickLoad(views["Zone 1"]);
-      count.textContent = "1 of 40";
       status.textContent = "Zone 1 checked. Next zone…";
       await wait(2000);
-      for (const [i, zone] of ["Zone 2", "Zone 3"].entries()) {
+      for (const zone of ["Zone 2", "Zone 3"]) {
         await choose("zone", zones, zone);
         status.textContent = "Load, and wait again.";
         await clickLoad(views[zone]);
-        count.textContent = `${i + 2} of 40`;
         status.textContent = `${zone} checked. Next zone…`;
         await wait(2000);
       }
