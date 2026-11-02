@@ -943,7 +943,7 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
 // A click on the simulation pauses it, another click resumes it. The buttons really work: a click on a step, Insights, the zone,
 // Zone Insights, × or FC Schedule stops the play and does it.
 // The HTML holds the FC Schedule (step 2), kept with "reduce motion".
-const faSim = document.querySelector(".fa-sim");
+const faSim = document.querySelector(".fa-sim:not(.ais-sim)");
 if (faSim) {
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const steps = [...faSim.querySelectorAll(".fa-steps button")];
@@ -1199,6 +1199,112 @@ if (faSim) {
     }, { rootMargin: "0px 0px -20% 0px" });
     start.observe(faSim);
   }
+}
+
+// Forecast accuracy page, "AI summaries": same view as the app above. In Global Zones the mouse opens a zone, then Zone Insights, and it stays
+// on the AI summary, explained day by day under the screen. A click pauses it. Starts once on screen, stops on the restart arrow.
+// The HTML holds the final state, kept without JS or with "reduce motion".
+const aiSim = document.querySelector(".ais-sim");
+if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const stage = aiSim.querySelector(".fa-views");
+  const view = aiSim.querySelector(".fa-view");
+  const details = aiSim.querySelector(".fa-details");
+  const modal = aiSim.querySelector(".fa-modal");
+  const zone = aiSim.querySelector(".fa-link");
+  const insights = aiSim.querySelector('[data-go="insights"]');
+  const status = aiSim.querySelector(".fa-status");
+  const finalStatus = status.textContent;
+  const days = [...aiSim.querySelectorAll(".ais-day")];
+  const dayTexts = [
+    "Monday: the AI sees Over FC up in the afternoon and links it to orders below Orders FC.",
+    "Friday: Under FC up in the evening, which the AI links to orders above Orders FC and more Missing Capacity.",
+    "Saturday: Proper FC down in the evening, with orders rising and Delivery Time above target.",
+    "Sunday: Under FC still high. Missing Capacity is stable, so the AI points to the orders.",
+  ];
+  const cursor = document.createElement("span");
+  cursor.className = "fa-cursor";
+  cursor.innerHTML = '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 1l13 9.5-6 1 3.5 6.5-2.5 1.3-3.5-6.5L3 17z" fill="#fff" stroke="#1d2230" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+  aiSim.append(cursor);
+  const paused = document.createElement("span");
+  paused.className = "fa-paused";
+  paused.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M7 5l13 7-13 7z"/></svg>Paused: click to resume';
+  paused.hidden = true;
+  stage.append(paused);
+  let isPlaying = false;
+  aiSim.addEventListener("click", (event) => {
+    if (isPlaying && !event.target.closest(".sim-restart")) paused.hidden = !paused.hidden;
+  });
+  // Waits for ms of play: the time doesn't run while the simulation is paused
+  const pause = async (ms) => {
+    let left = ms;
+    while (left > 0) {
+      const step = Math.min(left, 50);
+      await wait(step);
+      if (paused.hidden) left -= step;
+    }
+  };
+  const mouseTo = async (el) => {
+    const box = aiSim.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    cursor.classList.add("is-on");
+    cursor.style.transform = `translate(${r.left - box.left + r.width / 2}px, ${r.top - box.top + r.height / 2}px)`;
+    await pause(500);
+  };
+  const press = async (el) => {
+    el.classList.add("fa-is-pressed");
+    await pause(200);
+    el.classList.remove("fa-is-pressed");
+  };
+  const reset = () => {
+    modal.classList.remove("is-open");
+    modal.querySelector(".fa-modal-scroll").scrollTop = 0;
+    details.hidden = true;
+    days.forEach((day) => day.classList.remove("is-on"));
+    view.scrollTop = 0;
+    status.textContent = "Global Zones: every zone with its main KPIs.";
+  };
+  reset();
+  const run = async () => {
+    isPlaying = true;
+    aiSim.classList.add("is-playable");
+    for (;;) {
+      reset();
+      await pause(1200);
+      status.textContent = "A click on a zone opens its deep dive.";
+      await mouseTo(zone);
+      await press(zone);
+      details.hidden = false;
+      await pause(1000);
+      status.textContent = "Zone Insights opens on the AI summary, already written: nothing to ask for.";
+      await mouseTo(insights);
+      await press(insights);
+      modal.classList.add("is-open");
+      cursor.classList.remove("is-on");
+      await pause(2600);
+      for (const [i, day] of days.entries()) {
+        days.forEach((d) => d.classList.remove("is-on"));
+        day.classList.add("is-on");
+        status.textContent = dayTexts[i];
+        const box = modal.querySelector(".fa-modal-scroll");
+        const below = day.getBoundingClientRect().bottom - box.getBoundingClientRect().bottom;
+        if (below > 0) box.scrollTop += below + 12;   // phones: the summary is taller than the screen
+        await pause(3200);
+      }
+      days.forEach((d) => d.classList.remove("is-on"));
+      status.textContent = finalStatus;
+      await pause(2000);
+      isPlaying = false;
+      aiSim.classList.remove("is-playable");
+      await restartAtEnd(aiSim);
+      isPlaying = true;
+      aiSim.classList.add("is-playable");
+    }
+  };
+  const start = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { start.disconnect(); run(); }
+  }, { rootMargin: "0px 0px -20% 0px" });
+  start.observe(aiSim);
 }
 
 // Later: chatbot window (Phase 2).

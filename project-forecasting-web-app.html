@@ -373,6 +373,74 @@
               <h3><span class="fa-num" aria-hidden="true">2</span>AI summaries</h3>
               <p class="fa-subtitle">Explaining why forecast accuracy moved</p>
               <p>A written summary for each zone, with one goal: explain the variation of Proper, Under and Over FC.</p>
+              <!-- Simulation (script.js), same app view as above: Global Zones, a click on a zone, Zone Insights, then it stays on the AI summary and
+                   explains it day by day. A click pauses it. Made-up data. The HTML holds the final state -->
+              <figure class="project-shot annotated fa-sim ais-sim" role="group" aria-label="Simulation with made-up data: in Global Zones, a forecaster opens a zone, then Zone Insights, and reads the AI summary, which explains day by day why Proper, Under and Over FC moved.">
+                <div class="monitor-screen">
+                  <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Forecast accuracy web app · simulation</span></div>
+                  <div class="fa-appbar" aria-hidden="true">
+                    <div class="fa-markets"><span>Market</span><b class="is-on">Asia</b><b>Africa</b><b>Europe</b></div>
+                    <div class="fa-steps"><button type="button" tabindex="-1">Market Overview</button><button type="button" tabindex="-1" class="is-on">Global Zones</button><button type="button" tabindex="-1">FC Alerts</button></div>
+                  </div>
+                  <div class="fa-views">
+                    <div class="fa-view is-on">
+                      <p class="fa-head fa-a">Global Zones <em>Viewing 40 zones</em></p>
+                      <div class="fa-tw">
+                        <table class="fa-table fa-zones">
+                          <thead>
+                            <tr class="fa-a fa-super"><th></th><th colspan="2">Delivery Time</th><th>Utilization</th><th colspan="4">Forecast accuracy</th><th>Capacity</th></tr>
+                            <tr class="fa-a"><th>Zone</th><th>DT</th><th>Gap</th><th>Rate</th><th>Under</th><th>Proper</th><th>Over</th><th>Elig. slots</th><th>SF</th></tr>
+                          </thead>
+                          <tbody>
+                            <tr class="fa-a fa-zone-row"><td><button type="button" class="fa-link"><span class="fa-toggle"></span>Zone 12</button></td><td>37.1</td><td>+5.1</td><td>3.0</td><td>24%</td><td>49%</td><td>27%</td><td>4.3k</td><td>94%</td></tr>
+                            <tr class="fa-details"><td colspan="9">
+                              <div class="fa-dive-head"><b>Zone Deep Dive</b><span class="fa-dive-btns"><button type="button" class="fa-btn" data-go="insights">🔍 Zone Insights</button><button type="button" class="fa-btn">📊 FC Schedule</button></span></div>
+                              <div class="fa-dive">
+                                <div><h5>Targets</h5><span><i>DT Target</i><b>32.0</b></span><span><i>Utilization Rate Target</i><b>2.6</b></span></div>
+                                <div><h5>Missing Capacity</h5><span><i>% Missing Cap</i><b>6.2%</b></span><span><i>WoW</i><b>+3.0%</b></span><h5>Correlation</h5><span><i>Broken Correlation</i><b>14.5%</b></span></div>
+                                <div><h5>Capacity</h5><span><i>Slot Filling</i><b>94%</b></span><span><i>Filling Rate</i><b>95%</b></span><h5>Orders</h5><span><i>Orders WAPE</i><b>11.2%</b></span><span><i>Orders MPE</i><b>+6.4%</b></span></div>
+                                <div class="fa-comment"><h5>📝 Action Plan / Comments</h5><p>Weekend evenings short on slots: discuss with the local team.</p></div>
+                              </div>
+                            </td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 7</td><td>33.4</td><td>+1.4</td><td>2.7</td><td>31%</td><td>52%</td><td>17%</td><td>3.9k</td><td>96%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 21</td><td>31.8</td><td>−0.2</td><td>2.6</td><td>28%</td><td>54%</td><td>18%</td><td>3.2k</td><td>95%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 33</td><td>30.5</td><td>−1.5</td><td>2.3</td><td>14%</td><td>56%</td><td>30%</td><td>2.8k</td><td>97%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 18</td><td>32.6</td><td>+0.6</td><td>2.6</td><td>26%</td><td>58%</td><td>16%</td><td>2.4k</td><td>94%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 23</td><td>32.1</td><td>+0.1</td><td>2.6</td><td>22%</td><td>61%</td><td>17%</td><td>3.4k</td><td>95%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 19</td><td>31.5</td><td>−0.5</td><td>2.6</td><td>20%</td><td>63%</td><td>17%</td><td>2.3k</td><td>95%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 4</td><td>30.9</td><td>−1.1</td><td>2.5</td><td>17%</td><td>66%</td><td>17%</td><td>5.1k</td><td>97%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 6</td><td>31.2</td><td>−0.8</td><td>2.6</td><td>18%</td><td>68%</td><td>14%</td><td>4.6k</td><td>96%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 25</td><td>31.4</td><td>−0.6</td><td>2.5</td><td>15%</td><td>69%</td><td>16%</td><td>1.7k</td><td>96%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 2</td><td>30.7</td><td>−1.3</td><td>2.5</td><td>13%</td><td>72%</td><td>15%</td><td>2.1k</td><td>96%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 14</td><td>30.4</td><td>−1.6</td><td>2.5</td><td>11%</td><td>73%</td><td>16%</td><td>4.1k</td><td>97%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 15</td><td>31.1</td><td>−0.9</td><td>2.6</td><td>12%</td><td>74%</td><td>14%</td><td>2.6k</td><td>96%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 38</td><td>30.1</td><td>−1.9</td><td>2.5</td><td>10%</td><td>75%</td><td>15%</td><td>1.9k</td><td>97%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 31</td><td>29.6</td><td>−2.4</td><td>2.5</td><td>9%</td><td>76%</td><td>15%</td><td>4.8k</td><td>98%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 9</td><td>30.2</td><td>−1.8</td><td>2.5</td><td>10%</td><td>78%</td><td>12%</td><td>3.0k</td><td>97%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 11</td><td>29.9</td><td>−2.1</td><td>2.4</td><td>7%</td><td>79%</td><td>14%</td><td>2.9k</td><td>98%</td></tr>
+                            <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 27</td><td>29.8</td><td>−2.2</td><td>2.5</td><td>8%</td><td>81%</td><td>11%</td><td>3.6k</td><td>98%</td></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="fa-modal is-open">
+                        <div class="fa-modal-scroll">
+                          <p class="fa-modal-title">Zone Insights: Zone 12 </p>
+                          <div class="fa-tiles "><div><span>Actual Orders</span><b>9k</b></div><div><span>Under FC</span><b class="t-uf">24%</b><em>+6.8 pp</em></div><div><span>Proper FC</span><b class="t-pf">49%</b><em>−7.2 pp</em></div><div><span>Over FC</span><b class="t-of">27%</b><em>+0.4 pp</em></div><div><span>Eligible Slots</span><b>4.3k</b><em>+0.8%</em></div></div>
+                          <div class="fa-ai">
+                            <p class="fa-ai-title">✨ AI Summary <em>Generated on Monday morning</em></p>
+                            <p class="fa-note-text">Explains why Proper, Under and Over FC moved, day by day.</p>
+                            <p class="ais-day"><b>Mon:</b> <span class="t-of">Over FC rose by 9 pp</span> in the afternoon: orders came in 6% below Orders FC, with no change in capacity.</p>
+                            <p class="ais-day"><b>Fri:</b> <span class="t-uf">Under FC rose by 14 pp</span> in the evening: orders came in 8% above Orders FC and Missing Capacity rose by 3 pp.</p>
+                            <p class="ais-day"><b>Sat:</b> <span class="t-uf">Proper FC fell by 11 pp</span> in the evening: orders rose 12% week on week, and Delivery Time stayed above target.</p>
+                            <p class="ais-day"><b>Sun:</b> <span class="t-uf">Under FC stayed high</span> in the evening: the deviation comes from the orders, as Missing Capacity is stable.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <figcaption class="fa-status">One summary per zone, written automatically: the forecaster reads why the zone moved.</figcaption>
+              </figure>
               <ol class="project-flow fa-flow-4 reveal-stagger" aria-label="How the AI summaries are made">
                 <li><strong>A BigQuery query</strong><span>All the data needed to explain the variation</span></li>
                 <li><strong>An AI agent</strong><span>Given access to this query</span></li>

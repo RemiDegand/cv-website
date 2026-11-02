@@ -1499,6 +1499,10 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-sim.is-playable .fa-views { cursor: pointer; }
 .fa-paused { position: absolute; z-index: 5; top: 50%; left: 50%; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #1d2230; color: #fff; font-size: 0.8rem; font-weight: 600; white-space: nowrap; transform: translate(-50%, -50%); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); pointer-events: none; }
 .fa-paused[hidden] { display: none; }
+/* AI summaries simulation: the day being explained lights up */
+.project-page .ais-day { padding: 2px 4px; border-radius: 4px; }
+.project-page .ais-day.is-on { background: #fff3c4; }
+.ais-sim + .project-flow { margin-top: 24px; }
 .fa-sim > .fa-cursor:not(.is-on) { opacity: 0 !important; }   /* stays hidden when the end of the simulation fades everything */
 .fa-is-pressed { box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.45) !important; }
 /* A window over the view (Insights, Zone Insights), scrolled by the mouse */
