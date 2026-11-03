@@ -28,14 +28,26 @@
 
   <main>
     <!-- 1. HERO -->
-    <section id="hero" class="hero">
+    <!-- Dynamic hero (3 Nov 2026, web design pass): who I am (name + headline + typed line),
+         what I do now and what I want next (Before → Now → Next path), moving background, photo with
+         a turning ring and floating chips. Everything is readable without JavaScript and without motion. -->
+    <section id="hero" class="hero hero-live">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+        <span class="hero-grid"></span>
+      </div>
       <div class="container hero-inner">
         <div class="hero-text">
           <p class="welcome">Welcome to my CV website</p>
           <h1>Rémi Degand</h1>
-          <!-- Headline decided 12 Oct 2026; pitch replaced 3 Nov 2026 (user's request) -->
+          <!-- Headline decided 12 Oct 2026; the pitch of 3 Nov (MiM at NEOMA, MSc Business Analytics; internship, VIE or full-time from May 2027) now lives in the path below -->
           <p class="headline">Data &amp; Business Analyst</p>
-          <p class="pitch">Currently in the final year of my Master in Management (MiM) at NEOMA Business School, MSc Business Analytics. <span class="eyebrow">Looking for an internship, VIE or full-time contract · Available from May 2027</span></p>
+          <p class="hero-rotator"><span class="sr-only">I build forecasts, dashboards, data models, AI tools and automations.</span><span aria-hidden="true">I build <span class="rotator" data-words="forecasts|dashboards|data models|AI tools|automations">forecasts, dashboards and AI tools</span><span class="rotator-caret"></span></span></p>
+          <ol class="journey" aria-label="My path">
+            <li class="j-step j-past"><span class="j-dot"></span><div class="j-card"><span class="j-label">Before</span><strong>5 internships</strong><span class="j-sub">Latest at Glovo &amp; OSLO</span></div></li>
+            <li class="j-step j-now"><span class="j-dot"></span><div class="j-card"><span class="j-label">Now</span><strong>Final year, Master in Management</strong><span class="j-sub">NEOMA Business School · MSc Business Analytics</span></div></li>
+            <li class="j-step j-next"><span class="j-dot"></span><div class="j-card"><span class="j-label">Next</span><strong>Analyst role in tech</strong><span class="j-sub">Internship, VIE or full-time · from May 2027</span></div></li>
+          </ol>
           <div class="hero-buttons">
             <a href="CV.pdf" class="button button-primary" download="Remi-Degand-CV.pdf">Download CV</a>
             <!-- The chatbot comes in Phase 2: this button will open it -->
@@ -43,8 +55,46 @@
             <a href="https://www.linkedin.com/in/remi-degand/" class="button button-ghost" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
-        <!-- profile.jpg = 600x600 web version of photo2.jpg -->
-        <img src="profile.jpg" alt="Portrait of Rémi Degand" class="hero-photo" width="220" height="220">
+        <div class="hero-visual">
+          <!-- profile.jpg = 600x600 web version of photo2.jpg -->
+          <div class="photo-ring"><img src="profile.jpg" alt="Portrait of Rémi Degand" class="hero-photo" width="220" height="220"></div>
+          <span class="float-chip chip-status"><i class="pulse" aria-hidden="true"></i>Open to opportunities · May 2027</span>
+          <span class="float-chip chip-a" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>Forecasting</span>
+          <span class="float-chip chip-b" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"/></svg>Python · SQL</span>
+          <span class="float-chip chip-c" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg>AI tools</span>
+        </div>
+      </div>
+      <a href="#proof" class="scroll-cue"><span class="mouse" aria-hidden="true"></span>Scroll to explore</a>
+    </section>
+
+    <!-- In numbers + moving strip of the organisations I worked for (3 Nov 2026, web design pass).
+         Numbers: 9 companies = 5 internships + 4 summer jobs; 7 projects on projects.html; 3 countries = Spain, Malta, France; 3 languages = French, English, Spanish -->
+    <section id="proof" class="home-proof" aria-label="In numbers">
+      <div class="container">
+        <ul class="stats">
+          <li class="stat"><strong data-count="9">9</strong><span>companies worked for</span></li>
+          <li class="stat"><strong data-count="7">7</strong><span>projects delivered at work</span></li>
+          <li class="stat"><strong data-count="3">3</strong><span>countries worked in</span></li>
+          <li class="stat"><strong data-count="3">3</strong><span>languages spoken</span></li>
+        </ul>
+        <div class="marquee">
+          <p class="marquee-label">Where I've worked and volunteered</p>
+          <div class="marquee-viewport">
+            <ul class="marquee-track">
+              <li><img src="logos/glovo.png" alt="" width="40" height="40">Glovo</li>
+              <li><img src="logos/oslo.png" alt="" width="40" height="40">OSLO</li>
+              <li><img src="logos/envie-dsup.png" alt="" width="40" height="40">Envie d'Sup</li>
+              <li><img src="logos/pain-de-minuit.png" alt="" width="40" height="40">Pain de Minuit</li>
+              <li><img src="logos/hilton.png" alt="" width="40" height="40">Hilton</li>
+              <li><img src="logos/decathlon.png" alt="" width="40" height="40">Decathlon</li>
+              <li><img src="logos/intermarche.png" alt="" width="40" height="40">Intermarché</li>
+              <li><img src="logos/florimond-desprez.png" alt="" width="40" height="40">Florimond Desprez</li>
+              <li><img src="logos/europevent.png" alt="" width="40" height="40">EuropEvent</li>
+              <li><img src="logos/egc.png" alt="" width="40" height="40">EGC Lille</li>
+              <li><img src="logos/cheer-up.png" alt="" width="40" height="40">Cheer Up</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -55,7 +105,7 @@
     <section id="highlights">
       <!-- What the visitor finds on each page: one tile per page (same tiles as the Projects page overview), each a link to its page -->
       <div class="container site-map">
-        <div class="section-head"><h2>What you'll find here</h2></div>
+        <div class="section-head guide-head"><h2>How this site works</h2><p class="guide-sub">Four pages, one click each. Start wherever you like.</p></div>
         <nav class="cat-overview" aria-label="Sections of the site">
           <a href="experience.html" class="cat-tile">
             <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></span>
@@ -78,6 +128,7 @@
             <p class="cat-desc">Find where to reach me: email and LinkedIn.</p>
           </a>
         </nav>
+        <p class="ai-teaser"><span class="ai-spark" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></span><span><strong>Coming soon:</strong> an AI assistant that answers your questions about my profile, in your language.</span></p>
       </div>
       <div class="container home-split">
         <div class="home-col">
@@ -101,8 +152,8 @@
                 <p class="card-desc">Forecaster in the Supply Ops department for the PLECA market. Forecasted weekly rider supply from customer demand and designed tools to make processes more efficient.</p>
                 <ul class="figures">
                   <li><strong>5</strong> countries forecast weekly</li>
-                  <li><strong>1</strong> web app designed, used daily by the team</li>
                   <li><strong>+8 pts</strong> forecast accuracy vs. target</li>
+                  <li><strong>1</strong> web app designed, used daily by the team</li>
                 </ul>
                 <ul class="tags">
                   <li>Python</li><li>SQL</li><li>BigQuery</li><li>Looker</li><li>Apps Script</li><li>LLMs</li>
