@@ -115,6 +115,27 @@ h4 { font-size: 1.1rem; }
   box-shadow: var(--shadow);
 }
 
+/* ===== Home: one continuous background instead of alternating bands (3 Nov 2026, user's request) =====
+   Soft blue glows behind the hero fade into white; the sections keep no background of their own */
+body.home {
+  background:
+    radial-gradient(900px 520px at 88% -80px, #dfe8ff 0%, rgba(223, 232, 255, 0) 70%),
+    radial-gradient(760px 480px at -120px 260px, #eef3ff 0%, rgba(238, 243, 255, 0) 70%),
+    linear-gradient(180deg, #fbfcff 0%, var(--bg) 900px);
+}
+body.home section { background: none; }
+body.home .menu { background: rgba(255, 255, 255, 0.72); }
+body.home .hero { padding: 88px 0 48px; }
+body.home #highlights { padding-top: 32px; }
+/* "Welcome to my CV website": small blue capitals after a short line, above the name */
+.welcome { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; color: var(--accent); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.welcome::before { content: ""; width: 28px; height: 2px; border-radius: 2px; background: var(--accent); }
+/* Photo: a soft blue ring around it */
+body.home .hero-photo { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0.08), 0 18px 40px rgba(37, 99, 235, 0.16); }
+/* A thin fading line between the hero and the rest */
+body.home #highlights::before { content: ""; display: block; max-width: 1088px; height: 1px; margin: 0 auto 56px; background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent); }
+@media (max-width: 720px) { body.home .hero { padding: 48px 0 32px; } body.home #highlights::before { margin: 0 16px 40px; } }
+
 /* ===== Buttons ===== */
 .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
