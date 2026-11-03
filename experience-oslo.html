@@ -78,12 +78,52 @@
             </div>
             <div class="block-part reveal">
               <h3>Projects from this experience</h3>
-              <div class="xp-projs reveal-stagger">
-                <a href="project-revenue-recognition.html" class="xp-proj"><span class="xp-proj-title">Revenue recognition model</span><span class="xp-proj-result"><strong>€350k → €8k</strong> annual revenue discrepancies</span><span class="xp-proj-go" aria-hidden="true">→</span></a>
-                <a href="project-vat-automation.html" class="xp-proj"><span class="xp-proj-title">VAT calculation automation</span><span class="xp-proj-result"><strong>~2 h saved</strong> per month, no more manual entries</span><span class="xp-proj-go" aria-hidden="true">→</span></a>
-                <a href="project-cash-flow-tools.html" class="xp-proj"><span class="xp-proj-title">Cash flow calculation tools</span><span class="xp-proj-result"><strong>3 entities</strong> cash flow for any period, in one refresh</span><span class="xp-proj-go" aria-hidden="true">→</span></a>
-                <a href="project-aged-receivables.html" class="xp-proj"><span class="xp-proj-title">Aged receivables reporting</span><span class="xp-proj-result"><strong>3</strong> business units covered</span><span class="xp-proj-go" aria-hidden="true">→</span></a>
-                <a href="project-sales-performance-reporting.html" class="xp-proj"><span class="xp-proj-title">Production schedule &amp; sales reporting</span><span class="xp-proj-result"><strong>~1,000 orders</strong> a year covered, weekly reporting for management</span><span class="xp-proj-go" aria-hidden="true">→</span></a>
+              <div class="xp-cards reveal-stagger">
+                <article class="card project" style="--brand: #D3A26E">
+                  <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+                  <h4><a href="project-revenue-recognition.html" class="project-link">Revenue recognition model</a></h4>
+                  <p class="card-desc">Designed a data model that spreads the revenue of each invoice line over the months of the activity, instead of booking it all on the invoice date.</p>
+                  <p class="project-result"><strong>€350k → €8k</strong> annual revenue discrepancies</p>
+                  <ul class="tags">
+                    <li>MyReport Data (Data modeling)</li><li>SQL</li><li>Finance</li>
+                  </ul>
+                </article>
+                <article class="card project" style="--brand: #D3A26E">
+                  <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+                  <h4><a href="project-vat-automation.html" class="project-link">VAT calculation automation</a></h4>
+                  <p class="card-desc">Automated the monthly VAT calculation on unmatched supplier entries, from the ERP to each VAT account, with a VBA macro.</p>
+                  <p class="project-result"><strong>~2 h saved</strong> per month, no more manual entries</p>
+                  <ul class="tags">
+                    <li>Excel (VBA)</li><li>MyReport Data (ETL, Data modeling)</li>
+                  </ul>
+                </article>
+                <article class="card project" style="--brand: #D3A26E">
+                  <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+                  <h4><a href="project-cash-flow-tools.html" class="project-link">Cash flow calculation tools</a></h4>
+                  <p class="card-desc">Designed and automated the cash flow calculation of 3 entities in an Excel file connected to the ERP, for any period chosen by the user, with checks and financial ratios.</p>
+                  <p class="project-result"><strong>3 entities</strong> cash flow for any period, in one refresh</p>
+                  <ul class="tags">
+                    <li>Excel (VBA)</li><li>MyReport Data (ETL, Data modeling)</li>
+                  </ul>
+                </article>
+                <article class="card project" style="--brand: #D3A26E">
+                  <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+                  <h4><a href="project-aged-receivables.html" class="project-link">Aged receivables reporting</a></h4>
+                  <p class="card-desc">Automated aged receivables reporting by business unit and by sales representative to support and optimize cash collection and cash flow monitoring.</p>
+                  <p class="project-result"><strong>3</strong> business units covered</p>
+                  <ul class="tags">
+                    <li>MyReport Data (Data modeling)</li><li>MyReport Page (Data visualization)</li><li>SQL</li>
+                  </ul>
+                </article>
+                <article class="card project" style="--brand: #D3A26E">
+                  <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
+                  <h4><a href="project-sales-performance-reporting.html" class="project-link">Production schedule &amp; sales reporting</a></h4>
+                  <p class="card-desc">Rebuilt a business unit's production schedule and created sales performance dashboards for management and for each sales representative.</p>
+                  <p class="project-result"><strong>~1,000 orders</strong> a year covered, weekly reporting for management</p>
+                  <ul class="tags">
+                    <li>Excel (Advanced)</li><li>MyReport Data (Data modeling)</li><li>MyReport Page (Data visualization)</li>
+                  </ul>
+                </article>
               </div>
             </div>
           </div>
@@ -122,5 +162,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="chatbot.js" defer></script><!-- AI assistant: bubble bottom right + welcome animation (3 Nov 2026) -->
 </body>
 </html>

@@ -79,9 +79,25 @@
             </div>
             <div class="block-part reveal">
               <h3>Design tools</h3>
-              <div class="xp-projs reveal-stagger">
-                <a href="project-forecasting-web-app.html" class="xp-proj"><span class="xp-proj-title">Forecast accuracy web app</span><span class="xp-proj-result"><strong>Daily use</strong> by all forecasting team members</span><span class="xp-proj-go" aria-hidden="true">→</span></a>
-                <a href="project-ai-forecast-adjustments.html" class="xp-proj"><span class="xp-proj-title">AI automation skills for forecast adjustments</span><span class="xp-proj-result"><strong>~2 h a week</strong> of manual entries automated</span><span class="xp-proj-go" aria-hidden="true">→</span></a>
+              <div class="xp-cards reveal-stagger">
+                <article class="card project" style="--brand: #FED42A">
+                  <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
+                  <h4><a href="project-forecasting-web-app.html" class="project-link">Forecast accuracy web app</a></h4>
+                  <p class="card-desc">Designed and built a web app specialised in forecast accuracy: all the zones at a glance, alerts on the zones that deviate and AI summaries that explain why.</p>
+                  <p class="project-result"><strong>Daily use</strong> by all forecasting team members</p>
+                  <ul class="tags">
+                    <li>Python</li><li>BigQuery (SQL)</li><li>Vertex AI (Gemini)</li><li>Apps Script</li><li>Cloud Run</li>
+                  </ul>
+                </article>
+                <article class="card project" style="--brand: #FED42A">
+                  <p class="project-org"><img src="logos/glovo.png" alt="Glovo logo" class="project-logo" width="24" height="24">Glovo · Delivery Platform</p>
+                  <h4><a href="project-ai-forecast-adjustments.html" class="project-link">AI automation skills for forecast adjustments</a></h4>
+                  <p class="card-desc">Automated the weekly entry of forecast adjustments with an AI skill: written sentences in, final CSV out.</p>
+                  <p class="project-result"><strong>~2 h a week</strong> of manual entries automated</p>
+                  <ul class="tags">
+                    <li>LLMs (Gemini, Claude)</li><li>AI agents (OpenCode)</li><li>Prompt engineering</li><li>BigQuery (SQL)</li><li>GitHub</li>
+                  </ul>
+                </article>
               </div>
               <ul class="project-did reveal-stagger">
                 <li><strong>Poland:</strong> a Google Sheets Apps Script process to improve the forecast adjustments of small cities, run by the local team.</li>

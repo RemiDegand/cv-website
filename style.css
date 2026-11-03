@@ -1716,3 +1716,15 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .xp-map-key.is-mine { background: #fed42a; border: 1px solid #d9a800; }
 .xp-map-key:not(:first-child) { margin-left: 12px; }
 .xp-page .xp-mission + p { margin-top: 12px; }
+/* Experience pages: the project cards of the Projects page, smaller (2 per row, 1 on phones) */
+.xp-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 10px; }
+.xp-cards .card.project { padding: 16px 18px; }
+.xp-cards .project-org { font-size: 0.7rem; }
+.xp-cards .project-logo { width: 20px; height: 20px; }
+.xp-cards .project h4, .xp-cards h4 { font-size: 1.02rem; margin: 6px 0 6px; }
+.xp-cards .card-desc { font-size: 0.85rem; line-height: 1.5; }
+.xp-cards .project-result { margin-top: 10px; padding: 4px 10px; font-size: 0.8rem; }
+.xp-cards .project-result strong { font-size: 0.9rem; }
+.xp-cards .tags li { font-size: 0.72rem; padding: 3px 8px; }
+.xp-cards + .project-did { margin-top: 16px; }
+@media (max-width: 720px) { .xp-cards { grid-template-columns: minmax(0, 1fr); } }

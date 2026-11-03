@@ -5,7 +5,7 @@
 const fs = require("fs");
 const path = require("path");
 const root = path.join(__dirname, "..");
-const { projects } = JSON.parse(fs.readFileSync(path.join(root, "content/projects.json"), "utf8"));
+const { projects, companies } = JSON.parse(fs.readFileSync(path.join(root, "content/projects.json"), "utf8"));
 
 const esc = (s) => s.replace(/&(?!amp;|#)/g, "&amp;");
 const experiences = [
@@ -48,7 +48,7 @@ const experiences = [
             </div>
             <div class="block-part reveal">
               <h3>Design tools</h3>
-              <div class="xp-projs reveal-stagger">
+              <div class="xp-cards reveal-stagger">
 ${projectCards}
               </div>
               <ul class="project-did reveal-stagger">
@@ -139,7 +139,17 @@ experiences.forEach((x, i) => {
     const p = byId[id];
     if (!p) throw new Error(`Unknown project ${id}`);
     if (!fs.existsSync(path.join(root, `project-${id}.html`))) throw new Error(`Missing project-${id}.html`);
-    return `                <a href="project-${id}.html" class="xp-proj"><span class="xp-proj-title">${esc(p.title)}</span><span class="xp-proj-result"><strong>${esc(p.result.key)}</strong> ${esc(p.result.text)}</span><span class="xp-proj-go" aria-hidden="true">→</span></a>`;
+    // Same card as on the Projects page (tools/build-projects.js), shown smaller (.xp-cards in style.css)
+    const co = companies[p.company], e = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+    return [
+      `<article class="card project" style="--brand: ${co.brand}">`,
+      `  <p class="project-org"><img src="${co.logo}" alt="${e(co.name)} logo" class="project-logo" width="24" height="24">${e(co.name)} · ${e(co.industry)}</p>`,
+      `  <h4><a href="project-${id}.html" class="project-link">${e(p.title)}</a></h4>`,
+      `  <p class="card-desc">${e(p.description)}</p>`,
+      p.result ? `  <p class="project-result"><strong>${e(p.result.key)}</strong> ${e(p.result.text)}</p>` : null,
+      `  <ul class="tags">`, `    ${p.tags.map((t) => `<li>${e(t)}</li>`).join("")}`, `  </ul>`,
+      `</article>`,
+    ].filter((l) => l !== null).map((l) => "                " + l).join("\n");
   }).join("\n");
   const defaultParts = () => [["The role &amp; my mission", `
             <div class="block-part reveal">
@@ -158,7 +168,7 @@ ${x.did.map((d) => `                <li>${d}</li>`).join("\n")}
             </div>${projectCards ? `
             <div class="block-part reveal">
               <h3>Projects from this experience</h3>
-              <div class="xp-projs reveal-stagger">
+              <div class="xp-cards reveal-stagger">
 ${projectCards}
               </div>
             </div>` : ""}`], ["Results &amp; tools", `
