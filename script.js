@@ -872,7 +872,8 @@ if (aiChat && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
 const lookerSim = document.querySelector(".lk-sim");
 if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const clock = simClock(lookerSim);
-  const wait = clock.wait;
+  const SPEED = 1.3;   // plays 1.3 times faster than the waits written below
+  const wait = (ms) => clock.wait(ms / SPEED);
   const $ = (selector) => lookerSim.querySelector(selector);
   const panels = $(".lk-panels");
   const filter = (name) => $(`[data-filter="${name}"]`);

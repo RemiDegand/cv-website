@@ -377,6 +377,13 @@
               <h3><span class="fa-num" aria-hidden="true">2</span>AI summaries</h3>
               <p class="fa-subtitle">Explaining why forecast accuracy moved</p>
               <p>A written summary for each zone, with one goal: explain the variation of Proper, Under and Over FC.</p>
+              <ol class="project-flow fa-flow-4 reveal-stagger" aria-label="How the AI summaries are made">
+                <li><strong>A BigQuery query</strong><span>All the data needed to explain the variation</span></li>
+                <li><strong>An AI agent</strong><span>Given access to this query</span></li>
+                <li><strong>Context and examples</strong><span>How to read the data, with examples of analysis</span></li>
+                <li><strong>A Python script</strong><span>Sets when it runs, runs everything, keeps a token limit</span></li>
+              </ol>
+              <p class="flow-note">It runs every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.</p>
               <!-- Simulation (script.js), same app view as above: Global Zones, a click on a zone, Zone Insights, then it stays on the AI summary and
                    explains it day by day. A click pauses it. Made-up data. The HTML holds the final state -->
               <figure class="project-shot annotated fa-sim ais-sim" role="group" aria-label="Simulation with made-up data: in Global Zones, a forecaster opens a zone, then Zone Insights, and reads the AI summary, which explains day by day why Proper, Under and Over FC moved.">
@@ -449,19 +456,18 @@
                 </div>
                 <figcaption class="fa-status">One summary per zone, written automatically: the forecaster reads why the zone moved.</figcaption>
               </figure>
-              <ol class="project-flow fa-flow-4 reveal-stagger" aria-label="How the AI summaries are made">
-                <li><strong>A BigQuery query</strong><span>All the data needed to explain the variation</span></li>
-                <li><strong>An AI agent</strong><span>Given access to this query</span></li>
-                <li><strong>Context and examples</strong><span>How to read the data, with examples of analysis</span></li>
-                <li><strong>A Python script</strong><span>Sets when it runs, runs everything, keeps a token limit</span></li>
-              </ol>
-              <p class="flow-note">It runs every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.</p>
             </div>
 
             <div class="block-part reveal fa-section">
               <h3><span class="fa-num" aria-hidden="true">3</span>Chatbot</h3>
               <p class="fa-subtitle">How the data are computed and how to read them</p>
-              <p>The metrics were complex, and some were new, so a chatbot explains them. To save tokens, I gave it the queries and only the complementary information it needed.</p>
+              <p>The metrics were complex, and some were new, so a chatbot explains them.</p>
+              <ol class="project-flow fa-flow-4 reveal-stagger" aria-label="How the chatbot answers">
+                <li><strong>A question in the app</strong><span>The "?" button opens Metric Help on every screen</span></li>
+                <li><strong>The queries</strong><span>How each metric is computed</span></li>
+                <li><strong>Complementary information</strong><span>Only what the queries don't say, to save tokens</span></li>
+                <li><strong>Gemini (Vertex AI)</strong><span>Answers definitions, formulas, aggregations and data sources only</span></li>
+              </ol>
               <!-- Simulation (script.js), same app view as above: on Market Overview the mouse opens the chatbot, then 2 questions and 2 answers. Same look as the
                    chat of the real app. Everything is only a picture: a click pauses it. Made-up view. The HTML holds the final state -->
               <figure class="project-shot annotated fa-sim chat-sim" role="group" aria-label="Simulation: on Market Overview, a forecaster opens the chatbot and asks how Proper FC is aggregated at country level, then what Slot Filling is. The chatbot answers both.">
