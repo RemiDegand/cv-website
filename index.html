@@ -217,32 +217,104 @@
           <h2>About me</h2>
           <p class="about-sub">Me in 5 words</p>
         </div>
-        <div class="about-grid">
-          <div class="about-tile">
-            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
-            <strong>Athletic</strong>
-            <p class="cat-desc">Passionate about football and running: <b>12 years</b> in a football club, and the last <b>Lille half-marathon</b>.</p>
-          </div>
-          <div class="about-tile">
-            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h6a4 4 0 0 1 4 4v11a3 3 0 0 0-3-3H2zM22 5h-6a4 4 0 0 0-4 4v11a3 3 0 0 1 3-3h7z"/></svg></span>
-            <strong>Curious</strong>
-            <p class="cat-desc">Avid reader, about <b>one book a month</b>. Last one: <i>Or noir</i> by Matthieu Auzanneau, on the history of the oil industry.</p>
-          </div>
-          <div class="about-tile">
-            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>
-            <strong>Proactive</strong>
-            <p class="cat-desc">Worked for <b>9 companies</b>, with 5 internships and 4 summer jobs, to build my skills while funding my studies.</p>
-          </div>
-          <div class="about-tile">
-            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>
-            <strong>Committed</strong>
-            <p class="cat-desc"><b>4 volunteering experiences</b> around health, equal opportunities, education and the fight against poverty.</p>
-          </div>
-          <div class="about-tile">
-            <span class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7M5 16c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 5 0M12 12V8M12 5.5c.8-.8.8-1.7 0-2.5-.8.8-.8 1.7 0 2.5z"/></svg></span>
-            <strong>Baker</strong>
-            <p class="cat-desc">I love baking: I made a <b>bûche de Noël</b> for one of my last internships.</p>
-          </div>
+        <!-- One illustration per word (inline SVG, drawn for the site), the word and one sentence under it, no box -->
+        <div class="hobbies">
+          <figure class="hobby">
+            <div class="hobby-art" aria-hidden="true">
+              <svg viewBox="0 0 200 150">
+                <rect width="200" height="150" fill="#e8f0ff"/>
+                <circle cx="34" cy="30" r="12" fill="#fde68a"/>
+                <rect y="112" width="200" height="38" fill="#cfe8c9"/>
+                <path d="M0 126 H200" stroke="#fff" stroke-width="3" stroke-dasharray="10 8"/>
+                <ellipse cx="66" cy="113" rx="20" ry="4" fill="#1a1f2b" opacity=".12"/>
+                <circle cx="66" cy="88" r="24" fill="#fff" stroke="#1a1f2b" stroke-width="2.5"/>
+                <polygon points="66,79 74.6,85.2 71.3,95.3 60.7,95.3 57.4,85.2" fill="#1a1f2b"/>
+                <path d="M66 79 V64.5 M74.6 85.2 L88.5 80.8 M71.3 95.3 L80 107 M60.7 95.3 L52 107 M57.4 85.2 L43.5 80.8" stroke="#1a1f2b" stroke-width="2"/>
+                <rect x="146" y="20" width="40" height="28" rx="4" fill="#fff" stroke="#1a1f2b" stroke-width="2" transform="rotate(6 166 34)"/>
+                <text x="166" y="38" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#2563eb" text-anchor="middle" transform="rotate(6 166 34)">21.1 km</text>
+                <path d="M112 104 L115 84 Q117 78 123 80 L135 86 Q145 90 157 92 Q171 94 173 102 L173 104 Z" fill="#2563eb"/>
+                <path d="M123 88 l6 -4 M128 91 l6 -4 M133 93 l6 -4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                <path d="M142 99 Q152 96 164 100" stroke="#bfd3ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M108 104 H174 Q177 104 177 107 Q177 112 171 112 H112 Q108 112 108 108 Z" fill="#fff" stroke="#1a1f2b" stroke-width="2"/>
+                <path d="M94 74 h-10 M96 84 h-14 M94 94 h-10" stroke="#2563eb" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+              </svg>
+            </div>
+            <figcaption><strong>Athletic</strong><p>Passionate about football and running: <b>12 years</b> in a football club, and the last <b>Lille half-marathon</b>.</p></figcaption>
+          </figure>
+          <figure class="hobby">
+            <div class="hobby-art" aria-hidden="true">
+              <svg viewBox="0 0 200 150">
+                <rect width="200" height="150" fill="#fff3dc"/>
+                <rect x="50" y="108" width="100" height="16" rx="3" fill="#2563eb"/>
+                <rect x="138" y="111" width="9" height="10" fill="#fff" opacity=".85"/>
+                <rect x="58" y="92" width="88" height="16" rx="3" fill="#f59e0b"/>
+                <rect x="134" y="95" width="9" height="10" fill="#fff" opacity=".85"/>
+                <rect x="46" y="76" width="96" height="16" rx="3" fill="#1e3a8a"/>
+                <rect x="130" y="79" width="9" height="10" fill="#fff" opacity=".85"/>
+                <path d="M98 56 Q80 48 60 52 V74 Q80 70 98 78 Z" fill="#fff" stroke="#1a1f2b" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M98 56 Q116 48 136 52 V74 Q116 70 98 78 Z" fill="#fff" stroke="#1a1f2b" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M68 58 Q80 56 90 60 M68 64 Q80 62 90 66 M106 60 Q116 56 128 58 M106 66 Q116 62 128 64" stroke="#9aa3b2" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+                <path d="M162 22 Q173 37 173 44 A11 11 0 0 1 151 44 Q151 37 162 22 Z" fill="#1a1f2b"/>
+                <ellipse cx="157.5" cy="43" rx="2.2" ry="4" fill="#fff" opacity=".6"/>
+              </svg>
+            </div>
+            <figcaption><strong>Curious</strong><p>Avid reader, about <b>one book a month</b>. Last one: <i>Or noir</i> by Matthieu Auzanneau, on the history of the oil industry.</p></figcaption>
+          </figure>
+          <figure class="hobby">
+            <div class="hobby-art" aria-hidden="true">
+              <svg viewBox="0 0 200 150">
+                <rect width="200" height="150" fill="#e6f6ec"/>
+                <path d="M28 122 H186" stroke="#1a1f2b" stroke-width="2" opacity=".15"/>
+                <path d="M62 72 V64 Q62 59 67 59 H83 Q88 59 88 64 V72" stroke="#1a1f2b" stroke-width="3" fill="none"/>
+                <rect x="40" y="72" width="70" height="50" rx="7" fill="#2563eb"/>
+                <path d="M40 92 H110" stroke="#1e3a8a" stroke-width="2.5"/>
+                <rect x="70" y="87" width="10" height="10" rx="2" fill="#fbbf24"/>
+                <rect x="124" y="100" width="12" height="22" rx="2" fill="#a7c4ff"/>
+                <rect x="142" y="86" width="12" height="36" rx="2" fill="#7aa5ff"/>
+                <rect x="160" y="70" width="12" height="52" rx="2" fill="#2563eb"/>
+                <path d="M118 90 L144 70 L158 78 L182 48" stroke="#16a34a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M172 49 L182 48 L181 58" stroke="#16a34a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M30 34 l3 -8 3 8 8 3 -8 3 -3 8 -3 -8 -8 -3z" fill="#fbbf24"/>
+              </svg>
+            </div>
+            <figcaption><strong>Proactive</strong><p>Worked for <b>9 companies</b>, with 5 internships and 4 summer jobs, to build my skills while funding my studies.</p></figcaption>
+          </figure>
+          <figure class="hobby">
+            <div class="hobby-art" aria-hidden="true">
+              <svg viewBox="0 0 200 150">
+                <rect width="200" height="150" fill="#ffe9ee"/>
+                <path d="M100 96 C60 72 62 40 82 40 C92 40 98 48 100 54 C102 48 108 40 118 40 C138 40 140 72 100 96 Z" fill="#ef4444"/>
+                <path d="M84 50 Q76 52 76 62" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6"/>
+                <path d="M50 98 Q62 112 100 112 V124 Q62 124 44 108 Z" fill="#f2c4a2"/>
+                <path d="M150 98 Q138 112 100 112 V124 Q138 124 156 108 Z" fill="#e6b08b"/>
+                <path d="M34 102 L48 96 L56 114 L42 120 Z" fill="#2563eb"/>
+                <path d="M166 102 L152 96 L144 114 L158 120 Z" fill="#1e3a8a"/>
+                <path d="M50 46 v10 M45 51 h10 M152 30 v10 M147 35 h10 M160 70 v8 M156 74 h8" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+              </svg>
+            </div>
+            <figcaption><strong>Committed</strong><p><b>4 volunteering experiences</b> around health, equal opportunities, education and the fight against poverty.</p></figcaption>
+          </figure>
+          <figure class="hobby">
+            <div class="hobby-art" aria-hidden="true">
+              <svg viewBox="0 0 200 150">
+                <rect width="200" height="150" fill="#fbf0e2"/>
+                <ellipse cx="98" cy="116" rx="74" ry="11" fill="#fff" stroke="#e8d6bf" stroke-width="2"/>
+                <path d="M48 72 H140 V110 H48 Q36 110 36 91 Q36 72 48 72 Z" fill="#7c4a2d"/>
+                <path d="M54 81 Q80 85 106 79 M60 96 Q92 101 124 92 M50 104 Q70 107 92 103" stroke="#5a3420" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <ellipse cx="140" cy="91" rx="12" ry="19" fill="#a0673f"/>
+                <ellipse cx="140" cy="91" rx="7" ry="12" stroke="#f3e1c7" stroke-width="2" fill="none"/>
+                <ellipse cx="140" cy="91" rx="2.5" ry="5" stroke="#f3e1c7" stroke-width="2" fill="none"/>
+                <circle cx="70" cy="76" r="1.6" fill="#fff"/><circle cx="96" cy="74" r="1.6" fill="#fff"/><circle cx="118" cy="77" r="1.6" fill="#fff"/><circle cx="84" cy="90" r="1.4" fill="#fff" opacity=".8"/>
+                <rect x="57" y="61" width="7" height="12" rx="2" fill="#fff"/>
+                <path d="M50 63 Q60.5 49 71 63 Z" fill="#f0dcc0"/>
+                <ellipse cx="96" cy="68" rx="9" ry="4" fill="#16a34a" transform="rotate(-25 96 68)"/>
+                <ellipse cx="111" cy="68" rx="9" ry="4" fill="#15803d" transform="rotate(25 111 68)"/>
+                <circle cx="102" cy="71" r="3" fill="#dc2626"/><circle cx="107" cy="73" r="3" fill="#dc2626"/>
+                <path d="M164 30 l2 -6 2 6 6 2 -6 2 -2 6 -2 -6 -6 -2z M30 40 l1.5 -4 1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5z" fill="#f59e0b"/>
+              </svg>
+            </div>
+            <figcaption><strong>Baker</strong><p>I love baking: I made a <b>bûche de Noël</b> for one of my last internships.</p></figcaption>
+          </figure>
         </div>
       </div>
     </section>
