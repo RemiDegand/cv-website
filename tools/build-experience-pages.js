@@ -25,7 +25,9 @@ const experiences = [
     ],
     projects: ["forecasting-web-app", "ai-forecast-adjustments"],
     figures: [["5", "countries forecast every week"], ["+8 pts", "forecast accuracy vs. target"], ["Daily use", "of the web app by the whole team"]],
-    tools: ["Python", "SQL", "BigQuery", "Looker", "Google Sheets (Apps Script)", "LLMs (Gemini, Claude)", "OpenCode (AI CLI)"],
+    // Order chosen by the user (3 Nov 2026)
+    tools: ["LLMs (Gemini, Claude)", "AI agents (OpenCode)", "BigQuery (SQL)", "Looker", "Google Sheets (Apps Script)"],
+    skills: ["Demand forecasting", "Descriptive & diagnostic analysis", "Stakeholder management", "Process automation", "Prompt engineering"],
     // Structure asked by the user (3 Nov 2026): My mission / My tasks / My impact. Source: Experiences/Glovo/Content.docx (kept on my PC only).
     parts: (projectCards) => [
       ["My mission", `
@@ -66,9 +68,8 @@ ${projectCards}
             </div>
             <div class="block-part reveal">
               <h3>Tools &amp; skills</h3>
-              <ul class="tags reveal-stagger">
-                TOOLS
-              </ul>
+              <div class="xp-tagrow"><span class="chip-label">Tools</span><ul class="tags reveal-stagger">TOOLS</ul></div>
+              <div class="xp-tagrow"><span class="chip-label">Skills</span><ul class="tags reveal-stagger">SKILLS</ul></div>
             </div>`],
     ],
   },
@@ -184,7 +185,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
                 ${x.tools.map((t) => `<li>${esc(t)}</li>`).join("")}
               </ul>
             </div>`]];
-  const parts = (x.parts ? x.parts(projectCards) : defaultParts()).map(([t, b]) => [t, b.replace("TOOLS", x.tools.map((t) => `<li>${esc(t)}</li>`).join(""))]);
+  const parts = (x.parts ? x.parts(projectCards) : defaultParts()).map(([t, b]) => [t, b.replace("TOOLS", x.tools.map((t) => `<li>${esc(t)}</li>`).join("")).replace("SKILLS", (x.skills || []).map((t) => `<li>${esc(t)}</li>`).join(""))]);
   total = parts.length;
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -197,6 +198,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="experience-pages.css"><!-- project cards with a cover (3 Nov 2026) -->
 </head>
 <body>
 

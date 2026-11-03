@@ -1727,3 +1727,8 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .xp-cards .project-result strong { font-size: 0.9rem; }
 .xp-cards .tags li { font-size: 0.72rem; padding: 3px 8px; }
 .xp-cards + .project-did { margin-top: 16px; }
+/* Experience pages: "Tools" and "Skills" rows (label on the left, tags on the right; stacked on phones) */
+.xp-tagrow { display: flex; align-items: baseline; gap: 12px; margin-top: 10px; }
+.xp-tagrow .chip-label { flex: 0 0 56px; min-width: 0; }
+.xp-tagrow .tags { margin: 0; }
+@media (max-width: 720px) { .xp-tagrow { flex-direction: column; gap: 6px; } }
