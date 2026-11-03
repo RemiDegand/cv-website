@@ -1708,3 +1708,11 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 @media (max-width: 720px) { .xp-figures { grid-template-columns: minmax(0, 1fr); } .xp-figures strong { font-size: 1.3rem; } }
 @media (prefers-reduced-motion: reduce) { .xp-proj, .xp-proj-go { transition: none; } .xp-proj:hover, .xp-proj:hover .xp-proj-go { transform: none; } }
 .xp-projs + .project-did { margin-top: 16px; }
+/* Glovo experience page: map of my areas (images/maps/glovo-areas.svg, made by tools/build-glovo-map.js) */
+.xp-map-fig { margin: 14px 0 0; }
+.xp-map-fig img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--border); }
+.xp-map-fig figcaption { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 10px; color: var(--text-muted); font-size: 0.85rem; }
+.xp-map-key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #dfe4ec; }
+.xp-map-key.is-mine { background: #fed42a; border: 1px solid #d9a800; }
+.xp-map-key:not(:first-child) { margin-left: 12px; }
+.xp-page .xp-mission + p { margin-top: 12px; }

@@ -31,8 +31,11 @@ const experiences = [
       ["My mission", `
             <div class="block-part reveal">
               <p class="xp-mission">Support the forecasting of <strong>rider demand from customer demand</strong> for one of Glovo's 3 markets, and find ways to make processes more efficient, dashboards more insightful and forecasts more accurate.</p>
-              <p class="chip-row"><span class="chip-label">Market (PLECA)</span><span class="chip">Poland</span><span class="chip">Ukraine</span><span class="chip">Armenia</span><span class="chip">Georgia</span><span class="chip">Kazakhstan</span><span class="chip">Kyrgyzstan</span></p>
-              <p class="chip-row"><span class="chip-label">My areas (full ownership)</span><span class="chip">Poland (South)</span><span class="chip">Ukraine (West)</span><span class="chip">Armenia</span><span class="chip">Georgia</span><span class="chip">Kyrgyzstan</span></p>
+              <p>The <strong>PLECA market</strong> covers 6 countries: Poland, Ukraine, Armenia, Georgia, Kazakhstan and Kyrgyzstan. I had full ownership of 5 areas:</p>
+              <figure class="xp-map-fig">
+                <img src="images/maps/glovo-areas.svg" width="640" height="272" alt="Map of the PLECA market. My areas in yellow: the South of Poland, the West of Ukraine, Armenia, Georgia and Kyrgyzstan. Kazakhstan in grey." loading="lazy">
+                <figcaption><span class="xp-map-key is-mine"></span>My areas <span class="xp-map-key"></span>Rest of the PLECA market</figcaption>
+              </figure>
             </div>`],
       ["My tasks", `
             <div class="block-part reveal">
