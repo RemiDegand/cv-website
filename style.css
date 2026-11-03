@@ -333,26 +333,6 @@ body.home #about { padding-top: 0; }
   .compact-list li:hover .card-logo { transform: none; }
 }
 
-/* ===== TEMPORARY (3 Nov 2026): 3 layout options of the key experience card (The role · My mission · What I did) ===== */
-.xpo-options { margin-bottom: 64px; padding: 24px; border: 2px dashed var(--border); border-radius: var(--radius); }
-.xpo-intro { margin: 0 0 8px; color: var(--text-muted); }
-.xpo-tag { margin: 28px 0 10px; color: var(--accent); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.xpo-card .card-title { display: flex; gap: 14px; align-items: center; }
-.xpo-rows { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 10px 16px; margin: 18px 0; }
-.xpo-rows dt { padding-top: 3px; color: var(--text-muted); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.xpo-rows dd { margin: 0; }
-.xpo-bullets { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
-.xpo-bullets li::marker { color: var(--brand, var(--accent)); }
-.xpo-num { color: var(--accent); }
-.xpo-role { margin: 16px 0 4px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
-.xpo-mission { margin: 0 0 12px; font-size: 1.02rem; }
-.xpo-bullets-c { margin-bottom: 18px; }
-.xpo-projects { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--border); font-size: 0.9rem; }
-.xpo-projects span { color: var(--text-muted); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.xpo-projects a { font-weight: 600; text-decoration: none; }
-.xpo-projects a:hover { text-decoration: underline; }
-@media (max-width: 720px) { .xpo-options { padding: 14px; } .xpo-rows { grid-template-columns: minmax(0, 1fr); gap: 2px; } .xpo-rows dd { margin-bottom: 10px; } }
-
 /* ===== Experience page: key experience timeline ===== */
 /* One line on the left with the year and the logo; each card has its text on the left
    and its key figures on the right. --brand is set on .xp-item in experience.html */
