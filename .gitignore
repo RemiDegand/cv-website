@@ -8,3 +8,6 @@ CV.pdf
 # Project sources (Word context + full-size dashboard PDFs, ~14 MB): kept on my PC only.
 # The site uses the WebP images made from them, in images/projects/.
 /projects/
+
+# Experience sources (Word content per experience): kept on my PC only.
+/experiences/

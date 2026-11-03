@@ -12,7 +12,7 @@ const experiences = [
   {
     id: "glovo", brand: "#FED42A", logo: "logos/glovo.png", company: "Glovo", industry: "Delivery Platform", site: "https://glovoapp.com",
     title: "Forecasting Analyst Intern",
-    lead: "Forecaster in the Supply Ops department for the PLECA market. Forecasted weekly rider supply from customer demand and designed tools to make processes more efficient.",
+    lead: "Forecasting Analyst in the Supply Operations department, for the PLECA market. Forecasted weekly rider demand and designed tools for the forecasting team.",
     facts: [["When", "Mar – Sep 2026"], ["Where", "Barcelona, Spain"], ["Timing", "Gap year · 2nd internship"]],
     context: "Glovo is a delivery platform. Each week, the forecasting team plans how many rider slots every zone needs, from the expected customer demand.",
     mission: "Forecast the weekly rider supply of the PLECA market: <strong>5 countries</strong>, several hundred thousand orders and rider slots a week.",
@@ -26,6 +26,48 @@ const experiences = [
     projects: ["forecasting-web-app", "ai-forecast-adjustments"],
     figures: [["5", "countries forecast every week"], ["+8 pts", "forecast accuracy vs. target"], ["Daily use", "of the web app by the whole team"]],
     tools: ["Python", "SQL", "BigQuery", "Looker", "Google Sheets (Apps Script)", "LLMs (Gemini, Claude)", "OpenCode (AI CLI)"],
+    // Structure asked by the user (3 Nov 2026): My mission / My tasks / My impact. Source: Experiences/Glovo/Content.docx (kept on my PC only).
+    parts: (projectCards) => [
+      ["My mission", `
+            <div class="block-part reveal">
+              <p class="xp-mission">Support the forecasting of <strong>rider demand from customer demand</strong> for one of Glovo's 3 markets, and find ways to make processes more efficient, dashboards more insightful and forecasts more accurate.</p>
+              <p class="chip-row"><span class="chip-label">Market (PLECA)</span><span class="chip">Poland</span><span class="chip">Ukraine</span><span class="chip">Armenia</span><span class="chip">Georgia</span><span class="chip">Kazakhstan</span><span class="chip">Kyrgyzstan</span></p>
+              <p class="chip-row"><span class="chip-label">My areas (full ownership)</span><span class="chip">Poland (South)</span><span class="chip">Ukraine (West)</span><span class="chip">Armenia</span><span class="chip">Georgia</span><span class="chip">Kyrgyzstan</span></p>
+            </div>`],
+      ["My tasks", `
+            <div class="block-part reveal">
+              <h3>Forecast rider demand, every week</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Reviewed last week's performance</strong> of my 5 countries: what happened (descriptive analysis) and why (diagnostic analysis), crossing Looker dashboards with queries analysed in Google Sheets.</li>
+                <li><strong>Collected input from the 5 local teams</strong> (in touch all week, 1 meeting a week with each): the external factors behind past performance and the coming events, such as bad weather, the World Cup or a marketing campaign.</li>
+                <li><strong>Built forecasts for specific events</strong> from past performance: marketing campaigns, and bank holidays from year-over-year performance.</li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>Design tools</h3>
+              <div class="xp-projs reveal-stagger">
+${projectCards}
+              </div>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Poland:</strong> a Google Sheets Apps Script process to improve the forecast adjustments of small cities, run by the local team.</li>
+                <li><strong>Ukraine:</strong> Google Sheets reports to improve the analysis.</li>
+              </ul>
+            </div>`],
+      ["My impact", `
+            <div class="block-part reveal">
+              <ul class="xp-figures reveal-stagger">
+                <li><strong>+8 pts</strong><span>forecast accuracy vs. target, on average across my areas</span></li>
+                <li><strong>1 web app</strong><span>used daily by the whole forecasting team</span></li>
+                <li><strong>~2 h a week</strong><span>saved by an agentic AI that automates the forecast adjustments</span></li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>Tools &amp; skills</h3>
+              <ul class="tags reveal-stagger">
+                TOOLS
+              </ul>
+            </div>`],
+    ],
   },
   {
     id: "oslo", brand: "#D3A26E", logo: "logos/oslo.png", company: "OSLO", industry: "IT & SaaS Solutions", site: "https://oslo.fr",
@@ -79,11 +121,12 @@ const experiences = [
 ];
 
 const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
+let total = 3;
 const block = (n, title, body) => `
           <div class="block" id="block-${n}" role="region" aria-labelledby="block-${n}-title">
             <header class="block-head reveal">
               <span class="block-num" aria-hidden="true">${n}</span>
-              <div><p class="block-kicker">Part ${n} of 3</p><h2 class="block-title" id="block-${n}-title">${title}</h2></div>
+              <div><p class="block-kicker">Part ${n} of ${total}</p><h2 class="block-title" id="block-${n}-title">${title}</h2></div>
             </header>${body}
           </div>`;
 
@@ -95,6 +138,41 @@ experiences.forEach((x, i) => {
     if (!fs.existsSync(path.join(root, `project-${id}.html`))) throw new Error(`Missing project-${id}.html`);
     return `                <a href="project-${id}.html" class="xp-proj"><span class="xp-proj-title">${esc(p.title)}</span><span class="xp-proj-result"><strong>${esc(p.result.key)}</strong> ${esc(p.result.text)}</span><span class="xp-proj-go" aria-hidden="true">→</span></a>`;
   }).join("\n");
+  const defaultParts = () => [["The role &amp; my mission", `
+            <div class="block-part reveal">
+              <h3>Context</h3>
+              <p>${esc(x.context)}</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>My mission</h3>
+              <p class="xp-mission">${x.mission}</p>${x.chips ? `
+              <p class="chip-row"><span class="chip-label">${x.chipsLabel}</span>${x.chips.map((c) => `<span class="chip">${c}</span>`).join("")}</p>` : ""}
+            </div>`], ["What I did", `
+            <div class="block-part reveal">
+              <ul class="project-did reveal-stagger">
+${x.did.map((d) => `                <li>${d}</li>`).join("\n")}
+              </ul>
+            </div>${projectCards ? `
+            <div class="block-part reveal">
+              <h3>Projects from this experience</h3>
+              <div class="xp-projs reveal-stagger">
+${projectCards}
+              </div>
+            </div>` : ""}`], ["Results &amp; tools", `
+            <div class="block-part reveal">
+              <h3>Results</h3>
+              <ul class="xp-figures reveal-stagger">
+${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join("\n")}
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>Tools &amp; skills</h3>
+              <ul class="tags reveal-stagger">
+                ${x.tools.map((t) => `<li>${esc(t)}</li>`).join("")}
+              </ul>
+            </div>`]];
+  const parts = (x.parts ? x.parts(projectCards) : defaultParts()).map(([t, b]) => [t, b.replace("TOOLS", x.tools.map((t) => `<li>${esc(t)}</li>`).join(""))]);
+  total = parts.length;
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,44 +217,10 @@ ${x.facts.map(([k, v]) => `          <div><dt>${k}</dt><dd>${esc(v)}</dd></div>`
         </dl>
 
         <nav class="block-nav" aria-label="Parts of this experience">
-          <a href="#block-1"><span class="block-nav-num">1</span><span class="block-nav-text">The role &amp; my mission</span></a>
-          <a href="#block-2"><span class="block-nav-num">2</span><span class="block-nav-text">What I did</span></a>
-          <a href="#block-3"><span class="block-nav-num">3</span><span class="block-nav-text">Results &amp; tools</span></a>
+${parts.map(([t], k) => `          <a href="#block-${k + 1}"><span class="block-nav-num">${k + 1}</span><span class="block-nav-text">${t}</span></a>`).join("\n")}
         </nav>
 
-        <div class="blocks">${block(1, "The role &amp; my mission", `
-            <div class="block-part reveal">
-              <h3>Context</h3>
-              <p>${esc(x.context)}</p>
-            </div>
-            <div class="block-part reveal">
-              <h3>My mission</h3>
-              <p class="xp-mission">${x.mission}</p>${x.chips ? `
-              <p class="chip-row"><span class="chip-label">${x.chipsLabel}</span>${x.chips.map((c) => `<span class="chip">${c}</span>`).join("")}</p>` : ""}
-            </div>`)}${block(2, "What I did", `
-            <div class="block-part reveal">
-              <ul class="project-did reveal-stagger">
-${x.did.map((d) => `                <li>${d}</li>`).join("\n")}
-              </ul>
-            </div>${projectCards ? `
-            <div class="block-part reveal">
-              <h3>Projects from this experience</h3>
-              <div class="xp-projs reveal-stagger">
-${projectCards}
-              </div>
-            </div>` : ""}`)}${block(3, "Results &amp; tools", `
-            <div class="block-part reveal">
-              <h3>Results</h3>
-              <ul class="xp-figures reveal-stagger">
-${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join("\n")}
-              </ul>
-            </div>
-            <div class="block-part reveal">
-              <h3>Tools &amp; skills</h3>
-              <ul class="tags reveal-stagger">
-                ${x.tools.map((t) => `<li>${esc(t)}</li>`).join("")}
-              </ul>
-            </div>`)}
+        <div class="blocks">${parts.map(([t, body], k) => block(k + 1, t, body)).join("")}
         </div>
 
         <nav class="project-pager" aria-label="Other experiences">
@@ -192,6 +236,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
   </footer>
 
   <script src="script.js"></script>
+  <script src="chatbot.js" defer></script><!-- AI assistant: bubble bottom right + welcome animation (3 Nov 2026) -->
 </body>
 </html>
 `;
