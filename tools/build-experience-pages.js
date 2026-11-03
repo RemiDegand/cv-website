@@ -1,0 +1,200 @@
+// node tools/build-experience-pages.js
+// Writes one page per key experience (experience-<id>.html), opened from its card on experience.html and the Home carousel.
+// Content: the "Experience summaries" of docs/CV website.md (facts only). Projects come from content/projects.json.
+// Edit the data below, then run the script again (the pages are generated: don't edit them by hand).
+const fs = require("fs");
+const path = require("path");
+const root = path.join(__dirname, "..");
+const { projects } = JSON.parse(fs.readFileSync(path.join(root, "content/projects.json"), "utf8"));
+
+const esc = (s) => s.replace(/&(?!amp;|#)/g, "&amp;");
+const experiences = [
+  {
+    id: "glovo", brand: "#FED42A", logo: "logos/glovo.png", company: "Glovo", industry: "Delivery Platform", site: "https://glovoapp.com",
+    title: "Forecasting Analyst Intern",
+    lead: "Forecaster in the Supply Ops department for the PLECA market. Forecasted weekly rider supply from customer demand and designed tools to make processes more efficient.",
+    facts: [["When", "Mar – Sep 2026"], ["Where", "Barcelona, Spain"], ["Timing", "Gap year · 2nd internship"]],
+    context: "Glovo is a delivery platform. Each week, the forecasting team plans how many rider slots every zone needs, from the expected customer demand.",
+    mission: "Forecast the weekly rider supply of the PLECA market: <strong>5 countries</strong>, several hundred thousand orders and rider slots a week.",
+    chips: ["Poland (South)", "Ukraine (West)", "Armenia", "Georgia", "Kyrgyzstan"], chipsLabel: "Countries",
+    did: [
+      "<strong>Weekly forecasts</strong> of rider supply for the 5 countries, zone by zone.",
+      "<strong>Reviewed past forecasts</strong> to find and fix the gaps.",
+      "<strong>Led weekly meetings</strong> with the 5 local teams, to add their local input and adjust the forecasts.",
+      "<strong>Built tools for the forecasting team</strong>: a web app and an AI skill (see the projects below).",
+    ],
+    projects: ["forecasting-web-app", "ai-forecast-adjustments"],
+    figures: [["5", "countries forecast every week"], ["+8 pts", "forecast accuracy vs. target"], ["Daily use", "of the web app by the whole team"]],
+    tools: ["Python", "SQL", "BigQuery", "Looker", "Google Sheets (Apps Script)", "LLMs (Gemini, Claude)", "OpenCode (AI CLI)"],
+  },
+  {
+    id: "oslo", brand: "#D3A26E", logo: "logos/oslo.png", company: "OSLO", industry: "IT & SaaS Solutions", site: "https://oslo.fr",
+    title: "Data Analyst Intern",
+    lead: "Analyst in the Information Systems department. Improved data reliability to build KPIs for steering the business, and created BI tools for the software OSLO distributes.",
+    facts: [["When", "Sep – Dec 2025"], ["Where", "Villeneuve d'Ascq, France"], ["Timing", "Gap year · 1st internship"]],
+    context: "OSLO distributes IT and SaaS solutions through several business units and entities, each with its own clients, invoices and reporting needs.",
+    mission: "Support financial and operational decisions across <strong>4 business units</strong> and <strong>3 entities</strong> with reliable data models, dashboards and automated tools.",
+    did: [
+      "<strong>Finance tools:</strong> aged receivables, cash flow, VAT, revenue recognition and sales commissions.",
+      "<strong>Performance reporting:</strong> production schedule and sales dashboards, and multi-business-unit dashboards with N / N-1 / N-2 analysis.",
+      "<strong>Regular data extractions</strong> on business activity, such as churn.",
+    ],
+    projects: ["revenue-recognition", "vat-automation", "cash-flow-tools", "aged-receivables", "sales-performance-reporting"],
+    figures: [["13", "data models"], ["6", "dashboards · 6 automated Excel tools"], ["€350k → €8k", "annual revenue discrepancies"]],
+    tools: ["Excel (Advanced, VBA)", "MyReport Data (ETL, Data modeling)", "MyReport Page (Data visualization)", "SQL"],
+  },
+  {
+    id: "treasurer", brand: "#E1311D", logo: "logos/envie-dsup.png", company: "Envie d'Sup", industry: "State-Supported NPO", site: "https://www.cordeesdelareussite.fr/",
+    title: "Treasurer",
+    lead: "Managed the public budget of a non-profit serving 229 students from priority education zones.",
+    facts: [["When", "Dec 2024 – Jun 2025"], ["Where", "Rouen, France"], ["Timing", "Master's year 1 · Alongside classes"]],
+    context: "Envie d'Sup is a public-interest association supported by the French government. It runs workshops, cultural outings and trips for middle and high school students from priority education zones.",
+    mission: "Ensure rigorous financial management of the association, for <strong>229 students</strong>.",
+    did: [
+      "<strong>Budget forecasts</strong> built and monitored to stay within the allocated envelopes.",
+      "<strong>Expenses tracked</strong> and over 84 supplier invoices processed.",
+      "<strong>Cost analysis</strong> by class and activity type (workshops, cultural outings, trips), to know the resources needed for each student and prepare the next year's grant applications.",
+    ],
+    projects: [],
+    figures: [["€49k", "public budget managed"], ["84+", "supplier invoices processed"], ["100%", "program execution"]],
+    tools: ["Budgeting", "Forecasting", "Cost analysis"],
+  },
+  {
+    id: "pain-de-minuit", brand: "#BA9B6D", logo: "logos/pain-de-minuit.png", company: "Pain de Minuit", industry: "Craft Brewery", site: "https://pain-de-minuit.com",
+    title: "Business Developer Intern",
+    lead: "Acquired new B2B clients, mainly bakeries, and managed end-to-end logistics.",
+    facts: [["When", "Feb – Jul 2024"], ["Where", "Nieppe, France"], ["Timing", "Bachelor's year 3 · Final internship"]],
+    context: "Pain de Minuit is a start-up that brews beer from unsold bread, distributed across France.",
+    mission: "Win new clients among independent retailers, mainly bakeries, and run the logistics from order to shipment.",
+    did: [
+      "<strong>Prospecting strategy</strong> designed and run for independent retailers.",
+      "<strong>Client follow-ups</strong> at +30, +90 and +120 days, to keep the new clients.",
+      "<strong>End-to-end logistics:</strong> order processing, stock reception and shipments for distributor orders.",
+      "<strong>International prospecting</strong> with a bakery in the UK, which led to a feature on a public service TV channel.",
+    ],
+    projects: [],
+    figures: [["105", "new B2B clients (104 bakeries, 1 large retail store)"], ["~21", "new clients per month"], ["€3–10k", "distributor orders handled"]],
+    tools: ["B2B sales", "Prospecting", "Logistics"],
+  },
+];
+
+const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
+const block = (n, title, body) => `
+          <div class="block" id="block-${n}" role="region" aria-labelledby="block-${n}-title">
+            <header class="block-head reveal">
+              <span class="block-num" aria-hidden="true">${n}</span>
+              <div><p class="block-kicker">Part ${n} of 3</p><h2 class="block-title" id="block-${n}-title">${title}</h2></div>
+            </header>${body}
+          </div>`;
+
+experiences.forEach((x, i) => {
+  const prev = experiences[i - 1], next = experiences[i + 1];
+  const projectCards = x.projects.map((id) => {
+    const p = byId[id];
+    if (!p) throw new Error(`Unknown project ${id}`);
+    if (!fs.existsSync(path.join(root, `project-${id}.html`))) throw new Error(`Missing project-${id}.html`);
+    return `                <a href="project-${id}.html" class="xp-proj"><span class="xp-proj-title">${esc(p.title)}</span><span class="xp-proj-result"><strong>${esc(p.result.key)}</strong> ${esc(p.result.text)}</span><span class="xp-proj-go" aria-hidden="true">→</span></a>`;
+  }).join("\n");
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${esc(x.title)} at ${esc(x.company)} | Rémi Degand</title>
+  <meta name="description" content="${esc(x.title)} at ${esc(x.company)}: an experience of Rémi Degand.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- GENERATED by "node tools/build-experience-pages.js": edit the data in that script, not this file -->
+  <header class="menu">
+    <div class="container menu-inner">
+      <a href="index.html" class="menu-name">Rémi Degand</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="experience.html" class="active">Experience</a>
+        <a href="projects.html">Projects</a>
+        <a href="education.html">Education</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="experience-page" class="project-page xp-page" style="--brand: ${x.brand}">
+      <div class="container project-page-inner">
+        <a href="experience.html" class="back-link">← All experience</a>
+
+        <header class="project-page-head">
+          <p class="project-org"><img src="${x.logo}" alt="${esc(x.company)} logo" class="project-logo" width="24" height="24">${esc(x.company)} · ${esc(x.industry)}<a href="${x.site}" class="org-link" target="_blank" rel="noopener" aria-label="${esc(x.company)} website (opens in a new tab)" title="${esc(x.company)} website">↗</a></p>
+          <h1 class="project-page-title">${esc(x.title)}</h1>
+          <p class="lead">${esc(x.lead)}</p>
+        </header>
+
+        <dl class="project-facts">
+${x.facts.map(([k, v]) => `          <div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("\n")}
+        </dl>
+
+        <nav class="block-nav" aria-label="Parts of this experience">
+          <a href="#block-1"><span class="block-nav-num">1</span><span class="block-nav-text">The role &amp; my mission</span></a>
+          <a href="#block-2"><span class="block-nav-num">2</span><span class="block-nav-text">What I did</span></a>
+          <a href="#block-3"><span class="block-nav-num">3</span><span class="block-nav-text">Results &amp; tools</span></a>
+        </nav>
+
+        <div class="blocks">${block(1, "The role &amp; my mission", `
+            <div class="block-part reveal">
+              <h3>Context</h3>
+              <p>${esc(x.context)}</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>My mission</h3>
+              <p class="xp-mission">${x.mission}</p>${x.chips ? `
+              <p class="chip-row"><span class="chip-label">${x.chipsLabel}</span>${x.chips.map((c) => `<span class="chip">${c}</span>`).join("")}</p>` : ""}
+            </div>`)}${block(2, "What I did", `
+            <div class="block-part reveal">
+              <ul class="project-did reveal-stagger">
+${x.did.map((d) => `                <li>${d}</li>`).join("\n")}
+              </ul>
+            </div>${projectCards ? `
+            <div class="block-part reveal">
+              <h3>Projects from this experience</h3>
+              <div class="xp-projs reveal-stagger">
+${projectCards}
+              </div>
+            </div>` : ""}`)}${block(3, "Results &amp; tools", `
+            <div class="block-part reveal">
+              <h3>Results</h3>
+              <ul class="xp-figures reveal-stagger">
+${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join("\n")}
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>Tools &amp; skills</h3>
+              <ul class="tags reveal-stagger">
+                ${x.tools.map((t) => `<li>${esc(t)}</li>`).join("")}
+              </ul>
+            </div>`)}
+        </div>
+
+        <nav class="project-pager" aria-label="Other experiences">
+          ${prev ? `<a href="experience-${prev.id}.html" class="project-pager-prev"><span>← Previous experience</span>${esc(prev.title)} · ${esc(prev.company)}</a>` : "<span></span>"}
+          ${next ? `<a href="experience-${next.id}.html" class="project-pager-next"><span>Next experience →</span>${esc(next.title)} · ${esc(next.company)}</a>` : "<span></span>"}
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Rémi Degand</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+`;
+  fs.writeFileSync(path.join(root, `experience-${x.id}.html`), html);
+  console.log(`experience-${x.id}.html`);
+});
