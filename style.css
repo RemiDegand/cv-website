@@ -136,6 +136,21 @@ body.home .hero-photo { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0.08), 0 18px 4
 body.home #highlights::before { content: ""; display: block; max-width: 1088px; height: 1px; margin: 0 auto 56px; background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent); }
 @media (max-width: 720px) { body.home .hero { padding: 48px 0 32px; } body.home #highlights::before { margin: 0 16px 40px; } }
 
+/* Home, About me: "Me in 5 words", one white tile per word (icon + word, then one sentence); not links, so no hover lift */
+body.home #about { padding-top: 0; }
+.section-head.about-head { justify-content: flex-start; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+.about-head h2 { font-size: 1.6rem; }
+.about-sub { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
+.about-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.about-tile { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; align-content: start; gap: 12px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); box-shadow: var(--shadow); }
+.about-tile .cat-icon { width: 40px; height: 40px; border-radius: 10px; }
+.about-tile strong { font-size: 1rem; }
+.about-tile .cat-desc { grid-column: 1 / -1; }
+.about-tile .cat-desc b { color: var(--text); font-weight: 600; }
+@media (max-width: 1000px) { .about-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .about-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .about-tile { padding: 14px; gap: 10px; } .about-tile .cat-icon { width: 34px; height: 34px; } }
+@media (max-width: 420px) { .about-grid { grid-template-columns: minmax(0, 1fr); } }
+
 /* ===== Buttons ===== */
 .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
