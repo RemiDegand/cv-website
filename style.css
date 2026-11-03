@@ -941,6 +941,10 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .carousel-dots button.active { width: 24px; background: var(--accent); }
 
 /* Home: key experience (left) and key projects (right) side by side; stacked on phones */
+/* Home: one tile per page of the site, above key experience and key projects (tile styles from the Projects page overview) */
+.site-map .section-head { margin-bottom: 20px; }
+.site-map h2 { font-size: 1.6rem; }
+.site-map .cat-overview { margin-bottom: 64px; }
 .home-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
 /* Same height on both sides: each column stretches, its carousel fills the space, cards fill the carousel,
    so the cards and the arrow rows line up */
