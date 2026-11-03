@@ -40,7 +40,7 @@ Rémi's idea was to see all the zones at the same time, with alarms; the tool ke
 - Last complete week or last 7 days, on every view.
 
 ## AI summaries
-For each zone, a day-by-day written summary whose only goal is to explain the variation of Proper, Under and Over FC, using data from outside forecast accuracy (Delivery Time, Missing Capacity, week-on-week order variation, Orders FC). Process: a specific BigQuery query collects all the data needed; an AI agent (OpenCode) is given access to this query, with context and examples of analysis with those data; a Python script sets when it runs, runs everything and keeps a token limit. It runs every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.
+For each zone, a day-by-day written summary whose only goal is to explain the week-over-week (WoW) variation of Proper, Under and Over FC, using data from outside forecast accuracy (Delivery Time, Missing Capacity, week-on-week order variation, Orders FC). Process: a specific BigQuery query collects all the data needed; an AI agent (OpenCode) is given access to this query, with context and examples of analysis with those data; a Python script sets when it runs, runs everything and keeps a token limit. It runs every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.
 
 ## Chatbot
 The metrics were complex, and some were new, so a metric help chatbot (Gemini through Vertex AI) explains how the data are computed and how to read them. To save tokens, Rémi gave it the queries and only the complementary information it needed. It refuses to analyse performance or recommend actions.
