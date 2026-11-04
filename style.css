@@ -1104,6 +1104,12 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 }
 .edu-detail-title { font-size: 1.1rem; margin: 0; }
 
+/* School highlights under the card header (NEOMA: FT ranking, English), 4 Nov 2026 */
+.edu-highlights { list-style: none; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.edu-highlights li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--text-muted); font-size: 0.8rem; line-height: 1.4; }
+.edu-highlights svg { flex: none; color: var(--accent); margin-top: 2px; }
+.edu-highlights strong { display: block; color: var(--accent); font-size: 0.9rem; }
+
 /* Mini timeline inside the card: one step per school year (dot + line), current year filled */
 .card .edu-years { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 16px; }
 .edu-years > li { position: relative; padding-left: 26px; }
