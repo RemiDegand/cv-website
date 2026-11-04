@@ -1,0 +1,146 @@
+/* =====================================================================
+   EXPERIENCE PAGE, DYNAMIC KEY EXPERIENCE (3 Nov 2026, web design pass).
+   Loaded by experience.html only, after style.css. Everything here is switched on by
+   experience-fx.js (class .xfx on <html>): without JavaScript or with "reduce motion",
+   the page stays exactly as styled in style.css.
+   - the timeline line draws itself as you scroll, in each company's colour, led by a glowing dot
+   - logos light up when the line reaches them; the current one has a pulsing ring
+   - each experience slides in (year from the left, card from the right), figures count up
+   - cards tilt a little towards the mouse, with a soft light in the company colour
+   ===================================================================== */
+@keyframes xfx-left { from { opacity: 0; transform: translateX(-32px); } }
+@keyframes xfx-right { from { opacity: 0; transform: translateX(64px) rotate(0.8deg); } }
+@keyframes xfx-pop { from { opacity: 0; transform: scale(0.3); } }
+@keyframes xfx-up { from { opacity: 0; transform: translateY(10px); } }
+@keyframes xfx-ring { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand, var(--accent)) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 14px color-mix(in srgb, var(--brand, var(--accent)) 0%, transparent); } }
+@keyframes xfx-bob { 50% { transform: translateY(-5px); } }
+
+/* --- Page title --- */
+.xfx #experience .page-title { animation: xfx-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.xfx #experience > .container > .group-title:first-of-type { animation: xfx-up 0.7s 0.12s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+
+/* --- The line: a coloured copy over the grey line, cut at the scroll position (--p, set by JS) --- */
+.xfx .xp-timeline { position: relative; }
+.xfx-line { position: absolute; top: 0; bottom: 0; left: -2px; width: 2px; background: var(--grad, var(--accent)); clip-path: inset(0 0 calc(100% - var(--p, 0%)) 0); pointer-events: none; }
+.xfx-head { position: absolute; top: var(--p, 0%); left: -8px; z-index: 0; width: 14px; height: 14px; border: 3px solid #fff; border-radius: 50%; background: var(--head, var(--accent)); box-shadow: 0 0 0 1px color-mix(in srgb, var(--head, var(--accent)) 50%, transparent), 0 0 18px 4px color-mix(in srgb, var(--head, var(--accent)) 45%, transparent); transform: translateY(-50%); pointer-events: none; transition: background-color 0.4s ease, box-shadow 0.4s ease; }
+
+/* --- Logos on the line: grey until the line reaches them, then in colour; the current one pulses --- */
+.xfx .xp-item .xp-dot { z-index: 2; transition: filter 0.5s ease, opacity 0.5s ease, transform 0.45s cubic-bezier(0.2, 1.4, 0.4, 1), box-shadow 0.3s ease; }
+.xfx .xp-item:not(.is-lit) .xp-dot { filter: grayscale(1); opacity: 0.5; transform: scale(0.86); }
+.xfx .xp-item.is-active .xp-dot { animation: xfx-ring 2s 0.3s infinite; }
+.xfx .xp-item.is-active .xp-year { color: var(--text); }
+.xfx .xp-item.is-active .xp-label { color: var(--accent); }
+.xfx .xp-next .xp-dot { animation: xfx-bob 3s ease-in-out infinite; }
+
+/* --- Cards: tilt towards the mouse (--rx / --ry from JS), soft light following it, outline when current --- */
+.xfx .xp-card { position: relative; transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.25s ease-out, border-color 0.4s ease, box-shadow 0.4s ease; }
+.xfx #experience .xp-card:hover { transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px); }
+.xfx .xp-card::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), color-mix(in srgb, var(--brand, var(--accent)) 13%, transparent), transparent 65%); opacity: 0; transition: opacity 0.3s ease; }
+.xfx .xp-card:hover::before { opacity: 1; }
+.xfx .xp-item.is-active:not(.xp-next) .xp-card { border-color: color-mix(in srgb, var(--brand, var(--accent)) 55%, var(--border)); box-shadow: 0 4px 8px rgba(16, 24, 40, 0.05), 0 18px 40px color-mix(in srgb, var(--brand, var(--accent)) 20%, transparent); }
+.xfx .xp-card .figures li { transition: transform 0.25s ease; }
+.xfx .xp-card:hover .figures li:hover { transform: translateX(4px); }
+
+/* --- Entrance: each experience appears when it comes into view (.in, set by JS) --- */
+.xfx .xp-item:not(.in) > * { opacity: 0; }
+.xfx .xp-item.in .xp-context { animation: xfx-left 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.xfx .xp-item.in .xp-dot { animation: xfx-pop 0.6s 0.1s cubic-bezier(0.2, 1.4, 0.4, 1) backwards; }
+.xfx .xp-item.in.is-active .xp-dot { animation: xfx-pop 0.6s 0.1s cubic-bezier(0.2, 1.4, 0.4, 1) backwards, xfx-ring 2s 0.8s infinite; }
+.xfx .xp-next.in .xp-dot { animation: xfx-pop 0.6s 0.1s cubic-bezier(0.2, 1.4, 0.4, 1) backwards, xfx-bob 3s 0.7s ease-in-out infinite; }
+.xfx .xp-item.in .xp-card { animation: xfx-right 0.8s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.xfx .xp-item.in .figures li { animation: xfx-up 0.5s backwards; animation-delay: calc(0.45s + var(--t, 0) * 0.1s); }
+.xfx .xp-item.in .tags li { animation: xfx-up 0.4s backwards; animation-delay: calc(0.55s + var(--t, 0) * 0.06s); }
+
+/* --- Spotlight (3 Nov 2026, user's idea): the experience being read (.is-active) is sharp and lit;
+   the others are dimmed. Hover or keyboard focus brings any card back into the light. --- */
+/* Floating removed the same day (user: too much movement); the dimming stays */
+.xfx .xp-item > .xp-context, .xfx .xp-item > .xp-card { transition: opacity 0.6s ease, filter 0.6s ease, transform 0.25s ease-out, border-color 0.4s ease, box-shadow 0.5s ease; }
+.xfx .xp-item.in:not(.is-active) .xp-card { opacity: 0.45; filter: grayscale(0.6) blur(0.3px); box-shadow: none; }
+.xfx .xp-item.in:not(.is-active) .xp-context { opacity: 0.45; }
+.xfx .xp-item.in:not(.is-active):is(:hover, :focus-within) .xp-card { opacity: 1; filter: none; }
+.xfx .xp-item.in:not(.is-active):is(:hover, :focus-within) .xp-context { opacity: 1; }
+/* the one being read: full light, a bit more depth */
+.xfx .xp-item.is-active .xp-card { opacity: 1; filter: none; }
+.xfx .xp-item.is-active:not(.xp-next) .xp-card { box-shadow: 0 6px 12px rgba(16, 24, 40, 0.06), 0 24px 56px color-mix(in srgb, var(--brand, var(--accent)) 26%, transparent); }
+.xfx .xp-next.is-active .xp-card { box-shadow: 0 20px 50px rgba(37, 99, 235, 0.14); background: #fff; }
+
+/* Phones: the line sits further left (style.css moves the timeline), nothing else changes */
+@media (max-width: 720px) {
+  .xfx-head { left: -8px; }
+}
+
+/* =====================================================================
+   OTHER EXPERIENCES: Leadership & volunteering + Hands-on (4 Nov 2026, web design pass).
+   Visible but one step below the key timeline: both lists sit in one soft panel, rows are small
+   white cards with the company colour, Hands-on rows are more compact than Leadership rows,
+   the details card gets a header band in the company colour and its figures as tiles.
+   Static look works without JavaScript; experience-fx.js adds the group icons + counts, the
+   kicker on the details card (.xm-kicker) and the entrance (.xm-motion, not with "reduce motion").
+   ===================================================================== */
+.xp-browse { margin-top: 64px; padding: 32px; border: 1px solid var(--border); border-radius: 20px; background: radial-gradient(600px 300px at 0% 0%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 70%), linear-gradient(180deg, var(--bg-soft), var(--bg) 85%); }
+
+/* Group titles: icon + label + count */
+.xp-list .group-title { display: flex; align-items: center; gap: 10px; margin: 32px 0 12px; color: var(--text); }
+.xp-list .group-title:first-child { margin-top: 0; }
+.xm-icon { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--accent-soft); color: var(--accent); flex-shrink: 0; }
+.xm-count { margin-left: auto; min-width: 24px; padding: 1px 8px; border-radius: 999px; background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; text-align: center; letter-spacing: 0; }
+
+/* Rows: small white cards, company colour bar on the left, arrow on the right */
+.xp-browse .xp-row { position: relative; margin-bottom: 8px; padding: 12px 40px 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease; }
+.xp-browse .xp-row::before { content: ""; position: absolute; left: -1px; top: 10px; bottom: 10px; width: 3px; border-radius: 0 3px 3px 0; background: var(--brand, var(--accent)); transform: scaleY(0); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.xp-browse .xp-row::after { content: "\203A"; position: absolute; right: 16px; top: 50%; font-size: 1.4rem; line-height: 1; color: var(--text-muted); opacity: 0.35; transform: translateY(-55%); transition: transform 0.25s ease, opacity 0.25s ease, color 0.25s ease; }
+.xp-browse .xp-row:hover, .xp-browse .xp-row:focus-visible { transform: translateX(4px); border-color: color-mix(in srgb, var(--brand, var(--accent)) 40%, var(--border)); background: color-mix(in srgb, var(--brand, var(--accent)) 5%, var(--bg)); box-shadow: 0 6px 16px color-mix(in srgb, var(--brand, var(--accent)) 12%, transparent); }
+.xp-browse .xp-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.xp-browse .xp-row:is(:hover, :focus-visible, .selected)::before { transform: scaleY(1); }
+.xp-browse .xp-row:is(:hover, :focus-visible)::after { opacity: 0.8; transform: translate(3px, -55%); }
+.xp-browse .xp-row.selected { border-color: color-mix(in srgb, var(--brand, var(--accent)) 55%, var(--border)); background: linear-gradient(90deg, color-mix(in srgb, var(--brand, var(--accent)) 9%, var(--bg)), var(--bg) 70%); box-shadow: 0 8px 24px color-mix(in srgb, var(--brand, var(--accent)) 16%, transparent); }
+.xp-browse .xp-row.selected::after { opacity: 1; color: color-mix(in srgb, var(--brand, var(--accent)) 80%, var(--text)); transform: translate(3px, -55%); }
+.xp-browse .xp-row.selected strong { color: var(--text); }
+.xp-browse .xp-row .card-logo { width: 44px; height: 44px; transition: transform 0.3s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.xp-browse .xp-row:is(:hover, .selected) .card-logo { transform: scale(1.06); }
+/* Logo on the left over 2 lines; title + company on the first, date under it (so long titles keep the full width) */
+.xp-browse .xp-row { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; row-gap: 4px; align-items: center; }
+.xp-browse .xp-row .card-logo { grid-row: 1 / span 2; }
+.xp-browse .xp-row-date { justify-self: start; padding: 0 8px; border-radius: 999px; background: var(--bg-soft); border: 1px solid var(--border); font-size: 0.72rem; font-weight: 500; line-height: 1.6; }
+
+/* Hands-on rows: lighter and more compact (they matter less than leadership) */
+.xp-browse .xp-row.xm-compact { padding-top: 8px; padding-bottom: 8px; margin-bottom: 6px; }
+.xp-browse .xp-row.xm-compact .card-logo { width: 34px; height: 34px; border-radius: 8px; }
+.xp-browse .xp-row.xm-compact strong { font-weight: 500; font-size: 0.95rem; }
+.xp-browse .xp-row.xm-compact .xp-row-text span { font-size: 0.8rem; }
+
+/* Details card: header band in the company colour, bigger logo, figures as tiles */
+.xp-browse .xp-detail .card { position: relative; overflow: hidden; padding: 28px; border-color: color-mix(in srgb, var(--brand, var(--accent)) 35%, var(--border)); box-shadow: inset 0 4px 0 var(--brand, var(--accent)), 0 18px 48px color-mix(in srgb, var(--brand, var(--accent)) 14%, transparent); }
+.xp-browse .xp-detail .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 120px; background: linear-gradient(180deg, color-mix(in srgb, var(--brand, var(--accent)) 12%, transparent), transparent); pointer-events: none; }
+.xp-browse .xp-detail .card > * { position: relative; }
+.xp-browse .xp-detail .card .xm-kicker { margin: 0 0 14px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--brand, var(--accent)) 70%, var(--text)); }
+.xp-browse .xp-detail .card-logo { width: 56px; height: 56px; border-radius: 12px; box-shadow: 0 0 0 4px var(--bg), 0 6px 16px rgba(16, 24, 40, 0.1); }
+.xp-browse .xp-detail .card h4 { font-size: 1.2rem; }
+.xp-browse .xp-detail .figures { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 20px 0 0; }
+.xp-browse .xp-detail .figures li { padding: 12px 14px; border-radius: 10px; background: var(--bg-soft); border: 1px solid var(--border); border-left: 3px solid var(--brand, var(--accent)); line-height: 1.4; font-size: 0.9rem; }
+.xp-browse .xp-detail .figures strong { font-size: 1.15rem; }
+.xp-browse .xp-detail .figures li > strong:first-child { display: block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .xp-browse .xp-detail .card { animation: xm-card-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .xp-browse .xp-detail .figures li { animation: xfx-up 0.45s backwards; animation-delay: calc(0.15s + var(--t, 0) * 0.07s); }
+}
+@keyframes xm-card-in { from { opacity: 0; transform: translateX(18px) scale(0.985); } }
+
+/* Entrance: rows come in one after the other when the panel scrolls into view */
+.xm-motion .xp-browse .xp-row:not(.in) { opacity: 0; transform: translateY(10px); }
+.xm-motion .xp-browse .xp-row.in { transition: opacity 0.5s ease calc(var(--i, 0) * 45ms), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) calc(var(--i, 0) * 45ms), border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease; }
+.xm-motion .xp-browse .xp-row.in.xm-done { transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .xp-browse .xp-row, .xp-browse .xp-row::before, .xp-browse .xp-row::after, .xp-browse .xp-row .card-logo { transition: none; }
+  .xp-browse .xp-row:hover, .xp-browse .xp-row:focus-visible { transform: none; }
+}
+
+/* Phones: lighter panel, the details card opens under its row */
+@media (max-width: 720px) {
+  .xp-browse { margin-top: 48px; padding: 16px; border-radius: 16px; }
+  .xp-browse .xp-detail { margin: 0 0 12px; }
+  .xp-browse .xp-detail .card { padding: 20px; }
+  .xp-browse .xp-detail .figures { grid-template-columns: minmax(0, 1fr); }
+}
