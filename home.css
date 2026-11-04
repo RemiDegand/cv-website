@@ -1,0 +1,179 @@
+/* =====================================================================
+   HOME, DYNAMIC VERSION (3 Nov 2026, web design pass). Loaded by index.html only, after style.css.
+   Goal: in one look, who I am (name, headline, typed line), what I do now and what I want
+   next (Before → Now → Next path), then numbers, the organisations, how the site works.
+   Everything moves softly; "reduce motion" turns all of it off (end of this file).
+   ===================================================================== */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+@keyframes pop { from { opacity: 0; transform: scale(0.9); } }
+
+/* --- Hero: full first screen, moving background --- */
+body.home .hero-live { position: relative; overflow: hidden; isolation: isolate; display: flex; align-items: center; min-height: min(780px, calc(100vh - var(--menu-height))); padding: 72px 0 112px; }
+.hero-live > .container { flex: 1; }
+.hero-bg { position: absolute; inset: -40px; z-index: -1; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, #000 65%, transparent 96%); mask-image: linear-gradient(180deg, #000 65%, transparent 96%);transform: translate(calc(var(--px, 0) * -16px), calc(var(--py, 0) * -16px)); transition: transform 0.6s ease-out; }
+.hero-bg .blob { position: absolute; border-radius: 50%; filter: blur(64px); opacity: 0.6; }
+.blob.b1 { width: 460px; height: 460px; top: -80px; right: 2%; background: #c3d5ff; animation: drift1 18s ease-in-out infinite alternate; }
+.blob.b2 { width: 360px; height: 360px; bottom: -60px; right: 30%; background: #ddd2ff; animation: drift2 23s ease-in-out infinite alternate; }
+.blob.b3 { width: 320px; height: 320px; top: 22%; left: -100px; background: #cdeeff; animation: drift3 20s ease-in-out infinite alternate; }
+@keyframes drift1 { to { transform: translate(-90px, 70px) scale(1.12); } }
+@keyframes drift2 { to { transform: translate(110px, -60px) scale(0.9); } }
+@keyframes drift3 { to { transform: translate(80px, 50px) scale(1.15); } }
+.hero-grid { position: absolute; inset: 0; background-image: radial-gradient(rgba(37, 99, 235, 0.2) 1px, transparent 1.2px); background-size: 24px 24px; -webkit-mask-image: radial-gradient(ellipse 55% 65% at 72% 42%, #000, transparent 72%); mask-image: radial-gradient(ellipse 55% 65% at 72% 42%, #000, transparent 72%); }
+/* Soft light that follows the mouse (script.js sets --mx / --my) */
+.hero-live::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(420px circle at var(--mx, 75%) var(--my, 35%), rgba(37, 99, 235, 0.09), transparent 70%); }
+
+/* --- Hero text --- */
+.hero-live .hero-text { min-width: 0; }
+.hero-live h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); letter-spacing: -0.025em; }
+.hero-live .headline { margin: 6px 0 10px; font-size: clamp(1.25rem, 2.2vw, 1.6rem); font-weight: 700; background: linear-gradient(90deg, #2563eb, #6d5dfc, #0ea5e9, #2563eb); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 9s linear infinite; }
+@keyframes shine { to { background-position: 300% 0; } }
+.hero-rotator { margin: 0 0 28px; font-size: 1.15rem; color: var(--text-muted); }
+.rotator { color: var(--text); font-weight: 600; }
+.rotator-caret { display: none; width: 2px; height: 1.15em; margin-left: 3px; vertical-align: -0.2em; background: var(--accent); animation: blink 1s steps(1) infinite; }
+.typing .rotator-caret { display: inline-block; }
+@keyframes blink { 50% { opacity: 0; } }
+/* Entrance, in reading order */
+.hero-live .hero-text > * { animation: rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.hero-live .hero-text > :nth-child(2) { animation-delay: 0.08s; }
+.hero-live .hero-text > :nth-child(3) { animation-delay: 0.16s; }
+.hero-live .hero-text > :nth-child(4) { animation-delay: 0.24s; }
+.hero-live .hero-text > :nth-child(5) { animation-delay: 0.32s; }
+.hero-live .hero-text > :nth-child(6) { animation-delay: 0.9s; }
+
+/* --- Before → Now → Next: dots on one line, the line fills up to "Now" --- */
+/* Simplified 4 Nov 2026 (user: "plus épuré"): no boxes, a thin line, small dots, text only; "Now" stands out by colour alone */
+.hero-live .hero-text > .journey { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; max-width: 620px; margin: 0; padding: 0; list-style: none; animation: none; }
+.journey::before, .journey::after { content: ""; position: absolute; top: 4px; left: 4px; height: 1px; }
+.journey::before { right: 0; background: linear-gradient(90deg, #c7d2fe, #c7d2fe 70%, transparent); }
+.journey::after { width: calc((100% + 24px) / 3); background: var(--accent); transform-origin: left; animation: fill-line 1s 0.9s cubic-bezier(0.6, 0, 0.2, 1) backwards; }
+@keyframes fill-line { from { transform: scaleX(0); } }
+@keyframes fill-line-v { from { transform: scaleY(0); } }
+.j-step { position: relative; padding-top: 22px; animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.j-past { animation-delay: 0.4s; }
+.j-now { animation-delay: 0.55s; }
+.j-next { animation-delay: 0.7s; }
+.j-dot { position: absolute; top: 0; left: 0; z-index: 1; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+.j-now .j-dot { animation: ping 2s 1.8s infinite; }
+.j-next .j-dot { background: var(--bg); box-shadow: inset 0 0 0 1.5px #a5b4fc; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); } 70%, 100% { box-shadow: 0 0 0 9px rgba(37, 99, 235, 0); } }
+.j-card { padding: 0; }
+.j-label { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+.j-now .j-label { color: var(--accent); }
+.j-card strong { display: block; margin-top: 4px; font-size: 0.95rem; font-weight: 600; line-height: 1.35; }
+.j-past strong, .j-next strong { font-weight: 500; }
+.j-sub { display: block; margin-top: 2px; font-size: 0.82rem; line-height: 1.45; color: var(--text-muted); }
+/* MiM › Business Analytics: the specialisation hangs off the programme */
+.j-track { display: block; color: var(--text); font-weight: 500; white-space: nowrap; }
+.j-track::before { content: "↳" / ""; margin: 0 6px 0 2px; color: var(--accent); }
+.hero-live .hero-buttons { margin-top: 28px; }
+.hero-live .button { transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.hero-live .button-primary { box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28); }
+.hero-live .button:not(:disabled):hover { transform: translateY(-2px); }
+
+/* --- Photo: turning gradient ring + floating chips; follows the mouse a little --- */
+.hero-visual { position: relative; flex-shrink: 0; display: grid; place-items: center; width: 360px; height: 360px; transform: translate(calc(var(--px, 0) * 10px), calc(var(--py, 0) * 10px)); transition: transform 0.6s ease-out; animation: pop 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.photo-ring { position: relative; width: 264px; height: 264px; padding: 6px; border-radius: 50%; box-shadow: 0 26px 60px rgba(37, 99, 235, 0.25); }
+.photo-ring::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(#2563eb, #6d5dfc, #0ea5e9, #93c5fd, #2563eb); animation: spin 10s linear infinite; }
+@keyframes spin { to { transform: rotate(1turn); } }
+body.home .hero-live .photo-ring .hero-photo { position: relative; display: block; width: 100%; height: 100%; border: 5px solid #fff; box-shadow: none; }
+.float-chip { position: absolute; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px; background: rgba(255, 255, 255, 0.88); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 10px 26px rgba(16, 24, 40, 0.1); color: var(--text); font-size: 0.82rem; font-weight: 600; white-space: nowrap; animation: float 6s ease-in-out infinite; }
+.float-chip svg { color: var(--accent); }
+.chip-status { bottom: 4px; left: 50%; translate: -50% 0; animation-delay: -2s; }
+.chip-a { top: 34px; left: -18px; animation-delay: -1s; }
+.chip-b { top: 92px; right: -26px; animation-delay: -3.5s; }
+.chip-c { bottom: 86px; left: -34px; animation-delay: -4.5s; }
+@keyframes float { 50% { transform: translateY(-10px); } }
+.pulse { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; animation: ping-green 2s infinite; }
+@keyframes ping-green { 0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5); } 70%, 100% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); } }
+
+/* --- "Scroll to explore" --- */
+.scroll-cue { position: absolute; left: 50%; bottom: 22px; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; animation: rise 0.8s 1.4s backwards; }
+.scroll-cue:hover { color: var(--accent); }
+.scroll-cue .mouse { position: relative; width: 22px; height: 34px; border: 2px solid currentColor; border-radius: 12px; }
+.scroll-cue .mouse::after { content: ""; position: absolute; top: 6px; left: 50%; width: 4px; height: 7px; margin-left: -2px; border-radius: 2px; background: var(--accent); animation: wheel 1.6s ease-in-out infinite; }
+@keyframes wheel { 0% { opacity: 0; transform: translateY(-2px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(10px); } }
+
+/* --- In numbers + moving logo strip --- */
+body.home .home-proof { padding: 0 0 24px; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 8px; list-style: none; border: 1px solid var(--border); border-radius: 20px; background: rgba(255, 255, 255, 0.8); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 18px 50px rgba(16, 24, 40, 0.06); }
+.stat { padding: 18px 20px; text-align: center; }
+.stat + .stat { border-left: 1px solid var(--border); }
+.stat strong { display: block; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; background: linear-gradient(135deg, #2563eb, #6d5dfc); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.stat span { display: block; margin-top: 4px; color: var(--text-muted); font-size: 0.88rem; }
+.marquee { margin-top: 40px; }
+.marquee-label { margin: 0 0 14px; text-align: center; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.marquee-viewport { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee-track { --gap: 48px; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px var(--gap); margin: 0; padding: 6px 0; list-style: none; }
+.marquee.is-ready .marquee-track { flex-wrap: nowrap; justify-content: flex-start; width: max-content; animation: marquee 45s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }   /* one set + half a gap: loops without a jump */
+.marquee-track li { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-weight: 600; white-space: nowrap; filter: grayscale(1); opacity: 0.65; transition: filter 0.3s ease, opacity 0.3s ease, color 0.3s ease; }
+.marquee-track li:hover { filter: none; opacity: 1; color: var(--text); }
+.marquee-track img { width: 40px; height: 40px; border-radius: 10px; object-fit: contain; }
+
+/* --- How this site works: numbered tiles, light that follows the mouse, arrow on hover --- */
+.guide-head { flex-wrap: wrap; justify-content: flex-start; gap: 4px 14px; }
+.guide-sub { margin: 0; color: var(--text-muted); }
+.site-map .cat-overview { counter-reset: tile; }
+.site-map .cat-tile { position: relative; overflow: hidden; padding-right: 44px; background: radial-gradient(240px circle at var(--x, -300px) var(--y, -300px), rgba(37, 99, 235, 0.1), transparent 70%), var(--bg); }
+.site-map .cat-tile::before { counter-increment: tile; content: "0" counter(tile); position: absolute; top: 14px; right: 16px; color: #b6c2d6; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; transition: color 0.25s ease; }
+.site-map .cat-tile::after { content: "→"; position: absolute; right: 16px; bottom: 14px; color: var(--accent); font-weight: 700; opacity: 0; transform: translateX(-8px); transition: opacity 0.25s ease, transform 0.25s ease; }
+.site-map .cat-tile:hover::before, .site-map .cat-tile:focus-visible::before { color: var(--accent); }
+.site-map .cat-tile:hover::after, .site-map .cat-tile:focus-visible::after { opacity: 1; transform: none; }
+
+/* --- Carousels play by themselves on Home: the active dot fills up, then the next card comes (script.js) --- */
+.carousel-nav.autoplay .carousel-dots button.active { position: relative; overflow: hidden; background: color-mix(in srgb, var(--accent) 25%, var(--border)); }
+.carousel-nav.autoplay .carousel-dots button.active::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--accent); transform-origin: left; animation: dot-fill 6s linear; }
+.carousel-nav.autoplay.paused .carousel-dots button.active::after { animation-play-state: paused; }
+@keyframes dot-fill { from { transform: scaleX(0); } }
+
+/* --- Sections appear as you scroll (script.js adds .h-reveal-on to <html>, .h-reveal and .in) --- */
+.h-reveal-on .h-reveal:not(.in) { opacity: 0; }
+.h-reveal-on .h-reveal.in { animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(var(--i, 0) * 90ms); }
+
+/* --- Tablet and phone --- */
+@media (max-width: 960px) {
+  .hero-visual { width: 300px; height: 300px; }
+  .photo-ring { width: 220px; height: 220px; }
+  .chip-a, .chip-b, .chip-c { display: none; }
+}
+@media (max-width: 720px) {
+  body.home .hero-live { min-height: 0; padding: 32px 0 40px; }
+  .hero-live .hero-inner { flex-direction: column-reverse; align-items: flex-start; gap: 20px; }
+  .hero-visual { width: auto; height: auto; display: flex; align-items: center; gap: 14px; transform: none; }
+  .photo-ring { width: 112px; height: 112px; padding: 4px; flex-shrink: 0; }
+  body.home .hero-live .photo-ring .hero-photo { border-width: 3px; }
+  .chip-status { position: static; translate: none; padding: 6px 12px; font-size: 0.78rem; white-space: normal; }
+  .hero-rotator { margin-bottom: 22px; font-size: 1.02rem; }
+  .hero-live .hero-text > .journey { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-left: 22px; }
+  .journey::before, .journey::after { top: 9px; left: 4px; width: 1px; height: auto; }
+  .journey::before { right: auto; bottom: 9px; background: #c7d2fe; }
+  .journey::after { height: calc(50% - 9px); transform-origin: top; animation-name: fill-line-v; }
+  .j-step { padding-top: 0; }
+  .j-dot { top: 5px; left: -22px; }
+  .scroll-cue { display: none; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat { padding: 14px 10px; }
+  .stat + .stat { border-left: none; }
+  .stat:nth-child(even) { border-left: 1px solid var(--border); }
+  .stat:nth-child(n + 3) { border-top: 1px solid var(--border); }
+  .marquee { margin-top: 28px; }
+  .marquee-track { --gap: 32px; }
+  .marquee.is-ready .marquee-track { animation-duration: 32s; }
+  .site-map .cat-tile { padding-right: 14px; }
+  .site-map .cat-tile::before { top: 10px; right: 10px; font-size: 0.68rem; }
+  .site-map .cat-tile::after { display: none; }   /* no hover on touch screens */
+  .marquee-track li { gap: 8px; font-size: 0.85rem; }
+  .marquee-track img { width: 30px; height: 30px; }
+  .marquee:not(.is-ready) .marquee-track { gap: 10px 22px; }
+}
+@media (max-height: 640px) { .scroll-cue { display: none; } }
+
+/* --- Reduce motion: no movement at all, everything shown --- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg .blob, .hero-live .headline, .photo-ring::before, .float-chip, .pulse, .j-now .j-dot, .scroll-cue .mouse::after,
+  .hero-live .hero-text > *, .j-step, .journey::after, .hero-visual, .scroll-cue { animation: none; }
+  .hero-bg, .hero-visual { transform: none; }
+  .j-card, .site-map .cat-tile::before, .site-map .cat-tile::after, .marquee-track li { transition: none; }
+}
