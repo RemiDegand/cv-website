@@ -1,0 +1,82 @@
+/* =====================================================================
+   PROJECTS PAGE, UPGRADE (3 Nov 2026, web design pass). Loaded by projects.html only, after
+   style.css. Switched on by projects-fx.js (class .pfx on <html>): without JavaScript the page
+   stays as styled in style.css. No floating (user, 3 Nov: too much movement).
+   - header: soft glows + numbers that count up (counted from the cards themselves)
+   - sticky category bar under the menu once the overview tiles are passed, current one underlined
+   - cards: slight tilt towards the mouse, light in the company colour, arrow button, thicker top bar
+   - sections and cards come in as you scroll; cards pop back when a filter shows them again
+   ===================================================================== */
+@keyframes pfx-up { from { opacity: 0; transform: translateY(18px); } }
+@keyframes pfx-pop { from { opacity: 0; transform: scale(0.94) translateY(8px); } }
+
+/* --- Header: soft glows behind the title, numbers --- */
+.pfx #projects { position: relative; isolation: isolate; }
+.pfx #projects::before { content: ""; position: absolute; inset: 0 0 auto; z-index: -1; height: 520px; pointer-events: none; background: radial-gradient(700px 360px at 85% -60px, #dfe8ff, rgba(223, 232, 255, 0) 70%), radial-gradient(560px 320px at -80px 120px, #eef3ff, rgba(238, 243, 255, 0) 70%); }
+.pfx .projects-title { animation: pfx-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.pfx .projects-lead { animation: pfx-up 0.7s 0.08s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.proj-stats { display: flex; flex-wrap: wrap; gap: 10px; margin: -12px 0 32px; padding: 0; list-style: none; animation: pfx-up 0.7s 0.16s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.proj-stats li { display: inline-flex; align-items: baseline; gap: 6px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px; background: rgba(255, 255, 255, 0.8); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: var(--text-muted); font-size: 0.88rem; }
+.proj-stats strong { color: var(--accent); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.proj-stats .stat-ai strong { background: linear-gradient(135deg, var(--accent), #6d5dfc); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* --- Overview tiles: come in one after the other --- */
+.pfx .cat-overview .cat-tile { animation: pfx-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(0.2s + var(--i, 0) * 0.07s); }
+.pfx .filters { animation: pfx-up 0.6s 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+
+/* --- Sticky category bar (built by JS from the overview tiles) --- */
+.proj-nav { position: sticky; top: var(--menu-height); z-index: 9; margin: 0 -16px; padding: 0 16px; background: rgba(255, 255, 255, 0.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transform: translateY(-8px); opacity: 0; visibility: hidden; transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease, visibility 0s 0.25s; }
+.proj-nav.is-shown { transform: none; opacity: 1; visibility: visible; border-bottom-color: transparent;
+  /* background and bottom line as wide as the screen, not only the content column */
+  box-shadow: 0 0 0 100vmax rgba(255, 255, 255, 0.86), 0 1px 0 100vmax var(--border); clip-path: inset(0 -100vmax -1px); transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease; }
+.proj-nav-inner { position: relative; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.proj-nav-inner::-webkit-scrollbar { display: none; }
+.proj-nav a { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; padding: 12px 14px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: color 0.2s ease; }
+.proj-nav a svg { width: 18px; height: 18px; }
+.proj-nav a:hover, .proj-nav a.is-current { color: var(--accent); }
+.proj-nav a[hidden] { display: none; }
+.proj-nav-bar { position: absolute; bottom: 0; left: 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--accent); transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+/* the bar takes no room in the page (its height is taken back below it), so nothing jumps when it appears */
+.proj-nav { margin-bottom: -46px; }
+.pfx .cat-section { scroll-margin-top: calc(var(--menu-height) + 64px); }
+
+/* --- Section heads: icon pops in, title comes up (.in from JS) --- */
+.pfx .cat-section-head .cat-icon { transition: transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1), background-color 0.25s ease, color 0.25s ease; }
+.pfx .cat-section.is-current .cat-section-head .cat-icon { background: var(--accent); color: #fff; }
+.pfx .cat-section:not(.in) .cat-section-head, .pfx .cat-section:not(.in) .cat-grid > .card { opacity: 0; }
+.pfx .cat-section.in .cat-section-head { animation: pfx-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.pfx .cat-section.in .cat-grid > .card { animation: pfx-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(0.12s + var(--i, 0) * 0.1s); }
+.pfx .cat-grid > .card.pfx-back { animation: pfx-pop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }   /* shown again by a filter */
+
+/* --- Cards: tilt, light in the company colour, arrow button, thicker top bar --- */
+.pfx .card.project { position: relative; transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.25s ease-out, border-color 0.3s ease, box-shadow 0.3s ease, border-top-width 0.2s ease; }
+.pfx #projects .card.project:hover { transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px); }
+.pfx .card.project::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(380px circle at var(--gx, 50%) var(--gy, 0%), color-mix(in srgb, var(--brand, var(--accent)) 14%, transparent), transparent 65%); opacity: 0; transition: opacity 0.3s ease; }
+.pfx .card.project:hover::before { opacity: 1; }
+.proj-go { position: absolute; top: 18px; right: 18px; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-soft); color: var(--text-muted); pointer-events: none; transition: background-color 0.25s ease, color 0.25s ease, transform 0.3s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.proj-go svg { width: 18px; height: 18px; }
+.card.project:hover .proj-go, .card.project:has(.project-link:focus-visible) .proj-go { background: var(--brand, var(--accent)); color: #fff; transform: rotate(-45deg) scale(1.08); }
+/* yellow (Glovo) needs dark text on it */
+.card.project[style*="#FED42A"]:hover .proj-go { color: var(--text); }
+.pfx .card.project .project-org { padding-right: 44px; }   /* room for the arrow */
+.pfx .card.project .project-logo { transition: transform 0.3s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.pfx .card.project:hover .project-logo { transform: scale(1.15) rotate(-6deg); }
+.pfx .card.project .project-result { transition: background-color 0.3s ease; }
+.pfx .card.project:hover .project-result { background: color-mix(in srgb, var(--accent) 14%, #fff); }
+
+/* --- Phones: no sticky bar room trick needed for the tilt; bar stays, smaller --- */
+@media (max-width: 720px) {
+  .proj-stats { gap: 8px; margin: -16px 0 24px; }
+  .proj-stats li { padding: 6px 12px; font-size: 0.82rem; }
+  .proj-nav a { padding: 11px 10px; font-size: 0.85rem; }
+  .proj-nav a svg { display: none; }
+  .proj-nav { margin-bottom: -44px; }
+}
+
+/* --- Reduce motion: no movement --- */
+@media (prefers-reduced-motion: reduce) {
+  .pfx .projects-title, .pfx .projects-lead, .proj-stats, .pfx .cat-overview .cat-tile, .pfx .filters,
+  .pfx .cat-section.in .cat-section-head, .pfx .cat-section.in .cat-grid > .card, .pfx .cat-grid > .card.pfx-back { animation: none; }
+  .pfx .card.project, .proj-go, .proj-nav, .proj-nav-bar, .pfx .card.project .project-logo { transition: none; }
+  .pfx #projects .card.project:hover, .card.project:hover .proj-go, .pfx .card.project:hover .project-logo { transform: none; }
+}

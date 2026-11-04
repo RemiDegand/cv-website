@@ -1,0 +1,90 @@
+/* =====================================================================
+   CONTACT PAGE (redesigned 3 Nov 2026, web design pass). Loaded by contact.html only, after style.css.
+   Left: status, title, what I'm looking for. Right: a business card that tilts towards the mouse.
+   Below: one big card per way to reach me (email with a copy button, LinkedIn, CV).
+   ===================================================================== */
+@keyframes ct-up { from { opacity: 0; transform: translateY(18px); } }
+@keyframes ct-card-in { from { opacity: 0; transform: perspective(1000px) rotateY(-18deg) rotateX(6deg) translateY(20px); } }
+@keyframes ct-ping { 0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5); } 70%, 100% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); } }
+
+.contact { position: relative; isolation: isolate; overflow: hidden; padding: 72px 0 96px; }
+/* Same soft glows and dot grid as the Home hero */
+.ct-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(640px 420px at 82% 18%, rgba(195, 213, 255, 0.7), transparent 70%),
+    radial-gradient(520px 380px at 8% 70%, rgba(221, 210, 255, 0.45), transparent 70%); }
+.ct-bg::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(37, 99, 235, 0.18) 1px, transparent 1.2px); background-size: 24px 24px; -webkit-mask-image: radial-gradient(ellipse 45% 55% at 78% 30%, #000, transparent 72%); mask-image: radial-gradient(ellipse 45% 55% at 78% 30%, #000, transparent 72%); }
+
+/* --- Top: intro on the left, business card on the right --- */
+.ct-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: 56px; }
+.ct-intro > * { animation: ct-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.ct-intro > :nth-child(2) { animation-delay: 0.08s; }
+.ct-intro > :nth-child(3) { animation-delay: 0.16s; }
+.ct-intro > :nth-child(4) { animation-delay: 0.24s; }
+.ct-status { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 18px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; background: rgba(255, 255, 255, 0.85); color: var(--text); font-size: 0.85rem; font-weight: 600; }
+.ct-pulse { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; animation: ct-ping 2s infinite; }
+.contact .page-title { margin-bottom: 12px; font-size: clamp(2.4rem, 5vw, 3.4rem); letter-spacing: -0.025em; }
+.contact .lead { margin: 0 0 28px; }
+/* What I'm looking for: 4 small boxes */
+.ct-wish { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 520px; margin: 0; }
+.ct-wish > div { padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255, 255, 255, 0.8); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.ct-wish dt { color: var(--text-muted); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.ct-wish dd { margin: 2px 0 0; font-weight: 600; }
+
+/* Business card: dark, with a light that follows the mouse (--gx / --gy) and a slight tilt (--rx / --ry) */
+.ct-card-wrap { display: grid; place-items: center; perspective: 1000px; }
+.ct-card { position: relative; width: min(100%, 400px); aspect-ratio: 1.6; padding: 26px; overflow: hidden; border-radius: 20px; color: #fff; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 55%, #6d5dfc 100%); box-shadow: 0 30px 60px rgba(30, 58, 138, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25); transform: rotateX(var(--rx, 4deg)) rotateY(var(--ry, -8deg)); transform-style: preserve-3d; transition: transform 0.3s ease-out; animation: ct-card-in 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.ct-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(320px circle at var(--gx, 20%) var(--gy, 0%), rgba(255, 255, 255, 0.28), transparent 60%); }
+.ct-card::after { content: ""; position: absolute; right: -60px; bottom: -80px; width: 240px; height: 240px; border-radius: 50%; border: 36px solid rgba(255, 255, 255, 0.07); }
+.ct-card-top { display: flex; align-items: center; gap: 16px; }
+.ct-photo { width: 72px; height: 72px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.8); object-fit: cover; }
+.ct-name { display: block; font-size: 1.35rem; line-height: 1.2; }
+.ct-role { display: block; margin-top: 2px; color: rgba(255, 255, 255, 0.82); font-size: 0.9rem; }
+.ct-card-lines { display: grid; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; font-size: 0.85rem; color: rgba(255, 255, 255, 0.92); }
+.ct-card-lines li { display: flex; align-items: center; gap: 10px; }
+.ct-card-lines svg { flex-shrink: 0; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+.ct-card-mark { position: absolute; top: 22px; right: 24px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.2em; opacity: 0.55; }
+
+/* --- Ways to reach me: 3 big cards --- */
+.ct-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 64px; }
+.ct-action { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 24px; border: 1px solid var(--border); border-radius: 18px; background: #fff; box-shadow: var(--shadow); color: var(--text); text-decoration: none; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; animation: ct-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.ct-action:nth-child(1) { animation-delay: 0.35s; }
+.ct-action:nth-child(2) { animation-delay: 0.45s; }
+.ct-action:nth-child(3) { animation-delay: 0.55s; }
+.ct-action:hover, .ct-action:focus-within { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); box-shadow: 0 4px 8px rgba(16, 24, 40, 0.05), 0 18px 36px rgba(37, 99, 235, 0.14); }
+.ct-icon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 12px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); transition: background-color 0.25s ease, color 0.25s ease, transform 0.35s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.ct-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ct-action:hover .ct-icon, .ct-action:focus-within .ct-icon { background: var(--accent); color: #fff; transform: rotate(-8deg) scale(1.06); }
+.ct-action strong { font-size: 1.1rem; }
+.ct-value { color: var(--text-muted); font-size: 0.92rem; overflow-wrap: anywhere; text-decoration: none; }
+a.ct-value:hover { color: var(--accent); }
+.ct-go { margin-top: auto; padding-top: 16px; color: var(--accent); font-weight: 600; }
+.ct-go span { display: inline-block; transition: transform 0.25s ease; }
+.ct-link:hover .ct-go span { transform: translate(3px, -2px); }
+.ct-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 16px; }
+.ct-buttons .button { padding: 8px 16px; font-size: 0.9rem; }
+.ct-copy.is-done { border-color: #16a34a; color: #16a34a; }
+/* "Copied" message at the bottom of the screen */
+.ct-toast { position: fixed; left: 50%; bottom: 28px; z-index: 950; margin: 0; padding: 10px 18px; border-radius: 999px; background: var(--text); color: #fff; font-size: 0.9rem; font-weight: 600; box-shadow: 0 12px 30px rgba(16, 24, 40, 0.25); transform: translate(-50%, 16px); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; }
+.ct-toast.is-shown { opacity: 1; transform: translate(-50%, 0); }
+
+/* --- Tablet and phone --- */
+@media (max-width: 900px) {
+  .ct-hero { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .ct-actions { grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 40px; }
+}
+@media (max-width: 560px) {
+  .contact { padding: 40px 0 72px; }
+  .ct-card { padding: 20px; aspect-ratio: auto; }
+  .ct-photo { width: 60px; height: 60px; }
+  .ct-name { font-size: 1.2rem; }
+  .ct-action { padding: 20px; }
+}
+
+/* --- Reduce motion: no movement --- */
+@media (prefers-reduced-motion: reduce) {
+  .ct-intro > *, .ct-card, .ct-action, .ct-pulse { animation: none; }
+  .ct-card, .ct-action, .ct-icon, .ct-go span, .ct-toast { transition: none; }
+  .ct-card { transform: none; }
+  .ct-action:hover, .ct-action:focus-within, .ct-action:hover .ct-icon, .ct-link:hover .ct-go span { transform: none; }
+}

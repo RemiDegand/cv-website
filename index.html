@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="home.css"><!-- Home only: dynamic hero, numbers, logo strip, guide (3 Nov 2026) -->
 </head>
 <body class="home">
 
@@ -44,16 +45,12 @@
           <p class="headline">Data &amp; Business Analyst</p>
           <p class="hero-rotator"><span class="sr-only">I build forecasts, dashboards, data models, AI tools and automations.</span><span aria-hidden="true">I build <span class="rotator" data-words="forecasts|dashboards|data models|AI tools|automations">forecasts, dashboards and AI tools</span><span class="rotator-caret"></span></span></p>
           <ol class="journey" aria-label="My path">
-            <li class="j-step j-past"><span class="j-dot"></span><div class="j-card"><span class="j-label">Before</span><strong>5 internships</strong><span class="j-sub">Latest at Glovo &amp; OSLO</span></div></li>
-            <li class="j-step j-now"><span class="j-dot"></span><div class="j-card"><span class="j-label">Now</span><strong>Final year, Master in Management</strong><span class="j-sub">NEOMA Business School · MSc Business Analytics</span></div></li>
-            <li class="j-step j-next"><span class="j-dot"></span><div class="j-card"><span class="j-label">Next</span><strong>Analyst role in tech</strong><span class="j-sub">Internship, VIE or full-time · from May 2027</span></div></li>
+            <!-- Simplified 4 Nov 2026 (user): fewer words, no boxes -->
+            <li class="j-step j-past"><span class="j-dot"></span><div class="j-card"><span class="j-label">Before</span><strong>2 Analyst internships</strong><span class="j-sub">In data-driven companies</span></div></li>
+            <li class="j-step j-now"><span class="j-dot"></span><div class="j-card"><span class="j-label">Now</span><strong>Final year of Master</strong><span class="j-sub">NEOMA BS · MiM<span class="j-track">Business Analytics</span></span></div></li>
+            <li class="j-step j-next"><span class="j-dot"></span><div class="j-card"><span class="j-label">Next</span><strong>Analyst in a data-driven company</strong></div></li>
           </ol>
-          <div class="hero-buttons">
-            <a href="CV.pdf" class="button button-primary" download="Remi-Degand-CV.pdf">Download CV</a>
-            <!-- The chatbot comes in Phase 2: this button will open it -->
-            <button type="button" class="button button-secondary" disabled title="Coming soon">Ask my AI assistant</button>
-            <a href="https://www.linkedin.com/in/remi-degand/" class="button button-ghost" target="_blank" rel="noopener">LinkedIn</a>
-          </div>
+          <!-- No buttons in the hero (user, 4 Nov 2026): Download CV and LinkedIn removed; both stay on the Contact page. No AI assistant button either (3 Nov): the chatbot is the bubble at the bottom right -->
         </div>
         <div class="hero-visual">
           <!-- profile.jpg = 600x600 web version of photo2.jpg -->
@@ -128,7 +125,6 @@
             <p class="cat-desc">Find where to reach me: email and LinkedIn.</p>
           </a>
         </nav>
-        <p class="ai-teaser"><span class="ai-spark" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></span><span><strong>Coming soon:</strong> an AI assistant that answers your questions about my profile, in your language.</span></p>
       </div>
       <div class="container home-split">
         <div class="home-col">
@@ -376,5 +372,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="chatbot.js" defer></script><!-- AI assistant: bubble bottom right + welcome animation (3 Nov 2026) -->
+  <script src="home.js"></script>
 </body>
 </html>

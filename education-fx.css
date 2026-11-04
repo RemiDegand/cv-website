@@ -1,0 +1,87 @@
+/* =====================================================================
+   EDUCATION PAGE, AESTHETIC PASS (3 Nov 2026, web design pass). Loaded by education.html only,
+   after style.css. Switched on by education-fx.js (class .efx on <html>); without JavaScript the
+   page stays as styled in style.css.
+   Problem solved: until a school was clicked, the right half of the page was empty and nothing
+   said the schools could be opened ("View details →" only showed on hover).
+   - NEOMA opens by itself shortly after the page loads (computers and tablets)
+   - schools are white cards with an arrow button that is always visible
+   - when no school is open, a "Pick a school" panel fills the right side
+   - levels, logos and schools come in one after the other
+   ===================================================================== */
+@keyframes efx-left { from { opacity: 0; transform: translateX(-24px); } }
+@keyframes efx-right { from { opacity: 0; transform: translateX(28px); } }
+@keyframes efx-pop { from { opacity: 0; transform: scale(0.3); } }
+@keyframes efx-up { from { opacity: 0; transform: translateY(12px); } }
+
+/* --- Intro line under the title --- */
+.edu-lead { margin: -20px 0 36px; color: var(--text-muted); animation: efx-up 0.6s 0.1s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+
+/* --- Schools: white cards on the line, an arrow button always visible --- */
+.efx .edu-item { margin: 0; padding: 16px 60px 16px 18px; border: 1px solid var(--border); border-radius: 14px; background: #fff; box-shadow: var(--shadow); transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease; }
+.efx .edu-logo { left: -63px; top: 16px; }          /* still centred on the line (the card no longer has a negative margin) */
+.efx .edu-level { right: calc(100% + 77px); top: 28px; }
+.efx .edu-item:hover, .efx .edu-item:focus-visible { background: #fff; transform: translateX(4px); border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); box-shadow: 0 4px 8px rgba(16, 24, 40, 0.05), 0 14px 28px rgba(37, 99, 235, 0.12); }
+.efx .edu-item.selected { background: linear-gradient(90deg, var(--accent-soft), #fff 75%); border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.14); }
+/* the old "View details →" text becomes a round arrow button */
+.efx .edu-hint { display: grid; place-items: center; top: 50%; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: var(--accent-soft); font-size: 0; opacity: 1; transform: translateY(-50%); transition: background-color 0.25s ease, transform 0.25s ease; }
+.efx .edu-hint::before { content: "→"; color: var(--accent); font-size: 1.05rem; font-weight: 700; transition: color 0.25s ease; }
+.efx .edu-item:hover .edu-hint, .efx .edu-item:focus-visible .edu-hint { transform: translateY(-50%) translateX(3px); }
+.efx .edu-item.selected .edu-hint { display: grid; background: var(--accent); }
+.efx .edu-item.selected .edu-hint::before { color: #fff; }
+
+/* --- Open school: its details card spans its row and the rows below (--span from JS), so the
+   other schools keep their normal spacing instead of being pushed under the card (3 Nov, user's request) --- */
+@media (min-width: 721px) {
+  .efx .edu-detail { grid-row: span var(--span, 1); align-self: start; }
+  /* one row per school (as tall as the school), then an empty 1fr row that takes the card's extra height */
+  .efx .timeline.zoomed { grid-template-rows: repeat(var(--n, 3), auto) 1fr; }
+}
+
+/* --- Entrance, top to bottom (--i = school index, set by JS) --- */
+.efx .edu-item { animation: efx-right 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(0.15s + var(--i, 0) * 0.1s); }
+.efx .edu-item .edu-logo { animation: efx-pop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) backwards; animation-delay: calc(0.25s + var(--i, 0) * 0.1s); }
+.efx .edu-item .edu-level { animation: efx-left 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(0.2s + var(--i, 0) * 0.1s); }
+
+/* --- "Pick a school" panel: fills the right column when no school is open.
+   Absolutely placed over the 2nd grid column (2fr / 3fr, 40px gap, 40px padding on the left),
+   so it never changes the height of the schools' rows --- */
+.edu-pick { position: absolute; top: 0; left: calc(80px + (100% - 80px) * 0.4); width: calc((100% - 80px) * 0.6); padding: 28px; border: 2px dashed color-mix(in srgb, var(--accent) 35%, var(--border)); border-radius: 18px; background: linear-gradient(160deg, #f7f9ff, #fff 60%); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s; animation: efx-up 0.6s 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.timeline.zoomed .edu-pick { opacity: 0; visibility: hidden; transform: translateX(12px); transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s 0.2s; }
+.edu-pick-head { display: flex; align-items: center; gap: 14px; }
+.edu-pick-icon { display: grid; place-items: center; flex-shrink: 0; width: 46px; height: 46px; border-radius: 12px; background: var(--accent); color: #fff; box-shadow: 0 10px 22px rgba(37, 99, 235, 0.3); animation: efx-cap 3s ease-in-out infinite; }
+@keyframes efx-cap { 50% { transform: translateY(-4px) rotate(-6deg); } }
+.edu-pick strong { display: block; font-size: 1.1rem; }
+.edu-pick-arrow { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 0.85rem; font-weight: 600; }
+.edu-pick-arrow::before { content: "←"; display: inline-block; animation: efx-nudge 1.4s ease-in-out infinite; }
+@keyframes efx-nudge { 50% { transform: translateX(-6px); } }
+.edu-pick p { margin: 14px 0 0; color: var(--text-muted); font-size: 0.95rem; }
+/* a shimmering preview of what opens: one line per school year */
+.edu-pick-preview { display: grid; gap: 16px; margin: 22px 0 0; padding: 0; list-style: none; }
+.edu-pick-preview li { position: relative; display: grid; gap: 7px; padding-left: 24px; }
+.edu-pick-preview li::before { content: ""; position: absolute; top: 2px; left: 0; width: 10px; height: 10px; border: 2px solid #c7d2fe; border-radius: 50%; }
+.edu-pick-preview li:first-child::before { border-color: var(--accent); background: var(--accent); }
+.edu-pick-preview i { display: block; height: 10px; border-radius: 6px; background: linear-gradient(90deg, #eef2ff 0%, #dfe6fb 40%, #eef2ff 80%); background-size: 200% 100%; animation: efx-shimmer 1.8s linear infinite; }
+.edu-pick-preview i:first-child { width: 45%; height: 12px; }
+.edu-pick-preview i:nth-child(2) { width: 85%; }
+.edu-pick-preview li:nth-child(2) i:nth-child(2) { width: 70%; }
+.edu-pick-preview li:nth-child(3) i:nth-child(2) { width: 78%; }
+@keyframes efx-shimmer { to { background-position: -200% 0; } }
+
+/* --- Phones: the details open under each school, so no panel; the arrow button stays --- */
+@media (max-width: 720px) {
+  .edu-pick { display: none; }
+  .edu-lead { margin: -16px 0 28px; font-size: 0.95rem; }
+  .efx .edu-item { padding: 14px 56px 14px 14px; }
+  .efx .edu-logo { left: -53px; top: 14px; width: 32px; height: 32px; }   /* centred on the line, fully on screen */
+  .efx .edu-level { position: static; animation: none; }
+  .efx .edu-hint { position: absolute; display: grid; margin: 0; top: 50%; right: 12px; }
+  .efx .edu-item:hover, .efx .edu-item:focus-visible { transform: none; }
+}
+
+/* --- Reduce motion: no movement --- */
+@media (prefers-reduced-motion: reduce) {
+  .edu-lead, .efx .edu-item, .efx .edu-item .edu-logo, .efx .edu-item .edu-level, .edu-pick, .edu-pick-icon, .edu-pick-arrow::before, .edu-pick-preview i { animation: none; }
+  .efx .edu-item, .efx .edu-hint, .edu-pick { transition: none; }
+  .efx .edu-item:hover, .efx .edu-item:focus-visible { transform: none; }
+}

@@ -1,0 +1,137 @@
+/* =====================================================================
+   RÉMI'S AI ASSISTANT (3 Nov 2026, web design pass). Loaded by chatbot.js on every page.
+   1. Welcome animation in the middle of the screen (first page of a visit only)
+   2. The avatar flies to the bottom right and becomes the chat bubble
+   3. Chat panel (bottom right on computers, bottom sheet on phones)
+   ===================================================================== */
+.cva, .cva-intro { --cva-blue: var(--accent, #2563eb); --cva-violet: #6d5dfc; --cva-cyan: #0ea5e9; --cva-text: var(--text, #1a1f2b); --cva-muted: var(--text-muted, #5b6475); --cva-border: var(--border, #e3e7ee); font-family: "Inter", system-ui, sans-serif; }
+
+/* --- Avatar: a living orb (turning gradient, two eyes that blink, a smile) --- */
+.cva-avatar { position: relative; display: grid; place-items: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; isolation: isolate; box-shadow: inset 0 -6px 14px rgba(30, 27, 120, 0.25); }
+.cva-avatar::before { content: ""; position: absolute; inset: -20%; z-index: -1; background: conic-gradient(from 0deg, var(--cva-blue), var(--cva-violet), var(--cva-cyan), #93c5fd, var(--cva-blue)); animation: cva-spin 8s linear infinite; }
+.cva-avatar::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 50%; background: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.55), transparent 45%); }
+.cva-avatar svg { width: 72%; height: 72%; }
+.cva-avatar .eye { fill: #fff; transform-box: fill-box; transform-origin: center; animation: cva-blink 5s infinite; }
+.cva-avatar .smile { fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; }
+@keyframes cva-spin { to { transform: rotate(1turn); } }
+@keyframes cva-blink { 0%, 45%, 49%, 100% { transform: scaleY(1); } 47% { transform: scaleY(0.1); } }
+
+/* --- 1. Welcome animation --- */
+.cva-intro { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px; isolation: isolate; animation: cva-fade-in 0.5s ease both; }
+/* the blurred screen is its own layer, so it can fade out while the orb keeps flying */
+.cva-intro::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(700px 500px at 50% 45%, rgba(255, 255, 255, 0.96), rgba(240, 244, 255, 0.92)); -webkit-backdrop-filter: blur(18px) saturate(1.2); backdrop-filter: blur(18px) saturate(1.2); }
+.cva-intro.is-leaving::before { animation: cva-fade-out 0.7s 0.15s ease forwards; }
+.cva-intro.is-leaving { pointer-events: none; }
+.cva-intro-card { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 620px; text-align: center; }
+/* The orb falls from the top of the screen, spinning, then squashes, bounces twice and settles (1.9 s) */
+.cva-intro-orb { width: 104px; height: 104px; margin-bottom: 28px; box-shadow: 0 20px 50px rgba(79, 70, 229, 0.35), inset 0 -10px 24px rgba(30, 27, 120, 0.25); animation: cva-fall 1.9s 0.2s both; }
+.cva-intro-orb .smile { stroke-width: 2.2; }
+@keyframes cva-fall {
+  0%   { opacity: 0; transform: translateY(-62vh) rotate(-900deg) scale(0.75); animation-timing-function: cubic-bezier(0.4, 0, 0.85, 0.5); }   /* speeds up like a falling object */
+  8%   { opacity: 1; }
+  52%  { transform: translateY(0) rotate(0deg) scale(1); animation-timing-function: ease-out; }
+  60%  { transform: translateY(10px) scale(1.2, 0.8); animation-timing-function: ease-out; }    /* squash on the ground */
+  74%  { transform: translateY(-34px) rotate(10deg) scale(0.94, 1.06); animation-timing-function: ease-in; }   /* first bounce */
+  84%  { transform: translateY(4px) scale(1.08, 0.92); animation-timing-function: ease-out; }
+  92%  { transform: translateY(-9px) rotate(-4deg) scale(0.98, 1.02); animation-timing-function: ease-in; }   /* small second bounce */
+  100% { transform: none; }
+}
+/* its shadow on the "ground" grows as it comes down, and shrinks on each bounce */
+.cva-intro-shadow { position: absolute; top: 112px; left: 50%; width: 90px; height: 14px; margin-left: -45px; border-radius: 50%; background: radial-gradient(closest-side, rgba(49, 46, 129, 0.28), transparent); pointer-events: none; animation: cva-shadow 1.9s 0.2s both; }
+@keyframes cva-shadow {
+  0%   { opacity: 0; transform: scale(0.2); animation-timing-function: cubic-bezier(0.4, 0, 0.85, 0.5); }
+  52%  { opacity: 1; transform: scale(1); }
+  60%  { transform: scale(1.15); }
+  74%  { opacity: 0.6; transform: scale(0.75); }
+  84%  { opacity: 1; transform: scale(1.05); }
+  92%  { opacity: 0.85; transform: scale(0.92); }
+  100% { opacity: 1; transform: none; }
+}
+/* rings that ripple out of the orb once it has landed, while it talks */
+.cva-intro-rings { position: absolute; top: 0; left: 50%; width: 104px; height: 104px; margin-left: -52px; pointer-events: none; }
+.cva-intro-rings span { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(99, 102, 241, 0.35); opacity: 0; animation: cva-ripple 2.4s 2.1s ease-out infinite; }
+.cva-intro-rings span:nth-child(2) { animation-delay: 2.9s; }
+.cva-intro-kicker { margin: 0 0 12px; color: var(--cva-blue); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; animation: cva-rise 0.7s 1.75s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.cva-intro-title { margin: 0 0 14px; color: var(--cva-text); font-size: clamp(1.7rem, 4.4vw, 2.6rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; animation: cva-rise 0.7s 2.1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.cva-intro-title b { background: linear-gradient(90deg, var(--cva-blue), var(--cva-violet), var(--cva-cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cva-intro-text { margin: 0; color: var(--cva-muted); font-size: clamp(1rem, 2.2vw, 1.15rem); animation: cva-rise 0.7s 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.cva-intro-skip { position: fixed; right: 24px; bottom: 24px; padding: 8px 16px; border: 1px solid var(--cva-border); border-radius: 999px; background: rgba(255, 255, 255, 0.9); color: var(--cva-muted); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; animation: cva-fade-in 0.4s 1s both; }
+.cva-intro-skip:hover { color: var(--cva-blue); border-color: var(--cva-blue); }
+.cva-intro.is-leaving .cva-intro-kicker, .cva-intro.is-leaving .cva-intro-title, .cva-intro.is-leaving .cva-intro-text, .cva-intro.is-leaving .cva-intro-skip, .cva-intro.is-leaving .cva-intro-rings, .cva-intro.is-leaving .cva-intro-shadow { animation: cva-fade-out 0.25s ease forwards; }
+@keyframes cva-fade-in { from { opacity: 0; } }
+@keyframes cva-fade-out { to { opacity: 0; } }
+@keyframes cva-pop { from { opacity: 0; transform: scale(0.3); } }
+@keyframes cva-rise { from { opacity: 0; transform: translateY(16px); } }
+@keyframes cva-ripple { from { transform: scale(1); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
+
+/* --- 2. Bubble at the bottom right --- */
+.cva-launcher { position: fixed; right: 24px; bottom: 24px; z-index: 900; display: grid; place-items: center; width: 62px; height: 62px; padding: 0; border: none; border-radius: 50%; background: none; cursor: pointer; box-shadow: 0 12px 30px rgba(79, 70, 229, 0.35); transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease; }
+.cva-launcher .cva-avatar { width: 100%; height: 100%; }
+.cva-launcher:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 16px 36px rgba(79, 70, 229, 0.45); }
+.cva-launcher:focus-visible { outline: 3px solid rgba(37, 99, 235, 0.4); outline-offset: 3px; }
+.cva-waiting .cva-launcher { visibility: hidden; }   /* during the welcome animation */
+.cva-launcher.is-landing { animation: cva-land 0.6s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.cva-launcher.is-landing::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 3px solid rgba(99, 102, 241, 0.5); animation: cva-ripple 0.9s ease-out forwards; }
+@keyframes cva-land { 0% { transform: scale(0.85); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+/* Open: the face gives way to a "close" chevron */
+.cva-chevron { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg, var(--cva-blue), var(--cva-violet)); color: #fff; opacity: 0; transform: rotate(-90deg); transition: opacity 0.25s ease, transform 0.3s ease; }
+.cva.is-open .cva-chevron { opacity: 1; transform: none; }
+/* "Ask me about Rémi" label next to the bubble */
+.cva-tip { position: fixed; right: 98px; bottom: 36px; z-index: 900; max-width: calc(100vw - 130px); padding: 9px 14px; border: 1px solid var(--cva-border); border-radius: 14px 14px 4px 14px; background: #fff; box-shadow: 0 10px 28px rgba(16, 24, 40, 0.12); color: var(--cva-text); font-size: 0.88rem; font-weight: 600; white-space: nowrap; cursor: pointer; opacity: 0; transform: translateX(10px); pointer-events: none; transition: opacity 0.35s ease, transform 0.35s ease; }
+.cva-tip.is-shown { opacity: 1; transform: none; pointer-events: auto; }
+.cva-tip::before { content: "👋 "; }
+
+/* --- 3. Chat panel --- */
+.cva-panel { position: fixed; right: 24px; bottom: 100px; z-index: 901; display: flex; flex-direction: column; width: 380px; height: min(580px, calc(100vh - 130px)); overflow: hidden; border: 1px solid var(--cva-border); border-radius: 22px; background: #fff; box-shadow: 0 30px 80px rgba(16, 24, 40, 0.22), 0 4px 14px rgba(16, 24, 40, 0.06); opacity: 0; visibility: hidden; transform: translateY(16px) scale(0.96); transform-origin: bottom right; transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 0.3s; }
+.cva.is-open .cva-panel { opacity: 1; visibility: visible; transform: none; transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.cva-head { position: relative; display: flex; align-items: center; gap: 12px; padding: 16px 16px 16px 18px; background: linear-gradient(120deg, #1e40af, var(--cva-blue) 45%, var(--cva-violet)); color: #fff; }
+.cva-head .cva-avatar { width: 42px; height: 42px; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5); }
+.cva-head-text { flex: 1; min-width: 0; }
+.cva-head strong { display: block; font-size: 1.02rem; line-height: 1.2; }
+.cva-head span { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; opacity: 0.9; }
+.cva-head span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.25); }
+.cva-close { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: none; border-radius: 50%; background: rgba(255, 255, 255, 0.15); color: #fff; cursor: pointer; transition: background-color 0.2s ease; }
+.cva-close:hover { background: rgba(255, 255, 255, 0.28); }
+.cva-log { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 18px 16px 8px; overflow-y: auto; overscroll-behavior: contain; background: linear-gradient(180deg, #f7f9ff, #fff 120px); scroll-behavior: smooth; }
+.cva-msg { display: flex; align-items: flex-end; gap: 8px; max-width: 88%; animation: cva-rise 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.cva-msg .cva-avatar { width: 26px; height: 26px; }
+.cva-bubble { padding: 10px 14px; border-radius: 16px; font-size: 0.9rem; line-height: 1.5; overflow-wrap: anywhere; }
+.cva-msg.bot .cva-bubble { border: 1px solid var(--cva-border); border-bottom-left-radius: 4px; background: #fff; color: var(--cva-text); box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04); }
+.cva-msg.bot .cva-bubble b { font-weight: 600; }
+.cva-msg.bot .cva-bubble a { display: inline-block; margin-top: 4px; color: var(--cva-blue); font-weight: 600; text-decoration: none; }
+.cva-msg.bot .cva-bubble a:hover { text-decoration: underline; }
+.cva-msg.user { align-self: flex-end; }
+.cva-msg.user .cva-bubble { border-bottom-right-radius: 4px; background: linear-gradient(135deg, var(--cva-blue), var(--cva-violet)); color: #fff; }
+.cva-typing { display: inline-flex; gap: 4px; padding: 4px 2px; }
+.cva-typing i { width: 7px; height: 7px; border-radius: 50%; background: #a5b4fc; animation: cva-bounce 1.2s infinite; }
+.cva-typing i:nth-child(2) { animation-delay: 0.15s; }
+.cva-typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes cva-bounce { 0%, 60%, 100% { transform: none; opacity: 0.6; } 30% { transform: translateY(-5px); opacity: 1; } }
+/* Suggested questions */
+.cva-chips { display: flex; gap: 8px; padding: 8px 16px 10px; overflow-x: auto; scrollbar-width: none; }
+.cva-chips::-webkit-scrollbar { display: none; }
+.cva-chips button { flex-shrink: 0; padding: 7px 12px; border: 1px solid #c7d2fe; border-radius: 999px; background: #f5f7ff; color: var(--cva-blue); font: inherit; font-size: 0.8rem; font-weight: 600; white-space: nowrap; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+.cva-chips button:hover { border-color: var(--cva-blue); background: var(--cva-blue); color: #fff; }
+.cva-form { display: flex; align-items: center; gap: 8px; margin: 0 12px; padding: 6px 6px 6px 14px; border: 1px solid var(--cva-border); border-radius: 999px; background: #fff; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.cva-form:focus-within { border-color: var(--cva-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12); }
+.cva-form input { flex: 1; min-width: 0; border: none; outline: none; background: none; color: var(--cva-text); font: inherit; font-size: 0.9rem; }
+.cva-form button { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: none; border-radius: 50%; background: linear-gradient(135deg, var(--cva-blue), var(--cva-violet)); color: #fff; cursor: pointer; transition: transform 0.2s ease, opacity 0.2s ease; }
+.cva-form button:hover:not(:disabled) { transform: scale(1.08); }
+.cva-form button:disabled { opacity: 0.4; cursor: default; }
+.cva-foot { margin: 0; padding: 8px 16px 12px; color: #98a2b3; font-size: 0.7rem; text-align: center; }
+
+/* --- Phones: bigger touch targets, the panel becomes a bottom sheet --- */
+@media (max-width: 560px) {
+  .cva-launcher { right: 16px; bottom: 16px; width: 56px; height: 56px; }
+  .cva-tip { right: 82px; bottom: 26px; }
+  .cva-panel { right: 0; bottom: 0; left: 0; width: auto; height: min(88vh, 640px); border-radius: 22px 22px 0 0; transform-origin: bottom center; transform: translateY(40px); }
+  .cva.is-open .cva-launcher { opacity: 0; pointer-events: none; }   /* the sheet has its own close button */
+  .cva-form input { font-size: 16px; }   /* no zoom on iPhone */
+  .cva-intro-skip { right: 16px; bottom: 16px; }
+}
+
+/* --- Reduce motion: no movement --- */
+@media (prefers-reduced-motion: reduce) {
+  .cva-avatar::before, .cva-avatar .eye, .cva-intro-rings span, .cva-typing i { animation: none; }
+  .cva-intro, .cva-intro *, .cva-launcher, .cva-msg, .cva-panel, .cva-tip { animation: none !important; transition: none !important; }
+}
