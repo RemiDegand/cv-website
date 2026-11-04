@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="contact.css"><!-- Contact page design (3 Nov 2026) -->
 </head>
 <body>
 
@@ -27,16 +28,69 @@
   </header>
 
   <main>
-    <!-- 6. CONTACT -->
+    <!-- 6. CONTACT (redesigned 3 Nov 2026, web design pass): what I'm looking for + a business card,
+         then one big card per way to reach me. Styles in contact.css, copy button and tilt in contact.js -->
     <section id="contact" class="contact">
+      <div class="ct-bg" aria-hidden="true"></div>
       <div class="container">
-        <h1 class="page-title">Contact</h1>
-        <p class="lead">Looking for an Analyst role in tech from May 2027. Let's talk.</p>
-        <div class="hero-buttons">
-          <a href="mailto:remidegand02@gmail.com" class="button button-primary">Email me</a>
-          <a href="https://www.linkedin.com/in/remi-degand/" class="button button-ghost" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="CV.pdf" class="button button-ghost" download="Remi-Degand-CV.pdf">Download CV</a>
+        <div class="ct-hero">
+          <div class="ct-intro">
+            <p class="ct-status"><i class="ct-pulse" aria-hidden="true"></i>Open to opportunities · from May 2027</p>
+            <h1 class="page-title">Let's talk</h1>
+            <p class="lead">I'm looking for my next Analyst role in a data-driven company. Here is what I'm looking for, and the best ways to reach me.</p>
+            <dl class="ct-wish">
+              <div><dt>Role</dt><dd>Data &amp; Business Analyst</dd></div>
+              <div><dt>Company</dt><dd>Data-driven</dd></div>
+              <div><dt>Contract</dt><dd>Internship, VIE or full-time</dd></div>
+              <div><dt>Start</dt><dd>May 2027</dd></div>
+            </dl>
+          </div>
+
+          <!-- Business card: tilts a little towards the mouse (contact.js) -->
+          <div class="ct-card-wrap">
+            <div class="ct-card">
+              <div class="ct-card-top">
+                <img src="profile.jpg" alt="Portrait of Rémi Degand" class="ct-photo" width="72" height="72">
+                <div>
+                  <strong class="ct-name">Rémi Degand</strong>
+                  <span class="ct-role">Data &amp; Business Analyst</span>
+                </div>
+              </div>
+              <ul class="ct-card-lines">
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>NEOMA Business School · MSc Business Analytics</li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>Ex Glovo</li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>French · English</li>
+              </ul>
+              <span class="ct-card-mark" aria-hidden="true">RD</span>
+            </div>
+          </div>
         </div>
+
+        <!-- One big card per way to reach me -->
+        <div class="ct-actions">
+          <div class="ct-action ct-email">
+            <span class="ct-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+            <strong>Email</strong>
+            <a href="mailto:remidegand02@gmail.com" class="ct-value">remidegand02@gmail.com</a>
+            <div class="ct-buttons">
+              <a href="mailto:remidegand02@gmail.com" class="button button-primary">Write to me</a>
+              <button type="button" class="button button-ghost ct-copy" data-copy="remidegand02@gmail.com" hidden>Copy</button>
+            </div>
+          </div>
+          <a href="https://www.linkedin.com/in/remi-degand/" class="ct-action ct-link" target="_blank" rel="noopener">
+            <span class="ct-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></span>
+            <strong>LinkedIn</strong>
+            <span class="ct-value">linkedin.com/in/remi-degand</span>
+            <span class="ct-go">Connect <span aria-hidden="true">↗</span></span>
+          </a>
+          <a href="CV.pdf" class="ct-action ct-link" download="Remi-Degand-CV.pdf">
+            <span class="ct-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14l3 3 3-3"/></svg></span>
+            <strong>CV</strong>
+            <span class="ct-value">PDF version</span>
+            <span class="ct-go">Download <span aria-hidden="true">↓</span></span>
+          </a>
+        </div>
+        <p class="ct-toast" role="status" aria-live="polite"></p>
       </div>
     </section>
   </main>
@@ -46,5 +100,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="contact.js"></script>
+  <script src="chatbot.js" defer></script><!-- AI assistant: bubble bottom right + welcome animation (3 Nov 2026) -->
 </body>
 </html>
