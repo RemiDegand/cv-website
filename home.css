@@ -177,3 +177,37 @@ body.home .home-proof { padding: 0 0 24px; }
   .hero-bg, .hero-visual { transform: none; }
   .j-card, .site-map .cat-tile::before, .site-map .cat-tile::after, .marquee-track li { transition: none; }
 }
+
+/* --- About me, "Me in 5 words" as 5 rows in a zigzag (4 Nov 2026, user): drawing on the left and text on the
+   right, then the other way round. HTML unchanged (figure.hobby > .hobby-art + figcaption); overrides style.css. --- */
+body.home .hobbies { display: flex; flex-direction: column; gap: 56px; max-width: 900px; margin: 16px auto 0; }
+body.home .hobby { display: grid; grid-template-columns: 300px minmax(0, 1fr); align-items: center; gap: 48px; }
+body.home .hobby:nth-child(even) { grid-template-columns: minmax(0, 1fr) 300px; }
+body.home .hobby:nth-child(even) .hobby-art { order: 2; }
+body.home .hobby:nth-child(even) figcaption { text-align: right; }
+body.home .hobby figcaption { padding: 0; max-width: 460px; }
+body.home .hobby:nth-child(even) figcaption { justify-self: end; }
+body.home .hobby strong { font-size: 1.5rem; letter-spacing: -0.01em; }
+body.home .hobby strong::after { content: ""; display: block; width: 32px; height: 2px; margin-top: 10px; border-radius: 2px; background: var(--accent); transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+body.home .hobby:nth-child(even) strong::after { margin-left: auto; }
+body.home .hobby:hover strong::after { width: 56px; }
+body.home .hobby p { margin-top: 12px; font-size: 1rem; line-height: 1.6; }
+body.home .hobby:nth-child(even):hover .hobby-art { transform: translateY(-4px) rotate(1deg); }
+/* each row slides in from the side of its drawing */
+@keyframes from-left { from { opacity: 0; transform: translateX(-40px); } }
+@keyframes from-right { from { opacity: 0; transform: translateX(40px); } }
+.h-reveal-on body.home .hobby.in { animation: from-left 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.h-reveal-on body.home .hobby.in:nth-child(even) { animation-name: from-right; }
+@media (max-width: 720px) {
+  body.home .hobbies { gap: 28px; }
+  body.home .hobby { grid-template-columns: 120px minmax(0, 1fr); gap: 16px; }
+  body.home .hobby:nth-child(even) { grid-template-columns: minmax(0, 1fr) 120px; }
+  body.home .hobby .hobby-art { border-radius: 14px; }
+  body.home .hobby strong { font-size: 1.15rem; }
+  body.home .hobby strong::after { margin-top: 6px; width: 24px; }
+  body.home .hobby p { margin-top: 8px; font-size: 0.88rem; line-height: 1.5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.home .hobby strong::after { transition: none; }
+  .h-reveal-on body.home .hobby.in { animation: none; }
+}
