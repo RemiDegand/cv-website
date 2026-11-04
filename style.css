@@ -1214,7 +1214,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
   .card-header .card-meta { padding-left: 60px; }  /* line up dates under the text, not the logo */
   .compact-list .card-meta { padding-left: 60px; flex-direction: row; gap: 8px; }
   .menu-name { display: none; }
-  .menu nav { gap: 14px; font-size: 0.9rem; }   /* 5 links fit on a phone width */
+  .menu nav { gap: 10px; font-size: 0.9rem; }   /* 5 links fit on a phone width ("Experiences" since 4 Nov 2026) */
   .carousel-arrow { display: none; }   /* swipe on phones; dots show the position */
   .home-split { grid-template-columns: minmax(0, 1fr); gap: 48px; }
   .home-split h2 { font-size: 1.4rem; white-space: nowrap; }
@@ -1738,3 +1738,6 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .xp-tagrow .chip-label { flex: 0 0 56px; min-width: 0; }
 .xp-tagrow .tags { margin: 0; }
 @media (max-width: 720px) { .xp-tagrow { flex-direction: column; gap: 6px; } }
+
+/* Small phones (360px wide): the 5 menu links still fit (4 Nov 2026) */
+@media (max-width: 380px) { .menu nav { gap: 8px; font-size: 0.82rem; } }

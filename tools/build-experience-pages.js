@@ -208,7 +208,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
       <a href="index.html" class="menu-name">Rémi Degand</a>
       <nav>
         <a href="index.html">Home</a>
-        <a href="experience.html" class="active">Experience</a>
+        <a href="experience.html" class="active">Experiences</a>
         <a href="projects.html">Projects</a>
         <a href="education.html">Education</a>
         <a href="contact.html">Contact</a>
