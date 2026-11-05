@@ -1,5 +1,5 @@
 // Home only (3 Nov 2026, web design pass), loaded after script.js: typed line, mouse effects,
-// numbers that count up, moving logo strip, toolbox filter (5 Nov), sections that
+// numbers that count up, moving logo strip, toolbox pipeline (5 Nov), sections that
 // appear as you scroll. Without JavaScript or with "reduce motion", the page is complete and still.
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -73,31 +73,9 @@
     counters.forEach((el) => { el.textContent = "0"; io.observe(el); });
   }
 
-  // 5. Toolbox: the buttons light up the tools used at one place (Glovo, OSLO, this website); "All" shows every tool
-  const toolbox = document.querySelector(".toolbox");
-  const filter = toolbox && toolbox.querySelector(".tb-filter");
-  if (filter) {
-    filter.hidden = false;
-    const buttons = [...filter.querySelectorAll("button")];
-    filter.addEventListener("click", (e) => {
-      const button = e.target.closest("button");
-      if (!button) return;
-      const at = button.dataset.at;
-      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
-      if (at === "all") toolbox.removeAttribute("data-show"); else toolbox.dataset.show = at;
-      toolbox.querySelectorAll(".tb-drawer").forEach((drawer) => {
-        const tools = [...drawer.querySelectorAll(".tool")];
-        tools.forEach((tool) => tool.classList.toggle("is-off", at !== "all" && !tool.dataset.at.split(" ").includes(at)));
-        drawer.classList.toggle("is-empty", tools.every((tool) => tool.classList.contains("is-off")));
-      });
-    });
-  }
-  // order of each tool in its drawer, for the entrance one after the other
-  document.querySelectorAll(".tb-drawer").forEach((drawer) => drawer.querySelectorAll(".tool").forEach((tool, i) => tool.style.setProperty("--t", i)));
-
-  // 6. Sections appear as you scroll, one after the other within each group
+  // 5. Sections appear as you scroll, one after the other within each group
   if (!reduce && canObserve) {
-    const groups = [".home-proof .stat", ".marquee", "#about .section-head", ".tb-head", ".tb-drawer", ".words-title", ".hobby"];
+    const groups = [".home-proof .stat", ".marquee", "#about .section-head", ".tb-head", ".pl-stages", ".words-title", ".hobby"];
     const items = [];
     groups.forEach((selector) => document.querySelectorAll(selector).forEach((el, i) => {
       el.classList.add("h-reveal");

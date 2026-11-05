@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="home.css"><!-- Home only: dynamic hero, numbers, logo strip, toolbox, 5 words (3-5 Nov 2026) -->
-  <link rel="stylesheet" href="toolbox-options.css"><!-- TEMPORARY: Toolbox designs to compare (5 Nov 2026) -->
 </head>
 <body class="home">
 
@@ -104,63 +103,47 @@
           <h2>About me</h2>
         </div>
 
-        <!-- TOOLBOX (5 Nov 2026, web design pass): 4 drawers, each tool with what I used it for and where (tags).
-             Tools taken from the project and experience pages. The buttons light up the tools of one place (home.js);
-             without JavaScript the buttons stay hidden and every tool is shown. -->
+        <!-- TOOLBOX (5 Nov 2026, user chose option A of 5 designs): the tools along the 3 steps of the work, prepare → analyse & show → automate
+             with AI, on a pipe with dots flowing through it. Only tools the user uses himself (not only through AI). Styles: home.css -->
         <div class="toolbox">
           <div class="tb-head">
             <h3 class="about-title">My toolbox</h3>
-            <div class="tb-filter" role="group" aria-label="Show the tools I used at" hidden>
-              <button type="button" data-at="all" aria-pressed="true">All</button>
-              <button type="button" data-at="glovo" aria-pressed="false"><i class="tb-dot at-glovo" aria-hidden="true"></i>Glovo</button>
-              <button type="button" data-at="oslo" aria-pressed="false"><i class="tb-dot at-oslo" aria-hidden="true"></i>OSLO</button>
-              <button type="button" data-at="site" aria-pressed="false"><i class="tb-dot at-site" aria-hidden="true"></i>This website</button>
-            </div>
+            <p class="tb-sub">Prepare the data, analyse it, then automate with AI.</p>
           </div>
-          <!-- 3 steps (user, 5 Nov 2026): prepare, analyse & show, automate with AI. Only tools used without AI. Power BI: place not known yet -->
-          <div class="tb-grid">
-            <section class="tb-drawer" style="--d: #2563eb" aria-labelledby="tb-data">
-              <header>
-                <span class="tb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6M5 11.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"/></svg></span>
-                <h4 id="tb-data">Prepare the data</h4>
-              </header>
+          <ol class="pl-stages">
+            <li class="pl-stage" style="--s: 0">
+              <div class="pl-node" aria-hidden="true">1</div>
+              <h4>Prepare the data</h4>
+              <p class="pl-sub">Get it and make it ready to use</p>
               <ul>
-                <li class="tool" data-at="glovo oslo" style="--c: #1a73e8"><span class="tool-mark" aria-hidden="true">SQL</span><div class="tool-text"><strong>SQL · BigQuery</strong><span>Queries behind forecasts, reports and data models</span></div><span class="tool-at"><span class="at at-glovo">Glovo</span><span class="at at-oslo">OSLO</span></span></li>
-                <li class="tool" data-at="oslo" style="--c: #1d6f42"><span class="tool-mark" aria-hidden="true">XL</span><div class="tool-text"><strong>Excel · VBA</strong><span>Advanced formulas, macros, finance files</span></div><span class="tool-at"><span class="at at-oslo">OSLO</span></span></li>
-                <li class="tool" data-at="glovo" style="--c: #188038"><span class="tool-mark" aria-hidden="true">GS</span><div class="tool-text"><strong>Google Sheets · Apps Script</strong><span>Weekly reports, forecast inputs and automations</span></div><span class="tool-at"><span class="at at-glovo">Glovo</span></span></li>
+                <li class="pl-tool" style="--c: #1a73e8"><span class="tool-mark" aria-hidden="true">SQL</span><div><strong>SQL · BigQuery</strong><span>Queries behind forecasts, reports and data models</span></div></li>
+                <li class="pl-tool" style="--c: #1d6f42"><span class="tool-mark" aria-hidden="true">XL</span><div><strong>Excel · VBA</strong><span>Advanced formulas, macros, finance files</span></div></li>
+                <li class="pl-tool" style="--c: #188038"><span class="tool-mark" aria-hidden="true">GS</span><div><strong>Google Sheets · Apps Script</strong><span>Weekly reports, forecast inputs and automations</span></div></li>
               </ul>
-            </section>
-
-            <section class="tb-drawer" style="--d: #6d5dfc" aria-labelledby="tb-bi">
-              <header>
-                <span class="tb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
-                <h4 id="tb-bi">Analyse &amp; show</h4>
-              </header>
+            </li>
+            <li class="pl-stage" style="--s: 1">
+              <div class="pl-node" aria-hidden="true">2</div>
+              <h4>Analyse &amp; show</h4>
+              <p class="pl-sub">Dashboards and reports</p>
               <ul>
-                <li class="tool" data-at="" style="--c: #c99400"><span class="tool-mark" aria-hidden="true">BI</span><div class="tool-text"><strong>Power BI</strong><span>Interactive dashboards and reports</span></div><span class="tool-at"></span></li>
-                <li class="tool" data-at="glovo" style="--c: #5b47d6"><span class="tool-mark" aria-hidden="true">Lk</span><div class="tool-text"><strong>Looker</strong><span>Weekly review of past forecasts</span></div><span class="tool-at"><span class="at at-glovo">Glovo</span></span></li>
-                <li class="tool" data-at="oslo" style="--c: #d9531e"><span class="tool-mark" aria-hidden="true">MR</span><div class="tool-text"><strong>MyReport</strong><span>ETL, data models and dashboards</span></div><span class="tool-at"><span class="at at-oslo">OSLO</span></span></li>
+                <li class="pl-tool" style="--c: #c99400"><span class="tool-mark" aria-hidden="true">BI</span><div><strong>Power BI</strong><span>Interactive dashboards and reports</span></div></li>
+                <li class="pl-tool" style="--c: #5b47d6"><span class="tool-mark" aria-hidden="true">Lk</span><div><strong>Looker</strong><span>Weekly review of past forecasts</span></div></li>
+                <li class="pl-tool" style="--c: #d9531e"><span class="tool-mark" aria-hidden="true">MR</span><div><strong>MyReport</strong><span>ETL, data models and dashboards</span></div></li>
               </ul>
-            </section>
-
-            <section class="tb-drawer" style="--d: #c026d3" aria-labelledby="tb-ai">
-              <header>
-                <span class="tb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg></span>
-                <h4 id="tb-ai">Automate with AI</h4>
-              </header>
+            </li>
+            <li class="pl-stage" style="--s: 2">
+              <div class="pl-node" aria-hidden="true">3</div>
+              <h4>Automate with AI</h4>
+              <p class="pl-sub">Save time on repetitive work</p>
               <ul>
-                <li class="tool" data-at="glovo site" style="--c: #7c3aed"><span class="tool-mark" aria-hidden="true">AI</span><div class="tool-text"><strong>LLMs · Gemini, Claude</strong><span>AI summaries, chatbot, AI skills</span></div><span class="tool-at"><span class="at at-glovo">Glovo</span><span class="at at-site">This website</span></span></li>
-                <li class="tool" data-at="glovo" style="--c: #27272a"><span class="tool-mark" aria-hidden="true">&gt;_</span><div class="tool-text"><strong>AI agents · OpenCode</strong><span>AI skill for forecast adjustments</span></div><span class="tool-at"><span class="at at-glovo">Glovo</span></span></li>
-                <li class="tool" data-at="glovo" style="--c: #a21caf"><span class="tool-mark" aria-hidden="true">Pr</span><div class="tool-text"><strong>Prompt engineering</strong><span>Rules and examples that make AI output reliable</span></div><span class="tool-at"><span class="at at-glovo">Glovo</span></span></li>
-                <li class="tool" data-at="glovo site" style="--c: #24292f"><span class="tool-mark" aria-hidden="true">GH</span><div class="tool-text"><strong>GitHub</strong><span>Shared AI skill and this website's code</span></div><span class="tool-at"><span class="at at-glovo">Glovo</span><span class="at at-site">This website</span></span></li>
+                <li class="pl-tool" style="--c: #7c3aed"><span class="tool-mark" aria-hidden="true">AI</span><div><strong>LLMs · Gemini, Claude</strong><span>AI summaries, chatbot, AI skills</span></div></li>
+                <li class="pl-tool" style="--c: #27272a"><span class="tool-mark" aria-hidden="true">&gt;_</span><div><strong>AI agents · OpenCode</strong><span>AI skill for forecast adjustments</span></div></li>
+                <li class="pl-tool" style="--c: #a21caf"><span class="tool-mark" aria-hidden="true">Pr</span><div><strong>Prompt engineering</strong><span>Rules and examples that make AI output reliable</span></div></li>
+                <li class="pl-tool" style="--c: #24292f"><span class="tool-mark" aria-hidden="true">GH</span><div><strong>GitHub</strong><span>Shared AI skill and this website's code</span></div></li>
               </ul>
-            </section>
-          </div>
+            </li>
+          </ol>
         </div>
-
-        <!-- TEMPORARY (5 Nov 2026): 5 Toolbox designs built by toolbox-options.js, for the user to choose. Delete this block once chosen -->
-        <p class="tbo-intro"><b>Toolbox designs to compare (temporary).</b> The current version is just above. Below, 5 other designs with the same tools: tell me which one to keep.</p>
-        <div id="toolbox-options"></div>
 
         <h3 class="about-title words-title">Me in 5 words</h3>
         <!-- One illustration per word (inline SVG, drawn for the site), the word and one sentence under it, no box -->
@@ -273,6 +256,5 @@
   <script src="script.js"></script>
   <script src="chatbot.js" defer></script><!-- AI assistant: bubble bottom right + welcome animation (3 Nov 2026) -->
   <script src="home.js"></script>
-  <script src="toolbox-options.js"></script><!-- TEMPORARY: Toolbox designs to compare (5 Nov 2026) -->
 </body>
 </html>
