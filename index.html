@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="home.css"><!-- Home only: dynamic hero, numbers, logo strip, toolbox, 5 words (3-5 Nov 2026) -->
+  <link rel="stylesheet" href="toolbox-options.css"><!-- TEMPORARY: Toolbox designs to compare (5 Nov 2026) -->
 </head>
 <body class="home">
 
@@ -170,6 +171,10 @@
           </div>
         </div>
 
+        <!-- TEMPORARY (5 Nov 2026): 5 Toolbox designs built by toolbox-options.js, for the user to choose. Delete this block once chosen -->
+        <p class="tbo-intro"><b>Toolbox designs to compare (temporary).</b> The current version is just above. Below, 5 other designs with the same tools: tell me which one to keep.</p>
+        <div id="toolbox-options"></div>
+
         <h3 class="about-title words-title">Me in 5 words</h3>
         <!-- One illustration per word (inline SVG, drawn for the site), the word and one sentence under it, no box -->
         <div class="hobbies">
@@ -281,5 +286,6 @@
   <script src="script.js"></script>
   <script src="chatbot.js" defer></script><!-- AI assistant: bubble bottom right + welcome animation (3 Nov 2026) -->
   <script src="home.js"></script>
+  <script src="toolbox-options.js"></script><!-- TEMPORARY: Toolbox designs to compare (5 Nov 2026) -->
 </body>
 </html>
