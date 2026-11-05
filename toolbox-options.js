@@ -12,15 +12,11 @@
     { n: "SQL · BigQuery", k: "sql-bigquery", m: "SQL", sym: "Sq", c: "#1a73e8", g: "data", s: 0, at: ["glovo", "oslo"], u: "Queries behind forecasts, reports and data models" },
     { n: "Excel · VBA", k: "excel-vba", m: "XL", sym: "Xl", c: "#1d6f42", g: "data", s: 0, at: ["oslo"], u: "Advanced formulas, macros, finance files" },
     { n: "Google Sheets", k: "google-sheets", m: "GS", sym: "Gs", c: "#188038", g: "data", s: 0, at: ["glovo"], u: "Weekly reports and forecast inputs" },
-    { n: "Python", k: "python", m: "Py", sym: "Py", c: "#3776ab", g: "data", s: 1, at: ["glovo"], u: "Data pipeline of the AI summaries" },
     { n: "MyReport", k: "myreport", m: "MR", sym: "Mr", c: "#d9531e", g: "bi", s: 1, at: ["oslo"], u: "ETL, data models and dashboards" },
     { n: "Apps Script", k: "apps-script", m: "AS", sym: "As", c: "#b06000", g: "build", s: 1, at: ["glovo"], u: "Back end of the web app, sheet automations" },
     { n: "Looker", k: "looker", m: "Lk", sym: "Lk", c: "#5b47d6", g: "bi", s: 2, at: ["glovo"], u: "Weekly review of past forecasts" },
-    { n: "Chart.js", k: "chart-js", m: "Ch", sym: "Cj", c: "#e0466b", g: "bi", s: 2, at: ["glovo"], u: "Charts of the forecast web app" },
-    { n: "HTML · CSS · JavaScript", k: "html-css-js", m: "</>", sym: "Js", c: "#e34c26", g: "build", s: 2, at: ["glovo", "site"], u: "The forecast web app and this website" },
     { n: "LLMs · Gemini, Claude", k: "llms", m: "AI", sym: "Ai", c: "#7c3aed", g: "ai", s: 3, at: ["glovo", "site"], u: "AI summaries, chatbot, AI skills" },
     { n: "AI agents · OpenCode", k: "opencode", m: ">_", sym: "Oc", c: "#27272a", g: "ai", s: 3, at: ["glovo"], u: "AI skill for forecast adjustments" },
-    { n: "Vertex AI", k: "vertex-ai", m: "Vx", sym: "Vx", c: "#1967d2", g: "ai", s: 3, at: ["glovo"], u: "Gemini inside the web app" },
     { n: "Prompt engineering", k: "prompts", m: "Pr", sym: "Pe", c: "#a21caf", g: "ai", s: 3, at: ["glovo"], u: "Rules and examples that make AI output reliable" },
     { n: "Cloud Run", k: "cloud-run", m: "CR", sym: "Cr", c: "#3b6fd8", g: "build", s: 4, at: ["glovo"], u: "Cloud service of the web app" },
     { n: "GitHub", k: "github", m: "GH", sym: "Gh", c: "#24292f", g: "build", s: 4, at: ["glovo", "site"], u: "Shared AI skill and this website's code" },
@@ -83,14 +79,14 @@
         `<button type="button" data-place="${id}" aria-pressed="${i === 0}">${id === "all" ? "ls" : `ls --at ${id}`}</button>`).join("")}</div></div>`);
 
   // ---------- D. Keyboard ----------
-  const rows = [TOOLS.slice(0, 5), TOOLS.slice(5, 10), TOOLS.slice(10, 15)];
+  const rows = [TOOLS.slice(0, 4), TOOLS.slice(4, 8), TOOLS.slice(8)];
   const mods = [["Esc", "⌫"], ["Tab", "Enter"], ["Shift", "Shift"]];
   const optD = frame("D", "Keyboard", "Each tool is a key: press one to read it. The place buttons light up its keys.",
     `<div class="kb" data-opt="d">${filterBar()}
       <div class="kb-screen" aria-live="polite"><span class="kb-screen-hint">Press a key</span></div>
       <div class="kb-board">${rows.map((row, r) => `<div class="kb-row"><span class="kb-key kb-mod" aria-hidden="true">${mods[r][0]}</span>${row.map((t) => {
         const i = TOOLS.indexOf(t);
-        return `<button type="button" class="kb-key" ${item(t, i)}><b>${esc(t.m)}</b><small>${esc(t.n.split(" · ")[0])}</small></button>`; }).join("")}<span class="kb-key kb-mod" aria-hidden="true">${mods[r][1]}</span></div>`).join("")}
+        return `<button type="button" class="kb-key" ${item(t, i)}><b>${esc(t.m)}</b><small>${esc(t.n.split(" · ")[0])}</small></button>`; }).join("")}${row.length < 4 ? '<span class="kb-key kb-mod" aria-hidden="true">Ctrl</span>' : ""}<span class="kb-key kb-mod" aria-hidden="true">${mods[r][1]}</span></div>`).join("")}
         <div class="kb-row"><span class="kb-key kb-mod" aria-hidden="true">Fn</span><span class="kb-key kb-space" aria-hidden="true">Data &amp; Business Analyst</span><span class="kb-key kb-mod" aria-hidden="true">Alt</span></div>
       </div></div>`);
 
