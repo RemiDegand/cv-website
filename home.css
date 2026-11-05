@@ -221,6 +221,12 @@ body.home .about-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.3rem); letter-spaci
 .pl-tool:hover .tool-mark { transform: rotate(-8deg) scale(1.08); }
 .pl-tool strong { display: block; font-size: 0.9rem; line-height: 1.3; }
 .pl-tool div span { display: block; margin-top: 2px; color: var(--text-muted); font-size: 0.78rem; line-height: 1.4; }
+/* real logos (5 Nov 2026): white tile, logo in the brand colour */
+.tool-logo { background: #fff; color: var(--c); box-shadow: 0 0 0 1px var(--border), 0 6px 14px color-mix(in srgb, var(--c) 18%, transparent); }
+.tool-logo.is-text { font-size: 0.78rem; letter-spacing: 0.02em; }
+.tool-logo.is-pair { display: flex; align-items: center; justify-content: center; gap: 1px; }
+.tool-logo.is-full { overflow: hidden; background: none; box-shadow: 0 6px 14px rgba(19, 16, 16, 0.25); }
+.tool-logo.is-full svg { display: block; }
 /* entrance (home.js adds .h-reveal / .in): the stage numbers pop one after the other, then their tools rise */
 .h-reveal-on .pl-stages.h-reveal:not(.in) .pl-node, .h-reveal-on .pl-stages.h-reveal:not(.in) .pl-tool { opacity: 0; }
 .h-reveal-on .pl-stages.in { animation: none; }
