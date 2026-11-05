@@ -216,7 +216,7 @@ body.home .about-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.3rem); letter-spaci
 .at-site { --at: #6d5dfc; --at-text: #4c3fd1; }
 .tb-dot { background: var(--at); }
 
-.tb-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.tb-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .tb-drawer { position: relative; overflow: hidden; padding: 20px 14px 14px; border: 1px solid var(--border); border-radius: 20px; background: rgba(255, 255, 255, 0.9); box-shadow: 0 14px 40px rgba(16, 24, 40, 0.05); transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease; }
 .tb-drawer::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, var(--d), color-mix(in srgb, var(--d) 30%, #fff)); transform-origin: left; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .tb-drawer:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--d) 30%, var(--border)); box-shadow: 0 20px 50px color-mix(in srgb, var(--d) 14%, transparent); }
