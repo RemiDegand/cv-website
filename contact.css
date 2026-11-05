@@ -21,7 +21,9 @@
 .ct-intro > :nth-child(2) { animation-delay: 0.08s; }
 .ct-intro > :nth-child(3) { animation-delay: 0.16s; }
 .ct-intro > :nth-child(4) { animation-delay: 0.24s; }
-.ct-status { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 18px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; background: rgba(255, 255, 255, 0.85); color: var(--text); font-size: 0.85rem; font-weight: 600; }
+/* Green signal next to the start date (5 Nov 2026, user: replaces the "Open to opportunities" chip) */
+.ct-wish dd.ct-start { display: flex; align-items: center; gap: 8px; }
+.ct-start .ct-pulse { flex-shrink: 0; }
 .ct-pulse { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; animation: ct-ping 2s infinite; }
 .contact .page-title { margin-bottom: 12px; font-size: clamp(2.4rem, 5vw, 3.4rem); letter-spacing: -0.025em; }
 .contact .lead { margin: 0 0 28px; }
