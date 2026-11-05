@@ -1,5 +1,5 @@
 // Home only (3 Nov 2026, web design pass), loaded after script.js: typed line, mouse effects,
-// numbers that count up, moving logo strip, carousels that play by themselves, sections that
+// numbers that count up, moving logo strip, toolbox filter (5 Nov), sections that
 // appear as you scroll. Without JavaScript or with "reduce motion", the page is complete and still.
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -25,9 +25,8 @@
     })();
   }
 
-  // 2. Mouse: a soft light follows it in the hero, the photo and background move a little (depth);
-  //    on the "How this site works" tiles, a light follows it too
-  const hero = document.querySelector(".hero-live");
+  // 2. Mouse: a soft light follows it in the hero, the photo and background move a little (depth)
+    const hero = document.querySelector(".hero-live");
   if (hero && finePointer && !reduce) {
     let frame = 0;
     hero.addEventListener("pointermove", (e) => {
@@ -43,17 +42,6 @@
     });
     hero.addEventListener("pointerleave", () => { hero.style.setProperty("--px", 0); hero.style.setProperty("--py", 0); });
   }
-  if (finePointer) {
-    document.querySelectorAll(".site-map .cat-tile").forEach((tile) => {
-      tile.addEventListener("pointermove", (e) => {
-        const r = tile.getBoundingClientRect();
-        tile.style.setProperty("--x", e.clientX - r.left + "px");
-        tile.style.setProperty("--y", e.clientY - r.top + "px");
-      });
-      tile.addEventListener("pointerleave", () => { tile.style.removeProperty("--x"); tile.style.removeProperty("--y"); });
-    });
-  }
-
   // 3. Logo strip: a second copy of the logos follows the first, so the strip loops without a gap
   const marquee = document.querySelector(".marquee");
   if (marquee && !reduce) {
@@ -85,45 +73,31 @@
     counters.forEach((el) => { el.textContent = "0"; io.observe(el); });
   }
 
-  // 5. Key experience / key projects play by themselves: the active dot fills up in 6 s (CSS),
-  //    then the next card comes. Paused while the mouse or keyboard focus is on it, or off screen.
-  //    A visitor who swipes, scrolls sideways or uses an arrow or a dot takes over: autoplay stops.
-  if (!reduce) {
-    document.querySelectorAll(".home-col").forEach((col) => {
-      const nav = col.querySelector(".carousel-nav");
-      const dotsBox = col.querySelector(".carousel-dots");
-      const track = col.querySelector(".carousel-track");
-      if (!nav || !dotsBox || !track || dotsBox.children.length < 2) return;
-      let hover = false, focus = false, visible = false;
-      const sync = () => nav.classList.toggle("paused", hover || focus || !visible || document.hidden);
-      nav.classList.add("autoplay", "paused");
-      col.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") { hover = true; sync(); } });
-      col.addEventListener("pointerleave", () => { hover = false; sync(); });
-      col.addEventListener("focusin", () => { focus = true; sync(); });
-      col.addEventListener("focusout", () => { focus = false; sync(); });
-      document.addEventListener("visibilitychange", sync);
-      if (canObserve) new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: 0.5 }).observe(col);
-      else { visible = true; sync(); }
-
-      const stop = () => nav.classList.remove("autoplay");
-      track.addEventListener("touchstart", stop, { passive: true });
-      track.addEventListener("wheel", (e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) stop(); }, { passive: true });
-      nav.addEventListener("pointerdown", stop);
-      nav.addEventListener("keydown", stop);
-
-      dotsBox.addEventListener("animationend", (e) => {
-        if (e.animationName !== "dot-fill" || !nav.classList.contains("autoplay")) return;
-        const dots = [...dotsBox.children];
-        const i = dots.findIndex((dot) => dot.classList.contains("active"));
-        dots[(i + 1) % dots.length].click();   // after the last card, back to the first
+  // 5. Toolbox: the buttons light up the tools used at one place (Glovo, OSLO, this website); "All" shows every tool
+  const toolbox = document.querySelector(".toolbox");
+  const filter = toolbox && toolbox.querySelector(".tb-filter");
+  if (filter) {
+    filter.hidden = false;
+    const buttons = [...filter.querySelectorAll("button")];
+    filter.addEventListener("click", (e) => {
+      const button = e.target.closest("button");
+      if (!button) return;
+      const at = button.dataset.at;
+      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+      if (at === "all") toolbox.removeAttribute("data-show"); else toolbox.dataset.show = at;
+      toolbox.querySelectorAll(".tb-drawer").forEach((drawer) => {
+        const tools = [...drawer.querySelectorAll(".tool")];
+        tools.forEach((tool) => tool.classList.toggle("is-off", at !== "all" && !tool.dataset.at.split(" ").includes(at)));
+        drawer.classList.toggle("is-empty", tools.every((tool) => tool.classList.contains("is-off")));
       });
     });
   }
+  // order of each tool in its drawer, for the entrance one after the other
+  document.querySelectorAll(".tb-drawer").forEach((drawer) => drawer.querySelectorAll(".tool").forEach((tool, i) => tool.style.setProperty("--t", i)));
 
   // 6. Sections appear as you scroll, one after the other within each group
   if (!reduce && canObserve) {
-    const groups = [".home-proof .stat", ".marquee", ".site-map .section-head", ".site-map .cat-tile",
-      ".home-col", "#about .section-head", ".hobby"];
+    const groups = [".home-proof .stat", ".marquee", "#about .section-head", ".tb-head", ".tb-drawer", ".words-title", ".hobby"];
     const items = [];
     groups.forEach((selector) => document.querySelectorAll(selector).forEach((el, i) => {
       el.classList.add("h-reveal");

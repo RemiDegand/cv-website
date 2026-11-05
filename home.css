@@ -1,7 +1,7 @@
 /* =====================================================================
    HOME, DYNAMIC VERSION (3 Nov 2026, web design pass). Loaded by index.html only, after style.css.
    Goal: in one look, who I am (name, headline, typed line), what I do now and what I want
-   next (Before → Now → Next path), then numbers, the organisations, how the site works.
+   next (Before → Now → Next path), then numbers, the organisations, then About me (toolbox + 5 words).
    Everything moves softly; "reduce motion" turns all of it off (end of this file).
    ===================================================================== */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -112,22 +112,6 @@ body.home .home-proof { padding: 0 0 24px; }
 .marquee-track li:hover { filter: none; opacity: 1; color: var(--text); }
 .marquee-track img { width: 40px; height: 40px; border-radius: 10px; object-fit: contain; }
 
-/* --- How this site works: numbered tiles, light that follows the mouse, arrow on hover --- */
-.guide-head { flex-wrap: wrap; justify-content: flex-start; gap: 4px 14px; }
-.guide-sub { margin: 0; color: var(--text-muted); }
-.site-map .cat-overview { counter-reset: tile; }
-.site-map .cat-tile { position: relative; overflow: hidden; padding-right: 44px; background: radial-gradient(240px circle at var(--x, -300px) var(--y, -300px), rgba(37, 99, 235, 0.1), transparent 70%), var(--bg); }
-.site-map .cat-tile::before { counter-increment: tile; content: "0" counter(tile); position: absolute; top: 14px; right: 16px; color: #b6c2d6; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; transition: color 0.25s ease; }
-.site-map .cat-tile::after { content: "→"; position: absolute; right: 16px; bottom: 14px; color: var(--accent); font-weight: 700; opacity: 0; transform: translateX(-8px); transition: opacity 0.25s ease, transform 0.25s ease; }
-.site-map .cat-tile:hover::before, .site-map .cat-tile:focus-visible::before { color: var(--accent); }
-.site-map .cat-tile:hover::after, .site-map .cat-tile:focus-visible::after { opacity: 1; transform: none; }
-
-/* --- Carousels play by themselves on Home: the active dot fills up, then the next card comes (script.js) --- */
-.carousel-nav.autoplay .carousel-dots button.active { position: relative; overflow: hidden; background: color-mix(in srgb, var(--accent) 25%, var(--border)); }
-.carousel-nav.autoplay .carousel-dots button.active::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--accent); transform-origin: left; animation: dot-fill 6s linear; }
-.carousel-nav.autoplay.paused .carousel-dots button.active::after { animation-play-state: paused; }
-@keyframes dot-fill { from { transform: scaleX(0); } }
-
 /* --- Sections appear as you scroll (script.js adds .h-reveal-on to <html>, .h-reveal and .in) --- */
 .h-reveal-on .h-reveal:not(.in) { opacity: 0; }
 .h-reveal-on .h-reveal.in { animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(var(--i, 0) * 90ms); }
@@ -161,9 +145,6 @@ body.home .home-proof { padding: 0 0 24px; }
   .marquee { margin-top: 28px; }
   .marquee-track { --gap: 32px; }
   .marquee.is-ready .marquee-track { animation-duration: 32s; }
-  .site-map .cat-tile { padding-right: 14px; }
-  .site-map .cat-tile::before { top: 10px; right: 10px; font-size: 0.68rem; }
-  .site-map .cat-tile::after { display: none; }   /* no hover on touch screens */
   .marquee-track li { gap: 8px; font-size: 0.85rem; }
   .marquee-track img { width: 30px; height: 30px; }
   .marquee:not(.is-ready) .marquee-track { gap: 10px 22px; }
@@ -175,7 +156,7 @@ body.home .home-proof { padding: 0 0 24px; }
   .hero-bg .blob, .hero-live .headline, .photo-ring::before, .float-chip, .pulse, .j-now .j-dot, .scroll-cue .mouse::after,
   .hero-live .hero-text > *, .j-step, .journey::after, .hero-visual, .scroll-cue { animation: none; }
   .hero-bg, .hero-visual { transform: none; }
-  .j-card, .site-map .cat-tile::before, .site-map .cat-tile::after, .marquee-track li { transition: none; }
+  .j-card, .marquee-track li { transition: none; }
 }
 
 /* --- About me, "Me in 5 words" as 5 rows in a zigzag (4 Nov 2026, user): drawing on the left and text on the
@@ -210,4 +191,72 @@ body.home .hobby:nth-child(even):hover .hobby-art { transform: translateY(-4px) 
 @media (prefers-reduced-motion: reduce) {
   body.home .hobby strong::after { transition: none; }
   .h-reveal-on body.home .hobby.in { animation: none; }
+}
+
+/* --- About me (5 Nov 2026, user): "How this site works" and the 2 carousels removed; About me = Toolbox, then Me in 5 words --- */
+body.home #about { padding-top: 24px; }
+body.home .about-head { margin-bottom: 8px; }
+body.home .about-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.3rem); letter-spacing: -0.02em; }
+.about-title { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.about-title::before { content: ""; width: 24px; height: 2px; border-radius: 2px; background: currentColor; }
+.words-title { margin: 88px 0 28px; }
+
+/* --- Toolbox: 4 drawers; each tool = coloured mark, name, what for, where (logos) --- */
+.toolbox { margin-top: 24px; }
+.tb-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-bottom: 22px; }
+.tb-filter { display: flex; flex-wrap: wrap; gap: 8px; }
+.tb-filter button { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border: 1px solid var(--border); border-radius: 999px; background: #fff; color: var(--text-muted); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease; }
+.tb-filter button:hover { border-color: #b9c6dc; color: var(--text); transform: translateY(-1px); }
+.tb-filter button[aria-pressed="true"] { border-color: var(--text); background: var(--text); color: #fff; }
+.tb-dot { width: 9px; height: 9px; border-radius: 50%; }
+.tb-filter button[aria-pressed="true"] .tb-dot { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9); }
+/* Where a tool was used: one small tag per place, in its colour */
+.at-glovo { --at: #f2c200; --at-text: #6b5300; }
+.at-oslo { --at: #c58d52; --at-text: #7a4f22; }
+.at-site { --at: #6d5dfc; --at-text: #4c3fd1; }
+.tb-dot { background: var(--at); }
+
+.tb-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.tb-drawer { position: relative; overflow: hidden; padding: 20px 14px 14px; border: 1px solid var(--border); border-radius: 20px; background: rgba(255, 255, 255, 0.9); box-shadow: 0 14px 40px rgba(16, 24, 40, 0.05); transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease; }
+.tb-drawer::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, var(--d), color-mix(in srgb, var(--d) 30%, #fff)); transform-origin: left; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.tb-drawer:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--d) 30%, var(--border)); box-shadow: 0 20px 50px color-mix(in srgb, var(--d) 14%, transparent); }
+.tb-drawer header { display: flex; align-items: center; gap: 10px; padding: 0 6px 12px; }
+.tb-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; background: color-mix(in srgb, var(--d) 12%, #fff); color: var(--d); }
+.tb-drawer h4 { margin: 0; font-size: 1rem; }
+.tb-drawer ul { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+
+.tool { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; align-items: center; gap: 11px; padding: 8px 6px; border-radius: 12px; transition: background-color 0.25s ease, opacity 0.35s ease, filter 0.35s ease, transform 0.35s ease; }
+.tool:hover { background: color-mix(in srgb, var(--c) 8%, transparent); }
+.tool-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(140deg, color-mix(in srgb, var(--c) 78%, #fff), var(--c)); box-shadow: 0 6px 14px color-mix(in srgb, var(--c) 30%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.35); color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.01em; transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.tool:hover .tool-mark { transform: rotate(-8deg) scale(1.08); }
+.tool-text { min-width: 0; }
+.tool-text strong { display: block; font-size: 0.9rem; font-weight: 600; line-height: 1.3; }
+.tool-text span { display: block; margin-top: 1px; color: var(--text-muted); font-size: 0.76rem; line-height: 1.35; }
+.tool-at { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; }
+.at { padding: 2px 8px; border-radius: 999px; background: color-mix(in srgb, var(--at) 16%, #fff); color: var(--at-text); font-size: 0.68rem; font-weight: 600; white-space: nowrap; }
+
+/* Filter: tools of other places fade back, those of the chosen place stand out */
+.toolbox[data-show] .tool.is-off { opacity: 0.28; filter: grayscale(1); }
+.toolbox[data-show] .tool:not(.is-off) { background: color-mix(in srgb, var(--c) 7%, transparent); }
+.toolbox[data-show] .tb-drawer.is-empty { opacity: 0.55; }
+
+/* Entrance: each drawer rises, its colour line draws itself, then its tools come one by one */
+.h-reveal-on .tb-drawer.h-reveal:not(.in)::before { transform: scaleX(0); }
+.h-reveal-on .tb-drawer.h-reveal:not(.in) .tool { opacity: 0; }
+.h-reveal-on .tb-drawer.in .tool { animation: rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(var(--i, 0) * 90ms + 200ms + var(--t, 0) * 70ms); }
+
+@media (max-width: 900px) { .tb-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 720px) {
+  body.home .about-head h2 { font-size: 1.7rem; }
+  .tb-grid { gap: 12px; }
+  .tool { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; }
+  .tool-mark { width: 34px; height: 34px; border-radius: 10px; font-size: 0.66rem; }
+  .tool-at { grid-column: 2; justify-content: flex-start; margin-top: -2px; }
+  .tb-filter { gap: 6px; }
+  .tb-filter button { padding: 6px 11px; font-size: 0.8rem; }
+  .words-title { margin: 60px 0 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tb-drawer, .tb-drawer::before, .tool, .tool-mark, .tb-filter button { transition: none; }
+  .tb-drawer:hover, .tool:hover .tool-mark { transform: none; }
 }

@@ -110,4 +110,5 @@ const fill = (file, name, html) => {
 };
 
 fill("projects.html", "projects", projectsHtml());
-fill("index.html", "home-projects", homeHtml());
+// Home Key projects carousel removed on 5 Nov 2026 (user): rebuilt only if its markers come back
+if (fs.readFileSync(path.join(root, "index.html"), "utf8").includes("<!-- build:home-projects -->")) fill("index.html", "home-projects", homeHtml());
