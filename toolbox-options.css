@@ -19,7 +19,7 @@
 .tbo-tags { display: inline-flex; gap: 4px; }
 
 /* ================= A. Data pipeline ================= */
-.pl-stages { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.pl-stages { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
 /* the pipe behind the 5 nodes, with dots flowing through it */
 .pl-stages::before { content: ""; position: absolute; top: 21px; left: 22px; right: 22px; height: 6px; border-radius: 6px; background: radial-gradient(circle, var(--accent) 2px, transparent 2.5px) 0 50% / 26px 6px repeat-x, #e4eaf7; animation: pl-flow 1.4s linear infinite; }
 @keyframes pl-flow { to { background-position: 26px 50%, 0 0; } }

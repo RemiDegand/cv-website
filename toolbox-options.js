@@ -13,17 +13,17 @@
     { n: "Excel · VBA", k: "excel-vba", m: "XL", sym: "Xl", c: "#1d6f42", g: "data", s: 0, at: ["oslo"], u: "Advanced formulas, macros, finance files" },
     { n: "Google Sheets", k: "google-sheets", m: "GS", sym: "Gs", c: "#188038", g: "data", s: 0, at: ["glovo"], u: "Weekly reports and forecast inputs" },
     { n: "MyReport", k: "myreport", m: "MR", sym: "Mr", c: "#d9531e", g: "bi", s: 1, at: ["oslo"], u: "ETL, data models and dashboards" },
-    { n: "Apps Script", k: "apps-script", m: "AS", sym: "As", c: "#b06000", g: "build", s: 1, at: ["glovo"], u: "Back end of the web app, sheet automations" },
-    { n: "Looker", k: "looker", m: "Lk", sym: "Lk", c: "#5b47d6", g: "bi", s: 2, at: ["glovo"], u: "Weekly review of past forecasts" },
-    { n: "LLMs · Gemini, Claude", k: "llms", m: "AI", sym: "Ai", c: "#7c3aed", g: "ai", s: 3, at: ["glovo", "site"], u: "AI summaries, chatbot, AI skills" },
-    { n: "AI agents · OpenCode", k: "opencode", m: ">_", sym: "Oc", c: "#27272a", g: "ai", s: 3, at: ["glovo"], u: "AI skill for forecast adjustments" },
-    { n: "Prompt engineering", k: "prompts", m: "Pr", sym: "Pe", c: "#a21caf", g: "ai", s: 3, at: ["glovo"], u: "Rules and examples that make AI output reliable" },
-    { n: "Cloud Run", k: "cloud-run", m: "CR", sym: "Cr", c: "#3b6fd8", g: "build", s: 4, at: ["glovo"], u: "Cloud service of the web app" },
-    { n: "GitHub", k: "github", m: "GH", sym: "Gh", c: "#24292f", g: "build", s: 4, at: ["glovo", "site"], u: "Shared AI skill and this website's code" },
+    { n: "Apps Script", k: "apps-script", m: "AS", sym: "As", c: "#b06000", g: "build", s: 0, at: ["glovo"], u: "Back end of the web app, sheet automations" },
+    { n: "Looker", k: "looker", m: "Lk", sym: "Lk", c: "#5b47d6", g: "bi", s: 1, at: ["glovo"], u: "Weekly review of past forecasts" },
+    { n: "LLMs · Gemini, Claude", k: "llms", m: "AI", sym: "Ai", c: "#7c3aed", g: "ai", s: 2, at: ["glovo", "site"], u: "AI summaries, chatbot, AI skills" },
+    { n: "AI agents · OpenCode", k: "opencode", m: ">_", sym: "Oc", c: "#27272a", g: "ai", s: 2, at: ["glovo"], u: "AI skill for forecast adjustments" },
+    { n: "Prompt engineering", k: "prompts", m: "Pr", sym: "Pe", c: "#a21caf", g: "ai", s: 2, at: ["glovo"], u: "Rules and examples that make AI output reliable" },
+    { n: "Cloud Run", k: "cloud-run", m: "CR", sym: "Cr", c: "#3b6fd8", g: "build", s: 3, at: ["glovo"], u: "Cloud service of the web app" },
+    { n: "GitHub", k: "github", m: "GH", sym: "Gh", c: "#24292f", g: "build", s: 3, at: ["glovo", "site"], u: "Shared AI skill and this website's code" },
   ];
   const GROUPS = { data: ["Data & analysis", "#2563eb"], bi: ["Dashboards & BI", "#6d5dfc"], ai: ["AI", "#c026d3"], build: ["Build & automate", "#0d9488"] };
   const GROUP_ORDER = ["data", "bi", "ai", "build"];
-  const STAGES = [["Collect & store", "Where the data lives"], ["Transform & model", "Clean it, shape it"], ["Show", "Make it readable"], ["Add AI", "Explain and automate"], ["Ship", "Share it and run it"]];
+  const STAGES = [["Prepare the data", "Get it and make it ready to use"], ["Analyse & show", "Dashboards and reports"], ["Add AI", "Explain and automate"], ["Ship", "Share it and run it"]];
   const PLACES = [["all", "All"], ["glovo", "Glovo"], ["oslo", "OSLO"], ["site", "This website"]];
   const PLACE_NAME = { glovo: "Glovo", oslo: "OSLO", site: "This website" };
 
