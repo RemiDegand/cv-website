@@ -75,11 +75,15 @@
                 <li><strong>Agreed on the implementation</strong> with the Director of Information Systems, so the solution would last and stay easy to maintain.</li>
               </ul>
             </div>
-            <div class="block-part reveal">
-              <h3><span class="block-label">Task 1</span>Build finance tools</h3>
-              <p>Tools for the finance department: cash collection, cash flow, VAT, revenue and sales commissions.</p>
-              <ul class="project-did xp-card-list reveal-stagger">
-                <li><div class="xp-cards">
+            <!-- The projects by business area, Finance / Operations (user, 7 Nov 2026; same areas as the Projects page filters).
+                 One panel per area: icon, name, one line, the cards one under the other, then the tools not on the site as dashed tiles. -->
+            <section class="xp-area reveal" aria-labelledby="area-finance">
+              <header class="xp-area-head">
+                <span class="xp-area-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.6a4 4 0 1 0 0 6.8M7.5 10.6h6M7.5 13.4h6"/></svg></span>
+                <h3 id="area-finance">Finance</h3>
+                <p>For the finance department: cash collection, cash flow, revenue and VAT.</p>
+              </header>
+              <div class="xp-cards reveal-stagger">
                 <article class="card project" style="--brand: #D3A26E">
                   <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
                   <h4><a href="project-aged-receivables.html" class="project-link">Aged receivables reporting</a></h4>
@@ -89,8 +93,6 @@
                     <li>MyReport Data (Data modeling)</li><li>MyReport Page (Data visualization)</li><li>SQL</li>
                   </ul>
                 </article>
-                </div></li>
-                <li><div class="xp-cards">
                 <article class="card project" style="--brand: #D3A26E">
                   <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
                   <h4><a href="project-cash-flow-tools.html" class="project-link">Cash flow calculation tools</a></h4>
@@ -100,8 +102,6 @@
                     <li>Excel (VBA)</li><li>MyReport Data (ETL, Data modeling)</li>
                   </ul>
                 </article>
-                </div></li>
-                <li><div class="xp-cards">
                 <article class="card project" style="--brand: #D3A26E">
                   <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
                   <h4><a href="project-revenue-recognition.html" class="project-link">Revenue recognition model</a></h4>
@@ -111,8 +111,6 @@
                     <li>MyReport Data (Data modeling)</li><li>SQL</li><li>Finance</li>
                   </ul>
                 </article>
-                </div></li>
-                <li><div class="xp-cards">
                 <article class="card project" style="--brand: #D3A26E">
                   <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
                   <h4><a href="project-vat-automation.html" class="project-link">VAT calculation automation</a></h4>
@@ -122,15 +120,18 @@
                     <li>Excel (VBA)</li><li>MyReport Data (ETL, Data modeling)</li>
                   </ul>
                 </article>
-                </div></li>
-                <li><strong>Sales commissions:</strong> an automated calculation tool for 2 business units, about €3M of revenue each.</li>
-              </ul>
-            </div>
-            <div class="block-part reveal">
-              <h3><span class="block-label">Task 2</span>Report on business performance</h3>
-              <p>Reporting for management and the sales teams, on revenue, margins, volumes and new business.</p>
-              <ul class="project-did xp-card-list reveal-stagger">
-                <li><div class="xp-cards">
+              </div>
+              <div class="xp-extras">
+                <p class="xp-extra"><strong>Sales commission tool</strong>Automated calculation for 2 business units, about €3M of revenue each.</p>
+              </div>
+            </section>
+            <section class="xp-area reveal" aria-labelledby="area-operations">
+              <header class="xp-area-head">
+                <span class="xp-area-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+                <h3 id="area-operations">Operations</h3>
+                <p>For management and the sales teams: production, sales and business performance.</p>
+              </header>
+              <div class="xp-cards reveal-stagger">
                 <article class="card project" style="--brand: #D3A26E">
                   <p class="project-org"><img src="logos/oslo.png" alt="OSLO logo" class="project-logo" width="24" height="24">OSLO · IT &amp; SaaS Solutions</p>
                   <h4><a href="project-sales-performance-reporting.html" class="project-link">Production schedule &amp; sales reporting</a></h4>
@@ -140,11 +141,12 @@
                     <li>Excel (Advanced)</li><li>MyReport Data (Data modeling)</li><li>MyReport Page (Data visualization)</li>
                   </ul>
                 </article>
-                </div></li>
-                <li><strong>Multi-business-unit dashboards</strong> (€3–4M of revenue): year-over-year analysis (N / N-1 / N-2), recurring vs. non-recurring revenue and active contracts.</li>
-                <li><strong>Regular data extractions</strong> on business activity, such as churn.</li>
-              </ul>
-            </div>
+              </div>
+              <div class="xp-extras">
+                <p class="xp-extra"><strong>Multi-business-unit dashboards</strong>€3–4M of revenue each: N / N-1 / N-2, recurring vs. non-recurring revenue, active contracts.</p>
+                <p class="xp-extra"><strong>Regular data extractions</strong>On business activity, such as churn.</p>
+              </div>
+            </section>
           </div>
           <div class="block" id="block-3" role="region" aria-labelledby="block-3-title">
             <header class="block-head reveal">

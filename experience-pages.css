@@ -75,3 +75,22 @@
    are full width too and the bullet sits higher, level with the title (bar 4px + 18px) */
 .xp-page .xp-card-list .xp-cards { grid-template-columns: minmax(0, 1fr); }
 .xp-page .xp-card-list > li:has(.xp-cards):not(:has(:is(a[href="project-forecasting-web-app.html"], a[href="project-ai-forecast-adjustments.html"])))::before { top: 22px; }
+
+/* OSLO page (7 Nov 2026, user): the projects in 2 panels by business area, Finance / Operations. Soft panel tinted with the
+   company colour, icon tile in that colour, cards one under the other, tools not on the site as dashed tiles at the bottom. */
+.xp-page .xp-area { margin-top: 48px; padding: 28px; border: 1px solid color-mix(in srgb, var(--brand) 30%, var(--border)); border-radius: 22px; background: linear-gradient(180deg, color-mix(in srgb, var(--brand) 12%, #fff) 0, #fff 220px); }
+.xp-page .xp-area + .xp-area { margin-top: 28px; }
+.xp-page .xp-area-head { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 2px 16px; margin-bottom: 22px; }
+.xp-page .xp-area-icon { grid-row: span 2; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 15px; background: var(--brand); color: #fff; box-shadow: 0 10px 22px color-mix(in srgb, var(--brand) 40%, transparent); transition: transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.xp-page .xp-area:hover .xp-area-icon { transform: rotate(-8deg) scale(1.06); }
+.xp-page .xp-area-head h3 { margin: 0; font-size: 1.3rem; line-height: 1.2; }
+.xp-page .xp-area .xp-area-head p { margin: 0; color: var(--text-muted); font-size: 0.92rem; }
+.xp-page .xp-area .xp-cards { grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 0; }
+.xp-page .xp-extras { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 14px; }
+.xp-page .xp-area .xp-extra { margin: 0; padding: 14px 18px; border: 1.5px dashed color-mix(in srgb, var(--brand) 45%, var(--border)); border-radius: 14px; background: rgba(255, 255, 255, 0.7); color: var(--text-muted); font-size: 0.86rem; line-height: 1.5; }
+.xp-page .xp-extra strong { display: block; margin-bottom: 2px; color: var(--text); font-size: 0.95rem; }
+@media (max-width: 720px) {
+  .xp-page .xp-area { padding: 18px; border-radius: 18px; }
+  .xp-page .xp-area-icon { width: 44px; height: 44px; border-radius: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { .xp-page .xp-area-icon { transition: none; } .xp-page .xp-area:hover .xp-area-icon { transform: none; } }
