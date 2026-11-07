@@ -15,7 +15,7 @@
 - Each agent commits **only its own changes** (no `git add -A`); never undo the other agent's work without asking the user; if a request conflicts with the other agent's work, tell the user and let them choose.
 - Generated pages: change the generator (`tools/…`), never only the page, or the next rebuild removes the change. Lines added by the Web Designer to a generated page (e.g. its CSS/JS links) must also go in the generator.
 - Both keep this file up to date (each in its own section) and commit + push it with their code.
-- Known open conflict (3 Nov): the user asked the general agent for the experience page project cards **one below the other**; `experience-pages.css` (Web Designer) puts them **side by side**. The user has to choose.
+- Known open conflict (3 Nov): the user asked the general agent for the experience page project cards **one below the other**; `experience-pages.css` (Web Designer) puts them **side by side**. **Settled for Glovo on 7 Nov (user):** the 2 Glovo cards are now **wide row cards, one under the other**: the Web Designer's yellow cover with its drawing is on the left, the text on the right, so they read as one list with the Poland line under them. Phones (≤720px) keep the cover on top. Rules added by the general agent at the end of `experience-pages.css`; they only apply to the illustrated Glovo cards. Other experience pages (OSLO) still have 2 cards side by side.
 
 ## Why
 1. **Stand out in the job market:** an online CV that recruiters can browse and question, showing a tech/analytics profile instead of just describing one.
