@@ -365,6 +365,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="experience-pages.css"><!-- project cards with a cover (3 Nov 2026) -->
+  <link rel="stylesheet" href="page-head.css"><!-- page header: glow, logo tile, title, fact cards (7 Nov 2026) -->
 </head>
 <body>
 
