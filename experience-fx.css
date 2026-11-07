@@ -69,82 +69,52 @@
   .xfx-head { left: -8px; }
 }
 
-/* =====================================================================
-   OTHER EXPERIENCES: Leadership & volunteering + Hands-on (4 Nov 2026, web design pass).
-   Visible but one step below the key timeline: both lists sit in one soft panel, rows are small
-   white cards with the company colour, Hands-on rows are more compact than Leadership rows,
-   the details card gets a header band in the company colour and its figures as tiles.
-   Static look works without JavaScript; experience-fx.js adds the group icons + counts, the
-   kicker on the details card (.xm-kicker) and the entrance (.xm-motion, not with "reduce motion").
-   ===================================================================== */
-.xp-browse { margin-top: 64px; padding: 32px; border: 1px solid var(--border); border-radius: 20px; background: radial-gradient(600px 300px at 0% 0%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 70%), linear-gradient(180deg, var(--bg-soft), var(--bg) 85%); }
-
-/* Group titles: icon + label + count */
-.xp-list .group-title { display: flex; align-items: center; gap: 10px; margin: 32px 0 12px; color: var(--text); }
-.xp-list .group-title:first-child { margin-top: 0; }
-.xm-icon { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--accent-soft); color: var(--accent); flex-shrink: 0; }
-.xm-count { margin-left: auto; min-width: 24px; padding: 1px 8px; border-radius: 999px; background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; text-align: center; letter-spacing: 0; }
-
-/* Rows: small white cards, company colour bar on the left, arrow on the right */
-.xp-browse .xp-row { position: relative; margin-bottom: 8px; padding: 12px 40px 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease; }
-.xp-browse .xp-row::before { content: ""; position: absolute; left: -1px; top: 10px; bottom: 10px; width: 3px; border-radius: 0 3px 3px 0; background: var(--brand, var(--accent)); transform: scaleY(0); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.xp-browse .xp-row::after { content: "\203A"; position: absolute; right: 16px; top: 50%; font-size: 1.4rem; line-height: 1; color: var(--text-muted); opacity: 0.35; transform: translateY(-55%); transition: transform 0.25s ease, opacity 0.25s ease, color 0.25s ease; }
-.xp-browse .xp-row:hover, .xp-browse .xp-row:focus-visible { transform: translateX(4px); border-color: color-mix(in srgb, var(--brand, var(--accent)) 40%, var(--border)); background: color-mix(in srgb, var(--brand, var(--accent)) 5%, var(--bg)); box-shadow: 0 6px 16px color-mix(in srgb, var(--brand, var(--accent)) 12%, transparent); }
-.xp-browse .xp-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.xp-browse .xp-row:is(:hover, :focus-visible, .selected)::before { transform: scaleY(1); }
-.xp-browse .xp-row:is(:hover, :focus-visible)::after { opacity: 0.8; transform: translate(3px, -55%); }
-.xp-browse .xp-row.selected { border-color: color-mix(in srgb, var(--brand, var(--accent)) 55%, var(--border)); background: linear-gradient(90deg, color-mix(in srgb, var(--brand, var(--accent)) 9%, var(--bg)), var(--bg) 70%); box-shadow: 0 8px 24px color-mix(in srgb, var(--brand, var(--accent)) 16%, transparent); }
-.xp-browse .xp-row.selected::after { opacity: 1; color: color-mix(in srgb, var(--brand, var(--accent)) 80%, var(--text)); transform: translate(3px, -55%); }
-.xp-browse .xp-row.selected strong { color: var(--text); }
-.xp-browse .xp-row .card-logo { width: 44px; height: 44px; transition: transform 0.3s cubic-bezier(0.2, 1.4, 0.4, 1); }
-.xp-browse .xp-row:is(:hover, .selected) .card-logo { transform: scale(1.06); }
-/* Logo on the left over 2 lines; title + company on the first, date under it (so long titles keep the full width) */
-.xp-browse .xp-row { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; row-gap: 4px; align-items: center; }
-.xp-browse .xp-row .card-logo { grid-row: 1 / span 2; }
-.xp-browse .xp-row-date { justify-self: start; padding: 0 8px; border-radius: 999px; background: var(--bg-soft); border: 1px solid var(--border); font-size: 0.72rem; font-weight: 500; line-height: 1.6; }
-
-/* Hands-on rows: lighter and more compact (they matter less than leadership) */
-.xp-browse .xp-row.xm-compact { padding-top: 8px; padding-bottom: 8px; margin-bottom: 6px; }
-.xp-browse .xp-row.xm-compact .card-logo { width: 34px; height: 34px; border-radius: 8px; }
-.xp-browse .xp-row.xm-compact strong { font-weight: 500; font-size: 0.95rem; }
-.xp-browse .xp-row.xm-compact .xp-row-text span { font-size: 0.8rem; }
-
-/* Details card: header band in the company colour, bigger logo, figures as tiles */
-.xp-browse .xp-detail .card { position: relative; overflow: hidden; padding: 28px; border-color: color-mix(in srgb, var(--brand, var(--accent)) 35%, var(--border)); box-shadow: inset 0 4px 0 var(--brand, var(--accent)), 0 18px 48px color-mix(in srgb, var(--brand, var(--accent)) 14%, transparent); }
-.xp-browse .xp-detail .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 120px; background: linear-gradient(180deg, color-mix(in srgb, var(--brand, var(--accent)) 12%, transparent), transparent); pointer-events: none; }
-.xp-browse .xp-detail .card > * { position: relative; }
-.xp-browse .xp-detail .card .xm-kicker { margin: 0 0 14px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--brand, var(--accent)) 70%, var(--text)); }
-.xp-browse .xp-detail .card-logo { width: 56px; height: 56px; border-radius: 12px; box-shadow: 0 0 0 4px var(--bg), 0 6px 16px rgba(16, 24, 40, 0.1); }
-.xp-browse .xp-detail .card h4 { font-size: 1.2rem; }
-.xp-browse .xp-detail .figures { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 20px 0 0; }
-.xp-browse .xp-detail .figures li { padding: 12px 14px; border-radius: 10px; background: var(--bg-soft); border: 1px solid var(--border); border-left: 3px solid var(--brand, var(--accent)); line-height: 1.4; font-size: 0.9rem; }
-.xp-browse .xp-detail .figures strong { font-size: 1.15rem; }
-.xp-browse .xp-detail .figures li > strong:first-child { display: block; }
-
-@media (prefers-reduced-motion: no-preference) {
-  .xp-browse .xp-detail .card { animation: xm-card-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-  .xp-browse .xp-detail .figures li { animation: xfx-up 0.45s backwards; animation-delay: calc(0.15s + var(--t, 0) * 0.07s); }
-}
-@keyframes xm-card-in { from { opacity: 0; transform: translateX(18px) scale(0.985); } }
-
-/* Entrance: rows come in one after the other when the panel scrolls into view */
-.xm-motion .xp-browse .xp-row:not(.in) { opacity: 0; transform: translateY(10px); }
-.xm-motion .xp-browse .xp-row.in { transition: opacity 0.5s ease calc(var(--i, 0) * 45ms), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) calc(var(--i, 0) * 45ms), border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease; }
-.xm-motion .xp-browse .xp-row.in.xm-done { transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease; }
-
-@media (prefers-reduced-motion: reduce) {
-  .xp-browse .xp-row, .xp-browse .xp-row::before, .xp-browse .xp-row::after, .xp-browse .xp-row .card-logo { transition: none; }
-  .xp-browse .xp-row:hover, .xp-browse .xp-row:focus-visible { transform: none; }
-}
-
-/* Phones: lighter panel, the details card opens under its row */
-@media (max-width: 720px) {
-  .xp-browse { margin-top: 48px; padding: 16px; border-radius: 16px; }
-  .xp-browse .xp-detail { margin: 0 0 12px; }
-  .xp-browse .xp-detail .card { padding: 20px; }
-  .xp-browse .xp-detail .figures { grid-template-columns: minmax(0, 1fr); }
-}
-
 /* --- More space between the key experiences (7 Nov 2026, user): gap doubled from 24px (style.css) to 48px.
    A feed-like version (half a screen between cards + scroll snap) was tried the same day and removed: too much space. --- */
 .xfx .xp-timeline { gap: 48px; }
+
+/* =====================================================================
+   3 CHAPTERS (7 Nov 2026, user): 01 Key experience · 02 Leadership & volunteering · 03 Hands-on.
+   Leadership & volunteering and Hands-on use the same timeline as Key experience (they replace the
+   old list + details panel). A big numbered header with a lot of space above it marks each new
+   chapter. Hands-on is a compact timeline (smaller logos and cards). The static look (no .xfx)
+   works without JavaScript; the entrance is added by experience-fx.js.
+   ===================================================================== */
+.xp-chapter { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 4px 20px; margin: 120px 0 48px; padding-top: 40px; border-top: 1px solid var(--border); }
+.xp-chapter::before { content: ""; position: absolute; top: -2px; left: 0; width: 120px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, var(--accent), #6d5dfc); transform-origin: left; }
+#key-experience { margin-top: 8px; }
+.xp-chapter-num { font-size: 3.4rem; font-weight: 700; line-height: 1; letter-spacing: -0.04em; background: linear-gradient(135deg, var(--accent), #6d5dfc); -webkit-background-clip: text; background-clip: text; color: transparent; font-variant-numeric: tabular-nums; }
+.xp-chapter-title { margin: 0; font-size: 1.6rem; line-height: 1.2; }
+.xp-chapter-sub { margin: 4px 0 0; color: var(--text-muted); font-size: 0.95rem; }
+.xp-chapter-count { padding: 4px 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--text-muted); font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+
+/* Heart instead of a logo (charity raffle, no organisation) */
+.xp-dot-heart { display: grid; place-items: center; color: #e11d48; font-size: 1.2rem; line-height: 1; }
+
+/* Hands-on: compact timeline (they matter less than the other two chapters) */
+.xp-compact { gap: 20px; }
+.xfx .xp-compact { gap: 28px; }
+.xp-compact .xp-dot { left: -58px; top: 14px; width: 34px; height: 34px; }
+.xp-compact .xp-dot-heart { font-size: 1rem; }
+.xp-compact .xp-context { top: 18px; }
+.xp-compact .xp-card { padding: 16px 20px; grid-template-columns: minmax(0, 1fr); }
+.xp-compact .xp-card:has(.figures) { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+.xp-compact .xp-card h4 { font-size: 1rem; }
+.xp-compact .xp-card .card-desc { margin-bottom: 0; font-size: 0.9rem; }
+.xp-compact .xp-card .figures { font-size: 0.9rem; }
+
+/* Entrance (.in from experience-fx.js): the header comes up, its colour bar grows */
+.xfx .xp-chapter:not(.in) { opacity: 0; transform: translateY(24px); }
+.xfx .xp-chapter:not(.in)::before { transform: scaleX(0); }
+.xfx .xp-chapter.in { transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.xfx .xp-chapter.in::before { transition: transform 0.9s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+@media (max-width: 720px) {
+  .xp-chapter { grid-template-columns: auto minmax(0, 1fr); margin: 80px 0 32px; padding-top: 28px; gap: 2px 14px; }
+  .xp-chapter-num { grid-row: span 2; font-size: 2.4rem; }
+  .xp-chapter-title { font-size: 1.25rem; }
+  .xp-chapter-sub { font-size: 0.88rem; }
+  .xp-chapter-count { grid-column: 2; justify-self: start; margin-top: 6px; }
+  .xp-compact .xp-dot { left: -46px; top: 14px; width: 26px; height: 26px; }
+  .xp-compact .xp-card:has(.figures) { grid-template-columns: minmax(0, 1fr); }
+}

@@ -34,7 +34,14 @@
 
         <!-- Key experience: timeline, newest first. Left of the line: year + when/why (school year, gap year). Text on the left, key figures on the right.
              The Glovo, OSLO and Treasurer cards are also copied in the Home carousel (index.html) -->
-        <h3 class="group-title">Key experience</h3>
+        <header class="xp-chapter" id="key-experience">
+          <span class="xp-chapter-num" aria-hidden="true">01</span>
+          <div class="xp-chapter-text">
+            <h2 class="xp-chapter-title">Key experience</h2>
+            <p class="xp-chapter-sub">Internships and roles closest to an Analyst job.</p>
+          </div>
+          <span class="xp-chapter-count">4 experiences</span>
+        </header>
         <div class="xp-timeline">
           <!-- Next experience: empty placeholder ("?") for the role I'm looking for -->
           <div class="xp-item xp-next">
@@ -183,241 +190,234 @@
           </div>
         </div>
 
-        <!-- Other experiences: click a row to see its card on the right (under the row on phones, script.js) -->
-        <div class="xp-browse">
-          <div class="xp-list">
-            <h3 class="group-title">Leadership &amp; volunteering</h3>
-            <button type="button" class="xp-row" data-id="envie" style="--brand: #E1311D">
-              <img src="logos/envie-dsup.png" alt="State-Supported NPO logo" class="card-logo" width="48" height="48">
-              <span class="xp-row-text"><strong>Envie d'Sup</strong><span>State-Supported NPO</span></span>
-              <span class="xp-row-date">Nov 2024 – Jun 2025</span>
-            </button>
-            <button type="button" class="xp-row" data-id="egc" style="--brand: #333333">
-              <img src="logos/egc.png" alt="EGC logo" class="card-logo" width="48" height="48">
-              <span class="xp-row-text"><strong>Academic Lead, Budgeting &amp; Financial Analysis</strong><span>EGC · Business School</span></span>
-              <span class="xp-row-date">Sep 2022 – Feb 2024</span>
-            </button>
-            <button type="button" class="xp-row" data-id="cheerup" style="--brand: #006699">
-              <img src="logos/cheer-up.png" alt="Cheer Up logo" class="card-logo" width="48" height="48">
-              <span class="xp-row-text"><strong>Sponsorship &amp; Hospital Visits</strong><span>Cheer Up · Cancer Charity</span></span>
-              <span class="xp-row-date">Nov 2024 – Jun 2025</span>
-            </button>
-            <button type="button" class="xp-row" data-id="raffle">
-              <span class="card-logo card-logo-placeholder" aria-hidden="true">♥</span>
-              <span class="xp-row-text"><strong>Charity raffle</strong><span>Own initiative · Homeless Aid</span></span>
-              <span class="xp-row-date">Nov – Dec 2022</span>
-            </button>
-
-            <h3 class="group-title">Hands-on experience</h3>
-            <button type="button" class="xp-row" data-id="im-cc" style="--brand: #EE1C22">
-              <img src="logos/intermarche.png" alt="Intermarché logo" class="card-logo" width="48" height="48">
-              <span class="xp-row-text"><strong>Click &amp; Collect Order Picker</strong><span>Intermarché · Supermarket Chain</span></span>
-              <span class="xp-row-date">Jun – Jul 2025</span>
-            </button>
-            <button type="button" class="xp-row" data-id="hilton" style="--brand: #013252">
-              <img src="logos/hilton.png" alt="Hilton Malta logo" class="card-logo" width="48" height="48">
-              <span class="xp-row-text"><strong>Food &amp; Beverage Team Member</strong><span>Hilton Malta · Luxury Hotel</span></span>
-              <span class="xp-row-date">Apr – Aug 2023</span>
-            </button>
-            <button type="button" class="xp-row" data-id="europevent" style="--brand: #333333">
-              <img src="logos/europevent.png" alt="EuropEvent logo" class="card-logo" width="48" height="48">
-              <span class="xp-row-text"><strong>Warehouse Worker</strong><span>EuropEvent · Temporary Swimming Pools</span></span>
-              <span class="xp-row-date">Jul 2022</span>
-            </button>
-            <button type="button" class="xp-row" data-id="decathlon" style="--brand: #3642BB">
-              <img src="logos/decathlon.png" alt="Decathlon logo" class="card-logo" width="48" height="48">
-              <span class="xp-row-text"><strong>Sales Advisor Intern</strong><span>Decathlon · Sporting Goods Retail</span></span>
-              <span class="xp-row-date">Apr – May 2022</span>
-            </button>
-            <button type="button" class="xp-row" data-id="im-dm" style="--brand: #EE1C22">
-              <img src="logos/intermarche.png" alt="Intermarché logo" class="card-logo" width="48" height="48">
-              <span class="xp-row-text"><strong>Department Manager Intern</strong><span>Intermarché · Supermarket Chain</span></span>
-              <span class="xp-row-date">Dec 2021</span>
-            </button>
-            <button type="button" class="xp-row" data-id="florimond" style="--brand: #088A62">
-              <img src="logos/florimond-desprez.png" alt="Florimond Desprez logo" class="card-logo" width="48" height="48">
-              <span class="xp-row-text"><strong>Seasonal Agricultural Assistant</strong><span>Florimond Desprez · Plant Breeding &amp; Seeds</span></span>
-              <span class="xp-row-date">Jul 2021</span>
-            </button>
+        <!-- Chapters 02 and 03 (7 Nov 2026, user): same timeline as Key experience instead of the old list + details panel.
+             Year + school year on the left (school year worked out from the dates, to confirm), logo on the line, card on the right. -->
+        <header class="xp-chapter" id="leadership-volunteering">
+          <span class="xp-chapter-num" aria-hidden="true">02</span>
+          <div class="xp-chapter-text">
+            <h2 class="xp-chapter-title">Leadership &amp; volunteering</h2>
+            <p class="xp-chapter-sub">Roles taken on alongside my studies.</p>
           </div>
-          <div class="xp-detail" aria-live="polite"></div>
+          <span class="xp-chapter-count">4 experiences</span>
+        </header>
+        <div class="xp-timeline">
+          <div class="xp-item" style="--brand: #E1311D">
+            <p class="xp-context"><span class="xp-year">2024</span><span class="xp-label">Master's year 1</span></p>
+            <img src="logos/envie-dsup.png" alt="State-Supported NPO logo" class="xp-dot" width="44" height="44">
+            <article class="card xp-card" id="envie">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Envie d'Sup</h4>
+                      <p class="card-org">State-Supported NPO<a href="https://www.cordeesdelareussite.fr/" class="org-link" target="_blank" rel="noopener" aria-label="Envie d'Sup website (opens in a new tab)" title="Envie d'Sup website">↗</a></p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Nov 2024 – Jun 2025</p><p class="card-location">Rouen, France</p></div>
+                </header>
+                <p class="card-desc">Head of 9th Grade Program, Head of Outreach and Mentor for students from priority education zones.</p>
+              </div>
+              <ul class="figures">
+                <li><strong>8</strong> workshops designed for 9th graders</li>
+                <li><strong>18</strong> tutors coordinated · <strong>34</strong> students supported</li>
+                <li><strong>11</strong> students led in the outreach team</li>
+              </ul>
+            </article>
+          </div>
+          <div class="xp-item" style="--brand: #006699">
+            <p class="xp-context"><span class="xp-year">2024</span><span class="xp-label">Master's year 1</span></p>
+            <img src="logos/cheer-up.png" alt="Cheer Up logo" class="xp-dot" width="44" height="44">
+            <article class="card xp-card" id="cheerup">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Sponsorship &amp; Hospital Visits</h4>
+                      <p class="card-org">Cheer Up · Cancer Charity<a href="https://www.helloasso.com/associations/federation-cheer-up" class="org-link" target="_blank" rel="noopener" aria-label="Cheer Up website (opens in a new tab)" title="Cheer Up website">↗</a></p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Nov 2024 – Jun 2025</p><p class="card-location">Rouen, France</p></div>
+                </header>
+                <p class="card-desc">Raised prizes and donations for solidarity projects and visited young cancer patients.</p>
+              </div>
+              <ul class="figures">
+                <li><strong>2</strong> teams: sponsorship outreach and hospital visits</li>
+                <li><strong>Playroom project</strong> supported for hospitalized youth at CHB Rouen</li>
+                <li><strong>Wishes fulfilled</strong> for young patients, e.g. a trip to Disneyland</li>
+              </ul>
+            </article>
+          </div>
+          <div class="xp-item" style="--brand: #333333">
+            <p class="xp-context"><span class="xp-year">2022</span><span class="xp-label">Bachelor's year 2</span><span class="xp-sub">Until year 3</span></p>
+            <img src="logos/egc.png" alt="EGC logo" class="xp-dot" width="44" height="44">
+            <article class="card xp-card" id="egc">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Academic Lead, Budgeting &amp; Financial Analysis</h4>
+                      <p class="card-org">EGC · Business School<a href="https://egc-lille.com" class="org-link" target="_blank" rel="noopener" aria-label="EGC website (opens in a new tab)" title="EGC website">↗</a></p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Sep 2022 – Feb 2024</p><p class="card-location">Lille, France</p></div>
+                </header>
+                <p class="card-desc">Ran support sessions in budgeting and financial analysis for 2nd and 3rd-year Bachelor students.</p>
+              </div>
+              <ul class="figures">
+                <li><strong>Bi-weekly</strong> sessions for 1.5 years</li>
+                <li><strong>4</strong> topics: investment profitability, management control, costs, financial analysis</li>
+              </ul>
+            </article>
+          </div>
+          <div class="xp-item">
+            <p class="xp-context"><span class="xp-year">2022</span><span class="xp-label">Bachelor's year 2</span></p>
+            <span class="xp-dot xp-dot-heart" aria-hidden="true">♥</span>
+            <article class="card xp-card" id="raffle">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Charity raffle</h4>
+                      <p class="card-org">Own initiative · Homeless Aid</p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Nov – Dec 2022</p></div>
+                </header>
+                <p class="card-desc">Launched a charity raffle to fund essentials for homeless people.</p>
+              </div>
+              <ul class="figures">
+                <li><strong>200</strong> tickets sold at €2</li>
+                <li><strong>10</strong> people directly supported</li>
+                <li><strong>Shoes, clothing, hostel nights</strong>, sleeping bags and food provided</li>
+              </ul>
+            </article>
+          </div>
         </div>
 
-        <!-- Details cards shown in .xp-detail -->
-        <template id="xp-envie">
-          <article class="card" style="--brand: #E1311D">
-            <header class="card-header">
-              <div class="card-title">
-                <img src="logos/envie-dsup.png" alt="State-Supported NPO logo" class="card-logo" width="48" height="48">
-                <div>
-                  <h4>Envie d'Sup</h4>
-                  <p class="card-org">State-Supported NPO<a href="https://www.cordeesdelareussite.fr/" class="org-link" target="_blank" rel="noopener" aria-label="Envie d'Sup website (opens in a new tab)" title="Envie d'Sup website">↗</a></p>
-                </div>
+        <!-- Hands-on: same timeline, compact (smaller logos and cards, year only) -->
+        <header class="xp-chapter" id="hands-on">
+          <span class="xp-chapter-num" aria-hidden="true">03</span>
+          <div class="xp-chapter-text">
+            <h2 class="xp-chapter-title">Hands-on experience</h2>
+            <p class="xp-chapter-sub">Summer jobs and short internships in the field.</p>
+          </div>
+          <span class="xp-chapter-count">6 experiences</span>
+        </header>
+        <div class="xp-timeline xp-compact">
+          <div class="xp-item" style="--brand: #EE1C22">
+            <p class="xp-context"><span class="xp-year">2025</span></p>
+            <img src="logos/intermarche.png" alt="Intermarché logo" class="xp-dot" width="44" height="44">
+            <article class="card xp-card" id="im-cc">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Click &amp; Collect Order Picker</h4>
+                      <p class="card-org">Intermarché · Supermarket Chain<a href="https://www.intermarche.com" class="org-link" target="_blank" rel="noopener" aria-label="Intermarché website (opens in a new tab)" title="Intermarché website">↗</a></p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Jun – Jul 2025</p><p class="card-location">Pont-à-Marcq, France</p></div>
+                </header>
+                <p class="card-desc">Prepared Click &amp; Collect orders, delivered them on time and handled customer complaints.</p>
               </div>
-              <div class="card-meta"><p class="card-date">Nov 2024 – Jun 2025</p><p class="card-location">Rouen, France</p></div>
-            </header>
-            <p class="card-desc">Head of 9th Grade Program, Head of Outreach and Mentor for students from priority education zones.</p>
-            <ul class="figures">
-              <li><strong>8</strong> workshops designed for 9th graders</li>
-              <li><strong>18</strong> tutors coordinated · <strong>34</strong> students supported</li>
-              <li><strong>11</strong> students led in the outreach team</li>
-            </ul>
-          </article>
-        </template>
-        <template id="xp-egc">
-          <article class="card" style="--brand: #333333">
-            <header class="card-header">
-              <div class="card-title">
-                <img src="logos/egc.png" alt="EGC logo" class="card-logo" width="48" height="48">
-                <div>
-                  <h4>Academic Lead, Budgeting &amp; Financial Analysis</h4>
-                  <p class="card-org">EGC · Business School<a href="https://egc-lille.com" class="org-link" target="_blank" rel="noopener" aria-label="EGC website (opens in a new tab)" title="EGC website">↗</a></p>
-                </div>
+            </article>
+          </div>
+          <div class="xp-item" style="--brand: #013252">
+            <p class="xp-context"><span class="xp-year">2023</span></p>
+            <img src="logos/hilton.png" alt="Hilton Malta logo" class="xp-dot" width="44" height="44">
+            <article class="card xp-card" id="hilton">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Food &amp; Beverage Team Member</h4>
+                      <p class="card-org">Hilton Malta · Luxury Hotel<a href="https://www.hilton.com/en/hotels/mlahitw-hilton-malta/" class="org-link" target="_blank" rel="noopener" aria-label="Hilton Malta website (opens in a new tab)" title="Hilton Malta website">↗</a></p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Apr – Aug 2023</p><p class="card-location">St Julian's, Malta</p></div>
+                </header>
+                <p class="card-desc">Food runner across the hotel's restaurants, and service and logistics for corporate events and weddings.</p>
               </div>
-              <div class="card-meta"><p class="card-date">Sep 2022 – Feb 2024</p><p class="card-location">Lille, France</p></div>
-            </header>
-            <p class="card-desc">Ran support sessions in budgeting and financial analysis for 2nd and 3rd-year Bachelor students.</p>
-            <ul class="figures">
-              <li><strong>Bi-weekly</strong> sessions for 1.5 years</li>
-              <li><strong>4</strong> topics: investment profitability, management control, costs, financial analysis</li>
-            </ul>
-          </article>
-        </template>
-        <template id="xp-cheerup">
-          <article class="card" style="--brand: #006699">
-            <header class="card-header">
-              <div class="card-title">
-                <img src="logos/cheer-up.png" alt="Cheer Up logo" class="card-logo" width="48" height="48">
-                <div>
-                  <h4>Sponsorship &amp; Hospital Visits</h4>
-                  <p class="card-org">Cheer Up · Cancer Charity<a href="https://www.helloasso.com/associations/federation-cheer-up" class="org-link" target="_blank" rel="noopener" aria-label="Cheer Up website (opens in a new tab)" title="Cheer Up website">↗</a></p>
-                </div>
+              <ul class="figures">
+                <li><strong>~150</strong> orders a day</li>
+                <li><strong>10,000+</strong> dishes served</li>
+                <li><strong>~20</strong> banquets set up</li>
+              </ul>
+            </article>
+          </div>
+          <div class="xp-item" style="--brand: #333333">
+            <p class="xp-context"><span class="xp-year">2022</span></p>
+            <img src="logos/europevent.png" alt="EuropEvent logo" class="xp-dot" width="44" height="44">
+            <article class="card xp-card" id="europevent">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Warehouse Worker</h4>
+                      <p class="card-org">EuropEvent · Temporary Swimming Pools<a href="https://www.aquaevent.fr" class="org-link" target="_blank" rel="noopener" aria-label="EuropEvent website (opens in a new tab)" title="EuropEvent website">↗</a></p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Jul 2022</p><p class="card-location">Avelin, France</p></div>
+                </header>
+                <p class="card-desc">Assembled temporary swimming pools.</p>
               </div>
-              <div class="card-meta"><p class="card-date">Nov 2024 – Jun 2025</p><p class="card-location">Rouen, France</p></div>
-            </header>
-            <p class="card-desc">Raised prizes and donations for solidarity projects and visited young cancer patients.</p>
-            <ul class="figures">
-              <li><strong>2</strong> teams: sponsorship outreach and hospital visits</li>
-              <li><strong>Playroom project</strong> supported for hospitalized youth at CHB Rouen</li>
-              <li><strong>Wishes fulfilled</strong> for young patients, e.g. a trip to Disneyland</li>
-            </ul>
-          </article>
-        </template>
-        <template id="xp-raffle">
-          <article class="card">
-            <header class="card-header">
-              <div class="card-title">
-                <span class="card-logo card-logo-placeholder" aria-hidden="true">♥</span>
-                <div>
-                  <h4>Charity raffle</h4>
-                  <p class="card-org">Own initiative · Homeless Aid</p>
-                </div>
+            </article>
+          </div>
+          <div class="xp-item" style="--brand: #3642BB">
+            <p class="xp-context"><span class="xp-year">2022</span></p>
+            <img src="logos/decathlon.png" alt="Decathlon logo" class="xp-dot" width="44" height="44">
+            <article class="card xp-card" id="decathlon">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Sales Advisor Intern</h4>
+                      <p class="card-org">Decathlon · Sporting Goods Retail<a href="https://www.decathlon.fr" class="org-link" target="_blank" rel="noopener" aria-label="Decathlon website (opens in a new tab)" title="Decathlon website">↗</a></p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Apr – May 2022</p><p class="card-location">Villeneuve d'Ascq, France</p></div>
+                </header>
+                <p class="card-desc">Advised customers, sold products and equipment, and kept the fitness department's shelves and displays in order.</p>
               </div>
-              <div class="card-meta"><p class="card-date">Nov – Dec 2022</p></div>
-            </header>
-            <p class="card-desc">Launched a charity raffle to fund essentials for homeless people.</p>
-            <ul class="figures">
-              <li><strong>200</strong> tickets sold at €2</li>
-              <li><strong>10</strong> people directly supported</li>
-              <li><strong>Shoes, clothing, hostel nights</strong>, sleeping bags and food provided</li>
-            </ul>
-          </article>
-        </template>
-        <template id="xp-im-cc">
-          <article class="card" style="--brand: #EE1C22">
-            <header class="card-header">
-              <div class="card-title">
-                <img src="logos/intermarche.png" alt="Intermarché logo" class="card-logo" width="48" height="48">
-                <div>
-                  <h4>Click &amp; Collect Order Picker</h4>
-                  <p class="card-org">Intermarché · Supermarket Chain<a href="https://www.intermarche.com" class="org-link" target="_blank" rel="noopener" aria-label="Intermarché website (opens in a new tab)" title="Intermarché website">↗</a></p>
-                </div>
+            </article>
+          </div>
+          <div class="xp-item" style="--brand: #EE1C22">
+            <p class="xp-context"><span class="xp-year">2021</span></p>
+            <img src="logos/intermarche.png" alt="Intermarché logo" class="xp-dot" width="44" height="44">
+            <article class="card xp-card" id="im-dm">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Department Manager Intern</h4>
+                      <p class="card-org">Intermarché · Supermarket Chain<a href="https://www.intermarche.com" class="org-link" target="_blank" rel="noopener" aria-label="Intermarché website (opens in a new tab)" title="Intermarché website">↗</a></p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Dec 2021</p></div>
+                </header>
+                <p class="card-desc">Managed several food sections and learned how a supermarket and its departments run.</p>
               </div>
-              <div class="card-meta"><p class="card-date">Jun – Jul 2025</p><p class="card-location">Pont-à-Marcq, France</p></div>
-            </header>
-            <p class="card-desc">Prepared Click &amp; Collect orders, delivered them on time and handled customer complaints.</p>
-          </article>
-        </template>
-        <template id="xp-hilton">
-          <article class="card" style="--brand: #013252">
-            <header class="card-header">
-              <div class="card-title">
-                <img src="logos/hilton.png" alt="Hilton Malta logo" class="card-logo" width="48" height="48">
-                <div>
-                  <h4>Food &amp; Beverage Team Member</h4>
-                  <p class="card-org">Hilton Malta · Luxury Hotel<a href="https://www.hilton.com/en/hotels/mlahitw-hilton-malta/" class="org-link" target="_blank" rel="noopener" aria-label="Hilton Malta website (opens in a new tab)" title="Hilton Malta website">↗</a></p>
-                </div>
+            </article>
+          </div>
+          <div class="xp-item" style="--brand: #088A62">
+            <p class="xp-context"><span class="xp-year">2021</span></p>
+            <img src="logos/florimond-desprez.png" alt="Florimond Desprez logo" class="xp-dot" width="44" height="44">
+            <article class="card xp-card" id="florimond">
+              <div>
+                <header class="card-header">
+                  <div class="card-title">
+                    <div>
+                      <h4>Seasonal Agricultural Assistant</h4>
+                      <p class="card-org">Florimond Desprez · Plant Breeding &amp; Seeds<a href="https://www.florimond-desprez.com" class="org-link" target="_blank" rel="noopener" aria-label="Florimond Desprez website (opens in a new tab)" title="Florimond Desprez website">↗</a></p>
+                    </div>
+                  </div>
+                  <div class="card-meta"><p class="card-date">Jul 2021</p><p class="card-location">Cappelle-en-Pévèle, France</p></div>
+                </header>
+                <p class="card-desc">Helped select future cereal varieties and took part in the harvest and threshing.</p>
               </div>
-              <div class="card-meta"><p class="card-date">Apr – Aug 2023</p><p class="card-location">St Julian's, Malta</p></div>
-            </header>
-            <p class="card-desc">Food runner across the hotel's restaurants, and service and logistics for corporate events and weddings.</p>
-            <ul class="figures">
-              <li><strong>~150</strong> orders a day</li>
-              <li><strong>10,000+</strong> dishes served</li>
-              <li><strong>~20</strong> banquets set up</li>
-            </ul>
-          </article>
-        </template>
-        <template id="xp-europevent">
-          <article class="card" style="--brand: #333333">
-            <header class="card-header">
-              <div class="card-title">
-                <img src="logos/europevent.png" alt="EuropEvent logo" class="card-logo" width="48" height="48">
-                <div>
-                  <h4>Warehouse Worker</h4>
-                  <p class="card-org">EuropEvent · Temporary Swimming Pools<a href="https://www.aquaevent.fr" class="org-link" target="_blank" rel="noopener" aria-label="EuropEvent website (opens in a new tab)" title="EuropEvent website">↗</a></p>
-                </div>
-              </div>
-              <div class="card-meta"><p class="card-date">Jul 2022</p><p class="card-location">Avelin, France</p></div>
-            </header>
-            <p class="card-desc">Assembled temporary swimming pools.</p>
-          </article>
-        </template>
-        <template id="xp-decathlon">
-          <article class="card" style="--brand: #3642BB">
-            <header class="card-header">
-              <div class="card-title">
-                <img src="logos/decathlon.png" alt="Decathlon logo" class="card-logo" width="48" height="48">
-                <div>
-                  <h4>Sales Advisor Intern</h4>
-                  <p class="card-org">Decathlon · Sporting Goods Retail<a href="https://www.decathlon.fr" class="org-link" target="_blank" rel="noopener" aria-label="Decathlon website (opens in a new tab)" title="Decathlon website">↗</a></p>
-                </div>
-              </div>
-              <div class="card-meta"><p class="card-date">Apr – May 2022</p><p class="card-location">Villeneuve d'Ascq, France</p></div>
-            </header>
-            <p class="card-desc">Advised customers, sold products and equipment, and kept the fitness department's shelves and displays in order.</p>
-          </article>
-        </template>
-        <template id="xp-im-dm">
-          <article class="card" style="--brand: #EE1C22">
-            <header class="card-header">
-              <div class="card-title">
-                <img src="logos/intermarche.png" alt="Intermarché logo" class="card-logo" width="48" height="48">
-                <div>
-                  <h4>Department Manager Intern</h4>
-                  <p class="card-org">Intermarché · Supermarket Chain<a href="https://www.intermarche.com" class="org-link" target="_blank" rel="noopener" aria-label="Intermarché website (opens in a new tab)" title="Intermarché website">↗</a></p>
-                </div>
-              </div>
-              <div class="card-meta"><p class="card-date">Dec 2021</p></div>
-            </header>
-            <p class="card-desc">Managed several food sections and learned how a supermarket and its departments run.</p>
-          </article>
-        </template>
-        <template id="xp-florimond">
-          <article class="card" style="--brand: #088A62">
-            <header class="card-header">
-              <div class="card-title">
-                <img src="logos/florimond-desprez.png" alt="Florimond Desprez logo" class="card-logo" width="48" height="48">
-                <div>
-                  <h4>Seasonal Agricultural Assistant</h4>
-                  <p class="card-org">Florimond Desprez · Plant Breeding &amp; Seeds<a href="https://www.florimond-desprez.com" class="org-link" target="_blank" rel="noopener" aria-label="Florimond Desprez website (opens in a new tab)" title="Florimond Desprez website">↗</a></p>
-                </div>
-              </div>
-              <div class="card-meta"><p class="card-date">Jul 2021</p><p class="card-location">Cappelle-en-Pévèle, France</p></div>
-            </header>
-            <p class="card-desc">Helped select future cereal varieties and took part in the harvest and threshing.</p>
-          </article>
-        </template>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
   </main>
