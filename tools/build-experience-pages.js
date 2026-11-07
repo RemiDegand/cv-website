@@ -32,7 +32,7 @@ const experiences = [
     parts: (projectCards) => [
       ["My mission", `
             <div class="block-part reveal">
-              <p class="xp-mission">Support the forecasting of <strong>rider demand from customer demand</strong> for one of Glovo's 3 markets, and find ways to make processes more efficient, dashboards more insightful and forecasts more accurate.</p>
+              <p class="xp-mission">Support the forecasting of <strong>rider demand</strong> for one of Glovo's 3 markets, and find ways to make processes more efficient, dashboards more insightful and forecasts more accurate.</p>
               <p>The <strong>PLECA market</strong> covers 6 countries: Poland, Ukraine, Armenia, Georgia, Kazakhstan and Kyrgyzstan. I had full ownership of 5 areas:</p>
               <figure class="xp-map-fig">
                 <img src="images/maps/glovo-areas.svg" width="640" height="272" alt="Map of the PLECA market. My areas in yellow: the South of Poland, the West of Ukraine, Armenia, Georgia and Kyrgyzstan. Kazakhstan in grey." loading="lazy">
@@ -41,7 +41,8 @@ const experiences = [
             </div>`],
       ["My tasks", `
             <div class="block-part reveal">
-              <h3>Forecast rider demand, every week</h3>
+              <h3><span class="block-label">Task 1</span>Forecast rider demand, every week</h3>
+              <p>The forecast had to be ready before the release of the rider slot calendar.</p>
               <ul class="project-did reveal-stagger">
                 <li><strong>Reviewed last week's performance</strong> of my 5 countries: what happened (descriptive analysis) and why (diagnostic analysis), crossing Looker dashboards with queries analysed in Google Sheets.</li>
                 <li><strong>Collected input from the 5 local teams</strong> (in touch all week, 1 meeting a week with each): the external factors behind past performance and the coming events, such as bad weather, the World Cup or a marketing campaign.</li>
@@ -49,14 +50,13 @@ const experiences = [
               </ul>
             </div>
             <div class="block-part reveal">
-              <h3>Design tools</h3>
+              <h3><span class="block-label">Task 2</span>Design tools, every Friday</h3>
+              <p>Every Friday, designed tools to make processes more efficient, dashboards more insightful and forecasts more accurate.</p>
               <div class="xp-cards reveal-stagger">
 ${projectCards}
               </div>
               <ul class="project-did reveal-stagger">
-                <li><strong>Poland:</strong> a Google Sheets Apps Script process to improve the forecast adjustments of small cities, run by the local team.</li>
-                <li><strong>Ukraine:</strong> Google Sheets reports to improve the analysis.</li>
-              </ul>
+                <li><strong>Poland:</strong> a Google Sheets Apps Script process to improve the forecast adjustments of small cities, run by the local team.</li>              </ul>
             </div>`],
       ["My impact", `
             <div class="block-part reveal">
