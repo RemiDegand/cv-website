@@ -383,7 +383,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
   </header>
 
   <main>
-    <section id="experience-page" class="project-page xp-page" style="--brand: ${x.brand}">
+    <section id="experience-page" class="project-page xp-page xp-${x.id}" style="--brand: ${x.brand}">
       <div class="container project-page-inner">
         <a href="experience.html" class="back-link">← All experience</a>
 
