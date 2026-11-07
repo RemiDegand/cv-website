@@ -144,3 +144,16 @@
   .xp-browse .xp-detail .card { padding: 20px; }
   .xp-browse .xp-detail .figures { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* --- One experience at a time, like a feed (7 Nov 2026, user: "like TikTok", same design, more white space).
+   Big gap between the key experiences so only one is on screen; the page gently snaps each one to the
+   middle of the screen when the scroll stops close to it ("proximity": never traps the visitor). --- */
+html.xfx { scroll-snap-type: y proximity; scroll-padding-top: var(--menu-height); }
+.xfx .xp-timeline { gap: max(240px, 55vh); gap: max(240px, 55svh); padding-bottom: 8vh; }
+.xfx .xp-item { scroll-snap-align: center; }
+@media (max-width: 720px) {
+  .xfx .xp-timeline { gap: max(160px, 40svh); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.xfx { scroll-snap-type: none; }
+}
