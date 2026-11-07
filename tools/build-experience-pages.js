@@ -384,7 +384,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
         <header class="project-page-head">
           <p class="project-org"><img src="${x.logo}" alt="${esc(x.company)} logo" class="project-logo" width="24" height="24">${esc(x.company)} · ${esc(x.industry)}<a href="${x.site}" class="org-link" target="_blank" rel="noopener" aria-label="${esc(x.company)} website (opens in a new tab)" title="${esc(x.company)} website">↗</a></p>
           <h1 class="project-page-title">${esc(x.title)}</h1>
-          <p class="lead">${esc(x.lead)}</p>
+          <!-- No text under the title (user, 7 Nov 2026): My mission says it. The "lead" lines above are kept in the data but not shown -->
         </header>
 
         <dl class="project-facts">
