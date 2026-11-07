@@ -26,7 +26,8 @@
     { chip: "And at OSLO?", keys: ["oslo", "revenue", "vat", "finance", "financial", "data analyst", "villeneuve", "france"],
       a: "From <b>September to December 2025</b>, he was a Data Analyst Intern at <b>OSLO</b> (IT &amp; SaaS solutions). He built data models and dashboards for 4 business units; his revenue recognition model cut annual revenue discrepancies from <b>€350k to €8k</b>.<br><a href=\"experience-oslo.html\">More about OSLO →</a>" },
     { chip: "Which tools does he use?", keys: ["tool", "skill", "python", "sql", "excel", "vba", "stack", "technical", "software", "bigquery", "looker", "gemini", "program", "code", "coding"],
-      a: "<b>Python, SQL / BigQuery, Looker, Apps Script, Excel (VBA)</b>, MyReport for data modeling and dashboards, and AI tools such as <b>Vertex AI (Gemini)</b>.<br><a href=\"projects.html\">See them in his projects →</a>" },
+      // Same tools as the Home toolbox (user, 7 Nov 2026: no Python)
+      a: "To prepare data: <b>SQL / BigQuery, Excel (VBA), Google Sheets (Apps Script)</b>. To analyse and show it: <b>Power BI, Looker, MyReport</b>. To automate with AI: <b>LLMs (Gemini, Claude), AI agents (OpenCode)</b> and prompt engineering.<br><a href=\"projects.html\">See them in his projects →</a>" },
     { chip: "Show me his projects", keys: ["project", "built", "build", "dashboard", "app", "automation", "model", "achievement", "result"],
       a: "Rémi delivered <b>7 projects</b> during his internships: apps and tools, automations with AI, dashboards and reporting, and data models. For example, a forecast accuracy web app at Glovo and a VAT automation at OSLO.<br><a href=\"projects.html\">See all projects →</a>" },
     { chip: "Which languages does he speak?", keys: ["language", "english", "french", "spanish", "speak", "toeic", "anglais"],
