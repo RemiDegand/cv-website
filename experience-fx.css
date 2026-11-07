@@ -118,7 +118,7 @@
 
 /* "Want to see more?" redesigned (7 Nov 2026, user: improve its design). Overrides the base rules at the end of style.css.
    Bigger title with "more?" in the chapter-number gradient, a soft glow behind, a round gradient button with 2 rings pulsing
-   out and the arrow nudging down. Scrolling down stops here once (experience-fx.js); .is-here = short "you arrived" pop. */
+   out and the arrow nudging down. (A scroll stop on it was tried the same day and removed, user: "more a bad thing than a good one"; don't redo.) */
 .xp-more { position: relative; isolation: isolate; gap: 22px; margin-top: 120px; padding: 44px 64px; }
 .xp-more::before { content: ""; position: absolute; inset: -24px -96px; z-index: -1; border-radius: 50%; pointer-events: none;
   background: radial-gradient(closest-side, rgba(109, 93, 252, 0.11), rgba(37, 99, 235, 0.05) 55%, transparent); }
@@ -133,11 +133,9 @@
 .xp-more:is(:hover, :focus-visible) .xp-more-arrow { background: linear-gradient(135deg, var(--accent), #6d5dfc); transform: translateY(4px) scale(1.06); box-shadow: 0 16px 34px rgba(79, 70, 229, 0.42); }
 .xp-more:focus-visible { outline: none; }
 .xp-more:focus-visible .xp-more-arrow { outline: 3px solid color-mix(in srgb, var(--accent) 35%, transparent); outline-offset: 4px; }
-.xp-more.is-here .xp-more-arrow { animation: xp-more-pop 0.6s cubic-bezier(0.2, 1.4, 0.4, 1); }
 .xp-more + .xp-chapter { margin-top: 120px; }
 @keyframes xp-more-nudge { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(4px); } }
 @keyframes xp-more-ring { from { transform: scale(1); opacity: 0.7; } to { transform: scale(1.9); opacity: 0; } }
-@keyframes xp-more-pop { 0% { transform: scale(1); } 40% { transform: scale(1.14); } 100% { transform: scale(1); } }
 @media (max-width: 720px) {
   .xp-more { margin-top: 80px; padding: 32px 24px; gap: 18px; }
   .xp-more::before { inset: -16px -24px; }
