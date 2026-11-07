@@ -97,6 +97,16 @@ ${cardList.map((c) => `                <li><div class="xp-cards">\n${c}\n       
               <p class="xp-mission">Support financial and operational decision-making across OSLO's <strong>4 business units</strong> and <strong>3 entities</strong>, with reliable data models, dashboards and automated tools.</p>
             </div>`],
       ["My tasks", `
+            <!-- How each request was handled (user, 7 Nov 2026), before the 2 tasks, so the part isn't only projects -->
+            <div class="block-part reveal">
+              <h3>From a request to a lasting solution</h3>
+              <p>Every tool below started from a request from an OSLO team.</p>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Understood the need</strong> with the employees behind the request, to define their problem clearly.</li>
+                <li><strong>Designed a solution</strong> with the tools and resources available at OSLO.</li>
+                <li><strong>Agreed on the implementation</strong> with the Director of Information Systems, so the solution would last and stay easy to maintain.</li>
+              </ul>
+            </div>
             <div class="block-part reveal">
               <h3><span class="block-label">Task 1</span>Build finance tools</h3>
               <p>Tools for the finance department: cash collection, cash flow, VAT, revenue and sales commissions.</p>
