@@ -153,15 +153,16 @@ ${cardsFor(["sales-performance-reporting"])}
     ],
     projects: [],
     figures: [["€49k", "public budget managed"], ["84+", "supplier invoices processed"], ["100%", "program execution"]],
-    tools: ["Budgeting", "Forecasting", "Cost analysis"],
+    tools: ["Google Sheets"],   // user, 7 Nov 2026
     skills: ["Budgeting", "Forecasting", "Cost analysis"],
     // Same structure as Glovo (user, 7 Nov 2026): My mission / My tasks / My impact. €49k in the context (user), so not repeated
     // in My impact; the 4 mission points are the user's (pay invoices, receipts, clean handover, next year's budget).
     parts: () => [
       ["My mission", `
             <div class="block-part reveal">
-              <p class="xp-mission"><strong>Pay and track</strong> the association's expenses in good order, <strong>assess the budget</strong> for the next year and ensure a <strong>clean handover</strong> to the next treasurer.</p>
+              <!-- Context first, then the mission sentence (user, 7 Nov 2026) -->
               <p>Envie d'Sup is a public-interest association supported by the French government, with a public budget of <strong>€49k</strong>. It runs workshops, cultural outings and trips for <strong>229 middle and high school students</strong> from priority education zones.</p>
+              <p class="xp-mission"><strong>Pay and track</strong> the association's expenses in good order, <strong>assess the budget</strong> for the next year and ensure a <strong>clean handover</strong> to the next treasurer.</p>
             </div>`],
       ["My tasks", `
             <div class="block-part reveal">
@@ -179,8 +180,9 @@ ${cardsFor(["sales-performance-reporting"])}
               </ul>
             </div>
             <div class="block-part reveal">
-              <h3>Skills</h3>
-              <ul class="tags reveal-stagger">SKILLS</ul>
+              <h3>Tools &amp; skills</h3>
+              <div class="xp-tagrow"><span class="chip-label">Tools</span><ul class="tags reveal-stagger">TOOLS</ul></div>
+              <div class="xp-tagrow"><span class="chip-label">Skills</span><ul class="tags reveal-stagger">SKILLS</ul></div>
             </div>`],
     ],
   },

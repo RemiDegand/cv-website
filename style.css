@@ -1721,7 +1721,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .xp-map-key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #dfe4ec; }
 .xp-map-key.is-mine { background: #fed42a; border: 1px solid #d9a800; }
 .xp-map-key:not(:first-child) { margin-left: 12px; }
-.xp-page .xp-mission + p { margin-top: 12px; }
+.xp-page .xp-mission + p, .xp-page p + .xp-mission { margin-top: 12px; }   /* mission after the context (Treasurer, 7 Nov) */
 /* Experience pages: the project cards of the Projects page, smaller, one below the other (user, 3 Nov) */
 .xp-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 10px; }
 .xp-cards .card.project { padding: 16px 18px; }
