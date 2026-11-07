@@ -226,8 +226,13 @@ ${cards(["sales-performance-reporting"])}
     // only the Skills row.
     parts: () => [
       ["My mission", `
+            <!-- 2 sub-parts with small headings, like Context / The problem on the project pages (user, 7 Nov 2026) -->
             <div class="block-part reveal">
+              <h3>Context</h3>
               <p>Pain de Minuit is a start-up that brews beer from unsold bread and distributes it across France.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Mission</h3>
               <p class="xp-mission"><strong>Win new clients</strong> among independent retailers, mainly bakeries, and <strong>run the logistics</strong> from order to shipment.</p>
             </div>`],
       ["My tasks", `
