@@ -386,17 +386,21 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
   <main>
     <section id="experience-page" class="project-page xp-page xp-${x.id}" style="--brand: ${x.brand}">
       <div class="container project-page-inner">
-        <a href="experience.html" class="back-link">← All experience</a>
+        <!-- First screen: the header alone, then a scroll cue (Web Designer, 7 Nov 2026) -->
+        <div class="page-intro">
+          <a href="experience.html" class="back-link">← All experience</a>
 
-        <header class="project-page-head">
-          <p class="project-org"><img src="${x.logo}" alt="${esc(x.company)} logo" class="project-logo" width="24" height="24">${esc(x.company)} · ${esc(x.industry)}<a href="${x.site}" class="org-link" target="_blank" rel="noopener" aria-label="${esc(x.company)} website (opens in a new tab)" title="${esc(x.company)} website">↗</a></p>
-          <h1 class="project-page-title">${esc(x.title)}</h1>
-          <!-- No text under the title (user, 7 Nov 2026): My mission says it. The "lead" lines above are kept in the data but not shown -->
-        </header>
+          <header class="project-page-head">
+            <p class="project-org"><img src="${x.logo}" alt="${esc(x.company)} logo" class="project-logo" width="24" height="24">${esc(x.company)} · ${esc(x.industry)}<a href="${x.site}" class="org-link" target="_blank" rel="noopener" aria-label="${esc(x.company)} website (opens in a new tab)" title="${esc(x.company)} website">↗</a></p>
+            <h1 class="project-page-title">${esc(x.title)}</h1>
+            <!-- No text under the title (user, 7 Nov 2026): My mission says it. The "lead" lines above are kept in the data but not shown -->
+          </header>
 
-        <dl class="project-facts">
-${x.facts.map(([k, v]) => `          <div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("\n")}
-        </dl>
+          <dl class="project-facts">
+${x.facts.map(([k, v]) => `            <div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("\n")}
+          </dl>
+          <a href="#block-1" class="page-scroll"><span class="page-scroll-mouse" aria-hidden="true"></span>Scroll to explore</a>
+        </div>
 
         <nav class="block-nav" aria-label="Parts of this experience">
 ${parts.map(([t], k) => `          <a href="#block-${k + 1}"><span class="block-nav-num">${k + 1}</span><span class="block-nav-text">${t}</span></a>`).join("\n")}

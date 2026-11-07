@@ -66,8 +66,22 @@
 #project .project-facts > div:nth-child(3) { --ico: var(--ico-where); }
 #project .project-facts > div:nth-child(4) { --ico: var(--ico-scope); }
 
-/* more air before the parts bar */
-.project-page .block-nav { margin-top: 88px; }
+/* First screen = the header alone (7 Nov 2026, user: "you see only the top… indicate that you have to scroll"): the intro fills the
+   screen under the menu, back link at the top, header + facts centred in the space left, scroll cue at the bottom (like Home).
+   The parts bar and part 1 start below the fold. */
+.project-page .page-intro { display: flex; flex-direction: column; align-items: flex-start; min-height: calc(100vh - var(--menu-height) - 56px); min-height: calc(100svh - var(--menu-height) - 56px); }
+.project-page .page-intro > .back-link { margin-bottom: 40px; }
+.project-page .page-intro > .project-page-head { margin-top: auto; }
+.project-page .page-intro > :is(.project-page-head, .project-facts) { align-self: stretch; }
+.project-page .page-scroll { align-self: center; display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: auto; padding: 48px 0 28px; color: var(--text-muted); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; animation: xp-head-rise 0.8s 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.project-page .page-scroll:hover { color: var(--text); }
+.project-page .page-scroll-mouse { position: relative; width: 22px; height: 34px; border: 2px solid currentColor; border-radius: 12px; }
+.project-page .page-scroll-mouse::after { content: ""; position: absolute; top: 6px; left: 50%; width: 4px; height: 7px; margin-left: -2px; border-radius: 2px; background: var(--brand); animation: page-wheel 1.6s ease-in-out infinite; }
+@keyframes page-wheel { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(10px); } }
+.project-page::before { height: min(100vh, 900px); }
+
+/* the parts bar starts right under the first screen */
+.project-page .block-nav { margin-top: 24px; }
 
 /* entrance, top to bottom, once (the blocks keep their own scroll reveal) */
 @keyframes xp-head-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -95,9 +109,25 @@
   .project-page .project-facts dd { white-space: normal; }
   .project-page .project-facts > div::before { width: 36px; height: 36px; }
   .project-page .block-nav { margin-top: 56px; }
+  /* phones: same first screen (a longer project header just runs past it, the cue then sits under the facts) */
+  .project-page .page-intro { min-height: calc(100vh - var(--menu-height) - 32px); min-height: calc(100svh - var(--menu-height) - 32px); }
+  .project-page .page-intro > .back-link { margin-bottom: 28px; }
+  .project-page .page-scroll { padding: 32px 0 20px; }
+}
+@media (max-height: 640px) { .project-page .page-scroll { display: none; } }
+/* laptops (~800px high): tighter spacing so a 2-line title, the result and 4 fact cards still fit with the cue */
+@media (min-width: 721px) and (max-height: 880px) {
+  .project-page { padding-top: 32px; }
+  .project-page .page-intro { min-height: calc(100vh - var(--menu-height) - 32px); min-height: calc(100svh - var(--menu-height) - 32px); }
+  .project-page .page-intro > .back-link { margin-bottom: 20px; }
+  .project-page .project-page-head .project-org { margin-bottom: 20px; }
+  .project-page .project-page-title::after { margin-top: 20px; }
+  .project-page .project-page-head .project-result { margin-top: 22px; }
+  .project-page .project-facts { margin-top: 28px; }
+  .project-page .page-scroll { padding: 28px 0 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .project-page :is(.back-link, .project-page-head .project-org, .project-page-title, .project-page-head .project-result, .project-facts > div), .project-page .project-page-title::after { animation: none; }
+  .project-page :is(.back-link, .project-page-head .project-org, .project-page-title, .project-page-head .project-result, .project-facts > div, .page-scroll), .project-page .project-page-title::after, .project-page .page-scroll-mouse::after { animation: none; }
   .project-page :is(.back-link, .project-facts > div) { transition: none; }
   .project-page :is(.back-link, .project-facts > div):hover { transform: none; }
 }
