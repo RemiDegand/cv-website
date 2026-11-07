@@ -91,7 +91,7 @@ ${cardList.map((c) => `                <li><div class="xp-cards">\n${c}\n       
     skills: ["Data modeling", "Financial analysis", "Management reporting", "Process automation", "Data quality"],
     // Same structure as Glovo (user, 7 Nov 2026): My mission / My tasks / My impact. No Content.docx yet: facts from the OSLO
     // summary in docs/CV website.md (its 2 groups "Financial tools & operations" / "Performance management & data" = the 2 tasks).
-    parts: (projectCards, cardList, cardsFor) => [
+    parts: (projectCards, cardList, cardsFor, cards) => [
       ["My mission", `
             <div class="block-part reveal">
               <p class="xp-mission">Support financial and operational decision-making across OSLO's <strong>4 business units</strong> and <strong>3 entities</strong>, with reliable data models, dashboards and automated tools.</p>
@@ -107,23 +107,35 @@ ${cardList.map((c) => `                <li><div class="xp-cards">\n${c}\n       
                 <li><strong>Agreed on the implementation</strong> with the Director of Information Systems, so the solution would last and stay easy to maintain.</li>
               </ul>
             </div>
-            <div class="block-part reveal">
-              <h3><span class="block-label">Task 1</span>Build finance tools</h3>
-              <p>Tools for the finance department: cash collection, cash flow, VAT, revenue and sales commissions.</p>
-              <ul class="project-did xp-card-list reveal-stagger">
-${cardsFor(["aged-receivables", "cash-flow-tools", "revenue-recognition", "vat-automation"])}
-                <li><strong>Sales commissions:</strong> an automated calculation tool for 2 business units, about €3M of revenue each.</li>
-              </ul>
-            </div>
-            <div class="block-part reveal">
-              <h3><span class="block-label">Task 2</span>Report on business performance</h3>
-              <p>Reporting for management and the sales teams, on revenue, margins, volumes and new business.</p>
-              <ul class="project-did xp-card-list reveal-stagger">
-${cardsFor(["sales-performance-reporting"])}
-                <li><strong>Multi-business-unit dashboards</strong> (€3–4M of revenue): year-over-year analysis (N / N-1 / N-2), recurring vs. non-recurring revenue and active contracts.</li>
-                <li><strong>Regular data extractions</strong> on business activity, such as churn.</li>
-              </ul>
-            </div>`],
+            <!-- The projects by business area, Finance / Operations (user, 7 Nov 2026; same areas as the Projects page filters).
+                 One panel per area: icon, name, one line, the cards one under the other, then the tools not on the site as dashed tiles. -->
+            <section class="xp-area reveal" aria-labelledby="area-finance">
+              <header class="xp-area-head">
+                <span class="xp-area-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.6a4 4 0 1 0 0 6.8M7.5 10.6h6M7.5 13.4h6"/></svg></span>
+                <h3 id="area-finance">Finance</h3>
+                <p>For the finance department: cash collection, cash flow, revenue and VAT.</p>
+              </header>
+              <div class="xp-cards reveal-stagger">
+${cards(["aged-receivables", "cash-flow-tools", "revenue-recognition", "vat-automation"])}
+              </div>
+              <div class="xp-extras">
+                <p class="xp-extra"><strong>Sales commission tool</strong>Automated calculation for 2 business units, about €3M of revenue each.</p>
+              </div>
+            </section>
+            <section class="xp-area reveal" aria-labelledby="area-operations">
+              <header class="xp-area-head">
+                <span class="xp-area-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+                <h3 id="area-operations">Operations</h3>
+                <p>For management and the sales teams: production, sales and business performance.</p>
+              </header>
+              <div class="xp-cards reveal-stagger">
+${cards(["sales-performance-reporting"])}
+              </div>
+              <div class="xp-extras">
+                <p class="xp-extra"><strong>Multi-business-unit dashboards</strong>€3–4M of revenue each: N / N-1 / N-2, recurring vs. non-recurring revenue, active contracts.</p>
+                <p class="xp-extra"><strong>Regular data extractions</strong>On business activity, such as churn.</p>
+              </div>
+            </section>`],
       ["My impact", `
             <div class="block-part reveal">
               <ul class="xp-figures reveal-stagger">
@@ -167,9 +179,9 @@ ${cardsFor(["sales-performance-reporting"])}
       ["My tasks", `
             <div class="block-part reveal">
               <ul class="project-did reveal-stagger">
-                <li><strong>Built and monitored budget forecasts</strong> to stay within each allocated budget.</li>
+                <li><strong>Built and monitored budget forecasts</strong> in a Google Sheets tracker of spending by class, compared with last year's spending, to know how much could still be spent within each allocated budget.</li>
                 <li><strong>Kept a receipt for every expense</strong> and <strong>closed the accounts</strong> in good order at the end of the year.</li>
-                <li><strong>Built a Google Sheets tracker</strong> of spending by class and activity type (workshops, cultural outings, trips), compared with last year's spending, to know the resources needed for each student and prepare the next year's grant applications.</li>
+                <li><strong>Analysed costs</strong> by class and activity type (workshops, cultural outings, trips), to know the resources needed for each student and prepare the next year's grant applications.</li>
               </ul>
             </div>`],
       ["My impact", `
@@ -240,6 +252,12 @@ experiences.forEach((x, i) => {
     if (k < 0) throw new Error(`${id} is not in the projects of ${x.id}`);
     return `                <li><div class="xp-cards">\n${cardList[k]}\n                </div></li>`;
   }).join("\n");
+  // Some of this experience's cards as they are, in the order given (OSLO's Finance / Operations panels)
+  const cards = (ids) => ids.map((id) => {
+    const k = x.projects.indexOf(id);
+    if (k < 0) throw new Error(`${id} is not in the projects of ${x.id}`);
+    return cardList[k];
+  }).join("\n");
   const defaultParts = () => [["The role &amp; my mission", `
             <div class="block-part reveal">
               <h3>Context</h3>
@@ -273,7 +291,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
                 ${x.tools.map((t) => `<li>${esc(t)}</li>`).join("")}
               </ul>
             </div>`]];
-  const parts = (x.parts ? x.parts(projectCards, cardList, cardsFor) : defaultParts()).map(([t, b]) => [t, b.replace("TOOLS", x.tools.map((t) => `<li>${esc(t)}</li>`).join("")).replace("SKILLS", (x.skills || []).map((t) => `<li>${esc(t)}</li>`).join(""))]);
+  const parts = (x.parts ? x.parts(projectCards, cardList, cardsFor, cards) : defaultParts()).map(([t, b]) => [t, b.replace("TOOLS", x.tools.map((t) => `<li>${esc(t)}</li>`).join("")).replace("SKILLS", (x.skills || []).map((t) => `<li>${esc(t)}</li>`).join(""))]);
   total = parts.length;
   const html = `<!DOCTYPE html>
 <html lang="en">
