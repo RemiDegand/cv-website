@@ -87,6 +87,47 @@ ${cardList.map((c) => `                <li><div class="xp-cards">\n${c}\n       
     projects: ["revenue-recognition", "vat-automation", "cash-flow-tools", "aged-receivables", "sales-performance-reporting"],
     figures: [["13", "data models"], ["6", "dashboards · 6 automated Excel tools"], ["€350k → €8k", "annual revenue discrepancies"]],
     tools: ["Excel (Advanced, VBA)", "MyReport Data (ETL, Data modeling)", "MyReport Page (Data visualization)", "SQL"],
+    // Suggested by Claude from the OSLO summary and the project pages (7 Nov 2026), to confirm with the user
+    skills: ["Data modeling", "Financial analysis", "Management reporting", "Process automation", "Data quality"],
+    // Same structure as Glovo (user, 7 Nov 2026): My mission / My tasks / My impact. No Content.docx yet: facts from the OSLO
+    // summary in docs/CV website.md (its 2 groups "Financial tools & operations" / "Performance management & data" = the 2 tasks).
+    parts: (projectCards, cardList, cardsFor) => [
+      ["My mission", `
+            <div class="block-part reveal">
+              <p class="xp-mission">Support financial and operational decision-making across OSLO's <strong>4 business units</strong> and <strong>3 entities</strong>, with reliable data models, dashboards and automated tools.</p>
+            </div>`],
+      ["My tasks", `
+            <div class="block-part reveal">
+              <h3><span class="block-label">Task 1</span>Build finance tools</h3>
+              <p>Tools for the finance department: cash collection, cash flow, VAT, revenue and sales commissions.</p>
+              <ul class="project-did xp-card-list reveal-stagger">
+${cardsFor(["aged-receivables", "cash-flow-tools", "revenue-recognition", "vat-automation"])}
+                <li><strong>Sales commissions:</strong> an automated calculation tool for 2 business units, about €3M of revenue each.</li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3><span class="block-label">Task 2</span>Report on business performance</h3>
+              <p>Reporting for management and the sales teams, on revenue, margins, volumes and new business.</p>
+              <ul class="project-did xp-card-list reveal-stagger">
+${cardsFor(["sales-performance-reporting"])}
+                <li><strong>Multi-business-unit dashboards</strong> (€3–4M of revenue): year-over-year analysis (N / N-1 / N-2), recurring vs. non-recurring revenue and active contracts.</li>
+                <li><strong>Regular data extractions</strong> on business activity, such as churn.</li>
+              </ul>
+            </div>`],
+      ["My impact", `
+            <div class="block-part reveal">
+              <ul class="xp-figures reveal-stagger">
+                <li><strong>€350k → €8k</strong><span>annual revenue discrepancies, with the new revenue recognition model</span></li>
+                <li><strong>13 data models</strong><span>behind the dashboards and tools</span></li>
+                <li><strong>6 dashboards</strong><span>and 6 automated Excel tools, for 4 business units and 3 entities</span></li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>Tools &amp; skills</h3>
+              <div class="xp-tagrow"><span class="chip-label">Tools</span><ul class="tags reveal-stagger">TOOLS</ul></div>
+              <div class="xp-tagrow"><span class="chip-label">Skills</span><ul class="tags reveal-stagger">SKILLS</ul></div>
+            </div>`],
+    ],
   },
   {
     id: "treasurer", brand: "#E1311D", logo: "logos/envie-dsup.png", company: "Envie d'Sup", industry: "State-Supported NPO", site: "https://www.cordeesdelareussite.fr/",
@@ -152,6 +193,12 @@ experiences.forEach((x, i) => {
     ].filter((l) => l !== null).map((l) => "                " + l).join("\n");
   });
   const projectCards = cardList.join("\n");
+  // Some of this experience's cards as list items with a bullet (.xp-card-list), in the order given
+  const cardsFor = (ids) => ids.map((id) => {
+    const k = x.projects.indexOf(id);
+    if (k < 0) throw new Error(`${id} is not in the projects of ${x.id}`);
+    return `                <li><div class="xp-cards">\n${cardList[k]}\n                </div></li>`;
+  }).join("\n");
   const defaultParts = () => [["The role &amp; my mission", `
             <div class="block-part reveal">
               <h3>Context</h3>
@@ -185,7 +232,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
                 ${x.tools.map((t) => `<li>${esc(t)}</li>`).join("")}
               </ul>
             </div>`]];
-  const parts = (x.parts ? x.parts(projectCards, cardList) : defaultParts()).map(([t, b]) => [t, b.replace("TOOLS", x.tools.map((t) => `<li>${esc(t)}</li>`).join("")).replace("SKILLS", (x.skills || []).map((t) => `<li>${esc(t)}</li>`).join(""))]);
+  const parts = (x.parts ? x.parts(projectCards, cardList, cardsFor) : defaultParts()).map(([t, b]) => [t, b.replace("TOOLS", x.tools.map((t) => `<li>${esc(t)}</li>`).join("")).replace("SKILLS", (x.skills || []).map((t) => `<li>${esc(t)}</li>`).join(""))]);
   total = parts.length;
   const html = `<!DOCTYPE html>
 <html lang="en">

@@ -71,3 +71,7 @@
 .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"]))::before { height: 80px; }
 .xp-page .xp-card-list > li:has(.xp-cards) { position: relative; list-style: none; }
 .xp-page .xp-card-list > li:has(.xp-cards)::before { content: "•"; position: absolute; left: -15px; top: 98px; color: var(--text); }   /* level with the card title (cover 80px + 16px) */
+/* OSLO page (7 Nov 2026, user: same structure as Glovo): its cards have no cover, only the 4px bar, so the list cards
+   are full width too and the bullet sits higher, level with the title (bar 4px + 18px) */
+.xp-page .xp-card-list .xp-cards { grid-template-columns: minmax(0, 1fr); }
+.xp-page .xp-card-list > li:has(.xp-cards):not(:has(:is(a[href="project-forecasting-web-app.html"], a[href="project-ai-forecast-adjustments.html"])))::before { top: 22px; }
