@@ -29,7 +29,7 @@ const experiences = [
     tools: ["LLMs (Gemini, Claude)", "AI agents (OpenCode)", "BigQuery (SQL)", "Looker", "Google Sheets (Apps Script)"],
     skills: ["Demand forecasting", "Descriptive & diagnostic analysis", "Stakeholder management", "Process automation", "Prompt engineering"],
     // Structure asked by the user (3 Nov 2026): My mission / My tasks / My impact. Source: Experiences/Glovo/Content.docx (kept on my PC only).
-    parts: (projectCards) => [
+    parts: (projectCards, cardList) => [
       ["My mission", `
             <div class="block-part reveal">
               <p class="xp-mission">Support the forecasting of <strong>rider demand</strong> for one of Glovo's 3 markets, and find ways to make processes more efficient, dashboards more insightful and forecasts more accurate.</p>
@@ -52,10 +52,9 @@ const experiences = [
             <div class="block-part reveal">
               <h3><span class="block-label">Task 2</span>Design tools, every Friday</h3>
               <p>Every Friday, designed tools to make processes more efficient, dashboards more insightful and forecasts more accurate.</p>
-              <div class="xp-cards reveal-stagger">
-${projectCards}
-              </div>
-              <ul class="project-did reveal-stagger">
+              <!-- Cards and the Poland line in one list, with a dash before each (user, 7 Nov 2026) -->
+              <ul class="project-did xp-card-list reveal-stagger">
+${cardList.map((c) => `                <li><div class="xp-cards">\n${c}\n                </div></li>`).join("\n")}
                 <li><strong>Poland:</strong> a Google Sheets Apps Script process to improve the forecast adjustments of small cities, run by the local team.</li>              </ul>
             </div>`],
       ["My impact", `
@@ -136,7 +135,7 @@ const block = (n, title, body) => `
 
 experiences.forEach((x, i) => {
   const prev = experiences[i - 1], next = experiences[i + 1];
-  const projectCards = x.projects.map((id) => {
+  const cardList = x.projects.map((id) => {
     const p = byId[id];
     if (!p) throw new Error(`Unknown project ${id}`);
     if (!fs.existsSync(path.join(root, `project-${id}.html`))) throw new Error(`Missing project-${id}.html`);
@@ -151,7 +150,8 @@ experiences.forEach((x, i) => {
       `  <ul class="tags">`, `    ${p.tags.map((t) => `<li>${e(t)}</li>`).join("")}`, `  </ul>`,
       `</article>`,
     ].filter((l) => l !== null).map((l) => "                " + l).join("\n");
-  }).join("\n");
+  });
+  const projectCards = cardList.join("\n");
   const defaultParts = () => [["The role &amp; my mission", `
             <div class="block-part reveal">
               <h3>Context</h3>
@@ -185,7 +185,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
                 ${x.tools.map((t) => `<li>${esc(t)}</li>`).join("")}
               </ul>
             </div>`]];
-  const parts = (x.parts ? x.parts(projectCards) : defaultParts()).map(([t, b]) => [t, b.replace("TOOLS", x.tools.map((t) => `<li>${esc(t)}</li>`).join("")).replace("SKILLS", (x.skills || []).map((t) => `<li>${esc(t)}</li>`).join(""))]);
+  const parts = (x.parts ? x.parts(projectCards, cardList) : defaultParts()).map(([t, b]) => [t, b.replace("TOOLS", x.tools.map((t) => `<li>${esc(t)}</li>`).join("")).replace("SKILLS", (x.skills || []).map((t) => `<li>${esc(t)}</li>`).join(""))]);
   total = parts.length;
   const html = `<!DOCTYPE html>
 <html lang="en">

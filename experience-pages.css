@@ -65,3 +65,10 @@
    the other pages keep 2 cards side by side. */
 .xp-page .xp-cards:has(.card.project :is(a[href="project-forecasting-web-app.html"], a[href="project-ai-forecast-adjustments.html"])) { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"])) .project-result { align-self: flex-start; }
+/* Glovo page (7 Nov 2026, user): the 2 cards and the Poland line in one list with a dash before each, and a smaller picture */
+.xp-page .xp-card-list { list-style-type: "–  "; gap: 14px; }
+.xp-page .xp-card-list > li::marker { color: var(--text-muted); font-weight: 600; }
+.xp-page .xp-card-list .xp-cards { margin-top: 0; }
+.xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"]))::before { height: 80px; }
+.xp-page .xp-card-list > li:has(.xp-cards) { position: relative; list-style: none; }
+.xp-page .xp-card-list > li:has(.xp-cards)::before { content: "–"; position: absolute; left: -17px; top: 98px; color: var(--text-muted); font-weight: 600; }   /* level with the card title (cover 80px + 16px) */
