@@ -94,3 +94,53 @@
   .xp-page .xp-area-icon { width: 44px; height: 44px; border-radius: 13px; }
 }
 @media (prefers-reduced-motion: reduce) { .xp-page .xp-area-icon { transition: none; } .xp-page .xp-area:hover .xp-area-icon { transform: none; } }
+
+/* =====================================================================
+   PROJECT CARDS redesigned (7 Nov 2026, user: "I don't like the project card aesthetic"), tried on the Glovo page first, then on all experience pages and the Projects page (projects-fx.css) the same day
+   (#experience-page: the id beats the earlier :has() rules above). No picture any more (user, same day: "remove the
+   design on the top"), a 5px bar in the company colour on top like the Projects page cards, a round ↗ button top right, always visible, bigger title, softer text,
+   the result with a trend icon like the page header, quieter tags under a thin line; hover: lift + glow in the company colour.
+   ===================================================================== */
+#experience-page .xp-cards .card.project { padding: 22px 24px 20px; border: 1px solid var(--border); border-radius: 20px; background: #fff;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.05); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease; }
+#experience-page .xp-cards .card.project::before { content: ""; display: block; height: 5px; margin: -22px -24px 20px; background: var(--brand); }   /* a bar in the company colour on top, like the Projects page cards (user, same day) */
+/* the round ↗ button, top right, always visible */
+#experience-page .xp-cards .card.project::after { content: ""; top: 22px; right: 18px; width: 36px; height: 36px; padding: 0; border-radius: 50%; opacity: 1; transform: none;
+  background: var(--bg-soft) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1f2b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17L17 7M9 7h8v8'/></svg>") no-repeat center / 16px 16px;
+  box-shadow: inset 0 0 0 1px var(--border); transition: transform 0.35s cubic-bezier(0.2, 1.4, 0.4, 1), background-color 0.3s ease; }
+#experience-page .xp-cards .card.project:is(:hover, :has(.project-link:focus-visible))::after { transform: rotate(45deg) scale(1.08); background-color: var(--brand); }
+#experience-page .xp-cards .card.project:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--brand) 55%, var(--border));
+  box-shadow: 0 4px 10px rgba(16, 24, 40, 0.05), 0 22px 44px color-mix(in srgb, var(--brand) 26%, transparent); }
+/* text */
+#experience-page .xp-cards h4 { margin: 0 0 8px; padding-right: 48px; font-size: 1.2rem; line-height: 1.3; letter-spacing: -0.01em; }
+#experience-page .xp-cards .card.project:hover h4 a { color: var(--text); }
+#experience-page .xp-cards .card-desc { margin: 0; color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+/* result: trend icon + key figure in blue, no box */
+#experience-page .xp-cards .project-result { display: flex; align-items: center; gap: 4px 8px; margin: 16px 0 0; padding: 0; background: none; font-size: 0.9rem; color: var(--text); }
+#experience-page .xp-cards .project-result::before { content: ""; flex: none; width: 30px; height: 30px; margin-right: 4px; border-radius: 9px;
+  background: var(--accent-soft) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 17l6-6 4 4 8-8M15 7h6v6'/></svg>") no-repeat center / 16px 16px; }
+#experience-page .xp-cards .project-result strong { color: var(--accent); font-size: 1.02rem; }
+/* tags: quieter, under a thin line */
+#experience-page .xp-cards .tags { gap: 6px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+#experience-page .xp-cards .tags li { padding: 3px 10px; border: 0; border-radius: 8px; background: var(--bg-soft); color: var(--text-muted); font-size: 0.76rem; font-weight: 500; }
+/* the round bullet of the list stays level with the card title */
+#experience-page .xp-card-list > li:has(.xp-cards)::before { top: 30px; }
+@media (max-width: 720px) {
+  #experience-page .xp-cards .card.project { padding: 18px 18px 18px; }
+  #experience-page .xp-cards .card.project::after { top: 14px; right: 14px; }
+  #experience-page .xp-cards .card.project::before { margin: -18px -18px 16px; }
+  #experience-page .xp-card-list > li:has(.xp-cards)::before { top: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #experience-page .xp-cards .card.project, #experience-page .xp-cards .card.project::after { transition: none; }
+  #experience-page .xp-cards .card.project:hover, #experience-page .xp-cards .card.project:hover::after { transform: none; }
+}
+/* More white space around the project cards (7 Nov 2026, user): between the text above and the cards, and between cards */
+#experience-page .block-part > .xp-card-list { gap: 24px; margin-top: 28px; }
+#experience-page .xp-cards { gap: 24px; }
+#experience-page .block-part > .xp-cards, #experience-page .block-part > p + .xp-cards { margin-top: 28px; }
+#experience-page .xp-area-head { margin-bottom: 28px; }
+#experience-page .xp-area .xp-extras { margin-top: 24px; }
+/* result: a long sentence wraps next to the icon, not under it */
+#experience-page .xp-cards .project-result { display: block; position: relative; min-height: 30px; padding: 5px 0 0 42px; line-height: 1.45; }
+#experience-page .xp-cards .project-result::before { position: absolute; left: 0; top: 50%; margin: -15px 0 0; }

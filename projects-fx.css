@@ -74,3 +74,29 @@
   .pfx .card.project, .proj-go, .proj-nav, .proj-nav-bar, .pfx .card.project .project-logo { transition: none; }
   .pfx #projects .card.project:hover, .card.project:hover .proj-go, .pfx .card.project:hover .project-logo { transform: none; }
 }
+
+/* --- Cards, same look as the project cards of the experience pages (7 Nov 2026, user: "apply it to all cards including in
+   projects"): rounder, soft shadow, a 5px bar in the company colour on top (drawn as a background so the rounded corners
+   clip it), bigger title, softer text, the result with a trend icon instead of the blue box, quieter tags under a thin line.
+   The company line, the tilt, the light and the ↗ button (.proj-go) stay. --- */
+#projects .card.project { padding: 27px 24px 20px; border: 1px solid var(--border); border-radius: 20px;
+  background: linear-gradient(var(--brand, var(--accent)), var(--brand, var(--accent))) top / 100% 5px no-repeat, #fff;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.05); }
+.pfx #projects .card.project:hover { border-color: color-mix(in srgb, var(--brand, var(--accent)) 55%, var(--border)); box-shadow: 0 4px 10px rgba(16, 24, 40, 0.05), 0 22px 44px color-mix(in srgb, var(--brand, var(--accent)) 24%, transparent); }
+#projects .card.project .proj-go { top: 22px; box-shadow: inset 0 0 0 1px var(--border); }
+#projects .card.project h4 { margin: 4px 0 8px; padding-right: 8px; font-size: 1.2rem; line-height: 1.3; letter-spacing: -0.01em; }
+#projects .card.project:hover h4 { color: var(--text); }
+#projects .card.project .card-desc { margin: 0; color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+#projects .card.project .project-result { display: flex; align-items: center; gap: 4px 8px; margin: 16px 0 0; padding: 0; background: none; font-size: 0.9rem; color: var(--text); }
+.pfx #projects .card.project:hover .project-result { background: none; }
+#projects .card.project .project-result::before { content: ""; flex: none; width: 30px; height: 30px; margin-right: 4px; border-radius: 9px;
+  background: var(--accent-soft) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 17l6-6 4 4 8-8M15 7h6v6'/></svg>") no-repeat center / 16px 16px; }
+#projects .card.project .project-result strong { color: var(--accent); font-size: 1.02rem; }
+#projects .card.project .tags { gap: 6px; margin-top: auto; padding-top: 0; }
+#projects .card.project .tags::before { content: ""; flex: 0 0 100%; height: 1px; margin: 18px 0 10px; background: var(--border); }
+#projects .card.project .tags li { padding: 3px 10px; border: 0; border-radius: 8px; background: var(--bg-soft); color: var(--text-muted); font-size: 0.76rem; font-weight: 500; }
+#projects .cat-grid { gap: 24px; }
+@media (max-width: 720px) { #projects .card.project { padding: 23px 18px 18px; } }
+/* result: a long sentence wraps next to the icon, not under it */
+#projects .card.project .project-result { display: block; position: relative; min-height: 30px; padding: 5px 0 0 42px; line-height: 1.45; }
+#projects .card.project .project-result::before { position: absolute; left: 0; top: 50%; margin: -15px 0 0; }
