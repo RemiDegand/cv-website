@@ -15,8 +15,6 @@
 @keyframes xfx-ring { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand, var(--accent)) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 14px color-mix(in srgb, var(--brand, var(--accent)) 0%, transparent); } }
 @keyframes xfx-bob { 50% { transform: translateY(-5px); } }
 
-/* --- Page title --- */
-.xfx #experience .page-title { animation: xfx-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
 .xfx #experience > .container > .group-title:first-of-type { animation: xfx-up 0.7s 0.12s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
 
 /* --- The line: a coloured copy over the grey line, cut at the scroll position (--p, set by JS) --- */
@@ -80,13 +78,14 @@
    chapter. Hands-on is a compact timeline (smaller logos and cards). The static look (no .xfx)
    works without JavaScript; the entrance is added by experience-fx.js.
    ===================================================================== */
-.xp-chapter { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 4px 20px; margin: 120px 0 48px; padding-top: 40px; border-top: 1px solid var(--border); }
+.xp-chapter { position: relative; display: flex; align-items: baseline; gap: 12px; margin: 120px 0 48px; padding-top: 40px; border-top: 1px solid var(--border); }
 .xp-chapter::before { content: ""; position: absolute; top: -2px; left: 0; width: 120px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, var(--accent), #6d5dfc); transform-origin: left; }
-#key-experience { margin-top: 8px; }
-.xp-chapter-num { font-size: 3.4rem; font-weight: 700; line-height: 1; letter-spacing: -0.04em; background: linear-gradient(135deg, var(--accent), #6d5dfc); -webkit-background-clip: text; background-clip: text; color: transparent; font-variant-numeric: tabular-nums; }
+/* first chapter: no line above it, nothing above it on the page (visible title removed 7 Nov 2026, user) */
+#key-experience { margin-top: 0; padding-top: 0; border-top: 0; }
+#key-experience::before { display: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.xp-chapter-num { font-size: 1.1rem; font-weight: 700; line-height: 1; letter-spacing: 0.02em; background: linear-gradient(135deg, var(--accent), #6d5dfc); -webkit-background-clip: text; background-clip: text; color: transparent; font-variant-numeric: tabular-nums; }
 .xp-chapter-title { margin: 0; font-size: 1.6rem; line-height: 1.2; }
-.xp-chapter-sub { margin: 4px 0 0; color: var(--text-muted); font-size: 0.95rem; }
-.xp-chapter-count { padding: 4px 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--text-muted); font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
 
 /* Heart instead of a logo (charity raffle, no organisation) */
 .xp-dot-heart { display: grid; place-items: center; color: #e11d48; font-size: 1.2rem; line-height: 1; }
@@ -110,11 +109,9 @@
 .xfx .xp-chapter.in::before { transition: transform 0.9s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
 @media (max-width: 720px) {
-  .xp-chapter { grid-template-columns: auto minmax(0, 1fr); margin: 80px 0 32px; padding-top: 28px; gap: 2px 14px; }
-  .xp-chapter-num { grid-row: span 2; font-size: 2.4rem; }
+  .xp-chapter { margin: 80px 0 32px; padding-top: 28px; gap: 10px; }
+  .xp-chapter-num { font-size: 1rem; }
   .xp-chapter-title { font-size: 1.25rem; }
-  .xp-chapter-sub { font-size: 0.88rem; }
-  .xp-chapter-count { grid-column: 2; justify-self: start; margin-top: 6px; }
   .xp-compact .xp-dot { left: -46px; top: 14px; width: 26px; height: 26px; }
   .xp-compact .xp-card:has(.figures) { grid-template-columns: minmax(0, 1fr); }
 }
