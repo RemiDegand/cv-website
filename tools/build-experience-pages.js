@@ -142,7 +142,7 @@ ${cardsFor(["sales-performance-reporting"])}
   {
     id: "treasurer", brand: "#E1311D", logo: "logos/envie-dsup.png", company: "Envie d'Sup", industry: "State-Supported NPO", site: "https://www.cordeesdelareussite.fr/",
     title: "Treasurer",
-    lead: "Managed the public budget of a non-profit serving 229 students from priority education zones.",
+    lead: "Ran the finances of a state-supported non-profit in education.",   // user, 7 Nov 2026: no repeat of the context or of the Timing line
     facts: [["When", "Dec 2024 – Jun 2025"], ["Where", "Rouen, France"], ["Timing", "Master's year 1 · Alongside classes"]],
     context: "Envie d'Sup is a public-interest association supported by the French government. It runs workshops, cultural outings and trips for middle and high school students from priority education zones.",
     mission: "Ensure rigorous financial management of the association, for <strong>229 students</strong>.",
@@ -152,7 +152,7 @@ ${cardsFor(["sales-performance-reporting"])}
       "<strong>Cost analysis</strong> by class and activity type (workshops, cultural outings, trips), to know the resources needed for each student and prepare the next year's grant applications.",
     ],
     projects: [],
-    figures: [["€49k", "public budget managed"], ["84+", "supplier invoices processed"], ["100%", "program execution"]],
+    figures: [["€49k", "public budget managed"], ["84", "supplier invoices processed"], ["100%", "program execution"]],
     tools: ["Google Sheets"],   // user, 7 Nov 2026
     skills: ["Budgeting", "Forecasting", "Cost analysis"],
     // Same structure as Glovo (user, 7 Nov 2026): My mission / My tasks / My impact. €49k in the context (user), so not repeated
@@ -162,21 +162,21 @@ ${cardsFor(["sales-performance-reporting"])}
             <div class="block-part reveal">
               <!-- Context first, then the mission sentence (user, 7 Nov 2026) -->
               <p>Envie d'Sup is a public-interest association supported by the French government, with a public budget of <strong>€49k</strong>. It runs workshops, cultural outings and trips for <strong>229 middle and high school students</strong> from priority education zones.</p>
-              <p class="xp-mission"><strong>Pay and track</strong> the association's expenses in good order, <strong>assess the budget</strong> for the next year and ensure a <strong>clean handover</strong> to the next treasurer.</p>
+              <p class="xp-mission"><strong>Pay and track</strong> every expense of the association, <strong>assess the budget</strong> for the next year and ensure a <strong>clean handover</strong> to the next treasurer.</p>
             </div>`],
       ["My tasks", `
             <div class="block-part reveal">
               <ul class="project-did reveal-stagger">
-                <li><strong>Built and monitored budget forecasts</strong> to stay within the allocated envelopes.</li>
+                <li><strong>Built and monitored budget forecasts</strong> to stay within each allocated budget.</li>
                 <li><strong>Kept a receipt for every expense</strong> and <strong>closed the accounts</strong> in good order at the end of the year.</li>
-                <li><strong>Analysed costs</strong> by class and activity type (workshops, cultural outings, trips), to know the resources needed for each student and prepare the next year's grant applications.</li>
+                <li><strong>Built a Google Sheets tracker</strong> of spending by class and activity type (workshops, cultural outings, trips), compared with last year's spending, to know the resources needed for each student and prepare the next year's grant applications.</li>
               </ul>
             </div>`],
       ["My impact", `
             <div class="block-part reveal">
               <ul class="xp-figures reveal-stagger">
                 <li><strong>100%</strong><span>of the program carried out, within the budget</span></li>
-                <li><strong>84+</strong><span>supplier invoices processed</span></li>
+                <li><strong>84</strong><span>supplier invoices processed</span></li>
               </ul>
             </div>
             <div class="block-part reveal">
