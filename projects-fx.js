@@ -15,37 +15,7 @@
   tiles.forEach((tile, i) => tile.style.setProperty("--i", i));
   sections.forEach((section) => [...section.querySelectorAll(".cat-grid > .card")].forEach((card, i) => card.style.setProperty("--i", i)));
 
-  // 1. Numbers under the title, counted from the cards (stay right when projects are added)
-  const companies = new Set(cards.map((card) => (card.querySelector(".project-org")?.textContent || "").split("·")[0].trim()).filter(Boolean));
-  const stats = [
-    [cards.length, "project", "projects", ""],
-    [companies.size, "company", "companies", ""],
-    [sections.length, "category", "categories", ""],
-    [cards.filter((card) => card.dataset.ai === "true").length, "uses AI", "use AI", "stat-ai"],
-  ];
-  const list = document.createElement("ul");
-  list.className = "proj-stats";
-  list.setAttribute("aria-label", "In numbers");
-  stats.forEach(([n, one, many, cls]) => {
-    const li = document.createElement("li");
-    if (cls) li.className = cls;
-    li.innerHTML = `<strong data-count="${n}">${n}</strong>${n === 1 ? one : many}`;
-    list.append(li);
-  });
-  (page.querySelector(".projects-lead") || page.querySelector(".page-title")).after(list);
-  if (!reduce) {
-    list.querySelectorAll("[data-count]").forEach((el) => {
-      const end = Number(el.dataset.count), start = performance.now() + 300, duration = 1000;
-      el.textContent = "0";
-      const step = (now) => {
-        const t = Math.min(Math.max((now - start) / duration, 0), 1);
-        el.textContent = Math.round(end * (1 - Math.pow(1 - t, 3)));
-        if (t < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-      setTimeout(() => { el.textContent = end; }, 300 + duration + 400);   // safety net: always ends on the real number
-    });
-  }
+  // 1. (Numbers under the title removed 7 Nov 2026, user's request)
 
   // 2. Sticky category bar: same links as the overview tiles, shown once the tiles are passed
   const nav = document.createElement("nav");
