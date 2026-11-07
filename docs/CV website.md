@@ -633,6 +633,8 @@ ONLINE (each question)
 - **Tools on this PC:** no Python. Use Node.js for scripts and PowerShell `System.Drawing` for image cropping (logos).
 
 ### ▶ Next session: start here
+**New 7 Nov (Web Designer), to confirm with the user:** school years shown on the Volunteering timeline (Envie d'Sup / Cheer Up: Master's year 1; EGC: Bachelor's year 2, until year 3; raffle: Bachelor's year 2) · the dead `.xp-browse` code in `script.js` can be removed (general agent) · check the Experiences page (3 chapters, 48px gap) in a real browser. Done 7 Nov: Projects numbers row removed; Experiences in 3 chapters (Key experience · Volunteering · Hands-on) as timelines; NEOMA pills smaller with more white space.
+
 **New 4 Nov (general agent), to ask the user:** exact FT rank and year for NEOMA (the card says "Top 30") · use the same highlight tiles for EGC ("Top of the class in Budget Management and Financial Analysis")? · "Key experience" / "See all experience →" on Home and the group headings: add an s too, to match "Experiences"? · "tech" still in the "next experience" card ("Tech industry", "Analyst position in the tech industry"): change to data-driven company like the Contact page? · the Glovo card tags on Home and `experience.html` still list Python (the user dropped it on 3 Nov) · the Web Designer must commit `contact.css` / `contact.js` (and their other files) so the GitHub copy works.
 
 **Forecast accuracy page: all 3 sections of "What I built" have their simulation (chatbot added 3 Nov), to review with the user.**
