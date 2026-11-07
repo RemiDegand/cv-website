@@ -142,3 +142,63 @@
   }
 })();
 
+// "Want to see more?" = a step when scrolling down (7 Nov 2026, user: scrolling fast went straight from the key experiences into
+// Volunteering). The first downward wheel / key scroll that would carry it past the middle of the screen stops with it centred;
+// the rest of that gesture (trackpad momentum, quick wheel notches) is absorbed, so the next scroll goes on to Volunteering.
+// Re-armed once the visitor is back above it. The arrow link still jumps to Volunteering. Runs with "reduce motion" too (no smooth scroll).
+(() => {
+  const gate = document.querySelector(".xp-more");
+  if (!gate) return;
+  const instant = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let armed = true, locking = false, lockUntil = 0, lastInput = 0;
+
+  const centre = () => { const r = gate.getBoundingClientRect(); return r.top + r.height / 2; };
+  // the gate is between the middle of the screen and just below the bottom (one wheel notch can move 100+ px)
+  const ahead = () => { const c = centre(); return c > innerHeight / 2 + 4 && c < innerHeight * 1.08; };
+
+  // own easing (0.55 s) rather than behavior: "smooth", so the glide is the same in every browser
+  function glide(to) {
+    const html = document.documentElement, from = scrollY, t0 = performance.now(), dur = 550;
+    if (instant) { html.style.scrollBehavior = "auto"; scrollTo(0, to); html.style.scrollBehavior = ""; return; }
+    html.style.scrollBehavior = "auto";   // style.css sets smooth on html, which would fight the frames below
+    const frame = (now) => {
+      const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      scrollTo(0, from + (to - from) * e);
+      if (k < 1) requestAnimationFrame(frame); else html.style.scrollBehavior = "";
+    };
+    requestAnimationFrame(frame);
+  }
+
+  function stop() {
+    armed = false; locking = true; lockUntil = performance.now() + 650;
+    glide(scrollY + centre() - innerHeight / 2);
+    gate.classList.remove("is-here"); void gate.offsetWidth; gate.classList.add("is-here");
+  }
+  // true = swallow this input (the stop just happened, or happens now)
+  function step(down) {
+    const now = performance.now();
+    if (locking) {
+      if (now < lockUntil || now - lastInput < 200) { lastInput = now; return true; }   // still the same gesture
+      locking = false;
+    }
+    lastInput = now;
+    if (centre() > innerHeight * 1.15) armed = true;   // back above it
+    if (down && armed && ahead()) { stop(); return true; }
+    return false;
+  }
+
+  addEventListener("wheel", (e) => {
+    if (e.ctrlKey || e.target.closest?.(".cva")) return;   // zoom, or scrolling inside the chat panel
+    if (step(e.deltaY > 0)) e.preventDefault();
+  }, { passive: false });
+
+  addEventListener("keydown", (e) => {
+    if (!["ArrowDown", "PageDown", " "].includes(e.key)) return;
+    if (e.target.closest?.("input, textarea, select, [contenteditable], .cva") || (e.key === " " && e.shiftKey)) return;
+    if (step(true)) e.preventDefault();
+  });
+
+  // also re-armed by any other way of going back up (scrollbar, touch)
+  addEventListener("scroll", () => { if (centre() > innerHeight * 1.15) armed = true; }, { passive: true });
+})();
+
