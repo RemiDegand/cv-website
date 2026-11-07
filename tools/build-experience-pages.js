@@ -176,9 +176,13 @@ ${cards(["sales-performance-reporting"])}
     // in My impact; the 4 mission points are the user's (pay invoices, receipts, clean handover, next year's budget).
     parts: () => [
       ["My mission", `
+            <!-- Context first, then the mission sentence (user, 7 Nov 2026), as 2 sub-parts with small headings like Pain de Minuit (user, same day) -->
             <div class="block-part reveal">
-              <!-- Context first, then the mission sentence (user, 7 Nov 2026) -->
+              <h3>Context</h3>
               <p>Envie d'Sup is a public-interest association supported by the French government, with a public budget of <strong>€49k</strong>. It runs workshops, cultural outings and trips for <strong>229 middle and high school students</strong> from priority education zones.</p>
+            </div>
+            <div class="block-part reveal">
+              <h3>Mission</h3>
               <p class="xp-mission"><strong>Pay and track</strong> every expense of the association, <strong>assess the budget</strong> for the next year and ensure a <strong>clean handover</strong> to the next treasurer.</p>
             </div>`],
       ["My tasks", `
