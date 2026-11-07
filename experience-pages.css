@@ -60,22 +60,8 @@
   .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"])):hover::before { background-size: auto 78%, 14px 14px, auto; }
 }
 
-/* Glovo page: wide row cards, one under the other (7 Nov 2026, user's request to the general agent, so they read as one list
-   with the Poland line under them). Picture on the left, text on the right; phones keep the picture on top (rules above).
-   Only the cards with an illustration; the other pages keep 2 cards side by side. */
-@media (min-width: 721px) {
-  .xp-page .xp-cards:has(.card.project :is(a[href="project-forecasting-web-app.html"], a[href="project-ai-forecast-adjustments.html"])) { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"])) {
-    display: grid; grid-template-columns: 220px minmax(0, 1fr); column-gap: 22px; align-content: start; padding: 18px 22px 18px 0;
-  }
-  .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"]))::before {
-    grid-column: 1; grid-row: 1 / span 4; height: auto; min-height: 140px; margin: -18px 0;
-    border-bottom: 0; border-right: 1px solid color-mix(in srgb, var(--brand, var(--accent)) 30%, var(--border));
-    background-size: 88% auto, 14px 14px, auto;   /* drawing sized to the width, so it is never cropped */
-  }
-  .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"])):hover::before { background-size: 96% auto, 14px 14px, auto; }
-  .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"])) > :not(.project-org) { grid-column: 2; }
-  .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"])) .project-result { justify-self: start; }
-  .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"])) .tags { margin-top: 0; padding-top: 12px; }
-  .xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"])):hover { transform: translateY(-2px); }
-}
+/* Glovo page: the 2 project cards full width, one under the other (7 Nov 2026, user's request to the general agent, so they
+   read as one list with the Poland line under them). Picture on top, as before. Only the cards with an illustration;
+   the other pages keep 2 cards side by side. */
+.xp-page .xp-cards:has(.card.project :is(a[href="project-forecasting-web-app.html"], a[href="project-ai-forecast-adjustments.html"])) { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.xp-page .xp-cards .card.project:is(:has(a[href="project-forecasting-web-app.html"]), :has(a[href="project-ai-forecast-adjustments.html"])) .project-result { align-self: flex-start; }
