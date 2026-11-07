@@ -144,6 +144,41 @@ ${cardsFor(["sales-performance-reporting"])}
     projects: [],
     figures: [["€49k", "public budget managed"], ["84+", "supplier invoices processed"], ["100%", "program execution"]],
     tools: ["Budgeting", "Forecasting", "Cost analysis"],
+    skills: ["Budgeting", "Forecasting", "Cost analysis"],
+    // Same structure as Glovo (user, 7 Nov 2026): My mission / My tasks / My impact. €49k in the context (user), so not repeated
+    // in My impact; the 4 mission points are the user's (pay invoices, receipts, clean handover, next year's budget).
+    parts: () => [
+      ["My mission", `
+            <div class="block-part reveal">
+              <p class="xp-mission">Ensure the rigorous financial management of the association, for <strong>229 students</strong> from priority education zones.</p>
+              <p>Envie d'Sup is a public-interest association supported by the French government, with a public budget of <strong>€49k</strong>. It runs workshops, cultural outings and trips for middle and high school students.</p>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Pay</strong> the supplier invoices.</li>
+                <li><strong>Keep a receipt</strong> for every expense and track the spending.</li>
+                <li><strong>Close the accounts</strong> in good order, for a clean handover to the next treasurer.</li>
+                <li><strong>Assess the budget</strong> needed for the next year.</li>
+              </ul>
+            </div>`],
+      ["My tasks", `
+            <div class="block-part reveal">
+              <ul class="project-did reveal-stagger">
+                <li><strong>Built and monitored budget forecasts</strong> to stay within the allocated envelopes.</li>
+                <li><strong>Tracked expenses</strong> and processed the supplier invoices.</li>
+                <li><strong>Analysed costs</strong> by class and activity type (workshops, cultural outings, trips), to know the resources needed for each student and prepare the next year's grant applications.</li>
+              </ul>
+            </div>`],
+      ["My impact", `
+            <div class="block-part reveal">
+              <ul class="xp-figures reveal-stagger">
+                <li><strong>100%</strong><span>of the program carried out, within the budget</span></li>
+                <li><strong>84+</strong><span>supplier invoices processed</span></li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>Skills</h3>
+              <ul class="tags reveal-stagger">SKILLS</ul>
+            </div>`],
+    ],
   },
   {
     id: "pain-de-minuit", brand: "#BA9B6D", logo: "logos/pain-de-minuit.png", company: "Pain de Minuit", industry: "Craft Brewery", site: "https://pain-de-minuit.com",
