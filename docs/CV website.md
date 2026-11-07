@@ -94,6 +94,8 @@
 
 **🎨 More space between key experiences (7 Nov 2026, user):** the gap between the timeline cards is doubled, 24px → 48px (end of `experience-fx.css`). _Tried and removed the same day (user: too much space; don't redo):_ a "TikTok"-like feed with half a screen between cards and scroll snap.
 
+**"Want to see more?" after the key experiences (7 Nov 2026, user, general agent):** a centred link "Want to see more?" (user's idea, French "Vous voulez en voir plus ?"; the site is in English) with a round arrow button under it that bounces gently (still with "reduce motion"; fills blue on hover), jumping to chapter 02 `#volunteering`. Space: 88px above it, 96px before chapter 02 (64 / 72px on phones). Code: `.xp-more` in `experience.html`, styles at the end of `style.css` (not in the Web Designer's `experience-fx.css`). Checked at 1280px.
+
 **🎨 Chapter 02 renamed "Volunteering" (7 Nov 2026, user)** (was "Leadership & volunteering"; id `#volunteering`), and **no line above chapters 02 and 03** any more: only the space (120px, 80px on phones) and the small number mark a new chapter.
 
 **🎨 Chapters simplified (7 Nov 2026, user: too much information):** no line under the chapter titles, no count pill ("4 experiences"), the chapter number is small ("01" next to the title, same gradient), the visible page title "Experiences" and the line under it are gone (the h1 stays for screen readers, `.sr-only`). Supersedes those parts of the entry below; the chapter lines to confirm there no longer exist.

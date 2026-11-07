@@ -1741,3 +1741,15 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 
 /* Small phones (360px wide): the 5 menu links still fit (4 Nov 2026) */
 @media (max-width: 380px) { .menu nav { gap: 8px; font-size: 0.82rem; } }
+
+/* Experiences page: "Want to see more?" after the key experiences (7 Nov 2026, user), a link to chapter 02 with an arrow
+   that bounces gently; on hover the arrow fills blue. Still for "reduce motion". */
+.xp-more { display: flex; flex-direction: column; align-items: center; gap: 12px; width: max-content; margin: 88px auto 0; color: var(--text); text-decoration: none; }
+.xp-more-text { font-size: 1.15rem; font-weight: 600; }
+.xp-more-arrow { display: grid; place-items: center; width: 44px; height: 44px; border: 1.5px solid var(--border); border-radius: 50%; background: var(--bg); color: var(--accent); box-shadow: 0 6px 16px rgba(16, 24, 40, 0.06); animation: xp-more-bounce 1.8s ease-in-out infinite; transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
+.xp-more:hover .xp-more-arrow, .xp-more:focus-visible .xp-more-arrow { background: var(--accent); border-color: var(--accent); color: #fff; }
+.xp-more:hover .xp-more-text { color: var(--accent); }
+.xp-more + .xp-chapter { margin-top: 96px; }
+@keyframes xp-more-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+@media (max-width: 720px) { .xp-more { margin-top: 64px; } .xp-more + .xp-chapter { margin-top: 72px; } }
+@media (prefers-reduced-motion: reduce) { .xp-more-arrow { animation: none; } }
