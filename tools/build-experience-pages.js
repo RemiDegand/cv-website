@@ -137,14 +137,15 @@ ${cards(["sales-performance-reporting"])}
             </section>`],
       ["My impact", `
             <div class="block-part reveal">
-              <ul class="xp-figures reveal-stagger">
-                <!-- All the project results, from the most general to the most specific (user, 7 Nov 2026); 6 tiles = 2 rows of 3 -->
-                <li><strong>13 data models</strong><span>and 6 dashboards</span></li>
-                <li><strong>~1,000 orders</strong><span>a year in the production schedule, with weekly reporting for management</span></li>
-                <li><strong>3 business units</strong><span>with their aged receivables reporting, to support cash collection</span></li>
-                <li><strong>3 entities</strong><span>with their cash flow for any period, in one refresh</span></li>
-                <li><strong>€350k → €8k</strong><span>annual revenue discrepancies, with the new revenue recognition model</span></li>
-                <li><strong>~2 h saved</strong><span>per month on VAT calculation, with no more manual entries</span></li>
+              <!-- All the project results, from the most general to the most specific (user, 7 Nov 2026).
+                   A plain list, not blue tiles, and no line starts with a figure (user, same day) -->
+              <ul class="project-did reveal-stagger">
+                <li>Built <strong>13 data models</strong> and <strong>6 dashboards</strong>.</li>
+                <li>Structured the production schedule of <strong>~1,000 orders a year</strong>, with weekly reporting for management.</li>
+                <li>Gave <strong>3 business units</strong> an aged receivables reporting, to support cash collection.</li>
+                <li>Made the cash flow of <strong>3 entities</strong> available for any period, in one refresh.</li>
+                <li>Reduced annual revenue discrepancies from <strong>€350k to €8k</strong> with the new revenue recognition model.</li>
+                <li>Saved <strong>~2 h a month</strong> on VAT calculation, with no more manual entries.</li>
               </ul>
             </div>
             <div class="block-part reveal">
