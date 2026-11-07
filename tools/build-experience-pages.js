@@ -133,15 +133,18 @@ ${cards(["sales-performance-reporting"])}
               </div>
               <div class="xp-extras">
                 <p class="xp-extra"><strong>Multi-business-unit dashboards</strong>€3–4M of revenue each: N / N-1 / N-2, recurring vs. non-recurring revenue, active contracts.</p>
-                <p class="xp-extra"><strong>Regular data extractions</strong>On business activity, such as churn.</p>
               </div>
             </section>`],
       ["My impact", `
             <div class="block-part reveal">
               <ul class="xp-figures reveal-stagger">
+                <!-- All the project results, from the most general to the most specific (user, 7 Nov 2026); 6 tiles = 2 rows of 3 -->
+                <li><strong>13 data models</strong><span>behind 6 dashboards and 6 automated Excel tools, for 4 business units and 3 entities</span></li>
+                <li><strong>~1,000 orders</strong><span>a year in the production schedule, with weekly reporting for management</span></li>
+                <li><strong>3 business units</strong><span>with their aged receivables reporting, to support cash collection</span></li>
+                <li><strong>3 entities</strong><span>with their cash flow for any period, in one refresh</span></li>
                 <li><strong>€350k → €8k</strong><span>annual revenue discrepancies, with the new revenue recognition model</span></li>
-                <li><strong>13 data models</strong><span>behind the dashboards and tools</span></li>
-                <li><strong>6 dashboards</strong><span>and 6 automated Excel tools, for 4 business units and 3 entities</span></li>
+                <li><strong>~2 h saved</strong><span>per month on VAT calculation, with no more manual entries</span></li>
               </ul>
             </div>
             <div class="block-part reveal">
