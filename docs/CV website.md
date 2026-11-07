@@ -264,6 +264,7 @@ HANDS-ON EXPERIENCE               (compact list, one line each)
 
 **Card content (12 Oct, decided with the user step by step):**
 - **Header:** logo, school, degree line, dates, location. No description sentence (removed at the user's request).
+- **NEOMA highlights, smaller (7 Nov 2026, user):** now 2 small blue pills on one line: **"Top 30 worldwide"** · MiM, Financial Times and **"100% in English"** ("Language of every class" removed). Style at the end of `education-fx.css`. Earlier version below.
 - **NEOMA highlights (4 Nov 2026, user's request):** 2 light blue tiles under the NEOMA card header, before the years: trophy icon **"Top 30 worldwide"** / "Financial Times, Masters in Management ranking" · globe icon **"100% in English"** / "Language of every class" (facts from the user; exact FT rank and year not given, so the site says "Top 30"). Side by side, stacked when the card is narrow. Code: `.edu-highlights` in `style.css`. Could be reused for EGC ("Top of the class in Budget Management and Financial Analysis").
 - **Mini timeline, one step per school year, newest first** (DESC, user's request). Chosen over tabs and an accordion: everything visible at once. Dot + line per year; current year = filled dot + "Current" badge.
 - **Year line:** year name in blue + optional subtitle (+ badge) on the left, years **on the right** of the card.
