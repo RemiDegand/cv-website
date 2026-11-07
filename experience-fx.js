@@ -21,14 +21,18 @@
     return { timeline, line, head, items: [...timeline.querySelectorAll(".xp-item")] };
   });
 
-  const paint = () => lines.forEach(({ timeline, line, items: its }) => {
+  const paint = () => lines.forEach((l) => {
+    const { timeline, line, items: its } = l;
     const height = timeline.offsetHeight || 1;
-    const stops = its.map((item) => {
+    const ys = its.map((item) => {
       const dot = item.querySelector(".xp-dot");
-      const y = ((item.offsetTop + (dot ? dot.offsetTop + dot.offsetHeight / 2 : 40)) / height) * 100;
-      return `${brandOf(item)} ${y.toFixed(1)}%`;
+      return item.offsetTop + (dot ? dot.offsetTop + dot.offsetHeight / 2 : 40);
     });
+    const stops = its.map((item, k) => `${brandOf(item)} ${((ys[k] / height) * 100).toFixed(1)}%`);
     line.style.setProperty("--grad", `linear-gradient(180deg, ${stops.join(", ")})`);
+    // the line ends at the last logo (7 Nov 2026): grey line height + the furthest the gauge can go
+    l.end = ys.length ? ys[ys.length - 1] / height : 1;
+    timeline.style.setProperty("--end", (l.end * 100).toFixed(2) + "%");
   });
 
   // The line's tip follows a point a little below the middle of the screen; every logo above it is "lit",
@@ -54,9 +58,9 @@
       tip = dot.top + dot.height / 2;
     }
     let active = null;
-    lines.forEach(({ timeline, head, items: its }) => {
+    lines.forEach(({ timeline, head, items: its, end = 1 }) => {
       const box = timeline.getBoundingClientRect();
-      const p = Math.min(Math.max((tip - box.top) / box.height, 0), 1);
+      const p = Math.min(Math.max((tip - box.top) / box.height, 0), end);
       timeline.style.setProperty("--p", (p * 100).toFixed(2) + "%");
       const tipY = box.top + p * box.height;
       let last = null;
