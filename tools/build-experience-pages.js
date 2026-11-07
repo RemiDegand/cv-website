@@ -207,7 +207,7 @@ ${cards(["sales-performance-reporting"])}
   {
     id: "pain-de-minuit", brand: "#BA9B6D", logo: "logos/pain-de-minuit.png", company: "Pain de Minuit", industry: "Craft Brewery", site: "https://pain-de-minuit.com",
     title: "Business Developer Intern",
-    lead: "Acquired new B2B clients, mainly bakeries, and managed end-to-end logistics.",
+    lead: "Developed the B2B sales of a craft brewery start-up.",   // 7 Nov 2026: the card's sentence would repeat the mission below
     facts: [["When", "Feb – Jul 2024"], ["Where", "Nieppe, France"], ["Timing", "Bachelor's year 3 · Final internship"]],
     context: "Pain de Minuit is a start-up that brews beer from unsold bread, distributed across France.",
     mission: "Win new clients among independent retailers, mainly bakeries, and run the logistics from order to shipment.",
@@ -220,6 +220,45 @@ ${cards(["sales-performance-reporting"])}
     projects: [],
     figures: [["105", "new B2B clients (104 bakeries, 1 large retail store)"], ["~21", "new clients per month"], ["€3–10k", "distributor orders handled"]],
     tools: ["B2B sales", "Prospecting", "Logistics"],
+    skills: ["B2B sales", "Prospecting", "Client retention", "Logistics"],
+    // Same structure as Glovo (user, 7 Nov 2026): My mission / My tasks / My impact. No Content.docx: facts from the
+    // Pain de Minuit summary in docs/CV website.md. Impact as a list, verb first (like OSLO and Treasurer). Tools not known yet:
+    // only the Skills row.
+    parts: () => [
+      ["My mission", `
+            <div class="block-part reveal">
+              <p>Pain de Minuit is a start-up that brews beer from unsold bread and distributes it across France.</p>
+              <p class="xp-mission"><strong>Win new clients</strong> among independent retailers, mainly bakeries, and <strong>run the logistics</strong> from order to shipment.</p>
+            </div>`],
+      ["My tasks", `
+            <div class="block-part reveal">
+              <h3><span class="block-label">Task 1</span>Win and keep new clients</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Designed and ran a prospecting strategy</strong> targeted on independent retailers, mainly bakeries.</li>
+                <li><strong>Followed up every new client</strong> at +30, +90 and +120 days, to keep them.</li>
+                <li><strong>Led an international prospecting mission</strong> with a bakery in the UK.</li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3><span class="block-label">Task 2</span>Run the logistics</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Processed the orders</strong> and <strong>received the stock</strong>.</li>
+                <li><strong>Prepared the shipments</strong> of distributor orders, from €3,000 to €10,000.</li>
+              </ul>
+            </div>`],
+      ["My impact", `
+            <div class="block-part reveal">
+              <ul class="project-did reveal-stagger">
+                <li>Signed <strong>105 new B2B clients</strong>: 104 bakeries and 1 large retail store.</li>
+                <li>Averaged <strong>~21 new clients a month</strong>.</li>
+                <li>Got Pain de Minuit <strong>featured on public service TV</strong>, through a communication initiative with the UK bakery.</li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3>Skills</h3>
+              <ul class="tags reveal-stagger">SKILLS</ul>
+            </div>`],
+    ],
   },
 ];
 
