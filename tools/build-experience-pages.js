@@ -59,10 +59,11 @@ ${cardList.map((c) => `                <li><div class="xp-cards">\n${c}\n       
             </div>`],
       ["My impact", `
             <div class="block-part reveal">
-              <ul class="xp-figures reveal-stagger">
-                <li><strong>+8 pts</strong><span>forecast accuracy vs. target, on average across my areas</span></li>
-                <li><strong>1 web app</strong><span>used daily by the whole forecasting team</span></li>
-                <li><strong>~2 h a week</strong><span>saved by an agentic AI that automates the forecast adjustments</span></li>
+              <!-- A plain list like OSLO, not blue tiles, verb first (user, 7 Nov 2026) -->
+              <ul class="project-did reveal-stagger">
+                <li>Beat the forecast accuracy target by <strong>8 pts</strong>, on average across my areas.</li>
+                <li>Built <strong>a web app</strong> used daily by the whole forecasting team.</li>
+                <li>Saved <strong>~2 h a week</strong> with an agentic AI that automates the forecast adjustments.</li>
               </ul>
             </div>
             <div class="block-part reveal">
