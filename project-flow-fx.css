@@ -22,11 +22,43 @@
 .project-flow.fa-flow-pipe strong + span { margin-top: 0; }
 .project-flow.fa-flow-pipe + .fa-sim, .project-flow.fa-flow-pipe + p { margin-top: 28px; }
 
+/* Before / After (cash flow page, 8 Nov 2026): the old process in grey with a dashed line, the new one in blue */
+.project-flow.fa-flow-pipe.is-before::before { height: 0; background: none; border-top: 1px dashed #c3cad6; }
+.project-flow.fa-flow-pipe.is-before .flow-icon { background: #f1f3f6; color: #8a93a3; }
+.project-flow.fa-flow-pipe.is-before strong { color: var(--text-muted); }
+.project-page .flow-label + .fa-flow-pipe { margin-top: 26px; }
+.project-flow.fa-flow-pipe + .flow-label { margin-top: 40px; }
+
+/* Loop under the steps 1-3 (AI forecast adjustments page, Before): li.flow-back is a thin dashed U with its label on it */
+.project-flow.fa-flow-pipe.has-loop .flow-back + li { grid-area: 1 / 4; }
+.project-flow.fa-flow-pipe.has-loop .flow-back {
+  grid-area: 2 / 1 / auto / 4; height: 18px; margin: -10px calc((100% - 2 * var(--gap)) / 6) 10px;
+  border: 1px dashed #c3cad6; border-top: 0; border-radius: 0 0 12px 12px;
+}
+.project-flow.fa-flow-pipe.has-loop .flow-back span { position: absolute; left: 50%; bottom: -0.75em; margin: 0; padding: 0 10px; background: var(--bg); transform: translateX(-50%); white-space: nowrap; color: #8a93a3; font-size: 0.8rem; }
+
+/* "How the AI calculates: what it is given" (AI forecast adjustments page): a light panel, one small icon per item, no numbers */
+.flow-detail.flow-given { margin-top: 30px; padding: 20px 22px 22px; border: 0; border-radius: 16px; background: var(--bg-soft); }
+.flow-detail.flow-given::before { top: -30px; height: 30px; margin-left: -1px; border-left: 2px solid var(--accent); }   /* solid blue line, joins the AI step to the panel (user, 8 Nov: dotted line not visible enough) */
+.project-page .flow-given .flow-detail-title { margin-bottom: 16px; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.flow-given .flow-detail-steps { gap: 20px; }
+.flow-given .flow-detail-steps li::before { content: none; }
+.flow-given .given-icon { display: grid; place-items: center; width: 32px; height: 32px; margin-bottom: 10px; border-radius: 10px; background: var(--bg); color: var(--accent); box-shadow: 0 0 0 1px var(--border); }
+.flow-given .given-icon svg { width: 16px; height: 16px; }
+.flow-given .flow-detail-steps strong { font-size: 0.92rem; }
+.flow-given .flow-detail-steps strong + span { margin-top: 4px; }
+
 @media (max-width: 720px) {
   .project-flow.fa-flow-pipe { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-left: 56px; }
   .project-flow.fa-flow-pipe::before { top: 20px; bottom: 20px; left: 20px; right: auto; width: 1px; height: auto; }
   .project-flow.fa-flow-pipe li { min-height: 40px; text-align: left; }
   .project-flow.fa-flow-pipe .flow-icon { position: absolute; left: -56px; top: 0; margin: 0; }
+  .project-flow.fa-flow-pipe.is-before::before { width: 0; height: auto; border-top: 0; border-left: 1px dashed #c3cad6; }
+  .project-flow.fa-flow-pipe.has-loop .flow-back, .project-flow.fa-flow-pipe.has-loop .flow-back + li { grid-area: auto; }
+  .project-flow.fa-flow-pipe.has-loop .flow-back { height: auto; min-height: 0; margin: -10px 0 0; border: 0; }
+  .project-flow.fa-flow-pipe.has-loop .flow-back span { position: static; padding: 0; background: none; transform: none; }
+  .flow-given .flow-detail-steps li { display: grid; grid-template-columns: 32px minmax(0, 1fr); column-gap: 14px; }
+  .flow-given .given-icon { grid-row: span 2; margin: 0; }
 }
 
 /* ===== Web Designer: the forecaster icon of "How it started" talks (8 Nov 2026, user) =====
@@ -42,3 +74,162 @@
 @media (prefers-reduced-motion: reduce) {
   .lk-speaker:has(.lk-say.is-in) .lk-avatar, .lk-speaker:has(.lk-say.is-in) .lk-avatar svg circle { animation: none; }
 }
+
+/* ===== Web Designer: dashboard taller than its screen (aged receivables, Dashboard 2; 8 Nov 2026, user) =====
+   The screen keeps a 16:10 shape and the page scrolls inside it (.screen-scroll wraps the team pages, so the dashed
+   frames stay in place on the image). A "Scroll" pill bobs at the bottom of the screen until the visitor scrolls
+   (project-fx.js adds .is-scrolled). The click to enlarge still opens the full image. */
+.monitor-screen:has(.screen-scroll) { position: relative; }
+.screen-scroll { max-height: calc(var(--shot-w) * 0.625); overflow-y: auto; border-radius: 0 0 6px 6px; scrollbar-width: thin; scrollbar-color: #9aa3b2 #eef1f6; }
+.screen-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.project-shot .screen-scroll > a { position: relative; display: block; border: 0; border-radius: 0; box-shadow: none; }
+.project-shot .screen-scroll > a[hidden] { display: none; }
+.scroll-hint {
+  position: absolute; left: 50%; bottom: calc(var(--bezel) + 14px); display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 12px 6px 14px; border-radius: 999px; background: rgba(29, 34, 48, 0.85); color: #fff;
+  font-size: 0.75rem; font-weight: 600; pointer-events: none; transform: translateX(-50%);
+  box-shadow: 0 6px 16px rgba(16, 24, 40, 0.25); transition: opacity 0.3s ease; animation: hint-bob 1.6s ease-in-out infinite;
+}
+.monitor-screen:not(.has-scroll) .scroll-hint, .monitor-screen.is-scrolled .scroll-hint { opacity: 0; }
+@keyframes hint-bob { 50% { transform: translate(-50%, 4px); } }
+@media (prefers-reduced-motion: reduce) { .scroll-hint { animation: none; } }
+
+/* ===== Web Designer: Before / After table (production schedule page; 8 Nov 2026, user) =====
+   .ba-table.ba-clean: no outer box and no blue fill, thin lines between rows; each row name with a small icon
+   in a light circle; Before in grey with a grey ✕, After in dark text with a blue ✓. Stacked on phones
+   (the ✕ and ✓ tell Before from After). */
+.ba-table.ba-clean { border: 0; border-radius: 0; overflow: visible; }
+.ba-clean .ba-row { grid-template-columns: 10rem minmax(0, 1fr) minmax(0, 1fr); column-gap: 24px; border-top: 1px solid var(--border); }
+.ba-clean .ba-head { border-top: 0; }
+.ba-clean .ba-row > * { padding: 14px 0; border-top: 0; background: none; font-size: 0.9rem; line-height: 1.5; }
+.ba-clean .ba-head > * { padding: 0 0 10px; font-size: 0.72rem; }
+.ba-clean .ba-head > :nth-child(2) { padding-left: 26px; }
+.ba-clean .ba-head > :nth-child(3) { padding-left: 26px; color: var(--accent); }
+.ba-clean [role="rowheader"] { display: flex; align-items: center; gap: 10px; align-self: start; padding-top: 10px; color: var(--text); font-weight: 600; }
+.ba-clean .ba-icon { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); }
+.ba-clean .ba-row:not(.ba-head) > [role="cell"] { position: relative; padding-left: 26px; }
+.ba-clean .ba-row:not(.ba-head) > [role="cell"]::before { content: ""; position: absolute; left: 0; top: calc(14px + 0.75em - 8px); width: 16px; height: 16px; border-radius: 50%; background: center / 10px no-repeat; }
+.ba-clean .ba-row:not(.ba-head) > :nth-child(2) { color: var(--text-muted); }
+.ba-clean .ba-row:not(.ba-head) > :nth-child(2)::before { background-color: #f1f3f6; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.5 2.5l5 5M7.5 2.5l-5 5' stroke='%238a93a3' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.ba-clean .ba-row:not(.ba-head) > :nth-child(3) { color: var(--text); }
+.ba-clean .ba-row:not(.ba-head) > :nth-child(3)::before { background-color: var(--accent-soft); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.2l2 2 4-4.4' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+@media (max-width: 720px) {
+  .ba-clean .ba-head { display: none; }
+  .ba-clean .ba-row { grid-template-columns: minmax(0, 1fr); padding: 14px 0; }
+  .ba-clean .ba-row:nth-child(2) { border-top: 0; }
+  .ba-clean .ba-row > * { padding: 4px 0; font-size: 0.875rem; }
+  .ba-clean [role="rowheader"] { padding: 0 0 6px; }
+  .ba-clean .ba-row:not(.ba-head) > [role="cell"] { padding-left: 26px; }
+  .ba-clean .ba-row:not(.ba-head) > [role="cell"]::before { top: calc(4px + 0.75em - 8px); }
+}
+
+/* ===== Web Designer: stands under the simulation screens (forecasting web app page; 8 Nov 2026, user) =====
+   Same stand as the dashboards (.monitor-stand from style.css), no scrolling. The start / restart button stays
+   centred on the screen (moved up by half a stand); the stand fades with the screen at the end. */
+.sim-stage:has(> .monitor-stand) > .sim-restart { top: calc(50% - var(--stand, 38px) / 2); }
+
+/* ===== Web Designer: "The model in 3 steps" as a model view (revenue recognition page; 8 Nov 2026, user) =====
+   An app window (title bar + dotted canvas) with the tables as cards: coloured header, fields with a small type mark
+   (key, Σ, calendar, Aa, #, fx = calculated field). Columns: the 3 billing types | consolidation + time | revenue by month.
+   Tidy lines: every table has a fixed height (--head + rows × --row), so the consolidation layer sits exactly level with
+   Contracts (one straight line, the 2 other types join it on a short bus) and revenue by month level with the consolidation.
+   Long names end with "…" instead of leaving the frame. Stacked on phones, with a short line between the steps. */
+.project-page .dm-intro { max-width: 46rem; margin: 18px 0 0; color: var(--text); font-size: 0.9rem; line-height: 1.6; }   /* the short text above the map */
+.dm-app { --g: 64px; --tg: 16px; --row: 24px; --head: 30px; --type-h: calc(var(--head) + 5 * var(--row) + 10px); --core-h: calc(var(--head) + 6 * var(--row) + 10px); --out-h: calc(var(--head) + 3 * var(--row) + 10px); --line: #9aa3b2; margin: 20px 0 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08); }
+.dm-bar { position: relative; display: flex; align-items: center; justify-content: space-between; height: 34px; padding: 0 14px; border-bottom: 1px solid var(--border); background: #eef1f6; }
+.dm-title { position: absolute; left: 50%; transform: translateX(-50%); color: var(--text-muted); font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.dm-legend { display: flex; align-items: center; gap: 4px; color: var(--text-muted); font-size: 0.72rem; }
+.dm-canvas {
+  display: grid; grid-template-columns: minmax(0, 1fr) var(--g) minmax(0, 1fr) var(--g) minmax(0, 1fr); grid-template-rows: auto auto auto;
+  row-gap: 14px; margin: 0; padding: 22px 28px 24px; list-style: none;
+  background: radial-gradient(circle, #d5dbe6 1px, transparent 1.4px) 0 0 / 16px 16px, var(--bg-soft);
+}
+.dm-step { display: grid; grid-row: 1 / 4; grid-template-rows: subgrid; min-width: 0; }
+.dm-step-1 { grid-column: 1; } .dm-step-2 { grid-column: 3; } .dm-step-3 { grid-column: 5; }
+.dm-label { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.project-page .dm-label p { display: flex; align-items: center; gap: 8px; margin: 0; color: var(--text); font-size: 0.85rem; font-weight: 600; }
+.project-page .dm-label .dm-from { gap: 6px; color: var(--text-muted); font-size: 0.75rem; font-weight: 500; }
+.dm-from svg { flex: none; color: #8a93a3; }
+.dm-num { display: grid; place-items: center; flex: none; width: 20px; height: 20px; border-radius: 6px; background: var(--accent); color: #fff; font-size: 0.7rem; font-weight: 700; }
+.project-page .dm-sub { margin: 0; color: var(--text-muted); font-size: 0.8rem; line-height: 1.45; }
+.dm-tables { position: relative; display: grid; gap: var(--tg); align-content: start; min-width: 0; }
+.dm-step-1 .dm-tables { grid-auto-rows: var(--type-h); }
+.dm-step-2 .dm-tables { gap: 32px; margin-top: calc(1.5 * var(--type-h) + var(--tg) - var(--core-h) / 2); }   /* its middle level with the middle of Contracts */
+.dm-step-3 .dm-tables { margin-top: calc(1.5 * var(--type-h) + var(--tg) - var(--out-h) / 2); }   /* same middle too */
+.dm-table { position: relative; min-width: 0; border: 1px solid #d5dbe6; border-radius: 8px; background: var(--bg); box-shadow: 0 2px 6px rgba(16, 24, 40, 0.06); }
+.project-page .dm-name { display: flex; align-items: center; gap: 6px; height: var(--head); margin: 0; padding: 0 10px; border-radius: 7px 7px 0 0; background: var(--c, #475569); color: #fff; font-size: 0.8rem; font-weight: 600; }
+.dm-name svg { flex: none; }
+.dm-time .dm-name { background: #0f766e; }
+.dm-out .dm-name { background: var(--accent); }
+.dm-table ul { margin: 0; padding: 4px 0; list-style: none; }
+.dm-table li { display: flex; align-items: center; gap: 8px; height: var(--row); padding: 0 10px; color: var(--text); font-size: 0.78rem; }
+.dm-fn { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dm-f { display: grid; place-items: center; flex: none; width: 16px; color: #8a93a3; font-size: 0.68rem; font-style: normal; font-weight: 700; }
+.dm-key { color: #d4a017; }
+.dm-sum { font-size: 0.8rem; }
+.dm-fx { color: #7c3aed; font-family: Georgia, serif; font-style: italic; font-weight: 600; }
+.dm-table .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }   /* "(calculated)" for screen readers only */
+/* relationship lines: plain lines (border) and lines ending with an arrow (background: line + arrow head) */
+.dm-step-1 .dm-table::after { content: ""; position: absolute; left: 100%; top: 50%; width: calc(var(--g) / 2 + 1px); border-top: 1.5px solid var(--line); }
+.dm-step-1 .dm-tables::after { content: ""; position: absolute; left: calc(100% + var(--g) / 2); top: calc(var(--type-h) / 2); height: calc(2 * var(--type-h) + 2 * var(--tg)); border-left: 1.5px solid var(--line); }
+.dm-core::before, .dm-out::before {
+  content: ""; position: absolute; right: 100%; top: 50%; width: calc(var(--g) / 2); height: 10px; margin-top: -5px;
+  background: linear-gradient(var(--line), var(--line)) left center / calc(100% - 6px) 1.5px no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 10'%3E%3Cpath d='M0 0l7 5-7 5z' fill='%239aa3b2'/%3E%3C/svg%3E") right center / 7px 10px no-repeat;
+}
+.dm-core::after { content: ""; position: absolute; left: 100%; top: 50%; width: calc(var(--g) / 2 + 1px); border-top: 1.5px solid var(--line); }
+.dm-out::before { width: calc(var(--g) / 2 + 1px); }
+.dm-time::before {
+  content: ""; position: absolute; left: 50%; bottom: 100%; width: 10px; height: 32px; margin-left: -5px;
+  background: linear-gradient(var(--line), var(--line)) center bottom / 1.5px calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 7'%3E%3Cpath d='M0 7l5-7 5 7z' fill='%239aa3b2'/%3E%3C/svg%3E") center top / 10px 7px no-repeat;
+}
+@media (max-width: 960px) {
+  .dm-app { --g: 40px; }
+  .dm-canvas { padding: 20px 18px 22px; }
+  .dm-title { display: none; }   /* narrow: the fx legend matters more than the window title */
+}
+@media (max-width: 720px) {
+  .dm-app { --g: 0px; }
+  .dm-canvas { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; row-gap: 0; padding: 18px 16px 20px; }
+  .dm-step { display: flex; flex-direction: column; gap: 10px; grid-row: auto; grid-column: 1; }
+  .dm-step + .dm-step { position: relative; margin-top: 34px; }
+  .dm-step + .dm-step::before { content: ""; position: absolute; left: 50%; top: -28px; height: 22px; border-left: 1.5px solid var(--line); }
+  .dm-step-1 .dm-tables { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); grid-auto-rows: auto; }
+  .dm-step-2 .dm-tables, .dm-step-3 .dm-tables { width: min(100%, 260px); margin-top: 0; align-self: center; }
+  .dm-tables::before, .dm-tables::after, .dm-table::before, .dm-table::after { display: none; }
+  .dm-time::before { display: block; }
+}
+
+
+/* ===== Web Designer: small example under the model map (revenue recognition page; 8 Nov 2026, user) =====
+   An invoice card (€12,000, contract, 24 months) → "÷ 24 months" → 24 equal bars of €500, Jan 2025 to Dec 2026, in the
+   Contracts colour. The bars rise one after the other when the part comes into view (.reveal / .is-visible from script.js).
+   Stacked on phones. */
+.rr-ex { --c: #2a78d6; display: grid; grid-template-columns: 12rem auto minmax(0, 1fr); align-items: center; gap: 0 22px; margin: 28px 0 0; }
+.project-page .rr-ex-title { grid-column: 1 / -1; margin-bottom: 14px; color: var(--text); font-size: 0.95rem; font-weight: 600; }   /* short title: it is an example */
+.rr-inv { padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06); }
+.project-page .rr-inv-head { display: flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.project-page .rr-inv-amount { margin: 4px 0 10px; color: var(--text); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; }
+.rr-inv dl { display: grid; gap: 4px; margin: 0; }
+.rr-inv dl div { display: flex; justify-content: space-between; gap: 10px; font-size: 0.82rem; }
+.rr-inv dt { color: var(--text-muted); }
+.rr-inv dd { display: flex; align-items: center; gap: 6px; margin: 0; color: var(--text); font-weight: 600; }
+.rr-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.project-page .rr-arrow { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.rr-arrow::after { content: ""; width: 64px; height: 10px; background: linear-gradient(#9aa3b2, #9aa3b2) left center / calc(100% - 6px) 1.5px no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 10'%3E%3Cpath d='M0 0l7 5-7 5z' fill='%239aa3b2'/%3E%3C/svg%3E") right center / 7px 10px no-repeat; }
+.rr-chart { min-width: 0; }
+.project-page .rr-per { margin-bottom: 8px; color: var(--text-muted); font-size: 0.85rem; }
+.rr-per strong { color: var(--c); font-size: 1.1rem; }
+.rr-bars { display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); align-items: end; gap: 3px; height: 72px; padding-bottom: 1px; border-bottom: 1.5px solid #c3cad6; }
+.rr-bars i { height: 70%; border-radius: 3px 3px 0 0; background: var(--c); transform-origin: bottom; transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(0.3s + var(--i) * 0.04s); }
+.rr-bars i:nth-child(n + 13) { opacity: 0.8; }   /* 2026 a little lighter, so the 2 years read apart */
+.reveal-on .reveal:not(.is-visible) .rr-bars i { transform: scaleY(0); }
+.project-page .rr-axis { position: relative; display: flex; justify-content: space-between; margin-top: 6px; color: var(--text-muted); font-size: 0.72rem; }
+.rr-axis span:nth-child(2) { position: absolute; left: 50%; }
+.rr-ex figcaption { grid-column: 1 / -1; margin-top: 14px; color: var(--text-muted); font-size: 0.78rem; text-align: center; }
+@media (max-width: 720px) {
+  .rr-ex { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .rr-inv { width: min(100%, 15rem); justify-self: center; }
+  .rr-arrow::after { width: 10px; height: 36px; background: linear-gradient(#9aa3b2, #9aa3b2) center top / 1.5px calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 7'%3E%3Cpath d='M0 0l5 7 5-7z' fill='%239aa3b2'/%3E%3C/svg%3E") center bottom / 10px 7px no-repeat; }
+  .rr-bars { gap: 2px; }
+}
+@media (prefers-reduced-motion: reduce) { .rr-bars i { transition: none; } }

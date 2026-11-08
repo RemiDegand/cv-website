@@ -95,6 +95,9 @@
 #projects .card.project .tags { gap: 6px; margin-top: auto; padding-top: 0; }
 #projects .card.project .tags::before { content: ""; flex: 0 0 100%; height: 1px; margin: 18px 0 10px; background: var(--border); }
 #projects .card.project .tags li { padding: 3px 10px; border: 0; border-radius: 8px; background: var(--bg-soft); color: var(--text-muted); font-size: 0.76rem; font-weight: 500; }
+/* Same line height on every card (8 Nov 2026, user): the tools area always keeps room for 2 rows of tags, so the line above
+   the tools sits at the same level whether a card has 1 or 2 rows (the extra room is left empty under the tags). Side-by-side cards only. */
+@media (min-width: 721px) { #projects .card.project .tags { align-content: flex-start; min-height: calc(29px + 2 * (0.76rem * 1.6 + 6px) + 12px); } }
 #projects .cat-grid { gap: 24px; }
 @media (max-width: 720px) { #projects .card.project { padding: 23px 18px 18px; } }
 /* result: a long sentence wraps next to the icon, not under it */

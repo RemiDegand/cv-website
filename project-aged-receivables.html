@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="page-head.css"><!-- page header: glow, logo tile, title, fact cards (7 Nov 2026) -->
+  <link rel="stylesheet" href="project-flow-fx.css"><!-- Web Designer: steps with icons, scrolling dashboard screen (8 Nov 2026) -->
 </head>
 <body>
 
@@ -102,10 +103,10 @@
             <div class="block-part reveal">
               <h3>The reporting system</h3>
               <p>An automated aged receivables reporting system, directly connected to the payment data extracted from the ERP.</p>
-              <ol class="project-flow reveal-stagger" aria-label="How the reporting works">
-                <li><strong>ERP</strong><span>Payment data extracted automatically</span></li>
-                <li><strong>Data model</strong><span>Payments structured by status and sales representative</span></li>
-                <li><strong>MyReport dashboards</strong><span>Designed for day-to-day use</span></li>
+              <ol class="project-flow fa-flow-pipe reveal-stagger" aria-label="How the reporting works">
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6"/></svg></span><strong>ERP</strong><span>Payment data extracted automatically</span></li>
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="6" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="8.5" y="15" width="7" height="6" rx="1.5"/><path d="M6.5 9v2.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9M12 12.5V15"/></svg></span><strong>Data model</strong><span>Payments structured by status and sales representative</span></li>
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M8 17v-4M12 17v-6M16 17v-2"/></svg></span><strong>MyReport dashboards</strong><span>Designed for day-to-day use</span></li>
               </ol>
               <p class="project-statuses reveal-stagger">Each payment gets a status by days overdue:
                 <span class="status-list"><span class="status status-ok">Not due</span><span class="status status-1">&lt; 30 days</span><span class="status status-2">30–60 days</span><span class="status status-3">60–90 days</span><span class="status status-4">90+ days</span></span>
@@ -183,6 +184,8 @@
                 <div class="monitor">
                   <div class="monitor-screen">
                     <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">MyReport · Customer Payments</span></div>
+                    <!-- The 4 pages are taller than a screen: they scroll inside it, with a "Scroll" hint (Web Designer, 8 Nov 2026, user). Styles: project-flow-fx.css, hint: project-fx.js -->
+                    <div class="screen-scroll" tabindex="0" aria-label="Dashboard of the sales team, scroll to see all of it">
                     <a href="images/projects/aged-receivables-team-1.webp" target="_blank" rel="noopener" id="team-1" role="tabpanel" aria-labelledby="tab-team-1">
                       <img src="images/projects/aged-receivables-team-1.webp" alt="Sales Team 1 dashboard: totals by status, a bar chart by status and the list of outstanding payments sorted by days overdue" width="1600" height="1704" loading="lazy">
                       <span class="shot-zone" style="left: 0; top: 8.4%; width: 100%; height: 16%"></span>
@@ -207,6 +210,8 @@
                       <span class="shot-zone" style="left: 0; top: 25.2%; width: 100%; height: 24.4%"></span>
                       <span class="shot-zone" style="left: 0; top: 50.4%; width: 100%; height: 49.6%"></span>
                     </a>
+                    </div>
+                    <span class="scroll-hint" aria-hidden="true">Scroll <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
                   </div>
                   <div class="monitor-stand" aria-hidden="true"></div>
                 </div>
@@ -257,6 +262,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="project-fx.js"></script><!-- Web Designer: hides the "Scroll" hint of a scrolling screen once used (8 Nov 2026) -->
   <script src="chatbot.js" defer></script><!-- AI assistant: bubble bottom right + welcome animation (3 Nov 2026) -->
 </body>
 </html>

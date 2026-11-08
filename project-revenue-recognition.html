@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kalam:wght@700&family=Patrick+Hand&family=Patrick+Hand+SC&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="page-head.css"><!-- page header: glow, logo tile, title, fact cards (7 Nov 2026) -->
+  <link rel="stylesheet" href="project-flow-fx.css"><!-- Web Designer: the model as a model view (8 Nov 2026) -->
 </head>
 <body>
 
@@ -174,136 +175,60 @@
             <div class="block-part reveal">
               <h3>The model in 3 steps</h3>
               <p class="chip-row reveal-stagger"><span class="chip-label">Source</span><span class="chip">Invoice lines from the SQL database</span><span class="chip">MyReport Data</span></p>
-              <ol class="model-map reveal-stagger" aria-label="The model in 3 steps">
-                <li>
-                  <p class="model-head"><span class="model-num">1</span>Map each line to a type</p>
-                  <p class="model-boxes"><span class="model-box type-order">One-time orders</span><span class="model-box type-contract">Contracts</span><span class="model-box type-bundle">Bundles</span></p>
-                  <p class="model-sub">One sub-model per billing type, found from the general ledger account</p>
-                </li>
-                <li>
-                  <p class="model-head"><span class="model-num">2</span>Aggregate</p>
-                  <p class="model-boxes"><span class="model-box">Consolidation layer</span></p>
-                  <p class="model-sub">The same data fields for every revenue stream</p>
-                </li>
-                <li>
-                  <p class="model-head"><span class="model-num">3</span>Allocate</p>
-                  <p class="model-boxes"><span class="model-box">Revenue by month</span></p>
-                  <p class="model-sub">Start date, months covered, then the net amount spread evenly</p>
-                </li>
-              </ol>
-            </div>
-
-            <!-- Example: one invoice with 3 lines (round numbers, not company data), then the monthly revenue
-                 before and after the model. Same tabs and notes as the other project pages (script.js, .compare).
-                 Chart: 8px per k€ (scale 0–25k over 200px, top of the plot 16px under the title bar); month i
-                 centred at 8% + 7.5% × (i + 0.5) of the screen width -->
-            <div class="block-part reveal">
-              <h3><span class="block-label">Example</span>One invoice, three lines</h3>
-              <figure class="project-shot annotated compare">
-                <div class="report-bar">
-                  <div class="report-tabs" role="tablist" aria-label="Step of the example">
-                    <button type="button" role="tab" aria-selected="true" aria-controls="rr-lines" id="tab-rr-lines">1. Invoice lines</button>
-                    <button type="button" role="tab" aria-selected="false" aria-controls="rr-before" id="tab-rr-before" tabindex="-1">2. Before: on the invoice date</button>
-                    <button type="button" role="tab" aria-selected="false" aria-controls="rr-after" id="tab-rr-after" tabindex="-1">3. After: spread over the activity</button>
-                  </div>
-                </div>
-
-                <!-- View 1: the invoice lines in the model (also the table view of the charts) -->
-                <div class="compare-view" id="rr-lines" role="tabpanel" aria-labelledby="tab-rr-lines">
-                  <div class="shot-notes">
-                    <p class="shot-note" style="--at: 0.15; --y: 26px">Each invoice line on its own</p>
-                    <p class="shot-note" style="--at: 0.37; --y: 26px">Type found from the general ledger account</p>
-                    <p class="shot-note" style="--at: 0.77; --y: 26px">Start date and months covered give the amount per month</p>
-                  </div>
-                  <div class="monitor">
-                    <div class="monitor-screen">
-                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">MyReport Data</span></div>
-                      <div class="sheet" tabindex="0" aria-label="The 3 lines of the example invoice in the model">
-                        <div class="sheet-canvas">
-                          <table class="sheet-grid">
-                            <colgroup><col style="width: 4%"><col style="width: 15%"><col style="width: 7%"><col style="width: 12%"><col style="width: 16%"><col style="width: 11%"><col style="width: 12%"><col style="width: 10%"><col style="width: 13%"></colgroup>
-                            <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th></tr></thead>
-                            <tbody>
-                              <tr class="cell-head"><th>1</th><td>Invoice</td><td>Line</td><td>GL account</td><td>Type</td><td class="num">Net amount</td><td>Start</td><td class="num">Months</td><td class="num">Per month</td></tr>
-                              <tr><th>2</th><td>N° xxxx01</td><td>1</td><td>Account 1</td><td><span class="type-dot type-contract"></span>Contract</td><td class="num">12,000</td><td>01/01/25</td><td class="num">12</td><td class="num">1,000</td></tr>
-                              <tr><th>3</th><td>N° xxxx01</td><td>2</td><td>Account 2</td><td><span class="type-dot type-order"></span>One-time order</td><td class="num">3,000</td><td>01/01/25</td><td class="num">1</td><td class="num">3,000</td></tr>
-                              <tr><th>4</th><td>N° xxxx01</td><td>3</td><td>Account 3</td><td><span class="type-dot type-bundle"></span>Bundle</td><td class="num">6,000</td><td>01/01/25</td><td class="num">6</td><td class="num">1,000</td></tr>
-                            </tbody>
-                          </table>
-                          <!-- Frames: invoice and line (A–B), account and type (C–D), amount to amount per month (E–H) -->
-                          <span class="shot-zone" style="left: 4.3%; width: 21.4%; top: 26px; height: 92px"></span>
-                          <span class="shot-zone" style="left: 26.3%; width: 27.4%; top: 26px; height: 92px"></span>
-                          <span class="shot-zone" style="left: 54.3%; width: 45.4%; top: 26px; height: 92px"></span>
-                        </div>
-                      </div>
+              <!-- Why 3 tables, then the time table (user, 8 Nov 2026; plain text, same style as the Context paragraph) -->
+              <p>I split the invoice details into 3 tables, one per billing type, because each type had its own rules, formats and data: for example, discounts had to be applied to some types, while others already included them. This kept the data clean. I then consolidated the 3 tables and linked them to a time table to spread the revenue over the months.</p>
+              <!-- The model as the model view of a data modeling tool (Web Designer, 8 Nov 2026, user: "more like a data modeling app").
+                   Step 1 (user, 8 Nov): data from the Invoice details table, sorted and split into one table per billing type (income
+                   category from the GL account), each with calculated fields: start month, and the number of months for contracts (to
+                   spread the revenue later). Step 2: the consolidation layer, lined up with Contracts, and a time table under it
+                   (date, day, month, year). The 3 billing types keep their colours (.type-order / -contract / -bundle). Styles: project-flow-fx.css -->
+              <figure class="dm-app" aria-label="The model in 3 steps">
+                <div class="dm-bar"><span class="monitor-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="dm-title" aria-hidden="true">MyReport Data · Model view</span><span class="dm-legend"><i class="dm-f dm-fx" aria-hidden="true">fx</i>Calculated field</span></div>
+                <ol class="dm-canvas reveal-stagger">
+                  <li class="dm-step dm-step-1">
+                    <div class="dm-label"><p><span class="dm-num">1</span>Map each line to a type</p><p class="dm-from"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg>From the Invoice details table</p></div>
+                    <div class="dm-tables">
+                      <div class="dm-table type-order"><p class="dm-name"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg><span class="dm-fn">One-time orders</span></p><ul><li><i class="dm-f" aria-hidden="true">Aa</i><span class="dm-fn">Invoice · Line</span></li><li><i class="dm-f" aria-hidden="true">Aa</i><span class="dm-fn">Income category</span></li><li><i class="dm-f dm-sum" aria-hidden="true">Σ</i><span class="dm-fn">Net amount</span></li><li><i class="dm-f dm-fx" aria-hidden="true">fx</i>Start month<span class="sr-only"> (calculated)</span></li></ul></div>
+                      <div class="dm-table type-contract"><p class="dm-name"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg><span class="dm-fn">Contracts</span></p><ul><li><i class="dm-f" aria-hidden="true">Aa</i><span class="dm-fn">Invoice · Line</span></li><li><i class="dm-f" aria-hidden="true">Aa</i><span class="dm-fn">Income category</span></li><li><i class="dm-f dm-sum" aria-hidden="true">Σ</i><span class="dm-fn">Net amount</span></li><li><i class="dm-f dm-fx" aria-hidden="true">fx</i>Start month<span class="sr-only"> (calculated)</span></li><li><i class="dm-f dm-fx" aria-hidden="true">fx</i>Months<span class="sr-only"> (calculated)</span></li></ul></div>
+                      <div class="dm-table type-bundle"><p class="dm-name"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg><span class="dm-fn">Bundles</span></p><ul><li><i class="dm-f" aria-hidden="true">Aa</i><span class="dm-fn">Invoice · Line</span></li><li><i class="dm-f" aria-hidden="true">Aa</i><span class="dm-fn">Income category</span></li><li><i class="dm-f dm-sum" aria-hidden="true">Σ</i><span class="dm-fn">Net amount</span></li><li><i class="dm-f dm-fx" aria-hidden="true">fx</i>Start month<span class="sr-only"> (calculated)</span></li></ul></div>
                     </div>
-                    <div class="monitor-stand" aria-hidden="true"></div>
-                  </div>
-                  <p class="story-answer"><strong>The result:</strong> every line knows when its revenue starts, how many months it covers and how much it brings each month.</p>
-                </div>
-
-                <!-- View 2: monthly revenue before (all on the invoice date) -->
-                <div class="compare-view" id="rr-before" role="tabpanel" aria-labelledby="tab-rr-before" hidden>
-                  <div class="shot-notes">
-                    <p class="shot-note" style="--at: 0.1175; --y: 44px">The whole invoice on the invoice date: €21k</p>
-                    <p class="shot-note" style="--at: 0.75; --y: 176px">Nothing in the next months, while the contract and the bundle still run</p>
-                  </div>
-                  <div class="monitor">
-                    <div class="monitor-screen">
-                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Dashboard · Monthly revenue (k€)</span></div>
-                      <div class="rev-chart" role="img" aria-label="Monthly revenue before the model: 21 k€ in January (contract 12, one-time order 3, bundle 6), 0 from February to December">
-                        <div class="rev-grid" aria-hidden="true"><span style="--k: 0">0</span><span style="--k: 5">5k</span><span style="--k: 10">10k</span><span style="--k: 15">15k</span><span style="--k: 20">20k</span><span style="--k: 25">25k</span></div>
-                        <div class="rev-plot">
-                          <div class="rev-col" title="Jan: €21k (contract 12k, one-time order 3k, bundle 6k)"><span class="rev-seg type-contract" style="--v: 12"></span><span class="rev-seg type-bundle" style="--v: 6"></span><span class="rev-seg type-order" style="--v: 3"></span></div>
-                          <div class="rev-col" title="Feb: €0"></div><div class="rev-col" title="Mar: €0"></div><div class="rev-col" title="Apr: €0"></div><div class="rev-col" title="May: €0"></div><div class="rev-col" title="Jun: €0"></div><div class="rev-col" title="Jul: €0"></div><div class="rev-col" title="Aug: €0"></div><div class="rev-col" title="Sep: €0"></div><div class="rev-col" title="Oct: €0"></div><div class="rev-col" title="Nov: €0"></div><div class="rev-col" title="Dec: €0"></div>
-                        </div>
-                        <p class="rev-months" aria-hidden="true"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></p>
-                        <span class="shot-zone" style="left: 8.5%; width: 6.5%; top: 44px; height: 176px"></span>
-                        <span class="shot-zone" style="left: 16%; width: 81.5%; top: 176px; height: 44px"></span>
-                      </div>
+                    <p class="dm-sub">One sub-model per billing type, found from the general ledger account</p>
+                  </li>
+                  <li class="dm-step dm-step-2">
+                    <div class="dm-label"><p><span class="dm-num">2</span>Aggregate</p></div>
+                    <div class="dm-tables">
+                      <div class="dm-table dm-core"><p class="dm-name"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg><span class="dm-fn">Consolidation layer</span></p><ul><li><i class="dm-f" aria-hidden="true">Aa</i><span class="dm-fn">Invoice</span></li><li><i class="dm-f" aria-hidden="true">#</i><span class="dm-fn">Line</span></li><li><i class="dm-f" aria-hidden="true">Aa</i><span class="dm-fn">Type</span></li><li><i class="dm-f dm-sum" aria-hidden="true">Σ</i><span class="dm-fn">Net amount</span></li><li><i class="dm-f" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></i><span class="dm-fn">Start month</span></li><li><i class="dm-f" aria-hidden="true">#</i><span class="dm-fn">Months</span></li></ul></div>
+                      <div class="dm-table dm-time"><p class="dm-name"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg><span class="dm-fn">Time</span></p><ul><li><i class="dm-f dm-key" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg></i><span class="dm-fn">Date</span></li><li><i class="dm-f" aria-hidden="true">#</i><span class="dm-fn">Day</span></li><li><i class="dm-f" aria-hidden="true">#</i><span class="dm-fn">Month</span></li><li><i class="dm-f" aria-hidden="true">#</i><span class="dm-fn">Year</span></li></ul></div>
                     </div>
-                    <div class="monitor-stand" aria-hidden="true"></div>
-                  </div>
-                  <p class="rev-legend" aria-hidden="true"><span><i class="type-contract"></i>Contract</span><span><i class="type-bundle"></i>Bundle</span><span><i class="type-order"></i>One-time order</span></p>
-                  <p class="story-answer"><strong>The result:</strong> January looks huge and the rest of the year looks empty, although the activity runs all year.</p>
-                </div>
-
-                <!-- View 3: monthly revenue after (spread over the months covered) -->
-                <div class="compare-view" id="rr-after" role="tabpanel" aria-labelledby="tab-rr-after" hidden>
-                  <div class="shot-notes">
-                    <p class="shot-note" style="--at: 0.1175; --y: 172px">One-time order: all in its month</p>
-                    <p class="shot-note" style="--at: 0.34; --y: 196px">Bundle: €1k a month for 6 months</p>
-                    <p class="shot-note" style="--at: 0.75; --y: 204px">Contract: €1k a month for 12 months</p>
-                  </div>
-                  <div class="monitor">
-                    <div class="monitor-screen">
-                      <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Dashboard · Monthly revenue (k€)</span></div>
-                      <div class="rev-chart" role="img" aria-label="Monthly revenue after the model: 5 k€ in January (contract 1, bundle 1, one-time order 3), 2 k€ from February to June (contract 1, bundle 1), 1 k€ from July to December (contract)">
-                        <div class="rev-grid" aria-hidden="true"><span style="--k: 0">0</span><span style="--k: 5">5k</span><span style="--k: 10">10k</span><span style="--k: 15">15k</span><span style="--k: 20">20k</span><span style="--k: 25">25k</span></div>
-                        <div class="rev-plot">
-                          <div class="rev-col" title="Jan: €5k (contract 1k, bundle 1k, one-time order 3k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span><span class="rev-seg type-order" style="--v: 3"></span></div>
-                          <div class="rev-col" title="Feb: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
-                          <div class="rev-col" title="Mar: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
-                          <div class="rev-col" title="Apr: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
-                          <div class="rev-col" title="May: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
-                          <div class="rev-col" title="Jun: €2k (contract 1k, bundle 1k)"><span class="rev-seg type-contract" style="--v: 1"></span><span class="rev-seg type-bundle" style="--v: 1"></span></div>
-                          <div class="rev-col" title="Jul: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
-                          <div class="rev-col" title="Aug: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
-                          <div class="rev-col" title="Sep: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
-                          <div class="rev-col" title="Oct: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
-                          <div class="rev-col" title="Nov: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
-                          <div class="rev-col" title="Dec: €1k (contract)"><span class="rev-seg type-contract" style="--v: 1"></span></div>
-                        </div>
-                        <p class="rev-months" aria-hidden="true"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></p>
-                        <span class="shot-zone" style="left: 8.5%; width: 6.5%; top: 172px; height: 30px"></span>
-                        <span class="shot-zone" style="left: 16%; width: 37%; top: 196px; height: 24px"></span>
-                        <span class="shot-zone" style="left: 53.5%; width: 44%; top: 204px; height: 16px"></span>
-                      </div>
+                    <p class="dm-sub">The same data fields for every revenue stream</p>
+                  </li>
+                  <li class="dm-step dm-step-3">
+                    <div class="dm-label"><p><span class="dm-num">3</span>Allocate</p></div>
+                    <div class="dm-tables">
+                      <div class="dm-table dm-out"><p class="dm-name"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg><span class="dm-fn">Revenue by month</span></p><ul><li><i class="dm-f" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></i><span class="dm-fn">Month</span></li><li><i class="dm-f" aria-hidden="true">Aa</i><span class="dm-fn">Type</span></li><li><i class="dm-f dm-sum" aria-hidden="true">Σ</i><span class="dm-fn">Per month</span></li></ul></div>
                     </div>
-                    <div class="monitor-stand" aria-hidden="true"></div>
-                  </div>
-                  <p class="rev-legend" aria-hidden="true"><span><i class="type-contract"></i>Contract</span><span><i class="type-bundle"></i>Bundle</span><span><i class="type-order"></i>One-time order</span></p>
-                  <p class="story-answer"><strong>The result:</strong> the same €21k in total, spread over the months of the activity: a realistic monthly view.</p>
+                    <p class="dm-sub">Start date, months covered, then the net amount spread evenly</p>
+                  </li>
+                </ol>
+              </figure>
+              <!-- Small example under the map (user, 8 Nov 2026): one contract invoice of €12,000 over 24 months gives €500 each month.
+                   Round numbers, not company data. The bars rise one after the other when the part comes into view. Styles: project-flow-fx.css -->
+              <figure class="rr-ex" aria-label="Example: a contract invoice of 12,000 euros over 24 months gives 500 euros of revenue each month, from January 2025 to December 2026">
+                <p class="rr-ex-title">Here is an example</p>
+                <div class="rr-inv" aria-hidden="true">
+                  <p class="rr-inv-head"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>Invoice</p>
+                  <p class="rr-inv-amount">€12,000</p>
+                  <dl>
+                    <div><dt>Type</dt><dd><span class="rr-dot"></span>Contract</dd></div>
+                    <div><dt>Start</dt><dd>Jan 2025</dd></div>
+                    <div><dt>Months</dt><dd>24</dd></div>
+                  </dl>
+                </div>
+                <p class="rr-arrow" aria-hidden="true"><span>÷ 24 months</span></p>
+                <div class="rr-chart" aria-hidden="true">
+                  <p class="rr-per"><strong>€500</strong> each month</p>
+                  <div class="rr-bars"><i style="--i: 0"></i><i style="--i: 1"></i><i style="--i: 2"></i><i style="--i: 3"></i><i style="--i: 4"></i><i style="--i: 5"></i><i style="--i: 6"></i><i style="--i: 7"></i><i style="--i: 8"></i><i style="--i: 9"></i><i style="--i: 10"></i><i style="--i: 11"></i><i style="--i: 12"></i><i style="--i: 13"></i><i style="--i: 14"></i><i style="--i: 15"></i><i style="--i: 16"></i><i style="--i: 17"></i><i style="--i: 18"></i><i style="--i: 19"></i><i style="--i: 20"></i><i style="--i: 21"></i><i style="--i: 22"></i><i style="--i: 23"></i></div>
+                  <p class="rr-axis"><span>Jan 2025</span><span>Jan 2026</span><span>Dec 2026</span></p>
                 </div>
                 <figcaption>Illustrative example with round numbers, not company data.</figcaption>
               </figure>

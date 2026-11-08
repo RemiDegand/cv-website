@@ -492,7 +492,8 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
       pasteSim.classList.add("is-flying");
       await wait(1000);
       // Each row takes longer than the one before: the file is getting heavier
-      const steps = [[300, 12, 7], [700, 27, 8], [1200, 41, 8], [1700, 52, 9], [2300, 58, 10]];
+      // (Web Designer, 8 Nov 2026, user: the end was too long; was 300 → 2300 ms per row, then 1.2 s + 2.5 s + 3 s, about 13 s; now about 7 s)
+      const steps = [[250, 12, 7], [450, 27, 8], [700, 41, 8], [950, 52, 9], [1200, 58, 10]];
       for (const [i, [ms, pct, n]] of steps.entries()) {
         await wait(ms);
         rows[i + 1].classList.remove("is-empty");
@@ -500,14 +501,14 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
         size(n);
         if (i === 1) { pasteSim.classList.add("is-busy"); status.textContent = "Excel is getting slower…"; }
       }
-      await wait(1200);
+      await wait(600);
       pasteSim.classList.add("is-frozen");
       title.textContent = finalTitle;
       status.textContent = "Excel stopped responding…";
-      await wait(2500);
+      await wait(1600);
       pasteSim.classList.add("is-crashed");
       status.textContent = finalStatus;
-      await wait(3000);
+      await wait(1500);
       await restartAtEnd(pasteSim);
     }
   };
