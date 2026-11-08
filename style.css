@@ -1784,3 +1784,34 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 /* AI analysis: more room between the 4 steps and the simulation, now that the line under the steps is gone (8 Nov 2026, user) */
 .project-flow + .ais-sim { margin-top: 28px; }
 .fa-chain + .fa-sim { margin-top: 28px; }   /* Chatbot: the chain sits right above its simulation */
+
+/* Forecast accuracy page, "How it started": the forecaster above the Looker screen, with a speech bubble (8 Nov 2026, user) */
+.lk-speaker { display: flex; align-items: flex-end; gap: 10px; margin-bottom: 14px; }
+.lk-avatar { display: grid; flex: none; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); }
+.lk-speaker .story-line { max-width: 80%; }
+.lk-speaker .story-left .story-bubble { border-top-left-radius: 16px; border-bottom-left-radius: 4px; }
+.lk-say.is-waiting { visibility: hidden; }
+.lk-say.is-in { animation: lk-say-in 0.35s ease-out; transform-origin: bottom left; }
+@keyframes lk-say-in { from { opacity: 0; transform: scale(0.85) translateY(6px); } }
+/* AI forecast adjustments page, "How it started": after Paris, the Export sheet's Download CSV button is clicked (8 Nov 2026, user) */
+.adj-sim-download { margin-left: auto; padding: 2px 8px; border: 1px solid #c8ced8; border-radius: 4px; background: #f8fafc; color: #1f2937; font-weight: 600; white-space: nowrap; transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease; }
+.adj-sim-download.is-pressed { border-color: #188038; background: #188038; color: #fff; transform: scale(0.94); }
+.adj-sim-downloaded { display: none; margin-left: auto; color: #188038; font-weight: 600; white-space: nowrap; }
+.adj-sim.is-downloaded .adj-sim-downloaded { display: inline; animation: lk-say-in 0.35s ease-out; }
+.adj-sim.is-downloaded .adj-sim-download { display: none; }
+/* VAT page, "The file": the simulation on one Excel screen (8 Nov 2026, user) */
+.vat-sim .vat-row.is-off, .vat-sim .vat-total.is-off { visibility: hidden; }
+.vat-sim td[data-vat].is-off { color: transparent; }
+.vat-sim td[data-vat] { transition: background-color 0.6s ease; }
+.vat-sim td.is-new { background: #dcf2df; }
+.vat-sim .vat-neg { color: #b42318; }
+.vat-sim .vat-neg.is-off { color: transparent; }
+.vat-sim .vat-total td { border-top: 2px solid #107c41; background: #f1f8f3; font-weight: 700; }
+.vat-sim .vat-total.is-new td { background: #dcf2df; }
+.vat-sim .vat-total.is-off td { border-top-color: transparent; }
+.vat-sim .sheet-button { transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease; }
+.vat-sim .sheet-button.is-pressed { border-color: #107c41; background: #107c41; color: #fff; transform: scale(0.94); }
+.vat-sim-loading { display: none; margin-left: 8px; color: #107c41; font-weight: 600; }
+.vat-sim.is-loading .vat-sim-loading { display: inline; }
+.vat-sim .vat-sim-status { min-height: 1.5em; margin: 12px 0 0; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+.sim-stage.is-ended > .vat-sim-status { opacity: 1; }

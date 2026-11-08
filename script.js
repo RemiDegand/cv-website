@@ -633,7 +633,7 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
 // Google Sheet, the adjustments already written in sentences on the other screen: select the zone, current UTR loaded,
 // every changed cell typed, "Add Adjustments", a look at the Export sheet (lines appearing one by one) and back, next zone.
 // Starts on its start button and stops at the end on a faded restart arrow; the HTML holds the final state
-// of Kyiv, kept as is with "reduce motion"
+// of Lille, kept as is with "reduce motion"
 const adjSim = document.querySelector(".adj-sim");
 if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const all = (sel) => [...adjSim.querySelectorAll(sel)];
@@ -651,13 +651,13 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   // Current UTR (08:00 to 15:00, Mon to Sun) and the sentences of each zone, as cells to change
   const zones = [
-    { name: "Kyiv", id: 4, utr: [[3.47, 2.72, 4.00, 2.96, 3.97, 2.97, 2.62], [2.33, 3.12, 2.46, 3.64, 3.21, 3.98, 3.86], [2.76, 3.47, 3.28, 3.69, 2.63, 2.54, 3.73], [3.25, 2.89, 3.92, 3.79, 2.77, 3.94, 3.93], [3.19, 3.74, 2.57, 2.90, 2.87, 3.82, 3.26], [3.28, 2.56, 3.08, 3.96, 2.25, 3.23, 2.51], [2.94, 3.68, 2.54, 2.93, 2.66, 3.89, 3.03], [2.97, 2.35, 2.95, 2.40, 3.31, 2.37, 3.45]],
+    { name: "Lille", id: 4, utr: [[3.47, 2.72, 4.00, 2.96, 3.97, 2.97, 2.62], [2.33, 3.12, 2.46, 3.64, 3.21, 3.98, 3.86], [2.76, 3.47, 3.28, 3.69, 2.63, 2.54, 3.73], [3.25, 2.89, 3.92, 3.79, 2.77, 3.94, 3.93], [3.19, 3.74, 2.57, 2.90, 2.87, 3.82, 3.26], [3.28, 2.56, 3.08, 3.96, 2.25, 3.23, 2.51], [2.94, 3.68, 2.54, 2.93, 2.66, 3.89, 3.03], [2.97, 2.35, 2.95, 2.40, 3.31, 2.37, 3.45]],
       rules: [{ days: days(0, 4), hours, f: (v) => v + 0.2 }, { days: [5, 6], hours, f: (v) => v * 0.9 }] },
-    { name: "Lviv", id: 5, utr: [[2.74, 3.18, 2.59, 3.43, 2.96, 3.27, 2.83], [3.06, 2.77, 3.39, 2.68, 3.55, 2.91, 3.22], [2.48, 2.91, 3.05, 2.62, 3.34, 3.71, 3.12], [3.17, 2.66, 2.84, 3.41, 3.58, 3.26, 2.95], [3.62, 3.09, 2.73, 2.98, 3.21, 3.84, 3.47], [2.87, 3.35, 3.52, 3.14, 2.69, 3.03, 3.66], [3.31, 2.88, 3.46, 2.72, 3.09, 3.63, 2.79], [2.65, 3.24, 2.93, 3.57, 2.81, 3.15, 3.38]],
+    { name: "Paris", id: 5, utr: [[2.74, 3.18, 2.59, 3.43, 2.96, 3.27, 2.83], [3.06, 2.77, 3.39, 2.68, 3.55, 2.91, 3.22], [2.48, 2.91, 3.05, 2.62, 3.34, 3.71, 3.12], [3.17, 2.66, 2.84, 3.41, 3.58, 3.26, 2.95], [3.62, 3.09, 2.73, 2.98, 3.21, 3.84, 3.47], [2.87, 3.35, 3.52, 3.14, 2.69, 3.03, 3.66], [3.31, 2.88, 3.46, 2.72, 3.09, 3.63, 2.79], [2.65, 3.24, 2.93, 3.57, 2.81, 3.15, 3.38]],
       rules: [{ days: days(0, 3), hours: [2, 3], f: (v) => v + 0.2 }, { days: days(0, 6), hours: [4, 5], f: (v) => v - 0.1 }] },
-    // Last zone of the loop: selected and loaded, no rules typed
-    { name: "Tbilisi", utr: [[3.12, 2.84, 3.36, 2.67, 3.48, 2.95, 3.21], [2.76, 3.29, 2.91, 3.44, 3.07, 3.58, 2.82], [3.33, 2.71, 3.15, 3.62, 2.89, 3.26, 3.04], [2.98, 3.41, 2.63, 3.18, 3.52, 2.79, 3.37], [3.24, 2.87, 3.49, 2.94, 3.11, 3.65, 2.73], [2.69, 3.31, 3.02, 3.56, 2.83, 3.17, 3.43], [3.47, 2.92, 3.28, 2.75, 3.39, 3.08, 2.86], [2.81, 3.13, 3.54, 2.99, 3.23, 2.68, 3.35]] },
+    // 8 Nov 2026 (user): Marseille is no longer played; after Paris the export is downloaded as a CSV
   ];
+  const download = adjSim.querySelector(".adj-sim-download");
   const [firstTab, exportTab] = all(".adj-sim-tab");
   const clock = simClock(adjSim.querySelector(".adj-sim-stage"));
   const wait = clock.wait;
@@ -709,6 +709,9 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       cells.forEach((td) => { td.textContent = ""; td.classList.remove("is-changed", "is-typing"); });
       pick.textContent = "Select…";
       saved.textContent = "";
+      adjSim.classList.remove("is-downloaded", "is-export");   // a new play starts on the first sheet
+      firstTab.classList.add("is-active");
+      exportTab.classList.remove("is-active");
       status.textContent = "";
       lastLine = null;
       await wait(2000);
@@ -769,6 +772,17 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
         await showExport(zone, utr);
         status.textContent = `${zone.name}'s adjustments are saved in the Export sheet.`;
         await wait(1800);
+        if (z === zones.length - 1) {
+          // The last zone played: the export is downloaded as a CSV file for the forecasting tool
+          status.textContent = "Download the export as a CSV…";
+          await wait(700);
+          download.classList.add("is-pressed");
+          await wait(250);
+          download.classList.remove("is-pressed");
+          adjSim.classList.add("is-downloaded");
+          await wait(1800);
+          break;
+        }
         status.textContent = "Back to the first sheet for the next zone…";
         await wait(700);
         await openSheet(firstTab);
@@ -921,7 +935,15 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
       number.textContent = "";
       checks.forEach((check) => check.classList.remove("is-on"));
       panels.classList.add("is-empty");
-      await wait(700);
+      // The forecaster says what they are about to do, then starts
+      const say = $(".lk-say");
+      say.classList.remove("is-in");
+      say.classList.add("is-waiting");
+      status.textContent = "";
+      await wait(500);
+      say.classList.remove("is-waiting");
+      say.classList.add("is-in");
+      await wait(1800);
       status.textContent = "Select a country, a city and a zone…";
       await choose("country", ["Country A", "Country B"], "Country A");
       await choose("city", ["City 1", "City 2", "All"], "City 1");
@@ -1368,3 +1390,58 @@ if (chatSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
 }
 
 // Later: chatbot window (Phase 2).
+
+// VAT page, "The file" (8 Nov 2026, user): one Excel screen. Refresh → the unmatched supplier entries of journal A1 appear, by supplier →
+// "Assign VAT" → each VAT amount goes into the column of its VAT account → the total of each VAT account. Starts on its start button,
+// stops on the restart arrow; the HTML holds the final state, kept as is without JS or with "reduce motion"
+const vatSim = document.querySelector(".vat-sim");
+if (vatSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const rows = [...vatSim.querySelectorAll(".vat-row")];
+  const vatCells = [...vatSim.querySelectorAll("td[data-vat]")];
+  const total = vatSim.querySelector(".vat-total");
+  const refresh = vatSim.querySelector(".vat-refresh");
+  const assign = vatSim.querySelector(".vat-assign");
+  const status = vatSim.querySelector(".vat-sim-status");
+  const finalStatus = status.textContent;
+  const clock = simClock(vatSim);
+  const wait = clock.wait;
+  const press = async (button) => {
+    button.classList.add("is-pressed");
+    await wait(300);
+    button.classList.remove("is-pressed");
+  };
+  const run = async () => {
+    for (;;) {
+      rows.forEach((row) => row.classList.add("is-off"));
+      vatCells.forEach((cell) => cell.classList.add("is-off"));
+      total.classList.add("is-off");
+      status.textContent = "";
+      await wait(800);
+      status.textContent = "Click Refresh: MyReport reads the ERP…";
+      await wait(1000);
+      await press(refresh);
+      vatSim.classList.add("is-loading");
+      await wait(1400);
+      vatSim.classList.remove("is-loading");
+      status.textContent = "All the unmatched supplier entries of journal A1, by supplier.";
+      for (const row of rows) { row.classList.remove("is-off"); await wait(140); }
+      await wait(2400);
+      status.textContent = "Click \"Assign VAT\": each VAT amount goes into its VAT account's column.";
+      await wait(1200);
+      await press(assign);
+      for (const cell of vatCells) { cell.classList.remove("is-off"); cell.classList.add("is-new"); await wait(380); }
+      await wait(1000);
+      status.textContent = "A credit note gets the opposite sign. Then the total of each VAT account…";
+      await wait(2200);
+      total.classList.remove("is-off");
+      total.classList.add("is-new");
+      await wait(1800);
+      vatCells.forEach((cell) => cell.classList.remove("is-new"));
+      total.classList.remove("is-new");
+      status.textContent = finalStatus;
+      await wait(2500);
+      await restartAtEnd(vatSim);
+    }
+  };
+  simStart(clock, run);
+}

@@ -7,7 +7,7 @@ experience: Data Analyst Intern, Information Systems department, OSLO (Sep – D
 category: Data Modeling
 on_site: true
 page: project-revenue-recognition.html
-tools: [MyReport Data (data modeling), SQL, Finance]
+tools: [MyReport Data (data modeling), SQL]
 sources: [projects/Revenue recognition model/Content.docx (written by Rémi, 27 Oct 2026; local only), projects/Revenue recognition model/Schema of mapping.pdf (Rémi's schema of the model; local only), docs/CV website.md (OSLO summary), about-me.md]
 updated: 2026-10-27
 ---

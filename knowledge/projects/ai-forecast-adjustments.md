@@ -4,7 +4,7 @@ title: AI automation skills for forecast adjustments
 company: Glovo
 industry: Delivery Platform
 experience: Forecasting Analyst Intern, Global Operations / Supply Ops, Glovo (Mar – Sep 2026, Barcelona, Spain, on site)
-category: Automation & AI
+category: Automation
 on_site: true
 page: project-ai-forecast-adjustments.html
 tools: [LLMs (Gemini, Claude), AI agents (OpenCode), Prompt engineering, BigQuery (SQL), GitHub]
@@ -35,7 +35,7 @@ An AI skill shared with the forecasting team, hosted on GitHub (folders for Open
 - For a big change, the AI asks for validation; when a request is unclear, it asks for details.
 - At the end, the export with all the adjustments is ready as a final CSV: download it and export it into the forecasting tool.
 
-The website shows a simulation ("How it started"): the forecaster has next week's adjustments in sentences on one screen (Kyiv: increase UTR by 0.2 for Mon to Fri, decrease by 10% for weekends, both from 10:00 to 14:00; Lviv: increase by 0.2 for Mon to Thu from 10:00 to 12:00, decrease by 0.1 from 12:00 to 14:00; Tbilisi: increase by 5% for Fri and Sat from 10:00 to 14:00) and types them again, zone by zone, in the old Google Sheet (select the zone in a list, type every changed cell of the hour × day grid, click "Add Adjustments", look at the Export sheet with the saved adjustments, then back to the first sheet for the next zone). Only 10:00 to 13:00 is adjusted; the other hours shown (08:00, 09:00, 14:00, 15:00) keep their value. Kyiv's current UTR comes from Example.xlsx (random values), Lviv's and Tbilisi's are made up. Part 2 shows the same sentences pasted into the AI skill and the export table it returns (same values).
+The website shows a simulation ("How it started"): the forecaster has next week's adjustments in sentences on one screen (Lille: increase UTR by 0.2 for Mon to Fri, decrease by 10% for weekends, both from 10:00 to 14:00; Paris: increase by 0.2 for Mon to Thu from 10:00 to 12:00, decrease by 0.1 from 12:00 to 14:00; Marseille: increase by 5% for Fri and Sat from 10:00 to 14:00) and types them again, zone by zone, in the old Google Sheet (select the zone in a list, type every changed cell of the hour × day grid, click "Add Adjustments", look at the Export sheet with the saved adjustments, then back to the first sheet for the next zone). Only 10:00 to 13:00 is adjusted; the other hours shown (08:00, 09:00, 14:00, 15:00) keep their value. Lille's current UTR comes from Example.xlsx (random values), Paris's and Marseille's are made up. Part 2 shows the same sentences pasted into the AI skill and the export table it returns (same values).
 
 ## Results and impact
 - About 2 hours a week of manual entries automated (the old process took about 2 h a week, per Rémi's document; the time the new process takes is not measured).
@@ -59,4 +59,4 @@ LLMs (Gemini, Claude, from Rémi's Glovo tools list), AI agents (OpenCode), prom
 - Which AI tools exactly: OpenCode only, or also Claude Code (".Open Claude" in the document)? Which LLM?
 - Time the new process takes (to state the time saved precisely), and how many zones a week.
 - The "Impact" paragraph of Content.docx talks about VAT (copied from the VAT project): what should it say?
-- The "How it started" simulation (zones Kyiv, Lviv, Tbilisi and their sentences, Lviv values) was written by Claude from the docx examples: to confirm. Zone IDs in the export (Kyiv 4, Lviv 5) are illustrative.
+- The "How it started" simulation (zones Lille, Paris, Marseille and their sentences, Paris values) was written by Claude from the docx examples: to confirm. Zone IDs in the export (Lille 4, Paris 5) are illustrative. The zones are French cities on purpose (8 Nov 2026, user): Glovo does not operate in France, so the data stay anonymous.

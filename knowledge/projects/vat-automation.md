@@ -4,7 +4,7 @@ title: VAT calculation automation
 company: OSLO
 industry: IT & SaaS Solutions
 experience: Data Analyst Intern, Information Systems department, OSLO (Sep – Dec 2025, Villeneuve d'Ascq, France, on site)
-category: Automation & AI
+category: Automation
 on_site: true
 page: project-vat-automation.html
 tools: [Excel (VBA), MyReport Data (ETL, data modeling)]

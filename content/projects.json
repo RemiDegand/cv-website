@@ -6,7 +6,7 @@
   },
   "categories": [
     { "id": "apps-tools", "name": "Apps & Tools", "icon": "app-window", "description": "Apps and calculation tools that teams use day to day." },
-    { "id": "automation-ai", "name": "Automation & AI", "icon": "sparkles", "description": "Manual tasks automated, with scripts and AI." },
+    { "id": "automation-ai", "name": "Automation", "icon": "sparkles", "description": "Manual tasks automated, with scripts and AI." },
     { "id": "dashboards-reporting", "name": "Dashboards & Reporting", "icon": "bar-chart", "description": "Reports that show where to act." },
     { "id": "data-modeling", "name": "Data Modeling", "icon": "database", "description": "The data structures behind reliable numbers." }
   ],
@@ -97,7 +97,7 @@
       "title": "Revenue recognition model",
       "description": "Designed a data model that spreads the revenue of each invoice line over the months of the activity, instead of booking it all on the invoice date.",
       "result": { "key": "€350k → €8k", "text": "annual revenue discrepancies" },
-      "tags": ["MyReport Data (Data modeling)", "SQL", "Finance"],
+      "tags": ["MyReport Data (Data modeling)", "SQL"],
       "home": true
     }
   ]

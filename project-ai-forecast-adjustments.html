@@ -76,26 +76,27 @@
                    adjustments, already written in sentences for the local teams. Right: the old Google Sheet, where
                    each one is typed again: select the zone, current UTR loaded from BigQuery, type every changed cell
                    of the hour x day grid, click "Add Adjustments", look at the Export sheet (as in Example.xlsx) and come back, next zone in the list.
-                   Only 10:00 to 13:00 is adjusted, 08:00, 09:00, 14:00 and 15:00 keep their value. Kyiv values from Example.xlsx (random),
-                   Lviv values made up. The HTML is the final state of Kyiv (shown as is without JS or with
+                   After Paris (8 Nov 2026, user): no way back for Marseille, the "Download CSV" button of the Export sheet is clicked instead.
+                   Only 10:00 to 13:00 is adjusted, 08:00, 09:00, 14:00 and 15:00 keep their value. Lille values from Example.xlsx (random),
+                   Paris values made up. The HTML is the final state of Lille (shown as is without JS or with
                    "reduce motion"); script.js plays it once on screen, then a faded restart arrow replays it on click -->
-              <div class="adj-sim" role="group" aria-label="Simulation: the forecaster says: analyses done, now let's apply the adjustments for next week. The forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Kyiv, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends, both from 10:00 to 14:00; for Lviv, increase UTR by 0.2 for Monday to Thursday from 10:00 to 12:00 and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, each zone is selected, every new value is typed in the hour-by-day grid, some hours keep their value, then Add Adjustments is clicked. After each zone, the forecaster opens the Export sheet, where the saved adjustments appear line by line, then comes back to the first sheet and selects the next zone in the list.">
+              <div class="adj-sim" role="group" aria-label="Simulation: the forecaster says: analyses done, now let's apply the adjustments for next week. The forecaster has next week's adjustments written in sentences on one screen, zone by zone: for Lille, increase UTR by 0.2 for Monday to Friday and decrease it by 10% for weekends, both from 10:00 to 14:00; for Paris, increase UTR by 0.2 for Monday to Thursday from 10:00 to 12:00 and decrease it by 0.1 from 12:00 to 14:00. On the other screen, in the Google Sheet, each zone is selected, every new value is typed in the hour-by-day grid, some hours keep their value, then Add Adjustments is clicked. After each zone, the forecaster opens the Export sheet, where the saved adjustments appear line by line. After Lille, the forecaster comes back to the first sheet for Paris; after Paris, the export is downloaded as a CSV file. 20 more zones are still to do.">
                 <div class="adj-sim-stage">
                 <div class="adj-sim-desk" aria-hidden="true">
                   <div class="adj-sim-screen adj-sim-notes">
                     <p class="adj-sim-title">Next week's adjustments</p>
                     <ul class="adj-sim-zones">
-                      <li class="is-done"><strong>Kyiv</strong><span class="is-done">Increase UTR by 0.2 for Mon to Fri from 10:00 to 14:00</span><span class="is-done">Decrease UTR by 10% for weekends from 10:00 to 14:00</span></li>
-                      <li><strong>Lviv</strong><span>Increase UTR by 0.2 for Mon to Thu from 10:00 to 12:00</span><span>Decrease UTR by 0.1 from 12:00 to 14:00</span></li>
-                      <li><strong>Tbilisi</strong><span>Increase UTR by 5% for Fri and Sat from 10:00 to 14:00</span></li>
-                      <li class="adj-sim-more">+ the other zones…</li>
+                      <li class="is-done"><strong>Lille</strong><span class="is-done">Increase UTR by 0.2 for Mon to Fri from 10:00 to 14:00</span><span class="is-done">Decrease UTR by 10% for weekends from 10:00 to 14:00</span></li>
+                      <li><strong>Paris</strong><span>Increase UTR by 0.2 for Mon to Thu from 10:00 to 12:00</span><span>Decrease UTR by 0.1 from 12:00 to 14:00</span></li>
+                      <li><strong>Marseille</strong><span>Increase UTR by 5% for Fri and Sat from 10:00 to 14:00</span></li>
+                      <li class="adj-sim-more">… 20 more zones</li>
                     </ul>
                   </div>
                   <div class="adj-sim-screen adj-sim-sheet">
                     <p class="adj-sim-title">Google Sheets · Forecast adjustments</p>
                     <div class="adj-sim-views">
                       <div class="adj-sim-input">
-                        <p class="adj-sim-bar">Zone <span class="adj-sim-pickwrap"><span class="adj-sim-pick">Kyiv</span><span class="adj-sim-menu"><span>Bishkek</span><span>Kraków</span><span>Kyiv</span><span>Lviv</span><span>Tbilisi</span><span>Yerevan</span></span></span><span class="adj-sim-load">Loading from BigQuery…</span></p>
+                        <p class="adj-sim-bar">Zone <span class="adj-sim-pickwrap"><span class="adj-sim-pick">Lille</span><span class="adj-sim-menu"><span>Bordeaux</span><span>Lille</span><span>Lyon</span><span>Marseille</span><span>Nantes</span><span>Paris</span></span></span><span class="adj-sim-load">Loading from BigQuery…</span></p>
                         <table>
                           <thead><tr><th>UTR</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
                           <tbody>
@@ -109,10 +110,10 @@
                             <tr><th>15:00</th><td>2.97</td><td>2.35</td><td>2.95</td><td>2.40</td><td>3.31</td><td>2.37</td><td>3.45</td></tr>
                           </tbody>
                         </table>
-                        <p class="adj-sim-foot"><span class="adj-sim-button">▶ Add Adjustments</span><span class="adj-sim-saved">Saved: Kyiv</span></p>
+                        <p class="adj-sim-foot"><span class="adj-sim-button">▶ Add Adjustments</span><span class="adj-sim-saved">Saved: Lille</span></p>
                       </div>
                       <div class="adj-sim-export">
-                        <p class="adj-sim-bar">Adjustments saved, in the tool's format</p>
+                        <p class="adj-sim-bar">Adjustments saved, in the tool's format<span class="adj-sim-download">⤓ Download CSV</span><span class="adj-sim-downloaded">export.csv downloaded</span></p>
                         <table>
                           <thead><tr><th>Zone ID</th><th>Day</th><th>Start</th><th>End</th><th>New UTR</th></tr></thead>
                           <tbody>
@@ -208,8 +209,8 @@
                   <div class="monitor">
                     <div class="monitor-screen">
                       <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">OpenCode · forecast-adjustments skill</span></div>
-                      <div class="sheet ai-chat" tabindex="0" aria-label="The AI skill: the forecaster pastes the same adjustment sentences for Kyiv, Lviv and Tbilisi, the AI reads the current UTR from BigQuery and returns the export table, which the forecaster downloads">
-                        <p class="story-line story-left"><span class="story-who">Forecaster</span><span class="story-bubble">Kyiv: Increase UTR by 0.2 for Mon to Fri from 10:00 to 14:00. Decrease UTR by 10% for weekends from 10:00 to 14:00.<br>Lviv: Increase UTR by 0.2 for Mon to Thu from 10:00 to 12:00. Decrease UTR by 0.1 from 12:00 to 14:00.<br>Tbilisi: Increase UTR by 5% for Fri and Sat from 10:00 to 14:00.</span></p>
+                      <div class="sheet ai-chat" tabindex="0" aria-label="The AI skill: the forecaster pastes the same adjustment sentences for Lille, Paris and Marseille, the AI reads the current UTR from BigQuery and returns the export table, which the forecaster downloads">
+                        <p class="story-line story-left"><span class="story-who">Forecaster</span><span class="story-bubble">Lille: Increase UTR by 0.2 for Mon to Fri from 10:00 to 14:00. Decrease UTR by 10% for weekends from 10:00 to 14:00.<br>Paris: Increase UTR by 0.2 for Mon to Thu from 10:00 to 12:00. Decrease UTR by 0.1 from 12:00 to 14:00.<br>Marseille: Increase UTR by 5% for Fri and Sat from 10:00 to 14:00.</span></p>
                         <p class="story-line story-right"><span class="story-who">AI skill</span><span class="story-bubble"><span class="ai-reply"><span>Current UTR of the 3 zones read from BigQuery.</span><span>Every slot recalculated.</span><span>No unclear change.</span><span>Export ready ↓</span></span><span class="story-typing ai-dots"><span></span><span></span><span></span></span></span></p>
                         <p class="ai-file" aria-hidden="true"><span class="ai-file-name">Export: forecast adjustments (CSV)</span><span class="ai-file-done">✓ Downloaded</span><span class="ai-download"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></span><svg class="ai-cursor" viewBox="0 0 24 24" width="22" height="22"><path d="M5 2l14 12-6.5.6L16 22l-3 1.2-3.3-7.4L5 20z" fill="#1f2937" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></p>
                         <table class="sheet-grid ai-export">
