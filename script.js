@@ -1096,6 +1096,8 @@ if (faSim) {
         return pause(400);
       };
       const [overview, global, schedule, alerts] = views;
+      // The notes on the app's features (8 Nov 2026): they appear once the mouse has shown their part
+      const callout = (at) => { faSim.querySelectorAll(`.fa-callout[data-at="${at}"]`).forEach((el) => el.classList.add("is-in")); return pause(3000); };
       for (;;) {
         views.forEach((view) => {
           view.classList.add("is-playing");
@@ -1130,14 +1132,14 @@ if (faSim) {
         if (!await mouseTo(steps[1]) || !await press(steps[1])) return;
         show(1);
         status.textContent = "Global Zones: every zone with its main KPIs: Delivery Time, Utilization Rate, forecast accuracy and capacity.";
-        if (!await showAll(global, ".fa-a", 40) || !await pause(2500)) return;
+        if (!await showAll(global, ".fa-a", 40) || !await pause(1500) || !await callout("zones")) return;
         const zone = global.querySelector(".fa-link");
         status.textContent = "A click on a zone opens its deep dive: secondary KPIs, buttons to go further, and comments for the action plan.";
         if (!await mouseTo(zone) || !await press(zone)) return;
         details.hidden = false;
-        if (!await pause(3500)) return;
+        if (!await pause(2000) || !await callout("dive")) return;
         const zoneInsights = global.querySelector('[data-open="zone"]');
-        status.textContent = "Zone Insights: KPIs on top, the AI summary, then 3 reports.";
+        status.textContent = "Zone Insights: KPIs on top, the AI analysis, then 3 reports.";
         if (!await mouseTo(zoneInsights) || !await press(zoneInsights)) return;
         openModal("zone");
         if (!await pause(1500)) return;
@@ -1186,7 +1188,7 @@ if (faSim) {
         }
         status.textContent = texts[3];
         cursor.classList.remove("is-on");
-        if (!await pause(3000)) return;
+        if (!await pause(1500) || !await callout("alerts")) return;
         await restartAtEnd(faSim);
       }
     };
@@ -1194,8 +1196,8 @@ if (faSim) {
   }
 }
 
-// Forecast accuracy page, "AI summaries": same view as the app above. In Global Zones the mouse opens a zone, then Zone Insights, and it stays
-// on the AI summary, explained day by day under the screen. A click pauses it. Starts on its start button, stops on the restart arrow.
+// Forecast accuracy page, "AI analysis": same view as the app above. In Global Zones the mouse opens a zone, then Zone Insights, and it stays
+// on the AI analysis, explained day by day under the screen. A click pauses it. Starts on its start button, stops on the restart arrow.
 // The HTML holds the final state, kept without JS or with "reduce motion".
 const aiSim = document.querySelector(".ais-sim");
 if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -1253,7 +1255,7 @@ if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-m
       await press(zone);
       details.hidden = false;
       await pause(1000);
-      status.textContent = "Zone Insights opens on the AI summary, already written: nothing to ask for.";
+      status.textContent = "Zone Insights opens on the AI analysis, already written: nothing to ask for.";
       await mouseTo(insights);
       await press(insights);
       modal.classList.add("is-open");
@@ -1265,7 +1267,7 @@ if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-m
         status.textContent = dayTexts[i];
         const box = modal.querySelector(".fa-modal-scroll");
         const below = day.getBoundingClientRect().bottom - box.getBoundingClientRect().bottom;
-        if (below > 0) box.scrollTop += below + 12;   // the summary is taller than the screen
+        if (below > 0) box.scrollTop += below + 12;   // the analysis is taller than the screen
         await pause(2600);
       }
       days.forEach((d) => d.classList.remove("is-on"));

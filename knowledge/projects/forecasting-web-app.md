@@ -7,7 +7,7 @@ experience: Forecasting Analyst Intern, Global Operations / Supply Ops, Glovo (M
 category: Apps & Tools
 on_site: true
 page: project-forecasting-web-app.html
-tools: [Google Apps Script, HTML / CSS, JavaScript, Chart.js, Google Sheets, BigQuery (SQL), Vertex AI (Gemini), Python, Google Cloud Run]
+tools: [BigQuery (SQL), Python, AI agents (OpenCode), Vertex AI (Gemini), Google Cloud Run, Google Sheets (Apps Script)]
 sources: [Rémi's answers (2 Nov 2026, Content.docx, not public), code of the first version (not public), docs/CV website.md (Glovo summary), linkedin-glovo-description.md (draft v1–v3), about-me.md]
 updated: 2026-11-02
 ---
@@ -15,7 +15,7 @@ updated: 2026-11-02
 # Forecast accuracy web app (Glovo)
 
 ## Summary
-The forecast accuracy web app is an internal tool Rémi designed and built during the Glovo internship, as a personal initiative. It is specialised in forecast accuracy: it shows the performance of all the zones at a glance, raises alerts on the zones that deviate, and explains the variations with AI summaries. Every member of the forecasting team used it daily.
+The forecast accuracy web app is an internal tool Rémi designed and built during the Glovo internship, as a personal initiative. It is specialised in forecast accuracy: it shows the performance of all the zones at a glance, raises alerts on the zones that deviate, and explains the variations with AI analysis. Every member of the forecasting team used it daily.
 
 ## Context
 Rémi was Forecasting Analyst Intern in Glovo's Global Operations, in the Supply Ops department, working on the PLECA market (Poland, Kazakhstan, Kyrgyzstan, Georgia, Armenia, Ukraine). Rémi forecast weekly rider supply for 5 countries (South Poland, West Ukraine, Armenia, Georgia, Kyrgyzstan), covering about 615K orders and 371K rider slots per week, to match rider availability with customer demand.
@@ -31,7 +31,7 @@ Looker had three limits:
 - Not oriented to forecast accuracy: metrics like Delivery Time or Missing Capacity were shown on their own, not to explain why Proper, Under or Over FC moved.
 
 ## What I built
-Rémi's idea was to see all the zones at the same time, with alarms; the tool kept growing until it became a full web app. Every dashboard, metric and summary is designed to explain the performance and variation of Proper, Under and Over FC.
+Rémi's idea was to see all the zones at the same time, with alarms; the tool kept growing until it became a full web app. Every dashboard, metric and analysis is designed to explain the performance and variation of Proper, Under and Over FC.
 - FC Schedule (the most used view): forecast accuracy of a zone in a schedule grid, days in columns and hours in rows. Each slot is a circle whose colour shows the main result and whose size shows the number of orders.
 - Market Overview: performance with the week-on-week change, by country and area down to the zone, with no selection needed, and the top 10 zones by volume.
 - Global Zones: all the zones in one table, with filters.
@@ -39,15 +39,15 @@ Rémi's idea was to see all the zones at the same time, with alarms; the tool ke
 - Zone Deep Dive: accuracy by day and time slot, Slot Filling, Rider Demand, and comments per zone.
 - Last complete week or last 7 days, on every view.
 
-## AI summaries
-For each zone, a day-by-day written summary whose only goal is to explain the week-over-week (WoW) variation of Proper, Under and Over FC, using data from outside forecast accuracy (Delivery Time, Missing Capacity, week-on-week order variation, Orders FC). Process: a specific BigQuery query collects all the data needed; an AI agent (OpenCode) is given access to this query, with context and examples of analysis with those data; a Python script sets when it runs, runs everything and keeps a token limit. It runs every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.
+## AI analysis
+For each zone, a day-by-day written diagnostic analysis (it answers "why did it happen?") whose only goal is to explain the week-over-week (WoW) variation of Proper, Under and Over FC, using data from outside forecast accuracy (Delivery Time, Missing Capacity, week-on-week order variation, Orders FC). Process: specific BigQuery queries collect all the data needed; an AI agent (OpenCode) is given access to these queries, with context and examples of analysis with those data; a Python script sets when it runs, runs everything and keeps a token limit. It runs every morning at 9:00, so the team understands what happened as soon as it arrives at work.
 
 ## Chatbot
 The metrics were complex, and some were new, so a metric help chatbot (Gemini through Vertex AI) explains how the data are computed and how to read them. To save tokens, Rémi gave it the queries and only the complementary information it needed. It refuses to analyse performance or recommend actions.
 
 ## Versions
 - First version, PLECA market only ("PLECA Market FC"): a Google Apps Script web app reading a Google Sheet filled by BigQuery queries.
-- Final version, all markets: hosted on Google Cloud Run, with the code in Python, Vertex AI for the chatbot and Python for the AI summaries.
+- Final version, all markets: hosted on Google Cloud Run, with the code in Python, Vertex AI for the chatbot and Python for the AI analysis.
 
 ## Results and impact
 - Used daily by every member of the forecasting team: a more organised and quicker way to check the performance of the zones.
@@ -62,7 +62,7 @@ All the members of the forecasting team; daily use.
 First version: Google Apps Script, HTML / CSS, JavaScript, Chart.js, Google Sheets, BigQuery (SQL), Vertex AI (Gemini 2.5 Flash), Python. Final version: Google Cloud Run, Python, Vertex AI.
 
 ## Questions a recruiter might ask
-- **What did Rémi build at Glovo?** → A web app specialised in forecast accuracy: all the zones at a glance, alerts on the zones that deviate and AI summaries that explain why, used daily by the forecasting team.
+- **What did Rémi build at Glovo?** → A web app specialised in forecast accuracy: all the zones at a glance, alerts on the zones that deviate and AI analysis that explains why, used daily by the forecasting team.
 - **Why not just use Looker?** → On Looker, zones had to be selected one by one and the dashboard gave an average, with no pattern by day or time slot. The app shows all the zones at once and focuses on forecast accuracy.
 - **Whose idea was it?** → Rémi's own idea: to see all the zones at the same time, with alarms.
 - **What does the FC Schedule show?** → Forecast accuracy by day and hour for one zone, so patterns can be seen at a glance.
@@ -72,4 +72,4 @@ First version: Google Apps Script, HTML / CSS, JavaScript, Chart.js, Google Shee
 - Broken Correlation %: percentage of orders (Rémi's description) or of hours (the code of the first version divides hours by eligible hours)?
 - Which markets the final version covered, and how many forecasters used it.
 - Whether part of the +8 pts can be linked to the app.
-- Which AI model wrote the summaries; why the chatbot is limited to definitions; time saved each week; tools of the final version; AI tool used to build the app.
+- Which AI model wrote the analyses; why the chatbot is limited to definitions; time saved each week; tools of the final version; AI tool used to build the app.

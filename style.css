@@ -1509,13 +1509,12 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .lk-stack i:first-of-type { border-radius: 3px 3px 0 0; }
 .lk-stack em { margin-bottom: 2px; color: #4b5563; font-size: 0.62rem; font-style: normal; font-weight: 600; line-height: 1; }
 
-/* "What I built": the first of its 3 sections sits close to the block title; AI summaries process in 4 steps on one row */
+/* "What I built": the first of its 3 sections sits close to the block title; AI analysis process in 4 steps on one row */
 .fa-section { margin-top: 72px; }
 .fa-section.fa-first { margin-top: 28px; }
 .fa-section > h3 { display: flex; align-items: center; gap: 12px; margin-bottom: 2px; font-size: 1.35rem; }
 .fa-num { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 1rem; font-weight: 700; }
 .project-page .fa-subtitle { margin: 0 0 12px 46px; color: var(--text-muted); font-weight: 500; }   /* aligned with the title, after the 34px circle and its 12px gap */
-.project-page .fa-after-sim { margin-top: 16px; }
 .chat-sim { margin-top: 14px; }
 @media (min-width: 721px) {
   .fa-flow-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
@@ -1575,7 +1574,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .sim-stage.is-waiting > :not(.sim-restart) { pointer-events: none; }   /* nothing to click before the start button */
 /* The app's chatbot button, bottom right of the screen, above everything but the mouse (no interaction yet) */
 .fa-chat { position: absolute; z-index: 3; right: 14px; bottom: 14px; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #0f172a; color: #fff; font-size: 1.15rem; font-weight: 700; box-shadow: 0 6px 16px rgba(15, 23, 42, 0.28); }
-/* AI summaries simulation: the day being explained lights up */
+/* AI analysis simulation: the day being explained lights up */
 .project-page .ais-day { padding: 2px 4px; border-radius: 4px; }
 .project-page .ais-day.is-on { background: #fff3c4; }
 .ais-sim + .project-flow { margin-top: 24px; }
@@ -1661,7 +1660,7 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 .fa-grid td { padding: 0; border: 1px solid #f0f2f5; text-align: center; }
 .fa-c { display: inline-block; width: var(--s); height: var(--s); border-radius: 50%; background: var(--k); vertical-align: middle; }
 .fa-legend-size { color: #6b7280; }
-/* AI summary */
+/* AI analysis */
 .fa-ai { padding: 10px 12px; border: 1px solid #bfd3fb; border-radius: 8px; background: #f5f8ff; }
 .project-page .fa-ai p { margin-top: 8px; line-height: 1.5; }
 .project-page .fa-ai .fa-ai-title { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; margin-top: 0; color: #1d4ed8; font-weight: 700; }
@@ -1753,3 +1752,35 @@ html:has(.block-nav) { scroll-padding-top: calc(var(--menu-height) + 64px); }   
 @keyframes xp-more-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 @media (max-width: 720px) { .xp-more { margin-top: 64px; } .xp-more + .xp-chapter { margin-top: 72px; } }
 @media (prefers-reduced-motion: reduce) { .xp-more-arrow { animation: none; } }
+
+/* Forecasting web app, What I built > 1. Reporting: how it is built (8 Nov 2026, user), 3 short steps on one row with a blue arrow
+   between them, no boxes; the sentence on the app's purpose follows as plain text. Phones: one column, down arrows */
+.fa-chain { list-style: none; display: flex; align-items: center; gap: 16px; margin: 18px 0 16px; padding: 0; }
+.fa-chain li { flex: 1; color: var(--text-muted); line-height: 1.5; }
+.fa-chain li strong { color: var(--text); }
+.fa-chain li + li { position: relative; padding-left: 34px; }
+.fa-chain li + li::before { content: "→"; position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: var(--accent); font-weight: 700; font-size: 1.2rem; }
+@media (max-width: 640px) {
+  .fa-chain { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .fa-chain li + li { padding-left: 0; }
+  .fa-chain li + li::before { content: "↓"; position: static; display: block; transform: none; margin: 0 0 6px; }
+}
+/* Forecast accuracy simulation: notes on the app's features, in the simulation (8 Nov 2026, user; was a list under it).
+   Same look as the FC Schedule notes, with a small arrow pointing up at their part. Global Zones gets filters and the 2 periods */
+.fa-gfilters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 2px; }
+.fa-pick { padding: 3px 8px; border: 1px solid #c9ced8; border-radius: 5px; background: #fff; color: #4b5563; font-size: 0.7rem; white-space: nowrap; }
+.fa-period { display: inline-flex; margin-left: auto; overflow: hidden; border: 1px solid #c9ced8; border-radius: 6px; font-size: 0.7rem; white-space: nowrap; }
+.fa-period b { padding: 3px 8px; color: #4b5563; font-weight: 600; }
+.fa-period b.is-on { background: #1f2937; color: #fff; }
+.fa-callouts { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.fa-callout { position: relative; z-index: 1; width: max-content; max-width: 100%; margin-top: 8px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); box-shadow: var(--shadow); color: var(--text-muted); font-size: 0.75rem; font-weight: 500; line-height: 1.3; white-space: normal; }
+.fa-callout::before { content: ""; position: absolute; bottom: 100%; left: 20px; border: 6px solid transparent; border-bottom-color: #8a93a3; }
+.fa-callout-r::before { left: auto; right: 20px; }
+.fa-callouts .fa-callout { max-width: 48%; }
+.fa-filters + .fa-callout { margin: -2px 0 10px; }
+.fa-callout.is-in { animation: fa-callout-in 0.35s ease-out; }
+@keyframes fa-callout-in { from { opacity: 0; transform: translateY(-4px); } }
+@media (max-width: 720px) { .fa-callout { font-size: 0.7rem; } }
+/* AI analysis: more room between the 4 steps and the simulation, now that the line under the steps is gone (8 Nov 2026, user) */
+.project-flow + .ais-sim { margin-top: 28px; }
+.fa-chain + .fa-sim { margin-top: 28px; }   /* Chatbot: the chain sits right above its simulation */

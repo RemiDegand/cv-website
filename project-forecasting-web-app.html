@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forecast accuracy web app | Rémi Degand</title>
-  <meta name="description" content="Forecast accuracy web app: a web app specialised in forecast accuracy, with alerts and AI summaries, by Rémi Degand at Glovo.">
+  <meta name="description" content="Forecast accuracy web app: a web app specialised in forecast accuracy, with alerts and AI analysis, by Rémi Degand at Glovo.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="page-head.css"><!-- page header: glow, logo tile, title, fact cards (7 Nov 2026) -->
+  <link rel="stylesheet" href="project-flow-fx.css"><!-- part 2 steps as a pipe with icons (8 Nov 2026) -->
 </head>
 <body>
 
@@ -156,7 +157,14 @@
             <div class="block-part reveal fa-section fa-first">
               <h3><span class="fa-num" aria-hidden="true">1</span>Reporting</h3>
               <p class="fa-subtitle">The web app and its dashboards</p>
-              <p>Every dashboard, metric and summary answers one question: why did Proper, Under or Over FC move? Other metrics are there for their link to it.</p>
+              <!-- How it is built (8 Nov 2026, user): 3 short steps on one row linked by arrows (one column with down arrows on phones), then the
+                   purpose of the app as plain text; above the simulation. Styles: project-flow-fx.css (icons and thin line, Web Designer 8 Nov) -->
+              <ol class="project-flow fa-flow-pipe reveal-stagger" aria-label="How the reporting is built">
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span><strong>Specific queries</strong> to get the right output</li>
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M8 16v-5M13 16V8M18 16v-3"/></svg></span><strong>Compute and display</strong> the metrics with Python</li>
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a5 5 0 1 1 .9-9.9A6 6 0 0 1 19 10.5 3.75 3.75 0 0 1 18 18z"/></svg></span><strong>Host</strong> the web app on Google Cloud Run</li>
+              </ol>
+              <p>Every dashboard, metric and analysis answers one question: why did Proper, Under or Over FC move? Other metrics are there for their link to it.</p>
               <!-- Simulation (script.js), following the real app: 3 steps playing once on screen, with a mouse. The buttons work: a click on a step,
                    Insights, a zone, Zone Insights or FC Schedule shows it and stops the play. Grid and charts: made-up data from a scratch script.
                    On the 2 notes --y = top of the frame in px. The HTML holds the FC Schedule (step 2) -->
@@ -217,6 +225,12 @@
                     <!-- 2. Global Zones: primary KPIs; a click on a zone shows the Zone Deep Dive: buttons, secondary KPIs, comments -->
                     <div class="fa-view">
                       <p class="fa-head fa-a">Global Zones <em>Viewing 40 zones</em></p>
+                      <!-- Filters and the 2 periods, with their notes (8 Nov 2026, user: the list under the simulation moved into it) -->
+                      <div class="fa-gfilters fa-a"><span class="fa-pick">Area ▾</span><span class="fa-pick">Country ▾</span><span class="fa-pick">City ▾</span><span class="fa-pick">Zone ▾</span><span class="fa-period"><b class="is-on">Last complete week</b><b>Last 7 days</b></span></div>
+                      <div class="fa-callouts">
+                        <div class="fa-callout fa-late" data-at="zones">Filters: area, country, city or zone</div>
+                        <div class="fa-callout fa-callout-r fa-late" data-at="zones">Last complete week or last 7 days, on every view</div>
+                      </div>
                       <div class="fa-tw">
                         <table class="fa-table fa-zones">
                           <thead>
@@ -233,6 +247,7 @@
                                 <div><h5>Capacity</h5><span><i>Slot Filling</i><b>94%</b></span><span><i>Filling Rate</i><b>95%</b></span><h5>Orders</h5><span><i>Orders WAPE</i><b>11.2%</b></span><span><i>Orders MPE</i><b>+6.4%</b></span></div>
                                 <div class="fa-comment"><h5>📝 Action Plan / Comments</h5><p>Weekend evenings short on slots: discuss with the local team.</p></div>
                               </div>
+                              <div class="fa-callout fa-late" data-at="dive">Accuracy by day and time slot, comments saved automatically</div>
                             </td></tr>
                             <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 7</td><td>33.4</td><td>+1.4</td><td>2.7</td><td>31%</td><td>52%</td><td>17%</td><td>3.9k</td><td>96%</td></tr>
                             <tr class="fa-a"><td><span class="fa-toggle"></span>Zone 21</td><td>31.8</td><td>−0.2</td><td>2.6</td><td>28%</td><td>54%</td><td>18%</td><td>3.2k</td><td>95%</td></tr>
@@ -254,13 +269,13 @@
                           </tbody>
                         </table>
                       </div>
-                      <!-- Zone Insights: KPIs on top, the AI summary, then 3 reports -->
+                      <!-- Zone Insights: KPIs on top, the AI analysis, then 3 reports -->
                       <div class="fa-modal" data-modal="zone">
                         <div class="fa-modal-scroll">
                           <p class="fa-modal-title">Zone Insights: Zone 12 <button type="button" class="fa-close" aria-label="Close">×</button></p>
                           <div class="fa-tiles "><div><span>Actual Orders</span><b>9k</b></div><div><span>Under FC</span><b class="t-uf">24%</b><em>+6.8 pp</em></div><div><span>Proper FC</span><b class="t-pf">49%</b><em>−7.2 pp</em></div><div><span>Over FC</span><b class="t-of">27%</b><em>+0.4 pp</em></div><div><span>Eligible Slots</span><b>4.3k</b><em>+0.8%</em></div></div>
                           <div class="fa-ai" data-part>
-                            <p class="fa-ai-title">✨ AI Summary <em>Generated on Monday morning</em></p>
+                            <p class="fa-ai-title">✨ AI Analysis <em>Generated today at 9:00</em></p>
                             <p class="fa-note-text">Explains why Proper, Under and Over FC moved, day by day.</p>
                             <p><b>Mon:</b> <span class="t-of">Over FC rose by 9 pp</span> in the afternoon: orders came in 6% below Orders FC, with no change in capacity.</p>
                             <p><b>Tue:</b> <span class="t-of">Over FC rose by 7 pp</span> in the afternoon: orders came in 5% below Orders FC, with no change in capacity.</p>
@@ -334,6 +349,7 @@
                         <div class="fa-slider"><span>Min Under FC: <b>15%</b></span><span class="fa-track"><i style="--v:15%"></i></span></div>
                         <div class="fa-slider"><span>Min Order Volume: <b>0</b></span><span class="fa-track"><i style="--v:0%"></i></span></div>
                       </div>
+                      <div class="fa-callout fa-late" data-at="alerts">Same for Delivery Time in DT Alerts, with thresholds that can be changed</div>
                       <div class="fa-tw">
                         <table class="fa-table fa-zones">
                           <thead>
@@ -368,29 +384,22 @@
                 </div>
                 <figcaption class="fa-status">Zone 12 in a schedule grid: one circle per slot. Patterns by day and hour appear at a glance.</figcaption>
               </figure>
-              <ul class="project-did fa-after-sim reveal-stagger">
-                <li><strong>Global Zones:</strong> all the zones in one table, filtered by area, country, city or zone.</li>
-                <li><strong>DT Alerts:</strong> the zones too far from their Delivery Time target, with thresholds that can be changed.</li>
-                <li><strong>Zone Deep Dive:</strong> accuracy by day and by time slot, and a comment box saved automatically.</li>
-                <li><strong>Two periods:</strong> last complete week or last 7 days, on every view.</li>
-                <li><strong>Two versions:</strong> first the PLECA market, a Google Apps Script web app reading a Google Sheet filled by BigQuery queries; then all markets, hosted on Google Cloud Run with the code in Python.</li>
-              </ul>
             </div>
 
             <div class="block-part reveal fa-section">
-              <h3><span class="fa-num" aria-hidden="true">2</span>AI summaries</h3>
+              <h3><span class="fa-num" aria-hidden="true">2</span>AI analysis</h3>
               <p class="fa-subtitle">Explaining why forecast accuracy moved</p>
-              <p>A written summary for each zone, with one goal: explain the WoW variation of Proper, Under and Over FC.</p>
-              <ol class="project-flow fa-flow-4 reveal-stagger" aria-label="How the AI summaries are made">
-                <li><strong>A BigQuery query</strong><span>All the data needed to explain the variation</span></li>
-                <li><strong>An AI agent</strong><span>Given access to this query</span></li>
-                <li><strong>Context and examples</strong><span>How to read the data, with examples of analysis</span></li>
-                <li><strong>A Python script</strong><span>Sets when it runs, runs everything, keeps a token limit</span></li>
+              <p>A written <strong>diagnostic analysis</strong> for each zone, answering one question: why did it happen? It explains the WoW variation of Proper, Under and Over FC.</p>
+              <!-- Pipe with icons (Web Designer, 8 Nov 2026): styles in project-flow-fx.css -->
+              <ol class="project-flow fa-flow-pipe reveal-stagger" aria-label="How the AI analysis is made">
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span><strong>Specific queries</strong><span>All the data needed to explain the variation</span></li>
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg></span><strong>An AI agent</strong><span>Given access to these queries</span></li>
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2zM22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></svg></span><strong>Context and examples</strong><span>How to read the data, with examples of analysis</span></li>
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></svg></span><strong>A Python script</strong><span>Sets when it runs, runs everything, keeps a token limit</span></li>
               </ol>
-              <p class="flow-note">It runs every Monday morning for the last complete week, and at 9:00 from Monday to Friday for the last 7 days.</p>
-              <!-- Simulation (script.js), same app view as above: Global Zones, a click on a zone, Zone Insights, then it stays on the AI summary and
+              <!-- Simulation (script.js), same app view as above: Global Zones, a click on a zone, Zone Insights, then it stays on the AI analysis and
                    explains it day by day. A click pauses it. Made-up data. The HTML holds the final state -->
-              <figure class="project-shot annotated fa-sim ais-sim" role="group" aria-label="Simulation with made-up data: in Global Zones, a forecaster opens a zone, then Zone Insights, and reads the AI summary, which explains day by day why Proper, Under and Over FC moved.">
+              <figure class="project-shot annotated fa-sim ais-sim" role="group" aria-label="Simulation with made-up data: in Global Zones, a forecaster opens a zone, then Zone Insights, and reads the AI analysis, which explains day by day why Proper, Under and Over FC moved.">
                 <div class="monitor-screen">
                   <div class="monitor-bar" aria-hidden="true"><span class="monitor-dots"><i></i><i></i><i></i></span><span class="monitor-title">Forecast accuracy web app · simulation</span></div>
                   <div class="fa-appbar" aria-hidden="true">
@@ -443,7 +452,7 @@
                           <p class="fa-modal-title">Zone Insights: Zone 12 </p>
                           <div class="fa-tiles "><div><span>Actual Orders</span><b>9k</b></div><div><span>Under FC</span><b class="t-uf">24%</b><em>+6.8 pp</em></div><div><span>Proper FC</span><b class="t-pf">49%</b><em>−7.2 pp</em></div><div><span>Over FC</span><b class="t-of">27%</b><em>+0.4 pp</em></div><div><span>Eligible Slots</span><b>4.3k</b><em>+0.8%</em></div></div>
                           <div class="fa-ai">
-                            <p class="fa-ai-title">✨ AI Summary <em>Generated on Monday morning</em></p>
+                            <p class="fa-ai-title">✨ AI Analysis <em>Generated today at 9:00</em></p>
                             <p class="fa-note-text">Explains why Proper, Under and Over FC moved, day by day.</p>
                             <p class="ais-day"><b>Mon:</b> <span class="t-of">Over FC rose by 9 pp</span> in the afternoon: orders came in 6% below Orders FC, with no change in capacity.</p>
                             <p class="ais-day"><b>Tue:</b> <span class="t-of">Over FC rose by 7 pp</span> in the afternoon: orders came in 5% below Orders FC, with no change in capacity.</p>
@@ -458,7 +467,7 @@
                     </div>
                   </div>
                 </div>
-                <figcaption class="fa-status">One summary per zone, written automatically: the forecaster reads why the zone moved.</figcaption>
+                <figcaption class="fa-status">One analysis per zone, written automatically: the forecaster reads why the zone moved.</figcaption>
               </figure>
             </div>
 
@@ -466,11 +475,11 @@
               <h3><span class="fa-num" aria-hidden="true">3</span>Chatbot</h3>
               <p class="fa-subtitle">How the data are computed and how to read them</p>
               <p>The metrics were complex, and some were new, so a chatbot explains them.</p>
-              <ol class="project-flow fa-flow-4 reveal-stagger" aria-label="How the chatbot answers">
-                <li><strong>A question in the app</strong><span>The "?" button opens Metric Help on every screen</span></li>
-                <li><strong>The queries</strong><span>How each metric is computed</span></li>
-                <li><strong>Complementary information</strong><span>Only what the queries don't say, to save tokens</span></li>
-                <li><strong>Gemini (Vertex AI)</strong><span>Answers definitions, formulas, aggregations and data sources only</span></li>
+              <!-- 3 short steps, same look as Reporting and AI analysis: icon + thin line (Web Designer, 8 Nov 2026). Styles: project-flow-fx.css -->
+              <ol class="project-flow fa-flow-pipe reveal-stagger" aria-label="How the chatbot answers">
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg></span><strong>Connect an LLM</strong> (Gemini, Vertex AI) to the web app, with a token limit</li>
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2zM22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></svg></span><strong>Give it context:</strong> the queries and complementary information</li>
+                <li><span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9.8 9.5a2.3 2.3 0 0 1 4.4.8c0 1.5-2.2 2-2.2 2M12 15.5h.01"/></svg></span><strong>Answer questions</strong> on the metrics only: definitions, formulas, aggregations and data sources</li>
               </ol>
               <!-- Simulation (script.js), same app view as above: on Market Overview the mouse opens the chatbot, then 2 questions and 2 answers. Same look as the
                    chat of the real app. Everything is only a picture: a click pauses it. Made-up view. The HTML holds the final state -->
@@ -522,15 +531,17 @@
             <div class="block-part reveal">
               <h3>Impact</h3>
               <ul class="project-did reveal-stagger">
-                <li><strong>For the whole team:</strong> a more organised and quicker way to check the performance of the zones.</li>
-                <li><strong>A new view, FC Schedule:</strong> forecast accuracy by day and by time slot, where Looker only gave an average.</li>
-                <li><strong>A new metric, Broken Correlation %:</strong> how much was delivered in bad conditions (Delivery Time above target and Utilization Rate below target). A high figure means bad conditions with regard to the target, or a target that cannot be reached.</li>
+                <!-- Rewritten 8 Nov 2026 (user): the tool, the agentic AI, then the new view and metrics with the chatbot -->
+                <li><strong>A dedicated forecast accuracy tool</strong>, used daily by the whole team, with dashboards and reports on the forecast accuracy of every zone.</li>
+                <li><strong>Agentic AI for diagnostic analysis:</strong> the team understands faster what happened in each zone.</li>
+                <li><strong>New views and new metrics</strong> to complement our analysis, all explained by the chatbot.</li>
               </ul>
             </div>
             <div class="block-part reveal">
               <h3>Tools</h3>
               <ul class="tags reveal-stagger">
-                <li>Google Apps Script</li><li>HTML / CSS</li><li>JavaScript</li><li>Chart.js</li><li>Google Sheets</li><li>BigQuery (SQL)</li><li>Vertex AI (Gemini)</li><li>AI agents (OpenCode)</li><li>Python</li><li>Google Cloud Run</li>
+                <!-- 8 Nov 2026 (user): most important first; HTML / CSS, JavaScript and Chart.js removed; Apps Script with Google Sheets -->
+                <li>BigQuery (SQL)</li><li>Python</li><li>AI agents (OpenCode)</li><li>Vertex AI (Gemini)</li><li>Google Cloud Run</li><li>Google Sheets (Apps Script)</li>
               </ul>
             </div>
           </div>

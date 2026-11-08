@@ -49,7 +49,7 @@ The forecasting team (every forecaster, according to Rémi's document).
 LLMs (Gemini, Claude, from Rémi's Glovo tools list), AI agents (OpenCode), prompt engineering (the skill's rules and examples), BigQuery (SQL query), GitHub. Before: Google Sheets with Apps Script.
 
 ## Questions a recruiter might ask
-- **Has Rémi worked with AI at Glovo?** → Yes: he created an AI skill that turns written forecast adjustments into the forecasting tool's import file, and built a forecasting web app with AI-generated summaries and a chatbot.
+- **Has Rémi worked with AI at Glovo?** → Yes: he created an AI skill that turns written forecast adjustments into the forecasting tool's import file, and built a forecasting web app with AI-generated analysis and a chatbot.
 - **How does the AI avoid mistakes?** → It reads the current values from BigQuery through a query (JSON output), follows a file of rules and examples for the format, asks for validation on big changes and for details when a request is unclear.
 - **What did it save?** → About 2 hours of manual entries every week.
 

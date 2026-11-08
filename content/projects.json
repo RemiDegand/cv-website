@@ -23,9 +23,9 @@
       "ai": true,
       "company": "glovo",
       "title": "Forecast accuracy web app",
-      "description": "Designed and built a web app specialised in forecast accuracy: all the zones at a glance, alerts on the zones that deviate and AI summaries that explain why.",
+      "description": "Designed and built a web app specialised in forecast accuracy: all the zones at a glance, alerts on the zones that deviate and AI analysis that explains why.",
       "result": { "key": "Daily use", "text": "by all forecasting team members" },
-      "tags": ["Python", "BigQuery (SQL)", "Vertex AI (Gemini)", "Apps Script", "Cloud Run"],
+      "tags": ["BigQuery (SQL)", "AI agents (OpenCode)", "Vertex AI (Gemini)", "Cloud Run", "Google Sheets (Apps Script)"],
       "home": true
     },
     {

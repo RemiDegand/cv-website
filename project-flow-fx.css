@@ -1,0 +1,30 @@
+/* ===== Web Designer: process steps, simple version (8 Nov 2026) =====
+   Used on the forecasting web app page, parts 1 Reporting (3 steps), 2 AI analysis (4 steps) and 3 Chatbot (3 steps):
+   ol.project-flow.fa-flow-pipe. One small icon per step in a light circle, joined by a thin line, the bold title and
+   its sentence under it, no box. One colour only. Vertical on phones.
+   (A first version with coloured tiles and flowing dots was too much for the user. Parts 1 and 3 were a plain-text
+   chain with arrows, .fa-chain in style.css; the user asked for the same look as part 2 on 8 Nov.) */
+.project-flow.fa-flow-pipe { --gap: 24px; --n: 3; position: relative; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: var(--gap); margin: 22px 0 0; }
+.project-flow.fa-flow-pipe:has(> li:nth-child(4)) { --n: 4; }
+.project-flow.fa-flow-pipe::before {
+  content: ""; position: absolute; top: 20px; height: 1px; background: var(--border);
+  /* from the centre of the first icon to the centre of the last */
+  left: calc((100% - (var(--n) - 1) * var(--gap)) / (2 * var(--n))); right: calc((100% - (var(--n) - 1) * var(--gap)) / (2 * var(--n)));
+}
+.project-flow.fa-flow-pipe li { padding: 0; border: 0; background: none; text-align: center; color: var(--text-muted); font-size: 0.85rem; line-height: 1.45; }
+.project-flow.fa-flow-pipe li::after { content: none; }
+.project-flow.fa-flow-pipe .flow-icon {
+  position: relative; display: grid; place-items: center; width: 40px; height: 40px; margin: 0 auto 12px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent); box-shadow: 0 0 0 6px var(--bg);
+}
+.project-flow.fa-flow-pipe .flow-icon svg { width: 18px; height: 18px; }
+.project-flow.fa-flow-pipe strong { margin-bottom: 4px; color: var(--text); font-size: 0.95rem; line-height: 1.3; }
+.project-flow.fa-flow-pipe strong + span { margin-top: 0; }
+.project-flow.fa-flow-pipe + .fa-sim, .project-flow.fa-flow-pipe + p { margin-top: 28px; }
+
+@media (max-width: 720px) {
+  .project-flow.fa-flow-pipe { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-left: 56px; }
+  .project-flow.fa-flow-pipe::before { top: 20px; bottom: 20px; left: 20px; right: auto; width: 1px; height: auto; }
+  .project-flow.fa-flow-pipe li { min-height: 40px; text-align: left; }
+  .project-flow.fa-flow-pipe .flow-icon { position: absolute; left: -56px; top: 0; margin: 0; }
+}
