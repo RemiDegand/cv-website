@@ -223,7 +223,7 @@ ${cards(["sales-performance-reporting"])}
     ],
     projects: [],
     figures: [["105", "new B2B clients (104 bakeries, 1 large retail store)"], ["~21", "new clients per month"]],
-    tools: ["B2B sales", "Prospecting", "Negotiation"],
+    tools: ["Google Maps", "LinkedIn", "CRM", "ERP"],   // user, 8 Nov 2026
     skills: ["B2B sales", "Prospecting", "Negotiation", "Client retention"],   // Logistics removed (user, 8 Nov 2026)
     // Same structure as Glovo (user, 7 Nov 2026): My mission / My tasks / My impact. No Content.docx: facts from the
     // Pain de Minuit summary in docs/CV website.md. Impact as a list, verb first (like OSLO and Treasurer). Tools not known yet:
@@ -280,8 +280,9 @@ ${cards(["sales-performance-reporting"])}
               </figure>
             </div>
             <div class="block-part reveal">
-              <h3>Skills</h3>
-              <ul class="tags reveal-stagger">SKILLS</ul>
+              <h3>Tools &amp; skills</h3>
+              <div class="xp-tagrow"><span class="chip-label">Tools</span><ul class="tags reveal-stagger">TOOLS</ul></div>
+              <div class="xp-tagrow"><span class="chip-label">Skills</span><ul class="tags reveal-stagger">SKILLS</ul></div>
             </div>`],
     ],
   },
