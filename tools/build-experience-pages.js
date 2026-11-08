@@ -214,17 +214,17 @@ ${cards(["sales-performance-reporting"])}
     lead: "Developed the B2B sales of a craft brewery start-up.",   // 7 Nov 2026: the card's sentence would repeat the mission below
     facts: [["When", "Feb – Jul 2024"], ["Where", "Nieppe, France"], ["Timing", "Bachelor's year 3 · Final internship"]],
     context: "Pain de Minuit is a start-up that brews beer from unsold bread, distributed across France.",
-    mission: "Win new clients among independent retailers, mainly bakeries, and run the logistics from order to shipment.",
+    mission: "Win new clients among independent retailers, mainly bakeries, and build their loyalty.",
     did: [
-      "<strong>Prospecting strategy</strong> designed and run for independent retailers.",
-      "<strong>Client follow-ups</strong> at +30, +90 and +120 days, to keep the new clients.",
-      "<strong>End-to-end logistics:</strong> order processing, stock reception and shipments for distributor orders.",
+      "<strong>Prospecting:</strong> about 80% cold prospecting and 20% inbound requests.",
+      "<strong>Negotiation:</strong> tailored strategy per bakery, needs, sales pitch, objections, closing.",
+      "<strong>Client loyalty:</strong> follow-ups at +30, +90 and +120 days.",
       "<strong>International prospecting</strong> with a bakery in the UK, which led to a feature on a public service TV channel.",
     ],
     projects: [],
-    figures: [["105", "new B2B clients (104 bakeries, 1 large retail store)"], ["~21", "new clients per month"], ["€3–10k", "distributor orders handled"]],
-    tools: ["B2B sales", "Prospecting", "Logistics"],
-    skills: ["B2B sales", "Prospecting", "Client retention", "Logistics"],
+    figures: [["105", "new B2B clients (104 bakeries, 1 large retail store)"], ["~21", "new clients per month"]],
+    tools: ["B2B sales", "Prospecting", "Negotiation"],
+    skills: ["B2B sales", "Prospecting", "Negotiation", "Client retention"],   // Logistics removed (user, 8 Nov 2026)
     // Same structure as Glovo (user, 7 Nov 2026): My mission / My tasks / My impact. No Content.docx: facts from the
     // Pain de Minuit summary in docs/CV website.md. Impact as a list, verb first (like OSLO and Treasurer). Tools not known yet:
     // only the Skills row.
@@ -237,22 +237,30 @@ ${cards(["sales-performance-reporting"])}
             </div>
             <div class="block-part reveal">
               <h3>Mission</h3>
-              <p class="xp-mission"><strong>Win new clients</strong> among independent retailers, mainly bakeries, and <strong>run the logistics</strong> from order to shipment.</p>
+              <p class="xp-mission"><strong>Win new clients</strong> among independent retailers, mainly bakeries, and <strong>build their loyalty</strong>.</p>
             </div>`],
+      // 8 Nov 2026 (user): logistics removed; tasks = prospecting, negotiation, client loyalty
       ["My tasks", `
             <div class="block-part reveal">
-              <h3><span class="block-label">Task 1</span>Win and keep new clients</h3>
+              <h3><span class="block-label">Task 1</span>Prospect new clients</h3>
               <ul class="project-did reveal-stagger">
-                <li><strong>Designed and ran a prospecting strategy</strong> targeted on independent retailers, mainly bakeries.</li>
-                <li><strong>Followed up every new client</strong> at +30, +90 and +120 days, to keep them.</li>
+                <li><strong>Prospected independent retailers</strong>, mainly bakeries: about <strong>80% cold prospecting</strong> and <strong>20% inbound requests</strong>.</li>
                 <li><strong>Led an international prospecting mission</strong> with a bakery in the UK.</li>
               </ul>
             </div>
             <div class="block-part reveal">
-              <h3><span class="block-label">Task 2</span>Run the logistics</h3>
+              <h3><span class="block-label">Task 2</span>Negotiate and close</h3>
               <ul class="project-did reveal-stagger">
-                <li><strong>Processed the orders</strong> and <strong>received the stock</strong>.</li>
-                <li><strong>Prepared the shipments</strong> of distributor orders, from €3,000 to €10,000.</li>
+                <li><strong>Prepared a tailored strategy</strong> for each bakery, from an analysis done beforehand.</li>
+                <li><strong>Made the first contact</strong> to understand and identify the bakery's needs.</li>
+                <li><strong>Pitched the beer</strong> with a sales pitch and <strong>handled objections</strong>.</li>
+                <li><strong>Closed the deal.</strong></li>
+              </ul>
+            </div>
+            <div class="block-part reveal">
+              <h3><span class="block-label">Task 3</span>Build client loyalty</h3>
+              <ul class="project-did reveal-stagger">
+                <li><strong>Followed up every new client</strong> at +30, +90 and +120 days, to build their loyalty and keep them.</li>
               </ul>
             </div>`],
       ["My impact", `
