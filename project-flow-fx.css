@@ -28,3 +28,17 @@
   .project-flow.fa-flow-pipe li { min-height: 40px; text-align: left; }
   .project-flow.fa-flow-pipe .flow-icon { position: absolute; left: -56px; top: 0; margin: 0; }
 }
+
+/* ===== Web Designer: the forecaster icon of "How it started" talks (8 Nov 2026, user) =====
+   When the bubble "Let's start analysing the zones, one by one." pops in (script.js adds .lk-say.is-in at each play),
+   the icon hops twice, its head nods as if speaking, and 2 soft rings leave it. Then it stays still. CSS only. */
+.lk-avatar { position: relative; }
+.lk-avatar svg circle { transform-box: fill-box; transform-origin: 50% 100%; }
+.lk-speaker:has(.lk-say.is-in) .lk-avatar { animation: lk-hop 0.9s cubic-bezier(0.3, 1.4, 0.5, 1) 2, lk-ring 0.9s ease-out 2; }
+.lk-speaker:has(.lk-say.is-in) .lk-avatar svg circle { animation: lk-nod 0.3s ease-in-out 6; }
+@keyframes lk-hop { 0%, 60%, 100% { transform: none; } 25% { transform: translateY(-5px) rotate(-6deg); } }
+@keyframes lk-ring { 0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.35); } 100% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); } }
+@keyframes lk-nod { 50% { transform: translateY(1.5px) scaleY(0.92); } }
+@media (prefers-reduced-motion: reduce) {
+  .lk-speaker:has(.lk-say.is-in) .lk-avatar, .lk-speaker:has(.lk-say.is-in) .lk-avatar svg circle { animation: none; }
+}
