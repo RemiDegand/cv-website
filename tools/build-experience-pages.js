@@ -433,6 +433,7 @@ ${parts.map(([t], k) => `          <a href="#block-${k + 1}"><span class="block-
   </footer>
 
   <script src="script.js"></script>
+  <script src="lang.js" defer></script><!-- EN | FR switch, top right of the menu (9 Nov 2026) -->
   <script src="chatbot.js" defer></script><!-- AI assistant: bubble bottom right + welcome animation (3 Nov 2026) -->
 </body>
 </html>
