@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lang.css"><!-- language switch in the menu -->
   <link rel="stylesheet" href="page-head.css"><!-- page header: glow, logo tile, title, fact cards (7 Nov 2026) -->
 </head>
 <body>
@@ -24,6 +25,9 @@
         <a href="education.html">Education</a>
         <a href="contact.html">Contact</a>
       </nav>
+      <!-- Language switch EN | FR with flags (9 Nov 2026, Web Designer): styles lang.css, behaviour lang.js -->
+      <div class="lang-switch" role="group" aria-label="Language" data-active="en"><span class="lang-thumb" aria-hidden="true"></span><button type="button" data-lang="en" lang="en" title="English" aria-label="English" aria-pressed="true"><svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="lang-uk-clip"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><path d="M0,0v30h60v-30z" fill="#012169"/><path d="M0,0L60,30M60,0L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0L60,30M60,0L0,30" clip-path="url(#lang-uk-clip)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg></button><button type="button" data-lang="fr" lang="fr" title="Français" aria-label="Français" aria-pressed="false"><svg viewBox="0 0 3 2" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 0h1v2H0z" fill="#000091"/><path d="M1 0h1v2H1z" fill="#fff"/><path d="M2 0h1v2H2z" fill="#E1000F"/></svg></button></div>
+      <script>try{if(localStorage.getItem("cv-lang")==="fr"){var s=document.currentScript.previousElementSibling;s.dataset.active="fr";s.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.lang==="fr"))});document.documentElement.lang="fr"}}catch(e){}</script><!-- saved language before the first paint -->
     </div>
   </header>
 
