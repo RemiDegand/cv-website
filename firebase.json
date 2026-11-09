@@ -1,0 +1,43 @@
+{
+  "hosting": {
+    "public": ".",
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      ".git/**",
+      "**/.*",
+      "**/.*/**",
+      "**/node_modules/**",
+      "**/*.md",
+      "docs/**",
+      "knowledge/**",
+      "tools/**",
+      "content/**",
+      "functions/**",
+      "analytics/**",
+      "Experiences/**",
+      "Projects/**",
+      "photo.jpg",
+      "photo2.jpg",
+      "Decathlon logo.png",
+      "Glovo logo.jpg",
+      "Logo cheer up.png",
+      "Logo EGC.png",
+      "logo Envie d'Sup.jpg",
+      "logo EuropEvent.jpg",
+      "logo Institut de Genech.jpg",
+      "logo Intermarché.png",
+      "Logo Pain de Minuit.png",
+      "Oslo logo.png",
+      "firebase-debug.log"
+    ],
+    "headers": [
+      {
+        "source": "/CV.pdf",
+        "headers": [
+          { "key": "Content-Disposition", "value": "attachment; filename=\"Remi-Degand-CV.pdf\"" }
+        ]
+      }
+    ]
+  }
+}

@@ -11,3 +11,7 @@ CV.pdf
 
 # Experience sources (Word content per experience): kept on my PC only.
 /experiences/
+
+# Firebase deploy cache (local only)
+.firebase/
+firebase-debug.log
