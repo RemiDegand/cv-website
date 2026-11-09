@@ -745,7 +745,7 @@ ONLINE (each question)
 - [x] Profile photo: **yes**, close-up `photo2.jpg` used (not `photo.jpg`: face too small in the circle + photographer watermark "F.B.EYE")
 - [x] Public info: **email (Gmail), LinkedIn, downloadable PDF CV**. No phone. The PDF must not contain the phone or address.
 - [x] **Target role / headline:** **"Data & Business Analyst"** (decided 12 Oct; replaces "Forecasting & Data Analyst", which sounded like a planning/S&OP role). Use the same headline on LinkedIn and the CV.
-- [ ] **Use the CV's figures on the site?** Glovo: 58% forecast accuracy vs. 50% target, 615k orders / 371k rider slots per week. ⚠ Since 21 Oct these figures are already in the public repo (`knowledge/projects/forecasting-web-app.md` and `ai-forecast-adjustments.md`): remove them there if they must stay private. Extra skills from the CV: Power BI, R, VBA, Power Query, MyReport, ERP.
+- [x] **Glovo exact figures (accuracy %, target %, weekly order and rider slot volumes): kept private (user, 9 Nov 2026).** Removed from `knowledge/` and from these notes, so neither the site nor Ada uses them; only "+8 pts vs. target" stays public. Never add them back (they are still in old Git commits of the public repo). Extra skills from the CV still to place: Power BI, R, VBA, Power Query, MyReport, ERP.
 - [x] **Hero (decided 12 Oct):** headline "Data & Business Analyst" + pitch "I turn operational and financial data into insights that drive decisions, and build AI tools that save teams time." About section removed from Home for now.
 
 ### Draft CV vs. site/LinkedIn: differences to resolve

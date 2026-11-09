@@ -18,7 +18,7 @@ updated: 2026-10-30
 During the Glovo internship, Rémi created an AI skill, available to the whole forecasting team, that turns the week's forecast adjustments, written as sentences, into the import file of the company's forecasting tool. It replaced about 2 hours a week of manual entries in a Google Sheet.
 
 ## Context
-Rémi was Forecasting Analyst Intern in Glovo's Supply Ops department for the PLECA market, forecasting weekly rider supply for 5 countries (South Poland, West Ukraine, Armenia, Georgia, Kyrgyzstan), about 615K orders and 371K rider slots per week. The forecast was redone every week: at the start of the week the team analysed past performance and collected inputs from the local teams; at the end of the week it decided on adjustments and entered them.
+Rémi was Forecasting Analyst Intern in Glovo's Supply Ops department for the PLECA market, forecasting weekly rider supply for 5 countries (South Poland, West Ukraine, Armenia, Georgia, Kyrgyzstan). The forecast was redone every week: at the start of the week the team analysed past performance and collected inputs from the local teams; at the end of the week it decided on adjustments and entered them.
 
 ## Problem
 - Adjustments were entered in a Google Sheet with Apps Script, connected to BigQuery. For each zone: select the zone (the sheet then shows the current UTR by hour and day), type every adjusted value in a schedule grid (hour × day), click a button ("Add Adjustments") that saves the adjustments in another sheet, then start again with the next zone.

@@ -18,7 +18,7 @@ updated: 2026-11-02
 The forecast accuracy web app is an internal tool Rémi designed and built during the Glovo internship, as a personal initiative. It is specialised in forecast accuracy: it shows the performance of all the zones at a glance, raises alerts on the zones that deviate, and explains the variations with AI analysis. Every member of the forecasting team used it daily.
 
 ## Context
-Rémi was Forecasting Analyst Intern in Glovo's Global Operations, in the Supply Ops department, working on the PLECA market (Poland, Kazakhstan, Kyrgyzstan, Georgia, Armenia, Ukraine). Rémi forecast weekly rider supply for 5 countries (South Poland, West Ukraine, Armenia, Georgia, Kyrgyzstan), covering about 615K orders and 371K rider slots per week, to match rider availability with customer demand.
+Rémi was Forecasting Analyst Intern in Glovo's Global Operations, in the Supply Ops department, working on the PLECA market (Poland, Kazakhstan, Kyrgyzstan, Georgia, Armenia, Ukraine). Rémi forecast weekly rider supply for 5 countries (South Poland, West Ukraine, Armenia, Georgia, Kyrgyzstan), to match rider availability with customer demand.
 
 Forecast accuracy was becoming more and more important: the team had to see the zones that deviated and explain why. The team used a very global dashboard on Looker, not dedicated to forecast accuracy.
 
@@ -53,7 +53,7 @@ The metrics were complex, and some were new, so a metric help chatbot (Gemini th
 - Used daily by every member of the forecasting team: a more organised and quicker way to check the performance of the zones.
 - New view, FC Schedule: forecast accuracy by day and by time slot, where Looker only gave an average.
 - New metric, Broken Correlation %: how much was delivered in bad conditions (Delivery Time above target and Utilization Rate below target). A high figure means bad conditions with regard to the target, or a target that cannot be reached.
-- Context figure for the role (not measured for the app alone): Rémi reached 58% forecast accuracy, 8 points above the 50% target, by reviewing past forecasts to fix gaps and leading weekly meetings with the 5 local teams.
+- Context figure for the role (not measured for the app alone): Rémi beat the forecast accuracy target by 8 points, by reviewing past forecasts to fix gaps and leading weekly meetings with the 5 local teams.
 
 ## Users
 All the members of the forecasting team; daily use.
@@ -66,7 +66,7 @@ First version: Google Apps Script, HTML / CSS, JavaScript, Chart.js, Google Shee
 - **Why not just use Looker?** → On Looker, zones had to be selected one by one and the dashboard gave an average, with no pattern by day or time slot. The app shows all the zones at once and focuses on forecast accuracy.
 - **Whose idea was it?** → Rémi's own idea: to see all the zones at the same time, with alarms.
 - **What does the FC Schedule show?** → Forecast accuracy by day and hour for one zone, so patterns can be seen at a glance.
-- **What was the forecast accuracy?** → 58%, 8 points above the 50% target (result of the forecasting role overall).
+- **What was the forecast accuracy?** → 8 points above the target, on average across Rémi's areas (result of the forecasting role overall; the exact figures are not public).
 
 ## Open questions
 - Broken Correlation %: percentage of orders (Rémi's description) or of hours (the code of the first version divides hours by eligible hours)?
