@@ -15,3 +15,7 @@ CV.pdf
 # Firebase deploy cache (local only)
 .firebase/
 firebase-debug.log
+
+# Chatbot function: dependencies and generated context (rebuilt on deploy)
+functions/node_modules/
+functions/context.txt

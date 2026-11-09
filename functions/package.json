@@ -1,0 +1,12 @@
+{
+  "name": "cv-chatbot",
+  "private": true,
+  "description": "Ada, the chatbot of the CV website: one HTTPS function that calls Gemini",
+  "main": "index.js",
+  "engines": { "node": "22" },
+  "scripts": { "build": "node build-context.js" },
+  "dependencies": {
+    "firebase-admin": "^14.5.0",
+    "firebase-functions": "^7.4.0"
+  }
+}

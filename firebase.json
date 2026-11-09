@@ -1,4 +1,10 @@
 {
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs22",
+    "predeploy": ["node functions/build-context.js"],
+    "ignore": ["node_modules", ".git", "*.log", "build-context.js"]
+  },
   "hosting": {
     "public": ".",
     "cleanUrls": true,
@@ -30,6 +36,9 @@
       "Logo Pain de Minuit.png",
       "Oslo logo.png",
       "firebase-debug.log"
+    ],
+    "rewrites": [
+      { "source": "/api/ask", "function": { "functionId": "ask", "region": "europe-west1" } }
     ],
     "headers": [
       {
