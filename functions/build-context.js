@@ -54,6 +54,13 @@ for (const page of pages) {
   out.push(`### SITE PAGE: ${page}\n${text}`);
 }
 
+// 3. The preview answers of chatbot.js (short facts already public on the site, e.g. languages)
+const bot = fs.readFileSync(path.join(ROOT, "chatbot.js"), "utf8");
+const facts = [...bot.matchAll(/\ba: t\("((?:[^"\\]|\\.)*)"\)/g)]
+  .map((m) => m[1].replace(/\\"/g, '"').replace(/<a\b[^>]*>[^<]*→\s*<\/a>/g, "").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim())
+  .filter(Boolean);
+out.push(`### SHORT FACTS (preview answers of the chatbot)\n${facts.join("\n")}`);
+
 const context = out.join("\n\n");
 fs.writeFileSync(path.join(__dirname, "context.txt"), context);
 console.log(`context.txt: ${context.split(/\s+/).length} words, ${pages.length} pages`);

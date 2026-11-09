@@ -9,7 +9,7 @@
 (() => {
   const t = window.t || ((s, v) => (v ? s.replace(/\{(\w+)\}/g, (m, k) => v[k] ?? m) : s));   // French version: i18n.js (9 Nov 2026)
   const NAME = "Ada";          // the assistant's name: change it here only
-  const ENDPOINT = null;       // Phase 2: e.g. "https://<region>-<project>.cloudfunctions.net/ask"
+  const ENDPOINT = "/api/ask"; // Gemini back end (functions/index.js, Hosting rewrite in firebase.json; 9 Nov 2026). null = preview answers only
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const store = {
     get(key) { try { return JSON.parse(sessionStorage.getItem("cva-" + key)); } catch { return null; } },
