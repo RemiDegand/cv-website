@@ -1,7 +1,9 @@
 /* Language switch EN | FR with flags, top right of the menu (9 Nov 2026, Web Designer).
-   The switch is written in each page's menu (and in tools/build-experience-pages.js) and this file is linked in
-   the <head>, so the menu is complete on the first paint (no jump when changing page). lang.js only handles clicks.
-   English is the default. Design only for now: the French texts don't exist yet. */
+   The switch is written in each page's menu (and in tools/build-experience-pages.js), this file is linked in the
+   <head>, and a one-line script at the top of the <head> sets <html data-lang="fr"> when French was chosen.
+   So the chosen flag shows on the first paint with no script in the <body> (a script in the menu made the page
+   paint in two steps: the "flash"). lang.js only handles clicks. English is the default.
+   Design only for now: the French texts don't exist yet. */
 
 .menu nav { margin-left: auto; }   /* name on the left, links + switch on the right */
 
@@ -11,13 +13,14 @@
   align-items: center;
   gap: 4px;
   flex: none;
+  margin-left: 16px;   /* a little air after "Contact" (32px in all with the menu gap) */
   padding: 3px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.7);
 }
 
-/* Blue ring that sits around the chosen flag and slides to the other one */
+/* Blue ring around the chosen flag; it slides to the other one */
 .lang-switch .lang-thumb {
   position: absolute;
   top: 3px;
@@ -28,9 +31,10 @@
   box-shadow: 0 0 0 2px var(--accent), 0 2px 8px rgba(37, 99, 235, 0.3);
   pointer-events: none;
 }
-.lang-switch[data-active="fr"] .lang-thumb { transform: translateX(30px); }   /* 26px button + 4px gap */
+html[data-lang="fr"] .lang-switch .lang-thumb { transform: translateX(30px); }   /* 26px button + 4px gap */
 .lang-switch.is-ready .lang-thumb { transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1); }
 
+/* Flags: the other language is faded */
 .lang-switch button {
   display: block;
   width: 26px;
@@ -43,11 +47,12 @@
   cursor: pointer;
   opacity: 0.45;
   filter: saturate(0.4);
-  transition: opacity 0.25s, filter 0.25s, transform 0.25s;
 }
+.lang-switch.is-ready button { transition: opacity 0.25s, filter 0.25s, transform 0.25s; }
 .lang-switch button svg { display: block; width: 100%; height: 100%; }
 .lang-switch button:hover { opacity: 1; filter: none; transform: scale(1.08); }
-.lang-switch button[aria-pressed="true"] { opacity: 1; filter: none; transform: none; cursor: default; }
+html:not([data-lang="fr"]) .lang-switch [data-lang="en"],
+html[data-lang="fr"] .lang-switch [data-lang="fr"] { opacity: 1; filter: none; transform: none; cursor: default; }
 .lang-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* Phones: the 5 links already fill the width, so only the chosen flag shows; a tap switches language (lang.js).
@@ -55,12 +60,14 @@
 @media (max-width: 720px) {
   .menu nav { gap: 8px; font-size: 0.84rem; }
   .menu-inner { gap: 8px; }
-  .lang-switch { padding: 0; border: 0; background: none; }
+  .lang-switch { margin-left: 6px; padding: 0; border: 0; background: none; }
   .lang-switch .lang-thumb { display: none; }
   .lang-switch button { width: 24px; height: 24px; box-shadow: 0 0 0 1px var(--border); }
-  .lang-switch button[aria-pressed="false"] { display: none; }
-  .lang-switch button[aria-pressed="true"] { cursor: pointer; }
-  .lang-switch.is-ready button[aria-pressed="true"] { animation: lang-pop 0.35s ease; }
+  html:not([data-lang="fr"]) .lang-switch [data-lang="fr"],
+  html[data-lang="fr"] .lang-switch [data-lang="en"] { display: none; }
+  html:not([data-lang="fr"]) .lang-switch [data-lang="en"],
+  html[data-lang="fr"] .lang-switch [data-lang="fr"] { cursor: pointer; }
+  .lang-switch.is-switched button { animation: lang-pop 0.35s ease; }
 }
 @media (max-width: 480px) {
   .menu nav { font-size: 0.82rem; }
@@ -68,11 +75,12 @@
 }
 @media (max-width: 380px) {
   .menu nav { gap: 5px; font-size: 0.76rem; }
+  .lang-switch { margin-left: 4px; }
   .lang-switch button { width: 22px; height: 22px; }
 }
 @keyframes lang-pop { from { transform: scale(0.6); opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .lang-switch.is-ready .lang-thumb, .lang-switch button { transition: none; }
-  .lang-switch.is-ready button[aria-pressed="true"] { animation: none; }
+  .lang-switch.is-ready .lang-thumb, .lang-switch.is-ready button { transition: none; }
+  .lang-switch.is-switched button { animation: none; }
 }
