@@ -1,4 +1,6 @@
 // The menu link of the current page is marked "active" directly in each HTML file.
+// French version (9 Nov 2026): every text written by a script goes through tr(), from i18n.js (English when i18n.js is missing)
+const tr = window.t || ((s, v) => (v ? s.replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s));
 
 // Home: key experience and key projects carousels (one card at a time; arrows + dots in a row underneath).
 document.querySelectorAll(".carousel").forEach((carousel) => {
@@ -13,7 +15,7 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
   const dots = cards.map((card, i) => {
     const dot = document.createElement("button");
     dot.type = "button";
-    dot.setAttribute("aria-label", "Show card " + (i + 1) + " of " + cards.length);
+    dot.setAttribute("aria-label", tr("Show card {n} of {m}", { n: i + 1, m: cards.length }));
     dot.addEventListener("click", () => goTo(i));
     dotsBox.append(dot);
     return dot;
@@ -226,10 +228,10 @@ document.querySelectorAll(".report").forEach((report) => {
       for (let k = 0; k < teams; k++) panel(t, k).hidden = !(on && k === team);
     });
     if (focus) tabs[current].focus();
-    count.textContent = `Page ${current + 1} of ${tabs.length}`;
+    count.textContent = tr("Page {n} of {m}", { n: current + 1, m: tabs.length });
     const who = byTeam ? team : current;
     people.forEach((icon, p) => icon.classList.toggle("active", p === who));
-    if (personaName) personaName.textContent = byTeam ? `Sales Team ${team + 1}` : "Sales " + tabs[current].textContent;
+    if (personaName) personaName.textContent = tr("Sales Team {n}", { n: (byTeam ? team : current) + 1 });   // the tabs are Team 1, Team 2… in order
     arrows[0].disabled = current === 0;
     arrows[1].disabled = current === tabs.length - 1;
   };
@@ -341,7 +343,7 @@ const simClock = (stage, { ignore = "button, a", onChange } = {}) => {
   stage.classList.add("sim-stage");
   const badge = document.createElement("span");
   badge.className = "sim-paused";
-  badge.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M7 5l13 7-13 7z"/></svg>Paused: click to resume';
+  badge.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M7 5l13 7-13 7z"/></svg>' + tr("Paused: click to resume");
   badge.hidden = true;
   stage.append(badge);
   const setPaused = (value) => {
@@ -383,7 +385,7 @@ const simButton = (stage, label, title, icon) => new Promise((resolve) => {
 });
 const simStart = (clock, run) => {
   clock.stage.classList.add("is-waiting");
-  simButton(clock.stage, "Start the simulation", "Start", '<svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M8 5l12 7-12 7z"/></svg>').then(() => {
+  simButton(clock.stage, tr("Start the simulation"), tr("Start"), '<svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M8 5l12 7-12 7z"/></svg>').then(() => {
     clock.stage.classList.remove("is-waiting");
     clock.play(true);
     run();
@@ -392,7 +394,7 @@ const simStart = (clock, run) => {
 const restartAtEnd = async (stage) => {
   const clock = simClocks.get(stage);
   clock?.play(false);
-  await simButton(stage, "Restart the simulation", "Restart", '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>');
+  await simButton(stage, tr("Restart the simulation"), tr("Restart"), '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>');
   clock?.play(true);
 };
 
@@ -422,7 +424,7 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
       [...cells, total].forEach((cell) => { cell.textContent = ""; cell.classList.remove("is-red"); });
       await wait(900);
       for (const [i, cell] of cells.entries()) {
-        status.textContent = `Copying entry ${i + 1} of ${cells.length} by hand…`;
+        status.textContent = tr("Copying entry {n} of {m} by hand…", { n: i + 1, m: cells.length });
         erpRows[i].classList.add("is-copying");
         await wait(700);
         await type(cell, 160);
@@ -430,7 +432,7 @@ if (copySim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
         erpRows[i].classList.remove("is-copying");
         await wait(300);
       }
-      status.textContent = "Adding up the VAT…";
+      status.textContent = tr("Adding up the VAT…");
       await type(total, 90);
       await wait(400);
       copySim.classList.add("is-wrong");
@@ -465,21 +467,21 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
   const run = async () => {
     for (;;) {
       pasteSim.classList.remove("is-selected", "is-flying", "is-busy", "is-frozen", "is-crashed");
-      title.textContent = finalTitle.replace(" (Not Responding)", "");
+      title.textContent = finalTitle.replace(tr(" (Not Responding)"), "");
       rows.slice(1).forEach((row) => row.classList.add("is-empty"));   // row 1 = the headers
       newTab.classList.add("is-hidden");
       newTab.textContent = newName;
       activeTab(newTab.nextElementSibling);
       size(6);   // already heavy: every past quarter is in the file
-      calc.textContent = "Ready";
-      status.textContent = "The new quarter's entries, exported from the ERP.";
+      calc.textContent = tr("Ready");
+      status.textContent = tr("The new quarter's entries, exported from the ERP.");
       await wait(1500);
-      status.textContent = "Copying every entry of the quarter…";
+      status.textContent = tr("Copying every entry of the quarter…");
       pasteSim.classList.add("is-selected");
       await wait(1400);
       // A new sheet in front of all the others, renamed by hand after the quarter: the tabs get even narrower
-      status.textContent = "Adding one more sheet for the quarter…";
-      newTab.textContent = "Sheet" + tabs.length;
+      status.textContent = tr("Adding one more sheet for the quarter…");
+      newTab.textContent = tr("Sheet") + tabs.length;
       newTab.classList.remove("is-hidden");
       activeTab(newTab);
       await wait(900);
@@ -488,7 +490,7 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
       for (const ch of newName) { newTab.textContent += ch; await wait(140); }
       newTab.classList.remove("is-renaming");
       await wait(400);
-      status.textContent = "Pasting the entries, next to every past quarter…";
+      status.textContent = tr("Pasting the entries, next to every past quarter…");
       pasteSim.classList.add("is-flying");
       await wait(1000);
       // Each row takes longer than the one before: the file is getting heavier
@@ -497,14 +499,14 @@ if (pasteSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
       for (const [i, [ms, pct, n]] of steps.entries()) {
         await wait(ms);
         rows[i + 1].classList.remove("is-empty");
-        calc.textContent = `Calculating: ${pct}%`;
+        calc.textContent = tr("Calculating: {pct}%", { pct });
         size(n);
-        if (i === 1) { pasteSim.classList.add("is-busy"); status.textContent = "Excel is getting slower…"; }
+        if (i === 1) { pasteSim.classList.add("is-busy"); status.textContent = tr("Excel is getting slower…"); }
       }
       await wait(600);
       pasteSim.classList.add("is-frozen");
       title.textContent = finalTitle;
-      status.textContent = "Excel stopped responding…";
+      status.textContent = tr("Excel stopped responding…");
       await wait(1600);
       pasteSim.classList.add("is-crashed");
       status.textContent = finalStatus;
@@ -578,8 +580,8 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
     filled.forEach((el) => el.classList.add("is-blank"));
     rows.forEach((row) => row.classList.add("is-empty"));
     inputs.forEach((td) => { td.textContent = ""; td.classList.remove("is-typing"); });
-    show("statement", "Cash flow");
-    step(0, "The user picks the start and end of the period.");
+    show("statement", tr("Cash flow"));
+    step(0, tr("The user picks the start and end of the period."));
     await wait(900);
     for (const [i, td] of inputs.entries()) {
       td.classList.add("is-typing");
@@ -588,7 +590,7 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
       td.classList.remove("is-typing");
     }
     await wait(500);
-    step(1, "One click on Refresh: MyReport loads the day's entries from the ERP. Nothing is stored in the file.");
+    step(1, tr("One click on Refresh: MyReport loads the day's entries from the ERP. Nothing is stored in the file."));
     button.classList.add("is-hover");
     await wait(700);
     button.classList.add("is-pressed");
@@ -597,20 +599,20 @@ if (buildSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduce
     buildSim.classList.add("is-loading");
     await wait(2000);
     buildSim.classList.remove("is-loading");
-    step(2, "Every account with its balances; a mapping table gives each one its cash flow category.");
-    show("accounts", "Check");
+    step(2, tr("Every account with its balances; a mapping table gives each one its cash flow category."));
+    show("accounts", tr("Check"));
     await wait(500);
     await reveal(rows, 180);
     await wait(300);
     await reveal(all(".b-cat"), 260);
     await wait(1800);
-    step(3, "The cash flow statement for the period: operating, investing and financing cash flow, then the change in cash.");
-    show("statement", "Cash flow");
+    step(3, tr("The cash flow statement for the period: operating, investing and financing cash flow, then the change in cash."));
+    show("statement", tr("Cash flow"));
     await wait(500);
     await reveal(all(".b-val"), 110);
     await wait(2400);
-    step(4, "The control table: every check must be 0, so an inconsistency shows up at once. Then the financial ratios.");
-    show("checks", "Check");
+    step(4, tr("The control table: every check must be 0, so an inconsistency shows up at once. Then the financial ratios."));
+    show("checks", tr("Check"));
     await wait(500);
     await reveal(all(".b-gap"), 300);
     await wait(300);
@@ -649,7 +651,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
   const hours = [2, 3, 4, 5];   // 10:00 to 13:00: the other hours keep their value
   const menuItems = all(".adj-sim-menu span");
   const exportRows = all(".adj-sim-export tbody tr");
-  const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((d) => tr(d));
   // Current UTR (08:00 to 15:00, Mon to Sun) and the sentences of each zone, as cells to change
   const zones = [
     { name: "Lille", id: 4, utr: [[3.47, 2.72, 4.00, 2.96, 3.97, 2.97, 2.62], [2.33, 3.12, 2.46, 3.64, 3.21, 3.98, 3.86], [2.76, 3.47, 3.28, 3.69, 2.63, 2.54, 3.73], [3.25, 2.89, 3.92, 3.79, 2.77, 3.94, 3.93], [3.19, 3.74, 2.57, 2.90, 2.87, 3.82, 3.26], [3.28, 2.56, 3.08, 3.96, 2.25, 3.23, 2.51], [2.94, 3.68, 2.54, 2.93, 2.66, 3.89, 3.03], [2.97, 2.35, 2.95, 2.40, 3.31, 2.37, 3.45]],
@@ -688,7 +690,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       if (n < exportRows.length - 1) shown[n].forEach((text, c) => { tr.children[c].textContent = text; });
     });
     await openSheet(exportTab);
-    status.textContent = "Loading the Export sheet…";
+    status.textContent = tr("Loading the Export sheet…");
     for (const tr of exportRows.slice(lastLine ? 1 : 0)) {
       await wait(300);
       tr.classList.remove("is-off");
@@ -708,7 +710,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
     for (;;) {
       items.forEach((li) => { li.classList.remove("is-on", "is-done"); li.querySelectorAll("span").forEach((s) => s.classList.remove("is-on", "is-done")); });
       cells.forEach((td) => { td.textContent = ""; td.classList.remove("is-changed", "is-typing"); });
-      pick.textContent = "Select…";
+      pick.textContent = tr("Select…");
       saved.textContent = "";
       adjSim.classList.remove("is-downloaded", "is-export");   // a new play starts on the first sheet
       firstTab.classList.add("is-active");
@@ -720,14 +722,14 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       await wait(1000);
       adjSim.classList.remove("is-flash");
       await wait(1000);
-      status.textContent = "Next week's adjustments, already written for the local teams.";
+      status.textContent = tr("Next week's adjustments, already written for the local teams.");
       await wait(1800);
       const done = [];
       for (const [z, zone] of zones.entries()) {
         const li = items[z];
         const sentences = [...li.querySelectorAll("span")];
         li.classList.add("is-on");
-        status.textContent = `Zone ${z + 1}: select ${zone.name} in the list…`;
+        status.textContent = tr("Zone {n}: select {zone} in the list…", { n: z + 1, zone: zone.name });
         cells.forEach((td) => { td.textContent = ""; td.classList.remove("is-changed"); });
         await wait(400);
         menuItems.forEach((item) => item.classList.remove("is-on"));
@@ -738,7 +740,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
         pick.textContent = zone.name;
         adjSim.classList.remove("is-picking");
         adjSim.classList.add("is-loading");
-        status.textContent = `Loading the current UTR of ${zone.name}…`;
+        status.textContent = tr("Loading the current UTR of {zone}…", { zone: zone.name });
         await wait(1200);
         adjSim.classList.remove("is-loading");
         const utr = zone.utr.map((row) => [...row]);
@@ -747,7 +749,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
         if (!zone.rules) { sentences[0].classList.add("is-on"); break; }
         for (const [r, rule] of zone.rules.entries()) {
           sentences[r].classList.add("is-on");
-          status.textContent = `Typing by hand: "${sentences[r].textContent}"`;
+          status.textContent = tr("Typing by hand: \"{s}\"", { s: sentences[r].textContent });
           for (const h of rule.hours) {
             for (const d of rule.days) {
               utr[h][d] = rule.f(utr[h][d]);
@@ -758,24 +760,24 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
           sentences[r].classList.add("is-done");
           await wait(300);
         }
-        status.textContent = "Click \"Add Adjustments\" to save the zone…";
+        status.textContent = tr("Click \"Add Adjustments\" to save the zone…");
         await wait(500);
         button.classList.add("is-pressed");
         await wait(250);
         button.classList.remove("is-pressed");
         done.push(zone.name);
-        saved.textContent = "Saved: " + done.join(", ");
+        saved.textContent = tr("Saved: ") + done.join(", ");
         li.classList.remove("is-on");
         li.classList.add("is-done");
         await wait(1000);
-        status.textContent = "Open the Export sheet to see the adjustments…";
+        status.textContent = tr("Open the Export sheet to see the adjustments…");
         await wait(900);
         await showExport(zone, utr);
-        status.textContent = `${zone.name}'s adjustments are saved in the Export sheet.`;
+        status.textContent = tr("{zone}'s adjustments are saved in the Export sheet.", { zone: zone.name });
         await wait(1800);
         if (z === zones.length - 1) {
           // The last zone played: the export is downloaded as a CSV file for the forecasting tool
-          status.textContent = "Download the export as a CSV…";
+          status.textContent = tr("Download the export as a CSV…");
           await wait(700);
           download.classList.add("is-pressed");
           await wait(250);
@@ -784,7 +786,7 @@ if (adjSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
           await wait(1800);
           break;
         }
-        status.textContent = "Back to the first sheet for the next zone…";
+        status.textContent = tr("Back to the first sheet for the next zone…");
         await wait(700);
         await openSheet(firstTab);
         await wait(700);
@@ -928,7 +930,7 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
     draw(view);
     panels.classList.remove("is-loading");
   };
-  const zones = ["Zone 1", "Zone 2", "Zone 3", "All"];
+  const zones = ["Zone 1", "Zone 2", "Zone 3", tr("All")];
   const run = async () => {
     for (;;) {
       ["country", "city", "zone"].forEach((name) => { filter(name).textContent = ""; });
@@ -945,11 +947,11 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
       say.classList.remove("is-waiting");
       say.classList.add("is-in");
       await wait(1800);
-      status.textContent = "Select a country, a city and a zone…";
-      await choose("country", ["Country A", "Country B"], "Country A");
-      await choose("city", ["City 1", "City 2", "All"], "City 1");
+      status.textContent = tr("Select a country, a city and a zone…");
+      await choose("country", [tr("Country A"), tr("Country B")], tr("Country A"));
+      await choose("city", [tr("City 1"), tr("City 2"), tr("All")], tr("City 1"));
       await choose("zone", zones, "Zone 1");
-      status.textContent = "Last complete days or weeks, and how many…";
+      status.textContent = tr("Last complete days or weeks, and how many…");
       await wait(500);
       segDays.classList.add("is-on");
       await wait(500);
@@ -958,10 +960,10 @@ if (lookerSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduc
       number.textContent = "7";
       await wait(350);
       number.classList.remove("is-typing");
-      status.textContent = "Tick the weekdays…";
+      status.textContent = tr("Tick the weekdays…");
       for (const check of checks) { await wait(170); check.classList.add("is-on"); }
       await wait(350);
-      status.textContent = "Load, and wait.";
+      status.textContent = tr("Load, and wait.");
       await clickLoad(zone1);
       status.textContent = finalStatus;
       await wait(2500);
@@ -986,10 +988,10 @@ if (faSim) {
   const details = faSim.querySelector(".fa-details");
   const modal = (name) => faSim.querySelector(`.fa-modal[data-modal="${name}"]`);
   const texts = [
-    "Market Performance on top, then the breakdown by country and by area, down to the zone, with no selection.",
-    "All the zones with their main KPIs, with no selection.",
+    tr("Market Performance on top, then the breakdown by country and by area, down to the zone, with no selection."),
+    tr("All the zones with their main KPIs, with no selection."),
     status.textContent,
-    "Alerts keep only the zones below the threshold, biggest zones first.",
+    tr("Alerts keep only the zones below the threshold, biggest zones first."),
   ];
   const stepOfView = [0, 1, 1, 2];   // the FC Schedule opens from Global Zones, so it belongs to step 2
   const viewOfStep = [0, 1, 3];
@@ -1004,7 +1006,7 @@ if (faSim) {
     sliderVal.textContent = `${t}%`;
     sliderFill.style.setProperty("--v", `${t}%`);
     alertRows.forEach((row) => { row.hidden = Number(row.dataset.pf) > t; });
-    alertCount.textContent = `Viewing ${Math.round(40 - (100 - t) * 0.6)} zones`;
+    alertCount.textContent = tr("Viewing {n} zones", { n: Math.round(40 - (100 - t) * 0.6) });
   };
   const setSorted = (sorted) => {
     const order = [...alertRows].sort((a, b) => (sorted ? b.dataset.orders - a.dataset.orders : a.dataset.n - b.dataset.n));
@@ -1134,16 +1136,16 @@ if (faSim) {
         mouseCentre();
         cursor.classList.add("is-on");
         if (!await pause(500)) return;
-        status.textContent = "Select a market…";
+        status.textContent = tr("Select a market…");
         if (!await mouseTo(asia) || !await press(asia)) return;
         asia.classList.add("is-on");
-        status.textContent = "…then a section.";
+        status.textContent = tr("…then a section.");
         if (!await mouseTo(steps[0]) || !await press(steps[0])) return;
         show(0);
         // Almost at once: the market performance and both breakdowns
         if (!await showAll(overview, ".fa-a", 15) || !await pause(3000)) return;
         const insights = overview.querySelector("[data-open]");
-        status.textContent = "A click on Insights opens the country: KPIs on top, then 3 reports below.";
+        status.textContent = tr("A click on Insights opens the country: KPIs on top, then 3 reports below.");
         if (!await mouseTo(insights) || !await press(insights)) return;
         openModal("market");
         if (!await pause(1500)) return;
@@ -1151,25 +1153,25 @@ if (faSim) {
         if (!await pause(500) || !await readParts("market")) return;
 
         // 2. Global Zones: the mouse clicks its tab; list, click on a zone, Zone Insights, then the FC Schedule button
-        status.textContent = "Next section: Global Zones.";
+        status.textContent = tr("Next section: Global Zones.");
         if (!await mouseTo(steps[1]) || !await press(steps[1])) return;
         show(1);
-        status.textContent = "Global Zones: every zone with its main KPIs: Delivery Time, Utilization Rate, forecast accuracy and capacity.";
+        status.textContent = tr("Global Zones: every zone with its main KPIs: Delivery Time, Utilization Rate, forecast accuracy and capacity.");
         if (!await showAll(global, ".fa-a", 40) || !await pause(1500) || !await callout("zones")) return;
         const zone = global.querySelector(".fa-link");
-        status.textContent = "A click on a zone opens its deep dive: secondary KPIs, buttons to go further, and comments for the action plan.";
+        status.textContent = tr("A click on a zone opens its deep dive: secondary KPIs, buttons to go further, and comments for the action plan.");
         if (!await mouseTo(zone) || !await press(zone)) return;
         details.hidden = false;
         if (!await pause(2000) || !await callout("dive")) return;
         const zoneInsights = global.querySelector('[data-open="zone"]');
-        status.textContent = "Zone Insights: KPIs on top, the AI analysis, then 3 reports.";
+        status.textContent = tr("Zone Insights: KPIs on top, the AI analysis, then 3 reports.");
         if (!await mouseTo(zoneInsights) || !await press(zoneInsights)) return;
         openModal("zone");
         if (!await pause(1500)) return;
         mouseCentre();
         if (!await pause(500) || !await readParts("zone")) return;
         const scheduleButton = global.querySelector("[data-schedule]");
-        status.textContent = "The most used view: a click on FC Schedule.";
+        status.textContent = tr("The most used view: a click on FC Schedule.");
         if (!await mouseTo(scheduleButton) || !await pause(600) || !await press(scheduleButton)) return;
 
         // Still step 2: the FC Schedule of the zone
@@ -1183,18 +1185,18 @@ if (faSim) {
         if (!await pause(800) || !await showAll(schedule, ".fa-late", 500) || !await pause(3500)) return;
 
         // 3. FC Alerts: the mouse clicks its tab; the list, sorted by order volume, then Proper FC at 70 %: the zones above it disappear
-        status.textContent = "Next section: FC Alerts.";
+        status.textContent = tr("Next section: FC Alerts.");
         if (!await mouseTo(steps[2]) || !await press(steps[2])) return;
         setSorted(false);
         setSlider(100);
         show(3);
-        status.textContent = "FC Alerts: filters on top, then the zones with their main KPIs.";
+        status.textContent = tr("FC Alerts: filters on top, then the zones with their main KPIs.");
         if (!await showAll(alerts, ".fa-a", 200) || !await pause(1500)) return;
-        status.textContent = "Sort by order volume, biggest zones first…";
+        status.textContent = tr("Sort by order volume, biggest zones first…");
         if (!await mouseTo(sortHead) || !await press(sortHead)) return;
         setSorted(true);
         if (!await pause(1600)) return;
-        status.textContent = "…then Proper FC at 70%: only the zones below stay.";
+        status.textContent = tr("…then Proper FC at 70%: only the zones below stay.");
         const thumb = () => sliderFill;
         const box = faSim.getBoundingClientRect();
         const placeOnThumb = () => {
@@ -1235,13 +1237,13 @@ if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-m
   const finalStatus = status.textContent;
   const days = [...aiSim.querySelectorAll(".ais-day")];
   const dayTexts = [
-    "Monday: the AI sees Over FC up in the afternoon and links it to orders below Orders FC.",
-    "Tuesday: the same pattern as Monday: Over FC up in the afternoon, with orders below Orders FC.",
-    "Wednesday: no variation to explain: orders are in line with Orders FC.",
-    "Thursday: nearly stable, with the first signs of the weekend: orders start to grow in the evening.",
-    "Friday: Under FC up in the evening, which the AI links to orders above Orders FC and more Missing Capacity.",
-    "Saturday: Proper FC down in the evening, with orders rising and Delivery Time above target.",
-    "Sunday: Under FC still high. Missing Capacity is stable, so the AI points to the orders.",
+    tr("Monday: the AI sees Over FC up in the afternoon and links it to orders below Orders FC."),
+    tr("Tuesday: the same pattern as Monday: Over FC up in the afternoon, with orders below Orders FC."),
+    tr("Wednesday: no variation to explain: orders are in line with Orders FC."),
+    tr("Thursday: nearly stable, with the first signs of the weekend: orders start to grow in the evening."),
+    tr("Friday: Under FC up in the evening, which the AI links to orders above Orders FC and more Missing Capacity."),
+    tr("Saturday: Proper FC down in the evening, with orders rising and Delivery Time above target."),
+    tr("Sunday: Under FC still high. Missing Capacity is stable, so the AI points to the orders."),
   ];
   const cursor = document.createElement("span");
   cursor.className = "fa-cursor";
@@ -1267,18 +1269,18 @@ if (aiSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-m
     details.hidden = true;
     days.forEach((day) => day.classList.remove("is-on"));
     view.scrollTop = 0;
-    status.textContent = "Global Zones: every zone with its main KPIs.";
+    status.textContent = tr("Global Zones: every zone with its main KPIs.");
   };
   const run = async () => {
     for (;;) {
       reset();
       await pause(1200);
-      status.textContent = "A click on a zone opens its deep dive.";
+      status.textContent = tr("A click on a zone opens its deep dive.");
       await mouseTo(zone);
       await press(zone);
       details.hidden = false;
       await pause(1000);
-      status.textContent = "Zone Insights opens on the AI analysis, already written: nothing to ask for.";
+      status.textContent = tr("Zone Insights opens on the AI analysis, already written: nothing to ask for.");
       await mouseTo(insights);
       await press(insights);
       modal.classList.add("is-open");
@@ -1369,17 +1371,17 @@ if (chatSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced
       dots.hidden = true;
       input.textContent = "";
       cursor.classList.remove("is-on");
-      status.textContent = "A metric isn't clear? The chatbot is one click away, on every page of the app.";
+      status.textContent = tr("A metric isn't clear? The chatbot is one click away, on every page of the app.");
       await wait(1000);
       await mouseTo(button);
       await press(button);
       panel.hidden = false;
-      status.textContent = "The chatbot opens: it knows the queries behind each metric.";
+      status.textContent = tr("The chatbot opens: it knows the queries behind each metric.");
       await wait(900);
       await ask(0);
-      status.textContent = "It explains how the metric is computed…";
+      status.textContent = tr("It explains how the metric is computed…");
       await wait(3000);
-      status.textContent = "…and a new question goes deeper.";
+      status.textContent = tr("…and a new question goes deeper.");
       await ask(2);
       await wait(1500);
       status.textContent = finalStatus;
@@ -1418,21 +1420,21 @@ if (vatSim && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-
       total.classList.add("is-off");
       status.textContent = "";
       await wait(800);
-      status.textContent = "Click Refresh: MyReport reads the ERP…";
+      status.textContent = tr("Click Refresh: MyReport reads the ERP…");
       await wait(1000);
       await press(refresh);
       vatSim.classList.add("is-loading");
       await wait(1400);
       vatSim.classList.remove("is-loading");
-      status.textContent = "All the unmatched supplier entries of journal A1, by supplier.";
+      status.textContent = tr("All the unmatched supplier entries of journal A1, by supplier.");
       for (const row of rows) { row.classList.remove("is-off"); await wait(140); }
       await wait(2400);
-      status.textContent = "Click \"Assign VAT\": each VAT amount goes into its VAT account's column.";
+      status.textContent = tr("Click \"Assign VAT\": each VAT amount goes into its VAT account's column.");
       await wait(1200);
       await press(assign);
       for (const cell of vatCells) { cell.classList.remove("is-off"); cell.classList.add("is-new"); await wait(380); }
       await wait(1000);
-      status.textContent = "A credit note gets the opposite sign. Then the total of each VAT account…";
+      status.textContent = tr("A credit note gets the opposite sign. Then the total of each VAT account…");
       await wait(2200);
       total.classList.remove("is-off");
       total.classList.add("is-new");

@@ -3,6 +3,7 @@
 // switched on by the .pfx class on <html>. The cards and tiles are generated from
 // content/projects.json: everything here reads them, nothing here needs editing when projects change.
 (() => {
+  const t = window.t || ((s) => s);   // French version: i18n.js (9 Nov 2026)
   const page = document.getElementById("projects");
   const overview = page && page.querySelector(".cat-overview");
   if (!overview) return;
@@ -20,7 +21,7 @@
   // 2. Sticky category bar: same links as the overview tiles, shown once the tiles are passed
   const nav = document.createElement("nav");
   nav.className = "proj-nav";
-  nav.setAttribute("aria-label", "Jump to a category");
+  nav.setAttribute("aria-label", t("Jump to a category"));
   const inner = document.createElement("div");
   inner.className = "proj-nav-inner";
   const bar = document.createElement("span");

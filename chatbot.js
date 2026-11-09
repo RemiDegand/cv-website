@@ -7,6 +7,7 @@
 // below (facts already on the site). To go live, set ENDPOINT: it receives
 // { question, history } as JSON and must return { answer } (plain text).
 (() => {
+  const t = window.t || ((s, v) => (v ? s.replace(/\{(\w+)\}/g, (m, k) => v[k] ?? m) : s));   // French version: i18n.js (9 Nov 2026)
   const NAME = "Ada";          // the assistant's name: change it here only
   const ENDPOINT = null;       // Phase 2: e.g. "https://<region>-<project>.cloudfunctions.net/ask"
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -16,30 +17,30 @@
   };
 
   // ----- Preview answers: facts already on the site, with a link to the page that shows them -----
-  const ANSWERS = [
-    { chip: "What is he doing now?", keys: ["now", "current", "today", "study", "studies", "student", "school", "neoma", "master", "degree", "education", "university", "mim", "msc"],
-      a: "Rémi is in the <b>final year of his Master in Management at NEOMA Business School</b>, MSc Business Analytics (2026 – 2027). Before that, he took a gap year for two data internships, at Glovo and OSLO.<br><a href=\"education.html\">See his education →</a>" },
-    { chip: "When is he available?", keys: ["available", "availability", "when", "start", "looking", "internship", "vie", "job", "contract", "full-time", "full time", "hire", "hiring", "position", "role", "opportunit", "want", "next"],
-      a: "He is looking for an <b>Analyst role in a data-driven company</b>: an internship, a VIE or a full-time contract, <b>from May 2027</b>.<br><a href=\"contact.html\">Contact him →</a>" },
-    { chip: "What did he do at Glovo?", keys: ["glovo", "barcelona", "forecast", "forecasting", "rider", "supply", "spain"],
-      a: "From <b>March to September 2026</b>, Rémi was a Forecasting Analyst Intern at <b>Glovo</b> in Barcelona (Supply Ops, PLECA market). He forecast weekly rider supply for <b>5 countries</b> and built a forecast accuracy web app used daily by the forecasting team.<br><a href=\"experience-glovo.html\">More about Glovo →</a>" },
-    { chip: "And at OSLO?", keys: ["oslo", "revenue", "vat", "finance", "financial", "data analyst", "villeneuve", "france"],
-      a: "From <b>September to December 2025</b>, he was a Data Analyst Intern at <b>OSLO</b> (IT &amp; SaaS solutions). He built data models and dashboards for 4 business units; his revenue recognition model cut annual revenue discrepancies from <b>€350k to €8k</b>.<br><a href=\"experience-oslo.html\">More about OSLO →</a>" },
-    { chip: "Which tools does he use?", keys: ["tool", "skill", "python", "sql", "excel", "vba", "stack", "technical", "software", "bigquery", "looker", "gemini", "program", "code", "coding"],
+  const ANSWERS = [   // keys: English + French words (no accents), the French version shows French chips and answers
+    { chip: t("What is he doing now?"), keys: ["now", "current", "today", "study", "studies", "student", "school", "neoma", "master", "degree", "education", "university", "mim", "msc", "maintenant", "actuel", "aujourd", "etude", "ecole", "diplome", "formation", "universite"],
+      a: t("Rémi is in the <b>final year of his Master in Management at NEOMA Business School</b>, MSc Business Analytics (2026 – 2027). Before that, he took a gap year for two data internships, at Glovo and OSLO.<br><a href=\"education.html\">See his education →</a>") },
+    { chip: t("When is he available?"), keys: ["available", "availability", "when", "start", "looking", "internship", "vie", "job", "contract", "full-time", "full time", "hire", "hiring", "position", "role", "opportunit", "want", "next", "disponib", "quand", "recherche", "stage", "emploi", "poste", "cdi", "contrat", "embauch", "recrut"],
+      a: t("He is looking for an <b>Analyst role in a data-driven company</b>: an internship, a VIE or a full-time contract, <b>from May 2027</b>.<br><a href=\"contact.html\">Contact him →</a>") },
+    { chip: t("What did he do at Glovo?"), keys: ["glovo", "barcelona", "forecast", "forecasting", "rider", "supply", "spain", "barcelone", "prevision", "livreur", "espagne"],
+      a: t("From <b>March to September 2026</b>, Rémi was a Forecasting Analyst Intern at <b>Glovo</b> in Barcelona (Supply Ops, PLECA market). He forecast weekly rider supply for <b>5 countries</b> and built a forecast accuracy web app used daily by the forecasting team.<br><a href=\"experience-glovo.html\">More about Glovo →</a>") },
+    { chip: t("And at OSLO?"), keys: ["oslo", "revenue", "vat", "finance", "financial", "data analyst", "villeneuve", "france", "chiffre d", "tva", "financ"],
+      a: t("From <b>September to December 2025</b>, he was a Data Analyst Intern at <b>OSLO</b> (IT &amp; SaaS solutions). He built data models and dashboards for 4 business units; his revenue recognition model cut annual revenue discrepancies from <b>€350k to €8k</b>.<br><a href=\"experience-oslo.html\">More about OSLO →</a>") },
+    { chip: t("Which tools does he use?"), keys: ["tool", "skill", "python", "sql", "excel", "vba", "stack", "technical", "software", "bigquery", "looker", "gemini", "program", "code", "coding", "outil", "competence", "logiciel", "technique"],
       // Same tools as the Home toolbox (user, 7 Nov 2026: no Python)
-      a: "To prepare data: <b>SQL / BigQuery, Excel (VBA), Google Sheets (Apps Script)</b>. To analyse and show it: <b>Power BI, Looker, MyReport</b>. To automate with AI: <b>LLMs (Gemini, Claude), AI agents (OpenCode)</b> and prompt engineering.<br><a href=\"projects.html\">See them in his projects →</a>" },
-    { chip: "Show me his projects", keys: ["project", "built", "build", "dashboard", "app", "automation", "model", "achievement", "result"],
-      a: "Rémi delivered <b>7 projects</b> during his internships: apps and tools, automations with AI, dashboards and reporting, and data models. For example, a forecast accuracy web app at Glovo and a VAT automation at OSLO.<br><a href=\"projects.html\">See all projects →</a>" },
-    { chip: "Which languages does he speak?", keys: ["language", "english", "french", "spanish", "speak", "toeic", "anglais"],
-      a: "<b>French</b> (native), <b>English</b> (C1, TOEIC 930/990) and <b>Spanish</b> (B1)." },
-    { chip: "Who is he outside work?", keys: ["hobby", "hobbies", "sport", "football", "running", "read", "book", "free time", "personality", "passion", "volunteer", "bake", "baking"],
-      a: "Football (12 years in a club) and running (the Lille half-marathon), about one book a month, 4 volunteering experiences, and baking.<br><a href=\"index.html#about\">About me →</a>" },
-    { chip: "How can I contact him?", keys: ["contact", "email", "mail", "linkedin", "reach", "call", "cv", "resume", "phone", "meet"],
-      a: "His email and LinkedIn are on the <a href=\"contact.html\">Contact page</a>, and his CV can be downloaded from the <a href=\"index.html\">Home page</a>." },
+      a: t("To prepare data: <b>SQL / BigQuery, Excel (VBA), Google Sheets (Apps Script)</b>. To analyse and show it: <b>Power BI, Looker, MyReport</b>. To automate with AI: <b>LLMs (Gemini, Claude), AI agents (OpenCode)</b> and prompt engineering.<br><a href=\"projects.html\">See them in his projects →</a>") },
+    { chip: t("Show me his projects"), keys: ["project", "built", "build", "dashboard", "app", "automation", "model", "achievement", "result", "projet", "realis", "tableau de bord", "automatis", "modele", "resultat"],
+      a: t("Rémi delivered <b>7 projects</b> during his internships: apps and tools, automations with AI, dashboards and reporting, and data models. For example, a forecast accuracy web app at Glovo and a VAT automation at OSLO.<br><a href=\"projects.html\">See all projects →</a>") },
+    { chip: t("Which languages does he speak?"), keys: ["language", "english", "french", "spanish", "speak", "toeic", "anglais", "langue", "francais", "espagnol", "parle"],
+      a: t("<b>French</b> (native), <b>English</b> (C1, TOEIC 930/990) and <b>Spanish</b> (B1).") },
+    { chip: t("Who is he outside work?"), keys: ["hobby", "hobbies", "sport", "football", "running", "read", "book", "free time", "personality", "passion", "volunteer", "bake", "baking", "loisir", "passe-temps", "lecture", "livre", "course", "benevol", "patisserie", "personnalite"],
+      a: t("Football (12 years in a club) and running (the Lille half-marathon), about one book a month, 4 volunteering experiences, and baking.<br><a href=\"index.html#about\">About me →</a>") },
+    { chip: t("How can I contact him?"), keys: ["contact", "email", "mail", "linkedin", "reach", "call", "cv", "resume", "phone", "meet", "contacter", "joindre", "telephone", "rencontr"],
+      a: t("His email and LinkedIn are on the <a href=\"contact.html\">Contact page</a>, and his CV can be downloaded from the <a href=\"index.html\">Home page</a>.") },
   ];
-  const GREETING = `Hi, I'm ${NAME}, Rémi's AI assistant 👋 Ask me anything about his background, or pick a question below.`;
-  const HELLO = "Hello! What would you like to know about Rémi: his studies, his experience, his projects or his availability?";
-  const FALLBACK = "I'm still learning: in this preview I can answer the main questions about Rémi (studies, experience, projects, skills, availability). Try one of the questions below, or reach him directly on the <a href=\"contact.html\">Contact page</a>.";
+  const GREETING = t("Hi, I'm {name}, Rémi's AI assistant 👋 Ask me anything about his background, or pick a question below.", { name: NAME });
+  const HELLO = t("Hello! What would you like to know about Rémi: his studies, his experience, his projects or his availability?");
+  const FALLBACK = t("I'm still learning: in this preview I can answer the main questions about Rémi (studies, experience, projects, skills, availability). Try one of the questions below, or reach him directly on the <a href=\"contact.html\">Contact page</a>.");
 
   const norm = (text) => text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
   function localAnswer(question) {
@@ -71,25 +72,25 @@
   function build() {
     const root = make(`
       <div class="cva">
-        <div class="cva-panel" role="dialog" aria-label="${NAME}, Rémi's AI assistant">
+        <div class="cva-panel" role="dialog" aria-label="${NAME}, ${t("Rémi's AI assistant")}">
           <header class="cva-head">
             ${avatar()}
-            <div class="cva-head-text"><strong>${NAME}</strong><span>Rémi's AI assistant · Preview</span></div>
-            <button type="button" class="cva-close" aria-label="Close the chat"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+            <div class="cva-head-text"><strong>${NAME}</strong><span>${t("Rémi's AI assistant · Preview")}</span></div>
+            <button type="button" class="cva-close" aria-label="${t("Close the chat")}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
           </header>
           <div class="cva-log" aria-live="polite"></div>
-          <div class="cva-chips" aria-label="Suggested questions"></div>
+          <div class="cva-chips" aria-label="${t("Suggested questions")}"></div>
           <form class="cva-form">
-            <input type="text" name="q" maxlength="300" autocomplete="off" placeholder="Ask about Rémi's background…" aria-label="Your question">
-            <button type="submit" aria-label="Send" disabled><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <input type="text" name="q" maxlength="300" autocomplete="off" placeholder="${t("Ask about Rémi's background…")}" aria-label="${t("Your question")}">
+            <button type="submit" aria-label="${t("Send")}" disabled><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </form>
-          <p class="cva-foot">Answers based on Rémi's CV and this website.</p>
+          <p class="cva-foot">${t("Answers based on Rémi's CV and this website.")}</p>
         </div>
-        <button type="button" class="cva-launcher" aria-label="Open ${NAME}, Rémi's AI assistant" aria-expanded="false">
+        <button type="button" class="cva-launcher" aria-label="${t("Open {name}, Rémi's AI assistant", { name: NAME })}" aria-expanded="false">
           ${avatar()}
           <span class="cva-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
         </button>
-        <div class="cva-tip" aria-hidden="true">Ask me about Rémi</div>
+        <div class="cva-tip" aria-hidden="true">${t("Ask me about Rémi")}</div>
       </div>`);
     document.body.append(root);
 
@@ -141,7 +142,7 @@
       send.disabled = true;
       input.value = "";
       addMessage("user", question);
-      const typing = addMessage("bot", '<span class="cva-typing" aria-label="Typing"><i></i><i></i><i></i></span>', false);
+      const typing = addMessage("bot", `<span class="cva-typing" aria-label="${t("Typing")}"><i></i><i></i><i></i></span>`, false);
       const [answer] = await Promise.all([getAnswer(question), wait(reduce ? 200 : 650 + Math.random() * 500)]);
       typing.remove();
       addMessage("bot", answer);
@@ -191,11 +192,11 @@
             <div class="cva-intro-rings" aria-hidden="true"><span></span><span></span></div>
             <span class="cva-intro-shadow" aria-hidden="true"></span>
             ${avatar("cva-intro-orb")}
-            <p class="cva-intro-kicker">Welcome to Rémi Degand's CV website</p>
-            <h2 class="cva-intro-title">Hi, I'm <b>${NAME}</b>, his AI assistant.</h2>
-            <p class="cva-intro-text">Any question about Rémi's background? Don't hesitate to ask me.</p>
+            <p class="cva-intro-kicker">${t("Welcome to Rémi Degand's CV website")}</p>
+            <h2 class="cva-intro-title">${t("Hi, I'm <b>{name}</b>, his AI assistant.", { name: NAME })}</h2>
+            <p class="cva-intro-text">${t("Any question about Rémi's background? Don't hesitate to ask me.")}</p>
           </div>
-          <button type="button" class="cva-intro-skip">Skip</button>
+          <button type="button" class="cva-intro-skip">${t("Skip")}</button>
         </div>`);
       document.body.append(intro);
       const html = document.documentElement;

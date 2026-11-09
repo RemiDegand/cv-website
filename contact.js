@@ -1,6 +1,7 @@
 // Contact page (redesigned 3 Nov 2026, web design pass): copy the email address, and the
 // business card tilting towards the mouse. Styles in contact.css.
 (() => {
+  const t = window.t || ((s) => s);   // French version: i18n.js (9 Nov 2026)
   // 1. "Copy" button next to the email (shown only when the browser can copy)
   const copy = document.querySelector(".ct-copy");
   const toast = document.querySelector(".ct-toast");
@@ -10,15 +11,15 @@
     copy.addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(copy.dataset.copy);
-        copy.textContent = "Copied ✓";
+        copy.textContent = t("Copied ✓");
         copy.classList.add("is-done");
-        if (toast) { toast.textContent = "Email address copied"; toast.classList.add("is-shown"); }
+        if (toast) { toast.textContent = t("Email address copied"); toast.classList.add("is-shown"); }
       } catch {
-        if (toast) { toast.textContent = "Couldn't copy: select the address above"; toast.classList.add("is-shown"); }
+        if (toast) { toast.textContent = t("Couldn't copy: select the address above"); toast.classList.add("is-shown"); }
       }
       clearTimeout(timer);
       timer = setTimeout(() => {
-        copy.textContent = "Copy";
+        copy.textContent = t("Copy");
         copy.classList.remove("is-done");
         if (toast) toast.classList.remove("is-shown");
       }, 2200);

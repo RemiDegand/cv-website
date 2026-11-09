@@ -733,7 +733,7 @@ ONLINE (each question)
 
 ## Open questions / decisions
 - [ ] Domain name (e.g. `remidegand.com` / `.dev`)? Budget ≈ €10–15/year
-- [x] Languages of the site: **English only** at launch (decided 7 Oct). The chatbot will still reply in the recruiter's language.
+- [x] Languages of the site: **English only** at launch (decided 7 Oct). **French version added 9 Nov 2026** (flags in the menu, English stays the default; see "Next session"). The chatbot will still reply in the recruiter's language.
 - [x] Design style: **clean & light**, white background, dark text, one blue accent (decided 7 Oct)
 - [x] Profile photo: **yes**, close-up `photo2.jpg` used (not `photo.jpg`: face too small in the circle + photographer watermark "F.B.EYE")
 - [x] Public info: **email (Gmail), LinkedIn, downloadable PDF CV**. No phone. The PDF must not contain the phone or address.

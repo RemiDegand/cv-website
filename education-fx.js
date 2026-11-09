@@ -2,6 +2,7 @@
 // after script.js (which builds the details cards and handles the clicks). Styles in
 // education-fx.css, switched on by the .efx class on <html>.
 (() => {
+  const t = window.t || ((s) => s);   // French version: i18n.js (9 Nov 2026)
   const timeline = document.querySelector(".timeline");
   if (!timeline) return;
   const items = [...timeline.querySelectorAll(".edu-item")];
@@ -25,7 +26,7 @@
   if (head) {
     const lead = document.createElement("p");
     lead.className = "edu-lead";
-    lead.textContent = "Click a school to see its courses year by year, and the internships done along the way.";
+    lead.textContent = t("Click a school to see its courses year by year, and the internships done along the way.");
     head.after(lead);
   }
 
@@ -36,9 +37,9 @@
   pick.innerHTML = `
     <div class="edu-pick-head">
       <span class="edu-pick-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6"/></svg></span>
-      <div><strong>Pick a school</strong><span class="edu-pick-arrow">on the left</span></div>
+      <div><strong>${t("Pick a school")}</strong><span class="edu-pick-arrow">${t("on the left")}</span></div>
     </div>
-    <p>Its details open here: the courses of each year, newest first, and the internships done along the way.</p>
+    <p>${t("Its details open here: the courses of each year, newest first, and the internships done along the way.")}</p>
     <ul class="edu-pick-preview"><li><i></i><i></i></li><li><i></i><i></i></li><li><i></i><i></i></li></ul>`;
   timeline.append(pick);
 
