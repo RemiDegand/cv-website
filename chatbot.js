@@ -120,7 +120,7 @@
 
     ANSWERS.forEach((item) => {
       const chip = make(`<button type="button">${item.chip}</button>`);
-      chip.addEventListener("click", () => ask(item.chip));
+      chip.addEventListener("click", () => ask(item.chip, item.a));   // suggested questions use their ready answer: free and instant, no Gemini call (9 Nov 2026)
       chips.append(chip);
     });
 
@@ -135,7 +135,7 @@
       return localAnswer(question);
     }
 
-    async function ask(question) {
+    async function ask(question, preset) {
       question = question.trim();
       if (!question || busy) return;
       busy = true;
@@ -143,7 +143,7 @@
       input.value = "";
       addMessage("user", question);
       const typing = addMessage("bot", `<span class="cva-typing" aria-label="${t("Typing")}"><i></i><i></i><i></i></span>`, false);
-      const [answer] = await Promise.all([getAnswer(question), wait(reduce ? 200 : 650 + Math.random() * 500)]);
+      const [answer] = await Promise.all([preset || getAnswer(question), wait(reduce ? 200 : 650 + Math.random() * 500)]);
       typing.remove();
       addMessage("bot", answer);
       busy = false;
