@@ -20,6 +20,19 @@
   background: rgba(255, 255, 255, 0.7);
 }
 
+/* Wide screens (user, 9 Nov): the flags sit in the middle of the space between the end of "Contact" (= right edge
+   of the 1120px container's content: 50% + 544px) and the right edge of the page, i.e. at 75% + 272px of the menu.
+   Below 1320px that space is too narrow, so the switch stays in the menu row, after "Contact". */
+@media (min-width: 1320px) {
+  .lang-switch {
+    position: absolute;   /* positioned against .menu (sticky = full page width) */
+    top: 50%;
+    left: calc(75% + 272px);
+    margin: 0;
+    transform: translate(-50%, -50%);
+  }
+}
+
 /* Blue ring around the chosen flag; it slides to the other one */
 .lang-switch .lang-thumb {
   position: absolute;
