@@ -21,7 +21,11 @@ const DIR = __dirname;
 const { propertyId } = JSON.parse(fs.readFileSync(path.join(DIR, "config.json"), "utf8"));
 if (!propertyId) { console.error("Set propertyId in analytics/config.json first."); process.exit(1); }
 const keyFile = path.join(DIR, "service-account.json");
-const client = new BetaAnalyticsDataClient(fs.existsSync(keyFile) ? { credentials: JSON.parse(fs.readFileSync(keyFile, "utf8")) } : {});
+const { GoogleAuth, JWT } = require("google-auth-library");   // comes with @google-analytics/data
+const key = fs.existsSync(keyFile) ? JSON.parse(fs.readFileSync(keyFile, "utf8")) : null;
+const client = new BetaAnalyticsDataClient(key
+  ? { auth: new GoogleAuth({ authClient: new JWT({ email: key.client_email, key: key.private_key, scopes: ["https://www.googleapis.com/auth/analytics.readonly"] }) }) }
+  : {});
 
 const WEEKS = Math.max(1, parseInt(process.argv[2], 10) || 8);
 const SECTIONS = ["Home", "Experiences", "Projects", "Education", "Contact"];
