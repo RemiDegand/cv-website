@@ -7,7 +7,7 @@
 // - Banner LOOK = Web Designer (consent.css). Logic = this file.
 // - While GA_ID is empty, nothing happens (no banner, no tracking). Test locally with ?ga-debug in the address.
 (() => {
-  const GA_ID = "";                                  // ← GA4 Measurement ID, e.g. "G-ABC123XYZ"
+  const GA_ID = "G-CVMS5B93RP";                      // GA4 Measurement ID (property "CV website", 10 Nov 2026)
   const KEY = "cv-consent";
   const MAX_AGE = 182 * 24 * 3600 * 1000;            // CNIL: ask again after ~6 months
   const debug = /[?&]ga-debug\b/.test(location.search);
