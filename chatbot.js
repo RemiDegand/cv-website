@@ -128,7 +128,7 @@
       if (ENDPOINT) {
         try {
           const res = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ question, history: history.slice(-10) }) });
+            body: JSON.stringify({ question, history: history.slice(-10), lang: document.documentElement.lang === "fr" ? "fr" : "en" }) });   // site language: French site = French answers (Platform & Data, 10 Nov 2026)
           if (res.ok) { const data = await res.json(); if (data && data.answer) return escapeHtml(String(data.answer)); }
         } catch { /* falls back to the preview answers */ }
       }
