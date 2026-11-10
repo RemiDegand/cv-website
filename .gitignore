@@ -19,3 +19,8 @@ firebase-debug.log
 # Chatbot function: dependencies and generated context (rebuilt on deploy)
 functions/node_modules/
 functions/context.txt
+
+# Analytics: service account key and reports about visitors (local only)
+analytics/node_modules/
+analytics/service-account.json
+analytics/reports/

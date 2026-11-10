@@ -34,13 +34,22 @@
   window.gtag = window.gtag || gtag;
   gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "denied" });
 
+  // Page group (GA4 "Content group"): the detail pages count in their section (10 Nov 2026)
+  const path = location.pathname.split("/").pop().replace(/\.html$/, "") || "index";
+  const group =
+    path === "index" ? "Home" :
+    /^experience/.test(path) ? "Experiences" :
+    /^project/.test(path) ? "Projects" :
+    path === "education" ? "Education" :
+    path === "contact" ? "Contact" : "Other";
+
   let loaded = false;
   const load = () => {
     if (loaded || !GA_ID) return;
     loaded = true;
     gtag("consent", "update", { analytics_storage: "granted" });
     gtag("js", new Date());
-    gtag("config", GA_ID, debug ? { debug_mode: true } : {});
+    gtag("config", GA_ID, { content_group: group, ...(debug ? { debug_mode: true } : {}) });
     const s = document.createElement("script");
     s.async = true;
     s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA_ID);

@@ -1,0 +1,11 @@
+{
+  "name": "cv-website-analytics",
+  "private": true,
+  "description": "Weekly GA4 report (local only, never deployed)",
+  "scripts": {
+    "weekly": "node weekly-report.js"
+  },
+  "dependencies": {
+    "@google-analytics/data": "^7.3.0"
+  }
+}
