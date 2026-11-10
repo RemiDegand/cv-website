@@ -21,7 +21,7 @@ const DIR = __dirname;
 const { propertyId } = JSON.parse(fs.readFileSync(path.join(DIR, "config.json"), "utf8"));
 if (!propertyId) { console.error("Set propertyId in analytics/config.json first."); process.exit(1); }
 const keyFile = path.join(DIR, "service-account.json");
-const client = new BetaAnalyticsDataClient(fs.existsSync(keyFile) ? { keyFilename: keyFile } : {});
+const client = new BetaAnalyticsDataClient(fs.existsSync(keyFile) ? { credentials: JSON.parse(fs.readFileSync(keyFile, "utf8")) } : {});
 
 const WEEKS = Math.max(1, parseInt(process.argv[2], 10) || 8);
 const SECTIONS = ["Home", "Experiences", "Projects", "Education", "Contact"];
@@ -72,6 +72,7 @@ const run = (dimensions, metrics) => client.runReport({
   }
 
   const list = [...weeks.keys()].sort().map((k) => weeks.get(k));
+  if (!list.length) { console.log(`No data yet for the last ${WEEKS} weeks (since ${iso(monday)}).`); return; }
   const currentWeek = list.length && list[list.length - 1].from === iso(new Date(monday.getTime() + 7 * 864e5 * (WEEKS - 1)));
   if (currentWeek) list[list.length - 1].week += " (so far)";
 
