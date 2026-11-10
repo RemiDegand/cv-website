@@ -379,6 +379,7 @@ ${x.figures.map(([k, v]) => `                <li><strong>${esc(k)}</strong><span
   <link rel="stylesheet" href="lang.css"><!-- language switch in the menu -->
   <link rel="stylesheet" href="experience-pages.css"><!-- project cards with a cover (3 Nov 2026) -->
   <link rel="stylesheet" href="page-head.css"><!-- page header: glow, logo tile, title, fact cards (7 Nov 2026) -->
+  <link rel="stylesheet" href="mobile.css"><!-- phone look: top bar + bottom tab bar, last so it wins (10 Nov 2026, Web Designer) -->
 </head>
 <body>
 

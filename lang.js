@@ -31,8 +31,9 @@
     if (!b) return;
     let code = b.dataset.lang;
     if (code === current()) {
-      // Phones show only the chosen flag: a tap on it switches to the other language
-      if (!phone.matches) return;
+      // When only the chosen flag shows, a tap on it switches to the other language.
+      // Since 10 Nov 2026 (mobile.css) phones show both flags, so a tap on the chosen one does nothing there either.
+      if (buttons.some((x) => x !== b && x.offsetParent !== null)) return;
       code = codes.find((c) => c !== code);
     }
     try { localStorage.setItem(KEY, code); } catch { /* private mode: fine */ }

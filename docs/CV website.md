@@ -70,6 +70,8 @@
 - **About section removed** from Home (12 Oct): the hero + carousel already say who I am. May come back later as 2–3 sentences (business school → finance → data & AI, why tech).
 - The old one-page version is saved in Git commit `a3cf660`.
 
+**📱 Phone look (10 Nov 2026, Web Designer, user: improve the look on phones only).** One file, **`mobile.css`**, all inside `@media (max-width: 720px)`, so computers are unchanged; linked **last in the `<head>`** of the 16 pages and of `tools/build-experience-pages.js` (**new page = add that line**). **Bottom tab bar (chosen by the user over a ☰ menu):** the 5 menu links become a bar fixed at the bottom (icon + label, current page = blue with a soft blue pill behind the icon); same HTML as the computer menu, icons drawn in CSS by link address (`a[href^="index"]`…), so the French labels still work. Top bar = name on the left + **both flags** (lang.js: a tap on the chosen flag no longer switches when the other flag is visible). The header's blur moved to `.menu::before`, because a `backdrop-filter` on `.menu` would hold the fixed bar inside the header. Ada's bubble, its "Ask me" label and the cookie banner (`.consent`, Platform & Data) sit above the bar; the chat panel still covers it. Also: hero status chip on one line (photo 96px), "Me in 5 words" text always left-aligned, experience/project facts (When / Where / …) in **one card with thin lines between rows** instead of 3–4 cards, Projects area filters on **one line that swipes sideways**. Checked at 390px (Home, Projects, Glovo, Contact), no sideways scroll.
+
 ### 1. Home (`index.html`)
 **Hero (decided 12 Oct):**
 - Availability badge: "Available from May 2027 · Internship, VIE or full-time"
