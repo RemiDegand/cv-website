@@ -101,7 +101,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Show me his projects": "Quels projets a-t-il réalisés ?",
  "Skip": "Passer",
  "Sort by order volume, biggest zones first…": "Tri par volume de commandes, les plus grandes zones d’abord…",
- "Start": "Lancer",
+ "Start": "Début",
  "Start the simulation": "Lancer la simulation",
  "Suggested questions": "Questions suggérées",
  "Sunday: Under FC still high. Missing Capacity is stable, so the AI points to the orders.": "Dimanche : l’Under FC reste élevé. La Missing Capacity est stable, donc l’IA pointe du doigt les commandes.",
