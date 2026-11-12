@@ -8,15 +8,19 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const out = [];
 
-// 1. Project knowledge files
-const kDir = path.join(ROOT, "knowledge", "projects");
-for (const file of fs.readdirSync(kDir).filter((f) => f.endsWith(".md")).sort()) {
-  let md = fs.readFileSync(path.join(kDir, file), "utf8").replace(/\r/g, "");
+// 1. Knowledge files: knowledge/*.md (profile for recruiters, 12 Nov 2026; not README) + knowledge/projects/*.md
+const kRoot = path.join(ROOT, "knowledge");
+const kFiles = [
+  ...fs.readdirSync(kRoot).filter((f) => f.endsWith(".md") && f !== "README.md").sort(),
+  ...fs.readdirSync(path.join(kRoot, "projects")).filter((f) => f.endsWith(".md")).sort().map((f) => "projects/" + f),
+];
+for (const file of kFiles) {
+  let md = fs.readFileSync(path.join(kRoot, file), "utf8").replace(/\r/g, "");
   const fm = (md.match(/^---\n([\s\S]*?)\n---\n/) || [])[1] || "";
   md = md.replace(/^---\n[\s\S]*?\n---\n/, "");
   md = md.replace(/\n## Open questions[\s\S]*?(?=\n## |\s*$)/, "\n");     // unconfirmed points stay out
   const keep = fm.split("\n").filter((l) => /^(title|company|industry|experience|on_site|page|tools):/.test(l)).join("\n");
-  out.push(`### PROJECT FILE: ${file}\n${keep}\n${md.trim()}`);
+  out.push(`### ${file.startsWith("projects/") ? "PROJECT" : "PROFILE"} FILE: ${file}\n${keep}\n${md.trim()}`);
 }
 
 // 2. Visible text of the site pages (public anyway), without the simulations (made-up data, see the notes)
