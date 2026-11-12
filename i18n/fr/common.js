@@ -16,7 +16,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "And at OSLO?": "Et chez OSLO ?",
  "Answers based on Rémi's CV and this website.": "Réponses basées sur le CV de Rémi et sur ce site.",
  "Any question about Rémi's background? Don't hesitate to ask me.": "Une question sur le parcours de Rémi ? N’hésitez pas à me la poser.",
- "Ask about Rémi's background…": "Posez une question sur le parcours de Rémi…",
+ "Ask about Rémi's background…": "Votre question sur Rémi…",
  "Ask me about Rémi": "Une question sur Rémi ?",
  "Back to the first sheet for the next zone…": "Retour à la première feuille pour la zone suivante…",
  "Calculating: {pct}%": "Calcul : {pct} %",
