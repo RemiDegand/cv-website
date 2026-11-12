@@ -50,4 +50,4 @@ updated: 2026-10-21
 
 ## Folders
 - `projects/`: one file per project, the 6 on the site and the OSLO projects not shown yet (`on_site: false`).
-- Later: `experience/`, `education/`, `profile.md` (same rules), so the chatbot can answer about the rest of the CV.
+- `profile.md` (12 Nov 2026): facts for recruiters that are not on the site (mobility, target cities, why tech). Ada reads it as "RECRUITER NOTES". Later: `experience/`, `education/` (same rules).

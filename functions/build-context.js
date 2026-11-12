@@ -20,7 +20,7 @@ for (const file of kFiles) {
   md = md.replace(/^---\n[\s\S]*?\n---\n/, "");
   md = md.replace(/\n## Open questions[\s\S]*?(?=\n## |\s*$)/, "\n");     // unconfirmed points stay out
   const keep = fm.split("\n").filter((l) => /^(title|company|industry|experience|on_site|page|tools):/.test(l)).join("\n");
-  out.push(`### ${file.startsWith("projects/") ? "PROJECT" : "PROFILE"} FILE: ${file}\n${keep}\n${md.trim()}`);
+  out.push(`### ${file.startsWith("projects/") ? "PROJECT FILE" : "RECRUITER NOTES, not a page of the site"}: ${file}\n${keep}\n${md.trim()}`);
 }
 
 // 2. Visible text of the site pages (public anyway), without the simulations (made-up data, see the notes)
