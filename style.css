@@ -372,44 +372,12 @@ body.home #about { padding-top: 0; }
   .xp-next-cta { justify-items: start; margin-top: 16px; padding-left: 0; border-left: 0; }
 }
 
-/* ===== Experience page: other experiences (list on the left, details on the right) ===== */
-.xp-browse { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 40px; align-items: start; margin-top: 48px; }
-.xp-list .group-title { margin: 28px 0 8px; }
-.xp-list .group-title:first-child { margin-top: 0; }
-.xp-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 10px 12px;
-  border: 0;
-  border-radius: 10px;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-.xp-row:hover, .xp-row:focus-visible { background: color-mix(in srgb, var(--brand, var(--accent)) 9%, var(--bg)); outline: none; }
-.xp-row.selected { background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent); }
-.xp-row .card-logo { width: 40px; height: 40px; }
-.xp-row-text { flex: 1; min-width: 0; line-height: 1.35; }
-.xp-row-text strong { display: block; font-weight: 600; }
-.xp-row.selected strong { color: var(--accent); }
-.xp-row-text span { display: block; color: var(--text-muted); font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.xp-row-date { color: var(--text-muted); font-size: 0.8rem; white-space: nowrap; }
-.xp-detail { position: sticky; top: calc(var(--menu-height) + 24px); }   /* stays in view while scrolling the list */
-.xp-detail .card { box-shadow: none; animation: xp-in 0.3s ease both; }
-@keyframes xp-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
 @media (prefers-reduced-motion: reduce) {
-  .xp-dot, .xp-row { transition: none; }
+  .xp-dot { transition: none; }
   .xp-item:hover .xp-dot { transform: none; }
-  .xp-detail .card { animation: none; }
 }
 
-/* Phones: year above each card, figures under the text, details open under the clicked row */
+/* Phones: year above each card, figures under the text */
 @media (max-width: 720px) {
   .xp-timeline { margin-left: 0; padding-left: 32px; }
   .xp-dot { left: -49px; top: 18px; width: 32px; height: 32px; }
@@ -418,8 +386,6 @@ body.home #about { padding-top: 0; }
   .xp-card { grid-template-columns: minmax(0, 1fr); }
   .xp-card .card-header .card-meta { padding-left: 0; }   /* no logo in these cards (it sits on the line) */
   .xp-card .figures { margin-top: 16px; padding-left: 0; border-left: 0; }
-  .xp-browse { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .xp-detail { position: static; margin: 8px 0 16px; }
 }
 
 /* ===== Projects page (and Home copies): cards with the company colour bar on top =====

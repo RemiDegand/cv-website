@@ -36,7 +36,7 @@
     { chip: t("Who is he outside work?"), keys: ["hobby", "hobbies", "sport", "football", "running", "read", "book", "free time", "personality", "passion", "volunteer", "bake", "baking", "loisir", "passe-temps", "lecture", "livre", "course", "benevol", "patisserie", "personnalite"],
       a: t("Football (12 years in a club) and running (the Lille half-marathon), about one book a month, 4 volunteering experiences, and baking.<br><a href=\"index.html#about\">About me →</a>") },
     { chip: t("How can I contact him?"), keys: ["contact", "email", "mail", "linkedin", "reach", "call", "cv", "resume", "phone", "meet", "contacter", "joindre", "telephone", "rencontr"],
-      a: t("His email and LinkedIn are on the <a href=\"contact.html\">Contact page</a>, and his CV can be downloaded from the <a href=\"index.html\">Home page</a>.") },
+      a: t("His email and LinkedIn are on the <a href=\"contact.html\">Contact page</a>, where his CV can also be downloaded.") },
   ];
   const GREETING = t("Hi, I'm {name}, Rémi's AI assistant 👋 Ask me anything about his background, or pick a question below.", { name: NAME });
   const HELLO = t("Hello! What would you like to know about Rémi: his studies, his experience, his projects or his availability?");
@@ -75,7 +75,7 @@
         <div class="cva-panel" role="dialog" aria-label="${NAME}, ${t("Rémi's AI assistant")}">
           <header class="cva-head">
             ${avatar()}
-            <div class="cva-head-text"><strong>${NAME}</strong><span>${t("Rémi's AI assistant · Preview")}</span></div>
+            <div class="cva-head-text"><strong>${NAME}</strong><span>${t("Rémi Degand's AI assistant")}</span></div>
             <button type="button" class="cva-close" aria-label="${t("Close the chat")}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
           </header>
           <div class="cva-log" aria-live="polite"></div>

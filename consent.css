@@ -1,52 +1,93 @@
 /* Cookie banner + footer "Cookies" link (10 Nov 2026).
-   Plain working version by the Platform & Data agent; the LOOK belongs to the Web Designer (restyle freely,
-   keep the class names used by analytics.js: .consent, .consent-text, .consent-actions, .consent-btn[data-v], .consent-link).
-   Rule (CNIL): "Refuse" must stay as visible and as easy as "Accept". */
+   Logic and texts by the Platform & Data agent (analytics.js); the LOOK belongs to the Web Designer (restyled 12 Nov 2026).
+   Keep the class names used by analytics.js: .consent, .consent-text, .consent-actions, .consent-btn[data-v], .consent-link.
+   Rule (CNIL): "Refuse" must stay as visible and as easy as "Accept", so both buttons have exactly the same look.
+   Look: a frosted white card bottom left with a soft blue-violet shadow, a small cookie icon in a tinted tile,
+   two identical pills; it slides up when it appears. Phones: full width above Ada's bubble (mobile.css moves it above the tab bar). */
 .consent {
+  --c-blue: var(--accent, #2563eb);
+  --c-violet: #6d5dfc;
   position: fixed;
-  left: 16px;
-  bottom: 16px;
+  left: 20px;
+  bottom: 20px;
   z-index: 900;
-  max-width: 420px;
-  padding: 16px 18px;
-  background: var(--bg, #fff);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  max-width: 440px;
+  padding: 18px 20px 18px 18px;
   color: var(--text, #1a1f2b);
-  border: 1px solid var(--border, #e3e7ee);
-  border-radius: var(--radius, 12px);
-  box-shadow: 0 8px 30px rgba(16, 24, 40, 0.14);
-  font-size: 0.9rem;
-  line-height: 1.45;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(37, 99, 235, 0.14);
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(16, 24, 40, 0.05), 0 18px 44px rgba(49, 46, 129, 0.16);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  animation: consent-in 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
 }
-.consent-text { margin: 0 0 12px; }
+/* cookie icon in a soft gradient tile (drawn in CSS, no change to the markup) */
+.consent::before {
+  content: "";
+  grid-row: span 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.5A9 9 0 1 1 11.5 3a3 3 0 0 0 3.5 3.5 3 3 0 0 0 3.5 3.5 3 3 0 0 0 2.5 2.5z'/><circle cx='8.5' cy='11' r='.6' fill='%232563eb'/><circle cx='12' cy='15.5' r='.6' fill='%232563eb'/><circle cx='15.5' cy='13' r='.6' fill='%232563eb'/><circle cx='8' cy='16' r='.6' fill='%232563eb'/></svg>") no-repeat center / 22px 22px,
+    linear-gradient(135deg, #e8efff, #efeaff);
+}
+.consent-text { margin: 0; padding-top: 2px; color: var(--text-muted, #5b6474); }
 .consent-actions { display: flex; gap: 8px; justify-content: flex-end; }
+/* both buttons identical (CNIL): soft blue pill, filled with the site gradient on hover */
 .consent-btn {
   flex: 0 0 auto;
-  min-width: 96px;
-  padding: 8px 16px;
+  min-width: 104px;
+  padding: 9px 18px;
   font: inherit;
   font-weight: 600;
-  color: var(--accent, #2563eb);
+  color: var(--c-blue);
   background: var(--accent-soft, #e8efff);
-  border: 1px solid transparent;
+  border: 1px solid rgba(37, 99, 235, 0.18);
   border-radius: 999px;
   cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
-.consent-btn:hover { border-color: var(--accent, #2563eb); }
-.consent-btn:focus-visible { outline: 2px solid var(--accent, #2563eb); outline-offset: 2px; }
+.consent-btn:hover {
+  color: #fff;
+  background: linear-gradient(135deg, var(--c-blue), var(--c-violet));
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.28);
+  transform: translateY(-1px);
+}
+.consent-btn:active { transform: none; }
+.consent-btn:focus-visible { outline: 2px solid var(--c-blue); outline-offset: 2px; }
 
+@keyframes consent-in { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+/* footer link: quiet, like the © line, with an underline that grows on hover */
 .consent-link {
   padding: 0;
   font: inherit;
   color: inherit;
-  background: none;
+  background: linear-gradient(currentColor, currentColor) no-repeat left bottom / 0 1px;
   border: 0;
-  text-decoration: underline;
-  text-underline-offset: 2px;
   cursor: pointer;
+  transition: color 0.2s ease, background-size 0.25s ease;
 }
-.consent-link:hover { color: var(--accent, #2563eb); }
+.consent-link:hover { color: var(--accent, #2563eb); background-size: 100% 1px; }
+.consent-link:focus-visible { outline: 2px solid var(--accent, #2563eb); outline-offset: 2px; border-radius: 2px; }
 
 @media (max-width: 720px) {
-  .consent { left: 12px; right: 12px; bottom: 100px; max-width: none; }   /* above Ada's bubble (bottom right, 62px) */
+  .consent { left: 12px; right: 12px; bottom: 100px; max-width: none; padding: 16px; }   /* above Ada's bubble (bottom right, 62px) */
+  .consent::before { grid-row: auto; width: 36px; height: 36px; }
+  .consent-actions { grid-column: 1 / -1; }   /* buttons under the icon and the text, full width */
   .consent-btn { flex: 1 1 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consent { animation: none; }
+  .consent-btn, .consent-link { transition: none; }
+  .consent-btn:hover { transform: none; }
 }

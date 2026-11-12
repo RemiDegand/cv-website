@@ -4,8 +4,8 @@
 // script at the top of the <head> sets <html data-lang="fr"> when French was chosen, so the chosen flag shows
 // on the first paint. This file only handles clicks and keeps aria-pressed in line.
 // English is the default. The choice is remembered (localStorage "cv-lang").
-// DESIGN ONLY for now: no French texts yet. When they exist, listen to the "langchange" event
-// (detail = "en" | "fr") to swap the texts.
+// A click saves the choice and sends a "langchange" event (detail = "en" | "fr"); i18n.js then reloads the page, and
+// swaps the texts from its dictionary (i18n/fr.json, 9 Nov 2026), so simulations and animations restart cleanly.
 (() => {
   const box = document.querySelector(".lang-switch");
   if (!box) return;
