@@ -3,7 +3,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Découvrir la suite",
  "<span>Next experience →</span>Treasurer · Envie d'Sup": "<span>Expérience suivante →</span>Trésorier · Envie d'Sup",
  "<span>← Previous experience</span>Forecasting Analyst Intern · Glovo": "<span>← Expérience précédente</span>Forecasting Analyst (stage) · Glovo",
- "<strong>3 entities</strong> cash flow for any period, in one refresh": "Flux de trésorerie de <strong>3 entités</strong> pour toute période, en une actualisation",
+ "<strong>3 entities</strong> cash flow for any period, in one refresh": "Flux de trésorerie des <strong>3 entités</strong>, pour toute période, en une actualisation",
  "<strong>3</strong> business units covered": "<strong>3</strong> business units couvertes",
  "<strong>Agreed on the implementation</strong> with the Director of Information Systems, so the solution would last and stay easy to maintain.": "<strong>Validation de la mise en place</strong> avec le DSI, pour une solution durable et facile à maintenir.",
  "<strong>Designed a solution</strong> with the tools and resources available at OSLO.": "<strong>Conception d’une solution</strong> avec les outils et les ressources disponibles chez OSLO.",

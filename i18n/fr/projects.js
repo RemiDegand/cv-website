@@ -1,6 +1,6 @@
 // Built by tools/build-i18n.js from i18n/fr.json: don't edit by hand. Texts of projects.html.
 Object.assign((window.I18N_FR = window.I18N_FR || {}), {
- "<strong>3 entities</strong> cash flow for any period, in one refresh": "Flux de trésorerie de <strong>3 entités</strong> pour toute période, en une actualisation",
+ "<strong>3 entities</strong> cash flow for any period, in one refresh": "Flux de trésorerie des <strong>3 entités</strong>, pour toute période, en une actualisation",
  "<strong>3</strong> business units covered": "<strong>3</strong> business units couvertes",
  "<strong>Daily use</strong> by all forecasting team members": "<strong>Utilisation quotidienne</strong> par toute l’équipe forecasting",
  "<strong>~1,000 orders</strong> a year covered, weekly reporting for management": "<strong>~1 000 commandes</strong> par an couvertes, reporting hebdomadaire pour la direction",
@@ -19,7 +19,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Automation": "Automatisation",
  "Business area": "Domaine",
  "Cash flow calculation tools": "Outils de calcul des flux de trésorerie",
- "Dashboards &amp; Reporting": "Tableaux de bord et reporting",
+ "Dashboards &amp; Reporting": "Dashboards et reporting",
  "Data Modeling": "Modélisation de données",
  "Designed a data model that spreads the revenue of each invoice line over the months of the activity, instead of booking it all on the invoice date.": "Conception d’un modèle de données qui répartit le chiffre d’affaires de chaque ligne de facture sur les mois de l’activité, au lieu de tout comptabiliser à la date de facture.",
  "Designed and automated the cash flow calculation of 3 entities in an Excel file connected to the ERP, for any period chosen by the user, with checks and financial ratios.": "Conception et automatisation du calcul des flux de trésorerie de 3 entités dans un fichier Excel connecté à l’ERP, pour toute période choisie par l’utilisateur, avec des contrôles et des ratios financiers.",
@@ -30,7 +30,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Glovo logo": "Logo de Glovo",
  "Glovo · Delivery Platform": "Glovo · Plateforme de livraison",
  "LLMs (Gemini, Claude)": "LLM (Gemini, Claude)",
- "Manual tasks automated, with scripts and AI.": "Des tâches manuelles automatisées, avec des scripts et l’IA.",
+ "Manual tasks automated, with scripts and AI.": "Des tâches manuelles automatisées par des scripts et par l’IA.",
  "MyReport Data (Data modeling)": "MyReport Data (modélisation de données)",
  "MyReport Data (ETL, Data modeling)": "MyReport Data (ETL, modélisation de données)",
  "MyReport Page (Data visualization)": "MyReport Page (visualisation de données)",
@@ -41,12 +41,12 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Project categories": "Catégories de projets",
  "Projects | Rémi Degand": "Projets | Rémi Degand",
  "Rebuilt a business unit's production schedule and created sales performance dashboards for management and for each sales representative.": "Refonte du planning de production d’une business unit et création de dashboards de performance commerciale pour la direction et pour chaque commercial.",
- "Reports that show where to act.": "Des rapports qui montrent où agir.",
+ "Reports that show where to act.": "Des reportings qui montrent où agir.",
  "Revenue recognition model": "Modèle de reconnaissance du chiffre d’affaires",
  "Sales <span class=\"filter-count\"></span>": "Ventes <span class=\"filter-count\"></span>",
- "The data structures behind reliable numbers.": "Les structures de données derrière des chiffres fiables.",
- "Tools, data models and automations I built during my internships, used by real teams.": "Outils, modèles de données et automatisations que j’ai créés pendant mes stages, utilisés par de vraies équipes.",
- "Tools, data models and automations built by Rémi Degand during his internships.": "Outils, modèles de données et automatisations créés par Rémi Degand pendant ses stages.",
- "Uses AI": "Utilise l’IA",
+ "The data structures behind reliable numbers.": "Les structures de données qui fiabilisent les chiffres.",
+ "Tools, data models and automations I built during my internships, used by real teams.": "Outils, modèles de données et automatisations conçus pendant mes stages, et utilisés en conditions réelles par les équipes.",
+ "Tools, data models and automations built by Rémi Degand during his internships.": "Outils, modèles de données et automatisations conçus par Rémi Degand pendant ses stages.",
+ "Uses AI": "Avec l’IA",
  "VAT calculation automation": "Automatisation du calcul de la TVA"
 });
