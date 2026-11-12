@@ -64,7 +64,8 @@
 
 **Inherited choices from 9 Nov to review with the user:** words kept in English (Analyst, Data Analyst, Forecasting Analyst, business units, data-driven, KPI, prompt engineering, "skill IA"); "Full-time" = CDI; Ada = "l'assistante IA"; NEOMA courses kept in English (taught in English), EGC courses in the user's French wording of 13 Oct.
 
-**Log (newest first):** _nothing yet_
+**Log (newest first):**
+- **12 Nov 2026, Home rewritten (31 texts, `i18n/fr.json`).** Main choices: rotator "Je construis des forecasts | dashboards | modèles de données | outils IA | automatisations"; path "Avant / Aujourd'hui / **Demain**"; chip "Ouvert aux opportunités · mai 2027" (month in lower case); "Découvrir la suite" (was "Faites défiler pour explorer"); logo strip "Entreprises et associations" (a longer version wrapped at 390px); "À propos"; toolbox "Analyser et **restituer**", "Dashboards et reporting", "Les récupérer et les rendre exploitables", forecast / dashboard kept in English in the tool lines; "**Me découvrir** en 5 mots" (the user's own LinkedIn wording); the 5 sentences rewritten in French shapes ("pour monter en compétences", "4 engagements bénévoles : santé, …", "j'ai couru le dernier semi-marathon de Lille"); stats "projets réalisés en entreprise"; `<title>` back to "Rémi Degand | Analyst". "Forecasting" now stays in English everywhere (same key: also the Treasurer skill tag, was "Prévision"). Checked at 1280px and 390px (headless, French): nothing breaks, no sideways scroll. Not deployed yet. **Next:** Experiences page, then the shared texts (menu, footer, `common.js`).
 
 ## Why
 1. **Stand out in the job market:** an online CV that recruiters can browse and question, showing a tech/analytics profile instead of just describing one.

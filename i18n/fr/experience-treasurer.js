@@ -18,7 +18,6 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Envie d'Sup website": "Site d’Envie d'Sup",
  "Envie d'Sup website (opens in a new tab)": "Site d’Envie d'Sup (nouvel onglet)",
  "Envie d'Sup · State-Supported NPO": "Envie d'Sup · Association soutenue par l’État",
- "Forecasting": "Prévision",
  "Master's year 1 · Alongside classes": "Master 1re année · En parallèle des cours",
  "My impact": "Mon impact",
  "My mission": "Ma mission",
