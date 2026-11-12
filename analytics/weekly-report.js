@@ -1,6 +1,6 @@
 // Weekly traffic report from the GA4 Data API (Platform & Data agent, 10 Nov 2026).
 // Per ISO week (Monday to Sunday): unique visitors, sessions, page views, and page views per section
-// (Home · Experiences · Projects · Education · Contact = the content_group set by analytics.js).
+// (Home · Experiences · Projects · Education · Contact, worked out from the page address, see section() below).
 //
 // Setup (once):
 //   1. In analytics/config.json, set "propertyId" (GA4 > Admin > Property details > PROPERTY ID, numbers only).
@@ -30,6 +30,18 @@ const client = new BetaAnalyticsDataClient(key
 const WEEKS = Math.max(1, parseInt(process.argv[2], 10) || 8);
 const SECTIONS = ["Home", "Experiences", "Projects", "Education", "Contact"];
 
+// Section of a page, from its address (same rules as analytics.js). Not from GA4's contentGroup: checked 12 Nov 2026,
+// the Google tag sends its own automatic page_view on load and drops the content_group (and any other parameter)
+// given in gtag("config"/"set"), so contentGroup is empty or "(not set)" on every page view.
+const section = (pagePath) => {
+  const p = pagePath.split("?")[0].split("/").pop().replace(/\.html$/, "") || "index";
+  return p === "index" ? "Home" :
+    /^experience/.test(p) ? "Experiences" :
+    /^project/.test(p) ? "Projects" :
+    p === "education" ? "Education" :
+    p === "contact" ? "Contact" : "Other";
+};
+
 // Monday of the current week, minus (WEEKS - 1) weeks
 const iso = (d) => d.toISOString().slice(0, 10);
 const today = new Date();
@@ -57,7 +69,7 @@ const run = (dimensions, metrics) => client.runReport({
 (async () => {
   const [totals, bySection] = await Promise.all([
     run(["isoYearIsoWeek"], ["totalUsers", "sessions", "screenPageViews"]),
-    run(["isoYearIsoWeek", "contentGroup"], ["screenPageViews"]),
+    run(["isoYearIsoWeek", "pagePath"], ["screenPageViews"]),
   ]);
 
   const weeks = new Map();
@@ -71,8 +83,7 @@ const run = (dimensions, metrics) => client.runReport({
   }
   for (const r of bySection) {
     const w = row(r.dimensionValues[0].value);
-    const g = r.dimensionValues[1].value;
-    w[SECTIONS.includes(g) ? g : "Other"] += +r.metricValues[0].value;
+    w[section(r.dimensionValues[1].value)] += +r.metricValues[0].value;
   }
 
   const list = [...weeks.keys()].sort().map((k) => weeks.get(k));
