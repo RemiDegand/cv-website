@@ -18,7 +18,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Context": "Contexte",
  "Conversation that started the project": "La conversation à l’origine du projet",
  "Dashboard of the sales team, scroll to see all of it": "Tableau de bord de l’équipe commerciale, faites défiler pour tout voir",
- "Data Analyst Intern": "Stagiaire Data Analyst",
+ "Data Analyst Intern": "Data Analyst (stage)",
  "Data model": "Modèle de données",
  "Designed for day-to-day use": "Conçus pour un usage quotidien",
  "Detailed list of outstanding payments with customer information, sorted by days overdue": "Liste détaillée des paiements en attente avec les informations client, triée par jours de retard",

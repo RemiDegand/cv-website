@@ -6,7 +6,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "<strong>~1,000 orders</strong> a year covered, weekly reporting for management": "<strong>~1 000 commandes</strong> par an couvertes, reporting hebdomadaire pour la direction",
  "<strong>~2 h a week</strong> of manual entries automated": "<strong>~2 h par semaine</strong> de saisie manuelle automatisées",
  "<strong>~2 h saved</strong> per month, no more manual entries": "<strong>~2 h gagnées</strong> par mois, plus aucune saisie manuelle",
- "<strong>€350k → €8k</strong> annual revenue discrepancies": "<strong>350 k€ → 8 k€</strong> d’écarts annuels de chiffre d’affaires",
+ "<strong>€350k → €8k</strong> annual revenue discrepancies": "<strong>350 k€ → 8 k€</strong> d’écarts de chiffre d’affaires par an",
  "AI agents (OpenCode)": "Agents IA (OpenCode)",
  "AI automation skills for forecast adjustments": "Skills d’automatisation IA pour les ajustements de prévision",
  "Aged receivables reporting": "Reporting de la balance âgée",

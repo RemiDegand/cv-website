@@ -22,7 +22,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Designed and built a web app specialised in forecast accuracy: all the zones at a glance, alerts on the zones that deviate and AI analysis that explains why.": "Conçu et développé une application web dédiée à la précision des prévisions : toutes les zones en un coup d’œil, des alertes sur les zones qui dévient et une analyse IA qui explique pourquoi.",
  "Every Friday, designed tools to make processes more efficient, dashboards more insightful and forecasts more accurate.": "Chaque vendredi, conçu des outils pour rendre les processus plus efficaces, les tableaux de bord plus parlants et les prévisions plus précises.",
  "Forecast accuracy web app": "Application web de précision des prévisions",
- "Forecasting Analyst Intern": "Stagiaire Forecasting Analyst",
+ "Forecasting Analyst Intern": "Forecasting Analyst (stage)",
  "Forecasting Analyst Intern at Glovo | Rémi Degand": "Stagiaire Forecasting Analyst chez Glovo | Rémi Degand",
  "Forecasting Analyst Intern at Glovo: an experience of Rémi Degand.": "Stagiaire Forecasting Analyst chez Glovo : une expérience de Rémi Degand.",
  "Gap year · 2nd internship": "Année de césure · 2e stage",

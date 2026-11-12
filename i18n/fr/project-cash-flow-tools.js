@@ -59,7 +59,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Current liabilities": "Passif circulant",
  "Current ratio": "Ratio de liquidité générale",
  "Customers": "Clients",
- "Data Analyst Intern": "Stagiaire Data Analyst",
+ "Data Analyst Intern": "Data Analyst (stage)",
  "Data model by account": "Modèle de données par compte",
  "Drawn from the real file, with randomised amounts. Account labels made generic.": "Tiré du vrai fichier, avec des montants aléatoires. Libellés de comptes rendus génériques.",
  "EBITDA": "EBE",

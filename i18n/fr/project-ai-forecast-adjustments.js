@@ -42,7 +42,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Export ready ↓": "Export prêt ↓",
  "Export: forecast adjustments (CSV)": "Export : ajustements de prévision (CSV)",
  "Final CSV, exported into the forecasting tool": "CSV final, exporté dans l’outil de prévision",
- "Forecasting Analyst Intern": "Stagiaire Forecasting Analyst",
+ "Forecasting Analyst Intern": "Forecasting Analyst (stage)",
  "Forecasting team · every week": "Équipe forecasting · chaque semaine",
  "Fri": "Ven",
  "Friday": "Vendredi",

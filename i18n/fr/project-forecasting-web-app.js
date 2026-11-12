@@ -85,7 +85,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Forecast accuracy web app | Rémi Degand": "Application web de précision des prévisions | Rémi Degand",
  "Forecast accuracy web app · simulation": "Application web de précision des prévisions · simulation",
  "Forecast accuracy web app: a web app specialised in forecast accuracy, with alerts and AI analysis, by Rémi Degand at Glovo.": "Application web de précision des prévisions : une application web dédiée à la précision des prévisions, avec des alertes et une analyse IA, par Rémi Degand chez Glovo.",
- "Forecasting Analyst Intern": "Stagiaire Forecasting Analyst",
+ "Forecasting Analyst Intern": "Forecasting Analyst (stage)",
  "Fri": "Ven",
  "Gap": "Écart",
  "Give it context:": "Lui donner du contexte :",

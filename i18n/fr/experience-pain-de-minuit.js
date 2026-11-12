@@ -13,7 +13,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Averaged <strong>~21 new clients a month</strong>.": "En moyenne <strong>~21 nouveaux clients par mois</strong>.",
  "B2B sales": "Vente B2B",
  "Bachelor's year 3 · Final internship": "Bachelor 3e année · Stage de fin d’études",
- "Business Developer Intern": "Stagiaire Business Developer",
+ "Business Developer Intern": "Business Developer (stage)",
  "Business Developer Intern at Pain de Minuit | Rémi Degand": "Stagiaire Business Developer chez Pain de Minuit | Rémi Degand",
  "Business Developer Intern at Pain de Minuit: an experience of Rémi Degand.": "Stagiaire Business Developer chez Pain de Minuit : une expérience de Rémi Degand.",
  "Client retention": "Fidélisation client",

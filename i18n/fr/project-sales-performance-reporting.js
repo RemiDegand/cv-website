@@ -45,7 +45,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Conversation that started the project": "La conversation à l’origine du projet",
  "Custom development": "Développement sur mesure",
  "Dashboard page, scroll to see all of it": "Page du tableau de bord, faites défiler pour tout voir",
- "Data Analyst Intern": "Stagiaire Data Analyst",
+ "Data Analyst Intern": "Data Analyst (stage)",
  "Data entry": "Saisie",
  "Different columns in each table": "Des colonnes différentes dans chaque tableau",
  "Drop-down lists and set formats in each column": "Listes déroulantes et formats fixés dans chaque colonne",

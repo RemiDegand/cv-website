@@ -24,7 +24,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "Copy each amount": "Copier chaque montant",
  "Credit": "Crédit",
  "Credit note": "Avoir",
- "Data Analyst Intern": "Stagiaire Data Analyst",
+ "Data Analyst Intern": "Data Analyst (stage)",
  "Data model with filters": "Modèle de données avec filtres",
  "Debit": "Débit",
  "Delivery 08/25": "Livraison 08/25",
