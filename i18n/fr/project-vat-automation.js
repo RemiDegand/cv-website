@@ -1,7 +1,7 @@
 // Built by tools/build-i18n.js from i18n/fr.json: don't edit by hand. Texts of project-vat-automation.html.
 Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "<span class=\"block-label\">The file</span>From the ERP to each VAT account": "<span class=\"block-label\">Le fichier</span>De l’ERP à chaque compte de TVA",
- "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Faites défiler pour explorer",
+ "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Découvrir la suite",
  "<span>Next project →</span>Aged receivables reporting": "<span>Projet suivant →</span>Reporting de la balance âgée",
  "<span>← Previous project</span>AI automation skills for forecast adjustments": "<span>← Projet précédent</span>Skills d’automatisation IA pour les ajustements de prévision",
  "<strong>Error-prone:</strong> the calculation was hard to trust.": "<strong>Source d’erreurs :</strong> le calcul était peu fiable.",

@@ -2,7 +2,7 @@
 Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "3 entities · ~€10M revenue a year": "3 entités · ~10 M€ de CA par an",
  "<span class=\"block-label\">The file</span>From the accounts to the cash flow": "<span class=\"block-label\">Le fichier</span>Des comptes aux flux de trésorerie",
- "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Faites défiler pour explorer",
+ "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Découvrir la suite",
  "<span>Next project →</span>AI automation skills for forecast adjustments": "<span>Projet suivant →</span>Skills d’automatisation IA pour les ajustements de prévision",
  "<span>← Previous project</span>Forecast accuracy web app": "<span>← Projet précédent</span>Application web de précision des prévisions",
  "<strong>3 entities</strong> cash flow for any period, in one refresh": "Flux de trésorerie de <strong>3 entités</strong> pour toute période, en une actualisation",

@@ -1,7 +1,7 @@
 // Built by tools/build-i18n.js from i18n/fr.json: don't edit by hand. Texts of project-ai-forecast-adjustments.html.
 Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "<span class=\"block-label\">Example</span>The same adjustments, with the AI skill": "<span class=\"block-label\">Exemple</span>Les mêmes ajustements, avec le skill IA",
- "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Faites défiler pour explorer",
+ "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Découvrir la suite",
  "<span>Next project →</span>VAT calculation automation": "<span>Projet suivant →</span>Automatisation du calcul de la TVA",
  "<span>← Previous project</span>Cash flow calculation tools": "<span>← Projet précédent</span>Outils de calcul des flux de trésorerie",
  "<strong>About 2 h every week</strong>, before exporting the final sheet into the company's forecasting tool.": "<strong>Environ 2 h chaque semaine</strong>, avant d’exporter la feuille finale dans l’outil de prévision de l’entreprise.",
@@ -10,12 +10,12 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "<strong>For every zone:</strong> the sentences in, the file out. The AI asks for validation on big changes and for details when a request is unclear.": "<strong>Pour chaque zone :</strong> les phrases en entrée, le fichier en sortie. L’IA demande une validation pour les gros changements et des précisions quand une demande n’est pas claire.",
  "<strong>For the whole team:</strong> the skill is shared on GitHub and used by every forecaster.": "<strong>Pour toute l’équipe :</strong> le skill est partagé sur GitHub et utilisé par chaque forecaster.",
  "<strong>Repetitive:</strong> for each zone, select it, type every adjusted value in the hour-by-day grid, save with a button, then start again with the next zone.": "<strong>Répétitif :</strong> pour chaque zone, la choisir, saisir chaque valeur ajustée dans la grille heure par jour, enregistrer avec un bouton, puis recommencer avec la zone suivante.",
- "<strong>~2 h a week</strong> of manual entries automated": "<strong>~2 h par semaine</strong> de saisie manuelle automatisées",
+ "<strong>~2 h a week</strong> of manual entries automated": "<strong>~2 h par semaine</strong> de saisies manuelles automatisées",
  "<strong>~2 h a week</strong> of manual entries handed to the AI: the forecaster only pastes the sentences and downloads the file.": "<strong>~2 h par semaine</strong> de saisie manuelle confiées à l’IA : le forecaster colle seulement les phrases et télécharge le fichier.",
  "A new value for each zone, day and hour, in the right format": "Une nouvelle valeur pour chaque zone, jour et heure, au bon format",
  "A prompt": "Un prompt",
  "AI agents (OpenCode)": "Agents IA (OpenCode)",
- "AI automation skills for forecast adjustments": "Skills d’automatisation IA pour les ajustements de prévision",
+ "AI automation skills for forecast adjustments": "Skills IA pour automatiser les ajustements du forecast",
  "AI automation skills for forecast adjustments | Rémi Degand": "Skills d’automatisation IA pour les ajustements de prévision | Rémi Degand",
  "AI automation skills for forecast adjustments: an AI skill that turns written forecast adjustments into the forecasting tool's final CSV, by Rémi Degand at Glovo.": "Skills d’automatisation IA pour les ajustements de prévision : un skill IA qui transforme des ajustements de prévision écrits en CSV final pour l’outil de prévision, par Rémi Degand chez Glovo.",
  "AI skill": "Skill IA",

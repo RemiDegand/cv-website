@@ -11,7 +11,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "<span class=\"block-label\">Dashboard 2</span>For each sales team: their own figures": "<span class=\"block-label\">Tableau de bord 2</span>Pour chaque équipe commerciale : ses propres chiffres",
  "<span class=\"block-label\">Step 1</span>Rebuild the production schedule": "<span class=\"block-label\">Étape 1</span>Refondre le planning de production",
  "<span class=\"block-label\">Step 2</span>Build the reporting on top of the schedule": "<span class=\"block-label\">Étape 2</span>Construire le reporting sur le planning",
- "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Faites défiler pour explorer",
+ "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Découvrir la suite",
  "<span>Next project →</span>Revenue recognition model": "<span>Projet suivant →</span>Modèle de reconnaissance du chiffre d’affaires",
  "<span>← Previous project</span>Aged receivables reporting": "<span>← Projet précédent</span>Reporting de la balance âgée",
  "<strong>A structured process</strong> for every order: production and sales are easy to follow, and the data can finally be collected and analysed.": "<strong>Un processus structuré</strong> pour chaque commande : la production et les ventes sont faciles à suivre, et les données peuvent enfin être collectées et analysées.",

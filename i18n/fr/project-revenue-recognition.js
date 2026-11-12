@@ -6,7 +6,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "<span class=\"dm-num\">1</span>Map each line to a type": "<span class=\"dm-num\">1</span>Rattacher chaque ligne à un type",
  "<span class=\"dm-num\">2</span>Aggregate": "<span class=\"dm-num\">2</span>Agréger",
  "<span class=\"dm-num\">3</span>Allocate": "<span class=\"dm-num\">3</span>Répartir",
- "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Faites défiler pour explorer",
+ "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Découvrir la suite",
  "<span class=\"rr-dot\"></span>Contract": "<span class=\"rr-dot\"></span>Contrat",
  "<span>← Previous project</span>Production schedule &amp; sales reporting": "<span>← Projet précédent</span>Planning de production et reporting commercial",
  "<strong>A realistic monthly view</strong> of performance, that follows the company's actual activity.": "<strong>Une vue mensuelle réaliste</strong> de la performance, qui suit l’activité réelle de l’entreprise.",

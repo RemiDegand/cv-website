@@ -3,7 +3,7 @@ Object.assign((window.I18N_FR = window.I18N_FR || {}), {
  "3 business units": "3 business units",
  "<span class=\"block-label\">Dashboard 1</span>For the manager: where is the cash?": "<span class=\"block-label\">Tableau de bord 1</span>Pour le manager : où est la trésorerie ?",
  "<span class=\"block-label\">Dashboard 2</span>For each sales team: who do I call?": "<span class=\"block-label\">Tableau de bord 2</span>Pour chaque équipe commerciale : qui dois-je appeler ?",
- "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Faites défiler pour explorer",
+ "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Scroll to explore": "<span class=\"page-scroll-mouse\" aria-hidden=\"true\"></span>Découvrir la suite",
  "<span>Next project →</span>Production schedule &amp; sales reporting": "<span>Projet suivant →</span>Planning de production et reporting commercial",
  "<span>← Previous project</span>VAT calculation automation": "<span>← Projet précédent</span>Automatisation du calcul de la TVA",
  "<strong>3</strong> business units covered": "<strong>3</strong> business units couvertes",
