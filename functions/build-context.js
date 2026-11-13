@@ -20,7 +20,7 @@ for (const file of kFiles) {
   md = md.replace(/^---\n[\s\S]*?\n---\n/, "");
   md = md.replace(/\n## Open questions[\s\S]*?(?=\n## |\s*$)/, "\n");     // unconfirmed points stay out
   const keep = fm.split("\n").filter((l) => /^(title|company|industry|experience|on_site|page|tools):/.test(l)).join("\n");
-  out.push(`### ${file.startsWith("projects/") ? "PROJECT FILE" : "RECRUITER NOTES, not a page of the site"}: ${file}\n${keep}\n${md.trim()}`);
+  out.push(`### ${file.startsWith("projects/") ? "PROJECT FACTS" : "MORE FACTS ABOUT RÉMI"}\n${keep}\n${md.trim()}`);
 }
 
 // 2. Visible text of the site pages (public anyway), without the simulations (made-up data, see the notes)
@@ -63,7 +63,7 @@ const bot = fs.readFileSync(path.join(ROOT, "chatbot.js"), "utf8");
 const facts = [...bot.matchAll(/\ba: t\("((?:[^"\\]|\\.)*)"\)/g)]
   .map((m) => m[1].replace(/\\"/g, '"').replace(/<a\b[^>]*>[^<]*→\s*<\/a>/g, "").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim())
   .filter(Boolean);
-out.push(`### SHORT FACTS (preview answers of the chatbot)\n${facts.join("\n")}`);
+out.push(`### SHORT FACTS\n${facts.join("\n")}`);
 
 const context = out.join("\n\n");
 fs.writeFileSync(path.join(__dirname, "context.txt"), context);
